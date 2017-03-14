@@ -39,7 +39,7 @@ public final class Time implements Comparable<Time> {
     public Time read(InputStream in) throws IOException {
 
       final long high = (long)Serializers.INTEGER.read(in);
-      final long low = (long)Serializers.INTEGER.read(in);
+      final long low = (long)Serializers.INTEGER.read(in) & 0x00000000FFFFFFFFL;
 
       return Time.fromMs((high << 32) | low);
 
