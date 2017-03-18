@@ -12,8 +12,15 @@ public class Connector {
 
   Connector() {
     try {
+      
+      //the parameters differ based on the machine you are using and the user account you have
+      //DriverManager.getConnection(url, user, password)
+      //URL:"jdbc:mysql://your IP address:3306/codeU_database?useSSL=false" 
+      //user: guven user account that is used to access to the database
+      //password: password that assoicated with the account
       Connection myConn = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/codeU_database?useSSL=false", "root", "hs13706717787");
+          "jdbc:mysql://IP of remote machine:3306/codeU_database?useSSL=false", "username", "password");
+      
       myStmt = myConn.createStatement();
     } catch (SQLException ex) {
       // handle any errors
