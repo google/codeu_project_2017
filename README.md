@@ -39,6 +39,7 @@ JAVA&nbsp;7 when working with this project.
        ```
        $ sh run_server.sh
        $ sh run_client.sh
+       $ sh run_simple_gui_client.sh (Run GUI Version client)
        ```
 
      The `run_server` and `run_client` scripts have hard-coded addresses for
