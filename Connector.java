@@ -1,25 +1,33 @@
-package databaseTester;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+/*
+ * Please read here:
+ * ****to run this code, you will need to install jdbc connector that connects the java program to the databse. jdbc is the jar file, and 
+ * you will need to import it to the referenced library.
+ * 
+ * Description:
+ * this is the database conenctor you will need to use to communciate with the databased hosted on a remote machine
+ * create an insteance of this class by passing in the IP of the remote machine where the database is hosted, also 
+ * your authorized username and password to the database.
+ * before you use this class, please comment out the main method that I use for testing.
+ * for users, whcih is everyone, as we are all useing the machine that is separate from the databse, we do not nee to run the mySQL server.
+ * Instead, the MYSQL server on the machine that hosts the databse will need to be running continuously.  
+ */
+
 public class Connector {
 
   Statement myStmt;
 
-  Connector() {
+  public Connector(String IPAddressOfDB, String DBusername, String DBpassword ) {
     try {
-      
-      //the parameters differ based on the machine you are using and the user account you have
-      //DriverManager.getConnection(url, user, password)
-      //URL:"jdbc:mysql://your IP address:3306/codeU_database?useSSL=false" 
-      //user: guven user account that is used to access to the database
-      //password: password that assoicated with the account
+      //DriverManager.getConnection(url, user, password) 
       Connection myConn = DriverManager.getConnection(
-          "jdbc:mysql://IP of remote machine:3306/codeU_database?useSSL=false", "username", "password");
+          "jdbc:mysql://"+IPAddressOfDB+":3306/codeU_database?useSSL=false", DBusername, DBpassword);
       
       myStmt = myConn.createStatement();
     } catch (SQLException ex) {
@@ -32,8 +40,8 @@ public class Connector {
 
   public static void main(String[] args) {
 
-    Connector test = new Connector();
-    /*
+    Connector test = new Connector("localhost","usernmae", "password");
+    /*›
      * // TEST CASE 1: insert duplicate fail boolean success1 = test.addAccount("user", "hello"); if
      * (success1) System.out.println("user1 has been created, and insertion is complete"); else
      * System.out.println("insertion fails");
