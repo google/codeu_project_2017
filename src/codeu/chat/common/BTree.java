@@ -144,7 +144,8 @@ public class BTree<T> {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        return printTree(this, builder).toString();
+        printTree(this, builder);
+        return builder.deleteCharAt(builder.length() - 1).toString();
     }
 
     private StringBuilder printTree(BTree<T> curr, StringBuilder builder) {
@@ -159,6 +160,7 @@ public class BTree<T> {
                 break;
             }
             builder.append(curr.elems[i]);
+            builder.append(" ");
         }
         printTree(curr.children[i], builder);
         return builder;

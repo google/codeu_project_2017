@@ -19,7 +19,7 @@ public class BTreeTest {
         for (int i = 0; i < numsToTest.length; i++) {
             test = test.add(numsToTest[i]);
         }
-        assertEquals(test.toString(), "-557121819272931334463819399");
+        assertEquals(test.toString(), "-5 5 7 12 18 19 27 29 31 33 44 63 81 93 99");
     }
 
     @Test
@@ -33,7 +33,7 @@ public class BTreeTest {
                 test = test.add(numsToTest[i]);
             }
         }
-        assertEquals("-557121819272931334463819399", test.toString());
+        assertEquals("-5 5 7 12 18 19 27 29 31 33 44 63 81 93 99", test.toString());
     }
 
     @Test
