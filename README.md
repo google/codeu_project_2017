@@ -25,7 +25,7 @@ JAVA&nbsp;7 when working with this project.
   1. To build the project:
        ```
        $ sh clean.sh
-       $ sh make.sh`
+       $ sh make.sh
        ```
 
   1. To test the project:
