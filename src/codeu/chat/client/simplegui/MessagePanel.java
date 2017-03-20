@@ -196,7 +196,7 @@ public final class MessagePanel extends JPanel {
 
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
-      System.out.print(displayString);
+
       messageListModel.addElement(displayString);
     }
   }
