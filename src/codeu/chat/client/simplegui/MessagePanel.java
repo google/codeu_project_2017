@@ -115,7 +115,11 @@ public final class MessagePanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
+    final JButton updateButton = new JButton("Update");
     final JButton addButton = new JButton("Add");
+
+    updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+    buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
 
     // Placement of title, list panel, buttons, and current user panel.
@@ -144,6 +148,15 @@ public final class MessagePanel extends JPanel {
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
+
+    // User clicks Messages Update button.
+    updateButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        clientContext.message.updateMessages(false);
+        MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+      }
+    });
 
     // User click Messages Add button - prompt for message body and add new Message to Conversation
     addButton.addActionListener(new ActionListener() {
@@ -183,7 +196,7 @@ public final class MessagePanel extends JPanel {
 
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
-
+      System.out.print(displayString);
       messageListModel.addElement(displayString);
     }
   }
