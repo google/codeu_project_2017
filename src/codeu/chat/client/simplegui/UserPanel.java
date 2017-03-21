@@ -164,8 +164,16 @@ public final class UserPanel extends JPanel {
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
-          UserPanel.this.getAllUsers(listModel);
+          //if alphanumeric
+          if(s.matches("[a-zA-Z0-9]+")) {
+            clientContext.user.addUser(s);
+            UserPanel.this.getAllUsers(listModel);
+          } else {
+            JOptionPane.showMessageDialog(UserPanel.this,
+                "User not created. Alphanumeric characters only, with no spaces. Please try again.",
+                "User Not Created",
+                JOptionPane.ERROR_MESSAGE);
+          }
         }
       }
     });

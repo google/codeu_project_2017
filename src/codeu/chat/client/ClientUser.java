@@ -49,10 +49,11 @@ public final class ClientUser {
     boolean clean = true;
     if (userName.length() == 0) {
       clean = false;
+    //if alphanumeric
+    } else if(!userName.matches("[a-zA-Z0-9]+")) {
+      clean = false;
     } else {
-
-      // TODO: check for invalid characters
-
+      clean = true;
     }
     return clean;
   }
