@@ -1,0 +1,220 @@
+Mar 21, 2017 6:02:36 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 21, 2017 6:02:36 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 21, 2017 6:02:36 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 21, 2017 6:02:36 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 21, 2017 6:02:36 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 21, 2017 6:02:38 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 21, 2017 6:02:44 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 21, 2017 6:02:44 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 21, 2017 6:02:44 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Hello" UUID=[UUID:100.101.2227883600]
+Mar 21, 2017 6:02:49 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "HI" UUID= [UUID:100.101.3629747034]
+Mar 21, 2017 6:02:49 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="HI" UUID=[UUID:100.101.3629747034] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:02:49 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="HI" UUID=[UUID:100.101.3629747034] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:02:49 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Mar 21, 2017 6:02:49 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.101.3629747034] (HI).
+
+Mar 21, 2017 6:02:54 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.2227883600] UUID= [UUID:100.101.1510478227]
+Mar 21, 2017 6:02:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="HI" UUID=[UUID:100.101.3629747034] first=[UUID:100.101.1510478227] last=[UUID:100.101.1510478227]
+
+Mar 21, 2017 6:02:54 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=false firstMessage=[UUID:100.101.1510478227]
+Mar 21, 2017 6:02:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:100.101.3629747034] (HI).
+
+Mar 21, 2017 6:02:59 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.2227883600] UUID= [UUID:100.101.1891909849]
+Mar 21, 2017 6:02:59 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="HI" UUID=[UUID:100.101.3629747034] first=[UUID:100.101.1510478227] last=[UUID:100.101.1891909849]
+
+Mar 21, 2017 6:02:59 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 2 messages for conversation [UUID:100.101.3629747034] (HI).
+
+Mar 21, 2017 6:05:07 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.2227883600] UUID= [UUID:100.101.1053140074]
+Mar 21, 2017 6:05:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="HI" UUID=[UUID:100.101.3629747034] first=[UUID:100.101.1510478227] last=[UUID:100.101.1053140074]
+
+Mar 21, 2017 6:05:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 3 messages for conversation [UUID:100.101.3629747034] (HI).
+
+Mar 21, 2017 6:05:57 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 21, 2017 6:05:57 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 21, 2017 6:05:57 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 21, 2017 6:05:57 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 21, 2017 6:05:57 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 21, 2017 6:05:58 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 21, 2017 6:06:07 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 21, 2017 6:06:07 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 21, 2017 6:06:07 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.101.3860512745]
+Mar 21, 2017 6:06:13 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "First" UUID= [UUID:100.101.3290255845]
+Mar 21, 2017 6:06:13 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="First" UUID=[UUID:100.101.3290255845] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:06:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3290255845] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:06:13 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Mar 21, 2017 6:06:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.101.3290255845] (First).
+
+Mar 21, 2017 6:06:16 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.3860512745] UUID= [UUID:100.101.3520745744]
+Mar 21, 2017 6:06:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3290255845] first=[UUID:100.101.3520745744] last=[UUID:100.101.3520745744]
+
+Mar 21, 2017 6:06:16 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=false firstMessage=[UUID:100.101.3520745744]
+Mar 21, 2017 6:06:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:100.101.3290255845] (First).
+
+Mar 21, 2017 6:06:23 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.3860512745] UUID= [UUID:100.101.2981210568]
+Mar 21, 2017 6:06:23 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3290255845] first=[UUID:100.101.3520745744] last=[UUID:100.101.2981210568]
+
+Mar 21, 2017 6:06:23 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 2 messages for conversation [UUID:100.101.3290255845] (First).
+
+Mar 21, 2017 6:08:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 21, 2017 6:08:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 21, 2017 6:08:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 21, 2017 6:08:52 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 21, 2017 6:08:53 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 21, 2017 6:08:54 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 21, 2017 6:08:59 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 21, 2017 6:08:59 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 21, 2017 6:08:59 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.101.4135267788]
+Mar 21, 2017 6:09:04 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "First" UUID= [UUID:100.101.3144553532]
+Mar 21, 2017 6:09:04 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="First" UUID=[UUID:100.101.3144553532] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:09:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3144553532] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:09:04 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Mar 21, 2017 6:09:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.101.3144553532] (First).
+
+Mar 21, 2017 6:09:13 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.4135267788] UUID= [UUID:100.101.1757762651]
+Mar 21, 2017 6:09:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3144553532] first=[UUID:100.101.1757762651] last=[UUID:100.101.1757762651]
+
+Mar 21, 2017 6:09:13 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=false firstMessage=[UUID:100.101.1757762651]
+Mar 21, 2017 6:09:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:100.101.3144553532] (First).
+
+Mar 21, 2017 6:09:16 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.4135267788] UUID= [UUID:100.101.3609430277]
+Mar 21, 2017 6:09:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3144553532] first=[UUID:100.101.1757762651] last=[UUID:100.101.3609430277]
+
+Mar 21, 2017 6:09:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 2 messages for conversation [UUID:100.101.3144553532] (First).
+
+Mar 21, 2017 6:09:27 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.4135267788] UUID= [UUID:100.101.181577302]
+Mar 21, 2017 6:09:27 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="First" UUID=[UUID:100.101.3144553532] first=[UUID:100.101.1757762651] last=[UUID:100.101.181577302]
+
+Mar 21, 2017 6:09:27 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 3 messages for conversation [UUID:100.101.3144553532] (First).
+
+Mar 21, 2017 6:15:14 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 21, 2017 6:15:14 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 21, 2017 6:15:14 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 21, 2017 6:15:14 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 21, 2017 6:15:15 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 21, 2017 6:15:16 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 21, 2017 6:15:23 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 21, 2017 6:15:23 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 21, 2017 6:15:23 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.101.828636693]
+Mar 21, 2017 6:15:28 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "Convo" UUID= [UUID:100.101.742108303]
+Mar 21, 2017 6:15:28 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="Convo" UUID=[UUID:100.101.742108303] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:15:28 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Convo" UUID=[UUID:100.101.742108303] first=[UUID:0] last=[UUID:0]
+
+Mar 21, 2017 6:15:28 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Mar 21, 2017 6:15:28 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.101.742108303] (Convo).
+
+Mar 21, 2017 6:15:30 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.828636693] UUID= [UUID:100.101.1054223376]
+Mar 21, 2017 6:15:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Convo" UUID=[UUID:100.101.742108303] first=[UUID:100.101.1054223376] last=[UUID:100.101.1054223376]
+
+Mar 21, 2017 6:15:30 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=false firstMessage=[UUID:100.101.1054223376]
+Mar 21, 2017 6:15:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:100.101.742108303] (Convo).
+
+Mar 21, 2017 6:15:34 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.828636693] UUID= [UUID:100.101.3258615646]
+Mar 21, 2017 6:15:34 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Convo" UUID=[UUID:100.101.742108303] first=[UUID:100.101.1054223376] last=[UUID:100.101.3258615646]
+
+Mar 21, 2017 6:15:34 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 2 messages for conversation [UUID:100.101.742108303] (Convo).
+
+Mar 22, 2017 8:25:51 AM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.828636693] UUID= [UUID:100.101.4086749655]
+Mar 22, 2017 8:25:51 AM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Convo" UUID=[UUID:100.101.742108303] first=[UUID:100.101.1054223376] last=[UUID:100.101.4086749655]
+
+Mar 22, 2017 8:25:51 AM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 3 messages for conversation [UUID:100.101.742108303] (Convo).
+
