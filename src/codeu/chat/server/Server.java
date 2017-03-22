@@ -40,7 +40,9 @@ import codeu.chat.util.connections.Connection;
 
 public final class Server {
 
-  private final static Logger.Log LOG = Logger.newLog(Server.class);
+  private static final Logger.Log LOG = Logger.newLog(Server.class);
+
+  private static final int RELAY_REFRESH_MS = 5000;  // 5 seconds
 
   private final Timeline timeline = new Timeline();
 
@@ -80,8 +82,7 @@ public final class Server {
 
         }
 
-        // Do this again in 5 seconds
-        timeline.scheduleIn(5000, this);
+        timeline.scheduleIn(RELAY_REFRESH_MS, this);
       }
     });
   }

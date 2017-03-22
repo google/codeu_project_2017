@@ -161,7 +161,7 @@ public final class Timeline {
   public void stop() {
     running = false;
 
-    // Interrupt does not force a thread to exit. It signal's the
+    // Interrupt does not force a thread to exit. It signals the
     // thead that it is time to stop execution. As the threads may
     // be sleeping, this will force them awake.
     executor.interrupt();
@@ -189,7 +189,7 @@ public final class Timeline {
 
   private static <T> void forceAdd(BlockingQueue<T> queue, T value) {
     while (!queue.offer(value)) {
-      // try again...
+      LOG.warning("Failed to add to queue, trying again...");
     }
   }
 }
