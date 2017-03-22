@@ -83,30 +83,21 @@ final class ServerMain {
 
     final Server server = new Server(id, secret, relay);
 
-    LOG.info("Server object created.");
+    LOG.info("Created server.");
 
-    final Runnable hub = new Hub(serverSource, new Hub.Handler() {
+    while (true) {
 
-      @Override
-      public void handle(Connection connection) throws Exception {
+      try {
+
+        LOG.info("Established connection...");
+        final Connection connection = serverSource.connect();
+        LOG.info("Connection established.");
 
         server.handleConnection(connection);
 
+      } catch (IOException ex) {
+        LOG.error(ex, "Failed to establish connection.");
       }
-
-      @Override
-      public void onException(Exception ex) {
-
-        System.out.println("ERROR: Exception during server tick. Check log for details.");
-        LOG.error(ex, "Exception during server tick.");
-
-      }
-    });
-
-    LOG.info("Starting hub...");
-
-    hub.run();
-
-    LOG.info("Hub exited.");
+    }
   }
 }
