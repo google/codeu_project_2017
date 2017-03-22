@@ -22,24 +22,20 @@ import java.sql.Statement;
 public class Connector {
 
   Statement myStmt;
-
+      
+  /* the parameters differ based on the machine you are using and the user account you have
+   * DriverManager.getConnection(url, user, password)
+   * URL:"jdbc:mysql://IPAddressOfDB:3306/codeU_database?useSSL=false" 
+   * DBusername: user account that is used to access to the database
+   * DBpassword: password that assoicated with the account
+   */
   public Connector(String IPAddressOfDB, String DBusername, String DBpassword ) {
     try {
-      //DriverManager.getConnection(url, user, password) 
+      
       Connection myConn = DriverManager.getConnection(
           "jdbc:mysql://"+IPAddressOfDB+":3306/codeU_database?useSSL=false", DBusername, DBpassword);
-
-      
-      //the parameters differ based on the machine you are using and the user account you have
-      //DriverManager.getConnection(url, user, password)
-      //URL:"jdbc:mysql://your IP address:3306/codeU_database?useSSL=false" 
-      //user: user account that is used to access to the database
-      //password: password that assoicated with the account
-      //Connection myConn = DriverManager.getConnection(
-      //    "jdbc:mysql://IP of remote machine:3306/codeU_database?useSSL=false", "your username", "your password");
-
-      
       myStmt = myConn.createStatement();
+      
     } catch (SQLException ex) {
       // handle any errors
       System.out.println("SQLException: " + ex.getMessage());
@@ -47,7 +43,11 @@ public class Connector {
       System.out.println("VendorError: " + ex.getErrorCode());
     }
   }
-
+  
+  /*
+   * main method initiated the test cases for DB
+   * please comment it out for the future use
+   */
   public static void main(String[] args) {
 
     Connector test = new Connector("localhost","usernmae", "password");
