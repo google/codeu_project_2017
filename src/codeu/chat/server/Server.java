@@ -80,8 +80,8 @@ public final class Server {
 
         }
 
-        // Do this all again in 60 seconds
-        timeline.scheduleIn(60000, this);
+        // Do this again in 5 seconds
+        timeline.scheduleIn(5000, this);
       }
     });
   }

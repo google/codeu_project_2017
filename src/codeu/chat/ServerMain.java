@@ -17,7 +17,6 @@ package codeu.chat;
 
 import java.io.IOException;
 
-import codeu.chat.common.Hub;
 import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
 import codeu.chat.common.Uuid;

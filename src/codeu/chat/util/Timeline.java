@@ -26,6 +26,8 @@ import java.util.concurrent.PriorityBlockingQueue;
 // code has been executed.
 public final class Timeline {
 
+  private final static Logger.Log LOG = Logger.newLog(Timeline.class);
+
   private static final class Event implements Comparable<Event> {
 
     public final long time;
@@ -49,29 +51,55 @@ public final class Timeline {
 
   // This thread is used to track the time of events and moves events from the
   // "backlog" queue to the "todo" queue when it is time to execute. They are
-  // seperated to allow this thread to be safely interrupted.
+  // separated to allow this thread to be safely interrupted.
   private final Thread scheduler = new Thread() {
     @Override
     public void run() {
       while (running) {
-        final long now = System.currentTimeMillis();
-        final Event next = backlog.poll();
+
+        Event next;
+
         try {
-          if (next == null) {
-            Thread.sleep(10000);
-          } else if (next.time > now) {
-            // Put it back (it's not time).
-            while (!backlog.offer(next)) {
-              // force this to go through
-            }
-            Thread.sleep(next.time - now);
-          } else {
-            while (!todo.offer(next.callback)) {
-              // force this to go through
-            }
-          }
+          next = backlog.take();
         } catch (InterruptedException ex) {
-          // A new event was added - need to recheck all the times.
+          // Rather than try to handle the exception here, set "next"
+          // to null and let the normal flow handle the case.
+          next = null;
+        }
+
+        long sleep = 0;
+
+        if (next != null) {
+
+          final long now = System.currentTimeMillis();
+
+          // Check which queue the event should be added to. If it
+          // is time to execute, it should be added to the "todo"
+          // queue. If it is not time, it should be added back to the
+          // "backlog".
+          // If the item is added back to the backlog, we know how long
+          // it will be until it will be executed. That means we can sleep
+          // until then.
+          if (next.time <= now) {
+            forceAdd(todo, next.callback);
+            sleep = 0;
+          } else {
+            // Put it back (it's not time).
+            forceAdd(backlog, next);
+            sleep = next.time - now;
+          }
+        }
+
+        if (sleep > 0) {
+          try {
+            Thread.sleep(sleep);
+          } catch (InterruptedException ex) {
+            // There are two cases this will happen:
+            //  1. A new item was added and we are being woken to
+            //     check if we need to update the time.
+            //  2. It is time to exit and we need to wake-up so that
+            //     we can check that "running" is "false".
+          }
         }
       }
     }
@@ -87,8 +115,11 @@ public final class Timeline {
         try {
           todo.take().run();
         } catch (Exception ex) {
-          // Catch all exceptions here to stop any rouge action from
+          // Catch all exceptions here to stop any rogue action from
           // take down the timeline.
+          LOG.warning(
+              "An exception was seen on the timeline (%s)",
+              ex.toString());
         }
       }
     }
@@ -120,27 +151,45 @@ public final class Timeline {
   // point in time.
   public void scheduleAt(long timeMs, Runnable callback) {
     final Event event = new Event(timeMs, callback);
-    while (!backlog.offer(event)) {
-      // force add
-    }
+    forceAdd(backlog, event);
     scheduler.interrupt();  // wake it up
   }
 
+  // STOP
+  //
+  // Tell the timeline to shutdown. This is a non-blocking call.
   public void stop() {
     running = false;
-    forceStop(executor);
-    forceStop(scheduler);
+
+    // Interrupt does not force a thread to exit. It signal's the
+    // thead that it is time to stop execution. As the threads may
+    // be sleeping, this will force them awake.
+    executor.interrupt();
+    scheduler.interrupt();
   }
 
-  private static void forceStop(Thread thread) {
+  // JOIN
+  //
+  // Wait for the timeline to shutdown. This is a blocking call.
+  public void join() {
+    forceJoin(executor);
+    forceJoin(scheduler);
+  }
+
+  private static void forceJoin(Thread thread) {
     while (true) {
       try {
-        thread.interrupt();
         thread.join();
         break;
       } catch (InterruptedException ex) {
         // Do nothing - allow this to try again.
       }
+    }
+  }
+
+  private static <T> void forceAdd(BlockingQueue<T> queue, T value) {
+    while (!queue.offer(value)) {
+      // try again...
     }
   }
 }

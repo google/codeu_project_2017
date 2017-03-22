@@ -16,10 +16,10 @@ package codeu.chat;
 
 import java.io.IOException;
 
-import codeu.chat.common.Hub;
 import codeu.chat.relay.Server;
 import codeu.chat.relay.ServerFrontEnd;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Timeline;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
@@ -56,39 +56,39 @@ final class RelayMain {
   private static void startRelay(ConnectionSource source) {
 
     final Server relay = new Server(1024, 16);
-
     LOG.info("Relay object created.");
+
+    final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
+    LOG.info("Relay front end object created.");
+
+    final Timeline timeline = new Timeline();
+    LOG.info("Relay timeline created.");
 
     // TODO: Load team information
 
-    final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
-
-    LOG.info("Relay front end object created.");
-
     LOG.info("Starting relay main loop...");
 
-    final Runnable hub = new Hub(source, new Hub.Handler() {
+    while (true) {
+      try {
 
-      @Override
-      public void handle(Connection connection) throws Exception {
+        LOG.info("Established connection...");
+        final Connection connection = source.connect();
+        LOG.info("Connection established.");
 
-        frontEnd.handleConnection(connection);
+        timeline.scheduleNow(new Runnable() {
+          @Override
+          public void run() {
+            try {
+              frontEnd.handleConnection(connection);
+            } catch (Exception ex) {
+              LOG.error(ex, "Exception handling connection.");
+            }
+          }
+        });
 
+      } catch (IOException ex) {
+        LOG.error(ex, "Failed to establish connection.");
       }
-
-      @Override
-      public void onException(Exception ex) {
-
-        System.out.println("ERROR: front end failed to handle connection. Check log for details.");
-        LOG.error(ex, "Exception handling connection.");
-
-      }
-    });
-
-    LOG.info("Starting hub...");
-
-    hub.run();
-
-    LOG.info("Hub exited.");
+    }
   }
 }
