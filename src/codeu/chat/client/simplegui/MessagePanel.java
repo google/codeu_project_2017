@@ -17,6 +17,8 @@ package codeu.chat.client.simplegui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.*; 
+
 import javax.swing.*;
 
 import codeu.chat.client.ClientContext;
@@ -27,7 +29,7 @@ import codeu.chat.common.User;
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
-public final class MessagePanel extends JPanel {
+public final class MessagePanel extends JPanel implements KeyListener {
 
   // These objects are modified by the Conversation Panel.
   private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
@@ -35,6 +37,9 @@ public final class MessagePanel extends JPanel {
   private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
 
   private final ClientContext clientContext;
+  
+  private JTextField textField = new JTextField(20); //the text field
+   
 
   public MessagePanel(ClientContext clientContext) {
     super(new GridBagLayout());
@@ -115,8 +120,10 @@ public final class MessagePanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    final JButton addButton = new JButton("Add");
+    final JButton addButton = new JButton("Send Message");
+    buttonPanel.add(textField); //Adds the message box before the "Send Message" button
     buttonPanel.add(addButton);
+    
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -146,6 +153,8 @@ public final class MessagePanel extends JPanel {
     this.add(buttonPanel, buttonPanelC);
 
     // User click Messages Add button - prompt for message body and add new Message to Conversation
+    
+    //Add button is pressed
     addButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -154,10 +163,11 @@ public final class MessagePanel extends JPanel {
         } else if (!clientContext.conversation.hasCurrent()) {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
-          final String messageText = (String) JOptionPane.showInputDialog(
-              MessagePanel.this, "Enter message:", "Add Message", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+          
+          final String messageText = textField.getText();
+          
           if (messageText != null && messageText.length() > 0) {
+        	textField.setText(""); //clears the text field after use
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
@@ -167,10 +177,36 @@ public final class MessagePanel extends JPanel {
         }
       }
     });
-
+    
+    //Respond if user enters ENTER
+    
+    KeyListener listener = new KeyListener() {
+    	@Override
+      	public void keyTyped(KeyEvent e) {}
+      
+      	public void keyPressed(KeyEvent e) {}
+    	 
+      	public void keyReleased(KeyEvent e) {}
+      
+      	
+      };
+    
+      textField.addKeyListener(listener);
+      
+      
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
   }
+  
+  
+  
+  public void keyTyped(KeyEvent e) {}
+ 
+  public void keyPressed(KeyEvent e) {}
+	 
+  public void keyReleased(KeyEvent e) {}
+  
+  
 
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
