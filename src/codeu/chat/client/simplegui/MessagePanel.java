@@ -29,7 +29,7 @@ import codeu.chat.common.User;
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
-public final class MessagePanel extends JPanel implements KeyListener {
+public final class MessagePanel extends JPanel {
 
   // These objects are modified by the Conversation Panel.
   private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
@@ -180,34 +180,41 @@ public final class MessagePanel extends JPanel implements KeyListener {
     
     //Respond if user enters ENTER
     
-    KeyListener listener = new KeyListener() {
-    	@Override
-      	public void keyTyped(KeyEvent e) {}
+    textField.addKeyListener(new KeyListener() {
+    	//If the key typed is ENTER, send the message
+      	public void keyTyped(KeyEvent e) {
+      		if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
+      			if (!clientContext.user.hasCurrent()) {
+      	          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
+      	        } else if (!clientContext.conversation.hasCurrent()) {
+      	          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+      	        } else {
+      	          
+      	          final String messageText = textField.getText();
+      	          
+      	          if (messageText != null && messageText.length() > 0) {
+      	        	textField.setText(""); //clears the text field after use
+      	            clientContext.message.addMessage(
+      	                clientContext.user.getCurrent().id,
+      	                clientContext.conversation.getCurrentId(),
+      	                messageText);
+      	            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+      	          }
+      	        }
+      		}
+      	}
       
       	public void keyPressed(KeyEvent e) {}
     	 
       	public void keyReleased(KeyEvent e) {}
       
       	
-      };
+      });
     
-      textField.addKeyListener(listener);
-      
-      
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
   }
   
-  
-  
-  public void keyTyped(KeyEvent e) {}
- 
-  public void keyPressed(KeyEvent e) {}
-	 
-  public void keyReleased(KeyEvent e) {}
-  
-  
-
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {

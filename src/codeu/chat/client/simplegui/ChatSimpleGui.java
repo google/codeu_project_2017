@@ -17,6 +17,7 @@ package codeu.chat.client.simplegui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.JFrame; 
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
@@ -31,8 +32,8 @@ public final class ChatSimpleGui {
   private JFrame mainFrame;
 
   private final ClientContext clientContext;
-
-  // Constructor - sets up the Chat Application
+  
+   // Constructor - sets up the Chat Application
   public ChatSimpleGui(Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
   }
@@ -66,14 +67,15 @@ public final class ChatSimpleGui {
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
+    mainFrame.setJMenuBar(menuBar());
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
 
-    // Build main panels - Users, Conversations, Messages.
+    // Build main panels - Users, Conversations, Messages, Menu Bar
     final JPanel usersViewPanel = new UserPanel(clientContext);
-    usersViewPanel.setBorder(paneBorder());
+    usersViewPanel.setBorder(paneBorder()); 
     final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
@@ -115,5 +117,16 @@ public final class ChatSimpleGui {
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
+  }
+  
+  //Creates and Builds the Menu Bar
+  private JMenuBar menuBar(){
+	  JMenu topMenu = new JMenu("How to Use"); //first category of menu
+	  JMenuBar topMenuBar = new JMenuBar(); //the menu bar
+	  
+	  //adds the How to Use information at the top of this menu bar
+	  topMenuBar.add(topMenu); 
+	  
+	  return topMenuBar; 
   }
 }
