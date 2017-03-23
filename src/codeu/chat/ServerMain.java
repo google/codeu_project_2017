@@ -137,7 +137,6 @@ final class ServerMain {
 
 
 
-    broadCastSource.close();
 
     } catch (IOException exc) {
       System.out.println("error starting the broadcast hub");
