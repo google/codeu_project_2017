@@ -8,11 +8,11 @@ public final class Database {
 
   private final static Logger.Log LOG = Logger.newLog(Database.class);
 
-  private String m_dbPath;
-  private Connection m_connection;
+  private final String dbPath;
+  private Connection connection;
 
   public Database(String dbPath) {
-      m_dbPath = dbPath;
+      this.dbPath = dbPath;
   }
 
   /**
@@ -25,9 +25,9 @@ public final class Database {
   private boolean validateConnection() {
     try {
       // If the connection is null or is closed, create a new one.
-      if (m_connection == null || !m_connection.isValid(0)) {
+      if (connection == null || !connection.isValid(0)) {
         Class.forName("org.sqlite.JDBC");
-        m_connection = DriverManager.getConnection(String.format("jdbc:sqlite:%s", m_dbPath));
+        connection = DriverManager.getConnection(String.format("jdbc:sqlite:%s", dbPath));
       }
 
       // Any other state implies the connection is valid.
@@ -47,7 +47,7 @@ public final class Database {
    */
   public Connection getConnection() {
     if (validateConnection()) {
-      return m_connection;
+      return connection;
     }
     return null;
   }

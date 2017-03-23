@@ -34,12 +34,11 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.database.Database;
-import codeu.chat.database.Schema;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
 
-import codeu.chat.server.schema.UserSchema;
+import codeu.chat.server.database.UserTable;
 
 public final class Server {
 
@@ -56,7 +55,7 @@ public final class Server {
   private Uuid lastSeen = Uuids.NULL;
 
   private final Database database;
-  private final UserSchema userSchema;
+  private UserTable userTable = null;
 
   public Server(Uuid id, byte[] secret, Relay relay, Database database) {
 
@@ -67,7 +66,6 @@ public final class Server {
     this.relay = relay;
 
     this.database = database;
-    this.userSchema = new UserSchema(database);
 
     // Setup the database.
     setupDatabase();
@@ -280,7 +278,7 @@ public final class Server {
 
   private void setupDatabase() {
     try {
-      userSchema.createTable("users");
+      userTable = new UserTable(database);
 
       LOG.info("Database initialized.");
     } catch (Exception ex) {

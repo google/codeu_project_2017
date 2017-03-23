@@ -6,13 +6,10 @@ import java.util.Map;
 
 public abstract class Schema {
 
-  private Database m_database;
+  Map<String, String> fields;
 
-  Map<String, String> m_fields;
-
-  public Schema(Database database) {
-    m_database = database;
-    m_fields = new HashMap<String, String>();
+  public Schema() {
+    this.fields = new HashMap<String, String>();
   }
 
   /**
@@ -22,7 +19,7 @@ public abstract class Schema {
    * @param props The properties associated with the field.
    */
   protected void addField(String name, String props) {
-    m_fields.put(name, props);
+    fields.put(name, props);
   }
 
   /**
@@ -30,11 +27,12 @@ public abstract class Schema {
    * If the table already exists, does nothing.
    *
    * @param name The name of the table.
+   * @param database The database to create the table in.
    *
    * @throws SQLException If an SQL error occurs.
    */
-  public void createTable(String name) throws SQLException {
-    Connection connection = m_database.getConnection();
+  public void createTable(String name, Database database) throws SQLException {
+    Connection connection = database.getConnection();
     if (connection == null) {
       return;
     }
@@ -42,7 +40,7 @@ public abstract class Schema {
     // Build the update query.
     StringBuilder fields = new StringBuilder();
     fields.append("_id INTEGER PRIMARY KEY AUTOINCREMENT"); // Default primary key.
-    for (Map.Entry<String, String> entry : m_fields.entrySet()) {
+    for (Map.Entry<String, String> entry : this.fields.entrySet()) {
       String field = entry.getKey();
       String props = entry.getValue();
       fields.append(String.format(", %s %s", field, props));
@@ -59,11 +57,12 @@ public abstract class Schema {
    * If the table doesn't exist, does nothing.
    *
    * @param name The name of the table.
+   * @param database The database to drop the table from.
 
    * @throws SQLException If an SQL error occurs.
    */
-  public void dropTable(String name) throws SQLException {
-    Connection connection = m_database.getConnection();
+  public void dropTable(String name, Database database) throws SQLException {
+    Connection connection = database.getConnection();
     if (connection == null) {
       return;
     }
