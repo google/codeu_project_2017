@@ -90,6 +90,7 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
+      broadCastSystem.addMessage(message);
 
       // Unlike the other calls - we need to send something the result of this
       // call to the relay. Waiting until after the server has written back to
@@ -117,6 +118,7 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
+      broadCastSystem.addConversation(conversation.summary);
 
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
 

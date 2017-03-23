@@ -137,10 +137,14 @@ public class BroadCastSystem {
 
     public void broadCastMessage(Message message){
 
-        Uuid conversationId = message.id;
+
+        // todo conversation id is not the actual id
+        int conversationId = message.id.id();
 
         // using an iterator in order to remove connections if they return an exception
         // this is in case the client has disconnected for whatever reason
+
+        System.out.println("Testing list at uid + " + conversationId + " : " + conversationUsers.get(conversationId));
         Iterator<Connection> myIterator = conversationUsers.get(conversationId).iterator();
 
         while (myIterator.hasNext()) {
@@ -192,6 +196,7 @@ public class BroadCastSystem {
 
         conversationUsers.put(uid, Collections.synchronizedList(new LinkedList<>()));
 
+        System.out.println("added conversation at id" + uid);
     }
 
 
@@ -219,6 +224,7 @@ public class BroadCastSystem {
 
         if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
 
+            System.out.println("Conversation request received");
             ConversationSummary old = ConversationSummary.SERIALIZER.read(in);
             ConversationSummary newCon = ConversationSummary.SERIALIZER.read(in);
 
@@ -226,6 +232,7 @@ public class BroadCastSystem {
 
             Serializers.INTEGER.write(out,NetworkCode.JOIN_CONVERSATION_RESPONSE);
 
+            System.out.println("conversation response sent");
         }
 
     }
