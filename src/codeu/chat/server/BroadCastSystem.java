@@ -24,9 +24,20 @@ todo check the synchronization for conflicts (synchronize linked lists??)
  */
 public class BroadCastSystem {
 
+    private class ConversationMessageLink {
+
+        Uuid conversationUuid;
+        Message message;
+
+        ConversationMessageLink(Uuid conversationUuid, Message message) {
+            this.conversationUuid = conversationUuid;
+            this.message = message;
+        }
+
+    }
 
     private ConcurrentHashMap<Integer, List<Connection>> conversationUsers;
-    private final BlockingQueue<Message> messagesToBroadcast;
+    private final BlockingQueue<ConversationMessageLink> messagesToBroadcast;
     private final Thread broadCaster;
 
     private class MessageBroadCaster implements Runnable {
@@ -135,11 +146,12 @@ public class BroadCastSystem {
     }
 
 
-    public void broadCastMessage(Message message){
+    public void broadCastMessage(ConversationMessageLink messageLink){
 
 
         // todo conversation id is not the actual id
-        int conversationId = message.id.id();
+        int conversationId = messageLink.conversationUuid.id();
+        Message message = messageLink.message;
 
         // using an iterator in order to remove connections if they return an exception
         // this is in case the client has disconnected for whatever reason
@@ -201,9 +213,9 @@ public class BroadCastSystem {
 
 
     // adds the given message to the list of messages that need to be broadcasted
-    public void addMessage(Message message){
+    public void addMessage(Uuid conversationUuid, Message message){
         if (message == null) throw new NullPointerException("Message cannot be null");
-        messagesToBroadcast.add(message);
+        messagesToBroadcast.add(new ConversationMessageLink(conversationUuid, message));
     }
 
 

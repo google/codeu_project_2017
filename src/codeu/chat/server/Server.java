@@ -90,7 +90,7 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
-      broadCastSystem.addMessage(message);
+      broadCastSystem.addMessage(conversation, message);
 
       // Unlike the other calls - we need to send something the result of this
       // call to the relay. Waiting until after the server has written back to
