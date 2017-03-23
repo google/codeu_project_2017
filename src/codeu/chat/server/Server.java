@@ -33,9 +33,13 @@ import codeu.chat.common.Time;
 import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
+import codeu.chat.database.Database;
+import codeu.chat.database.Schema;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
+
+import codeu.chat.server.schema.UserSchema;
 
 public final class Server {
 
@@ -51,13 +55,22 @@ public final class Server {
   private final Relay relay;
   private Uuid lastSeen = Uuids.NULL;
 
-  public Server(Uuid id, byte[] secret, Relay relay) {
+  private final Database database;
+  private final UserSchema userSchema;
+
+  public Server(Uuid id, byte[] secret, Relay relay, Database database) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
     this.controller = new Controller(id, model);
     this.relay = relay;
+
+    this.database = database;
+    this.userSchema = new UserSchema(database);
+
+    // Setup the database.
+    setupDatabase();
   }
 
   public void syncWithRelay(int maxReadSize) throws Exception {
@@ -264,4 +277,15 @@ public final class Server {
                 relay.pack(conversation.id, conversation.title, conversation.creation),
                 relay.pack(message.id, message.content, message.creation));
   }
+
+  private void setupDatabase() {
+    try {
+      userSchema.createTable("users");
+
+      LOG.info("Database initialized.");
+    } catch (Exception ex) {
+      LOG.error("Database initialization failed: ", ex.getMessage());
+    }
+  }
+
 }

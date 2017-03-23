@@ -14,5 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cd './bin'
-java codeu.chat.ServerMain "100.101" "ABABAB" "2007"
+java -cp ./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.ServerMain "100.101" "ABABAB" "2007" "server.db"
