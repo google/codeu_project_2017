@@ -57,10 +57,19 @@ public class BroadCastSystem {
         @Override
         public void run() {
 
-            // todo this will constantly listen to it's connection
+             // Connection listener will always listen to this connection until an exception
+            // is given off
 
-            // handle commands "join conversation" , "new broadcast"
+            while (true) {
 
+                try {
+                    handleCommand(myConnection);
+
+                } catch (IOException exc) {
+                    break;
+                }
+
+            }
 
 
         }
