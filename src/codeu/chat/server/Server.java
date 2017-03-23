@@ -50,14 +50,16 @@ public final class Server {
 
   private final Relay relay;
   private Uuid lastSeen = Uuids.NULL;
+  private BroadCastSystem broadCastSystem = null;
 
-  public Server(Uuid id, byte[] secret, Relay relay) {
+  public Server(Uuid id, byte[] secret, Relay relay, BroadCastSystem broadCastSystem) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
     this.controller = new Controller(id, model);
     this.relay = relay;
+    this.broadCastSystem = broadCastSystem;
   }
 
   public void syncWithRelay(int maxReadSize) throws Exception {

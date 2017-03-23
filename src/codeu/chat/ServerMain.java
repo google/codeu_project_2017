@@ -16,15 +16,14 @@
 package codeu.chat;
 
 import java.io.IOException;
+import java.util.List;
 
 import codeu.chat.common.Hub;
 import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
-import codeu.chat.server.NoOpRelay;
-import codeu.chat.server.RemoteRelay;
-import codeu.chat.server.Server;
+import codeu.chat.server.*;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
@@ -77,11 +76,20 @@ final class ServerMain {
                                 ConnectionSource serverSource,
                                 ConnectionSource relaySource) {
 
+
+    try (
+      final ConnectionSource broadCastSource = ServerConnectionSource.forPort(2025)
+    ) {
+
+
+
+    BroadCastSystem broadCastSystem = new BroadCastSystem();
+
     final Relay relay = relaySource == null ?
                         new NoOpRelay() :
                         new RemoteRelay(relaySource);
 
-    final Server server = new Server(id, secret, relay);
+    final Server server = new Server(id, secret, relay, broadCastSystem);
 
     LOG.info("Server object created.");
 
@@ -103,10 +111,37 @@ final class ServerMain {
       }
     });
 
+    final Runnable broadcastHub = new BroadCastHub(broadCastSource, new BroadCastHub.Handler() {
+      @Override
+      public void handle(Connection connection) throws Exception {
+
+        broadCastSystem.handleConnection(connection);
+
+      }
+
+      @Override
+      public void onException(Exception ex) {
+        System.out.println("ERROR: Exception during broadcast system tick. Check log");
+        LOG.error(ex, "Exception suring broadcast system tick");
+      }
+    });
+
     LOG.info("Starting hub...");
 
     hub.run();
 
     LOG.info("Hub exited.");
+
+    LOG.info("Starting BroadCast Hub....");
+
+    broadcastHub.run();
+
+    LOG.info("BroadCast Hub exited.");
+
+    broadCastSource.close();
+
+    } catch (IOException exc) {
+      System.out.println("error starting the broadcast hub");
+    }
   }
 }
