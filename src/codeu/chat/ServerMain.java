@@ -125,6 +125,9 @@ final class ServerMain {
         LOG.error(ex, "Exception suring broadcast system tick");
       }
     });
+    LOG.info("Starting BroadCast Hub....");
+
+    broadcastHub.run();
 
     LOG.info("Starting hub...");
 
@@ -132,11 +135,7 @@ final class ServerMain {
 
     LOG.info("Hub exited.");
 
-    LOG.info("Starting BroadCast Hub....");
 
-    broadcastHub.run();
-
-    LOG.info("BroadCast Hub exited.");
 
     broadCastSource.close();
 

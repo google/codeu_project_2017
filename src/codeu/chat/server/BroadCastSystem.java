@@ -5,6 +5,7 @@ import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Iterator;
@@ -194,6 +195,29 @@ public class BroadCastSystem {
 
     public void handleConnection(Connection connection) {
         // todo this will create a new thread that listens to this connection
+
+        ConnectionListener connectionListener = new ConnectionListener(connection);
+        Thread connectionThread = new Thread(connectionListener);
+        connectionThread.start();
+
+    }
+
+    public void handleCommand(Connection connection) throws IOException{
+        InputStream in = connection.in();
+        OutputStream out = connection.out();
+
+
+        int type = Serializers.INTEGER.read(in);
+
+        if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
+
+            // todo call switch conversation for the connection
+            // Get the conversation summaries for the old and new conversation
+
+
+            Serializers.INTEGER.write(out,NetworkCode.JOIN_CONVERSATION_RESPONSE);
+        }
+
     }
 
 
