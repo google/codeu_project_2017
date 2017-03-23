@@ -194,7 +194,6 @@ public class BroadCastSystem {
 
 
     public void handleConnection(Connection connection) {
-        // todo this will create a new thread that listens to this connection
 
         ConnectionListener connectionListener = new ConnectionListener(connection);
         Thread connectionThread = new Thread(connectionListener);
@@ -211,11 +210,13 @@ public class BroadCastSystem {
 
         if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
 
-            // todo call switch conversation for the connection
-            // Get the conversation summaries for the old and new conversation
+            ConversationSummary old = ConversationSummary.SERIALIZER.read(in);
+            ConversationSummary newCon = ConversationSummary.SERIALIZER.read(in);
 
+            switchConversation(connection,old,newCon);
 
             Serializers.INTEGER.write(out,NetworkCode.JOIN_CONVERSATION_RESPONSE);
+
         }
 
     }
