@@ -2,13 +2,22 @@ package codeu.chat.database;
 
 import java.sql.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import codeu.chat.util.Logger;
+
 public abstract class Table<S extends Schema> {
+
+  private final static Logger.Log LOG = Logger.newLog(Table.class);
 
   private final S schema;
   private final Database database;
   private final String name;
 
-  public Table(S schema, Database database, String name) throws SQLException {
+  public Table(S schema, Database database, String name) {
     this.schema = schema;
     this.database = database;
     this.name = name;
@@ -33,6 +42,109 @@ public abstract class Table<S extends Schema> {
    */
   public S getSchema() {
     return schema;
+  }
+
+  /**
+   * Find objects with a given query.
+   *
+   * @param query The query.
+   * @param values The values for the query.
+   *
+   * @return The list of DBObjects found.
+   */
+  public List<DBObject<S>> findQuery(String query, String... values) {
+    Connection connection = database.getConnection();
+    if (connection == null) return new ArrayList<DBObject<S>>();
+
+    List<DBObject<S>> objects = new ArrayList<DBObject<S>>();
+
+    // Run a query in the database.
+    String sqlQuery = String.format("SELECT * FROM %s WHERE %s", name, query);
+    System.out.println(sqlQuery);
+    try (PreparedStatement stmt = connection.prepareStatement(sqlQuery)) {
+      int i = 1;
+      for (String value : values) {
+        stmt.setString(i ++, value);
+      }
+      try (ResultSet results = stmt.executeQuery()) {
+        // Try to find the first row.
+        while (results.next()) {
+          // Build a map of field values.
+          int id = -1;
+          Map<String, String> fields = new HashMap<String, String>();
+          for (String field : schema.getFields().keySet()) {
+            if (field.equals("_id")) {
+              id = results.getInt(field);
+            } else {
+              fields.put(name, results.getString(field));
+            }
+          }
+
+          // Create a DBObject with the field values.
+          DBObject<S> object = new DBObject<S>(this, id, fields);
+
+          // Add the object to the list.
+          objects.add(object);
+        }
+      }
+    } catch (SQLException ex) {
+      LOG.error("Failed to query database: ", ex.getMessage());
+    }
+
+    // Return the found objects.
+    return objects;
+  }
+
+  /**
+   * Find objects with given fields and values.
+   *
+   * @param parameters The field and value pairs.
+   *
+   * @return The list of DBObjects found.
+   */
+  public List<DBObject<S>> find(Map<String, String> parameters) {
+    // Build the query.
+    StringBuilder query = new StringBuilder();
+    int numFields = parameters.size();
+    for (String field : parameters.keySet()) {
+      query.append(String.format("%s = ?", field));
+      if (-- numFields > 0) {
+        query.append(" AND ");
+      }
+    }
+
+    return findQuery(query.toString(), parameters.values().toArray(new String[parameters.size()]));
+  }
+
+  /**
+   * Find objects with given fields and values.
+   *
+   * @param pairs The field and value pairs.
+   *
+   * @return The list of DBObjects found.
+   */
+  public List<DBObject<S>> find(String... pairs) {
+    Map<String, String> fields = new HashMap<String, String>();
+    for (int i = 0; i < pairs.length; i += 2) {
+      fields.put(pairs[i], pairs[i + 1]);
+    }
+    return find(fields);
+  }
+
+  /**
+   * Find an object in the database with a given id.
+   *
+   * @param id The ID.
+   *
+   * @return The DBObject if found, null otherwise.
+   */
+  public DBObject<S> find(int id) {
+    List<DBObject<S>> found = find("_id", Integer.toString(id));
+    if (found.size() > 0) {
+      return found.get(0);
+    } else {
+      return null;
+    }
   }
 
 }

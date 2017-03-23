@@ -4,9 +4,13 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import codeu.chat.util.Logger;
+
 public abstract class Schema {
 
-  Map<String, String> fields;
+  private final static Logger.Log LOG = Logger.newLog(Schema.class);
+
+  private final Map<String, String> fields;
 
   public Schema() {
     this.fields = new HashMap<String, String>();
@@ -23,15 +27,22 @@ public abstract class Schema {
   }
 
   /**
+   * Get the fields in the schema.
+   *
+   * @return The fields.
+   */
+  public Map<String, String> getFields() {
+    return fields;
+  }
+
+  /**
    * Create a table with this schema.
    * If the table already exists, does nothing.
    *
    * @param name The name of the table.
    * @param database The database to create the table in.
-   *
-   * @throws SQLException If an SQL error occurs.
    */
-  public void createTable(String name, Database database) throws SQLException {
+  public void createTable(String name, Database database) {
     Connection connection = database.getConnection();
     if (connection == null) {
       return;
@@ -48,8 +59,11 @@ public abstract class Schema {
     String query = String.format("CREATE TABLE IF NOT EXISTS %s (%s)", name, fields.toString());
 
     // Run the update.
-    PreparedStatement stmt = connection.prepareStatement(query);
-    stmt.executeUpdate();
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+      stmt.executeUpdate();
+    } catch (SQLException ex) {
+      LOG.error("Failed to create table: ", ex.getMessage());
+    }
   }
 
   /**
@@ -58,20 +72,20 @@ public abstract class Schema {
    *
    * @param name The name of the table.
    * @param database The database to drop the table from.
-
-   * @throws SQLException If an SQL error occurs.
    */
-  public void dropTable(String name, Database database) throws SQLException {
+  public void dropTable(String name, Database database) {
     Connection connection = database.getConnection();
     if (connection == null) {
       return;
     }
 
     // Run the update to drop the table.
-    PreparedStatement stmt = connection.prepareStatement(
-      String.format("DROP TABLE IF EXISTS %s", name)
-    );
-    stmt.executeUpdate();
+    String query = String.format("DROP TABLE IF EXISTS %s", name);
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+      stmt.executeUpdate();
+    } catch (SQLException ex) {
+      LOG.error("Failed to drop table: ", ex.getMessage());
+    }
   }
 
 }

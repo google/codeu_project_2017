@@ -277,13 +277,9 @@ public final class Server {
   }
 
   private void setupDatabase() {
-    try {
-      userTable = new UserTable(database);
+    userTable = new UserTable(database);
 
-      LOG.info("Database initialized.");
-    } catch (Exception ex) {
-      LOG.error("Database initialization failed: ", ex.getMessage());
-    }
+    LOG.info("Database initialized.");
   }
 
 }
