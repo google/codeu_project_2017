@@ -10,6 +10,10 @@ public final class TextValidator {
 
   private static final Pattern validUserNamePattern = Pattern.compile("[a-zA-Z0-9]+");
 
+  /**
+   * @param username – the string to be validated
+   * @return – whether or not the string was valid for username type input
+   */
   public static boolean isValidUserName(String username) {
     if (username == null) {
       return false;
