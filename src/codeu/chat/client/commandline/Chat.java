@@ -90,6 +90,7 @@ public final class Chat {
     if (token.equals("exit")) {
 
       alive = false;
+      broadCastReceiver.exit();
 
     } else if (token.equals("help")) {
 

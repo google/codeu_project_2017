@@ -20,6 +20,8 @@ public class BroadCastReceiver extends Thread{
     ConnectionSource mySource;
     OutputStream out;
     BroadcastEvent myResponse;
+    boolean alive;
+    InputStream in;
 
     @FunctionalInterface
     public interface BroadcastEvent { void onBroadcast(Message message); }
@@ -27,6 +29,7 @@ public class BroadCastReceiver extends Thread{
     public BroadCastReceiver(ConnectionSource mySource, BroadcastEvent broadcastEvent) {
         this.mySource = mySource;
         this.myResponse = broadcastEvent;
+        this.alive = true;
     }
 
 
@@ -36,11 +39,10 @@ public class BroadCastReceiver extends Thread{
         try (
                 final Connection myConnection = this.mySource.connect();
         ) {
-            InputStream in = myConnection.in();
+            in = myConnection.in();
             out = myConnection.out();
-            // todo this will have to be fixed to check for join conversation responses
 
-            while (true) {
+            while (alive) {
                 int type = Serializers.INTEGER.read(in);
 
                 if (type == NetworkCode.NEW_BROADCAST) {
@@ -72,8 +74,15 @@ public class BroadCastReceiver extends Thread{
             System.out.println("Error in join conversation");
         }
 
+    }
 
-
+    public void exit() {
+        alive = false;
+        try {
+            in.close();
+        } catch (IOException exc){
+            // todo error
+        }
     }
 
 
