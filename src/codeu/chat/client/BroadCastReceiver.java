@@ -15,14 +15,20 @@ import java.io.OutputStream;
 /**
  * Created by rsharif on 3/23/17.
  */
-public class BroadCastReciever extends Thread{
+public class BroadCastReceiver extends Thread{
 
     ConnectionSource mySource;
     OutputStream out;
+    BroadcastEvent myResponse;
 
-    public BroadCastReciever(ConnectionSource mySource) {
+    @FunctionalInterface
+    public interface BroadcastEvent { void onBroadcast(Message message); }
+
+    public BroadCastReceiver(ConnectionSource mySource, BroadcastEvent broadcastEvent) {
         this.mySource = mySource;
+        this.myResponse = broadcastEvent;
     }
+
 
     @Override
     public void run() {
@@ -38,9 +44,8 @@ public class BroadCastReciever extends Thread{
                 int type = Serializers.INTEGER.read(in);
 
                 if (type == NetworkCode.NEW_BROADCAST) {
-                    Message m = Message.SERIALIZER.read(in);
-                    System.out.println("Message received: ");
-                    System.out.println(m);
+                    Message message = Message.SERIALIZER.read(in);
+                    myResponse.onBroadcast(message);
                 }
 
                 else if(type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
@@ -60,11 +65,11 @@ public class BroadCastReciever extends Thread{
         try {
 
             Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_REQUEST);
-            ConversationSummary.SERIALIZER.write(out, old);
-            ConversationSummary.SERIALIZER.write(out, newCon);
+            Serializers.nullable(ConversationSummary.SERIALIZER).write(out, old);
+            Serializers.nullable(ConversationSummary.SERIALIZER).write(out, newCon);
 
         } catch (IOException exc) {
-
+            System.out.println("Error in join conversation");
         }
 
 

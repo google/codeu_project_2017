@@ -237,8 +237,9 @@ public class BroadCastSystem {
         if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
 
             System.out.println("Conversation request received");
-            ConversationSummary old = ConversationSummary.SERIALIZER.read(in);
-            ConversationSummary newCon = ConversationSummary.SERIALIZER.read(in);
+
+            ConversationSummary old = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
+            ConversationSummary newCon = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
 
             switchConversation(connection,old,newCon);
 
