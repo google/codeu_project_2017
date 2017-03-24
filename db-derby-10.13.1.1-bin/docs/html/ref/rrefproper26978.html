@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="derby.authentication.ldap.searchBase" />
+<meta name="abstract" content="The derby.authentication.ldap.searchBase property specifies the root DN of the point in your hierarchy from which to begin a guest or anonymous search for the user's DN." />
+<meta name="description" content="The derby.authentication.ldap.searchBase property specifies the root DN of the point in your hierarchy from which to begin a guest or anonymous search for the user's DN." />
+<meta content="derby.authentication.ldap.searchbase property, LDAP, configuring" name="DC.subject" />
+<meta content="derby.authentication.ldap.searchbase property, LDAP, configuring" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefproper22250.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperbuiltinalgorithm.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperiterations.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropersaltlength.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperauthdn.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperauthpw.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper37341.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpasswordmillis.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpasswordthreshold.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper13766.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper25581.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27467.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperclasspath.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper24846.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper81405.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper25025.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropernoautoboot.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper24390.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper39325.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropersqlauth.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper13217.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperxatrantimeout.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper43414.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper43517.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperpreallocator.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperstatementcachesize.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper10607.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper23835.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper40346.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper98166.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper46141.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperlogbuffersize.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefpropermaxlogshippinginterval.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperminlogshippinginterval.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperverbose.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatsauto.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatslog.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperindexstatstrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27529.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperstormin.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper81359.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper28026.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper40688.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrowlocking.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper34037.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdefaultfileperms.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperextdiagsevlevel.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper33027.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper18151.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperlogboottrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper26985.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper35028.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrollingfilecount.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrollingfilelimit.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrollingfilepattern.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperrollingfile.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperbootall.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdurability.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper32066.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproper27355.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefproperdatadictversion.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefproper26978" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>derby.authentication.ldap.searchBase</title>
+</head>
+<body id="rrefproper26978"><a name="rrefproper26978"><!-- --></a>
+
+
+<h1 class="topictitle1">derby.authentication.ldap.searchBase</h1>
+
+
+<div><p>The <em>derby.authentication.ldap.searchBase</em> property specifies
+the root DN of the point in your hierarchy from which to begin a guest or
+anonymous search for the user's DN.</p>
+
+<div class="section">
+<p>For example:</p>
+
+<pre><strong>ou=people,o=example.com</strong></pre>
+
+<p>When using Netscape Directory Server, set this property to the root DN,
+the special entry to which access control does not apply.</p>
+
+<p>For more information about LDAP user authentication, see "Configuring LDAP
+authentication" in the <span><em>Derby Security Guide</em></span>.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre><strong><span>-- system-wide property</span>
+derby.authentication.ldap.searchBase=
+    ou=people,o=example.com
+<span>-- database-wide property</span>
+CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY(
+    'derby.authentication.ldap.searchBase',
+    'ou=people,o=example.com')</strong></pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Dynamic or static</h2>
+<p>Static. For system-wide properties, you must reboot
+<span>Derby</span> for the change to take
+effect. For database-wide properties, you must reboot the database for the
+change to take effect.</p>
+
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefproper22250.html" title="The Derby properties are used for configuring the system and database, as well as for diagnostics such as logging statements, and monitoring and tracing locks.">Derby properties</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefproperbuiltinalgorithm.html" title="The derby.authentication.builtin.algorithm property specifies the message digest algorithm to use to protect the passwords that are stored in the database when using NATIVE authentication.">derby.authentication.builtin.algorithm</a></div>
+<div><a href="rrefproperiterations.html" title="The derby.authentication.builtin.iterations property specifies the number of times to apply the hash function (which is specified by the derby.authentication.builtin.algorithm property) on the credentials.">derby.authentication.builtin.iterations</a></div>
+<div><a href="rrefpropersaltlength.html" title="The derby.authentication.builtin.saltLength property specifies the number of bytes of random salt that will be added to users' credentials before hashing them.">derby.authentication.builtin.saltLength</a></div>
+<div><a href="rrefproperauthdn.html" title="Along with derby.authentication.ldap.searchAuthPW, the derby.authentication.ldap.searchAuthDN property indicates how Derby should bind with the LDAP directory server to do searches for user DN (distinguished name).">derby.authentication.ldap.searchAuthDN</a></div>
+<div><a href="rrefproperauthpw.html" title="Along with derby.authentication.ldap.searchAuthDN, the derby.authentication.ldap.searchAuthPW property indicates how Derby should bind with the directory server to do searches in order to retrieve a fully qualified user DN (distinguished name).">derby.authentication.ldap.searchAuthPW</a></div>
+<div><a href="rrefproper37341.html" title="The derby.authentication.ldap.searchFilter property specifies the search filter to use to determine what constitutes a user (and other search predicate) for Derby searches for a full DN during user authentication.">derby.authentication.ldap.searchFilter</a></div>
+<div><a href="rrefproperpasswordmillis.html" title="The derby.authentication.native.passwordLifetimeMillis property specifies the number of milliseconds a NATIVE authentication password remains valid after being created, reset, or modified.">derby.authentication.native.passwordLifetimeMillis</a></div>
+<div><a href="rrefproperpasswordthreshold.html" title="The derby.authentication.native.passwordLifetimeThreshold property specifies the threshold that triggers a connection-time warning that a password is about to expire.">derby.authentication.native.passwordLifetimeThreshold</a></div>
+<div><a href="rrefproper13766.html" title="The derby.authentication.provider property specifies the authentication provider for Derby user authentication.">derby.authentication.provider</a></div>
+<div><a href="rrefproper25581.html" title="The derby.authentication.server property specifies the location of the external directory service that provides user authentication for the Derby system as defined with the derby.authentication.provider property.">derby.authentication.server</a></div>
+<div><a href="rrefproper27467.html" title="The derby.connection.requireAuthentication property turns on user authentication for Derby.">derby.connection.requireAuthentication</a></div>
+<div><a href="rrefproperclasspath.html" title="The derby.database.classpath property specifies the classpath that Derby should use when searching for jar files in a database.">derby.database.classpath</a></div>
+<div><a href="rrefproper24846.html" title="The derby.database.defaultConnectionMode property, one of the user authorization properties, defines the default connection mode for users of the database or system for which this property is set.">derby.database.defaultConnectionMode</a></div>
+<div><a href="rrefproper81405.html" title="The derby.database.forceDatabaseLock property, if set to true on some platforms, prevents Derby from booting a database if a db.lck file is present in the database directory.">derby.database.forceDatabaseLock</a></div>
+<div><a href="rrefproper25025.html" title="The derby.database.fullAccessUsers property, one of the user authorization properties, specifies a list of users to which full (read-write) access to a database is granted.">derby.database.fullAccessUsers</a></div>
+<div><a href="rrefpropernoautoboot.html" title="The derby.database.noAutoBoot property specifies that a database should not be automatically booted at startup time.">derby.database.noAutoBoot</a></div>
+<div><a href="rrefproper24390.html" title="The derby.database.propertiesOnly property, when set to true, ensures that database-wide properties cannot be overridden by system-wide properties.">derby.database.propertiesOnly</a></div>
+<div><a href="rrefproper39325.html" title="The derby.database.readOnlyAccessUsers property, one of the user authorization properties, specifies a list of users to which read-only access to a database is granted.">derby.database.readOnlyAccessUsers</a></div>
+<div><a href="rrefpropersqlauth.html" title="The derby.database.sqlAuthorization property, one of the user authorization properties, enables the SQL standard authorization mode for the database or system on which this property is set.">derby.database.sqlAuthorization</a></div>
+<div><a href="rrefproper13217.html" title="The derby.infolog.append property specifies whether to append to or overwrite (delete and recreate) the derby.log file when the Derby engine is started.">derby.infolog.append</a></div>
+<div><a href="rrefproperxatrantimeout.html" title="The derby.jdbc.xaTransactionTimeout property specifies the default value of the XA transaction timeout that is used when a user either does not specify the XA transaction timeout or requests to use the default value.">derby.jdbc.xaTransactionTimeout</a></div>
+<div><a href="rrefproper43414.html" title="The derby.language.logQueryPlan property, when set to true, tells Derby to write the query plan information into the derby.log file for all executed queries.">derby.language.logQueryPlan</a></div>
+<div><a href="rrefproper43517.html" title="The derby.language.logStatementText property, when set to true, tells Derby to write the text and parameter values of all executed statements to the information log at the beginning of execution.">derby.language.logStatementText</a></div>
+<div><a href="rrefproperpreallocator.html" title="The derby.language.sequence.preallocator property specifies how many values to preallocate for sequences.">derby.language.sequence.preallocator</a></div>
+<div><a href="rrefproperstatementcachesize.html" title="The derby.language.statementCacheSize property defines the size, in number of statements, of the database statement cache (prepared statements kept in memory).">derby.language.statementCacheSize</a></div>
+<div><a href="rrefproper10607.html" title="The derby.locks.deadlockTimeout property determines the number of seconds after which Derby checks whether a transaction waiting to obtain a lock is involved in a deadlock.">derby.locks.deadlockTimeout</a></div>
+<div><a href="rrefproper23835.html" title="The derby.locks.deadlockTrace property causes a detailed list of locks at the time of a deadlock or a timeout to be written to the error log (typically the file derby.log).">derby.locks.deadlockTrace</a></div>
+<div><a href="rrefproper40346.html" title="The derby.locks.escalationThreshold property is used by the Derby system at runtime in determining when to attempt to escalate locking for at least one of the tables involved in a transaction from row-level locking to table-level locking.">derby.locks.escalationThreshold</a></div>
+<div><a href="rrefproper98166.html" title="The derby.locks.monitor property specifies that all deadlock errors are logged to the error log.">derby.locks.monitor</a></div>
+<div><a href="rrefproper46141.html" title="The derby.locks.waitTimeout property specifies the number of seconds after which Derby aborts a transaction when it is waiting for a lock.">derby.locks.waitTimeout</a></div>
+<div><a href="rrefproperlogbuffersize.html" title="The derby.replication.logBufferSize property specifies the size of the replication log buffers in bytes.">derby.replication.logBufferSize</a></div>
+<div><a href="rrefpropermaxlogshippinginterval.html" title="The derby.replication.maxLogShippingInterval property specifies, in milliseconds, the longest interval between two consecutive shipments of the transaction log from the master to the slave.">derby.replication.maxLogShippingInterval</a></div>
+<div><a href="rrefproperminlogshippinginterval.html" title="The derby.replication.minLogShippingInterval property specifies, in milliseconds, the shortest interval between two consecutive shipments of the transaction log from the master to the slave.">derby.replication.minLogShippingInterval</a></div>
+<div><a href="rrefproperverbose.html" title="The derby.replication.verbose property specifies whether replication messages are written to the Derby log.">derby.replication.verbose</a></div>
+<div><a href="rrefproperindexstatsauto.html" title="The derby.storage.indexStats.auto property, if set to true (the default), specifies that outdated index cardinality statistics are updated automatically during query compilation.">derby.storage.indexStats.auto</a></div>
+<div><a href="rrefproperindexstatslog.html" title="The derby.storage.indexStats.log property, if set to true, specifies that the thread that updates index cardinality statistics during query compilation will write messages to the Derby system log (derby.log) every time it performs a task.">derby.storage.indexStats.log</a></div>
+<div><a href="rrefproperindexstatstrace.html" title="The derby.storage.indexStats.trace property allows you to enable more detailed logging of index cardinality statistics than the derby.storage.indexStats.log property provides.">derby.storage.indexStats.trace</a></div>
+<div><a href="rrefproper27529.html" title="The derby.storage.initialPages property creates a Derby table or index with a number of pages already pre-allocated.">derby.storage.initialPages</a></div>
+<div><a href="rrefproperstormin.html" title="The derby.storage.minimumRecordSize property indicates the minimum user row size in bytes for on-disk database pages for tables when you are creating a table.">derby.storage.minimumRecordSize</a></div>
+<div><a href="rrefproper81359.html" title="The derby.storage.pageCacheSize property defines the size, in number of pages, of the data page cache in the database (data pages kept in memory).">derby.storage.pageCacheSize</a></div>
+<div><a href="rrefproper28026.html" title="The derby.storage.pageReservedSpace property defines the percentage of space reserved for updates on an on-disk database page for tables only (not indexes) and indicates the percentage of space to keep free on a page when inserting.">derby.storage.pageReservedSpace</a></div>
+<div><a href="rrefproper40688.html" title="The derby.storage.pageSize property defines the page size, in bytes, for on-disk database pages for tables or indexes used during table or index creation.">derby.storage.pageSize</a></div>
+<div><a href="rrefproperrowlocking.html" title="The derby.storage.rowLocking property, if set to true, enables row-level locking.">derby.storage.rowLocking</a></div>
+<div><a href="rrefproper34037.html" title="The derby.storage.tempDirectory property defines the location on disk for temporary file space needed by Derby for performing large sorts and deferred deletes and updates.">derby.storage.tempDirectory</a></div>
+<div><a href="rrefproperdefaultfileperms.html" title="The derby.storage.useDefaultFilePermissions property overrides the default access to files on systems that run on the Java SE 7 platform.">derby.storage.useDefaultFilePermissions</a></div>
+<div><a href="rrefproperextdiagsevlevel.html" title="The derby.stream.error.extendedDiagSeverityLevel property specifies whether thread dump information and extended diagnostic information are created, and at what level, in the event of a system crash or session error.">derby.stream.error.extendedDiagSeverityLevel</a></div>
+<div><a href="rrefproper33027.html" title="The derby.stream.error.field property specifies a static field that references a stream to which the error log is written.">derby.stream.error.field</a></div>
+<div><a href="rrefproper18151.html" title="The derby.stream.error.file property specifies the name of the file to which the error log is written.">derby.stream.error.file</a></div>
+<div><a href="rrefproperlogboottrace.html" title="The derby.stream.error.logBootTrace property specifies whether boot errors are written to the Derby log file.">derby.stream.error.logBootTrace</a></div>
+<div><a href="rrefproper26985.html" title="The derby.stream.error.logSeverityLevel property specifies which errors are logged to the Derby error log (typically the derby.log file).">derby.stream.error.logSeverityLevel</a></div>
+<div><a href="rrefproper35028.html" title="The derby.stream.error.method property specifies a static method that returns a stream to which the Derby error log is written.">derby.stream.error.method</a></div>
+<div><a href="rrefproperrollingfilecount.html" title="The derby.stream.error.rollingFile.count property specifies the number of rolling log files to permit before deleting the oldest file when rolling to the next file, if derby.stream.error.style is set to rollingFile.">derby.stream.error.rollingFile.count</a></div>
+<div><a href="rrefproperrollingfilelimit.html" title="The derby.stream.error.rollingFile.limit property specifies the number of bytes to which to limit each rolling log file before it is rolled over to the next file, if derby.stream.error.style is set to rollingFile.">derby.stream.error.rollingFile.limit</a></div>
+<div><a href="rrefproperrollingfilepattern.html" title="The derby.stream.error.rollingFile.pattern property specifies the naming pattern to use for the rolling log files, if derby.stream.error.style is set to rollingFile.">derby.stream.error.rollingFile.pattern</a></div>
+<div><a href="rrefproperrollingfile.html" title="The derby.stream.error.style property specifies that the Derby log file should be rolled over when it reaches a certain size.">derby.stream.error.style</a></div>
+<div><a href="rrefproperbootall.html" title="The derby.system.bootAll property specifies that all databases in the directory specified by the derby.system.home property should be automatically booted at startup time.">derby.system.bootAll</a></div>
+<div><a href="rrefproperdurability.html" title="The derby.system.durability property changes the default durability of Derby to improve performance at the expense of consistency and durability of the database.">derby.system.durability</a></div>
+<div><a href="rrefproper32066.html" title="The derby.system.home property specifies the Derby system directory, which is the directory that contains subdirectories holding databases that you create and the text file derby.properties.">derby.system.home</a></div>
+<div><a href="rrefproper27355.html" title="The derby.user.UserName property caches user DNs locally when derby.authentication.provider is set to LDAP and derby.authentication.ldap.searchFilter is set to derby.user.">derby.user.UserName</a></div>
+<div><a href="rrefproperdatadictversion.html" title="The DataDictionaryVersion property shows the version of the on-disk data in the database.">DataDictionaryVersion</a></div>
+</div>
+</div>
+
+</body>
+</html>

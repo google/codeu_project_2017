@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_DIAG.STATEMENT_DURATION diagnostic table function" />
+<meta name="abstract" content="You can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table function to analyze the execution duration of the useful SQL statements in the derby.log file or a log file that you specify." />
+<meta name="description" content="You can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table function to analyze the execution duration of the useful SQL statements in the derby.log file or a log file that you specify." />
+<meta content="diagnostic table functions, SYSCS_DIAG.STATEMENT_DURATION, SYSCS_DIAG.STATEMENT_DURATION diagnostic table functions" name="DC.subject" />
+<meta content="diagnostic table functions, SYSCS_DIAG.STATEMENT_DURATION, SYSCS_DIAG.STATEMENT_DURATION diagnostic table functions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtables.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagcontainedroles.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrorlogreader.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrormessages.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiaglocktable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagspacetable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagstatementcache.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtransactiontable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsyscsdiagstatementduration" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_DIAG.STATEMENT_DURATION diagnostic table function</title>
+</head>
+<body id="rrefsyscsdiagstatementduration"><a name="rrefsyscsdiagstatementduration"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_DIAG.STATEMENT_DURATION diagnostic table function</h1>
+
+
+
+<div><p>You can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table
+function to analyze the <dfn class="term">execution duration</dfn> of the useful SQL
+statements in the <samp class="codeph">derby.log</samp> file or a log file that you
+specify.</p>
+
+<div class="section">
+<p>You can also use this diagnostic table function to get an indication of where
+the bottlenecks are in the JDBC code for an application.</p>
+
+<p>For a database for which authentication and SQL authorization are both
+enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+access this diagnostic table function. See "Configuring user authentication" and
+"Configuring user authorization" in the
+<span><em>Derby Security Guide</em></span> for more information.</p>
+
+<p>To access the SYSCS_DIAG.STATEMENT_DURATION diagnostic
+table function, you must use the SQL table function syntax.</p>
+
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.STATEMENT_DURATION()) 
+    AS T1</pre>
+
+where T1 is a user-specified table name that is any valid
+identifier.</div>
+
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>For each transaction ID, a row is not returned for the
+last statement with that transaction ID. Transaction IDs change within a
+connection after a commit or rollback, if the transaction that just ended
+modified data.</div>
+
+<p>You can specify a log file name as an optional argument to the
+SYSCS_DIAG.STATEMENT_DURATION diagnostic table function. When you specify a log
+file name, the file name must be an expression whose data type maps to a Java
+string.</p>
+
+<div class="p">For example:<pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.STATEMENT_DURATION('somederby.log')) 
+    AS T1</pre>
+</div>
+
+<div class="p"><div class="tip"><span class="tiptitle">Tip: </span> By default
+<span>Derby</span> log files contain only
+boot, shutdown, and error messages. See the
+<samp class="codeph"><a href="rrefproper26985.html#rrefproper26985">derby.stream.error.logSeverityLevel</a></samp>
+property and the
+<samp class="codeph"><a href="rrefproper43517.html#rrefproper43517">derby.language.logStatementText</a></samp>
+property for instructions on how to print more information to
+<span>Derby</span> log files. You can then
+query that information by using the SYSCS_DIAG.STATEMENT_DURATION diagnostic
+table function.</div>
+</div>
+
+<p>The returned table has the columns shown in the following table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For the columns returned by the SYSCS_DIAG.STATEMENT_DURATION table function, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. Columns returned by the SYSCS_DIAG.STATEMENT_DURATION table function</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N10119">Column Name</th>
+
+<th valign="bottom" width="17%" id="N10120">Type</th>
+
+<th valign="bottom" width="11%" id="N10127">Length</th>
+
+<th valign="bottom" width="12%" id="N1012E">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N10135">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N10119">TS</td>
+
+<td valign="top" width="17%" headers="N10120">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10127">26</td>
+
+<td valign="top" width="12%" headers="N1012E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N10135">The timestamp of the statement.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10119">THREADID</td>
+
+<td valign="top" width="17%" headers="N10120">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10127">80</td>
+
+<td valign="top" width="12%" headers="N1012E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N10135">The thread name.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10119">XID</td>
+
+<td valign="top" width="17%" headers="N10120">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10127">15</td>
+
+<td valign="top" width="12%" headers="N1012E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N10135">The transaction ID.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10119">LOGTEXT</td>
+
+<td valign="top" width="17%" headers="N10120">LONG VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10127">32,700</td>
+
+<td valign="top" width="12%" headers="N1012E">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N10135">The text of the statement or commit or rollback.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N10119">DURATION</td>
+
+<td valign="top" width="17%" headers="N10120">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N10127">10</td>
+
+<td valign="top" width="12%" headers="N1012E">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N10135">The duration, in milliseconds, of the statement.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsyscsdiagtables.html" title="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions.">SYSCS_DIAG diagnostic tables and functions</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsyscsdiagcontainedroles.html" title="The SYSCS_DIAG.CONTAINED_ROLES diagnostic table function returns all the roles contained within the specified role.">SYSCS_DIAG.CONTAINED_ROLES diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagerrorlogreader.html" title="The SYSCS_DIAG.ERROR_LOG_READER diagnostic table function contains all the useful SQL statements that are in the derby.log file or a log file that you specify.">SYSCS_DIAG.ERROR_LOG_READER diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagerrormessages.html" title="The SYSCS_DIAG.ERROR_MESSAGES diagnostic table shows all of the SQLStates, locale-sensitive error messages, and exception severities for a Derby database.">SYSCS_DIAG.ERROR_MESSAGES diagnostic table</a></div>
+<div><a href="rrefsyscsdiaglocktable.html" title="The SYSCS_DIAG.LOCK_TABLE diagnostic table shows all of the locks that are currently held in the Derby database.">SYSCS_DIAG.LOCK_TABLE diagnostic table</a></div>
+<div><a href="rrefsyscsdiagspacetable.html" title="The SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space usage of a particular table and its indexes.">SYSCS_DIAG.SPACE_TABLE diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagstatementcache.html" title="The SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of the SQL statement cache.">SYSCS_DIAG.STATEMENT_CACHE diagnostic table</a></div>
+<div><a href="rrefsyscsdiagtransactiontable.html" title="The SYSCS_DIAG.TRANSACTION_TABLE diagnostic table shows all of the transactions that are currently in the database.">SYSCS_DIAG.TRANSACTION_TABLE diagnostic table</a></div>
+</div>
+</div>
+
+</body>
+</html>

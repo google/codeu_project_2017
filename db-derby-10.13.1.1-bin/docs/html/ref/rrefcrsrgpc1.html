@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Columns in the ResultSets returned by getFunctionColumns and getProcedureColumns" />
+<meta name="abstract" content="Columns in the ResultSets returned by getFunctionColumns and getProcedureColumns are as described by the API." />
+<meta name="description" content="Columns in the ResultSets returned by getFunctionColumns and getProcedureColumns are as described by the API." />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmrs.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefdmdfns1.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefcrsrgpc1" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Columns in the ResultSets returned by getFunctionColumns and getProcedureColumns</title>
+</head>
+<body id="rrefcrsrgpc1"><a name="rrefcrsrgpc1"><!-- --></a>
+
+
+<h1 class="topictitle1">Columns in the ResultSets returned by getFunctionColumns and getProcedureColumns</h1>
+
+
+<div><p>Columns in the <em>ResultSet</em>s returned by
+<em>getFunctionColumns</em> and <em>getProcedureColumns</em> are as described by the
+API.</p>
+
+<div class="section">
+<p>The following table shows
+<span>Derby</span>-specific details for
+some specific columns returned by <em>getFunctionColumns</em>.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes Derby-specific details for some columns in the ResultSet returned by the getFunctionColumns method." frame="border" border="1" rules="all"><caption>Table 1. Columns in the <em>ResultSet</em> returned by
+<em>getFunctionColumns</em></caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="30%" id="N10098">Column</th>
+
+<th valign="bottom" width="70%" id="N1009F">Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="30%" headers="N10098">COLUMN_TYPE</td>
+
+<td valign="top" width="70%" headers="N1009F">A <em>short</em> indicating what the row describes. Is always
+<em>DatabaseMetaData.functionColumnIn</em> if it represents a parameter; 
+<em>DatabaseMetaData.functionReturn</em> if it represents a return value; and
+<em>DatabaseMetaData.functionColumnResult</em> if it represents a column in a
+table function.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N10098">TYPE_NAME</td>
+
+<td valign="top" width="70%" headers="N1009F"><span>Derby</span>-specific
+name for the type.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N10098">NULLABLE</td>
+
+<td valign="top" width="70%" headers="N1009F">Always returns <em>DatabaseMetaData.functionNullable</em>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N10098">REMARKS</td>
+
+<td valign="top" width="70%" headers="N1009F">A <em>String</em> which describes the Java type of the method
+parameter.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N10098">ORDINAL_POSITION</td>
+
+<td valign="top" width="70%" headers="N1009F">The ordinal position, starting from 1, for the input
+and output parameters for the function.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N10098">METHOD_ID</td>
+
+<td valign="top" width="70%" headers="N1009F">A <span>Derby</span>-specific
+column.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N10098">PARAMETER_ID</td>
+
+<td valign="top" width="70%" headers="N1009F">A <span>Derby</span>-specific
+column.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<p>The following table shows
+<span>Derby</span>-specific details for
+some specific columns returned by <em>getProcedureColumns</em>.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists and describes Derby-specific details for some columns in the ResultSet returned by the getProcedureColumns methods." frame="border" border="1" rules="all"><caption>Table 2. Columns in the <em>ResultSet</em> returned by
+<em>getProcedureColumns</em></caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="30%" id="N101D4">Column</th>
+
+<th valign="bottom" width="70%" id="N101DB">Description</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="30%" headers="N101D4">COLUMN_TYPE</td>
+
+<td valign="top" width="70%" headers="N101DB">A <em>short</em> indicating what the row describes. Is always
+<em>DatabaseMetaData.procedureColumnIn</em> if the parameter is (possibly
+implicitly) declared as an IN parameter; 
+<em>DatabaseMetaData.procedureColumnInOut</em> if the parameter is declared as an
+INOUT parameter; and <em>DatabaseMetaData.procedureColumnOut</em> if the parameter
+is declared as an OUT parameter.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N101D4">TYPE_NAME</td>
+
+<td valign="top" width="70%" headers="N101DB"><span>Derby</span>-specific
+name for the type.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N101D4">NULLABLE</td>
+
+<td valign="top" width="70%" headers="N101DB">Always returns <em>DatabaseMetaData.procedureNullable</em>.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N101D4">REMARKS</td>
+
+<td valign="top" width="70%" headers="N101DB">A <em>String</em> which describes the Java type of the method
+parameter.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N101D4">ORDINAL_POSITION</td>
+
+<td valign="top" width="70%" headers="N101DB">The ordinal position, starting from 1, for the input
+and output parameters for the procedure.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N101D4">METHOD_ID</td>
+
+<td valign="top" width="70%" headers="N101DB">A <span>Derby</span>-specific
+column.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="30%" headers="N101D4">PARAMETER_ID</td>
+
+<td valign="top" width="70%" headers="N101DB">A <span>Derby</span>-specific
+column.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc15905.html" title="Derby implements the java.sql.DatabaseMetaData interface.">java.sql.DatabaseMetaData interface</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefdmrs.html" title="DatabaseMetaData result sets do not close the result sets of other statements, even when auto-commit is set to true.">DatabaseMetaData result sets</a></div>
+<div><a href="rrefdmdfns1.html" title="The java.sql.DatabaseMetaData.getBestRowIdentifier method looks for identifiers in a specific order. This order might not return a unique row.">java.sql.DatabaseMetaData.getBestRowIdentifier method</a></div>
+</div>
+</div>
+
+</body>
+</html>

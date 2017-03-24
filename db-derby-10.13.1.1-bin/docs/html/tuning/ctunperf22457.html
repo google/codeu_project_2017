@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Performance tips and tricks" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf18705.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf10679.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperfstatistics.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf54492.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf10065.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf23868.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf98197.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf16556.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf16800.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperftablefunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperfinmemdb.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperfsequences.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf17936.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf816635.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunperf22457" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Performance tips and tricks</title>
+</head>
+<body id="ctunperf22457"><a name="ctunperf22457"><!-- --></a>
+
+
+<h1 class="topictitle1">Performance tips and tricks</h1>
+
+
+<div>
+<p>This section lists tips for improving the performance of your
+<span>Derby</span> application. For a more
+in-depth discussion of performance, see <a href="ctundepth39739.html">Tuning databases and applications</a>.</p>
+
+<p>Be sure to visit the <a href="http://db.apache.org/derby/blogs/index.html" target="_blank">Resources</a> section of the
+<span>Derby</span> Web site for
+up-to-date performance tips and tricks.</p>
+
+</div>
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="ctunperf18705.html">Use prepared statements with substitution parameters</a></strong><br />
+Use prepared statements with substitution parameters to save on costly compilation time. Prepared statements using substitution parameters significantly improve performance in applications using standard statements.</li>
+<li class="ulchildlink"><strong><a href="ctunperf10679.html">Create indexes, and make sure they are being used</a></strong><br />
+Indexes speed up queries dramatically if the table is much larger than the number of rows retrieved.</li>
+<li class="ulchildlink"><strong><a href="ctunperfstatistics.html">Ensure that table statistics are accurate</a></strong><br />
+Ensure that table statistics are accurate, since missing or out-of-data statistics can result in poor query plan selection.</li>
+<li class="ulchildlink"><strong><a href="ctunperf54492.html">Increase the size of the data page cache</a></strong><br />
+Increase the size of the data page cache and prime all the caches.</li>
+<li class="ulchildlink"><strong><a href="ctunperf10065.html">Tune the size of database pages</a></strong><br />
+Tune the size of database pages. Using large database pages has provided a performance improvement of up to 50%. If you use large database pages, increase the amount of memory available to Derby.</li>
+<li class="ulchildlink"><strong><a href="ctunperf23868.html">Avoid expensive queries</a></strong><br />
+Some expensive queries can, and should, be avoided.</li>
+<li class="ulchildlink"><strong><a href="ctunperf98197.html">Use the appropriate getXXX and setXXX methods for the type</a></strong><br />
+For performance reasons, use the recommended getXXX method when retrieving values, and use the recommended setXXX method when setting values for parameters.</li>
+<li class="ulchildlink"><strong><a href="ctunperf16556.html">Tune database booting/class loading</a></strong><br />
+System startup time can be improved by reducing the number of databases in the system directory.</li>
+<li class="ulchildlink"><strong><a href="ctunperf16800.html">Avoid inserts in autocommit mode if possible</a></strong><br />
+To improve insert performance, avoid inserts in autocommit mode if possible.</li>
+<li class="ulchildlink"><strong><a href="ctunperftablefunctions.html">Improve the performance of table functions</a></strong><br />
+To improve the performance of table functions, force more efficient join orders for queries which use table functions.</li>
+<li class="ulchildlink"><strong><a href="ctunperfinmemdb.html">Configure Derby to use an in-memory database</a></strong><br />
+Tune the Java heap and Derby page cache size when using an in-memory database.</li>
+<li class="ulchildlink"><strong><a href="ctunperfsequences.html">Increase the concurrency of sequences</a></strong><br />
+If you use a sequence generator (created with the CREATE SEQUENCE statement), you can increase its concurrency by doing the following.</li>
+<li class="ulchildlink"><strong><a href="ctunperf17936.html">Shut down the system properly</a></strong><br />
+If your application shuts down the database in an orderly fashion, it can reduce the amount of work that the database has to do to start up again after an unexpected exit.</li>
+<li class="ulchildlink"><strong><a href="ctunperf816635.html">Put Derby first in your classpath</a></strong><br />
+The structure of your classpath can affect Derby startup time and the time required to load a particular class.</li>
+</ul>
+</div>
+
+</body>
+</html>

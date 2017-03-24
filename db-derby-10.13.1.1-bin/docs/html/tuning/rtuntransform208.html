@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="LIKE transformations" />
+<meta name="abstract" content="This section describes using LIKE transformations as a comparison operator." />
+<meta name="description" content="This section describes using LIKE transformations as a comparison operator." />
+<meta content="LIKE transformations, Internal transformation of statements, LIKE predicates" name="DC.subject" />
+<meta content="LIKE transformations, Internal transformation of statements, LIKE predicates" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctuntransform35783.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform139.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform582.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform866214.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform590.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform345.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform443.html" />
+<meta scheme="URI" name="DC.Relation" content="rtuntransform472.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtuntransform208" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>LIKE transformations</title>
+</head>
+<body id="rtuntransform208"><a name="rtuntransform208"><!-- --></a>
+
+
+<h1 class="topictitle1">LIKE transformations</h1>
+
+
+
+<div><p>This section describes using LIKE transformations as a comparison
+operator.</p>
+<div class="section">
+<div class="note"><span class="notetitle">Note: </span>LIKE transformations and optimizations are disabled when you use
+locale-based collation. See "Character-based collation in
+<span>Derby</span>" in the
+<span><em>Derby Developer's Guide</em></span> for information about
+locale-based collation.</div>
+
+</div>
+
+</div>
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rtuntransform345.html">Character string beginning with constant</a></strong><br />
+A LIKE predicate in which a column is compared to a character string that begins with a character constant (not a wildcard) is transformed into three predicates: one predicate that uses the LIKE operator, one that uses the &gt;= operator, and one that uses the &lt; operator.</li>
+<li class="ulchildlink"><strong><a href="rtuntransform443.html">Character string without wildcards</a></strong><br />
+A LIKE predicate is transformed into a predicate that uses the = operator (and a NOT LIKE predicate is transformed into one that uses &lt;&gt;) when the character string does not contain any wildcards.</li>
+<li class="ulchildlink"><strong><a href="rtuntransform472.html">Unknown parameter</a></strong><br />
+The situation is similar to those described above when a column is compared using the LIKE operator to a parameter whose value is unknown in advance (dynamic parameter, join column, and the like).</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctuntransform35783.html" title="WHERE clauses with predicates joined by OR are usually not optimizable. WHERE clauses with predicates joined by AND are optimizable if at least one of the predicates is optimizable.">Predicate transformations</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtuntransform139.html" title="A BETWEEN predicate is transformed into equivalent predicates that use the &gt;= and &lt;= operators, which are optimizable.">BETWEEN transformations</a></div>
+<div><a href="rtuntransform582.html" title="A simple IN list predicate is a predicate where the left operand is a simple column reference and the IN list is composed entirely of constants or parameter markers.">Simple IN predicate transformations</a></div>
+<div><a href="rtuntransform866214.html" title="NOT IN lists are transformed into multiple predicates that use the &lt;&gt; operator.">NOT IN predicate transformations</a></div>
+<div><a href="rtuntransform590.html" title="If all the OR predicates in a WHERE clause have a particular form, they might be optimizable.">OR transformations</a></div>
+</div>
+</div>
+
+</body>
+</html>

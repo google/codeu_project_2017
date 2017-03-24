@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_DIAG.STATEMENT_CACHE diagnostic table" />
+<meta name="abstract" content="The SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of the SQL statement cache." />
+<meta name="description" content="The SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of the SQL statement cache." />
+<meta content="diagnostic tables, SYSCS_DIAG.STATEMENT_CACHE, SYSCS_DIAG.STATEMENT_CACHE diagnostic table" name="DC.subject" />
+<meta content="diagnostic tables, SYSCS_DIAG.STATEMENT_CACHE, SYSCS_DIAG.STATEMENT_CACHE diagnostic table" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtables.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagcontainedroles.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrorlogreader.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrormessages.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiaglocktable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagspacetable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagstatementduration.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtransactiontable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsyscsdiagstatementcache" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_DIAG.STATEMENT_CACHE diagnostic table</title>
+</head>
+<body id="rrefsyscsdiagstatementcache"><a name="rrefsyscsdiagstatementcache"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_DIAG.STATEMENT_CACHE diagnostic table</h1>
+
+
+
+<div><p>The SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of
+the SQL statement cache.</p>
+
+<div class="section">
+<div class="p">You can reference the SYSCS_DIAG.STATEMENT_CACHE diagnostic table directly in
+a statement. For example:
+<pre>SELECT * FROM SYSCS_DIAG.STATEMENT_CACHE</pre>
+</div>
+
+<p>For a database for which authentication and SQL authorization are both
+enabled, only the
+<a href="rrefattrib26867.html#rrefattrib26867">database owner</a> can
+access this diagnostic table. See "Configuring user authentication" and
+"Configuring user authorization" in the
+<span><em>Derby Security Guide</em></span> for more information.</p>
+
+<p>The table has the columns shown in the following table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For the columns in the SYSCS_DIAG.STATEMENT_CACHE table, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. Columns in the SYSCS_DIAG.STATEMENT_CACHE table</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N100BA">Column Name</th>
+
+<th valign="bottom" width="17%" id="N100C1">Type</th>
+
+<th valign="bottom" width="11%" id="N100C8">Length</th>
+
+<th valign="bottom" width="12%" id="N100CF">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N100D6">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N100BA">ID</td>
+
+<td valign="top" width="17%" headers="N100C1">CHAR</td>
+
+<td valign="top" width="11%" headers="N100C8">36</td>
+
+<td valign="top" width="12%" headers="N100CF">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100D6">The internal identifier of the compiled statement.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BA">SCHEMANAME</td>
+
+<td valign="top" width="17%" headers="N100C1">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100C8">128</td>
+
+<td valign="top" width="12%" headers="N100CF">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100D6">The schema the statement was compiled in.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BA">SQL_TEXT</td>
+
+<td valign="top" width="17%" headers="N100C1">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100C8">32,672</td>
+
+<td valign="top" width="12%" headers="N100CF">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100D6">The text of the statement.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BA">UNICODE</td>
+
+<td valign="top" width="17%" headers="N100C1">BOOLEAN</td>
+
+<td valign="top" width="11%" headers="N100C8">1</td>
+
+<td valign="top" width="12%" headers="N100CF">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100D6">Always <em>true</em></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BA">VALID</td>
+
+<td valign="top" width="17%" headers="N100C1">BOOLEAN</td>
+
+<td valign="top" width="11%" headers="N100C8">1</td>
+
+<td valign="top" width="12%" headers="N100CF">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100D6"><em>true</em> (the statement is currently valid)
+<p><em>false</em> (the statement is not currently valid)</p>
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100BA">COMPILED_AT</td>
+
+<td valign="top" width="17%" headers="N100C1">TIMESTAMP</td>
+
+<td valign="top" width="11%" headers="N100C8">29</td>
+
+<td valign="top" width="12%" headers="N100CF">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100D6">The time the statement was compiled. Requires statistics
+timing to be enabled (see
+<a href="rrefsetstatstimingproc.html#rrefsetstatstimingproc">SYSCS_UTIL.SYSCS_SET_STATISTICS_TIMING system procedure</a>).</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsyscsdiagtables.html" title="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions.">SYSCS_DIAG diagnostic tables and functions</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsyscsdiagcontainedroles.html" title="The SYSCS_DIAG.CONTAINED_ROLES diagnostic table function returns all the roles contained within the specified role.">SYSCS_DIAG.CONTAINED_ROLES diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagerrorlogreader.html" title="The SYSCS_DIAG.ERROR_LOG_READER diagnostic table function contains all the useful SQL statements that are in the derby.log file or a log file that you specify.">SYSCS_DIAG.ERROR_LOG_READER diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagerrormessages.html" title="The SYSCS_DIAG.ERROR_MESSAGES diagnostic table shows all of the SQLStates, locale-sensitive error messages, and exception severities for a Derby database.">SYSCS_DIAG.ERROR_MESSAGES diagnostic table</a></div>
+<div><a href="rrefsyscsdiaglocktable.html" title="The SYSCS_DIAG.LOCK_TABLE diagnostic table shows all of the locks that are currently held in the Derby database.">SYSCS_DIAG.LOCK_TABLE diagnostic table</a></div>
+<div><a href="rrefsyscsdiagspacetable.html" title="The SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space usage of a particular table and its indexes.">SYSCS_DIAG.SPACE_TABLE diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagstatementduration.html" title="You can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table function to analyze the execution duration of the useful SQL statements in the derby.log file or a log file that you specify.">SYSCS_DIAG.STATEMENT_DURATION diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagtransactiontable.html" title="The SYSCS_DIAG.TRANSACTION_TABLE diagnostic table shows all of the transactions that are currently in the database.">SYSCS_DIAG.TRANSACTION_TABLE diagnostic table</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -30,5 +30,6 @@ public final class ClientContext {
     user = new ClientUser(controller, view);
     conversation = new ClientConversation(controller, view, user);
     message = new ClientMessage(controller, view, user, conversation);
+	System.out.println(this.getClass().toString());
   }
 }

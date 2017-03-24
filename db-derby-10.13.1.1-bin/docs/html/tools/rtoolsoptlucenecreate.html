@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Creating an index" />
+<meta name="abstract" content="The luceneSupport optional tool lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns." />
+<meta name="description" content="The luceneSupport optional tool lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns." />
+<meta content="luceneSupport optional tool, creating an index" name="DC.subject" />
+<meta content="luceneSupport optional tool, creating an index" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucene.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptluceneupdate.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenequery.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenedrop.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenelist.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenesecman.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsoptlucenecreate" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Creating an index</title>
+</head>
+<body id="rtoolsoptlucenecreate"><a name="rtoolsoptlucenecreate"><!-- --></a>
+
+
+<h1 class="topictitle1">Creating an index</h1>
+
+
+
+<div><p>The <samp class="codeph">luceneSupport</samp> optional tool lets you use Apache
+Lucene to perform full-text indexing and searching of the contents of
+<span>Derby</span> text
+columns.</p>
+
+<div class="section">
+<p>After the <samp class="codeph">luceneSupport</samp> tool has been loaded, a user can
+index a text column in a table or view which that user owns. If SQL
+authorization is enabled, then the database owner is the only account which can
+index a text column in another user's table. The following procedure makes this
+possible:</p>
+
+<pre>LUCENESUPPORT.CREATEINDEX
+(
+    SCHEMANAME VARCHAR( 128 ),
+    TABLENAME VARCHAR( 128 ),
+    TEXTCOLUMN VARCHAR( 128 ),
+    INDEXDESCRIPTORMAKER VARCHAR( 32672 ),
+    KEYCOLUMNS VARCHAR( 32672 ) ...
+)</pre>
+
+<p>The procedure parameters are as follows:</p>
+
+<ul>
+<li><samp class="codeph">SCHEMANAME</samp>: The SQL identifier of the schema which holds
+the table or view. This argument is case-insensitive unless you double-quote
+it.</li>
+
+<li><samp class="codeph">TABLENAME</samp>: The SQL identifier of the table or view (also
+case-insensitive).</li>
+
+<li><samp class="codeph">TEXTCOLUMN</samp>: The SQL identifier of the text column being
+indexed (also case-insensitive). The column must have a character datatype.</li>
+
+<li><samp class="codeph">INDEXDESCRIPTORMAKER</samp>: If the argument is not null, this is
+the full name of a zero-argument static, public method which creates an
+<samp class="codeph">org.apache.derby.optional.api.IndexDescriptor</samp>. If the argument
+is null, the index is created using the default maker method,
+<samp class="codeph">org.apache.derby.optional.api.LuceneUtils.defaultIndexDescriptor</samp>.
+An <samp class="codeph">org.apache.derby.optional.api.IndexDescriptor</samp> specifies the
+following:
+<ul>
+<li>The analyzer to use when parsing text into indexable terms</li>
+
+<li>The names of the indexed fields which can be queried later on</li>
+
+<li>The subclass of
+<samp class="codeph">org.apache.lucene.queryparser.classic.QueryParser</samp> which should
+be used when querying the index later on</li>
+
+</ul>
+
+<p>The default <samp class="codeph">org.apache.derby.optional.api.IndexDescriptor</samp>
+supplies one field name (<samp class="codeph">luceneTextField</samp>) along with an
+instance of
+<samp class="codeph">org.apache.lucene.queryparser.classic.MultiFieldQueryParser</samp> as
+its <samp class="codeph">QueryParser</samp>. In addition, the default
+<samp class="codeph">org.apache.derby.optional.api.IndexDescriptor</samp>  attempts to find
+a Lucene-supplied analyzer matching the default language of the database.
+Matches are found for the languages listed in the following table. Note that the
+Chinese analyzer was deprecated, so for Chinese, the plugin uses the
+<samp class="codeph">StandardAnalyzer</samp> instead.</p>
+
+<div class="p">
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the languages and corresponding language codes supported by the Lucene plugin." frame="border" border="1" rules="all"><caption>Table 1. Language codes supported by the Lucene plugin</caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="75%" id="N10126">Language</th>
+
+<th valign="bottom" width="25%" id="N1012D">Language Code</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="75%" headers="N10126">Arabic</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">ar</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Armenian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">hy</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Basque</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">eu</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Brazilian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">br</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Bulgarian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">bg</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Catalan</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">ca</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Czech</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">cz</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Danish</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">da</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Dutch</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">nl</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">English</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">en</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Finnish</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">fi</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">French</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">fr</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Galician</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">gl</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">German</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">de</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Greek</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">el</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Hindi</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">hi</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Hungarian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">hu</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Indonesian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">id</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Irish</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">ga</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Italian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">it</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Latvian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">lv</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Norwegian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">no</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Persian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">fa</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Portuguese</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">pt</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Romanian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">ro</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Russian</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">ru</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Spanish</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">es</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Swedish</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">sv</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Thai</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">th</samp></td>
+
+</tr>
+
+<tr>
+<td valign="top" width="75%" headers="N10126">Turkish</td>
+
+<td valign="top" width="25%" headers="N1012D"><samp class="codeph">tr</samp></td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<p><span>Derby</span> supplies another
+utility method which instantiates the default Lucene analyzer; this utility
+method is called
+<samp class="codeph">org.apache.derby.optional.api.LuceneUtils.standardAnalyzer</samp>, and
+it materializes an
+<samp class="codeph">org.apache.lucene.analysis.standard.StandardAnalyzer</samp>.</p>
+</li>
+
+<li><samp class="codeph">KEYCOLUMNS</samp>: This is an optional list of SQL identifiers for
+other columns in the table or view. The values of these columns are stored in
+the text index for use in joining Lucene results back to the original data. If
+the <samp class="codeph">KEYCOLUMNS</samp> are omitted, <samp class="codeph">TABLENAME</samp> must
+identify a base table with a primary key; in this case, the whole primary key is
+stored in the text index for joining later.</li>
+
+</ul>
+
+<p>The keys and the text column cannot have the following names:</p>
+
+<ul>
+<li><samp class="codeph">DOCUMENTID</samp></li>
+
+<li><samp class="codeph">SCORE</samp></li>
+
+</ul>
+
+<p><samp class="codeph">CREATEINDEX</samp> creates a table function named
+<samp class="codeph">$TABLENAME__$TEXTCOLUMN</samp> in the <samp class="codeph">$SCHEMANAME</samp>
+schema. <a href="rtoolsoptlucenequery.html">Querying an index</a> describes this table function in
+greater detail.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Example</h2>
+<pre><strong>-- index the POEMTEXT column of the POEMS table,
+-- using its primary key and the default IndexDescriptor maker
+CALL LUCENESUPPORT.CREATEINDEX( 'ruth', 'poems', 'poemText', null );
+
+-- index the POEMVIEW view, using POEMID and VERSIONSTAMP as keys
+-- and a custom IndexDescriptor
+CALL LUCENESUPPORT.CREATEINDEX
+(
+    'ruth', 'poemView', 'poemText',
+    'myapp.MyIndexDescriptor.makeMe',
+    'poemID', 'versionStamp'
+);</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtoolsoptlucene.html" title="The luceneSupport plugin is an optional tool that lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns.">Using the luceneSupport optional tool</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsoptluceneupdate.html" title="After an index has been created, a user can perform a bulk reindexing of the text column.">Updating an index</a></div>
+<div><a href="rtoolsoptlucenequery.html" title="To query an index, use the table function created by CREATEINDEX.">Querying an index</a></div>
+<div><a href="rtoolsoptlucenedrop.html" title="A Lucene index can be dropped by the table owner.">Dropping an index</a></div>
+<div><a href="rtoolsoptlucenelist.html" title="You can use a table function to list all Lucene indexes.">Listing indexes</a></div>
+<div><a href="rtoolsoptlucenesecman.html" title="When you run the luceneSupport tool under a Java Security Manager, the security policy must grant privileges to two jar files.">Running the luceneSupport tool with a security manager</a></div>
+</div>
+</div>
+
+</body>
+</html>

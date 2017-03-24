@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<base target="contentwin" /><title>Derby Security Guide</title>
+</head>
+<body>
+<ul>
+<li><a href="rseccopyright.html">Copyright</a></li>
+<li><a href="rseclicense.html">License</a></li>
+<li><a href="csecpref29520.html">About this guide</a>
+<ul>
+<li><a href="csecpref11181.html">Purpose of this guide</a></li>
+<li><a href="csecpref24290.html">Audience</a></li>
+<li><a href="csecpref23947.html">How this guide is organized</a></li>
+</ul>
+</li>
+<li><a href="csecintro.html">Part One: Introduction to database security</a>
+<ul>
+<li><a href="csecintrowhy.html">Why databases need security</a>
+<ul>
+<li><a href="csecintrovuln.html">Vulnerabilities of unsecured databases</a></li>
+<li><a href="csecintrothreats.html">Threats to unsecured databases</a></li>
+</ul>
+</li>
+<li><a href="csecintrodefenses.html">Defenses against security threats</a>
+<ul>
+<li><a href="csecintroderbydefenses.html">Derby defenses against threats</a></li>
+<li><a href="csecintrootherdefenses.html">Defenses outside of Derby</a></li>
+</ul>
+</li>
+<li><a href="csecintromapping.html">Defenses mapped to threats</a></li>
+<li><a href="csecintrosafer.html">Designing safer Derby applications</a></li>
+<li><a href="csecterms.html">Security terminology</a></li>
+</ul>
+</li>
+<li><a href="cseccsecuree.html">Part Two: Configuring security for Derby</a>
+<ul>
+<li><a href="cseccsecure12392.html">Basic security configuration tasks</a>
+<ul>
+<li><a href="tseccsecure81850.html">Configuring security in an embedded environment</a></li>
+<li><a href="tseccsecure82556.html">Configuring security in a client/server environment</a>
+<ul>
+<li><a href="csecnetservsecurity.html">Network Server security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="cseccsecure24366.html">Configuring database encryption</a>
+<ul>
+<li><a href="cseccsecure96815.html">Requirements for Derby encryption</a></li>
+<li><a href="cseccsecure97760.html">Working with encryption</a>
+<ul>
+<li><a href="cseccsecure88690.html">Encrypting databases on creation</a></li>
+<li><a href="tseccsecureunencrypteddb.html">Encrypting an existing unencrypted database</a></li>
+<li><a href="cseccsecure866716.html">Creating a boot password</a>
+<ul>
+<li><a href="cseccsecure31493.html">Specifying an alternate encryption provider</a></li>
+<li><a href="cseccsecure67151.html">Specifying an alternate encryption algorithm</a></li>
+</ul>
+</li>
+<li><a href="tseccsecurenewkeyoverview.html">Encrypting databases with a new key</a>
+<ul>
+<li><a href="tseccsecurenewbootpw.html">Encrypting databases with a new boot password</a></li>
+<li><a href="tseccsecurenewextkey.html">Encrypting databases with a new external encryption key</a></li>
+</ul>
+</li>
+<li><a href="cseccsecure60146.html">Booting an encrypted database</a></li>
+<li><a href="cseccsecuredecryptdb.html">Decrypting an encrypted database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="cseccsecure90988.html">Using signed jar files</a></li>
+<li><a href="csecssl.html">Configuring SSL/TLS</a>
+<ul>
+<li><a href="tsecsslclientkeycert.html">Creating a client key pair and certificate</a></li>
+<li><a href="tsecsslserverkeycert.html">Creating a server key pair and certificate</a></li>
+<li><a href="tsecsslimportcerts.html">Importing certificates</a></li>
+<li><a href="csecsslbootconn.html">Booting the server and connecting to it</a></li>
+<li><a href="csecsslkeys.html">Key and certificate handling</a></li>
+<li><a href="csecsslserver.html">Starting the server with SSL/TLS</a></li>
+<li><a href="csecsslclient.html">Running the client with SSL/TLS</a></li>
+<li><a href="csecssladmin.html">Other server commands</a></li>
+</ul>
+</li>
+<li><a href="cseccsecureidentity.html">Understanding identity in Derby</a>
+<ul>
+<li><a href="cseccsecure37241.html">Users and authorization identifiers</a>
+<ul>
+<li><a href="cseccsecure24458.html">Authorization identifiers, user authentication, and user authorization</a></li>
+<li><a href="cseccsecure865580.html">User names and schemas</a></li>
+<li><a href="rseccsecure622.html">Exceptions when using authorization identifiers</a></li>
+</ul>
+</li>
+<li><a href="cseccsecuredbowner.html">Database Owner</a></li>
+</ul>
+</li>
+<li><a href="cseccsecure42374.html">Configuring user authentication</a>
+<ul>
+<li><a href="cseccsecure41285.html">Configuring LDAP authentication</a>
+<ul>
+<li><a href="csecldapbooting.html">Booting an LDAP server</a></li>
+<li><a href="cseccsecure863446.html">Setting up Derby to use your LDAP directory service</a></li>
+<li><a href="cseccsecure876908.html">Guest access to search for DNs</a></li>
+<li><a href="cseccsecure863546.html">LDAP performance issues</a></li>
+<li><a href="cseccsecure863676.html">LDAP restrictions</a></li>
+<li><a href="cseccsecure864242.html">JNDI-specific properties for external directory services</a></li>
+</ul>
+</li>
+<li><a href="cseccsecurenativeauth.html">Configuring NATIVE authentication</a>
+<ul>
+<li><a href="csecnativeenable.html">Enabling NATIVE authentication explicitly</a></li>
+<li><a href="csecnativecreddb.html">Working with a credentials database</a></li>
+<li><a href="csecnativeotherprops.html">NATIVE authentication and other database properties</a></li>
+<li><a href="csecnativemanagecreds.html">Managing users and passwords</a></li>
+<li><a href="csecnativeconvert.html">Converting an existing database to use NATIVE authentication</a></li>
+</ul>
+</li>
+<li><a href="cseccsecure21561.html">Specifying authentication with a user-defined class</a>
+<ul>
+<li><a href="rsecexudclass.html">Example of setting a user-defined class</a></li>
+</ul>
+</li>
+<li><a href="rseccsecure557.html">List of user authentication properties</a></li>
+<li><a href="cseccsecure79358.html">Programming applications for Derby user authentication</a></li>
+<li><a href="rseccsecure305.html">Login failure exceptions with user authentication</a></li>
+<li><a href="csecnetservauthent.html">Configuring Network Server authentication in special circumstances</a>
+<ul>
+<li><a href="csecappsclientsecurity.html">Configuring Network Client authentication without SSL/TLS</a></li>
+<li><a href="csecapps49914.html">Configuring Network Server authentication without SSL/TLS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="csecauthorization.html">Configuring user authorization</a>
+<ul>
+<li><a href="csecauthorcoarse.html">Configuring coarse-grained user authorization</a>
+<ul>
+<li><a href="rseccsecure190.html">Read-only and full access permissions</a></li>
+<li><a href="cseccsecure865818.html">Setting the default connection access mode</a></li>
+<li><a href="rseccsecure379.html">User authorization exceptions</a></li>
+</ul>
+</li>
+<li><a href="csecauthorfine.html">Configuring fine-grained user authorization</a>
+<ul>
+<li><a href="cseccsecuregrantrevokeaccess.html">Using fine-grained user authorization</a></li>
+<li><a href="cseccsecureprivileges.html">Privileges on views, triggers, constraints, and generated columns</a></li>
+<li><a href="cseccsecureroles.html">Using SQL roles</a></li>
+<li><a href="cseccsecuresqlauthupgrade.html">Upgrading an old database to use SQL standard authorization</a></li>
+<li><a href="rseccsecuresqlauthexceptions.html">SQL standard authorization exceptions</a></li>
+<li><a href="rseccsecurenativeauthex.html">NATIVE authentication and SQL authorization example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="csecjavasecurity.html">Configuring Java security</a>
+<ul>
+<li><a href="rsecnetservbasic.html">Basic security policy template</a></li>
+<li><a href="rsecpolicysample.html">Sample customized Java security policy file</a></li>
+<li><a href="csecrunpolicy.html">Using a Java security policy file</a></li>
+<li><a href="csecembeddedperms.html">Running embedded Derby with a security manager</a></li>
+<li><a href="tsecnetservrun.html">Running the Network Server with a security manager</a></li>
+<li><a href="tsecnetservopen.html">Running the Network Server without a security manager</a></li>
+</ul>
+</li>
+<li><a href="csecnetservfileperms.html">Restricting file permissions</a></li>
+<li><a href="csecputtogether.html">Putting it all together</a>
+<ul>
+<li><a href="csecputstart.html">Starting a secured Network Server</a></li>
+<li><a href="csecputrun.html">Creating and using a secure database</a></li>
+<li><a href="csecputstop.html">Stopping the secured Network Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="rsectrademderby.html">Trademarks</a></li>
+</ul>
+</body>
+</html>

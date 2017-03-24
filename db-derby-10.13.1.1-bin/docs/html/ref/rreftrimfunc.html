@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="TRIM function" />
+<meta name="abstract" content="The TRIM function takes a character expression and returns that expression with leading and/or trailing pad characters removed." />
+<meta name="description" content="The TRIM function takes a character expression and returns that expression with leading and/or trailing pad characters removed." />
+<meta content="functions, TRIM, TRIM function" name="DC.subject" />
+<meta content="functions, TRIM, TRIM function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rreftrimfunc" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>TRIM function</title>
+</head>
+<body id="rreftrimfunc"><a name="rreftrimfunc"><!-- --></a>
+
+
+<h1 class="topictitle1">TRIM function</h1>
+
+
+
+<div><p>The TRIM function takes a character expression and returns that
+expression with leading and/or trailing pad characters removed.</p>
+
+<div class="section"><p>Optional parameters indicate whether leading, or trailing, or both
+leading and trailing pad characters should be removed, and specify the pad
+character that is to be removed.</p>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>TRIM( [ <a href="rreftrimfunc.html#rreftrimfunc__trimOp"><em>trimOperands</em></a> ] <em>trimSource</em> )</strong></pre>
+ 
+<p>The <em>trimSource</em> is a <em>characterExpression</em>.</p>
+
+</div>
+
+<div class="section" id="rreftrimfunc__trimOp"><a name="rreftrimfunc__trimOp"><!-- --></a><h2 class="sectiontitle">trimOperands</h2>
+<pre><strong>{ <a href="rreftrimfunc.html#rreftrimfunc__trimTy"><em>trimType</em></a> [ <em>trimCharacter</em> ] FROM | <em>trimCharacter</em> FROM }</strong></pre>
+
+<p>The <em>trimCharacter</em> is a <em>characterExpression</em>.</p>
+
+</div>
+
+<div class="section" id="rreftrimfunc__trimTy"><a name="rreftrimfunc__trimTy"><!-- --></a><h2 class="sectiontitle">trimType</h2>
+<pre><strong>{ LEADING | TRAILING | BOTH }</strong></pre>
+
+</div>
+
+<div class="section">
+<div class="p">If <em>trimType</em> is not specified, it defaults to BOTH. If <em>trimCharacter</em> is not specified, it will default to the space character (' ').  Otherwise the <em>trimCharacter</em> expression must evaulate to one of the following:
+	<ul>
+	    <li>A character string whose length is exactly one</li>
+
+	    <li>NULL</li>
+
+	</ul>
+
+</div>
+<div class="p">
+If either <em>trimCharacter</em> or <em>trimSource</em> evaluates to NULL, the result of the TRIM function is NULL.  Otherwise, the result of the TRIM function is defined as follows:
+	<ul>
+	<li>If <em>trimType</em> is LEADING, the result will be the <em>trimSource</em> value with all leading occurrences of <em>trimCharacter</em> removed.</li>
+
+	<li>If <em>trimType</em> is TRAILING, the result will be the <em>trimSource</em> value with all trailing occurrences of <em>trimCharacter</em> removed.</li>
+
+	<li>If <em>trimType</em> is BOTH, the result will be the <em>trimSource</em> value with all leading <em>and</em> trailing occurrences of <em>trimCharacter</em> removed.</li>
+
+	</ul>
+
+</div>
+<p>
+If <em>trimSource</em>'s data type is CHAR or VARCHAR, the return type of the TRIM function will be VARCHAR. Otherwise the return type of the TRIM function will be CLOB.
+</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<div class="p">
+<pre><strong><span>-- returns 'derby' (no spaces)</span>
+VALUES TRIM('  derby ')</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- returns 'derby' (no spaces)</span>
+VALUES TRIM(BOTH ' ' FROM '  derby ')</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- returns 'derby ' (with a space at the end)</span>
+VALUES TRIM(LEADING ' ' FROM '  derby ')</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- returns '  derby' (with two spaces at the beginning)</span>
+VALUES TRIM(TRAILING ' ' FROM '  derby ')</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- returns NULL</span>
+VALUES TRIM(cast (null as char(1)) FROM '  derby ')</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- returns NULL</span>
+VALUES TRIM(' ' FROM cast(null as varchar(30)))</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- returns ' derb' (with a space at the beginning)</span>
+VALUES TRIM('y' FROM ' derby')</strong></pre>
+ 
+</div>
+<div class="p">
+<pre><strong><span>-- results in an error because <em>trimCharacter</em> can only be 1 character</span>
+VALUES TRIM('by' FROM ' derby')</strong></pre>
+ 
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsqlj29026.html" title="A built-in function is an expression in which an SQL keyword or special operator executes some operation.">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

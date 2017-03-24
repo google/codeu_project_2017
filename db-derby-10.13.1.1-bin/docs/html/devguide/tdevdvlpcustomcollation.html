@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="task" name="DC.Type" />
+<meta name="DC.Title" content="Creating a customized collator" />
+<meta name="abstract" content="You may need to define a collation order different from that of the strengths provided by the collation=collation attribute." />
+<meta name="description" content="You may need to define a collation order different from that of the strengths provided by the collation=collation attribute." />
+<meta content="customizing collation, collation, customized" name="DC.subject" />
+<meta content="customizing collation, collation, customized" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevcollation.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcollationoverview.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcollationlocale.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcollationattribs.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcollationexamples.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevcollationlikeequal.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlpcaseinscoll.html" />
+<meta scheme="URI" name="DC.Relation" content="tdevdvlpcollation.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevdvlp51654.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="tdevdvlpcustomcollation" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Creating a customized collator</title>
+</head>
+<body id="tdevdvlpcustomcollation"><a name="tdevdvlpcustomcollation"><!-- --></a>
+
+
+<h1 class="topictitle1">Creating a customized collator</h1>
+
+
+
+<div><p>You may need to define a collation order different from that of the
+strengths provided by the <em>collation=collation</em> attribute.</p>
+
+<div class="section">
+<p>To define a new collation order, follow these steps.</p>
+
+</div>
+
+<ol>
+<li>
+<span>Create a class that extends the <em>java.text.spi.CollatorProvider</em>
+class and that returns a collator that orders strings the way you want it
+to.</span>
+</li>
+
+<li>
+<span>Create a text file named
+<em>META-INF/services/java.text.spi.CollatorProvider</em> that contains one line
+with the name of your collator provider class.</span>
+</li>
+
+<li>
+<span>Put the compiled class file and the text file in a jar file that you drop
+into your JRE's <em>lib/ext</em> directory or in one of the directories specified
+by the <em>java.ext.dirs</em> property.</span></li>
+
+</ol>
+
+<div class="example">
+<p>For example, suppose you want to define a collation order to make Greek
+characters sort near their Latin equivalents ('α' near 'a', ''β' near
+'b', and so on). You could define another locale with a <em>CollatorProvider</em>
+that returns a <em>java.text.RuleBasedCollator</em> with  ever rules you want.
+See the API documentation for the <em>RuleBasedCollator</em> class for details
+about how you specify rules. In its simplest form, a set of rules might look
+like <samp class="codeph">"a,A &lt; b,B &lt; c,C"</samp>, which means more or less that
+'a' and 'A' should be sorted before 'b' and 'B', which should be sorted before
+'c' and 'C'. So to get the Greek characters sorted near similar Latin
+characters, define a <em>CollatorProvider</em> that looks like this one:</p>
+
+<pre>
+public class MyCollatorProvider extends CollatorProvider {
+    public Locale[] getAvailableLocales() {
+        return new Locale[] {
+            new Locale("en", "US", "greek")
+        };
+    }
+    
+    public Collator getInstance(Locale locale) {
+        StringBuilder rules = new StringBuilder();
+        // alpha should go between a and b
+        rules.append("&lt; a,A &lt; \u03b1,\u0391 &lt; b,B");
+        // beta should go between b and c
+        rules.append("&amp; b,B &lt; \u03b2,\u0392 &lt; c,C");
+        // add more rules here ....
+
+        try {
+            return new RuleBasedCollator(rules.toString());
+        } catch (ParseException pe) {
+            throw new Error(pe);
+        }
+    }
+}
+</pre>
+
+<p>Again, put the compiled class and the
+<em>META-INF/services/java.text.spi.CollatorProvider</em> file in a jar file, and
+start the <samp class="codeph">ij</samp> tool with the <samp class="codeph">-Djava.ext.dirs=.</samp>
+option in the directory where the jar file is located. Create a database that
+uses the new locale and insert some data with both Greek and Latin
+characters:</p>
+
+<pre>
+ij&gt; connect 'jdbc:derby:GreekDB;territory=en_US_greek;collation=TERRITORY_BASED;create=true';
+ij&gt; create table t (x varchar(12));
+0 rows inserted/updated/deleted
+ij&gt; insert into t values 'a', 'b', 'c', 'α', 'β';
+5 rows inserted/updated/deleted
+ij&gt; select * from t order by x;
+X           
+------------
+a
+α
+b
+β
+c 
+
+5 rows selected
+</pre>
+
+<p>The ordering is just as you wanted it, with the Greek characters between the
+Latin ones, and not at the end where they would normally be located.</p>
+
+<p>One word of caution: If, after you have created a database, you update your
+custom <em>CollatorProvider</em> so that the ordering is changed, you will need
+to recreate the database. You must do this because the indexes in the database
+are ordered, and you may see strange results if the indexes are ordered with a
+different collator from the one your database is currently using.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevdvlp51654.html" title="You specify attributes on the Derby connection URL.">Working with the database connection URL attributes</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevcollation.html" title="A character set is a set of symbols and encodings. Character data types are represented as Unicode 2.0 sequences in Derby. Collation defines how character data is sorted.">Character-based collation in Derby</a></div>
+<div><a href="cdevcollationoverview.html" title="Derby supports a wide range of character sets and encodes all of the character sets by using the Unicode support provided by the java.lang.Character class in the Java Virtual Machine (JVM) in which the Derby database runs.">How collation works in Derby</a></div>
+<div><a href="cdevcollationlocale.html" title="Derby supports the ability to define collation rules that are appropriate to a locale. This is referred to as locale-based collation.">Locale-based collation</a></div>
+<div><a href="cdevcollationattribs.html" title="When you create a Derby database, the attributes that you set determine the collation that is used with all character data in the database.">Database connection URL attributes that control collation</a></div>
+<div><a href="cdevcollationexamples.html" title="These examples show the results of sorts on databases created with various collation and locale attributes.">Examples of case-sensitive and case-insensitive string sorting</a></div>
+<div><a href="cdevcollationlikeequal.html" title="When you use locale-based collation, the comparisons can return different results when you use the LIKE and equal (=) operators.">Differences between LIKE and equal (=) comparisons</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tdevdvlpcaseinscoll.html" title="When you create a database using locale-based collation, the collation=collation value TERRITORY_BASED uses the default collation strength for the locale, usually TERTIARY, which will consider character case significant in searches and comparisons.">Creating a case-insensitive database</a></div>
+<div><a href="tdevdvlpcollation.html" title="By default, Derby uses Unicode codepoint collation. However, you can specify locale-based collation when you create the database.">Creating a database with locale-based collation</a></div>
+</div>
+</div>
+
+</body>
+</html>

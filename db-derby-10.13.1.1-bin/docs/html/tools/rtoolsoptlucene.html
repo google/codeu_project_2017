@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Using the luceneSupport optional tool" />
+<meta name="abstract" content="The luceneSupport plugin is an optional tool that lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns." />
+<meta name="description" content="The luceneSupport plugin is an optional tool that lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns." />
+<meta content="optional tools, luceneSupport, luceneSupport optional tool, tools" name="DC.subject" />
+<meta content="optional tools, luceneSupport, luceneSupport optional tool, tools" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsopttools.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptdbmetadata.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptforeignviews.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptsimplejson.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptdbreader.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenecreate.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptluceneupdate.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenequery.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenedrop.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenelist.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucenesecman.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsoptlucene" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using the luceneSupport optional tool</title>
+</head>
+<body id="rtoolsoptlucene"><a name="rtoolsoptlucene"><!-- --></a>
+
+
+<h1 class="topictitle1">Using the luceneSupport optional tool</h1>
+
+
+
+<div><p>The <samp class="codeph">luceneSupport</samp> plugin is an optional tool that
+lets you use Apache Lucene to perform full-text indexing and searching of the
+contents of <span>Derby</span> text
+columns.</p>
+
+<div class="section">
+<p>The mainline API documentation for Apache Lucene at <a href="https://builds.apache.org/job/Lucene-Artifacts-trunk/javadoc/" target="_blank">https://builds.apache.org/job/Lucene-Artifacts-trunk/javadoc/</a> is a useful starting point for understanding Lucene's
+capabilities.</p>
+
+<div class="note"><span class="notetitle">Note: </span>The <samp class="codeph">luceneSupport</samp> plugin can be used only after a
+database has been fully upgraded to
+<span>Derby</span> Release 10.11 or
+higher. (See "Upgrading a database" in the
+<span><em>Derby Developer's Guide</em></span> for more information.) The
+plugin cannot be used on a database that is at Release 10.10 or lower.</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Terminology</h2>
+<p>The following concepts are important to an understanding of the
+<samp class="codeph">luceneSupport</samp> plugin.</p>
+
+<ul>
+<li><strong>Analyzer</strong>: An analyzer is an implementation of
+<samp class="codeph">org.apache.lucene.analysis.Analyzer</samp>. It extracts indexable
+terms from a block of text. The same analyzer should be used to index the text
+and to query it. An analyzer may perform language-specific tasks such as
+<em>stemming</em> and <em>filtering</em>. More information on analyzers can be found
+in the Lucene API documentation. Users can extend the existing Lucene analyzers
+or write their own custom analyzers.</li>
+
+<li><strong>Filtering</strong>: Filtering is the language-specific task of throwing away
+insignificant words such as articles and conjunctions.</li>
+
+<li><strong>Query-parsing</strong>: Query-parsing is the process of interpreting a Lucene
+query string. Lucene has its own <a href="https://builds.apache.org/job/Lucene-Artifacts-trunk/javadoc/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description" target="_blank">query language</a>. By extending the default Lucene
+<samp class="codeph">QueryParser</samp> class, users can enhance the Lucene query language
+or replace it with some other query language.</li>
+
+<li><strong>Score</strong>: The score measures how well a query matches a block of text
+(a text column value). The higher the score, the better the match. The score is
+a float value. There is no minimum or maximum value.</li>
+
+<li><strong>Stemming</strong>: Stemming is the language-specific task of reducing related
+words to their common root. For instance, an English stemmer might map all of
+the following words onto the common root "house": "house", "houses", "housed",
+and "housing".</li>
+
+</ul>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Classpath for running the luceneSupport optional tool</h2>
+<p>Before you run the <samp class="codeph">luceneSupport</samp> optional tool, make sure
+that your classpath contains the following jar files:</p>
+
+<ul>
+<li><samp class="codeph">derby.jar</samp></li>
+
+<li><samp class="codeph">derbyoptionaltools.jar</samp></li>
+
+<li><samp class="codeph">core</samp>: The core Lucene machinery. For Lucene 4.5.0, this is
+<samp class="codeph">lucene-core-4.5.0.jar</samp>.</li>
+
+<li><samp class="codeph">analyzers-common</samp>: The common Lucene analyzers. For
+Lucene 4.5.0, this is <samp class="codeph">lucene-analyzers-common-4.5.0.jar</samp>.</li>
+
+<li><samp class="codeph">queryparser</samp>: The basic Lucene logic for query-parsing. For
+Lucene 4.5.0, this is <samp class="codeph">lucene-queryparser-4.5.0.jar</samp>.</li>
+
+</ul>
+
+<p>The Lucene jar files are included in the
+<span>Derby</span> source tree;
+alternatively, you can download them from
+<a href="http://lucene.apache.org/" target="_blank">http://lucene.apache.org/</a>.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Loading and unloading the luceneSupport optional tool</h2>
+<p>In a database protected by SQL authorization, only the database owner can
+issue the commands which load and unload the Lucene plugin. (See
+"Database Owner" in the <em>Derby Security Guide</em> for more
+information.)</p>
+
+<p>Loading the plugin looks very much like loading any other optional tool. You
+call the <samp class="codeph">SYSCS_UTIL.SYSCS_REGISTER_TOOL</samp> system procedure in
+a statement like the following:</p>
+
+<pre><strong>call syscs_util.syscs_register_tool( 'luceneSupport', true );</strong></pre>
+
+<p>This command creates the <samp class="codeph">LUCENESUPPORT</samp> schema, which
+contains the following objects:</p>
+
+<ul>
+<li><samp class="codeph">CREATEINDEX</samp>: A database procedure for indexing
+<span>Derby</span> text columns. See
+<a href="rtoolsoptlucenecreate.html">Creating an index</a> for details.</li>
+
+<li><samp class="codeph">UPDATEINDEX</samp>: A database procedure for refreshing an index
+built by <samp class="codeph">CREATEINDEX</samp>. See
+<a href="rtoolsoptluceneupdate.html">Updating an index</a> for details.</li>
+
+<li><samp class="codeph">DROPINDEX</samp>: A database procedure for dropping an index built
+by <samp class="codeph">CREATEINDEX</samp>. See <a href="rtoolsoptlucenedrop.html">Dropping an index</a> for
+details.</li>
+
+<li><samp class="codeph">LISTINDEXES</samp>:  A table function for listing the indexes
+created by <samp class="codeph">CREATEINDEX</samp>. See
+<a href="rtoolsoptlucenelist.html">Listing indexes</a> for details.</li>
+
+</ul>
+
+<p>Removing the plugin also looks much like unloading other optional tools. Call
+the <samp class="codeph">SYSCS_UTIL.SYSCS_REGISTER_TOOL</samp> system procedure in a
+statement like the following:</p>
+
+<pre><strong>call syscs_util.syscs_register_tool( 'luceneSupport', false );</strong></pre>
+
+<p>This command does the following:</p>
+
+<ul>
+<li><strong>Drops Lucene directories</strong>: Deletes the directories which were created
+to hold the Lucene indexes</li>
+
+<li><strong>Drops schema objects</strong>: Drops all schema objects created by
+<samp class="codeph">CREATEINDEX</samp> commands</li>
+
+<li><strong>Drops <samp class="codeph">LUCENESUPPORT</samp></strong>: Drops the
+<samp class="codeph">LUCENESUPPORT</samp> schema and all schema objects which it
+contains</li>
+
+</ul>
+
+<p>See the <span><em>Derby Reference Manual</em></span> for information about
+the <samp class="codeph">SYSCS_UTIL.SYSCS_REGISTER_TOOL</samp> system procedure.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Encryption and the luceneSupport tool</h2>
+<p>The <samp class="codeph">luceneSupport</samp> tool may not be used on an encrypted
+database. Users who need full-text indexing of encrypted data should store the
+database in an encrypted directory or on an encrypted device.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Lucene versions</h2>
+<p>The <span>Derby</span> community has
+tested the <samp class="codeph">luceneSupport</samp> tool against the following versions of
+Lucene. Other versions of Lucene may or may not work.</p>
+
+<ul>
+<li>4.5.0</li>
+
+<li>4.7.1</li>
+
+<li>4.8.1</li>
+
+<li>4.9.0</li>
+
+</ul>
+
+<p><span>Derby</span> cannot make any
+guarantees about the compatibility of two different versions of Lucene. Users
+should bear the following in mind:</p>
+
+<ul>
+<li><strong>No time travel</strong>: <span>Derby</span>
+will raise an error if you try to use an earlier version of Lucene to read an
+index created by a later version of Lucene.</li>
+
+<li><strong>Bounce your indexes</strong>: When you change versions of Lucene, it is always
+safest to call <samp class="codeph">LUCENESUPPORT.UPDATEINDEX</samp> on all of your
+existing Lucene indexes (see <a href="rtoolsoptluceneupdate.html">Updating an index</a>).</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rtoolsoptlucenecreate.html">Creating an index</a></strong><br />
+The luceneSupport optional tool lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns.</li>
+<li class="ulchildlink"><strong><a href="rtoolsoptluceneupdate.html">Updating an index</a></strong><br />
+After an index has been created, a user can perform a bulk reindexing of the text column.</li>
+<li class="ulchildlink"><strong><a href="rtoolsoptlucenequery.html">Querying an index</a></strong><br />
+To query an index, use the table function created by CREATEINDEX.</li>
+<li class="ulchildlink"><strong><a href="rtoolsoptlucenedrop.html">Dropping an index</a></strong><br />
+A Lucene index can be dropped by the table owner.</li>
+<li class="ulchildlink"><strong><a href="rtoolsoptlucenelist.html">Listing indexes</a></strong><br />
+You can use a table function to list all Lucene indexes.</li>
+<li class="ulchildlink"><strong><a href="rtoolsoptlucenesecman.html">Running the luceneSupport tool with a security manager</a></strong><br />
+When you run the luceneSupport tool under a Java Security Manager, the security policy must grant privileges to two jar files.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsopttools.html" title="">Optional tools</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsoptdbmetadata.html" title="The databaseMetaData optional tool creates functions and table functions corresponding to most of the methods in the java.sql.DatabaseMetaData interface.">Using the databaseMetaData optional tool</a></div>
+<div><a href="rtoolsoptforeignviews.html" title="The foreignViews optional tool creates schemas, table functions, and convenience views for all user tables in a foreign database. This can be useful for bulk-importing foreign data.">Using the foreignViews optional tool</a></div>
+<div><a href="rtoolsoptsimplejson.html" title="The simpleJson optional tool creates functions and a user-defined type, which can be used to integrate relational data with data represented in the popular JSON format.">Using the simpleJson optional tool</a></div>
+<div><a href="rtoolsoptdbreader.html" title="The rawDBReader optional tool creates functions and views, which can be used to extract data out of a corrupt or unbootable database into a new, healthy database.">Using the rawDBReader optional tool</a></div>
+</div>
+</div>
+
+</body>
+</html>

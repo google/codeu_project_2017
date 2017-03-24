@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Generating the DDL for a database" />
+<meta name="abstract" content="The dblook utility generates all of the following objects when generating the DDL for a database." />
+<meta name="description" content="The dblook utility generates all of the following objects when generating the DDL for a database." />
+<meta content="dblook, generating DDL" name="DC.subject" />
+<meta content="dblook, generating DDL" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsdblook.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsusingdblook.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsdblookoptions.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsdblookexamples.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctoolsgenddldb" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Generating the DDL for a database</title>
+</head>
+<body id="ctoolsgenddldb"><a name="ctoolsgenddldb"><!-- --></a>
+
+
+<h1 class="topictitle1">Generating the DDL for a database</h1>
+
+
+
+<div><p>The <samp class="codeph">dblook</samp> utility generates all of the following
+objects when generating the DDL for a database.</p>
+
+<ul>
+<li>Checks</li>
+
+<li>Functions</li>
+
+<li>Indexes</li>
+
+<li>Jar files</li>
+
+<li>Keys (primary, foreign, and unique)</li>
+
+<li>Schemas</li>
+
+<li>Stored procedures</li>
+
+<li>Triggers</li>
+
+<li>Tables</li>
+
+<li>Views</li>
+
+<li>Roles</li>
+
+<li>User-defined types</li>
+
+<li>User-defined aggregates</li>
+
+</ul>
+
+<div class="p">When <samp class="codeph">dblook</samp> runs against a database that has jar files
+installed, it creates a new directory, called <samp class="codeph">DERBYJARS</samp>,
+within the current directory, where it keeps copies of all of the jar files it
+encounters. In order to run the generated DDL as a script, this
+<samp class="codeph">DERBYJARS</samp> directory must either
+<ul>
+<li>Exist within the directory in which it was created, or</li>
+
+<li>Be moved manually to another directory, in which case the path in the
+generated DDL file must be manually changed to reflect to the new location</li>
+
+</ul>
+
+</div>
+
+<p>The <samp class="codeph">dblook</samp> utility ignores any objects that have system
+schemas (for example, SYS), since DDL is not able to directly create or modify
+system objects.</p>
+
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsdblook.html" title="Use the dblook utility to view all or parts of the Data Definition Language (DDL) for a given database.">dblook</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctoolsusingdblook.html" title="The syntax for the command to launch the dblook utility is as follows.">Using dblook</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsdblookoptions.html" title="The dblook utility options include the following.">dblook options</a></div>
+<div><a href="rtoolsdblookexamples.html" title="The following examples demonstrate how the various dblook utility options can be specified from a command line. These examples use the sample database.">dblook examples</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Enabling NATIVE authentication explicitly" />
+<meta name="abstract" content="You can turn on NATIVE authentication explicitly by using a property." />
+<meta name="description" content="You can turn on NATIVE authentication explicitly by using a property." />
+<meta content="user authentication, NATIVE authentication, enabling" name="DC.subject" />
+<meta content="user authentication, NATIVE authentication, enabling" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecurenativeauth.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativecreddb.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativeotherprops.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativemanagecreds.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativeconvert.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="csecnativeenable" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Enabling NATIVE authentication explicitly</title>
+</head>
+<body id="csecnativeenable"><a name="csecnativeenable"><!-- --></a>
+
+
+<h1 class="topictitle1">Enabling NATIVE authentication explicitly</h1>
+
+
+
+<div><p>You can turn on NATIVE authentication explicitly by using a
+property.</p>
+
+<p>To do so, specify one of the following values for the
+<samp class="codeph">derby.authentication.provider</samp> property:</p>
+
+<ul>
+<li>NATIVE:<em>credentialsDB</em>
+<p>This value tells <span>Derby</span> to
+use <em>credentialsDB</em>, a dedicated database, to store user credentials. This
+value must be set by using system-wide Java Virtual Machine (JVM) properties or
+by using the <samp class="codeph">derby.properties</samp> file; it cannot be set in the
+database by using the <samp class="codeph">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</samp>
+procedure. When this system-wide value is set, <em>credentialsDB</em> is used to
+authenticate all operations. If an individual database holds credentials for the
+<a href="cseccsecuredbowner.html">Database Owner</a>, the global
+credentials database is used only to authenticate system-wide operations such as
+engine shutdown.</p>
+
+<p>The value of <em>credentialsDB</em> must be a valid name for a database.</p>
+
+</li>
+
+<li>NATIVE:<em>credentialsDB</em>:LOCAL
+<p>This value tells <span>Derby</span> to
+use <em>credentialsDB</em> for system-wide operations, but to use an individual
+database's SYSUSERS system table to authenticate connections to that database.
+This value must be set by using system-wide JVM properties or by using the
+<samp class="codeph">derby.properties</samp> file; it cannot be set in the database by
+using the <samp class="codeph">SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY</samp> system
+procedure.</p>
+
+</li>
+
+</ul>
+
+<p>See the <span><em>Derby Reference Manual</em></span> for details on the
+<samp class="codeph">derby.authentication.provider</samp> property.</p>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cseccsecurenativeauth.html" title="Derby's simplest authentication mechanism is NATIVE authentication.">Configuring NATIVE authentication</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="csecnativecreddb.html" title="With NATIVE authentication, a database can become a credentials database in any of several ways.">Working with a credentials database</a></div>
+<div><a href="csecnativeotherprops.html" title="When NATIVE authentication is enabled, Derby behaves as if the derby.connection.requireAuthentication and derby.database.sqlAuthorization properties are also set.">NATIVE authentication and other database properties</a></div>
+<div><a href="csecnativemanagecreds.html" title="To manage users and passwords, Derby provides a group of system procedures.">Managing users and passwords</a></div>
+<div><a href="csecnativeconvert.html" title="If you wish to apply NATIVE authentication to a database that was created without it, the procedure is slightly different depending on whether you specify NATIVE:credentialsDB or NATIVE:credentialsDB:LOCAL.">Converting an existing database to use NATIVE authentication</a></div>
+</div>
+</div>
+
+</body>
+</html>

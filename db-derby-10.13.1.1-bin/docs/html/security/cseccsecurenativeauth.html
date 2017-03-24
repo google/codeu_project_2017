@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Configuring NATIVE authentication" />
+<meta name="abstract" content="Derby's simplest authentication mechanism is NATIVE authentication." />
+<meta name="description" content="Derby's simplest authentication mechanism is NATIVE authentication." />
+<meta content="user authentication, NATIVE authentication, overview" name="DC.subject" />
+<meta content="user authentication, NATIVE authentication, overview" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure42374.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure41285.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure21561.html" />
+<meta scheme="URI" name="DC.Relation" content="rseccsecure557.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure79358.html" />
+<meta scheme="URI" name="DC.Relation" content="rseccsecure305.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnetservauthent.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativeenable.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativecreddb.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativeotherprops.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativemanagecreds.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnativeconvert.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cseccsecurenativeauth" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Configuring NATIVE authentication</title>
+</head>
+<body id="cseccsecurenativeauth"><a name="cseccsecurenativeauth"><!-- --></a>
+
+
+<h1 class="topictitle1">Configuring NATIVE authentication</h1>
+
+
+
+<div><p><span>Derby</span>'s simplest
+authentication mechanism is NATIVE authentication.</p>
+
+<p>When you use NATIVE authentication, user names and encrypted passwords are
+stored in a database. You can specify a dedicated credentials database
+for this purpose, or you can store the credentials in the same database you use
+for your application data. The credentials are stored in the SYSUSERS system
+table of the database.</p>
+
+<p>To configure NATIVE authentication, follow these steps.</p>
+
+<ol>
+<li>Use the <samp class="codeph">SYSCS_UTIL.SYSCS_CREATE_USER</samp> system procedure to
+add credentials for the
+<a href="cseccsecuredbowner.html">Database Owner</a>. Remember that the
+Database Owner is the user who created the database.</li>
+
+<li>Add credentials for other users.</li>
+
+<li>Shut down the database, then reboot it. When the database reboots, NATIVE
+authentication is enabled.</li>
+
+</ol>
+
+<p>For example, you can issue the following commands:</p>
+
+<pre><strong>java org.apache.derby.tools.ij</strong>
+ij version 10.11
+ij&gt; <strong>connect 'jdbc:derby:testdb;create=true;user=tquist';</strong>
+ij&gt; -- the Database Owner must be the first user you create
+<strong>call SYSCS_UTIL.SYSCS_CREATE_USER( 'tquist', 'tquist' );</strong>
+0 rows inserted/updated/deleted
+ij&gt; -- now add other users
+<strong>call SYSCS_UTIL.SYSCS_CREATE_USER( 'thardy', 'thardy' );</strong>
+0 rows inserted/updated/deleted
+ij&gt; <strong>call SYSCS_UTIL.SYSCS_CREATE_USER( 'jhallett', 'jhallett' );</strong>
+0 rows inserted/updated/deleted
+ij&gt; <strong>call SYSCS_UTIL.SYSCS_CREATE_USER( 'mchrysta', 'mchrysta' );</strong>
+0 rows inserted/updated/deleted
+ij&gt; -- shut down the database in order to turn on NATIVE authentication
+<strong>connect 'jdbc:derby:testdb;shutdown=true';</strong>
+ERROR 08006: Database 'testdb' shutdown.
+ij&gt; -- these connection attempts fail because of bad credentials
+<strong>connect 'jdbc:derby:testdb;user=tquist';</strong>
+ERROR 08004: Connection authentication failure occurred.  Reason: Invalid authentication..
+ij&gt; <strong>connect 'jdbc:derby:testdb;user=thardy;password=tquist';</strong>
+ERROR 08004: Connection authentication failure occurred.  Reason: Invalid authentication..
+ij&gt; -- these connection attempts present good credentials, so they succeed
+<strong>connect 'jdbc:derby:testdb;user=tquist;password=tquist';</strong>
+ij(CONNECTION1)&gt; <strong>connect 'jdbc:derby:testdb;user=thardy;password=thardy';</strong>
+ij(CONNECTION2)&gt; <strong>connect 'jdbc:derby:testdb;user=jhallett;password=jhallett';</strong>
+ij(CONNECTION3)&gt; <strong>connect 'jdbc:derby:testdb;user=mchrysta;password=mchrysta';</strong>
+</pre>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="csecnativeenable.html">Enabling NATIVE authentication explicitly</a></strong><br />
+You can turn on NATIVE authentication explicitly by using a property.</li>
+<li class="ulchildlink"><strong><a href="csecnativecreddb.html">Working with a credentials database</a></strong><br />
+With NATIVE authentication, a database can become a credentials database in any of several ways.</li>
+<li class="ulchildlink"><strong><a href="csecnativeotherprops.html">NATIVE authentication and other database properties</a></strong><br />
+When NATIVE authentication is enabled, Derby behaves as if the derby.connection.requireAuthentication and derby.database.sqlAuthorization properties are also set.</li>
+<li class="ulchildlink"><strong><a href="csecnativemanagecreds.html">Managing users and passwords</a></strong><br />
+To manage users and passwords, Derby provides a group of system procedures.</li>
+<li class="ulchildlink"><strong><a href="csecnativeconvert.html">Converting an existing database to use NATIVE authentication</a></strong><br />
+If you wish to apply NATIVE authentication to a database that was created without it, the procedure is slightly different depending on whether you specify NATIVE:credentialsDB or NATIVE:credentialsDB:LOCAL.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cseccsecure42374.html" title="By default, Derby runs without any credentials checking. This situation may be fine for many shrink-wrapped, embedded applications. However, it means that anyone can connect to an unsecured database and steal or corrupt the data there. Fortunately, it's easy to frustrate these attacks by requiring authentication.">Configuring user authentication</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cseccsecure41285.html" title="You can allow Derby to authenticate users against an existing LDAP directory service within your enterprise. LDAP (lightweight directory access protocol) provides an open directory access protocol running over TCP/IP. An LDAP directory service can quickly authenticate a user's name and password.">Configuring LDAP authentication</a></div>
+<div><a href="cseccsecure21561.html" title="You can set the derby.authentication.provider property to the full name of a class that implements the public interface org.apache.derby.authentication.UserAuthenticator.">Specifying authentication with a user-defined class</a></div>
+<div><a href="cseccsecure79358.html" title="To program user authentication into Derby applications, use the DriverManager.getConnection call to specify the user name and password.">Programming applications for Derby user authentication</a></div>
+<div><a href="csecnetservauthent.html" title="Some advanced Network Server configuration features may be useful in certain situations.">Configuring Network Server authentication in special circumstances</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rseccsecure557.html" title="The following table summarizes the Derby properties related to user authentication.">List of user authentication properties</a></div>
+<div><a href="rseccsecure305.html" title="If user authentication is turned on and a valid user name and password are not provided, SQLException 08004 is raised.">Login failure exceptions with user authentication</a></div>
+</div>
+</div>
+
+</body>
+</html>

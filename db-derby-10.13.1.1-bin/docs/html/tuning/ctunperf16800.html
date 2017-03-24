@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Avoid inserts in autocommit mode if possible" />
+<meta name="abstract" content="To improve insert performance, avoid inserts in autocommit mode if possible." />
+<meta name="description" content="To improve insert performance, avoid inserts in autocommit mode if possible." />
+<meta content="autocommit mode" name="DC.subject" />
+<meta content="autocommit mode" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf22457.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf18705.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf10679.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperfstatistics.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf54492.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf10065.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf23868.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf98197.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf16556.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperftablefunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperfinmemdb.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperfsequences.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf17936.html" />
+<meta scheme="URI" name="DC.Relation" content="ctunperf816635.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="ctunperf16800" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Avoid inserts in autocommit mode if possible</title>
+</head>
+<body id="ctunperf16800"><a name="ctunperf16800"><!-- --></a>
+
+
+<h1 class="topictitle1">Avoid inserts in autocommit mode if possible</h1>
+
+
+
+<div><p>To improve insert performance, avoid inserts in autocommit mode if
+possible.</p>
+
+<p>Inserts can be painfully slow in autocommit mode because each commit involves
+an update of the log on the disk for each INSERT statement. The commit will not
+return until a physical disk write is executed. To speed things up:</p>
+
+<ul>
+<li>Run in autocommit false mode, execute a number of inserts in one
+transaction, and then explicitly issue a commit.</li>
+
+<li>If your application allows an initial load into the table, you can use the
+import procedures to insert data into a table. 
+<span>Derby</span> will not log the
+individual inserts when loading into an empty table using these interfaces. See
+the <span><em>Derby Reference Manual</em></span> and the
+<span><em>Derby Server and Administration Guide</em></span> for more information on the
+import procedures.</li>
+
+</ul>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctunperf22457.html" title="">Performance tips and tricks</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctunperf18705.html" title="Use prepared statements with substitution parameters to save on costly compilation time. Prepared statements using substitution parameters significantly improve performance in applications using standard statements.">Use prepared statements with substitution parameters</a></div>
+<div><a href="ctunperf10679.html" title="Indexes speed up queries dramatically if the table is much larger than the number of rows retrieved.">Create indexes, and make sure they are being used</a></div>
+<div><a href="ctunperfstatistics.html" title="Ensure that table statistics are accurate, since missing or out-of-data statistics can result in poor query plan selection.">Ensure that table statistics are accurate</a></div>
+<div><a href="ctunperf54492.html" title="Increase the size of the data page cache and prime all the caches.">Increase the size of the data page cache</a></div>
+<div><a href="ctunperf10065.html" title="Tune the size of database pages. Using large database pages has provided a performance improvement of up to 50%. If you use large database pages, increase the amount of memory available to Derby.">Tune the size of database pages</a></div>
+<div><a href="ctunperf23868.html" title="Some expensive queries can, and should, be avoided.">Avoid expensive queries</a></div>
+<div><a href="ctunperf98197.html" title="For performance reasons, use the recommended getXXX method when retrieving values, and use the recommended setXXX method when setting values for parameters.">Use the appropriate getXXX and setXXX methods for the type</a></div>
+<div><a href="ctunperf16556.html" title="System startup time can be improved by reducing the number of databases in the system directory.">Tune database booting/class loading</a></div>
+<div><a href="ctunperftablefunctions.html" title="To improve the performance of table functions, force more efficient join orders for queries which use table functions.">Improve the performance of table functions</a></div>
+<div><a href="ctunperfinmemdb.html" title="Tune the Java heap and Derby page cache size when using an in-memory database.">Configure Derby to use an in-memory database</a></div>
+<div><a href="ctunperfsequences.html" title="If you use a sequence generator (created with the CREATE SEQUENCE statement), you can increase its concurrency by doing the following.">Increase the concurrency of sequences</a></div>
+<div><a href="ctunperf17936.html" title="If your application shuts down the database in an orderly fashion, it can reduce the amount of work that the database has to do to start up again after an unexpected exit.">Shut down the system properly</a></div>
+<div><a href="ctunperf816635.html" title="The structure of your classpath can affect Derby startup time and the time required to load a particular class.">Put Derby first in your classpath</a></div>
+</div>
+</div>
+
+</body>
+</html>

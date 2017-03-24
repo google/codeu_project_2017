@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_DIAG diagnostic tables and functions" />
+<meta name="abstract" content="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions." />
+<meta name="description" content="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions." />
+<meta content="diagnostic tables and table functions, SYSCS_DIAG tables and functions" name="DC.subject" />
+<meta content="diagnostic tables and table functions, SYSCS_DIAG tables and functions" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj23296.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj28468.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj18919.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj39374.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj19433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29840.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefqueries.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj29026.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemfunctions.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlbuiltinsystemprocedures.html" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj31068.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagcontainedroles.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrorlogreader.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrormessages.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiaglocktable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagspacetable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagstatementcache.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagstatementduration.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtransactiontable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsyscsdiagtables" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_DIAG diagnostic tables and functions</title>
+</head>
+<body id="rrefsyscsdiagtables"><a name="rrefsyscsdiagtables"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_DIAG diagnostic tables and functions</h1>
+
+
+
+<div><p><span>Derby</span> provides a
+set of system table expressions which you can use to obtain diagnostic
+information about the state of the database and about the database
+sessions.</p>
+
+<div class="section">
+<div class="p">There are two types of diagnostic table expressions in
+<span>Derby</span>:
+<dl>
+
+<dt class="dlterm">Diagnostic tables</dt>
+
+<dd>Tables that are like any other table in
+<span>Derby</span>. You can specify the
+diagnostic table name anywhere a normal table name is allowed.</dd>
+
+
+<dt class="dlterm">Diagnostic table functions</dt>
+
+<dd>Functions that are like any other function in
+<span>Derby</span>. Diagnostic table
+functions can accept zero or more arguments, depending on the table function
+that you use. You must use the SQL-defined table function syntax to access these
+functions.</dd>
+
+</dl>
+
+</div>
+
+<p>The following table shows the types and names of the diagnostic table
+expressions in <span>Derby</span>.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table lists the Derby diagnostic table expressions and their types (either table or table function)." frame="border" border="1" rules="all"><caption>Table 1. System diagnostic table expressions provided by
+<span>Derby</span></caption>
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="60%" id="N100CF">Diagnostic Table Expression</th>
+
+<th valign="bottom" width="40%" id="N100D6">Type of Expression</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.CONTAINED_ROLES</td>
+
+<td valign="top" width="40%" headers="N100D6">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.ERROR_LOG_READER</td>
+
+<td valign="top" width="40%" headers="N100D6">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.ERROR_MESSAGES</td>
+
+<td valign="top" width="40%" headers="N100D6">Table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.LOCK_TABLE</td>
+
+<td valign="top" width="40%" headers="N100D6">Table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.SPACE_TABLE</td>
+
+<td valign="top" width="40%" headers="N100D6">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.STATEMENT_CACHE</td>
+
+<td valign="top" width="40%" headers="N100D6">Table</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.STATEMENT_DURATION</td>
+
+<td valign="top" width="40%" headers="N100D6">Table function</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="60%" headers="N100CF">SYSCS_DIAG.TRANSACTION_TABLE</td>
+
+<td valign="top" width="40%" headers="N100D6">Table</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<div class="restriction"><span class="restrictiontitle">Restriction: </span>If you reference a diagnostic table in a DDL statement
+or a compression procedure,
+<span>Derby</span> returns an
+exception.</div>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagcontainedroles.html">SYSCS_DIAG.CONTAINED_ROLES diagnostic table function</a></strong><br />
+The SYSCS_DIAG.CONTAINED_ROLES diagnostic table function returns all the roles contained within the specified role.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagerrorlogreader.html">SYSCS_DIAG.ERROR_LOG_READER diagnostic table function</a></strong><br />
+The SYSCS_DIAG.ERROR_LOG_READER diagnostic table function contains all the useful SQL statements that are in the derby.log file or a log file that you specify.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagerrormessages.html">SYSCS_DIAG.ERROR_MESSAGES diagnostic table</a></strong><br />
+The SYSCS_DIAG.ERROR_MESSAGES diagnostic table shows all of the SQLStates, locale-sensitive error messages, and exception severities for a Derby database.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiaglocktable.html">SYSCS_DIAG.LOCK_TABLE diagnostic table</a></strong><br />
+The SYSCS_DIAG.LOCK_TABLE diagnostic table shows all of the locks that are currently held in the Derby database.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagspacetable.html">SYSCS_DIAG.SPACE_TABLE diagnostic table function</a></strong><br />
+The SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space usage of a particular table and its indexes.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagstatementcache.html">SYSCS_DIAG.STATEMENT_CACHE diagnostic table</a></strong><br />
+The SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of the SQL statement cache.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagstatementduration.html">SYSCS_DIAG.STATEMENT_DURATION diagnostic table function</a></strong><br />
+You can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table function to analyze the execution duration of the useful SQL statements in the derby.log file or a log file that you specify.</li>
+<li class="ulchildlink"><strong><a href="rrefsyscsdiagtransactiontable.html">SYSCS_DIAG.TRANSACTION_TABLE diagnostic table</a></strong><br />
+The SYSCS_DIAG.TRANSACTION_TABLE diagnostic table shows all of the transactions that are currently in the database.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj23296.html" title="">SQL language reference</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="crefsqlj18919.html" title="An identifier is the representation within the language of items created by the user, as opposed to language keywords or commands.">SQL identifiers</a></div>
+<div><a href="crefsqlj39374.html" title="">Statements</a></div>
+<div><a href="crefsqlbuiltinsystemfunctions.html" title="">Built-in system functions</a></div>
+<div><a href="crefsqlbuiltinsystemprocedures.html" title="">Built-in system procedures</a></div>
+<div><a href="crefsqlj31068.html" title="">Data types</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsqlj28468.html" title="Using the classes and methods of JDBC, you submit SQL statements to Derby as strings. The character set permitted for strings containing SQL statements is Unicode.">Capitalization and special characters</a></div>
+<div><a href="rrefclauses.html" title="">SQL clauses</a></div>
+<div><a href="rrefsqlj19433.html" title="Syntax for many statements and expressions includes the term expression, or a term for a specific kind of expression such as tableSubquery. Expressions are allowed in these specified places within statements.">SQL expressions</a></div>
+<div><a href="rrefsqlj29840.html" title="The JOIN operations perform joins between two tables.">JOIN operations</a></div>
+<div><a href="rrefqueries.html" title="">SQL queries</a></div>
+<div><a href="rrefsqlj29026.html" title="A built-in function is an expression in which an SQL keyword or special operator executes some operation.">Built-in functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

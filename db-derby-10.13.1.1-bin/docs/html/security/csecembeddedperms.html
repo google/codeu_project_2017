@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Running embedded Derby with a security manager" />
+<meta name="abstract" content="This section describes the permissions that should be granted to the codebase derby.jar to allow you to run embedded Derby with a security manager." />
+<meta name="description" content="This section describes the permissions that should be granted to the codebase derby.jar to allow you to run embedded Derby with a security manager." />
+<meta content="permissions, granting to derby.jar" name="DC.subject" />
+<meta content="permissions, granting to derby.jar" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="csecjavasecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="rsecnetservbasic.html" />
+<meta scheme="URI" name="DC.Relation" content="rsecpolicysample.html" />
+<meta scheme="URI" name="DC.Relation" content="csecrunpolicy.html" />
+<meta scheme="URI" name="DC.Relation" content="tsecnetservrun.html" />
+<meta scheme="URI" name="DC.Relation" content="tsecnetservopen.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="csecembeddedperms" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Running embedded Derby
+ with a security manager</title>
+</head>
+<body id="csecembeddedperms"><a name="csecembeddedperms"><!-- --></a>
+
+
+<h1 class="topictitle1">Running embedded <span>Derby</span>
+ with a security manager</h1>
+
+
+
+<div><p>This section describes the permissions that should be granted to the
+codebase <samp class="codeph">derby.jar</samp> to allow you to run embedded <span>Derby</span> with a security
+manager.</p>
+
+<p>These permissions are also needed to run the Network Server, but the Network
+Server requires additional permissions as well.</p>
+
+<p>These permissions are listed approximately in the order shown in <a href="rsecpolicysample.html">Sample customized Java security policy file</a>. Some of the optional permissions are not
+included in <a href="rsecpolicysample.html">Sample customized Java security policy file</a>.</p>
+
+<div class="section"><h2 class="sectiontitle">Mandatory permissions</h2><dl>
+
+<dt class="dlterm">permission java.lang.RuntimePermission "createClassLoader"</dt>
+
+<dd>Mandatory. It allows
+<span>Derby</span> to execute SQL queries
+and supports loading class files from jar files stored in the database.</dd>
+
+
+
+<dt class="dlterm">permission org.apache.derby.security.SystemPermission "engine", "usederbyinternals"</dt>
+
+<dd>Mandatory. It allows <span>Derby</span> to access sensitive structures which application code should not touch.</dd>
+
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "derby.*", "read"</dt>
+
+<dd>Allows <span>Derby</span> to read
+individual <span>Derby</span> properties
+set in the JVM system properties. If the action is denied, the properties set in
+the JVM system properties are ignored.</dd>
+
+
+</dl>
+</div>
+
+<div class="section"><h2 class="sectiontitle">Optional permissions</h2><dl>
+<dt class="dlterm">permission java.util.PropertyPermission "user.dir", "read"</dt>
+
+<dd>Permits access to the system directory value if
+<samp class="codeph">derby.system.home</samp> is not set or no permission has been granted
+to read the <samp class="codeph">derby.system.home</samp> property.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "sun.arch.data.model", "read"</dt>
+
+<dd>If set by the JVM, this is the definite answer to whether the system is
+32-bit or 64-bit.</dd>
+
+
+<dt class="dlterm">permission java.util.PropertyPermission "os.arch", "read"</dt>
+
+<dd>Used by <span>Derby</span> to
+determine if the system is 32-bit or 64-bit, if the system property
+<samp class="codeph">sun.arch.data.model</samp> isn't set by the JVM.
+<span>Derby</span> has to recognize the
+value of <samp class="codeph">os.arch</samp> to determine if the system is 32-bit or
+64-bit, and if the value isn't recognized, a heuristic will be used
+instead.</dd>
+
+
+<dt class="dlterm">permission java.io.FilePermission "${derby.system.home}", "read,write"</dt>
+
+<dd>Allows <span>Derby</span> to determine
+the system directory when it is set by <samp class="codeph">derby.system.home</samp> and
+create it if needed. If the system directory already exists, only the "read"
+permission needs to be granted.</dd>
+
+
+<dt class="dlterm">permission java.io.FilePermission "${derby.system.home}${/}derby.properties",
+"read"</dt>
+
+<dd>Allows <span>Derby</span> to read the
+system properties file from the system directory.</dd>
+
+
+<dt class="dlterm">permission java.io.FilePermission "${derby.system.home}${/}derby.log",
+"read,write,delete"</dt>
+
+<dt class="dlterm">permission java.io.FilePermission "${user.dir}${/}derby.log",
+"read,write,delete";</dt>
+
+<dd>Only one of these permissions is needed. Permits the application to read,
+write, and delete to the
+<span>Derby</span> log file, unless the
+log has been redirected. (See the <samp class="codeph">derby.stream.error</samp> properties
+in the <span><em>Derby Reference Manual</em></span> for more information.) If
+one of the requested valid actions is denied, the
+<span>Derby</span> log will be
+<samp class="codeph">java.lang.System.err</samp>.</dd>
+
+
+<dt class="dlterm">permission java.security.SecurityPermission "getPolicy"</dt>
+
+<dd>You need this permission if you want to change the security policy on the
+fly and reload it into a running system. Given this permission, a System
+Administrator can reload the policy file by calling the
+<samp class="codeph">SYSCS_UTIL.SYSCS_RELOAD_SECURITY_POLICY</samp> system procedure, which
+is described in the <span><em>Derby Reference Manual</em></span>.</dd>
+
+
+<dt class="dlterm">permission javax.management.MBeanServerPermission "createMBeanServer";</dt>
+
+<dd>Allows <span>Derby</span> to create an
+MBean server. If the JVM running
+<span>Derby</span> supports the platform
+MBean server, <span>Derby</span> will
+automatically try to create such a server if it does not already exist. For
+details, see "Using Java Management Extensions (JMX) technology" in the
+<span><em>Derby Server and Administration Guide</em></span>.</dd>
+
+
+<dt class="dlterm">permission javax.management.MBeanPermission 
+"org.apache.derby.*#[org.apache.derby:*]", "registerMBean,unregisterMBean";</dt>
+
+<dd>Allows <span>Derby</span> to register
+and unregister its (JMX) MBeans. Such MBeans are associated with the domain
+<samp class="codeph">org.apache.derby</samp>, which is also the prefix of the fully
+qualified class name of all
+<span>Derby</span> MBeans. For more
+information about the <span>Derby</span>
+MBeans, refer to the public API documentation of the package
+<samp class="codeph">org.apache.derby.mbeans</samp> and its subpackages. It is possible to
+fine-tune this permission (for example, to allow access only to certain MBeans).
+To fine-tune this permission, see the API documentation for
+<samp class="codeph">javax.management.MBeanPermission</samp> or the JMX Instrumentation
+and Agent Specification.</dd>
+
+
+<dt class="dlterm">permission javax.management.MBeanTrustPermission "register";</dt>
+
+<dd>Trusts <span>Derby</span> code to be
+the source of MBeans and to register these in the MBean server.</dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "getProtectionDomain";</dt>
+
+<dd>This permission is needed if you want classpath information to be printed to
+<samp class="codeph">derby.log</samp>.</dd>
+
+
+<dt class="dlterm">permission java.sql.SQLPermission "callAbort";</dt>
+
+<dd>Allows <span>Derby</span> code to call
+the <samp class="codeph">java.sql.Connection.abort</samp> method. This permission must be
+granted both to the <span>Derby</span>
+JDBC driver (by granting it to <samp class="codeph">derby.jar</samp> and
+<samp class="codeph">derbyclient.jar</samp>) and to the application code that calls
+<samp class="codeph">Connection.abort()</samp>. Do not grant this permission to application
+code unless you are certain that only superusers can invoke the code.</dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "accessUserInformation";</dt>
+
+<dt class="dlterm">permission java.lang.RuntimePermission "getFileStoreAttributes";</dt>
+
+<dd>These two permissions are needed when you are running with JDK 7 or higher
+and when the secure file mask settings are active (that is, when
+<samp class="codeph">derby.storage.useDefaultFilePermissions</samp> is set to false, or
+when the server has been started from the command line (in which case secure
+file mask settings are active by default). See
+<a href="csecnetservfileperms.html">Restricting file permissions</a> for details.</dd>
+
+
+<dt class="dlterm">permission java.net.SocketPermission "localhost:389", "connect,resolve";</dt>
+
+<dd>Allows <span>Derby</span> code to
+contact the LDAP server to perform authentication. This permission must be
+granted to <samp class="codeph">derby.jar</samp>. Port 389 is the default LDAP port.</dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "setContextClassLoader"</dt>
+
+<dd>Allows <span>Derby</span> to set the
+context class loader for long running threads to null to avoid potential for
+class loader leaks in application server environments when the application
+server starts <span>Derby</span> in a
+custom class loader.</dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "getClassLoader"</dt>
+
+<dd> This permission is also needed when setting the context class loader to
+avoid class loader leaks. The class loader for the parent is saved and set to
+null before creation of the thread and restored afterwards.</dd>
+
+
+<dt class="dlterm">permission java.lang.RuntimePermission "getStackTrace";</dt>
+
+<dt class="dlterm">permission java.lang.RuntimePermission "modifyThreadGroup";</dt>
+
+<dd>These two permissions are needed to allow extended diagnostics, specifically
+the stack traces of all threads, to be dumped to <samp class="codeph">derby.log</samp> on
+severe errors and when the
+<samp class="codeph">derby.stream.error.extendedDiagSeverityLevel</samp> property is set.
+See the documentation of this property in the
+<span><em>Derby Reference Manual</em></span> for details.</dd>
+
+
+<dt class="dlterm">permission java.sql.SQLPermission "deregisterDriver";</dt>
+
+<dd>Allows <span>Derby</span> to
+deregister the driver. This permission is needed for system shutdown only on the
+Java SE 8 platform and higher, if system shutdown is invoked without the
+<samp class="codeph">deregister=false</samp> connection URL attribute (see the
+<span><em>Derby Reference Manual</em></span> for details).</dd>
+
+
+</dl>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Combining permissions</h2>
+<div class="p">The <a href="rsecpolicysample.html#rsecpolicysample">Sample customized Java security policy file</a>
+combines several <samp class="codeph">derby.system.home</samp> permissions into one
+permission as follows:
+<pre>permission java.io.FilePermission "${derby.system.home}/-", "read,write,delete";</pre>
+
+This permission allows the
+<span>Derby</span> engine complete access
+to the system directory and any databases contained in the system directory.
+You will probably want to restrict these liberal permissions, which allow the
+server to backup/restore and export/import to or from any location in the local
+file system.</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="csecjavasecurity.html" title="The Java security manager lets you reduce the damage that your application can do.">Configuring Java security</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="csecrunpolicy.html" title="You can bring up the Network Server with a security manager and a customized policy file.">Using a Java security policy file</a></div>
+</div>
+<div class="reltasks"><strong>Related tasks</strong><br />
+<div><a href="tsecnetservrun.html" title="If you start the Network Server without specifying a security manager, the Network Server installs a default Java security manager that enforces a Basic policy.">Running the Network Server with a security manager</a></div>
+<div><a href="tsecnetservopen.html" title="You may override the Network Server's default installation of a security manager if, for some reason, you need to run your application outside of the Java security protections.">Running the Network Server without a security manager</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rsecnetservbasic.html" title="If you start the Network Server without specifying a security manager, the Network Server will install a default Java security manager that enforces a basic policy.">Basic security policy template</a></div>
+<div><a href="rsecpolicysample.html" title="Here is a sample customized Java security policy file.">Sample customized Java security policy file</a></div>
+</div>
+</div>
+
+</body>
+</html>

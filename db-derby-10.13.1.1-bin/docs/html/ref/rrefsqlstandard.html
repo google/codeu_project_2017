@@ -1,0 +1,3312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Derby support for SQL:2011 features" />
+<meta name="abstract" content="The SQL:2011 standard puts features into two categories, mandatory and optional." />
+<meta name="description" content="The SQL:2011 standard puts features into two categories, mandatory and optional." />
+<meta content="SQL:2011, features supported by Derby" name="DC.subject" />
+<meta content="SQL:2011, features supported by Derby" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlstandardnot.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqlstandard" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Derby support for
+SQL:2011 features</title>
+</head>
+<body id="rrefsqlstandard"><a name="rrefsqlstandard"><!-- --></a>
+
+
+<h1 class="topictitle1"><span>Derby</span> support for
+SQL:2011 features</h1>
+
+
+
+<div><p>The SQL:2011 standard puts features into two categories, mandatory
+and optional.</p>
+
+<div class="section">
+<p>In the tables that follow, the support status of each feature is indicated as
+follows:</p>
+
+<ul>
+<li><p><strong>Yes</strong>: The feature is supported.</p>
+</li>
+
+<li><p><strong>Yes*</strong>: The feature is supported (for example, through JDBC) but not
+according to the SQL standard. See Note for details.</p>
+</li>
+
+<li><p><strong>Partial</strong>: The feature is partially supported.</p>
+</li>
+
+<li><p><strong>No</strong>: The feature is unsupported.</p>
+</li>
+
+</ul>
+
+<p><span>Derby</span> supports many
+features of the SQL:2011 standard. Most are in Part 2 (Foundation), but some are
+in other parts. The supported optional features with the prefix J are in
+Part 13 (JRT). The supported optional features with the prefix X are in
+Part 14 (SQL/XML).</p>
+
+<p><a href="rrefsqlstandardnot.html">SQL:2011 features not supported by Derby</a> lists the features in Part 2 that
+<span>Derby</span> does not support.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Support for mandatory features</h2>
+<p>The following tables describe support for SQL:2011 mandatory features.</p>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E011, numeric data types." frame="border" border="1" rules="all"><caption>Table 1. E011: Numeric data types</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N100FB">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N10102">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N10109">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N100FB">E011-01</td>
+
+<td valign="top" width="50%" headers="N10102">INTEGER and SMALLINT data types (including all
+spellings)</td>
+
+<td valign="top" width="25%" headers="N10109">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100FB">E011-02</td>
+
+<td valign="top" width="50%" headers="N10102">REAL, DOUBLE PRECISION, and FLOAT data types</td>
+
+<td valign="top" width="25%" headers="N10109">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100FB">E011-03</td>
+
+<td valign="top" width="50%" headers="N10102">DECIMAL and NUMERIC data types</td>
+
+<td valign="top" width="25%" headers="N10109">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100FB">E011-04</td>
+
+<td valign="top" width="50%" headers="N10102">Arithmetic operators</td>
+
+<td valign="top" width="25%" headers="N10109">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100FB">E011-05</td>
+
+<td valign="top" width="50%" headers="N10102">Numeric comparison</td>
+
+<td valign="top" width="25%" headers="N10109">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N100FB">E011-06</td>
+
+<td valign="top" width="50%" headers="N10102">Implicit casting among the numeric data types</td>
+
+<td valign="top" width="25%" headers="N10109">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E021, character data types." frame="border" border="1" rules="all"><caption>Table 2. E021: Character data types</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N10206">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N1020D">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N10214">SQL:2011 Mandatory</th>
+
+<th valign="bottom" width="35%" id="N1021B">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-01</td>
+
+<td valign="top" width="35%" headers="N1020D">CHARACTER data type (including all its spellings)</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-02</td>
+
+<td valign="top" width="35%" headers="N1020D">CHARACTER VARYING data type (including all its spellings)</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-03</td>
+
+<td valign="top" width="35%" headers="N1020D">Character literals</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-04</td>
+
+<td valign="top" width="35%" headers="N1020D">CHARACTER_LENGTH function</td>
+
+<td valign="top" width="15%" headers="N10214">Yes*</td>
+
+<td valign="top" width="35%" headers="N1021B">Called LENGTH. <samp class="codeph">{fn LENGTH(...)}</samp> is according to JDBC specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-05</td>
+
+<td valign="top" width="35%" headers="N1020D">OCTET_LENGTH function</td>
+
+<td valign="top" width="15%" headers="N10214">No</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-06</td>
+
+<td valign="top" width="35%" headers="N1020D">SUBSTRING function</td>
+
+<td valign="top" width="15%" headers="N10214">Yes*</td>
+
+<td valign="top" width="35%" headers="N1021B">Called SUBSTR. <samp class="codeph">{fn SUBSTRING(....)}</samp> is according to JDBC specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-07</td>
+
+<td valign="top" width="35%" headers="N1020D">Character concatenation</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-08</td>
+
+<td valign="top" width="35%" headers="N1020D">UPPER and LOWER functions</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-09</td>
+
+<td valign="top" width="35%" headers="N1020D">TRIM function</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-10</td>
+
+<td valign="top" width="35%" headers="N1020D">Implicit casting among the character data types</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-11</td>
+
+<td valign="top" width="35%" headers="N1020D">POSITION function</td>
+
+<td valign="top" width="15%" headers="N10214">Yes*</td>
+
+<td valign="top" width="35%" headers="N1021B">Called LOCATE. <samp class="codeph">{fn LOCATE(...)}</samp> is according to JDBC specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10206">E021-12</td>
+
+<td valign="top" width="35%" headers="N1020D">Character comparison</td>
+
+<td valign="top" width="15%" headers="N10214">Yes</td>
+
+<td valign="top" width="35%" headers="N1021B">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E031, identifiers." frame="border" border="1" rules="all"><caption>Table 3. E031: Identifiers</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N10418">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N1041F">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N10426">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N10418">E031-01</td>
+
+<td valign="top" width="50%" headers="N1041F">Delimited identifiers</td>
+
+<td valign="top" width="25%" headers="N10426">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10418">E031-02</td>
+
+<td valign="top" width="50%" headers="N1041F">Lower case identifiers</td>
+
+<td valign="top" width="25%" headers="N10426">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10418">E031-03</td>
+
+<td valign="top" width="50%" headers="N1041F">Trailing underscore</td>
+
+<td valign="top" width="25%" headers="N10426">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E051, basic query specification." frame="border" border="1" rules="all"><caption>Table 4. E051: Basic query specification</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N104CA">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N104D1">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N104D8">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-01</td>
+
+<td valign="top" width="50%" headers="N104D1">SELECT DISTINCT</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-02</td>
+
+<td valign="top" width="50%" headers="N104D1">GROUP BY clause</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-04</td>
+
+<td valign="top" width="50%" headers="N104D1">GROUP BY can contain columns not in select-list</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-05</td>
+
+<td valign="top" width="50%" headers="N104D1">Select list items can be renamed</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-06</td>
+
+<td valign="top" width="50%" headers="N104D1">HAVING clause</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-07</td>
+
+<td valign="top" width="50%" headers="N104D1">Qualified * in select list</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-08</td>
+
+<td valign="top" width="50%" headers="N104D1">Correlation names in the FROM clause</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N104CA">E051-09</td>
+
+<td valign="top" width="50%" headers="N104D1">Rename columns in the FROM clause</td>
+
+<td valign="top" width="25%" headers="N104D8">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E061, basic predicates and search conditions." frame="border" border="1" rules="all"><caption>Table 5. E061: Basic predicates and search conditions</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N10603">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N1060A">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N10611">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-01</td>
+
+<td valign="top" width="50%" headers="N1060A">Comparison predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-02</td>
+
+<td valign="top" width="50%" headers="N1060A">BETWEEN predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-03</td>
+
+<td valign="top" width="50%" headers="N1060A">IN predicate with list of values</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-04</td>
+
+<td valign="top" width="50%" headers="N1060A">LIKE predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-05</td>
+
+<td valign="top" width="50%" headers="N1060A">LIKE predicate: ESCAPE clause</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-06</td>
+
+<td valign="top" width="50%" headers="N1060A">NULL predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-07</td>
+
+<td valign="top" width="50%" headers="N1060A">Quantified comparison predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-08</td>
+
+<td valign="top" width="50%" headers="N1060A">EXISTS predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-09</td>
+
+<td valign="top" width="50%" headers="N1060A">Subqueries in comparison predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-11</td>
+
+<td valign="top" width="50%" headers="N1060A">Subqueries in IN predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-12</td>
+
+<td valign="top" width="50%" headers="N1060A">Subqueries in quantified comparison predicate</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-13</td>
+
+<td valign="top" width="50%" headers="N1060A">Correlated subqueries</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10603">E061-14</td>
+
+<td valign="top" width="50%" headers="N1060A">Search condition</td>
+
+<td valign="top" width="25%" headers="N10611">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E071, basic query expressions." frame="border" border="1" rules="all"><caption>Table 6. E071: Basic query expressions</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N107C3">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N107CA">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N107D1">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N107C3">E071-01</td>
+
+<td valign="top" width="50%" headers="N107CA">UNION DISTINCT table operator</td>
+
+<td valign="top" width="25%" headers="N107D1">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N107C3">E071-02</td>
+
+<td valign="top" width="50%" headers="N107CA">UNION ALL table operator</td>
+
+<td valign="top" width="25%" headers="N107D1">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N107C3">E071-03</td>
+
+<td valign="top" width="50%" headers="N107CA">EXCEPT DISTINCT table operator</td>
+
+<td valign="top" width="25%" headers="N107D1">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N107C3">E071-05</td>
+
+<td valign="top" width="50%" headers="N107CA">Columns combined via table operators need not have exactly the same data type</td>
+
+<td valign="top" width="25%" headers="N107D1">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N107C3">E071-06</td>
+
+<td valign="top" width="50%" headers="N107CA">Table operators in subqueries</td>
+
+<td valign="top" width="25%" headers="N107D1">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E081, basic privileges." frame="border" border="1" rules="all"><caption>Table 7. E081: Basic privileges</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N108AB">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N108B2">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N108B9">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-01</td>
+
+<td valign="top" width="50%" headers="N108B2">SELECT privilege at the table level</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-02</td>
+
+<td valign="top" width="50%" headers="N108B2">DELETE privilege</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-03</td>
+
+<td valign="top" width="50%" headers="N108B2">INSERT privilege at the table level</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-04</td>
+
+<td valign="top" width="50%" headers="N108B2">UPDATE privilege at the table level</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-05</td>
+
+<td valign="top" width="50%" headers="N108B2">UPDATE privilege at the column level</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-06</td>
+
+<td valign="top" width="50%" headers="N108B2">REFERENCES privilege at the table level</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-07</td>
+
+<td valign="top" width="50%" headers="N108B2">REFERENCES privilege at the column level</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-08</td>
+
+<td valign="top" width="50%" headers="N108B2">WITH GRANT OPTION</td>
+
+<td valign="top" width="25%" headers="N108B9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-09</td>
+
+<td valign="top" width="50%" headers="N108B2">USAGE privilege</td>
+
+<td valign="top" width="25%" headers="N108B9">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N108AB">E081-10</td>
+
+<td valign="top" width="50%" headers="N108B2">EXECUTE privilege</td>
+
+<td valign="top" width="25%" headers="N108B9">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E091, set functions." frame="border" border="1" rules="all"><caption>Table 8. E091: Set functions</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N10A1A">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N10A21">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N10A28">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-01</td>
+
+<td valign="top" width="50%" headers="N10A21">AVG</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-02</td>
+
+<td valign="top" width="50%" headers="N10A21">COUNT</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-03</td>
+
+<td valign="top" width="50%" headers="N10A21">MAX</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-04</td>
+
+<td valign="top" width="50%" headers="N10A21">MIN</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-05</td>
+
+<td valign="top" width="50%" headers="N10A21">SUM</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-06</td>
+
+<td valign="top" width="50%" headers="N10A21">ALL quantifier</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10A1A">E091-07</td>
+
+<td valign="top" width="50%" headers="N10A21">DISTINCT qualifier</td>
+
+<td valign="top" width="25%" headers="N10A28">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E101, basic data manipulation." frame="border" border="1" rules="all"><caption>Table 9. E101: Basic data manipulation</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N10B40">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N10B47">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N10B4E">SQL:2011 Mandatory</th>
+
+<th valign="bottom" width="35%" id="N10B55">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N10B40">E101-01</td>
+
+<td valign="top" width="35%" headers="N10B47">INSERT statement</td>
+
+<td valign="top" width="15%" headers="N10B4E">Yes</td>
+
+<td valign="top" width="35%" headers="N10B55">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10B40">E101-03</td>
+
+<td valign="top" width="35%" headers="N10B47">Searched UPDATE statement</td>
+
+<td valign="top" width="15%" headers="N10B4E">Partial</td>
+
+<td valign="top" width="35%" headers="N10B55"><em>correlation name</em> not supported</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10B40">E101-04</td>
+
+<td valign="top" width="35%" headers="N10B47">Searched DELETE statement</td>
+
+<td valign="top" width="15%" headers="N10B4E">Partial</td>
+
+<td valign="top" width="35%" headers="N10B55"><em>correlation name</em> not supported</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E121, basic cursor support." frame="border" border="1" rules="all"><caption>Table 10. E121: Basic cursor support (through JDBC)</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N10C20">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N10C27">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N10C2E">SQL:2011 Mandatory</th>
+
+<th valign="bottom" width="35%" id="N10C35">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-01</td>
+
+<td valign="top" width="35%" headers="N10C27">Declare cursor</td>
+
+<td valign="top" width="15%" headers="N10C2E">No</td>
+
+<td valign="top" width="35%" headers="N10C35">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-02</td>
+
+<td valign="top" width="35%" headers="N10C27">ORDER BY columns need not be in select list</td>
+
+<td valign="top" width="15%" headers="N10C2E">Yes</td>
+
+<td valign="top" width="35%" headers="N10C35">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-03</td>
+
+<td valign="top" width="35%" headers="N10C27">Value expressions in ORDER BY clause</td>
+
+<td valign="top" width="15%" headers="N10C2E">Yes</td>
+
+<td valign="top" width="35%" headers="N10C35">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-06</td>
+
+<td valign="top" width="35%" headers="N10C27">Positioned UPDATE statement</td>
+
+<td valign="top" width="15%" headers="N10C2E">Partial</td>
+
+<td valign="top" width="35%" headers="N10C35"><em>correlation name</em> not supported</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-07</td>
+
+<td valign="top" width="35%" headers="N10C27">Positioned DELETE statement</td>
+
+<td valign="top" width="15%" headers="N10C2E">Partial</td>
+
+<td valign="top" width="35%" headers="N10C35"><em>correlation name</em> not supported</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-08</td>
+
+<td valign="top" width="35%" headers="N10C27">CLOSE statement</td>
+
+<td valign="top" width="15%" headers="N10C2E">No</td>
+
+<td valign="top" width="35%" headers="N10C35">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-10</td>
+
+<td valign="top" width="35%" headers="N10C27">FETCH statement</td>
+
+<td valign="top" width="15%" headers="N10C2E">No</td>
+
+<td valign="top" width="35%" headers="N10C35">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10C20">E121-17</td>
+
+<td valign="top" width="35%" headers="N10C27">WITH HOLD cursors</td>
+
+<td valign="top" width="15%" headers="N10C2E">No</td>
+
+<td valign="top" width="35%" headers="N10C35">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E141, basic integrity constraints." frame="border" border="1" rules="all"><caption>Table 11. E141: Basic integrity constraints</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N10DA2">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N10DA9">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N10DB0">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-01</td>
+
+<td valign="top" width="50%" headers="N10DA9">NOT NULL constraints</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-02</td>
+
+<td valign="top" width="50%" headers="N10DA9">UNIQUE constraints of NOT NULL columns</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-03</td>
+
+<td valign="top" width="50%" headers="N10DA9">PRIMARY KEY constraints</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-04</td>
+
+<td valign="top" width="50%" headers="N10DA9">Basic FOREIGN KEY constraint with the NO ACTION default</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-06</td>
+
+<td valign="top" width="50%" headers="N10DA9">CHECK constraints</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-07</td>
+
+<td valign="top" width="50%" headers="N10DA9">Column defaults</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-08</td>
+
+<td valign="top" width="50%" headers="N10DA9">NOT NULL inferred on PRIMARY KEY</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N10DA2">E141-10</td>
+
+<td valign="top" width="50%" headers="N10DA9">Names in a foreign key can be specified in any order</td>
+
+<td valign="top" width="25%" headers="N10DB0">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E151, transaction support." frame="border" border="1" rules="all"><caption>Table 12. E151: Transaction support</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N10EE3">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N10EEA">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N10EF1">SQL:2011 Mandatory</th>
+
+<th valign="bottom" width="35%" id="N10EF8">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N10EE3">E151-01</td>
+
+<td valign="top" width="35%" headers="N10EEA">COMMIT statement</td>
+
+<td valign="top" width="15%" headers="N10EF1">Yes*</td>
+
+<td valign="top" width="35%" headers="N10EF8">Through JDBC <samp class="codeph">Connection.commit</samp>, <samp class="codeph">ij</samp> supports COMMIT statement</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10EE3">E151-02</td>
+
+<td valign="top" width="35%" headers="N10EEA">ROLLBACK statement</td>
+
+<td valign="top" width="15%" headers="N10EF1">Yes*</td>
+
+<td valign="top" width="35%" headers="N10EF8">Through JDBC <samp class="codeph">Connection.rollback</samp>, <samp class="codeph">ij</samp> supports ROLLBACK statement</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for E152, basic SET TRANSACTION statement." frame="border" border="1" rules="all"><caption>Table 13. E152: Basic SET TRANSACTION statement</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N10FAF">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N10FB6">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N10FBD">SQL:2011 Mandatory</th>
+
+<th valign="bottom" width="35%" id="N10FC4">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N10FAF">E152-01</td>
+
+<td valign="top" width="35%" headers="N10FB6">SET TRANSACTION statement: ISOLATION LEVEL SERIALIZABLE clause</td>
+
+<td valign="top" width="15%" headers="N10FBD">Yes*</td>
+
+<td valign="top" width="35%" headers="N10FC4">SET [CURRENT] ISOLATION SERIALIZABLE.
+<samp class="codeph">Connection.setTransactionIsolation(
+Connection.TRANSACTION_SERIALIZABLE)</samp>
+is according to JDBC specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N10FAF">E152-02</td>
+
+<td valign="top" width="35%" headers="N10FB6">SET TRANSACTION statement: READ ONLY and READ WRITE clauses</td>
+
+<td valign="top" width="15%" headers="N10FBD">Yes*</td>
+
+<td valign="top" width="35%" headers="N10FC4">No SQL syntax. <samp class="codeph">Connection.setReadWrite()</samp> is
+according to JDBC specification.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F031, basic schema manipulation." frame="border" border="1" rules="all"><caption>Table 14. F031: Basic schema manipulation</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N11067">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N1106E">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11075">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-01</td>
+
+<td valign="top" width="50%" headers="N1106E">CREATE TABLE statement to create persistent base
+tables</td>
+
+<td valign="top" width="25%" headers="N11075">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-02</td>
+
+<td valign="top" width="50%" headers="N1106E">CREATE VIEW statement</td>
+
+<td valign="top" width="25%" headers="N11075">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-03</td>
+
+<td valign="top" width="50%" headers="N1106E">GRANT statement</td>
+
+<td valign="top" width="25%" headers="N11075">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-04</td>
+
+<td valign="top" width="50%" headers="N1106E">ALTER TABLE statement: ADD COLUMN clause</td>
+
+<td valign="top" width="25%" headers="N11075">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-13</td>
+
+<td valign="top" width="50%" headers="N1106E">DROP TABLE statement: RESTRICT clause</td>
+
+<td valign="top" width="25%" headers="N11075">Yes (implicit)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-16</td>
+
+<td valign="top" width="50%" headers="N1106E">DROP VIEW statement: RESTRICT clause</td>
+
+<td valign="top" width="25%" headers="N11075">Yes (implicit)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11067">F031-19</td>
+
+<td valign="top" width="50%" headers="N1106E">REVOKE statement: RESTRICT clause</td>
+
+<td valign="top" width="25%" headers="N11075"> Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F041, basic joined tables." frame="border" border="1" rules="all"><caption>Table 15. F041: Basic joined tables</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N11185">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N1118C">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11193">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-01</td>
+
+<td valign="top" width="50%" headers="N1118C">Inner join (but not necessarily the INNER keyword)</td>
+
+<td valign="top" width="25%" headers="N11193">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-02</td>
+
+<td valign="top" width="50%" headers="N1118C">INNER keyword</td>
+
+<td valign="top" width="25%" headers="N11193">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-03</td>
+
+<td valign="top" width="50%" headers="N1118C">LEFT OUTER JOIN</td>
+
+<td valign="top" width="25%" headers="N11193">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-04</td>
+
+<td valign="top" width="50%" headers="N1118C">RIGHT OUTER JOIN</td>
+
+<td valign="top" width="25%" headers="N11193">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-05</td>
+
+<td valign="top" width="50%" headers="N1118C">Outer joins can be nested</td>
+
+<td valign="top" width="25%" headers="N11193">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-07</td>
+
+<td valign="top" width="50%" headers="N1118C">The inner table in a left or right outer join can also be used in an
+inner join</td>
+
+<td valign="top" width="25%" headers="N11193">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11185">F041-08</td>
+
+<td valign="top" width="50%" headers="N1118C">All comparison operators are supported (rather than just =)</td>
+
+<td valign="top" width="25%" headers="N11193">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F051, basic date and time." frame="border" border="1" rules="all"><caption>Table 16. F051: Basic date and time</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N112AB">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N112B2">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N112B9">SQL:2011 Mandatory</th>
+
+<th valign="bottom" width="35%" id="N112C0">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-01</td>
+
+<td valign="top" width="35%" headers="N112B2">DATE data type (including DATE literal)</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes*</td>
+
+<td valign="top" width="35%" headers="N112C0">DATE literal is implemented as built-in function.
+<samp class="codeph">{d 'yyyy-mm-ff'}</samp> is according to JDBC specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-02</td>
+
+<td valign="top" width="35%" headers="N112B2">TIME data type (including TIME literal) with fractional seconds precision of 0</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes*</td>
+
+<td valign="top" width="35%" headers="N112C0">TIME literal is implemented as built-in function. No
+precision in datatype. <samp class="codeph">{t' hh:mm:ss'}</samp> is according to JDBC
+specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-03</td>
+
+<td valign="top" width="35%" headers="N112B2">TIMESTAMP data type (including TIMESTAMP literal) with
+fractional seconds precision of 0 and 6</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes*</td>
+
+<td valign="top" width="35%" headers="N112C0">TIMESTAMP literal is implemented as built-in function. No
+precision in datatype. No timezone in datatype.
+<samp class="codeph">{ts 'yyyy-mm-dd hh:mm:ss.f...'}</samp> is according to JDBC
+specification.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-04</td>
+
+<td valign="top" width="35%" headers="N112B2">Comparison predicate on DATE, TIME, and TIMESTAMP data
+types</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes</td>
+
+<td valign="top" width="35%" headers="N112C0">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-05</td>
+
+<td valign="top" width="35%" headers="N112B2">Explicit CAST between datetime types and character
+types</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes</td>
+
+<td valign="top" width="35%" headers="N112C0">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-06</td>
+
+<td valign="top" width="35%" headers="N112B2">CURRENT_DATE</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes*</td>
+
+<td valign="top" width="35%" headers="N112C0">No time zone in datetime value expression</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-07</td>
+
+<td valign="top" width="35%" headers="N112B2">LOCALTIME</td>
+
+<td valign="top" width="15%" headers="N112B9">Yes*</td>
+
+<td valign="top" width="35%" headers="N112C0"><samp class="codeph">{fn CURTIME()}</samp> is according to JDBC
+specification</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N112AB">F051-08</td>
+
+<td valign="top" width="35%" headers="N112B2">LOCALTIMESTAMP</td>
+
+<td valign="top" width="15%" headers="N112B9">No</td>
+
+<td valign="top" width="35%" headers="N112C0">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F131, grouped operations." frame="border" border="1" rules="all"><caption>Table 17. F131: Grouped operations</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N1143A">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N11441">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11448">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N1143A">F131-01</td>
+
+<td valign="top" width="50%" headers="N11441">WHERE, GROUP BY, and HAVING clauses supported in queries with
+grouped views</td>
+
+<td valign="top" width="25%" headers="N11448">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N1143A">F131-02</td>
+
+<td valign="top" width="50%" headers="N11441">Multiple tables supported in queries with grouped
+views</td>
+
+<td valign="top" width="25%" headers="N11448">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N1143A">F131-03</td>
+
+<td valign="top" width="50%" headers="N11441">Set functions supported in queries with grouped views</td>
+
+<td valign="top" width="25%" headers="N11448">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N1143A">F131-04</td>
+
+<td valign="top" width="50%" headers="N11441">Subqueries with GROUP BY and HAVING clauses and grouped
+views</td>
+
+<td valign="top" width="25%" headers="N11448">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N1143A">F131-05</td>
+
+<td valign="top" width="50%" headers="N11441">Single row SELECT with GROUP BY and HAVING clauses and
+grouped views</td>
+
+<td valign="top" width="25%" headers="N11448">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F261, CASE expression." frame="border" border="1" rules="all"><caption>Table 18. F261: CASE expression</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N11522">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N11529">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11530">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N11522">F261-01</td>
+
+<td valign="top" width="50%" headers="N11529">Simple CASE</td>
+
+<td valign="top" width="25%" headers="N11530">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11522">F261-02</td>
+
+<td valign="top" width="50%" headers="N11529">Searched CASE</td>
+
+<td valign="top" width="25%" headers="N11530">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11522">F261-03</td>
+
+<td valign="top" width="50%" headers="N11529">NULLIF function</td>
+
+<td valign="top" width="25%" headers="N11530">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11522">F261-04</td>
+
+<td valign="top" width="50%" headers="N11529">COALESCE function</td>
+
+<td valign="top" width="25%" headers="N11530">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F311, schema definition statement." frame="border" border="1" rules="all"><caption>Table 19. F311: Schema definition statement</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N115EF">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N115F6">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N115FD">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N115EF">F311-01</td>
+
+<td valign="top" width="50%" headers="N115F6">Create schema</td>
+
+<td valign="top" width="25%" headers="N115FD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N115EF">F311-02</td>
+
+<td valign="top" width="50%" headers="N115F6">CREATE TABLE for persistent base tables</td>
+
+<td valign="top" width="25%" headers="N115FD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N115EF">F311-03</td>
+
+<td valign="top" width="50%" headers="N115F6">CREATE VIEW</td>
+
+<td valign="top" width="25%" headers="N115FD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N115EF">F311-04</td>
+
+<td valign="top" width="50%" headers="N115F6">CREATE VIEW: WITH CHECK OPTION</td>
+
+<td valign="top" width="25%" headers="N115FD">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N115EF">F311-05</td>
+
+<td valign="top" width="50%" headers="N115F6">GRANT statement</td>
+
+<td valign="top" width="25%" headers="N115FD">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for T321, basic SQL invoked routines." frame="border" border="1" rules="all"><caption>Table 20. T321: Basic SQL invoked routines</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N116D7">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N116DE">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N116E5">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N116D7">T321-01</td>
+
+<td valign="top" width="50%" headers="N116DE">User-defined functions with no overloading</td>
+
+<td valign="top" width="25%" headers="N116E5">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N116D7">T321-02</td>
+
+<td valign="top" width="50%" headers="N116DE">User-defined stored procedures with no overloading</td>
+
+<td valign="top" width="25%" headers="N116E5">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N116D7">T321-03</td>
+
+<td valign="top" width="50%" headers="N116DE">Function invocation</td>
+
+<td valign="top" width="25%" headers="N116E5">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N116D7">T321-04</td>
+
+<td valign="top" width="50%" headers="N116DE">CALL statement</td>
+
+<td valign="top" width="25%" headers="N116E5">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N116D7">T321-05</td>
+
+<td valign="top" width="50%" headers="N116DE">RETURN statement</td>
+
+<td valign="top" width="25%" headers="N116E5">No</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for miscellaneous mandatory features." frame="border" border="1" rules="all"><caption>Table 21. Miscellaneous mandatory features</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N117BF">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N117C6">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N117CD">SQL:2011 Mandatory</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N117BF">E111</td>
+
+<td valign="top" width="50%" headers="N117C6">Single row select statement</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">E131</td>
+
+<td valign="top" width="50%" headers="N117C6">Null value support (nulls in lieu of values)</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">E161</td>
+
+<td valign="top" width="50%" headers="N117C6">SQL comments using leading double minus</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">E171</td>
+
+<td valign="top" width="50%" headers="N117C6">SQLSTATE support</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">F201</td>
+
+<td valign="top" width="50%" headers="N117C6">CAST function</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">F221</td>
+
+<td valign="top" width="50%" headers="N117C6">Explicit defaults</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">F471</td>
+
+<td valign="top" width="50%" headers="N117C6">Scalar subquery values</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">F481</td>
+
+<td valign="top" width="50%" headers="N117C6">Expanded NULL predicate</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N117BF">T631</td>
+
+<td valign="top" width="50%" headers="N117C6">IN predicate with one list element</td>
+
+<td valign="top" width="25%" headers="N117CD">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Support for optional features</h2>
+<p>The following tables show
+<span>Derby</span> support for
+SQL:2011 optional features.</p>
+
+<div class="p">
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F111, isolation levels other than SERIALIZABLE." frame="border" border="1" rules="all"><caption>Table 22. F111: Isolation levels other than SERIALIZABLE</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N11929">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N11930">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11937">SQL:2011 Optional</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N11929">F111-01</td>
+
+<td valign="top" width="50%" headers="N11930">READ UNCOMMITTED isolation level</td>
+
+<td valign="top" width="25%" headers="N11937">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11929">F111-02</td>
+
+<td valign="top" width="50%" headers="N11930">READ COMMITTED isolation level</td>
+
+<td valign="top" width="25%" headers="N11937">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11929">F111-03</td>
+
+<td valign="top" width="50%" headers="N11930">REPEATABLE READ isolation level</td>
+
+<td valign="top" width="25%" headers="N11937">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F302, INTERSECT table operator." frame="border" border="1" rules="all"><caption>Table 23. F302: INTERSECT table operator</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N119DB">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N119E2">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N119E9">SQL:2011 Optional</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N119DB">F302-01</td>
+
+<td valign="top" width="50%" headers="N119E2">INTERSECT DISTINCT table operator</td>
+
+<td valign="top" width="25%" headers="N119E9">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N119DB">F302-02</td>
+
+<td valign="top" width="50%" headers="N119E2">INTERSECT ALL table operator</td>
+
+<td valign="top" width="25%" headers="N119E9">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F381, extended schema manipulation." frame="border" border="1" rules="all"><caption>Table 24. F381: Extended schema manipulation</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N11A72">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N11A79">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11A80">SQL:2011 Optional</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N11A72">F381-01</td>
+
+<td valign="top" width="50%" headers="N11A79">ALTER TABLE statement: ALTER COLUMN clause</td>
+
+<td valign="top" width="25%" headers="N11A80">Partial</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11A72">F381-02</td>
+
+<td valign="top" width="50%" headers="N11A79">ALTER TABLE statement: ADD CONSTRAINT clause</td>
+
+<td valign="top" width="25%" headers="N11A80">Partial</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11A72">F381-03</td>
+
+<td valign="top" width="50%" headers="N11A79">ALTER TABLE statement: DROP CONSTRAINT clause</td>
+
+<td valign="top" width="25%" headers="N11A80">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F401, extended joined table." frame="border" border="1" rules="all"><caption>Table 25. F401: Extended joined table</caption>
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="25%" id="N11B24">Feature ID</th>
+
+<th valign="bottom" width="50%" id="N11B2B">Feature Name</th>
+
+<th valign="bottom" width="25%" id="N11B32">SQL:2011 Optional</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="25%" headers="N11B24">F401-01</td>
+
+<td valign="top" width="50%" headers="N11B2B">NATURAL JOIN</td>
+
+<td valign="top" width="25%" headers="N11B32">Yes</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11B24">F401-02</td>
+
+<td valign="top" width="50%" headers="N11B2B">FULL OUTER JOIN</td>
+
+<td valign="top" width="25%" headers="N11B32">No</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="25%" headers="N11B24">F401-04</td>
+
+<td valign="top" width="50%" headers="N11B2B">CROSS JOIN</td>
+
+<td valign="top" width="25%" headers="N11B32">Yes</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for F831, full cursor update." frame="border" border="1" rules="all"><caption>Table 26. F831: Full cursor update</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N11BDE">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N11BE5">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N11BEC">SQL:2011 Optional</th>
+
+<th valign="bottom" width="35%" id="N11BF3">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N11BDE">F831-01</td>
+
+<td valign="top" width="35%" headers="N11BE5">Updatable scrollable cursors</td>
+
+<td valign="top" width="15%" headers="N11BEC">Partial</td>
+
+<td valign="top" width="35%" headers="N11BF3">Insensitive result set cursors</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11BDE">F831-02</td>
+
+<td valign="top" width="35%" headers="N11BE5">Updatable ordered cursors</td>
+
+<td valign="top" width="15%" headers="N11BEC">No</td>
+
+<td valign="top" width="35%" headers="N11BF3">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for T041, basic LOB data type support." frame="border" border="1" rules="all"><caption>Table 27. T041: Basic LOB data type support</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N11C92">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N11C99">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N11CA0">SQL:2011 Optional</th>
+
+<th valign="bottom" width="35%" id="N11CA7">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N11C92">T041-01</td>
+
+<td valign="top" width="35%" headers="N11C99">BLOB data type</td>
+
+<td valign="top" width="15%" headers="N11CA0">Yes</td>
+
+<td valign="top" width="35%" headers="N11CA7">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11C92">T041-02</td>
+
+<td valign="top" width="35%" headers="N11C99">CLOB data type</td>
+
+<td valign="top" width="15%" headers="N11CA0">Yes</td>
+
+<td valign="top" width="35%" headers="N11CA7">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11C92">T041-03</td>
+
+<td valign="top" width="35%" headers="N11C99">POSITION, LENGTH, LOWER, TRIM, UPPER, and SUBSTRING
+functions for LOB data types</td>
+
+<td valign="top" width="15%" headers="N11CA0">Yes*</td>
+
+<td valign="top" width="35%" headers="N11CA7">Not standard SQL syntax. See notes on features E021-04,
+E021-06, E021-09 and E021-11</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11C92">T041-04</td>
+
+<td valign="top" width="35%" headers="N11C99">Concatenation of LOB data types</td>
+
+<td valign="top" width="15%" headers="N11CA0">Yes</td>
+
+<td valign="top" width="35%" headers="N11CA7">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11C92">T041-05</td>
+
+<td valign="top" width="35%" headers="N11C99">LOB locator: non-holdable</td>
+
+<td valign="top" width="15%" headers="N11CA0">No</td>
+
+<td valign="top" width="35%" headers="N11CA7">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for T211, basic trigger capability." frame="border" border="1" rules="all"><caption>Table 28. T211: Basic trigger capability</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N11DAC">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N11DB3">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N11DBA">SQL:2011 Optional</th>
+
+<th valign="bottom" width="35%" id="N11DC1">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-01</td>
+
+<td valign="top" width="35%" headers="N11DB3">Triggers activated on UPDATE, INSERT, or DELETE of one base
+table</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-02</td>
+
+<td valign="top" width="35%" headers="N11DB3">BEFORE triggers</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes*</td>
+
+<td valign="top" width="35%" headers="N11DC1">Need to specify non-standard ON CASCADE BEFORE. Before
+triggers cannot have INSERT, UPDATE or DELETE statements as their action</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-03</td>
+
+<td valign="top" width="35%" headers="N11DB3">AFTER triggers</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-04</td>
+
+<td valign="top" width="35%" headers="N11DB3">FOR EACH ROW triggers</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-05</td>
+
+<td valign="top" width="35%" headers="N11DB3">Ability to specify a search condition that shall be True
+before the trigger is invoked</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-06</td>
+
+<td valign="top" width="35%" headers="N11DB3">Support for run-time rules for the interaction of triggers
+and constraints</td>
+
+<td valign="top" width="15%" headers="N11DBA">No</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-07</td>
+
+<td valign="top" width="35%" headers="N11DB3">TRIGGER privilege</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11DAC">T211-08</td>
+
+<td valign="top" width="35%" headers="N11DB3">Multiple triggers for the same event are executed in the
+order in which they were created in the catalog</td>
+
+<td valign="top" width="15%" headers="N11DBA">Yes</td>
+
+<td valign="top" width="35%" headers="N11DC1">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+<div class="p">
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="This table describes support for miscellaneous optional features." frame="border" border="1" rules="all"><caption>Table 29. Miscellaneous optional features</caption>
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="15%" id="N11F2C">Feature ID</th>
+
+<th valign="bottom" width="35%" id="N11F33">Feature Name</th>
+
+<th valign="bottom" width="15%" id="N11F3A">SQL:2011 Optional</th>
+
+<th valign="bottom" width="35%" id="N11F41">Note</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F033</td>
+
+<td valign="top" width="35%" headers="N11F33">ALTER TABLE statement: DROP COLUMN clause</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F200</td>
+
+<td valign="top" width="35%" headers="N11F33">TRUNCATE TABLE statement</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F262</td>
+
+<td valign="top" width="35%" headers="N11F33">Extended CASE expression</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F263</td>
+
+<td valign="top" width="35%" headers="N11F33">Comma-separated predicates in simple CASE expression</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F281</td>
+
+<td valign="top" width="35%" headers="N11F33">LIKE enhancements</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F304</td>
+
+<td valign="top" width="35%" headers="N11F33">EXCEPT ALL table operator</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F312</td>
+
+<td valign="top" width="35%" headers="N11F33">MERGE statement</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F313</td>
+
+<td valign="top" width="35%" headers="N11F33">Enhanced MERGE statement</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F314</td>
+
+<td valign="top" width="35%" headers="N11F33">MERGE statement with DELETE branch</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F382</td>
+
+<td valign="top" width="35%" headers="N11F33">Alter column data type</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">You can alter only VARCHAR, VARCHAR FOR BIT DATA, BLOB, and
+CLOB columns, and you can change only the length. That is, you can change the
+data type from VARCHAR(10) to VARCHAR(100), but not from VARCHAR(10) to
+CLOB(100).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F383</td>
+
+<td valign="top" width="35%" headers="N11F33">Set column not null clause</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F391</td>
+
+<td valign="top" width="35%" headers="N11F33">Long identifiers</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F402</td>
+
+<td valign="top" width="35%" headers="N11F33">Named column joins for LOBs, arrays, and multisets</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F431</td>
+
+<td valign="top" width="35%" headers="N11F33">Read-only scrollable cursors</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes*</td>
+
+<td valign="top" width="35%" headers="N11F41">Through JDBC (only insensitive cursors)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F491</td>
+
+<td valign="top" width="35%" headers="N11F33">Constraint management</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F492</td>
+
+<td valign="top" width="35%" headers="N11F33">Optional table constraint enforcement</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F531</td>
+
+<td valign="top" width="35%" headers="N11F33">Temporary tables</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Global tables (DECLARE GLOBAL TEMPORARY TABLE statement)</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F591</td>
+
+<td valign="top" width="35%" headers="N11F33">Derived tables</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F641</td>
+
+<td valign="top" width="35%" headers="N11F33">Row and table constructors</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F690</td>
+
+<td valign="top" width="35%" headers="N11F33">Collation support</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Users can create a database with territory-based
+collation</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F701</td>
+
+<td valign="top" width="35%" headers="N11F33">Referential update actions</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F721</td>
+
+<td valign="top" width="35%" headers="N11F33">Deferrable constraints</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Deferrable NOT NULL constraints are not supported</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F763</td>
+
+<td valign="top" width="35%" headers="N11F33">CURRENT_SCHEMA</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Non-standard syntax (CURRENT SCHEMA instead of
+CURRENT_SCHEMA), and it is not allowed in a DEFAULT clause</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F781</td>
+
+<td valign="top" width="35%" headers="N11F33">Self-referencing operations</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F791</td>
+
+<td valign="top" width="35%" headers="N11F33">Insensitive cursors</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes*</td>
+
+<td valign="top" width="35%" headers="N11F41">Through JDBC</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F801</td>
+
+<td valign="top" width="35%" headers="N11F33">Full set function</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">DISTINCT in more than one aggregate function will not work,
+but SELECT DISTINCT with DISTINCT in one aggregate function will work</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F850</td>
+
+<td valign="top" width="35%" headers="N11F33">Top-level &lt;order by clause&gt; in &lt;query
+expression&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F851</td>
+
+<td valign="top" width="35%" headers="N11F33">&lt;order by clause&gt; in subqueries</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F852</td>
+
+<td valign="top" width="35%" headers="N11F33">Top-level &lt;order by clause&gt; in views</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F855</td>
+
+<td valign="top" width="35%" headers="N11F33">Nested &lt;order by clause&gt; in &lt;query expression&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F856</td>
+
+<td valign="top" width="35%" headers="N11F33">Nested &lt;fetch first clause&gt; in &lt;query
+expression&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F857</td>
+
+<td valign="top" width="35%" headers="N11F33">Top-level &lt;fetch first clause&gt; in &lt;query
+expression&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F858</td>
+
+<td valign="top" width="35%" headers="N11F33">&lt;fetch first clause&gt; in subqueries</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F859</td>
+
+<td valign="top" width="35%" headers="N11F33">Top-level &lt;fetch first clause&gt; in views</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F860</td>
+
+<td valign="top" width="35%" headers="N11F33">Dynamic &lt;fetch first row count&gt; in
+&lt;fetch first clause&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F861</td>
+
+<td valign="top" width="35%" headers="N11F33">Top-level &lt;result offset clause&gt; in &lt;query
+expression&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F862</td>
+
+<td valign="top" width="35%" headers="N11F33">&lt;result offset clause&gt; in subqueries</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F863</td>
+
+<td valign="top" width="35%" headers="N11F33">Nested &lt;result offset clause&gt; in &lt;query
+expression&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F864</td>
+
+<td valign="top" width="35%" headers="N11F33">Top-level &lt;result offset clause&gt; in views</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">F865</td>
+
+<td valign="top" width="35%" headers="N11F33">Dynamic &lt;offset row count&gt; in &lt;result offset
+clause&gt;</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">J581</td>
+
+<td valign="top" width="35%" headers="N11F33">Output parameters</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">J621</td>
+
+<td valign="top" width="35%" headers="N11F33">External Java routines</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">J622</td>
+
+<td valign="top" width="35%" headers="N11F33">External Java types</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T021</td>
+
+<td valign="top" width="35%" headers="N11F33">BINARY and VARBINARY data types</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes*</td>
+
+<td valign="top" width="35%" headers="N11F41">Non-standard type names CHAR FOR BIT DATA and VARCHAR FOR BIT
+DATA instead of BINARY and VARBINARY</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T031</td>
+
+<td valign="top" width="35%" headers="N11F33">BOOLEAN data type</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T042</td>
+
+<td valign="top" width="35%" headers="N11F33">Extended LOB data type support</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">CAST and string value functions implemented. No comparison or
+ordering.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T071</td>
+
+<td valign="top" width="35%" headers="N11F33">BIGINT data type</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T101</td>
+
+<td valign="top" width="35%" headers="N11F33">Enhanced nullability determination</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T174</td>
+
+<td valign="top" width="35%" headers="N11F33">Identity columns</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes*</td>
+
+<td valign="top" width="35%" headers="N11F41">MAXVALUE and CYCLE not supported. Deviation from standard: A comma (<samp class="codeph">,</samp>) is required before INCREMENT.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T175</td>
+
+<td valign="top" width="35%" headers="N11F33">Generated columns</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T176</td>
+
+<td valign="top" width="35%" headers="N11F33">Sequence generator support</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes*</td>
+
+<td valign="top" width="35%" headers="N11F41">ALTER SEQUENCE not supported. Only one NEXT VALUE FOR clause per sequence in each statement</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T191</td>
+
+<td valign="top" width="35%" headers="N11F33">Referential action RESTRICT</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T212</td>
+
+<td valign="top" width="35%" headers="N11F33">Enhanced trigger capability</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T271</td>
+
+<td valign="top" width="35%" headers="N11F33">Savepoints</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T281</td>
+
+<td valign="top" width="35%" headers="N11F33">SELECT privilege with column granularity</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T323</td>
+
+<td valign="top" width="35%" headers="N11F33">Explicit security for external routines</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T326</td>
+
+<td valign="top" width="35%" headers="N11F33">Table functions</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T331</td>
+
+<td valign="top" width="35%" headers="N11F33">Basic roles</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T332</td>
+
+<td valign="top" width="35%" headers="N11F33">Extended roles</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T351</td>
+
+<td valign="top" width="35%" headers="N11F33">Bracketed SQL comments (<samp class="codeph">/*...*/</samp> comments)</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T431</td>
+
+<td valign="top" width="35%" headers="N11F33">Extended grouping capabilities</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Partial support for GROUP BY ROLLUP</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T441</td>
+
+<td valign="top" width="35%" headers="N11F33">ABS and MOD functions</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T501</td>
+
+<td valign="top" width="35%" headers="N11F33">Enhanced EXISTS predicate</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T591</td>
+
+<td valign="top" width="35%" headers="N11F33">UNIQUE constraints of possibly null columns</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">T611</td>
+
+<td valign="top" width="35%" headers="N11F33">Elementary OLAP operations</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Partial support for ROW_NUMBER</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X010</td>
+
+<td valign="top" width="35%" headers="N11F33">XML type</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X016</td>
+
+<td valign="top" width="35%" headers="N11F33">Persistent XML values</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X061</td>
+
+<td valign="top" width="35%" headers="N11F33">XMLParse: Character string input and DOCUMENT option</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">No support for the STRIP WHITESPACE option</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X096</td>
+
+<td valign="top" width="35%" headers="N11F33">XMLExists</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Support only for XPath queries, not full XQuery</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X200</td>
+
+<td valign="top" width="35%" headers="N11F33">XMLQuery</td>
+
+<td valign="top" width="15%" headers="N11F3A">Partial</td>
+
+<td valign="top" width="35%" headers="N11F41">Support only for XPath queries, not full XQuery</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X202</td>
+
+<td valign="top" width="35%" headers="N11F33">XMLQuery: RETURNING SEQUENCE</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X203</td>
+
+<td valign="top" width="35%" headers="N11F33">XMLQuery: passing a context item</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X205</td>
+
+<td valign="top" width="35%" headers="N11F33">XMLQuery: EMPTY ON EMPTY option</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="15%" headers="N11F2C">X222</td>
+
+<td valign="top" width="35%" headers="N11F33">XML passing mechanism BY REF</td>
+
+<td valign="top" width="15%" headers="N11F3A">Yes</td>
+
+<td valign="top" width="35%" headers="N11F41">None</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefsqlstandardnot.html">SQL:2011 features not supported by Derby</a></strong><br />
+Some mandatory and optional features in Part 2 of the SQL:2011 standard are not supported by Derby.</li>
+</ul>
+</div>
+
+</body>
+</html>

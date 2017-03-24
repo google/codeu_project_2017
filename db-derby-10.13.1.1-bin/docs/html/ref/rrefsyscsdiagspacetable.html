@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="SYSCS_DIAG.SPACE_TABLE diagnostic table function" />
+<meta name="abstract" content="The SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space usage of a particular table and its indexes." />
+<meta name="description" content="The SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space usage of a particular table and its indexes." />
+<meta content="diagnostic table functions, SYSCS_DIAG.SPACE_TABLE, SYSCS_DIAG.SPACE_TABLE diagnostic table function" name="DC.subject" />
+<meta content="diagnostic table functions, SYSCS_DIAG.SPACE_TABLE, SYSCS_DIAG.SPACE_TABLE diagnostic table function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtables.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagcontainedroles.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrorlogreader.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagerrormessages.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiaglocktable.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagstatementcache.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagstatementduration.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsyscsdiagtransactiontable.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsyscsdiagspacetable" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>SYSCS_DIAG.SPACE_TABLE diagnostic table function</title>
+</head>
+<body id="rrefsyscsdiagspacetable"><a name="rrefsyscsdiagspacetable"><!-- --></a>
+
+
+<h1 class="topictitle1">SYSCS_DIAG.SPACE_TABLE diagnostic table function</h1>
+
+
+
+<div><p>The SYSCS_DIAG.SPACE_TABLE diagnostic table function shows the space
+usage of a particular table and its indexes.</p>
+
+<div class="section">
+<p>You can use this diagnostic table function to determine if space might be
+saved by compressing the table and indexes.</p>
+
+<p>All users can access this diagnostic table function, whether or not the
+database has authentication and SQL authorization enabled. See "Configuring user
+authentication" and "Configuring user authorization" in the
+<span><em>Derby Security Guide</em></span> for more information.</p>
+
+<div class="p">To access the SYSCS_DIAG.SPACE_TABLE diagnostic table function, you must use
+the SQL table function syntax. You can invoke the table function in the
+following ways:
+<ul>
+<li>If invoked with no arguments, the table function retrieves space information
+for all tables and indexes in the database.</li>
+
+<li>If invoked with one argument, a <var class="varname">tableName</var>, the table
+function retrieves information for the specified table in the current
+schema.</li>
+
+<li>If invoked with two arguments, a <var class="varname">schemaName</var> followed by
+a <var class="varname">tableName</var>, the table function retrieves information for
+the specified schema and table.</li>
+
+</ul>
+</div>
+
+<p>The returned table has the columns shown in the following table.</p>
+
+
+<div class="tablenoborder"><table cellspacing="0" cellpadding="4" summary="For each column returned by the SYSCS_DIAG.SPACE_TABLE table function, this table provides its data type, its length in bytes, whether it is nullable, and a description of its contents." frame="border" border="1" rules="all"><caption>Table 1. Columns returned by the SYSCS_DIAG.SPACE_TABLE table function</caption>
+
+
+
+
+
+<thead align="left">
+<tr valign="bottom">
+<th valign="bottom" width="31%" id="N100DC">Column Name</th>
+
+<th valign="bottom" width="17%" id="N100E3">Type</th>
+
+<th valign="bottom" width="11%" id="N100EA">Length</th>
+
+<th valign="bottom" width="12%" id="N100F1">Nullable</th>
+
+<th valign="bottom" width="28.999999999999996%" id="N100F8">Contents</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td valign="top" width="31%" headers="N100DC">CONGLOMERATENAME</td>
+
+<td valign="top" width="17%" headers="N100E3">VARCHAR</td>
+
+<td valign="top" width="11%" headers="N100EA">128</td>
+
+<td valign="top" width="12%" headers="N100F1">true</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The name of the conglomerate, which is either the table name
+or the index name. (Unlike the SYSCONGLOMERATES column of the same name, table
+ID's do not appear here).</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">ISINDEX</td>
+
+<td valign="top" width="17%" headers="N100E3">SMALLINT</td>
+
+<td valign="top" width="11%" headers="N100EA">5</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">Is not zero if the conglomerate is an index, 0 otherwise.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">NUMALLOCATEDPAGES</td>
+
+<td valign="top" width="17%" headers="N100E3">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100EA">20</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The number of pages actively linked into the table. The total
+number of pages in the file is the sum of NUMALLOCATEDPAGES + NUMFREEPAGES.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">NUMFREEPAGES</td>
+
+<td valign="top" width="17%" headers="N100E3">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100EA">20</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The number of free pages that belong to the table. When a new
+page is to be linked into the table the system will move a page from the
+NUMFREEPAGES list to the NUMALLOCATEDPAGES list. The total number of pages in
+the file is the sum of NUMALLOCATEDPAGES + NUMFREEPAGES.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">NUMUNFILLEDPAGES</td>
+
+<td valign="top" width="17%" headers="N100E3">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100EA">20</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The number of unfilled pages that belong to the table.
+Unfilled pages are allocated pages that are not completely full. Note that the
+number of unfilled pages is an estimate and is not exact. Running the same query
+twice can give different results on this column.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">PAGESIZE</td>
+
+<td valign="top" width="17%" headers="N100E3">INTEGER</td>
+
+<td valign="top" width="11%" headers="N100EA">10</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The size of the page in bytes for that conglomerate.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">ESTIMSPACESAVING</td>
+
+<td valign="top" width="17%" headers="N100E3">BIGINT</td>
+
+<td valign="top" width="11%" headers="N100EA">20</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The estimated space which could possibly be saved by
+compressing the conglomerate, in bytes.</td>
+
+</tr>
+
+<tr>
+<td valign="top" width="31%" headers="N100DC">TABLEID</td>
+
+<td valign="top" width="17%" headers="N100E3">CHAR</td>
+
+<td valign="top" width="11%" headers="N100EA">36</td>
+
+<td valign="top" width="12%" headers="N100F1">false</td>
+
+<td valign="top" width="28.999999999999996%" headers="N100F8">The id of the table to which the conglomerate belongs.</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+<div class="p">For example, use the following query to return the space usage for all of the
+user tables and indexes in the database:
+<pre>SELECT sysschemas.schemaname, T2.*
+    FROM
+        SYS.SYSTABLES systabs, SYS.SYSSCHEMAS sysschemas,
+        TABLE (SYSCS_DIAG.SPACE_TABLE()) AS T2
+    WHERE systabs.tabletype = 'T'
+    AND sysschemas.schemaid = systabs.schemaid
+    AND systabs.tableid = T2.tableid;</pre>
+
+where T2 is a user-specified table name that is any valid identifier.</div>
+
+<p>Both the <var class="varname">schemaName</var> and the <var class="varname">tableName</var>
+arguments must be expressions whose data types map to Java strings. If the
+<var class="varname">schemaName</var> and the <var class="varname">tableName</var> are
+non-delimited identifiers, you must specify the names in uppercase.</p>
+<div class="p">For
+example: <pre>SELECT * 
+    FROM TABLE (SYSCS_DIAG.SPACE_TABLE('MYSCHEMA', 'MYTABLE')) 
+    AS T2</pre>
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefsyscsdiagtables.html" title="Derby provides a set of system table expressions which you can use to obtain diagnostic information about the state of the database and about the database sessions.">SYSCS_DIAG diagnostic tables and functions</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefsyscsdiagcontainedroles.html" title="The SYSCS_DIAG.CONTAINED_ROLES diagnostic table function returns all the roles contained within the specified role.">SYSCS_DIAG.CONTAINED_ROLES diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagerrorlogreader.html" title="The SYSCS_DIAG.ERROR_LOG_READER diagnostic table function contains all the useful SQL statements that are in the derby.log file or a log file that you specify.">SYSCS_DIAG.ERROR_LOG_READER diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagerrormessages.html" title="The SYSCS_DIAG.ERROR_MESSAGES diagnostic table shows all of the SQLStates, locale-sensitive error messages, and exception severities for a Derby database.">SYSCS_DIAG.ERROR_MESSAGES diagnostic table</a></div>
+<div><a href="rrefsyscsdiaglocktable.html" title="The SYSCS_DIAG.LOCK_TABLE diagnostic table shows all of the locks that are currently held in the Derby database.">SYSCS_DIAG.LOCK_TABLE diagnostic table</a></div>
+<div><a href="rrefsyscsdiagstatementcache.html" title="The SYSCS_DIAG.STATEMENT_CACHE diagnostic table shows the contents of the SQL statement cache.">SYSCS_DIAG.STATEMENT_CACHE diagnostic table</a></div>
+<div><a href="rrefsyscsdiagstatementduration.html" title="You can use the SYSCS_DIAG.STATEMENT_DURATION diagnostic table function to analyze the execution duration of the useful SQL statements in the derby.log file or a log file that you specify.">SYSCS_DIAG.STATEMENT_DURATION diagnostic table function</a></div>
+<div><a href="rrefsyscsdiagtransactiontable.html" title="The SYSCS_DIAG.TRANSACTION_TABLE diagnostic table shows all of the transactions that are currently in the database.">SYSCS_DIAG.TRANSACTION_TABLE diagnostic table</a></div>
+</div>
+</div>
+
+</body>
+</html>

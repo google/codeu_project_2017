@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Commit command" />
+<meta name="abstract" content="The Commit command issues a java.sql.Connection.commit request." />
+<meta name="description" content="The Commit command issues a java.sql.Connection.commit request." />
+<meta content="Commit command" name="DC.subject" />
+<meta content="Commit command" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref25570.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsijcomref23268.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref94092.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref11943.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref37862.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref25753.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref79286.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref24423.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref22318.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomrefdescribe.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref20382.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref39042.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref18077.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref30679.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref33358.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref61708.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref36618.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref62772.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref10316.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomrefhold.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref53869.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref88554.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref12281.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref11128.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomrefnohold.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref12333.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref44032.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref27997.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref61092.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref97975.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref33373.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref12297.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref28886.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref39198.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomrefshow.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref17631.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref16653.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref40155.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijcomref34110.html" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsijcomref18998.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsijcomref31510" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Commit command</title>
+</head>
+<body id="rtoolsijcomref31510"><a name="rtoolsijcomref31510"><!-- --></a>
+
+
+<h1 class="topictitle1">Commit command</h1>
+
+
+<div><p>The <samp class="codeph">Commit</samp> command issues a
+<em>java.sql.Connection.commit</em> request.</p>
+
+<div class="section">
+<p>Use this command only if auto-commit is off. A
+<em>java.sql.Connection.commit</em> request commits the currently active
+transaction and initiates a new transaction.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>COMMIT</strong></pre>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<pre>ij&gt; <strong>commit;</strong>
+ij&gt;</pre>
+
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtoolsijcomref25570.html" title="This section describes the commands and errors within the ij tool.">ij commands and errors reference</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="ctoolsijcomref23268.html" title="ij accepts several commands to control its use of JDBC.">ij commands</a></div>
+<div><a href="ctoolsijcomref18998.html" title="ij might issue messages to inform the user of errors during processing of statements.">ij errors</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsijcomref94092.html" title="The Absolute command moves the cursor to the row specified by the int argument, then fetches the row.">Absolute command</a></div>
+<div><a href="rtoolsijcomref11943.html" title="The After Last command moves the cursor to after the last row, then fetches the row.">After Last command</a></div>
+<div><a href="rtoolsijcomref37862.html" title="The Async command lets you execute an SQL statement in a separate thread.">Async command</a></div>
+<div><a href="rtoolsijcomref25753.html" title="The Autocommit command turns the connection's auto-commit mode on or off.">Autocommit command</a></div>
+<div><a href="rtoolsijcomref79286.html" title="The Before First command moves the cursor to before the first row, then fetches the row.">Before First command</a></div>
+<div><a href="rtoolsijcomref24423.html" title="The Close command closes the named cursor.">Close command</a></div>
+<div><a href="rtoolsijcomref22318.html" title="The Connect command connects to the database indicated by the ConnectionURLString argument.">Connect command</a></div>
+<div><a href="rtoolsijcomrefdescribe.html" title="The Describe command provides a decription of the specified table or view.">Describe command</a></div>
+<div><a href="rtoolsijcomref20382.html" title="The Disconnect command disconnects from the database.">Disconnect command</a></div>
+<div><a href="rtoolsijcomref39042.html" title="The Driver command takes the value of the DriverNameString argument and issues a Class.forName request to load the named class.">Driver command</a></div>
+<div><a href="rtoolsijcomref18077.html" title="The Elapsedtime command, if set to ON, displays the total time elapsed during statement execution.">Elapsedtime command</a></div>
+<div><a href="rtoolsijcomref30679.html" title="The Execute command executes an SQL statement or a named prepared statement.">Execute command</a></div>
+<div><a href="rtoolsijcomref33358.html" title="The Exit command causes the ij application to complete and processing to halt.">Exit command</a></div>
+<div><a href="rtoolsijcomref61708.html" title="The First command moves the cursor to the first row in the ResultSet, then fetches the row.">First command</a></div>
+<div><a href="rtoolsijcomref36618.html" title="The Get Cursor command creates a cursor with the name of the specified Identifier by issuing a java.sql.Statement.executeQuery request on the value of the specified String.">Get Cursor command</a></div>
+<div><a href="rtoolsijcomref62772.html" title="The Get Scroll Insensitive Cursor command creates a scrollable insensitive cursor with the name of the specified Identifier.">Get Scroll Insensitive Cursor command</a></div>
+<div><a href="rtoolsijcomref10316.html" title="The Help command prints out a brief list of the ij commands.">Help command</a></div>
+<div><a href="rtoolsijcomrefhold.html" title="The HoldForConnection command sets the default holdability for a connection to the default ResultSet.HOLD_CURSORS_OVER_COMMIT.">HoldForConnection command</a></div>
+<div><a href="rtoolsijcomref53869.html" title="The Last command moves the cursor to the last row in the ResultSet, then fetches the row.">Last command</a></div>
+<div><a href="rtoolsijcomref88554.html" title="The LocalizedDisplay command specifies that ij should display locale-sensitive data (such as dates) in the native format for the ij locale.">LocalizedDisplay command</a></div>
+<div><a href="rtoolsijcomref12281.html" title="The MaximumDisplayWidth command sets the largest display width for columns to the specified value.">MaximumDisplayWidth command</a></div>
+<div><a href="rtoolsijcomref11128.html" title="The Next command fetches the next row from the specified named cursor.">Next command</a></div>
+<div><a href="rtoolsijcomrefnohold.html" title="The NoHoldForConnection command changes the default holdability for a connection from ResultSet.HOLD_CURSORS_OVER_COMMIT to ResultSet.CLOSE_CURSORS_AT_COMMIT.">NoHoldForConnection command</a></div>
+<div><a href="rtoolsijcomref12333.html" title="The Prepare command creates a java.sql.PreparedStatement using the value of the specified String, accessible in ij by the Identifier given to it.">Prepare command</a></div>
+<div><a href="rtoolsijcomref44032.html" title="The Previous command moves the cursor to the row previous to the current one, then fetches the row.">Previous command</a></div>
+<div><a href="rtoolsijcomref27997.html" title="The Protocol command specifies the protocol for establishing connections and automatically loads the appropriate driver.">Protocol command</a></div>
+<div><a href="rtoolsijcomref61092.html" title="The Readonly command sets the current connection to a &quot;read-only&quot; connection, as if the current user were defined as a readOnlyAccess user.">Readonly command</a></div>
+<div><a href="rtoolsijcomref97975.html" title="The Relative command moves the cursor to the row that is the specified number of rows relative to the current row, then fetches the row.">Relative command</a></div>
+<div><a href="rtoolsijcomref33373.html" title="The Remove command removes a previously prepared statement from ij.">Remove command</a></div>
+<div><a href="rtoolsijcomref12297.html" title="The Rollback command issues a java.sql.Connection.rollback request.">Rollback command</a></div>
+<div><a href="rtoolsijcomref28886.html" title="The Run command redirects ij processing to read from a specified file.">Run command</a></div>
+<div><a href="rtoolsijcomref39198.html" title="The Set Connection command specifies which connection to make current when more than one connection is open.">Set Connection command</a></div>
+<div><a href="rtoolsijcomrefshow.html" title="The Show command displays information about active connections and database objects.">Show command</a></div>
+<div><a href="rtoolsijcomref17631.html" title="The Wait For command displays the results of a previously started asynchronous command.">Wait For command</a></div>
+<div><a href="rtoolsijcomref16653.html" title="ij accepts two forms of comments in commands.">Syntax for comments in ij commands</a></div>
+<div><a href="rtoolsijcomref40155.html" title="Some ij commands require identifier arguments.">Syntax for identifiers in ij commands</a></div>
+<div><a href="rtoolsijcomref34110.html" title="Some ij commands require string arguments.">Syntax for strings in ij commands</a></div>
+</div>
+</div>
+
+</body>
+</html>

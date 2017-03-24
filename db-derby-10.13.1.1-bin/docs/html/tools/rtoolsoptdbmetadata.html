@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Using the databaseMetaData optional tool" />
+<meta name="abstract" content="The databaseMetaData optional tool creates functions and table functions corresponding to most of the methods in the java.sql.DatabaseMetaData interface." />
+<meta name="description" content="The databaseMetaData optional tool creates functions and table functions corresponding to most of the methods in the java.sql.DatabaseMetaData interface." />
+<meta content="optional tools, databaseMetaData, databaseMetaData optional tool, tools" name="DC.subject" />
+<meta content="optional tools, databaseMetaData, databaseMetaData optional tool, tools" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsopttools.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptforeignviews.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucene.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptsimplejson.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptdbreader.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsoptdbmetadata" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using the databaseMetaData optional tool</title>
+</head>
+<body id="rtoolsoptdbmetadata"><a name="rtoolsoptdbmetadata"><!-- --></a>
+
+
+<h1 class="topictitle1">Using the databaseMetaData optional tool</h1>
+
+
+
+<div><p>The <samp class="codeph">databaseMetaData</samp> optional tool creates functions
+and table functions corresponding to most of the methods in the
+<em>java.sql.DatabaseMetaData</em> interface.</p>
+
+<div class="section">
+<p>Before you run the <samp class="codeph">databaseMetaData</samp> optional tool, make sure
+that your classpath contains the
+<span>Derby</span> jar files, including
+<samp class="codeph">derbytools.jar</samp>.</p>
+
+<p>You can load and unload the <samp class="codeph">databaseMetaData</samp> tool by using
+the <samp class="codeph">SYSCS_UTIL.SYSCS_REGISTER_TOOL</samp> system procedure. See the
+<span><em>Derby Reference Manual</em></span> for information about this
+procedure.</p>
+
+<p>To load the <samp class="codeph">databaseMetaData</samp> tool, use the following
+statement:</p>
+
+<pre><strong>call syscs_util.syscs_register_tool( 'databaseMetaData', true )</strong></pre>
+
+<p>This command creates metadata functions and table functions in the current
+schema. The functions and table functions have the same names as the
+corresponding <em>java.sql.DatabaseMetaData</em> methods which they wrap. Once you
+have loaded this tool, you can filter and join these functions to create
+powerful metadata queries. For instance, the following query lists the column
+names and datatypes for all columns in tables created by users:</p>
+
+<pre><strong>select t.table_schem, t.table_name, c.column_name, c.type_name
+from table( getTables( null, '%', '%' ) ) t,
+     table( getColumns( null, '%', '%', '%') ) c
+where c.table_schem = t.table_schem
+and c.table_name = t.table_name
+and t.table_type = 'TABLE'
+order by table_schem, table_name, column_name</strong></pre>
+
+<p>A few <em>DatabaseMetaData</em> methods take array arguments. Because those
+arguments cannot be represented as
+<span>Derby</span> types, the arguments
+are eliminated. This means that the trailing <em>types</em> arguments to
+<em>getTables()</em> and <em>getUDTs()</em> have been eliminated. In addition, the
+following <em>DatabaseMetaData</em> methods do not have corresponding metadata
+routines:</p>
+
+<ul>
+<li><em>getRowIdLifetime()</em> is eliminated because
+<span>Derby</span> does not provide an
+implementation of <em>java.sql.RowIdLifetime</em>.</li>
+
+<li><em>getSchemas()</em> is eliminated because
+<span>Derby</span> does not support
+overloads. The more general <em>getSchemas( String, String )</em> method is
+included.</li>
+
+<li><em>supportsConvert()</em> is eliminated because
+<span>Derby</span> does not support
+overloads. The more general <em>supportsConvert( int, int )</em> is included.</li>
+
+</ul>
+
+<p>When you have finished joining metadata results, you can drop this package of
+functions and table functions as follows:</p>
+
+<pre><strong>call syscs_util.syscs_register_tool( 'databaseMetaData', false )</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsopttools.html" title="">Optional tools</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsoptforeignviews.html" title="The foreignViews optional tool creates schemas, table functions, and convenience views for all user tables in a foreign database. This can be useful for bulk-importing foreign data.">Using the foreignViews optional tool</a></div>
+<div><a href="rtoolsoptlucene.html" title="The luceneSupport plugin is an optional tool that lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns.">Using the luceneSupport optional tool</a></div>
+<div><a href="rtoolsoptsimplejson.html" title="The simpleJson optional tool creates functions and a user-defined type, which can be used to integrate relational data with data represented in the popular JSON format.">Using the simpleJson optional tool</a></div>
+<div><a href="rtoolsoptdbreader.html" title="The rawDBReader optional tool creates functions and views, which can be used to extract data out of a corrupt or unbootable database into a new, healthy database.">Using the rawDBReader optional tool</a></div>
+</div>
+</div>
+
+</body>
+</html>

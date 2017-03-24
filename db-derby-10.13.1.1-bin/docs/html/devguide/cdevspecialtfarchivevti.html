@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="ArchiveVTI source code" />
+<meta name="abstract" content="The code that defines the archiveVTI table function is as follows." />
+<meta name="description" content="The code that defines the archiveVTI table function is as follows." />
+<meta content="functions, context-aware table functions, archiveVTI table function" name="DC.subject" />
+<meta content="functions, context-aware table functions, archiveVTI table function" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevspecialtfcontext.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevspecialtfarchivevti" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ArchiveVTI source code</title>
+</head>
+<body id="cdevspecialtfarchivevti"><a name="cdevspecialtfarchivevti"><!-- --></a>
+
+
+<h1 class="topictitle1">ArchiveVTI source code</h1>
+
+
+
+<div><p>The code that defines the <em>archiveVTI</em> table function is as 
+follows.</p>
+
+<pre>package org.apache.derbyTesting.functionTests.tests.lang;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.apache.derby.vti.AwareVTI;
+import org.apache.derby.vti.ForeignTableVTI;
+import org.apache.derby.vti.ForwardingVTI;
+import org.apache.derby.vti.RestrictedVTI;
+import org.apache.derby.vti.Restriction;
+import org.apache.derby.vti.VTIContext;
+
+/**
+ * &lt;p&gt;
+ * This table function acts like a union view on a set of archive tables.
+ * The idea is that the old contents of a main table are periodically
+ * moved to archive tables whose names start with $tableName$suffix.
+ * Each bulk move of rows results in the creation of a new archive table.
+ * The archive tables live in the same schema as the main table and have
+ * its shape. This table function unions the main table together with all
+ * of its archived snapshots. So, for instance, you might have the
+ * following set of tables, which this table function unions together:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;
+ *  T1
+ *  T1_ARCHIVE_1
+ *  T1_ARCHIVE_2
+ *   ...
+ *  T1_ARCHIVE_N
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * This table function may appear in user documentation. If you change
+ * the behavior of this table function, make sure that you adjust the
+ * user documentation linked from DERBY-6117.
+ * &lt;/p&gt;
+ */
+public class ArchiveVTI extends ForwardingVTI implements AwareVTI,
+        RestrictedVTI
+{
+    /////////////////////////////////////////////////////////////////////
+    //
+    //	CONSTANTS
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //	STATE
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    private Connection  _connection;
+    private String      _archiveSuffix;
+    private VTIContext  _vtiContext;
+    private ArrayList&lt;String&gt;   _tableNames;
+    private int         _tableIdx;
+    
+    private String[]    _columnNames;
+    private Restriction _restriction;
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  TABLE FUNCTION
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /**
+     * &lt;p&gt;
+     * Entry point for creating an ArchiveVTI which is bound to a Derby
+     * table function by a CREATE FUNCTION statement which looks like
+     * this:
+     * &lt;/p&gt;
+     *
+     * &lt;pre&gt;
+     * create function t1( archiveSuffix varchar( 32672 ) ) returns table
+     * (
+     *     keyCol int,
+     *     aCol int,
+     *     bCol int
+     * )
+     * language java parameter style derby_jdbc_result_set reads sql data
+     * external name
+     * 'org.apache.derbyTesting.functionTests.tests.lang.ArchiveVTI.archiveVTI'
+     * &lt;/pre&gt;
+     *
+     * @param archiveSuffix All of the archive tables have names of the
+     *                      form $tablename$archiveSuffix.
+     */
+    public  static  ArchiveVTI  archiveVTI( String archiveSuffix )
+            throws SQLException
+    { return new ArchiveVTI( archiveSuffix ); }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //	CONSTRUCTOR
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /** Construct from the suffix which flags all of the relevant
+     *  tables.
+     */
+    public  ArchiveVTI( String archiveSuffix )    throws SQLException
+    {
+        _connection = DriverManager.getConnection( 
+                "jdbc:default:connection" );
+        _archiveSuffix = archiveSuffix;
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //  AwareVTI BEHAVIOR
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    public  VTIContext  getContext() { return _vtiContext; }
+    public  void    setContext( VTIContext context )
+    { _vtiContext = context; }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //	RestrictedVTI BEHAVIOR
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    public  void    initScan
+        ( String[] columnNames, Restriction restriction )
+        throws SQLException
+    {
+        _columnNames = new String[ columnNames.length ];
+        System.arraycopy( columnNames, 0, _columnNames, 0,
+                columnNames.length );
+        _restriction = restriction;
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //	ResultSet BEHAVIOR
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    public boolean next()   throws SQLException
+    {
+        if ( _tableNames == null )
+        {
+            getTableNames();
+            _tableIdx = 0;
+            loadResultSet();
+        }
+
+        while ( !super.next() )
+        {
+            _tableIdx++;
+            if ( _tableIdx &gt;= _tableNames.size() ) { return false; }
+            loadResultSet();
+        }
+
+        return true;
+    }
+
+    public  void    close() throws SQLException
+    {
+        if ( getWrappedResultSet() != null ) 
+        { 
+            getWrappedResultSet().close();
+        }
+        wrapResultSet( null );
+        _connection = null;
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    //
+    //	UTILITY METHODS
+    //
+    /////////////////////////////////////////////////////////////////////
+
+    /**
+     * &lt;p&gt;
+     * Get cursors on all the tables which we are going to union
+     * together.
+     * &lt;/p&gt;
+     */
+    private void    getTableNames() throws SQLException
+    {
+        _tableNames = new ArrayList&lt;String&gt;();
+        _tableNames.add( getContext().vtiTable() );
+
+        DatabaseMetaData    dbmd = getConnection().getMetaData();
+        ResultSet   candidates = dbmd.getTables
+            ( null, getContext().vtiSchema(), getContext().vtiTable() 
+              + _archiveSuffix + "%", null );
+
+        while ( candidates.next() )
+        {
+            _tableNames.add( candidates.getString( "TABLE_NAME" ) );
+        }
+        candidates.close();
+    }
+    
+    /**
+     * &lt;p&gt;
+     * Compile the query against the next table and use its ResultSet
+     * until it's drained.
+     * &lt;/p&gt;
+     */
+    private void    loadResultSet() throws SQLException
+    {
+        if ( getWrappedResultSet() != null )
+        { 
+            getWrappedResultSet().close();
+        }
+        
+        ForeignTableVTI     nextRS = new ForeignTableVTI
+            ( getContext().vtiSchema(), _tableNames.get( _tableIdx ),
+              getConnection() );
+        nextRS.initScan( _columnNames, _restriction );
+
+        wrapResultSet( nextRS );
+    }
+
+    /**
+     * &lt;p&gt;
+     * Get this database session's connection to the database.
+     * &lt;/p&gt;
+     */
+    private Connection  getConnection() throws SQLException
+    {
+        return _connection;
+    }
+    
+}</pre>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevspecialtfcontext.html" title="A context-aware table function is able to access context information that is passed in to it from Derby.">Writing context-aware table functions</a></div>
+</div>
+</div>
+
+</body>
+</html>

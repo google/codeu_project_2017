@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="ij.connection.connectionName property" />
+<meta name="abstract" content="The ij.connection.connectionName property creates a named connection to the given database connection URL when ij starts up." />
+<meta name="description" content="The ij.connection.connectionName property creates a named connection to the given database connection URL when ij starts up." />
+<meta content="ij.connection property" name="DC.subject" />
+<meta content="ij.connection property" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref29864.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28146.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefdatasource.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefexceptiontrace.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref28788.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref32585.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefpassword.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref35032.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref12236.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref25589.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoconn.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefshownoselectcount.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref38481.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijproprefuser.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijpropref97949.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsijlocale.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsijpropref10135" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>ij.connection.connectionName property</title>
+</head>
+<body id="rtoolsijpropref10135"><a name="rtoolsijpropref10135"><!-- --></a>
+
+
+<h1 class="topictitle1">ij.connection.<em>connectionName</em> property</h1>
+
+
+
+<div><p>The <samp class="codeph">ij.connection.<em>connectionName</em></samp> property
+creates a named connection to the given database connection URL when
+<samp class="codeph">ij</samp> starts up.</p>
+
+<div class="section">
+<p>The property is equivalent to the <samp class="codeph">Connect AS
+<em>Identifier</em></samp> command. The database connection URL can be of the
+short form if an
+<samp class="codeph"><a href="rtoolsijpropref35032.html">ij.protocol</a></samp> is
+specified. This property can be specified more than once per session, creating
+multiple connections. When <samp class="codeph">ij</samp> starts, it displays the names
+of all the connections created in this way. It also displays the name of the
+current connection, if there is more than one, in the <samp class="codeph">ij</samp>
+prompt.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>ij.connection.<em>connectionName</em>=<em>databaseConnectionURL</em></strong></pre>
+
+<p>When specified on the command line, the <em>databaseConnectionURL</em> should
+not be enclosed in single quotes. However, if the database path contains special
+characters (such as a space), it must be enclosed in double quotes.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Example</h2>
+<p>This example connects to the existing database <samp class="codeph">sample</samp> and
+creates, then connects to, the database <samp class="codeph">anotherDB</samp>.</p>
+
+<pre><strong>java -Dij.connection.sample1=jdbc:derby:sample \
+-Dij.connection.anotherConn=jdbc:derby:anotherDB;create=true \
+org.apache.derby.tools.ij</strong>
+ij version <span>10.13</span>
+ANOTHERCONN* -  jdbc:derby:anotherDB;create=true
+SAMPLE1 -        jdbc:derby:sample
+* = current connection
+ij(ANOTHERCONN)&gt;</pre>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">See also</h2>
+<ul>
+<li><a href="rtoolsijcomref22318.html">Connect command</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rtoolsijpropref29864.html" title="When starting up ij, you can specify properties on the command line or in a properties file.">ij properties reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsijpropref28146.html" title="The ij.database property creates a connection to the database specified by the property when ij starts up.">ij.database property</a></div>
+<div><a href="rtoolsijproprefdatasource.html" title="The ij.dataSource property specifies the datasource to be used to access the database.">ij.dataSource property</a></div>
+<div><a href="rtoolsijproprefexceptiontrace.html" title="The ij.exceptionTrace property specifies whether ij should display a full exception stack trace when exceptions occur.">ij.exceptionTrace property</a></div>
+<div><a href="rtoolsijpropref28788.html" title="The ij.maximumDisplayWidth property specifies the maximum number of characters used to display any column.">ij.maximumDisplayWidth property</a></div>
+<div><a href="rtoolsijpropref32585.html" title="The ij.outfile property specifies a file to which the system should direct output for a session.">ij.outfile property</a></div>
+<div><a href="rtoolsijproprefpassword.html" title="The ij.password property specifies the password used to make connections.">ij.password property</a></div>
+<div><a href="rtoolsijpropref35032.html" title="The ij.protocol property specifies the default protocol and subprotocol portions of the database connection URL for connections.">ij.protocol property</a></div>
+<div><a href="rtoolsijpropref12236.html" title="The ij.protocol.protocolName property is similar to the ij.protocol property. The only difference is that it associates a name with the value, thus allowing you to define and use more than one protocol.">ij.protocol.protocolName property</a></div>
+<div><a href="rtoolsijpropref25589.html" title="The ij.showErrorCode property specifies whether ij should display the SQLException ErrorCode value with error messages.">ij.showErrorCode property</a></div>
+<div><a href="rtoolsijproprefshownoconn.html" title="The ij.showNoConnectionsAtStart property specifies whether the connections message should be displayed when ij is started.">ij.showNoConnectionsAtStart property</a></div>
+<div><a href="rtoolsijproprefshownoselectcount.html" title="The ij.showNoCountForSelect property specifies whether to display messages indicating the number of rows selected.">ij.showNoCountForSelect property</a></div>
+<div><a href="rtoolsijpropref38481.html" title="The ij.URLCheck property specifies whether ij should check for invalid or non-Derby URL attributes when you are using the embedded driver.">ij.URLCheck property</a></div>
+<div><a href="rtoolsijproprefuser.html" title="The ij.user property specifies the login name used to establish the connection.">ij.user property</a></div>
+<div><a href="rtoolsijpropref97949.html" title="The derby.ui.codeset property specifies an alternative supported character encoding value when you use one of the Derby tools with a language not supported by your default system.">derby.ui.codeset property</a></div>
+<div><a href="rtoolsijlocale.html" title="The derby.ui.locale property specifies an alternative supported locale name when you use one of the Derby tools with a language not supported by your default system.">derby.ui.locale property</a></div>
+</div>
+</div>
+
+</body>
+</html>

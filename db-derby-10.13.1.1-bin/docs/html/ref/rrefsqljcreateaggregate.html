@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="CREATE DERBY AGGREGATE statement" />
+<meta name="abstract" content="The CREATE DERBY AGGREGATE statement creates a user-defined aggregate (UDA). A UDA is a custom aggregate operator." />
+<meta name="description" content="The CREATE DERBY AGGREGATE statement creates a user-defined aggregate (UDA). A UDA is a custom aggregate operator." />
+<meta content="CREATE DERBY AGGREGATE statement, SQL statements, CREATE DERBY AGGREGATE, user-defined aggregates, creating, aggregates, user-defined" name="DC.subject" />
+<meta content="CREATE DERBY AGGREGATE statement, SQL statements, CREATE DERBY AGGREGATE, user-defined aggregates, creating, aggregates, user-defined" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefsqlj95081.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreatefunctionstatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj20937.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreateprocedurestatement.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefcreaterole.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj31580.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesequence.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatesynonym.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj24513.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj43125.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqljcreatetype.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefsqlj15446.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljcreateaggregate" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>CREATE DERBY AGGREGATE statement</title>
+</head>
+<body id="rrefsqljcreateaggregate"><a name="rrefsqljcreateaggregate"><!-- --></a>
+
+
+<h1 class="topictitle1">CREATE DERBY AGGREGATE statement</h1>
+
+
+
+<div><p>The CREATE DERBY AGGREGATE statement creates a user-defined
+aggregate (UDA). A UDA is a custom aggregate operator.</p>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>CREATE DERBY AGGREGATE <em><a href="rrefaggregatename.html#rrefaggregatename">aggregateName</a></em> FOR <em>valueDataType</em>
+[ RETURNS <em>returnDataType</em> ]
+<a href="rrefsqljexternalname.html#rrefsqljexternalname">EXTERNAL NAME</a> <em>singleQuotedString</em></strong></pre>
+
+<p>The aggregate name is composed of an optional <em><a href="rrefschemaname.html">schemaName</a></em> and a
+<em><a href="crefsqlj34834.html">SQLIdentifier</a></em>. If a
+<em>schemaName</em> is not provided, the current schema is the default schema. If
+a qualified aggregate name is specified, the schema name cannot begin with
+SYS.</p>
+
+<p>In general, UDAs live in the same namespace as one-argument user-defined
+functions (see
+<a href="rrefcreatefunctionstatement.html#rrefcreatefunctionstatement">CREATE FUNCTION statement</a>).
+A schema-qualified UDA name may not be the schema-qualified name of a
+one-argument user-defined function.</p>
+
+<p>An unqualified UDA name (that is, the UDA name without its schema name) may
+not be the name of an aggregate defined in part 2 of the SQL Standard,
+section 10.9:</p>
+
+<pre>ANY
+AVG
+COLLECT
+COUNT
+EVERY
+FUSION
+INTERSECTION
+MAX
+MIN
+SOME
+STDDEV_POP
+STDDEV_SAMP
+SUM
+VAR_POP
+VAR_SAMP</pre>
+
+<p>In addition, an unqualified UDA name may not be the name of any of the
+<span>Derby</span> built-in functions
+which take one argument.</p>
+
+<p>The <em>valueDataType</em> can be any valid nullable
+<span>Derby</span> data type except for
+XML, including user-defined types.</p>
+
+<p>The <em>returnDataType</em> can be any valid nullable
+<span>Derby</span> data type except for
+XML. If the <em>returnDataType</em> is omitted, it defaults to be the same as
+<em>valueDataType</em>.</p>
+
+<p>The <em>singleQuotedString</em> specified by the <a href="rrefsqljexternalname.html#rrefsqljexternalname">EXTERNAL NAME clause</a> is the full name
+of a Java class which implements the <em>org.apache.derby.agg.Aggregator</em>
+interface. That contract is not checked until a statement is compiled which
+invokes the UDA.</p>
+
+<p>The <em>org.apache.derby.agg.Aggregator</em> interface extends
+<em>java.io.Serializable</em>, so you must make sure that all of the state of your
+UDA is serializable. A UDA may be serialized to disk when it performs grouped
+aggregation over a large number of groups. That is, intermediate results may be
+serialized to disk for a query like the following:</p>
+
+<pre>SELECT a, myAggregate( b ) FROM myTable GROUP BY a</pre>
+
+<p>The serialization will fail if the UDA contains non-serializable fields.</p>
+
+<p>The owner of the schema where the UDA lives automatically gains the USAGE
+privilege on the UDA and can grant this privilege to other users and roles. Only
+the <a href="rrefattrib26867.html#rrefattrib26867">database owner</a> and
+the owner of the UDA can grant these USAGE privileges. The USAGE privilege
+cannot be revoked from the schema owner. See
+<a href="rrefsqljgrant.html#rrefsqljgrant">GRANT statement</a> and
+<a href="rrefsqljrevoke.html#rrefsqljrevoke">REVOKE statement</a> for more
+information.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<pre><strong>CREATE DERBY AGGREGATE mode FOR INT
+EXTERNAL NAME 'com.example.myapp.aggs.Mode';
+
+CREATE DERBY AGGREGATE types.maxPrice FOR PRICE
+EXTERNAL NAME 'com.example.myapp.types.PriceMaxer';
+
+CREATE DERBY AGGREGATE types.avgLength FOR VECTOR
+RETURNS DOUBLE
+EXTERNAL NAME 'com.example.myapp.types.VectorLength';</strong></pre>
+
+<p>See "Programming user-defined aggregates" in the
+<span><em>Derby Developer's Guide</em></span> for more details about
+creating and using user-defined aggregates.</p>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefsqlj95081.html" title="">CREATE statements</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefcreatefunctionstatement.html" title="The CREATE FUNCTION statement creates a Java function, which you can then use in an expression.">CREATE FUNCTION statement</a></div>
+<div><a href="rrefsqlj20937.html" title="A CREATE INDEX statement creates an index on a table. Indexes can be on one or more columns in the table.">CREATE INDEX statement</a></div>
+<div><a href="rrefcreateprocedurestatement.html" title="The CREATE PROCEDURE statement creates a Java stored procedure, which you can then call using the CALL PROCEDURE statement.">CREATE PROCEDURE statement</a></div>
+<div><a href="rrefcreaterole.html" title="The CREATE ROLE statement creates an SQL role. Roles are useful for administering privileges when a database has many users.">CREATE ROLE statement</a></div>
+<div><a href="rrefsqlj31580.html" title="The CREATE SCHEMA statement creates a schema, which is a way to logically group objects in a single collection and to provide a unique namespace for objects.">CREATE SCHEMA statement</a></div>
+<div><a href="rrefsqljcreatesequence.html" title="The CREATE SEQUENCE statement creates a sequence generator, which is a mechanism for generating exact numeric values, one at a time.">CREATE SEQUENCE statement</a></div>
+<div><a href="rrefsqljcreatesynonym.html" title="The CREATE SYNONYM statement provides an alternate name for a table or a view that is present in the same schema or another schema.">CREATE SYNONYM statement</a></div>
+<div><a href="rrefsqlj24513.html" title="The CREATE TABLE statement creates a table. Tables contain columns and constraints, rules to which data must conform.">CREATE TABLE statement</a></div>
+<div><a href="rrefsqlj43125.html" title="The CREATE TRIGGER statement creates a trigger, which defines a set of actions that are executed when a database event occurs on a specified table.">CREATE TRIGGER statement</a></div>
+<div><a href="rrefsqljcreatetype.html" title="The CREATE TYPE statement creates a user-defined type (UDT). A UDT is a serializable Java class whose instances are stored in columns.">CREATE TYPE statement</a></div>
+<div><a href="rrefsqlj15446.html" title="The CREATE VIEW statement creates a view, which is a virtual table formed by a query.">CREATE VIEW statement</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Upgrading an old database to use SQL standard authorization" />
+<meta name="abstract" content="An old, unprotected database can be shielded with authentication and SQL authorization later on." />
+<meta name="description" content="An old, unprotected database can be shielded with authentication and SQL authorization later on." />
+<meta content="upgrade, SQL standard authorization mode" name="DC.subject" />
+<meta content="upgrade, SQL standard authorization mode" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="csecauthorfine.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecuregrantrevokeaccess.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecureprivileges.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecureroles.html" />
+<meta scheme="URI" name="DC.Relation" content="rseccsecuresqlauthexceptions.html" />
+<meta scheme="URI" name="DC.Relation" content="rseccsecurenativeauthex.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cseccsecuresqlauthupgrade" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Upgrading an old database to use SQL standard authorization</title>
+</head>
+<body id="cseccsecuresqlauthupgrade"><a name="cseccsecuresqlauthupgrade"><!-- --></a>
+
+
+<h1 class="topictitle1">Upgrading an old database to use SQL standard authorization</h1>
+
+
+
+<div><p>An old, unprotected database can be shielded with authentication and
+SQL authorization later on.</p>
+
+<div class="section"><h2 class="sectiontitle">Upgrading authentication and authorization</h2>
+<p>To protect a single-user database and convert it to a shared, multi-user
+database, simply enable authentication and SQL authorization. To do this, first
+turn on user authentication as described in
+<a href="cseccsecure42374.html">Configuring user authentication</a>. Make sure that you supply login
+credentials for the <a href="cseccsecuredbowner.html">Database Owner</a>.
+In most single-user databases, the Database Owner is APP. However, the Database
+Owner could be some other user if the original database creation URL specified
+a user name; for details, see
+<a href="cseccsecuredbowner.html">Database Owner</a>. If you are unsure
+about who owns the database, run the following query:</p>
+
+<pre>select authorizationid from sys.sysschemas where schemaname = 'SYS'</pre>
+
+<p>After enabling user authentication, turn on SQL authorization. To do this,
+connect to the database as the Database Owner and issue the following
+command:</p>
+
+<pre>call syscs_util.syscs_set_database_property( 'derby.database.sqlAuthorization', 'true' )</pre>
+
+<p>Now shut down the database to activate the new value of
+<samp class="codeph">derby.database.sqlAuthorization</samp>. The next time you boot the
+database, it will be protected by authentication and SQL authorization.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Behavior of upgraded databases</h2>
+<p>You will notice the following behavior changes in your upgraded database:</p>
+
+<ul>
+<li><strong>Data</strong>: Users can access data in their own schemas. However, users
+cannot access data in schemas owned by other users. In particular, other users
+cannot access data in schemas belonging to the Database Owner. The Database
+Owner may need to GRANT access to that data.</li>
+
+<li><strong>Database Maintenance</strong>: In a single-user database, anyone can run
+maintenance procedures to backup/restore and import/export data. In the upgraded
+multi-user database, only the Database Owner can perform these sensitive
+operations.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="csecauthorfine.html" title="You can use fine-grained user authorization, also called SQL standard authorization, to restrict access to specific pieces of data.">Configuring fine-grained user authorization</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cseccsecuregrantrevokeaccess.html" title="When the SQL standard authorization mode is enabled, object owners can use the GRANT and REVOKE SQL statements to set the user privileges for specific database objects or for specific SQL actions. They can also use roles to administer privileges.">Using fine-grained user authorization</a></div>
+<div><a href="cseccsecureprivileges.html" title="Views, triggers, constraints, and generated columns operate with the privileges of the owner of the view, trigger, constraint, or generated column.">Privileges on views, triggers, constraints, and generated columns</a></div>
+<div><a href="cseccsecureroles.html" title="When the SQL standard authorization mode is enabled, object owners can use the SQL roles facility to administer privileges.">Using SQL roles</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rseccsecuresqlauthexceptions.html" title="SQL exceptions are returned when errors occur with SQL authorization.">SQL standard authorization exceptions</a></div>
+<div><a href="rseccsecurenativeauthex.html" title="This example consists of the program NativeAuthenticationExample.java, which shows how to use Derby's NATIVE user authentication and SQL authorization with either the embedded or the client driver.">NATIVE authentication and SQL authorization example</a></div>
+</div>
+</div>
+
+</body>
+</html>

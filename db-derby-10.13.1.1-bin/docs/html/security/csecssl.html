@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Configuring SSL/TLS" />
+<meta name="abstract" content="By default, network traffic travels in cleartext between Derby clients and servers." />
+<meta name="description" content="By default, network traffic travels in cleartext between Derby clients and servers." />
+<meta content="Network Server, SSL, TLS" name="DC.subject" />
+<meta content="Network Server, SSL, TLS" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecuree.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure12392.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure24366.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure90988.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecureidentity.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure42374.html" />
+<meta scheme="URI" name="DC.Relation" content="csecauthorization.html" />
+<meta scheme="URI" name="DC.Relation" content="csecjavasecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnetservfileperms.html" />
+<meta scheme="URI" name="DC.Relation" content="csecputtogether.html" />
+<meta scheme="URI" name="DC.Relation" content="tsecsslclientkeycert.html" />
+<meta scheme="URI" name="DC.Relation" content="tsecsslserverkeycert.html" />
+<meta scheme="URI" name="DC.Relation" content="tsecsslimportcerts.html" />
+<meta scheme="URI" name="DC.Relation" content="csecsslbootconn.html" />
+<meta scheme="URI" name="DC.Relation" content="csecsslkeys.html" />
+<meta scheme="URI" name="DC.Relation" content="csecsslserver.html" />
+<meta scheme="URI" name="DC.Relation" content="csecsslclient.html" />
+<meta scheme="URI" name="DC.Relation" content="csecssladmin.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="csecssl" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Configuring SSL/TLS</title>
+</head>
+<body id="csecssl"><a name="csecssl"><!-- --></a>
+
+
+<h1 class="topictitle1">Configuring SSL/TLS</h1>
+
+
+
+<div><p>By default, network traffic travels in cleartext between
+<span>Derby</span> clients and
+servers.</p>
+
+<p>By using a man-in-the-middle ploy, a clever attacker can read all of the
+string data shipped to and from the server. By knowing the
+<span>Derby</span> wire protocol, a clever
+attacker can read numeric data too. Even worse, the man-in-the-middle can change
+the data while it is traveling between the client and the server.</p>
+
+<p>Fortunately, <span>Derby</span> can
+encrypt network traffic using the SSL/TLS (Secure Socket Layer/Transport Layer
+Security) logic supplied with the virtual machine. As a side effect, SSL/TLS
+raises an extra authentication hurdle too, involving
+<em>peer authentication</em>.</p>
+
+<p>The term <em>peer</em> is used for the other part of the server-client
+communication: the server's peer is the client, and the client's peer is the
+server.</p>
+
+<p>SSL/TLS for <span>Derby</span> (both
+for client and for server) operates in three possible modes:</p>
+
+<dl>
+
+<dt class="dlterm">off</dt>
+
+<dd>The default, no SSL/TLS encryption</dd>
+
+
+
+<dt class="dlterm">basic</dt>
+
+<dd>SSL/TLS encryption, no peer authentication</dd>
+
+
+
+<dt class="dlterm">peerAuthentication</dt>
+
+<dd>SSL/TLS encryption and peer authentication</dd>
+
+
+</dl>
+
+<p>Peer authentication may be set on the server, on the client, or on both. Peer
+authentication means that the other side of the SSL/TLS connection is
+authenticated based on a trusted certificate installed locally.</p>
+
+<p>Before using this encryption technology, you will want to familiarize
+yourself with SSL/TLS concepts such as key pairs and certificates, and with the
+JDK's <samp class="codeph">keytool</samp> application. You can find useful overviews of
+SSL/TLS at Apache and Wikipedia
+(<a href="http://httpd.apache.org/docs/2.0/ssl/ssl_intro.html" target="_blank">http://httpd.apache.org/docs/2.0/ssl/ssl_intro.html</a> and
+<a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer" target="_blank">http://en.wikipedia.org/wiki/Secure_Sockets_Layer</a>, respectively). You can find <samp class="codeph">keytool</samp>
+documentation for Unix and for Windows at <a href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html" target="_blank">http://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html</a> and <a href="http://docs.oracle.com/javase/8/docs/technotes/tools/windows/keytool.html" target="_blank">http://docs.oracle.com/javase/8/docs/technotes/tools/windows/keytool.html</a>, respectively.</p>
+
+<p>Network encryption requires the following setup steps:</p>
+
+<ol>
+<li><strong>Client certificates:</strong> Each client must generate a client key pair and
+certificate. The client certificates must be loaded into the server's trust
+store.</li>
+
+<li><strong>Server certificate:</strong> The server must generate a server key pair and
+certificate. All of the clients must load the server's certificate into their
+respective trust stores.</li>
+
+<li><strong>Server startup:</strong> The server must be booted with system properties and a
+startup option that turn on SSL/TLS encryption.</li>
+
+<li><strong>Client startup:</strong> The client must be started with system properties that turn
+on SSL/TLS encryption. In addition, an extra attribute is added to the JDBC
+connection URL.</li>
+
+</ol>
+
+<p>To use SSL/TLS to encrypt
+<span>Derby</span>'s network traffic, the
+client must have a key store for holding its own public/private key pair. The
+client must also have a trust store for holding the server's certificate. If the
+key store and trust store do not already exist, the <samp class="codeph">keytool</samp>
+program will create them. Suppose that the client stores its public/private key
+pair in <samp class="codeph">~/vault/ClientKeyStore</samp>, and suppose that the client
+stores certificates from other systems in
+<samp class="codeph">~/vault/ClientTrustStore</samp>.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="tsecsslclientkeycert.html">Creating a client key pair and certificate</a></strong><br />
+Follow these steps to create a client key pair and a client certificate.</li>
+<li class="ulchildlink"><strong><a href="tsecsslserverkeycert.html">Creating a server key pair and certificate</a></strong><br />
+Follow these steps to create a server key pair and a server certificate.</li>
+<li class="ulchildlink"><strong><a href="tsecsslimportcerts.html">Importing certificates</a></strong><br />
+Follow these steps to import each certificate into the other's trust store.</li>
+<li class="ulchildlink"><strong><a href="csecsslbootconn.html">Booting the server and connecting to it</a></strong><br />
+Finally, boot the server and start the client.</li>
+<li class="ulchildlink"><strong><a href="csecsslkeys.html">Key and certificate handling</a></strong><br />
+For SSL operation, the server always needs a key pair. If the server runs in peer authentication mode (the server authenticates the clients), each client needs its own key pair. In general, if one end of the communication wants to authenticate its partner, the first end needs to install a certificate generated by the partner.</li>
+<li class="ulchildlink"><strong><a href="csecsslserver.html">Starting the server with SSL/TLS</a></strong><br />
+For server SSL/TLS, a server key pair needs to be generated. If the server is going to do client authentication, the client certificates need to be installed in the trust store.</li>
+<li class="ulchildlink"><strong><a href="csecsslclient.html">Running the client with SSL/TLS</a></strong><br />
+Basic SSL encryption on the client is enabled either by the URL attribute ssl, the property ssl, or the datasource attribute ssl set to basic.</li>
+<li class="ulchildlink"><strong><a href="csecssladmin.html">Other server commands</a></strong><br />
+The other server commands (shutdown, ping, sysinfo, runtimeinfo, logconnections, maxthreads, timeslice, trace, and tracedirectory) are implemented as clients, and they behave exactly as clients with regards to SSL.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cseccsecuree.html" title="This part of the manual describes the specific tasks involved in securing Derby databases.">Part Two: Configuring security for Derby</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cseccsecure12392.html" title="In most cases, you enable Derby security features through the use of properties. It is important to understand the best way to set properties for your environment.">Basic security configuration tasks</a></div>
+<div><a href="cseccsecure24366.html" title="Derby provides a way for you to encrypt your data on disk.">Configuring database encryption</a></div>
+<div><a href="cseccsecure90988.html" title="In a Java SE environment, Derby can detect digital signatures on jar files. When attempting to load a class from a signed jar file stored in the database, Derby will verify the validity of the signature.">Using signed jar files</a></div>
+<div><a href="cseccsecureidentity.html" title="Derby provides two kinds of identity, system-wide identity and database-specific identity.">Understanding identity in Derby</a></div>
+<div><a href="cseccsecure42374.html" title="By default, Derby runs without any credentials checking. This situation may be fine for many shrink-wrapped, embedded applications. However, it means that anyone can connect to an unsecured database and steal or corrupt the data there. Fortunately, it's easy to frustrate these attacks by requiring authentication.">Configuring user authentication</a></div>
+<div><a href="csecauthorization.html" title="While authentication determines whether someone is a legal database user, authorization determines what operations can be performed by a user's identity.">Configuring user authorization</a></div>
+<div><a href="csecjavasecurity.html" title="The Java security manager lets you reduce the damage that your application can do.">Configuring Java security</a></div>
+<div><a href="csecnetservfileperms.html" title="Additional file protections are available on some file systems, including Windows NTFS, Unix, and Linux. If you are running a Java 7 or higher VM, you can configure Derby to take advantage of these extra file protections.">Restricting file permissions</a></div>
+<div><a href="csecputtogether.html" title="This section shows how to enable all available Derby defenses.">Putting it all together</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="Using the rawDBReader optional tool" />
+<meta name="abstract" content="The rawDBReader optional tool creates functions and views, which can be used to extract data out of a corrupt or unbootable database into a new, healthy database." />
+<meta name="description" content="The rawDBReader optional tool creates functions and views, which can be used to extract data out of a corrupt or unbootable database into a new, healthy database." />
+<meta content="optional tools, rawDBReader, rawDBReader optional tool, tools" name="DC.subject" />
+<meta content="optional tools, rawDBReader, rawDBReader optional tool, tools" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="ctoolsopttools.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptdbmetadata.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptforeignviews.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptlucene.html" />
+<meta scheme="URI" name="DC.Relation" content="rtoolsoptsimplejson.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rtoolsoptdbreader" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using the rawDBReader optional tool</title>
+</head>
+<body id="rtoolsoptdbreader"><a name="rtoolsoptdbreader"><!-- --></a>
+
+
+<h1 class="topictitle1">Using the rawDBReader optional tool</h1>
+
+
+
+<div><p>The <samp class="codeph">rawDBReader</samp> optional tool creates functions
+and views, which can be used to extract data out of a corrupt or unbootable database
+into a new, healthy database.</p>
+
+<div class="section"><h2 class="sectiontitle">Overview</h2>
+
+
+<p>
+Derby is a stable, well-tested database engine. Nevertheless, it is possible for a Derby database to become corrupt.
+If a Derby database becomes corrupt but remains bootable (for instance, a single index becomes inconsistent),
+then the damage may be located by querying the <samp class="codeph">SYSCS_UTIL.SYSCS_CHECK_TABLE</samp>
+system table function and the damage may be repaired by running the <samp class="codeph">SYSCS_UTIL.SYSCS_COMPRESS_TABLE</samp>
+system procedure. These tools are documented in the <em>Derby Developer's Guide</em>.
+</p>
+
+
+<p>
+However, if the database is unbootable, then the best approach is to restore the database from a recent backup.
+If a backup isn't available, then you may be able to extract some data out of the corrupt database
+by using the <samp class="codeph">rawDBReader</samp> optional tool. The <samp class="codeph">rawDBReader</samp> tool is not guaranteed to
+retrieve all of the data. In some situations, the tool may retrieve data which was deleted before
+the database became unbootable. The <samp class="codeph">rawDBReader</samp> optional tool
+is a last resort to salvage something.
+</p>
+
+
+<p>
+When running the <samp class="codeph">rawDBReader</samp> tool, you will work with two databases. Both of these databases
+must be on the machine where you are running the tool.
+</p>
+
+
+<ul>
+<li><strong>corruptDB</strong> - This is the corrupt or unbootable database whose data you are trying to salvage.</li>
+
+<li><strong>healthyDB</strong> - This is a new database which you create in order to hold the retrieved data.</li>
+
+</ul>
+
+
+<p>
+The rawDBReader tool works by copying all of your user data from the corrupt database into
+a totally separate, healthy database. Each table in the corrupt database will be copied to
+a fresh table in the healthy database. The healthy target table will have the same schema name, the same table name,
+and the same column names as the original, corrupt table.
+</p>
+
+
+<p>
+There are three steps to using <samp class="codeph">rawDBReader</samp>:
+</p>
+
+
+<ul>
+<li><strong>load</strong> - You call <em>SYSCS_REGISTER_TOOL</em> with
+arguments specific to your situation. This will prepare
+the healthy database to accept data from the
+corrupt database. This will also generate a text
+file containing a series of commands. This is the recovery script.</li>
+
+<li><strong>extract</strong> - You then run the recovery script in order to
+retrieve your data from the corrupt database and copy the data into the healthy database.</li>
+
+<li><strong>unload</strong> - Finally, you can remove the tool via another call
+to <em>SYSCS_REGISTER_TOOL</em>.</li>
+
+</ul>
+
+
+<p>
+These steps are described in greater detail below.
+</p>
+
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Loading the tool</h2>
+
+
+<p>
+To run the <samp class="codeph">rawDBReader</samp> tool, you must be
+signed on to the machine where the corrupt database
+resides. Your classpath must contain <em>derby.jar</em>, <em>derbytools.jar</em>, and
+<em>derbyoptionaltools.jar</em>.
+</p>
+
+
+<p>
+To load the <samp class="codeph">rawDBReader</samp> tool, connect to the healthy database and issue the following statement:
+</p>
+
+
+<pre><strong>
+call syscs_util.syscs_register_tool
+(
+  'rawDBReader',
+  true,
+  $recoveryScript,
+  $controlSchema,
+  $schemaPrefix,
+  $corruptDBPath,
+  $corruptEncryptionAttributes,
+  $corruptDatabaseOwner,
+  $corruptDatabaseOwnerPassword
+);
+</strong></pre>
+
+
+<p>Where the arguments have these meanings:</p>
+
+
+<ul>
+<li><strong>$recoveryScript</strong> - The name of a file into which a recovery script will be written.</li>
+
+<li><strong>$controlSchema</strong> - The name of a schema which will be created in the healthy database and which will hold
+table functions and views for querying the core catalogs of the corrupt database.</li>
+
+<li><strong>$schemaPrefix</strong> - A string which will be prefixed to the names of user schemas which will be created in the
+healthy database. For every schema in the corrupt database, a corresponding schema will be created in the healthy database.
+These schemas will hold functions and views which can be used to extract data out of the corrupt database.</li>
+
+<li><strong>$corruptDBPath</strong> - The file path to the corrupt database directory.</li>
+
+<li><strong>$corruptEncryptionAttributes</strong> - The encryption directives with which the corrupt database was created. May be null.</li>
+
+<li><strong>$corruptDatabaseOwner</strong> - The name of the owner of the corrupt database.</li>
+
+<li><strong>$corruptDatabaseOwnerPassword</strong> - The password of the owner of the corrupt database. May be null.</li>
+
+</ul>
+
+
+<p>
+The schema prefix is just a tag which helps the tool create unique schema names that won't conflict
+with the names of user schemas. The control schema is a separate schema whose name should not conflict with
+any user schemas. If the corrupt database has the following user schemas...
+</p>
+
+
+<pre><strong>
+S1
+S2
+</strong></pre>
+
+
+<p>
+...then the healthy database will have the following schemas after loading the <samp class="codeph">rawDBReader</samp> tool
+and after running the recovery script:
+</p>
+
+
+<pre><strong>
+S1
+S2
+$controlSchema
+$schemaPrefixS1
+$schemaPrefixS2
+</strong></pre>
+
+
+<p>
+For instance, if the corrupt database was created without encryption and without specifying a database owner,
+then the following command would load  the <samp class="codeph">rawDBReader</samp> optional tool:
+</p>
+
+
+<pre><strong>
+call syscs_util.syscs_register_tool
+(
+  'rawDBReader',
+  true,
+  'recoverMyData.sql',
+  'CONTROL',
+  'BAD_',
+  'tmpdbs/corruptDB',
+  null,
+  'APP',
+  null
+);
+</strong></pre>
+
+
+<p>
+If, on the other hand, the corrupt database was created with encryption and with credentials for a database owner,
+then you would load the tool with a command like the following statement:
+</p>
+
+
+<pre><strong>
+call syscs_util.syscs_register_tool
+(
+  'rawDBReader',
+  true,
+  'recoverMyData.sql',
+  'CONTROL',
+  'BAD_',
+  'tmpdbs/corruptDB',
+  'bootPassword=DBpassword',
+  'dbo',
+  'DBO_password'
+);
+</strong></pre>
+
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Running the recovery script</h2>
+
+
+<p>
+Loading the tool will write a recovery script containing statements which will create schemas and tables in the
+healthy database. The schemas and tables correspond to the user schemas and tables in the corrupt database. The script will also
+contain statements which extract data out of the corrupt tables into their healthy counterparts. Here's a
+sample recovery script:
+</p>
+
+
+<pre><strong>
+connect 'jdbc:derby:tmpdbs/healthyDB';
+
+create schema "S1";
+
+-- siphon data out of c490.dat
+create table "S1"."T1" as select * from "BAD_S1"."T1" with no data;
+insert into "S1"."T1" select * from "BAD_S1"."T1";
+
+create schema "S2";
+
+-- siphon data out of c4a0.dat
+create table "S1"."T2" as select * from "BAD_S1"."T2" with no data;
+insert into "S1"."T2" select * from "BAD_S1"."T2";
+
+-- siphon data out of c4b0.dat
+create table "S2"."T1" as select * from "BAD_S2"."T1" with no data;
+insert into "S2"."T1" select * from "BAD_S2"."T1";
+
+-- siphon data out of c4c0.dat
+create table "S2"."T2" as select * from "BAD_S2"."T2" with no data;
+insert into "S2"."T2" select * from "BAD_S2"."T2";
+</strong></pre>
+
+
+</div>
+
+
+<div class="section"><h2 class="sectiontitle">Unloading the tool</h2>
+
+
+<p>
+You can unload the tool after you have run the recovery script and copied data out of
+the corrupt database into the healthy database. Note that you must specify the same control schema and schema prefix
+which you specified when you loaded the tool:
+</p>
+
+
+<pre><strong>
+call syscs_util.syscs_register_tool
+(
+  'rawDBReader',
+  false,
+  'CONTROL',
+  'BAD_'
+);
+</strong></pre>
+
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="ctoolsopttools.html" title="">Optional tools</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rtoolsoptdbmetadata.html" title="The databaseMetaData optional tool creates functions and table functions corresponding to most of the methods in the java.sql.DatabaseMetaData interface.">Using the databaseMetaData optional tool</a></div>
+<div><a href="rtoolsoptforeignviews.html" title="The foreignViews optional tool creates schemas, table functions, and convenience views for all user tables in a foreign database. This can be useful for bulk-importing foreign data.">Using the foreignViews optional tool</a></div>
+<div><a href="rtoolsoptlucene.html" title="The luceneSupport plugin is an optional tool that lets you use Apache Lucene to perform full-text indexing and searching of the contents of Derby text columns.">Using the luceneSupport optional tool</a></div>
+<div><a href="rtoolsoptsimplejson.html" title="The simpleJson optional tool creates functions and a user-defined type, which can be used to integrate relational data with data represented in the popular JSON format.">Using the simpleJson optional tool</a></div>
+</div>
+</div>
+
+</body>
+</html>

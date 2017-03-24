@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="EXTERNAL NAME clause" />
+<meta name="abstract" content="The EXTERNAL NAME clause specifies the Java method to be called in a CREATE FUNCTION or CREATE PROCEDURE statement, and it specifies a Java class in a CREATE AGGREGATE or CREATE TYPE statement." />
+<meta name="description" content="The EXTERNAL NAME clause specifies the Java method to be called in a CREATE FUNCTION or CREATE PROCEDURE statement, and it specifies a Java class in a CREATE AGGREGATE or CREATE TYPE statement." />
+<meta content="EXTERNAL NAME clause" name="DC.subject" />
+<meta content="EXTERNAL NAME clause" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefclauses.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefsqljexternalname" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>EXTERNAL NAME clause</title>
+</head>
+<body id="rrefsqljexternalname"><a name="rrefsqljexternalname"><!-- --></a>
+
+
+<h1 class="topictitle1">EXTERNAL NAME clause</h1>
+
+
+
+<div><p>The EXTERNAL NAME clause specifies the Java method to be called in a
+CREATE FUNCTION or CREATE PROCEDURE statement, and it specifies a Java class in
+a CREATE AGGREGATE or CREATE TYPE statement.</p>
+
+<div class="section">
+<p>See <a href="rrefcreatefunctionstatement.html">CREATE FUNCTION statement</a>,
+<a href="rrefcreateprocedurestatement.html">CREATE PROCEDURE statement</a>,
+<a href="rrefsqljcreateaggregate.html">CREATE DERBY AGGREGATE statement</a>, and
+<a href="rrefsqljcreatetype.html">CREATE TYPE statement</a> for more information.</p>
+
+</div>
+
+<div class="section"><h2 class="sectiontitle">Syntax</h2>
+<pre><strong>EXTERNAL NAME <em>singleQuotedString</em></strong></pre>
+
+<p>The <em>singleQuotedString</em> cannot have any extraneous spaces.</p>
+
+<p>The method name specified in the CREATE FUNCTION or CREATE PROCEDURE
+statement normally takes the following form:</p>
+
+<pre><strong>'<em>class_name</em>.<em>method_name</em>[(<em>parameterTypes</em>)]'</strong></pre>
+
+<p>The optional <em>parameterTypes</em> specification is needed when the Java signature determined from the SQL declaration is ambiguous.</p>
+
+<p>If the class is a static nested class, or if the method is in a static nested
+class, use a dollar sign ($) as a separator between the outer and static class.
+For example, suppose you have the following class and method definition:</p>
+
+<pre><strong>public class TestFuncs {
+    public static final class MyMath {
+        public static double pow( double base, double power ) {
+            return Math.pow( base, power );
+        }
+    }
+}</strong></pre>
+
+<p>If you use CREATE FUNCTION to bind this <em>pow</em> method to a user-defined
+function, the external name should be <em>TestFuncs$MyMath.pow</em>, not
+<em>TestFuncs.MyMath.pow</em>.</p>
+
+</div>
+
+<div class="example"><h2 class="sectiontitle">Examples</h2>
+<pre><strong>-- Specify the Mode class as an external name
+CREATE DERBY AGGREGATE mode FOR INT
+EXTERNAL NAME 'com.example.myapp.aggs.Mode';</strong></pre>
+
+<pre><strong>-- Specify the pow method in the static class MyMath
+CREATE FUNCTION MYPOWER ( X DOUBLE, Y DOUBLE )
+RETURNS DOUBLE
+PARAMETER STYLE JAVA
+NO SQL LANGUAGE JAVA
+EXTERNAL NAME 'TestFuncs$MyMath.pow'</strong></pre>
+
+<pre><strong>-- create a function to round a Double to a specified number of decimal places
+CREATE FUNCTION DoubleFormat (value FLOAT, places INTEGER)
+RETURNS FLOAT
+PARAMETER STYLE JAVA
+LANGUAGE JAVA
+EXTERNAL NAME
+'utils.Utils.Double(java.lang.Float,java.lang.Integer)'
+</strong></pre>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefclauses.html" title="">SQL clauses</a></div>
+</div>
+</div>
+
+</body>
+</html>

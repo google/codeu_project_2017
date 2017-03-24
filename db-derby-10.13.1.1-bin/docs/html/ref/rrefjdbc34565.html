@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.DriverManager.getConnection method" />
+<meta name="abstract" content="A Java application that uses the JDBC API establishes a connection to a database by obtaining a Connection object. The standard way to obtain a Connection object is to call the method DriverManager.getConnection, which takes a String that contains a database connection URL." />
+<meta name="description" content="A Java application that uses the JDBC API establishes a connection to a database by obtaining a Connection object. The standard way to obtain a Connection object is to call the method DriverManager.getConnection, which takes a String that contains a database connection URL." />
+<meta content="java.sql.DriverManager.getConnection method" name="DC.subject" />
+<meta content="java.sql.DriverManager.getConnection method" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="crefjdbc12657.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc32052.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27734.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc15905.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc40794.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20485.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc29874.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc23502.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc38274.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc16643.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc30469.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcrefsqlxml.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbcjavasqlsavepoint.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc20377.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_1summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_2summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc1020262.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc27433.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc37352.html" />
+<meta scheme="URI" name="DC.Relation" content="crefjavgcasyn.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc10889.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc34565" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.DriverManager.getConnection method</title>
+</head>
+<body id="rrefjdbc34565"><a name="rrefjdbc34565"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.DriverManager.getConnection method</h1>
+
+
+
+<div><p>A Java application that uses the JDBC API establishes a connection to
+a database by obtaining a <em>Connection</em> object. The standard way to obtain a
+<em>Connection</em> object is to call the method
+<em>DriverManager.getConnection</em>, which takes a <em>String</em> that contains a
+database connection URL.</p>
+
+<div class="section"><p>A JDBC database connection URL (uniform resource locator) provides a
+way of identifying a database.</p>
+</div>
+
+<div class="section"><p><em>DriverManager.getConnection</em> can take one argument besides
+a database connection URL, a <em>Properties</em> object. You can use the <em>Properties</em> object
+to set database connection URL attributes. If you specify any attributes both on
+the connection URL and in a <em>Properties</em> object, the attributes on the
+connection URL override the attributes in the <em>Properties</em> object.</p>
+</div>
+
+<div class="section"><p>You
+can also supply strings representing user names and passwords. When they are
+supplied, <span>Derby</span> checks
+whether they are valid for the current system if user authentication is enabled.
+User names are passed to <span>Derby</span> as
+authorization identifiers, which are used to determine whether the user is
+authorized for access to the database and for determining the default schema.
+When the connection is established, if no user is supplied, <span>Derby</span> sets
+the default user to <em>APP</em>, which <span>Derby</span> uses
+to name the default schema. If a user is supplied, the default schema is the
+same as the user name.</p>
+</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="rrefjdbc27433.html">Derby database connection URL syntax</a></strong><br />
+A Derby database connection URL consists of the basic database connection URL followed by an optional subsubprotocol and optional attributes.</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc37352.html">Syntax of database connection URLs for applications with embedded databases</a></strong><br />
+For applications with embedded databases, the syntax of the database connection URL is as follows.</li>
+<li class="ulchildlink"><strong><a href="crefjavgcasyn.html">Additional SQL syntax</a></strong><br />
+Derby also supports the following SQL standard syntax to obtain a reference to the current connection in a database-side JDBC routine.</li>
+<li class="ulchildlink"><strong><a href="rrefjdbc10889.html">Attributes of the Derby database connection URL</a></strong><br />
+You can supply an optional list of attributes to a database connection URL.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="crefjdbc12657.html" title="This section provides reference information about Derby's implementation of the Java Database Connectivity (JDBC) API and documents the way it conforms to the JDBC APIs.">JDBC reference</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc32052.html" title="The class that loads Derby's local JDBC driver is the class org.apache.derby.jdbc.EmbeddedDriver. The class that loads Derby's network client driver is the class org.apache.derby.jdbc.ClientDriver.">java.sql.Driver interface</a></div>
+<div><a href="rrefjdbc27734.html" title="A Derby Connection object is not garbage-collected until all other JDBC objects created from that connection are closed or are themselves garbage-collected.">java.sql.Connection interface</a></div>
+<div><a href="rrefjdbc15905.html" title="Derby implements the java.sql.DatabaseMetaData interface.">java.sql.DatabaseMetaData interface</a></div>
+<div><a href="rrefjdbc40794.html" title="Derby does not implement the setEscapeProcessing method of java.sql.Statement. In addition, the cancel method raises a &quot;Feature not supported&quot; exception.">java.sql.Statement interface</a></div>
+<div><a href="rrefjdbc20485.html" title="Derby supports all methods of CallableStatement except setBlob, getBlob, setClob, and getClob.">java.sql.CallableStatement interface</a></div>
+<div><a href="rrefjdbc29874.html" title="Derby provides all the required JDBC type conversions and additionally allows use of the individual setXXX methods for each type as if a setObject(Value, JDBCTypeCode) invocation were made.">java.sql.PreparedStatement interface</a></div>
+<div><a href="rrefjdbc23502.html" title="A positioned update or delete issued against a cursor being accessed through a ResultSet object modifies or deletes the current row of the ResultSet object.">java.sql.ResultSet interface</a></div>
+<div><a href="rrefjdbc38274.html" title="Derby does not track the source or updatability of columns in ResultSets, and so always returns the constants shown for the methods listed in the following table.">java.sql.ResultSetMetaData interface</a></div>
+<div><a href="rrefjdbc16643.html" title="Derby supplies values for the getMessage, getSQLState, and getErrorCode calls of SQLException.">java.sql.SQLException class</a></div>
+<div><a href="rrefjdbc30469.html" title="Derby can generate a warning in certain circumstances. A warning is generated if, for example, you try to connect to a database with the create attribute set to true if the database already exists.">java.sql.SQLWarning class</a></div>
+<div><a href="rrefjdbcrefsqlxml.html" title="The java.sql.SQLXML interface is the mapping for the SQL XML data type. However, Derby defines the XML data type and operators only in the SQL layer. There is no JDBC-side support for the XML data type and operators.">java.sql.SQLXML interface</a></div>
+<div><a href="rrefjdbcjavasqlsavepoint.html" title="The Savepoint interface contains methods to set, release, or roll back a transaction to designated savepoints. Once a savepoint has been set, the transaction can be rolled back to that savepoint without affecting preceding work.">java.sql.Savepoint interface</a></div>
+<div><a href="rrefjdbc20377.html" title="In Derby, the java.sql.Types are mapped to SQL data types.">Mapping of java.sql.Types to SQL types</a></div>
+<div><a href="rrefjdbc4_1summary.html" title="JDBC 4.1 added some functionality to the core API. This section documents the JDBC 4.1 features supported by Derby.">Features supported on JDBC 4.1 and above</a></div>
+<div><a href="rrefjdbc4_2summary.html" title="JDBC 4.2 adds some functionality to the core API. This section documents the JDBC 4.2 features supported by Derby.">JDBC 4.2-only features</a></div>
+<div><a href="rrefjdbc1020262.html" title="JDBC provides a way of smoothing out some of the differences in the ways different DBMS vendors implement SQL. This is called escape syntax.">JDBC escape syntax</a></div>
+</div>
+</div>
+
+</body>
+</html>

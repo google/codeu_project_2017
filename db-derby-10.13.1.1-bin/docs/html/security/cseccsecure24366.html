@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Configuring database encryption" />
+<meta name="abstract" content="Derby provides a way for you to encrypt your data on disk." />
+<meta name="description" content="Derby provides a way for you to encrypt your data on disk." />
+<meta content="database encryption, databases, encrypting" name="DC.subject" />
+<meta content="database encryption, databases, encrypting" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecuree.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure12392.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure90988.html" />
+<meta scheme="URI" name="DC.Relation" content="csecssl.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecureidentity.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure42374.html" />
+<meta scheme="URI" name="DC.Relation" content="csecauthorization.html" />
+<meta scheme="URI" name="DC.Relation" content="csecjavasecurity.html" />
+<meta scheme="URI" name="DC.Relation" content="csecnetservfileperms.html" />
+<meta scheme="URI" name="DC.Relation" content="csecputtogether.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure96815.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecure97760.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cseccsecure24366" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Configuring database encryption</title>
+</head>
+<body id="cseccsecure24366"><a name="cseccsecure24366"><!-- --></a>
+
+
+<h1 class="topictitle1">Configuring database encryption</h1>
+
+
+
+<div><p><span>Derby</span> provides
+a way for you to encrypt your data on disk.</p>
+
+<p>By default, <span>Derby</span> stores
+its data unencrypted in ordinary operating system files. An attacker who can
+view those files can simply type them out, exposing all sorts of data stored in
+string columns. Knowing
+<span>Derby</span>'s file formats, a
+clever attacker could even view numeric data stored in those files. Even worse,
+a clever attacker could change the data itself.</p>
+
+<p>Fortunately, <span>Derby</span> can
+encrypt databases. On a shared machine, that helps protect data from other
+users, including disgruntled or curious superusers. Encryption helps protect
+private financial data from thieves who physically steal your laptop.</p>
+
+<p>Before encrypting a database, you need to make two choices:</p>
+
+<ul>
+<li>A <strong>boot password</strong>: This is the password that unlocks your encrypted
+data when you want to use it.</li>
+
+<li>An <strong>encryption algorithm</strong>: This is a transformation name as described
+in the API documentation for the <samp class="codeph">javax.crypto.Cipher</samp> class.
+<span>Derby</span> encryption relies on
+the JCE libraries supplied with the virtual machine. For more information on
+those libraries, see the <cite>Java Cryptography Architecture (JCA) Reference
+Guide</cite> (<a href="http://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec.html" target="_blank">http://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec.html</a>).</li>
+
+</ul>
+
+<p>Here is a <samp class="codeph">ij</samp> command that creates an encrypted
+database. Notice the additional attributes in bold on the database creation URL:
+<samp class="codeph">dataEncryption</samp>, <samp class="codeph">encryptionAlgorithm</samp>, and
+<samp class="codeph">bootPassword</samp>. The URL string must be all on one line.</p>
+
+<pre>connect 'jdbc:derby:myEncryptedDatabaseName;create=true;
+<strong>dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;
+bootPassword=mySuperSecretBootPassword</strong>';
+</pre>
+
+<p>Once you have created an encrypted database, you can work in it. After you
+shut down the encrypted database, you can reconnect to it by simply supplying
+your boot password in the connection URL, as shown in the following 
+<samp class="codeph">ij</samp> command:</p>
+
+<pre>connect 'jdbc:derby:myEncryptedDatabaseName;
+<strong>bootPassword=mySuperSecretBootPassword</strong>';</pre>
+
+<p>Keep in mind that by booting a database with its boot password, you unlock
+the database for the lifetime of the virtual machine. This means that other
+threads can connect to the database without supplying the boot password. This
+situation lasts until the database is explicitly shut down or the virtual
+machine exits. For a single-user, shrink-wrapped application, this is generally
+not a problem. However, for a multi-user application, you need to take steps to
+keep the data secure during the various stages of working with the database:</p>
+
+<ol>
+<li><strong>Unlocking the database</strong>: The boot password is used to initially
+unlock encrypted data. Once the Database Owner has unlocked the database, other
+users can connect to it without supplying the boot password.</li>
+
+<li><strong>Working with the database</strong>: For that reason, you should configure
+<span>Derby</span> authorization
+(see below) to restrict the users who may access the unlocked data.</li>
+
+<li><strong>Relocking the database</strong>: To relock your data, simply shut down the
+database.</li>
+
+</ol>
+
+<p>The following sections provide detailed information about database
+encryption.</p>
+
+<div class="note"><span class="notetitle">Note: </span>Jar files stored in a database are not encrypted.</div>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cseccsecure96815.html">Requirements for Derby encryption</a></strong><br />
+Derby supports disk encryption and requires an encryption provider.</li>
+<li class="ulchildlink"><strong><a href="cseccsecure97760.html">Working with encryption</a></strong><br />
+This section describes using encryption in Derby.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cseccsecuree.html" title="This part of the manual describes the specific tasks involved in securing Derby databases.">Part Two: Configuring security for Derby</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cseccsecure12392.html" title="In most cases, you enable Derby security features through the use of properties. It is important to understand the best way to set properties for your environment.">Basic security configuration tasks</a></div>
+<div><a href="cseccsecure90988.html" title="In a Java SE environment, Derby can detect digital signatures on jar files. When attempting to load a class from a signed jar file stored in the database, Derby will verify the validity of the signature.">Using signed jar files</a></div>
+<div><a href="csecssl.html" title="By default, network traffic travels in cleartext between Derby clients and servers.">Configuring SSL/TLS</a></div>
+<div><a href="cseccsecureidentity.html" title="Derby provides two kinds of identity, system-wide identity and database-specific identity.">Understanding identity in Derby</a></div>
+<div><a href="cseccsecure42374.html" title="By default, Derby runs without any credentials checking. This situation may be fine for many shrink-wrapped, embedded applications. However, it means that anyone can connect to an unsecured database and steal or corrupt the data there. Fortunately, it's easy to frustrate these attacks by requiring authentication.">Configuring user authentication</a></div>
+<div><a href="csecauthorization.html" title="While authentication determines whether someone is a legal database user, authorization determines what operations can be performed by a user's identity.">Configuring user authorization</a></div>
+<div><a href="csecjavasecurity.html" title="The Java security manager lets you reduce the damage that your application can do.">Configuring Java security</a></div>
+<div><a href="csecnetservfileperms.html" title="Additional file protections are available on some file systems, including Windows NTFS, Unix, and Linux. If you are running a Java 7 or higher VM, you can configure Derby to take advantage of these extra file protections.">Restricting file permissions</a></div>
+<div><a href="csecputtogether.html" title="This section shows how to enable all available Derby defenses.">Putting it all together</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using fine-grained user authorization" />
+<meta name="abstract" content="When the SQL standard authorization mode is enabled, object owners can use the GRANT and REVOKE SQL statements to set the user privileges for specific database objects or for specific SQL actions. They can also use roles to administer privileges." />
+<meta name="description" content="When the SQL standard authorization mode is enabled, object owners can use the GRANT and REVOKE SQL statements to set the user privileges for specific database objects or for specific SQL actions. They can also use roles to administer privileges." />
+<meta content="user authorizations, fine-grained, granting, revoking, PUBLIC, GRANT statement, overview, REVOKE statement, SQL standard authorization mode, invoker rights, versus definer rights, definer rights, versus invoker rights" name="DC.subject" />
+<meta content="user authorizations, fine-grained, granting, revoking, PUBLIC, GRANT statement, overview, REVOKE statement, SQL standard authorization mode, invoker rights, versus definer rights, definer rights, versus invoker rights" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="csecauthorfine.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecureprivileges.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecureroles.html" />
+<meta scheme="URI" name="DC.Relation" content="cseccsecuresqlauthupgrade.html" />
+<meta scheme="URI" name="DC.Relation" content="rseccsecuresqlauthexceptions.html" />
+<meta scheme="URI" name="DC.Relation" content="rseccsecurenativeauthex.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cseccsecuregrantrevokeaccess" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Using fine-grained user authorization</title>
+</head>
+<body id="cseccsecuregrantrevokeaccess"><a name="cseccsecuregrantrevokeaccess"><!-- --></a>
+
+
+<h1 class="topictitle1">Using fine-grained user authorization</h1>
+
+
+
+<div><p>When the SQL standard authorization mode is enabled, object owners
+can use the GRANT and REVOKE SQL statements to set the user privileges for
+specific database objects or for specific SQL actions. They can also use roles
+to administer privileges.</p>
+
+<div class="p">The GRANT statement is used to grant specific privileges to users or to
+roles, or to grant roles to users or to roles. The REVOKE statement is used to
+revoke privileges and role grants. The grant and revoke privileges are:<ul>
+<li>DELETE</li>
+
+<li>EXECUTE</li>
+
+<li>INSERT</li>
+
+<li>SELECT</li>
+
+<li>REFERENCES</li>
+
+<li>TRIGGER</li>
+
+<li>UPDATE</li>
+
+</ul>
+</div>
+
+<p>When a table, view, function, or procedure is created, the person that
+creates the object is referred to as the <em>owner</em> of the object. Only the
+object owner and the <a href="cseccsecuredbowner.html">Database Owner</a>
+have full privileges on the object. No other users have privileges on the
+object until the object owner grants privileges to them.</p>
+
+<p>Another way of saying that privileges on objects belong to the owner is to
+call them <em>definer rights</em>, as opposed to <em>invoker rights</em>. This is
+the terminology used by the SQL standard.</p>
+
+<p>See the <span><em>Derby Reference Manual</em></span> for more information on
+the GRANT and REVOKE statements.</p>
+
+<div class="section"><h2 class="sectiontitle">Public and individual user privileges</h2>
+<p>The object owner can grant and revoke privileges for specific users, for
+specific roles, or for all users.</p>
+
+<p>The keyword PUBLIC is used to specify all users. When PUBLIC is specified,
+the privileges affect all current and future users. The privileges granted
+and revoked to PUBLIC and to individual users or roles are independent. For
+example, suppose that a SELECT privilege on table <samp class="codeph">t</samp> is granted
+to both PUBLIC and to the user <samp class="codeph">harry</samp>. The SELECT privilege is
+later revoked from user <samp class="codeph">harry</samp>, but user <samp class="codeph">harry</samp>
+has access to table <samp class="codeph">t</samp> through the PUBLIC privilege.</p>
+
+<div class="note"><span class="notetitle">Exception: </span>When you create a view, trigger, or
+constraint, <span>Derby</span> first
+checks to determine if you have the required privileges at the user level.
+If you have the user-level privileges, the object is created and is dependent
+on that user-level privilege. If you do not have the required privileges at
+the user level, <span>Derby</span> checks
+to determine if you have the required privileges at the PUBLIC level. If you
+have the PUBLIC level privileges, the object is created and is dependent on
+that PUBLIC level privilege. After the object is created, if the privilege
+on which the object depends is revoked, the object is automatically dropped.
+<span>Derby</span> does not try to
+determine if you have other privileges that can replace the privileges that are
+being revoked. 
+<dl>
+
+<dt class="dlterm">Example 1</dt>
+
+<dd>User <samp class="codeph">zhi</samp> creates table <samp class="codeph">t1</samp> and grants
+SELECT privileges to user <samp class="codeph">harry</samp> on table <samp class="codeph">t1</samp>.
+User <samp class="codeph">zhi</samp> grants SELECT privileges to PUBLIC on table
+<samp class="codeph">t1</samp>. User <samp class="codeph">harry</samp> creates view
+<samp class="codeph">v1</samp> with the statement <samp class="codeph">SELECT * from zhi.t1</samp>.
+The view depends on the user-level privilege that user <samp class="codeph">harry</samp>
+has on <samp class="codeph">t1</samp>. Subsequently, user <samp class="codeph">zhi</samp> revokes
+SELECT privileges from user <samp class="codeph">harry</samp> on table <samp class="codeph">t1</samp>.
+As a result, the view <samp class="codeph">harry.v1</samp> is dropped.</dd>
+
+
+
+<dt class="dlterm">Example 2</dt>
+
+<dd>User <samp class="codeph">anita</samp> creates table <samp class="codeph">t1</samp> and grants
+SELECT privileges to PUBLIC. User <samp class="codeph">harry</samp> creates view
+<samp class="codeph">v1</samp> with the statement <samp class="codeph">SELECT * from anita.t1</samp>.
+The view depends on the PUBLIC level privilege that user <samp class="codeph">harry</samp>
+has on <samp class="codeph">t1</samp>, since user <samp class="codeph">harry</samp> does not have
+user-level privileges on table <samp class="codeph">t1</samp> when he creates the view
+<samp class="codeph">harry.v1</samp>. Subsequently, user <samp class="codeph">anita</samp> grants
+SELECT privileges to user <samp class="codeph">harry</samp> on table
+<samp class="codeph">anita.t1</samp>. The view <samp class="codeph">harry.v1</samp> continues to
+depend on the PUBLIC level privilege that user <samp class="codeph">harry</samp> has on
+<samp class="codeph">t1</samp>. When user <samp class="codeph">anita</samp> revokes SELECT privileges
+from PUBLIC on table <samp class="codeph">t1</samp>, the view <samp class="codeph">harry.v1</samp> is
+dropped.</dd>
+
+
+</dl>
+
+<p>See <a href="cseccsecureprivileges.html">Privileges on views, triggers, constraints, and generated columns</a> for more information.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="csecauthorfine.html" title="You can use fine-grained user authorization, also called SQL standard authorization, to restrict access to specific pieces of data.">Configuring fine-grained user authorization</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cseccsecureprivileges.html" title="Views, triggers, constraints, and generated columns operate with the privileges of the owner of the view, trigger, constraint, or generated column.">Privileges on views, triggers, constraints, and generated columns</a></div>
+<div><a href="cseccsecureroles.html" title="When the SQL standard authorization mode is enabled, object owners can use the SQL roles facility to administer privileges.">Using SQL roles</a></div>
+<div><a href="cseccsecuresqlauthupgrade.html" title="An old, unprotected database can be shielded with authentication and SQL authorization later on.">Upgrading an old database to use SQL standard authorization</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rseccsecuresqlauthexceptions.html" title="SQL exceptions are returned when errors occur with SQL authorization.">SQL standard authorization exceptions</a></div>
+<div><a href="rseccsecurenativeauthex.html" title="This example consists of the program NativeAuthenticationExample.java, which shows how to use Derby's NATIVE user authentication and SQL authorization with either the embedded or the client driver.">NATIVE authentication and SQL authorization example</a></div>
+</div>
+</div>
+
+</body>
+</html>

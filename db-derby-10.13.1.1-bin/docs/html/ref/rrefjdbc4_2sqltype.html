@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="reference" name="DC.Type" />
+<meta name="DC.Title" content="java.sql.SQLType interface" />
+<meta name="abstract" content="JDBC 4.2 introduces a new data type identifier, java.sql.SQLType, to help databases describe data types which do not appear in the ANSI/ISO SQL Standard. Databases which provide non-standard types can provide their own implementations of SQLType." />
+<meta name="description" content="JDBC 4.2 introduces a new data type identifier, java.sql.SQLType, to help databases describe data types which do not appear in the ANSI/ISO SQL Standard. Databases which provide non-standard types can provide their own implementations of SQLType." />
+<meta content="JDBC 4.2, SQLType interface" name="DC.subject" />
+<meta content="JDBC 4.2, SQLType interface" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_2summary.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_2compactprofiles.html" />
+<meta scheme="URI" name="DC.Relation" content="rrefjdbc4_2databasemetadata.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="rrefjdbc4_2sqltype" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>java.sql.SQLType interface</title>
+</head>
+<body id="rrefjdbc4_2sqltype"><a name="rrefjdbc4_2sqltype"><!-- --></a>
+
+
+<h1 class="topictitle1">java.sql.SQLType interface</h1>
+
+
+
+<div><p>JDBC 4.2 introduces a new data type identifier,
+<em>java.sql.SQLType</em>, to help databases describe data types which do not
+appear in the ANSI/ISO SQL Standard. Databases which provide non-standard types
+can provide their own implementations of <em>SQLType</em>.</p>
+
+<div class="section">
+<p>
+JDBC 4.2 also supplies its own implementation, <em>java.sql.JDBCType</em>, which
+provides an enum for each of the type identifiers in <em>java.sql.Types</em>.
+</p>
+<p>
+<span>Derby</span> does not expose any
+datatypes which are not represented by <em>JDBCType</em> enums. Therefore,
+<span>Derby</span> does not need to
+provide its own implementation of <em>SQLType</em>.
+</p>
+<p>
+Overloads with <em>SQLType</em> arguments have been added to a few interfaces,
+alongside the existing methods which take <em>int</em> type identifiers from
+<em>java.sql.Types</em>. The affected interfaces are as follows:
+</p>
+
+<ul>
+<li><em>java.sql.CallableStatement</em></li>
+
+<li><em>java.sql.PreparedStatement</em></li>
+
+<li><em>java.sql.ResultSet</em></li>
+
+</ul>
+
+<p>
+With <span>Derby</span>, these methods
+raise a <em>java.sql.SQLFeatureNotSupportedException</em> (SQLState 0A000) if the
+caller passes in a bad <em>SQLType</em>, which can be either of the following:</p>
+
+<ul>
+<li>A <em>SQLType</em> from a foreign database; that is, a <em>SQLType</em> which is
+not one of the <em>JDBCType</em> enums.</li>
+
+<li>A <em>JDBCType</em> enum whose corresponding <em>int</em> type identifier (from
+<em>java.sql.Types</em>) is not supported by
+<span>Derby</span>. The supported
+<em>int</em> type identifiers are documented in
+<a href="rrefjdbc20377.html#rrefjdbc20377">Mapping of java.sql.Types to SQL types</a> and in the
+<a href="crefsqlj31068.html#crefsqlj31068">Data types</a> section. The
+<em>JDBCType</em> enums have the same names as their corresponding <em>int</em>
+identifiers in <em>java.sql.Types</em>.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="rrefjdbc4_2summary.html" title="JDBC 4.2 adds some functionality to the core API. This section documents the JDBC 4.2 features supported by Derby.">JDBC 4.2-only features</a></div>
+</div>
+<div class="relref"><strong>Related reference</strong><br />
+<div><a href="rrefjdbc4_2compactprofiles.html" title="Derby provides support for Compact Profiles on the Java SE 8 platform by means of a group of JDBC DataSource classes.">JDBC support for Java SE 8 Compact Profiles</a></div>
+<div><a href="rrefjdbc4_2databasemetadata.html" title="Derby implements all of the new metadata methods added by JDBC 4.2.">java.sql.DatabaseMetaData interface: JDBC 4.2 features</a></div>
+</div>
+</div>
+
+</body>
+</html>

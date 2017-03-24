@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="public" name="security" />
+<meta content="index,follow" name="Robots" />
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))' />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Setting Derby properties" />
+<meta name="abstract" content="This section covers the different ways of setting properties." />
+<meta name="description" content="This section covers the different ways of setting properties." />
+<meta content="Configuring Derby, Derby properties, setting" name="DC.subject" />
+<meta content="Configuring Derby, Derby properties, setting" name="keywords" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop34818.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop11108.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop32443.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop16827.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop12821.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop24843.html" />
+<meta scheme="URI" name="DC.Relation" content="cdevsetprop44147.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="cdevsetprop24222" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>Setting Derby properties</title>
+</head>
+<body id="cdevsetprop24222"><a name="cdevsetprop24222"><!-- --></a>
+
+
+<h1 class="topictitle1">Setting Derby properties</h1>
+
+
+
+<div><p>This section covers the different ways of setting
+properties.</p>
+
+</div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="cdevsetprop16827.html">Setting system-wide properties</a></strong><br />
+You can set system-wide properties programmatically (as a command-line option to the JVM when starting the application or within application code) or in the text file derby.properties.</li>
+<li class="ulchildlink"><strong><a href="cdevsetprop12821.html">Setting database-wide properties</a></strong><br />
+Database-wide properties, which affect a single database, are stored within the database itself. This allows different databases within a single Derby system to have different properties and ensures that the properties are correctly retained when a database is moved away from its original system or copied.</li>
+<li class="ulchildlink"><strong><a href="cdevsetprop24843.html">Setting properties in a client/server environment</a></strong><br />
+In a client/server environment, you must set the system properties for the server's system. That means that when you are using the derby.properties file, the file exists in the server's derby.system.home directory. Client applications can set database-wide properties because they are set via SQL statements.</li>
+<li class="ulchildlink"><strong><a href="cdevsetprop44147.html">Making dynamic or static changes to properties</a></strong><br />
+Properties set in the derby.properties file and on the command line of the application that boots Derby are always static, because Derby reads this file and those parameters only at startup.</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="cdevsetprop34818.html" title="This section describes how to use Derby properties.">Working with Derby properties</a></div>
+</div>
+<div class="relconcepts"><strong>Related concepts</strong><br />
+<div><a href="cdevsetprop11108.html" title="Derby lets you configure behavior or attributes of a system, a specific database, or a specific conglomerate (a table or index) through the use of properties.">Properties overview</a></div>
+<div><a href="cdevsetprop32443.html" title="Derby allows you a lot of freedom in configuring your system. This freedom can be confusing if you do not understand how properties work. You also have the option of not setting any properties and instead using the Derby defaults, which are tuned for a single-user embedded system.">Properties case study</a></div>
+</div>
+</div>
+
+</body>
+</html>
