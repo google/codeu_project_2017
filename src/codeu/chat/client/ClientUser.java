@@ -14,15 +14,15 @@
 
 package codeu.chat.client;
 
+import codeu.chat.common.User;
+import codeu.chat.common.Uuid;
+import codeu.chat.util.Logger;
+import codeu.chat.util.TextValidator;
+import codeu.chat.util.store.Store;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
-import codeu.chat.util.Logger;
-import codeu.chat.util.store.Store;
 
 public final class ClientUser {
 
@@ -31,6 +31,7 @@ public final class ClientUser {
   private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
   private final Controller controller;
   private final View view;
+  private final TextValidator validator = new TextValidator();
 
   private User current = null;
 
@@ -46,16 +47,7 @@ public final class ClientUser {
 
   // Validate the username string
   static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    //if alphanumeric
-    } else if(!userName.matches("[a-zA-Z0-9]+")) {
-      clean = false;
-    } else {
-      clean = true;
-    }
-    return clean;
+    return validator.isValidUserName(userName);
   }
 
   public boolean hasCurrent() {
