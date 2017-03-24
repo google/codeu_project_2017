@@ -1,0 +1,16 @@
+Mar 14, 2017 3:22:59 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 14, 2017 3:22:59 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 14, 2017 3:22:59 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 14, 2017 3:22:59 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 14, 2017 3:23:18 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 14, 2017 3:23:18 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 14, 2017 3:23:18 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Aman" UUID=[UUID:100.101.2867846969]
+Mar 14, 2017 3:23:36 PM codeu.chat.ClientMain main
+INFO: chat client has exited.
