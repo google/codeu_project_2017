@@ -14,15 +14,27 @@
 
 package codeu.chat.client.simplegui;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
+import codeu.chat.util.TextValidator;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -138,6 +150,7 @@ public final class UserPanel extends JPanel {
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
     this.add(currentPanel, currentPanelC);
+    TextValidator validator = new TextValidator();
 
     userUpdateButton.addActionListener(new ActionListener() {
       @Override
@@ -163,17 +176,14 @@ public final class UserPanel extends JPanel {
         final String s = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
-        if (s != null && s.length() > 0) {
-          //if alphanumeric
-          if(s.matches("[a-zA-Z0-9]+")) {
-            clientContext.user.addUser(s);
-            UserPanel.this.getAllUsers(listModel);
-          } else {
-            JOptionPane.showMessageDialog(UserPanel.this,
-                "User not created. Alphanumeric characters only, with no spaces. Please try again.",
-                "User Not Created",
-                JOptionPane.ERROR_MESSAGE);
-          }
+        if (validator.isValidUserName(s)) {
+          clientContext.user.addUser(s);
+          UserPanel.this.getAllUsers(listModel);
+        } else {
+          JOptionPane.showMessageDialog(UserPanel.this,
+              "User not created. Alphanumeric characters only, with no spaces. Please try again.",
+              "User Not Created",
+              JOptionPane.ERROR_MESSAGE);
         }
       }
     });
