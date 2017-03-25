@@ -1,4 +1,3 @@
-// Copyright 2017 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -145,13 +144,13 @@ public final class ChatSimpleGui {
 	  JMenuBar topMenuBar = new JMenuBar(); //the menu bar
 	  JMenu topMenuGeneral = new JMenu("General"); //first category of menu
 	  JMenu topMenuColorSelector = new JMenu("Color Selector"); //first category of menu
-	  //JMenuItem topMenuItem = new JMenuItem("How to Use", KeyEvent.VK_F1); 
+	  JMenuItem topMenuItem = new JMenuItem("How to Use"); 
 	  
 	  //adds the How to Use information at the top of this menu bar
-	  topMenuBar.add(topMenuBar); 
+	  topMenuBar.add(topMenuGeneral); 
 	  topMenuBar.add(topMenuColorSelector);
 	  
-	  //topMenuGeneral.add(topMenuItem); 
+	  topMenuGeneral.add(topMenuItem); 
 	  
 	  return topMenuBar; 
   }
