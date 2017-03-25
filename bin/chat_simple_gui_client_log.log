@@ -1,12 +1,12 @@
-Mar 24, 2017 9:33:47 PM codeu.chat.SimpleGuiClientMain main
+Mar 24, 2017 9:36:44 PM codeu.chat.SimpleGuiClientMain main
 INFO: ============================= START OF LOG =============================
-Mar 24, 2017 9:33:47 PM codeu.chat.SimpleGuiClientMain main
+Mar 24, 2017 9:36:44 PM codeu.chat.SimpleGuiClientMain main
 INFO: Starting chat client...
-Mar 24, 2017 9:33:47 PM codeu.chat.SimpleGuiClientMain main
+Mar 24, 2017 9:36:44 PM codeu.chat.SimpleGuiClientMain main
 INFO: Creating client...
-Mar 24, 2017 9:33:47 PM codeu.chat.SimpleGuiClientMain runClient
+Mar 24, 2017 9:36:44 PM codeu.chat.SimpleGuiClientMain runClient
 INFO: Created client
-Mar 24, 2017 9:33:48 PM codeu.chat.client.simplegui.ChatSimpleGui run
+Mar 24, 2017 9:36:45 PM codeu.chat.client.simplegui.ChatSimpleGui run
 SEVERE: Exception in ChatSimpleGui.run
 java.lang.IllegalArgumentException: adding container's parent to itself
 	at java.awt.Container.checkAddToSelf(Container.java:479)
@@ -18,15 +18,15 @@ java.lang.IllegalArgumentException: adding container's parent to itself
 	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
 	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
 
-Mar 24, 2017 9:33:58 PM codeu.chat.SimpleGuiClientMain main
+Mar 24, 2017 9:40:16 PM codeu.chat.SimpleGuiClientMain main
 INFO: ============================= START OF LOG =============================
-Mar 24, 2017 9:33:58 PM codeu.chat.SimpleGuiClientMain main
+Mar 24, 2017 9:40:16 PM codeu.chat.SimpleGuiClientMain main
 INFO: Starting chat client...
-Mar 24, 2017 9:33:58 PM codeu.chat.SimpleGuiClientMain main
+Mar 24, 2017 9:40:16 PM codeu.chat.SimpleGuiClientMain main
 INFO: Creating client...
-Mar 24, 2017 9:33:58 PM codeu.chat.SimpleGuiClientMain runClient
+Mar 24, 2017 9:40:16 PM codeu.chat.SimpleGuiClientMain runClient
 INFO: Created client
-Mar 24, 2017 9:33:58 PM codeu.chat.client.simplegui.ChatSimpleGui run
+Mar 24, 2017 9:40:16 PM codeu.chat.client.simplegui.ChatSimpleGui run
 SEVERE: Exception in ChatSimpleGui.run
 java.lang.IllegalArgumentException: adding container's parent to itself
 	at java.awt.Container.checkAddToSelf(Container.java:479)

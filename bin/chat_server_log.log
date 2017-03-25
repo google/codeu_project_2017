@@ -1,8 +1,29 @@
-Mar 24, 2017 9:33:16 PM codeu.chat.ServerMain main
+Mar 24, 2017 9:36:20 PM codeu.chat.ServerMain main
 INFO: ============================= START OF LOG =============================
-Mar 24, 2017 9:33:16 PM codeu.chat.ServerMain main
+Mar 24, 2017 9:36:20 PM codeu.chat.ServerMain main
+SEVERE: Failed to establish connections
+java.net.BindException: Address already in use (Bind failed)
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387)
+	at java.net.ServerSocket.bind(ServerSocket.java:375)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at java.net.ServerSocket.<init>(ServerSocket.java:128)
+	at codeu.chat.util.connections.ServerConnectionSource.forPort(ServerConnectionSource.java:68)
+	at codeu.chat.ServerMain.main(ServerMain.java:61)
+
+Mar 24, 2017 9:36:32 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Mar 24, 2017 9:36:32 PM codeu.chat.ServerMain main
 INFO: Starting server...
-Mar 24, 2017 9:33:16 PM codeu.chat.ServerMain runServer
+Mar 24, 2017 9:36:32 PM codeu.chat.ServerMain runServer
 INFO: Server object created.
-Mar 24, 2017 9:33:16 PM codeu.chat.ServerMain runServer
+Mar 24, 2017 9:36:32 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Mar 24, 2017 9:40:11 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Mar 24, 2017 9:40:11 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Mar 24, 2017 9:40:11 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Mar 24, 2017 9:40:11 PM codeu.chat.ServerMain runServer
 INFO: Starting hub...
