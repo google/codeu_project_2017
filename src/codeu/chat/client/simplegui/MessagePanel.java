@@ -37,9 +37,6 @@ public final class MessagePanel extends JPanel {
   private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
 
   private final ClientContext clientContext;
-  
-  private JTextField textField = new JTextField(20); //the text field
-   
 
   public MessagePanel(ClientContext clientContext) {
     super(new GridBagLayout());
@@ -73,7 +70,7 @@ public final class MessagePanel extends JPanel {
     // Title bar - current conversation and owner
     final JPanel titlePanel = new JPanel(new GridBagLayout());
     final GridBagConstraints titlePanelC = new GridBagConstraints();
-
+    
     final JPanel titleConvPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     final GridBagConstraints titleConvPanelC = new GridBagConstraints();
     titleConvPanelC.gridx = 0;
@@ -116,9 +113,10 @@ public final class MessagePanel extends JPanel {
     userListScrollPane.setMinimumSize(new Dimension(500, 200));
     userListScrollPane.setPreferredSize(new Dimension(500, 200));
 
-    // Button panel
+    // Button panel and text field
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
+    final JTextField textField = new JTextField(20);
 
     final JButton addButton = new JButton("Send Message");
     buttonPanel.add(textField); //Adds the message box before the "Send Message" button
@@ -178,10 +176,9 @@ public final class MessagePanel extends JPanel {
       }
     });
     
-    //Respond if user enters ENTER
-    
+    //Responds if user enters ENTER or RETURN
     textField.addKeyListener(new KeyListener() {
-    	//If the key typed is ENTER, send the message
+    	@Override
       	public void keyTyped(KeyEvent e) {
       		if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
       			if (!clientContext.user.hasCurrent()) {
@@ -202,13 +199,11 @@ public final class MessagePanel extends JPanel {
       	          }
       	        }
       		}
-      	}
-      
+      	} 
+      	@Override
       	public void keyPressed(KeyEvent e) {}
-    	 
+      	@Override
       	public void keyReleased(KeyEvent e) {}
-      
-      	
       });
     
     // Panel is set up. If there is a current conversation, Populate the conversation list.
