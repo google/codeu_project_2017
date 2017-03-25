@@ -60,48 +60,6 @@ public final class MainGui {
     // Build login panel
     final JPanel loginViewPanel = new LoginPanel(clientContext);
 
-    /*// Build main panels - Users, Conversations, Messages.
-    final JPanel usersViewPanel = new UserPanel(clientContext);
-    usersViewPanel.setBorder(paneBorder());
-    final GridBagConstraints usersViewC = new GridBagConstraints();
-
-    final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
-    messagesViewPanel.setBorder(paneBorder());
-    final GridBagConstraints messagesViewC = new GridBagConstraints();
-
-    // ConversationsPanel gets access to MessagesPanel
-    final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
-    conversationsViewPanel.setBorder(paneBorder());
-    final GridBagConstraints conversationViewC = new GridBagConstraints();
-
-    // Placement of main panels.
-    usersViewC.gridx = 0;
-    usersViewC.gridy = 0;
-    usersViewC.gridwidth = 1;
-    usersViewC.gridheight = 1;
-    usersViewC.fill = GridBagConstraints.BOTH;
-    usersViewC.weightx = 0.3;
-    usersViewC.weighty = 0.3;
-
-    conversationViewC.gridx = 1;
-    conversationViewC.gridy = 0;
-    conversationViewC.gridwidth = 1;
-    conversationViewC.gridheight = 1;
-    conversationViewC.fill = GridBagConstraints.BOTH;
-    conversationViewC.weightx = 0.7;
-    conversationViewC.weighty = 0.3;
-
-    messagesViewC.gridx = 0;
-    messagesViewC.gridy = 1;
-    messagesViewC.gridwidth = 2;
-    messagesViewC.gridheight = 1;
-    messagesViewC.fill = GridBagConstraints.BOTH;
-    messagesViewC.weighty = 0.7;
-
-    mainViewPanel.add(usersViewPanel, usersViewC);
-    mainViewPanel.add(conversationsViewPanel, conversationViewC);
-    mainViewPanel.add(messagesViewPanel, messagesViewC);*/
-
     mainViewPanel.add(loginViewPanel,BorderLayout.CENTER);
 
     mainFrame.add(mainViewPanel);
