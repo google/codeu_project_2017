@@ -8,9 +8,10 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
+import codeu.chat.common.LoginInputCallback;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
-public final class MainGui {
+public final class MainGui implements LoginInputCallback{
 
   private final static Logger.Log LOG = Logger.newLog(MainGui.class);
 
@@ -58,11 +59,19 @@ public final class MainGui {
     final JPanel mainViewPanel = new JPanel(new BorderLayout());
 
     // Build login panel
-    final JPanel loginViewPanel = new LoginPanel(clientContext);
+    final JPanel loginViewPanel = new LoginPanel(clientContext,this);
 
     mainViewPanel.add(loginViewPanel,BorderLayout.CENTER);
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
+  }
+  
+  // Login request callback function 
+  @Override
+  public void onLoginRequest(String username, String pswd){
+    
+    // Login function
+    JOptionPane.showMessageDialog(mainFrame,"User: " + username + "\nPswd: " + pswd);
   }
 }

@@ -5,15 +5,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 import codeu.chat.client.ClientContext;
+import codeu.chat.common.LoginInputCallback;
 
 @SuppressWarnings("serial")
 public final class LoginPanel extends JPanel{
 
     private final ClientContext clientContext;
+    private final LoginInputCallback loginInputCallback;
 
-    public LoginPanel(ClientContext clientContext) {
+    public LoginPanel(ClientContext clientContext, LoginInputCallback loginInputCallback) {
         super();
         this.clientContext = clientContext;
+        this.loginInputCallback = loginInputCallback;
         initialize();
     }
     private void initialize() {
@@ -61,8 +64,8 @@ public final class LoginPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                // Login function here.
-                JOptionPane.showMessageDialog(LoginPanel.this,"User: " + usernameTextField.getText() + "\nPswd: " + passwordTextField.getText());
+                // Login callback
+                loginInputCallback.onLoginRequest(usernameTextField.getText(), passwordTextField.getText());
             }
         });
     }
