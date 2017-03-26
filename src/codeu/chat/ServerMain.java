@@ -16,7 +16,6 @@
 package codeu.chat;
 
 import java.io.IOException;
-import java.util.List;
 
 import codeu.chat.common.Hub;
 import codeu.chat.common.Relay;
@@ -52,17 +51,20 @@ final class ServerMain {
 
     final int myPort = Integer.parseInt(args[2]);
 
-    final RemoteAddress relayAddress = args.length > 3 ?
-                                       RemoteAddress.parse(args[3]) :
+    final int myBroadCastPort = Integer.parseInt(args[3]);
+
+    final RemoteAddress relayAddress = args.length > 4 ?
+                                       RemoteAddress.parse(args[4]) :
                                        null;
 
     try (
         final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
+        final ConnectionSource broadcastSource = ServerConnectionSource.forPort(myBroadCastPort);
         final ConnectionSource relaySource = relayAddress == null ? null : new ClientConnectionSource(relayAddress.host, relayAddress.port)
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, relaySource);
+      runServer(id, secret, serverSource, broadcastSource ,relaySource);
 
     } catch (IOException ex) {
 
@@ -74,13 +76,8 @@ final class ServerMain {
   private static void runServer(Uuid id,
                                 byte[] secret,
                                 ConnectionSource serverSource,
+                                ConnectionSource broadcastSource,
                                 ConnectionSource relaySource) {
-
-
-    try (
-      final ConnectionSource broadCastSource = ServerConnectionSource.forPort(2025)
-    ) {
-
 
 
     BroadCastSystem broadCastSystem = new BroadCastSystem();
@@ -111,7 +108,7 @@ final class ServerMain {
       }
     });
 
-    final Runnable broadcastHub = new BroadCastHub(broadCastSource, new BroadCastHub.Handler() {
+    final Runnable broadcastHub = new BroadCastHub(broadcastSource, new BroadCastHub.Handler() {
       @Override
       public void handle(Connection connection) throws Exception {
 
@@ -138,8 +135,6 @@ final class ServerMain {
 
 
 
-    } catch (IOException exc) {
-      System.out.println("error starting the broadcast hub");
-    }
+
   }
 }

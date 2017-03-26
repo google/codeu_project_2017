@@ -23,6 +23,8 @@ public class BroadCastReceiver extends Thread{
     boolean alive;
     InputStream in;
 
+
+    // A broadcast event will be fired whenever a new broadcast is pushed to the client.
     @FunctionalInterface
     public interface BroadcastEvent { void onBroadcast(Message message); }
 
@@ -48,6 +50,7 @@ public class BroadCastReceiver extends Thread{
                 if (type == NetworkCode.NEW_BROADCAST) {
                     Message message = Message.SERIALIZER.read(in);
                     myResponse.onBroadcast(message);
+                    // todo send a broadcast response to inform server that broadcast was received
                 }
 
                 else if(type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
@@ -81,7 +84,7 @@ public class BroadCastReceiver extends Thread{
         try {
             in.close();
         } catch (IOException exc){
-            // todo error
+            // todo error... there was an error closing the input stream
         }
     }
 

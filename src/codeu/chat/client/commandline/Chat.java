@@ -149,7 +149,6 @@ public final class Chat {
 
       selectConversation(lineScanner);
 
-
     } else if (token.equals("m-add")) {
 
       if (!clientContext.user.hasCurrent()) {
@@ -330,9 +329,7 @@ public final class Chat {
     }
     if (newCurrent != previous) {
       clientContext.conversation.setCurrent(newCurrent);
-      System.out.println("here");
       broadCastReceiver.joinConversation(previous,newCurrent);
-      System.out.println("here2");
       clientContext.conversation.updateAllConversations(true);
     }
   }

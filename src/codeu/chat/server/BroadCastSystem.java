@@ -173,6 +173,7 @@ public class BroadCastSystem {
 
             In that example, client cannot tell which message is for which network code
 
+            **** This issue may also be resolved if the serializers use a bufferedReader instead
             */
 
             try {

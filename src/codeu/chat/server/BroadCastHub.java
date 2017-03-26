@@ -12,6 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+
+/*
+
+    The difference between the BroadCastHub and codeu.chat.common, is that this hub does not close the socket
+    after the connection is handled
+
+
+ */
+
 package codeu.chat.server;
 
 import java.util.concurrent.BlockingQueue;
