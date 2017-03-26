@@ -24,18 +24,18 @@ import java.sql.Statement;
 
 public class Connector {
 
-  Statement myStmt;
-  String tableName = "UserAccount";
-  String dbName = "CodeU_2017DB";
-  String hostname = "ec2-176-34-225-252.eu-west-1.compute.amazonaws.com";
-  String DBusername = "group34";
-  String DBpassword = "codeu2017";
+   private static Statement myStmt;
+   private static String tableName = "UserAccount";
+   private static final String dbName = "CodeU_2017DB";
+   private static final String hostname = "ec2-176-34-225-252.eu-west-1.compute.amazonaws.com";
+   private static final String DBusername = "group34";
+   private static final String DBpassword = "codeu2017";
 
   public Connector() {
     try {
       Connection myConn = DriverManager.getConnection(
-          "jdbc:mysql://"+this.hostname+":3306/"+this.dbName+"?useSSL=false",
-           this.DBusername, this.DBpassword);
+          "jdbc:mysql://" + Connector.hostname + ":3306/" + Connector.dbName + "?useSSL=false",
+          Connector.DBusername, Connector.DBpassword);
       myStmt = myConn.createStatement();
       
     } catch (SQLException ex) {

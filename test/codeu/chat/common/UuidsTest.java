@@ -14,18 +14,17 @@
 
 package codeu.chat.common;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.junit.Test;
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
 
 public final class UuidsTest {
 
   @Test
   public void testValidSingleLink() {
-
     final String string = "100";
-    final Uuid id = Uuids.fromString(string);
+    final codeu.chat.common.Uuid id = codeu.chat.common.Uuids.fromString(string);
 
     assertNotNull(id);
     assertNull(id.root());
@@ -36,7 +35,7 @@ public final class UuidsTest {
   public void testValidMultiLink() {
 
     final String string = "100.200";
-    final Uuid id = Uuids.fromString(string);
+    final codeu.chat.common.Uuid id = codeu.chat.common.Uuids.fromString(string);
 
     assertNotNull(id);
     assertNotNull(id.root());
