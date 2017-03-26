@@ -145,7 +145,6 @@ public class BroadCastSystem {
     public void broadCastMessage(ConversationMessageLink messageLink){
 
 
-        // todo conversation id is not the actual id
         int conversationId = messageLink.conversationUuid.id();
         Message message = messageLink.message;
 
@@ -205,7 +204,6 @@ public class BroadCastSystem {
 
         conversationUsers.put(uid, Collections.synchronizedList(new LinkedList<>()));
 
-        System.out.println("added conversation at id" + uid);
     }
 
 
@@ -231,6 +229,7 @@ public class BroadCastSystem {
 
         int type = Serializers.INTEGER.read(in);
 
+        // When the type is -1, the client has closed the connection.
         if (type == -1) {
             return false;
         }
