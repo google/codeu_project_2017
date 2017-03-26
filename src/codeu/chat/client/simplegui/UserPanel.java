@@ -150,7 +150,7 @@ public final class UserPanel extends JPanel {
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
     this.add(currentPanel, currentPanelC);
-    TextValidator validator = new TextValidator();
+    //TextValidator validator = new TextValidator();
 
     userUpdateButton.addActionListener(new ActionListener() {
       @Override
@@ -176,7 +176,7 @@ public final class UserPanel extends JPanel {
         final String s = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
-        if (validator.isValidUserName(s)) {
+        if (TextValidator.isValidUserName(s)) {
           clientContext.user.addUser(s);
           UserPanel.this.getAllUsers(listModel);
         } else {

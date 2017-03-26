@@ -31,7 +31,7 @@ public final class ClientUser {
   private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
   private final Controller controller;
   private final View view;
-  private final TextValidator validator = new TextValidator();
+  //private final TextValidator validator = new TextValidator();
 
   private User current = null;
 
@@ -47,7 +47,7 @@ public final class ClientUser {
 
   // Validate the username string
   static public boolean isValidName(String userName) {
-    return validator.isValidUserName(userName);
+    return TextValidator.isValidUserName(userName);
   }
 
   public boolean hasCurrent() {
