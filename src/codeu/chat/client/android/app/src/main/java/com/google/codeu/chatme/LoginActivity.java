@@ -21,8 +21,17 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    /**
+     * Progress loader
+     */
     private ProgressDialog mProgressDialog;
 
+    /**
+     * Sets up {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
+     * respond to a change in user's sign-in state
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +52,20 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * Adds {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
+     * {@link FirebaseAuth} which is the entry point to Firebase SDK
+     */
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+    /**
+     * Removes {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} from
+     * {@link FirebaseAuth} if it exists
+     */
     @Override
     protected void onStop() {
         super.onStop();
