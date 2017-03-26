@@ -39,7 +39,7 @@ public class BroadCastReceiver extends Thread{
     public void run() {
 
         try (
-                final Connection myConnection = this.mySource.connect();
+                final Connection myConnection = this.mySource.connect()
         ) {
             in = myConnection.in();
             out = myConnection.out();

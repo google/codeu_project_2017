@@ -71,18 +71,14 @@ public class BroadCastSystem {
              // Connection listener will always listen to this connection until an exception
             // is given off
 
-            while (true) {
+            try {
 
-                try {
-                    handleCommand(myConnection);
+                while (handleCommand(myConnection));
 
-                } catch (IOException exc) {
-                    break;
-                }
-
+            } catch (IOException exc) {
+                System.out.println("IOException in BroadCast System");
             }
-
-
+            System.out.println("*********************Thread Exiting *****************");
         }
 
     }
@@ -228,12 +224,16 @@ public class BroadCastSystem {
 
     }
 
-    public void handleCommand(Connection connection) throws IOException{
+    public boolean handleCommand(Connection connection) throws IOException{
         InputStream in = connection.in();
         OutputStream out = connection.out();
 
 
         int type = Serializers.INTEGER.read(in);
+
+        if (type == -1) {
+            return false;
+        }
 
         if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
 
@@ -248,6 +248,8 @@ public class BroadCastSystem {
 
             System.out.println("conversation response sent");
         }
+
+        return true;
 
     }
 
