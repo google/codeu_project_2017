@@ -14,4 +14,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="progress_sign_in">Fetching your data...</string>
+    <string name="progress_sign_up">Creating your recipe...</string>
 </resources>

@@ -1,9 +1,12 @@
 package com.google.codeu.chatme;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -52,46 +58,92 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
+     * Attempts to create an account with given account credentials
      *
-     * @param email
-     * @param password
+     * @param email    user email
+     * @param password user password
      */
     private void signUp(String email, String password) {
+        showProgressDialog(getString(R.string.progress_sign_up));
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signUpWithEmail:onComplete:" + task.isSuccessful());
+                        hideProgressDialog();
 
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signUpWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         } else {
                             Log.i(TAG, "signUpWithEmail:success"
                                     + mAuth.getCurrentUser().getUid());
+                            openChatActivity();
                         }
                     }
                 });
     }
 
     /**
+     * Attempts to log user in with given credentials
      *
-     * @param email
-     * @param password
+     * @param email    user email
+     * @param password user password
      */
     private void signIn(String email, String password) {
+        showProgressDialog(getString(R.string.progress_sign_in));
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                        hideProgressDialog();
 
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         } else {
                             Log.i(TAG, "signInwithEmail:success:"
                                     + mAuth.getCurrentUser().getUid());
+                            hideProgressDialog();
                         }
                     }
                 });
+    }
+
+    /**
+     * Launches {@link ChatActivity}, usually on successful sign up or sign in
+     */
+    private void openChatActivity() {
+        Intent mIntent = new Intent(LoginActivity.this, ChatActivity.class);
+        startActivity(mIntent);
+    }
+
+    /**
+     * Shows progress loader with the given message
+     *
+     * @param messsage message to display
+     */
+    public void showProgressDialog(String messsage) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(messsage);
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    /**
+     * Hides progress loader
+     */
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 }
