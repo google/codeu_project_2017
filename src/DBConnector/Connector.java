@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
- /**
+/**
   * Please read here:
   * to run this code, you will need to install jdbc connector that connects the java program to
   * the database. JDBC is the jar file, and you will need to import it to the referenced library.
