@@ -21,6 +21,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
+import java.io.Console;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -70,6 +71,7 @@ public final class Chat {
   // Parse and execute a single command.
   private void doOneCommand(Scanner lineScanner) {
 
+    final Console console = System.console();
     final Scanner tokenScanner = new Scanner(lineScanner.nextLine());
     if (!tokenScanner.hasNext()) {
       return;
@@ -89,7 +91,11 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        String user = tokenScanner.next();
+        char passwordArray[] = console.readPassword("Enter password: ");
+        String password = new String(passwordArray);
+        password = password.trim();
+        signInUser(user, password);
       }
 
     } else if (token.equals("sign-out")) {
@@ -109,7 +115,11 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        String user = tokenScanner.next().trim();
+        char passwordArray[] = console.readPassword("Enter password for new user: ");
+        String password = new String(passwordArray);
+        password = password.trim();
+        addUser(user, password);
       }
 
     } else if (token.equals("u-list-all")) {
@@ -193,8 +203,8 @@ public final class Chat {
   }
 
   // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
+  private void signInUser(String name, String password) {
+    if (!clientContext.user.signInUser(name, password)) {
       System.out.println("Error: sign in failed (invalid name?)");
     }
   }
@@ -266,8 +276,8 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String name, String password) {
+    clientContext.user.addUser(name, password);
   }
 
   // Display all users known to server.

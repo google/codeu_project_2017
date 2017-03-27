@@ -65,7 +65,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public User newUser(String name) {
+  public User newUser(String name, String password) {
 
     User response = null;
 
@@ -73,6 +73,7 @@ public class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(connection.out(), name);
+      Serializers.STRING.write(connection.out(), password);
       LOG.info("newUser: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {
