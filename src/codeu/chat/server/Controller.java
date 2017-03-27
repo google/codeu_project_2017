@@ -28,7 +28,7 @@ import codeu.chat.util.Logger;
 
 public final class Controller implements RawController, BasicController {
 
-  private final static Logger.Log LOG = Logger.newLog(Controller.class);
+  private static final Logger.Log LOG = Logger.newLog(Controller.class);
 
   private final Model model;
   private final Uuid.Generator uuidGenerator;
@@ -44,8 +44,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(String name) {
-    return newUser(createId(), name, Time.now());
+  public User newUser(String name, String PasswordHash, String salt) {
+    return newUser(createId(), name, Time.now(), PasswordHash, salt);
   }
 
   @Override
@@ -54,7 +54,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
+  public Message newMessage(
+      Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
 
     final User foundUser = model.userById().first(author);
     final Conversation foundConversation = model.conversationById().first(conversation);
@@ -86,9 +87,9 @@ public final class Controller implements RawController, BasicController {
       // not change.
 
       foundConversation.firstMessage =
-          Uuids.equals(foundConversation.firstMessage, Uuids.NULL) ?
-          message.id :
-          foundConversation.firstMessage;
+          Uuids.equals(foundConversation.firstMessage, Uuids.NULL)
+              ? message.id
+              : foundConversation.firstMessage;
 
       // Update the conversation to point to the new last message as it has changed.
 
@@ -103,28 +104,24 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(Uuid id, String name, Time creationTime, String PasswordHash, String salt) {
 
     User user = null;
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime);
+      user = new User(id, name, creationTime, PasswordHash, salt);
       model.add(user);
 
       LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
+          "newUser success (user.id=%s user.name=%s user.time=%s user.passHash=%s)",
+          id, name, creationTime, PasswordHash);
 
     } else {
 
       LOG.info(
           "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
+          id, name, creationTime);
     }
 
     return user;
@@ -151,13 +148,11 @@ public final class Controller implements RawController, BasicController {
 
     Uuid candidate;
 
-    for (candidate = uuidGenerator.make();
-         isIdInUse(candidate);
-         candidate = uuidGenerator.make()) {
+    for (candidate = uuidGenerator.make(); isIdInUse(candidate); candidate = uuidGenerator.make()) {
 
-     // Assuming that "randomUuid" is actually well implemented, this
-     // loop should never be needed, but just incase make sure that the
-     // Uuid is not actually in use before returning it.
+      // Assuming that "randomUuid" is actually well implemented, this
+      // loop should never be needed, but just incase make sure that the
+      // Uuid is not actually in use before returning it.
 
     }
 
@@ -165,11 +160,12 @@ public final class Controller implements RawController, BasicController {
   }
 
   private boolean isIdInUse(Uuid id) {
-    return model.messageById().first(id) != null ||
-           model.conversationById().first(id) != null ||
-           model.userById().first(id) != null;
+    return model.messageById().first(id) != null
+        || model.conversationById().first(id) != null
+        || model.userById().first(id) != null;
   }
 
-  private boolean isIdFree(Uuid id) { return !isIdInUse(id); }
-
+  private boolean isIdFree(Uuid id) {
+    return !isIdInUse(id);
+  }
 }
