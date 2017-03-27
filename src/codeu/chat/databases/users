@@ -1,12 +1,12 @@
 [
     {
-        username: "cesar",
-        name: "César Arturo González",
+        name: "cesar",
+        display_name: "César Arturo González",
         pswd: "cesar123"
     },
     {
-        username: "yoali",
-        name: "Yoali Sotomayor",
+        name: "yoali",
+        display_name: "Yoali Sotomayor",
         pswd: "yoali123"
     }
 ]
