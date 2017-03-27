@@ -61,6 +61,8 @@ public final class MainGui implements LoginInputCallback{
     // Build login panel
     final JPanel loginViewPanel = new LoginPanel(clientContext,this);
 
+
+    // Show login if user not connected
     mainViewPanel.add(loginViewPanel,BorderLayout.CENTER);
 
     mainFrame.add(mainViewPanel);
@@ -72,6 +74,6 @@ public final class MainGui implements LoginInputCallback{
   public void onLoginRequest(String username, String pswd){
     
     // Login function
-    JOptionPane.showMessageDialog(mainFrame,"User: " + username + "\nPswd: " + pswd);
+    System.out.println(clientContext.user.checkUserInDatabase(username, pswd));
   }
 }

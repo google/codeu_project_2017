@@ -26,6 +26,10 @@ import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public final class Controller implements RawController, BasicController {
 
   private final static Logger.Log LOG = Logger.newLog(Controller.class);
@@ -145,6 +149,25 @@ public final class Controller implements RawController, BasicController {
     }
 
     return conversation;
+  }
+
+  @Override
+  public String searchUserInDatabase(String username, String pswd){
+    StringBuilder stringBuilder = new StringBuilder();
+    try (BufferedReader br = new BufferedReader(new FileReader("../src/codeu/chat/databases/users"))) {
+
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				stringBuilder.append(sCurrentLine);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    if(stringBuilder.toString() != ""){
+      return stringBuilder.toString();
+    }
+    return null;
   }
 
   private Uuid createId() {

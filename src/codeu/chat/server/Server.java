@@ -204,6 +204,16 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
+    } else if (type == NetworkCode.SEARCH_USER_IN_DATABASE_REQUEST){
+
+      final String username = Serializers.STRING.read(in);
+      final String pswd = Serializers.STRING.read(in);
+
+      final String result = controller.searchUserInDatabase(username, pswd);
+
+      Serializers.INTEGER.write(out, NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE);
+      Serializers.nullable(Serializers.STRING).write(out, result);
+
     } else {
 
       // In the case that the message was not handled make a dummy message with

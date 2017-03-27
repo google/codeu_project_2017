@@ -24,6 +24,7 @@ import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
 import codeu.chat.util.store.Store;
 
+
 public final class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
@@ -150,4 +151,9 @@ public final class ClientUser {
   public static void printUser(User user) {
     System.out.println(getUserInfoString(user));
   }
+
+  // Check for user in database
+  public String checkUserInDatabase(String username, String pswd){
+    return controller.searchUserInDatabase(username, pswd);
+  } 
 }
