@@ -66,7 +66,7 @@ public class Connector {
     }
   }
 
-    /**
+  /**
    * AddAccount is to add the new account to the database.
    * 
    * @param username
@@ -122,7 +122,8 @@ public class Connector {
     }
   }
 
-  /**clean all the data inside the database
+  /**
+   * clean all the data inside the database
    *
    * @return true if the data has been cleaned
    */
