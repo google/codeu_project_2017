@@ -14,10 +14,7 @@
 
 package codeu.chat.client;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
@@ -26,7 +23,7 @@ import codeu.chat.util.store.Store;
 
 public final class ClientUser {
 
-  private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
+  private static final Logger.Log LOG = Logger.newLog(ClientUser.class);
 
   private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
   private final Controller controller;
@@ -45,7 +42,7 @@ public final class ClientUser {
   }
 
   // Validate the username string
-  static public boolean isValidName(String userName) {
+  public static boolean isValidName(String userName) {
     boolean clean = true;
     if (userName.length() == 0) {
       clean = false;
@@ -72,7 +69,10 @@ public final class ClientUser {
     if (name != null) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
-        current = newCurrent;
+        System.out.print("Please enter the password: ");
+        boolean userAccess = newCurrent.isPassword(new Scanner(System.in).nextLine().trim());
+        if (userAccess) current = newCurrent;
+        else System.out.println("Incorrect password!");
       }
     }
     return (prev != current);
@@ -88,14 +88,14 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  public void addUser(String name, String passHash, String salt) {
     final boolean validInputs = isValidName(name);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, passHash, salt) : null;
 
     if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+      System.out.format(
+          "Error: user not created - %s.\n", (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
@@ -138,8 +138,10 @@ public final class ClientUser {
   }
 
   public static String getUserInfoString(User user) {
-    return (user == null) ? "Null user" :
-        String.format(" User: %s\n   Id: %s\n   created: %s\n", user.name, user.id, user.creation);
+    return (user == null)
+        ? "Null user"
+        : String.format(
+            " User: %s\n   Id: %s\n   created: %s\n ", user.name, user.id, user.creation);
   }
 
   public String showUserInfo(String uname) {
