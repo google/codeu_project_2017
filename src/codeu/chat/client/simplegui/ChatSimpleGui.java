@@ -17,6 +17,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.JFrame; 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
@@ -149,6 +151,13 @@ public final class ChatSimpleGui {
 	  //adds the How to Use information at the top of this menu bar
 	  topMenuBar.add(topMenuGeneral); 
 	  topMenuBar.add(topMenuColorSelector);
+	  
+	  topMenuItem.addActionListener(new ActionListener(){
+		  @Override 
+		  public void actionPerformed(ActionEvent e) {
+			  	JOptionPane.showMessageDialog(topMenuItem, "This menu allows you to learn what to do and not what to do.");
+		  }
+	  });
 	  
 	  topMenuGeneral.add(topMenuItem); 
 	  

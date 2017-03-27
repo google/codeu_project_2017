@@ -38,3 +38,27 @@ java.lang.IllegalArgumentException: adding container's parent to itself
 	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
 	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
 
+Mar 26, 2017 9:44:27 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 26, 2017 9:44:27 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 26, 2017 9:44:27 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 26, 2017 9:44:27 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 26, 2017 9:44:27 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 26, 2017 9:44:29 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 26, 2017 9:50:05 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 26, 2017 9:50:05 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 26, 2017 9:50:05 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 26, 2017 9:50:05 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 26, 2017 9:50:05 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 26, 2017 9:50:06 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
