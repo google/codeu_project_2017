@@ -35,9 +35,9 @@ public class Connector {
       
     } catch (SQLException ex) {
       // handle any errors
-      System.out.println("SQLException: " + ex.getMessage());
-      System.out.println("SQLState: " + ex.getSQLState());
-      System.out.println("VendorError: " + ex.getErrorCode());
+      System.err.println("SQLException: " + ex.getMessage());
+      System.err.println("SQLState: " + ex.getSQLState());
+      System.err.println("VendorError: " + ex.getErrorCode());
     }
   }
 
@@ -53,7 +53,7 @@ public class Connector {
       ResultSet result = myStmt.executeQuery(sql);
 
       if (! result.first()) {
-        System.out.println("the table is emty");
+        System.err.println("the table is emty");
       } else {
         result.beforeFirst();
         while (result.next()) {
@@ -63,6 +63,7 @@ public class Connector {
 
     } catch (SQLException e) {
       e.printStackTrace();
+      System.err.println("the error occurred when printing out the users");
     }
   }
 
@@ -109,6 +110,7 @@ public class Connector {
       if (result.next()) {
         // move the cursor all the way back to the starting point
         result.beforeFirst();
+        System.err.println("the account exists");
         return false;
       }
 
@@ -128,16 +130,16 @@ public class Connector {
    * @return true if the data has been cleaned
    */
 
-  boolean dropAllAccounts() {
+  public void dropAllAccounts() {
     String sqlEmptyTable = " truncate table "+ tableName;
     try{
-        myStmt.executeUpdate(sqlEmptyTable);
+      myStmt.executeUpdate(sqlEmptyTable);
+      System.out.println("the table has been cleared");
     }
     catch(SQLException e){
-      System.out.println(e.getMessage());
-      return false;
+      System.err.println(e.getMessage());
+      System.err.println("the table is not able to be cleared");
     }
-    return true;
   }
 
   /**
@@ -154,7 +156,6 @@ public class Connector {
     String sqlSelect = "select username from "+tableName+" where username = " + "'" + username + "'";
     String sqlPassword =
         "select password from "+tableName+" where username = " + "'" + username + "'";
-
     try {
 
       // get the available username match from the database
@@ -174,25 +175,25 @@ public class Connector {
 
           // password does not match
           if (!passwordInDB.equals(password)) {
+            System.err.println("the password does not match");
             return false;
           }
           // the account exits and log in successfully
           return true;
         }
       }
-
+      System.err.println("the account exists");
       // the account does not exit
       return false;
 
     } catch (SQLException e) {
       System.err.println(e.getMessage());
       return false;
-
     }
   }
 
   /**
-   * delete the existing account
+   * delete the existing account; deletion requires the user to sign in first
    * 
    * @param username
    * @return false if the deletion fails; true if succeeds
@@ -208,7 +209,6 @@ public class Connector {
       if (result.next()) {
         result.beforeFirst();
         myStmt.executeUpdate(sqlDelete);
-
         return true;
       }
       return false;
