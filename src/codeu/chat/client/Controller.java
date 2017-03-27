@@ -26,6 +26,7 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
@@ -65,8 +66,10 @@ public class Controller implements BasicController {
     return response;
   }
 
+
+
   @Override
-  public User newUser(String name) {
+  public User newUser(String name, String passwordHash, String salt) {
 
     User response = null;
 
@@ -74,6 +77,11 @@ public class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(connection.out(), name);
+      //TO DO, Check with Server Controller for input from Client Controller
+      Serializers.STRING.write(connection.out(), passwordHash);
+      Serializers.STRING.write(connection.out(), salt);
+
+
       LOG.info("newUser: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {

@@ -64,6 +64,7 @@ public final class Server implements Relay {
     private final Component user;
     private final Component conversation;
     private final Component message;
+    //private final Component passwordHash;
 
     public Bundle(Uuid id,
                   Time time,
