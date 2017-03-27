@@ -91,6 +91,7 @@ public interface Relay {
     // All the information about the user who authored the message.
     Component user();
 
+
     // CONVERSATION
     //
     // All the infromation about the conversation that the message is part of.
