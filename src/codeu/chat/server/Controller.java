@@ -25,10 +25,13 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.common.DatabaseUser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.google.gson.*;
 
 public final class Controller implements RawController, BasicController {
 
@@ -154,6 +157,8 @@ public final class Controller implements RawController, BasicController {
   @Override
   public String searchUserInDatabase(String username, String pswd){
     StringBuilder stringBuilder = new StringBuilder();
+    Gson gson = new Gson();
+
     try (BufferedReader br = new BufferedReader(new FileReader("../src/codeu/chat/databases/users"))) {
 
 			String sCurrentLine;
@@ -164,9 +169,10 @@ public final class Controller implements RawController, BasicController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    if(stringBuilder.toString() != ""){
-      return stringBuilder.toString();
-    }
+    DatabaseUser[] databaseUsers = gson.fromJson(stringBuilder.toString(), DatabaseUser[].class); 
+    for(DatabaseUser databaseUser : databaseUsers)
+      if(databaseUser.checkLogin(username,pswd))
+        return databaseUser.toString();
     return null;
   }
 

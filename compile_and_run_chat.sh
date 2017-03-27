@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sh clean.sh
 sh make.sh
 LOCAL_MACHINE="$1@2007"
 

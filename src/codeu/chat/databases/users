@@ -1,10 +1,12 @@
 [
     {
         username: "cesar",
-        name: "César Arturo González"
+        name: "César Arturo González",
+        pswd: "cesar123"
     },
     {
         username: "yoali",
-        name: "Yoali Sotomayor"
+        name: "Yoali Sotomayor",
+        pswd: "yoali123"
     }
 ]
