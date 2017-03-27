@@ -1,5 +1,6 @@
 package codeu.chat.server;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import java.util.UUID;
@@ -11,10 +12,10 @@ public final class DatabaseTest {
 
   @Test
   public void testAddUser() {
+    System.out.println("DATABASE TEST RUN");
     String randomUN = UUID.randomUUID().toString();
     String randomPW = UUID.randomUUID().toString();
-    boolean wasSuccessful = con.addAccount(randomUN, randomPW);
-    assertTrue(wasSuccessful);
+    assertTrue(con.addAccount(randomUN, randomPW));
   }
 
   @Test
@@ -22,7 +23,22 @@ public final class DatabaseTest {
     String randomUN = UUID.randomUUID().toString();
     String randomPW = UUID.randomUUID().toString();
     con.addAccount(randomUN, randomPW);
-    boolean wasSuccessful = con.verifyAccount(randomUN, randomPW);
-    assertTrue(wasSuccessful);
+    assertTrue(con.verifyAccount(randomUN, randomPW));
+    assertFalse(con.verifyAccount(randomUN, randomPW + "1"));
+  }
+
+  @Test
+  public void testDeleteUser() {
+    String randomUN = UUID.randomUUID().toString();
+    String randomPW = UUID.randomUUID().toString();
+    con.addAccount(randomUN, randomPW);
+    assertTrue(con.deleteAccount(randomUN));
+    assertFalse(con.verifyAccount(randomUN, randomPW));
+    assertTrue(con.addAccount(randomUN, randomPW));
+  }
+
+  @Test
+  public void testUpdatePassword() {
+    //
   }
 }
