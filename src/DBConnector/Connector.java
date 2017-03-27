@@ -6,21 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
- /**
-  * Please read here:
-  * to run this code, you will need to install jdbc connector that connects the java program to
-  * the database. JDBC is the jar file, and you will need to import it to the referenced library.
-  * In order to check if the data has been written in the database, you can either use terminal
-  * or mysqlWorkbench to view the table. But, you will need to connect to the database first by
-  *  using the provided hostname, username, and password (see field variables);
-  */
-
- /**
-  * Description:
-  * this is the database connector you will need to use to communicate with the databased hosted on
-  * a remote machine. Pass in the IP of the remote machine where the database is hosted, also your
-  * authorized username and password to the database. we do not need to run mySQL server.
-  */
+/**
+ * Please read here:
+ * ****to run this code, you will need to install jdbc connector that connects the java program to the databse.
+ * jdbc is the jar file, and you will need to import it to the referenced library.
+ * 
+ * Description:
+ * this is the database connector you will need to use to communicate with the databased hosted on a remote machine.
+ * Pass in the IP of the remote machine where the database is hosted, also your authorized username and password to the database.
+ *  we do not nee to run the mySQL server.
+ */
 
 public class Connector {
 
@@ -47,6 +42,31 @@ public class Connector {
   }
 
   /**
+   * print all the current usernames
+   */
+  public void printAllUsers() {
+
+    String sql = "select username from " + tableName;
+
+    try {
+
+      ResultSet result = myStmt.executeQuery(sql);
+
+      if (! result.first()) {
+        System.out.println("the table is emty");
+      } else {
+        result.beforeFirst();
+        while (result.next()) {
+          System.out.print(result.getString("username") + " ");
+        }
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+    /**
    * AddAccount is to add the new account to the database.
    * 
    * @param username
@@ -59,8 +79,7 @@ public class Connector {
     String sqlAdd = "insert into "+tableName + "(username, password)" + "values(" + "'" + username
         + "'" + "," + "'" + password + "'" + ")";
     String sqlCount = "select count(*) from "+tableName;
-    String sqlSelect =
-        "select username from "+tableName+" where username = " + "'" + username + "'";
+    String sqlSelect = "select username from "+tableName+" where username = " + "'" + username + "'";
 
     try {
       // acquire the table size from the database, and initialize the table size
@@ -103,6 +122,23 @@ public class Connector {
     }
   }
 
+  /**clean all the data inside the database
+   *
+   * @return true if the data has been cleaned
+   */
+
+  boolean dropAllAccounts() {
+    String sqlEmptyTable = " truncate table "+ tableName;
+    try{
+        myStmt.executeUpdate(sqlEmptyTable);
+    }
+    catch(SQLException e){
+      System.out.println(e.getMessage());
+      return false;
+    }
+    return true;
+  }
+
   /**
    * verify if the account username and password input by users match what has been recorded in
    * database
@@ -114,8 +150,7 @@ public class Connector {
   public boolean verifyAccount(String username, String password) {
 
     // String constructed to check if the account exits and password matches
-    String sqlSelect =
-        "select username from "+tableName+" where username = " + "'" + username + "'";
+    String sqlSelect = "select username from "+tableName+" where username = " + "'" + username + "'";
     String sqlPassword =
         "select password from "+tableName+" where username = " + "'" + username + "'";
 
