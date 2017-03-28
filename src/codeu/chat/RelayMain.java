@@ -14,9 +14,14 @@
 
 package codeu.chat;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 import codeu.chat.common.Hub;
+import codeu.chat.common.Secret;
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
 import codeu.chat.relay.Server;
 import codeu.chat.relay.ServerFrontEnd;
 import codeu.chat.util.Logger;
@@ -44,22 +49,26 @@ final class RelayMain {
 
     try (final ConnectionSource source = ServerConnectionSource.forPort(myPort)) {
 
+      final Server relay = new Server(1024, 16);
+
+      LOG.info("Relay object created.");
+
+      LOG.info("Loading team data...");
+
+      loadTeamInfo(relay, args[1]);
+
+      LOG.info("Done loading team data.");
+
       LOG.info("Starting relay...");
 
-      startRelay(source);
+      startRelay(relay, source);
 
     } catch (IOException ex) {
       LOG.error(ex, "Failed to establish server accept port");
     }
   }
 
-  private static void startRelay(ConnectionSource source) {
-
-    final Server relay = new Server(1024, 16);
-
-    LOG.info("Relay object created.");
-
-    // TODO: Load team information
+  private static void startRelay(Server relay, ConnectionSource source) {
 
     final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
 
@@ -90,5 +99,42 @@ final class RelayMain {
     hub.run();
 
     LOG.info("Hub exited.");
+  }
+
+  private static void loadTeamInfo(Server relay, String file) {
+
+    try (final BufferedReader reader = new BufferedReader(new FileReader(file))) {
+
+      String line;
+      for (line = reader.readLine();
+           line != null;
+           line = reader.readLine()) {
+
+        line = line.trim();
+
+        if (line.startsWith("#")) {
+          // this is a comment, skip it
+        } else {
+
+          try {
+
+            final String[] tokens = line.split(":");
+
+            // There are just so many things that could go wrong when parsing
+            // this line that it is not worth trying to handle ahead of time.
+            // So instead just try to parse it and catch any exception.
+
+            final Uuid id = Uuids.fromString(tokens[0].trim());
+            final byte[] secret = Secret.parse(tokens[1].trim());
+
+            relay.addTeam(id, secret);
+          } catch (Exception ex) {
+            LOG.error(ex, "Skipping line \"%s\". Could not parse", line);
+          }
+        }
+      }
+    } catch (IOException ex) {
+      LOG.error(ex, "Failed to load team data");
+    }
   }
 }
