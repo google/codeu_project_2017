@@ -40,10 +40,9 @@ public final class Serializers {
     @Override
     public void write(OutputStream out, Integer value) throws IOException {
 
-      out.write(0xFF & (value >> 24));
-      out.write(0xFF & (value >> 16));
-      out.write(0xFF & (value >> 8));
-      out.write(0xFF & (value >> 0));
+      for (int i = 24; i >= 0; i -= 8) {
+        out.write(0xFF & (value >>> i));
+      }
 
     }
 
@@ -52,10 +51,34 @@ public final class Serializers {
 
       int value = 0;
 
-      value = (value << 8) | in.read();
-      value = (value << 8) | in.read();
-      value = (value << 8) | in.read();
-      value = (value << 8) | in.read();
+      for (int i = 0; i < 4; i++) {
+        value = (value << 8) | in.read();
+      }
+
+      return value;
+
+    }
+  };
+
+  public static final Serializer<Long> LONG = new Serializer<Long>() {
+
+    @Override
+    public void write(OutputStream out, Long value) throws IOException {
+
+      for (int i = 56; i >= 0; i -= 8) {
+        out.write((int)(0xFF & (value >>> i)));
+      }
+
+    }
+
+    @Override
+    public Long read(InputStream in) throws IOException {
+
+      long value = 0;
+
+      for (int i = 0; i < 8; i++) {
+        value = (value << 8) | in.read();
+      }
 
       return value;
 
