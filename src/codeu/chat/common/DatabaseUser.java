@@ -6,35 +6,16 @@ import java.io.OutputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+
+// DatabaseUser is used to parse the json object from the database with Gson.
 public class DatabaseUser{
-    /*public static final Serializer<DatabaseUser> SERIALIZER = new Serializer<DatabaseUser>() {
+    public final String id;
+    public final String display_name;
+    public final String pswd;
+    public final String name;
 
-        @Override
-        public void write(OutputStream out, DatabaseUser value) throws IOException {
-
-        Serializers.STRING.write(out, value.display_name);
-        Serializers.STRING.write(out, value.name);
-        Serializers.STRING.write(out, value.pswd);
-
-        }
-
-        @Override
-        public User read(InputStream in) throws IOException {
-
-        return new User(
-            Serializers.STRING.read(in),
-            Serializers.STRING.read(in),
-            Serializers.STRING.read(in)
-        );
-
-        }
-    };*/
-
-    private String display_name;
-    private String pswd;
-    private String name;
-
-    public DatabaseUser(String display_name, String pswd, String name){
+    public DatabaseUser(String id, String display_name, String pswd, String name){
+        this.id = id;
         this.name = name;
         this.display_name = display_name;
         this.pswd = pswd;

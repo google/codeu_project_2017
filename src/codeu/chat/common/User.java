@@ -32,6 +32,7 @@ public final class User {
 
       Uuids.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
+      Serializers.STRING.write(out, value.display_name);
       Time.SERIALIZER.write(out, value.creation);
 
     }
@@ -42,6 +43,7 @@ public final class User {
       return new User(
           Uuids.SERIALIZER.read(in),
           Serializers.STRING.read(in),
+          Serializers.STRING.read(in),
           Time.SERIALIZER.read(in)
       );
 
@@ -50,13 +52,23 @@ public final class User {
 
   public final Uuid id;
   public final String name;
+  public String display_name;
   public final Time creation;
 
   public User(Uuid id, String name, Time creation) {
 
     this.id = id;
     this.name = name;
+    this.display_name = name;
     this.creation = creation;
 
+  }
+  public User(Uuid id, String name, String display_name, Time creation){
+    this(id,name,creation);
+    this.display_name = display_name;
+  }
+  public User(DatabaseUser databaseUser){
+    this(Uuids.fromString(databaseUser.id),databaseUser.name,Time.now());
+    this.display_name = databaseUser.display_name;
   }
 }

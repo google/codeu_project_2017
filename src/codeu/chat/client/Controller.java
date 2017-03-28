@@ -114,9 +114,10 @@ public class Controller implements BasicController {
     return response;
   }
 
+  // Serialize the request for searchUserInDatabase with username and pswd parameters
   @Override
-  public String searchUserInDatabase(String username, String pswd){
-    String response = null;
+  public User searchUserInDatabase(String username, String pswd){
+    User response = null;
 
     try (final Connection connection = source.connect()) {
 
@@ -125,7 +126,7 @@ public class Controller implements BasicController {
       Serializers.STRING.write(connection.out(), pswd);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE) {
-        response = Serializers.nullable(Serializers.STRING).read(connection.in());
+        response = Serializers.nullable(User.SERIALIZER).read(connection.in());
       } else {
         LOG.error("Response from server failed.");
       }

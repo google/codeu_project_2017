@@ -51,6 +51,7 @@ public interface BasicController {
 
   // SEARCH FOR USER IN DATABASE
   //
-  // Create a search request in the database to find the user
-  String searchUserInDatabase(String username, String pswd);
+  //  Create a search request in the database to find the user and
+  //  return the User object. 
+  User searchUserInDatabase(String username, String pswd);
 }

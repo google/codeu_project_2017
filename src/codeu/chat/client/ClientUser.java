@@ -153,7 +153,18 @@ public final class ClientUser {
   }
 
   // Check for user in database
-  public String checkUserInDatabase(String username, String pswd){
+  public User checkUserInDatabase(String username, String pswd){
     return controller.searchUserInDatabase(username, pswd);
   } 
+
+  // Sign in with existing User
+  public boolean signInUser(User user) {
+    updateUsers();
+
+    final User prev = current;
+    if (user != null) {
+        current = user;
+    }
+    return (prev != current);
+  }
 }

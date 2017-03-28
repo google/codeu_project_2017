@@ -209,10 +209,10 @@ public final class Server {
       final String username = Serializers.STRING.read(in);
       final String pswd = Serializers.STRING.read(in);
 
-      final String result = controller.searchUserInDatabase(username, pswd);
+      final User user = controller.searchUserInDatabase(username, pswd);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE);
-      Serializers.nullable(Serializers.STRING).write(out, result);
+      Serializers.nullable(User.SERIALIZER).write(out, user);
 
     } else {
 

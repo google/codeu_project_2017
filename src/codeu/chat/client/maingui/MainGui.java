@@ -9,6 +9,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
 import codeu.chat.common.LoginInputCallback;
+import codeu.chat.common.User;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
 public final class MainGui implements LoginInputCallback{
@@ -61,19 +62,41 @@ public final class MainGui implements LoginInputCallback{
     // Build login panel
     final JPanel loginViewPanel = new LoginPanel(clientContext,this);
 
-
     // Show login if user not connected
     mainViewPanel.add(loginViewPanel,BorderLayout.CENTER);
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
-  
+
   // Login request callback function 
   @Override
   public void onLoginRequest(String username, String pswd){
     
-    // Login function
-    System.out.println(clientContext.user.checkUserInDatabase(username, pswd));
+    // Search for user in the server's database
+    final User loginUser = clientContext.user.checkUserInDatabase(username, pswd);
+
+    if(loginUser != null){
+
+      // Check if user is already logged
+      if(clientContext.user.getCurrent() == null){
+
+        // Sign in with the returned user from the database
+        if(clientContext.user.signInUser(loginUser)){
+
+          // User successfully signed in
+          JOptionPane.showMessageDialog(mainFrame,"Hello " + clientContext.user.getCurrent().display_name);
+          mainFrame.getContentPane().removeAll();
+        }
+      }else{
+
+        // User is already logged
+        JOptionPane.showMessageDialog(mainFrame, "User is already logged");
+      }
+    }else{
+
+      // User not found in database or incorrect password
+      System.out.println("User not found or incorrect password");
+    }
   }
 }
