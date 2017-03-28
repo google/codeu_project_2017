@@ -111,8 +111,10 @@ public final class Server {
 
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuids.SERIALIZER.read(in);
+      final String passHash = Serializers.STRING.read(in);
+      final String salt = Serializers.STRING.read(in);
 
-      final Conversation conversation = controller.newConversation(title, owner);
+      final Conversation conversation = controller.newConversation(title, owner, passHash, salt);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
@@ -239,7 +241,9 @@ public final class Server {
       conversation = controller.newConversation(relayConversation.id(),
                                                 relayConversation.text(),
                                                 user.id,
-                                                relayConversation.time());
+                                                relayConversation.time(),
+                                                "passHash",
+                                                  "salt");
     }
 
     Message message = model.messageById().first(relayMessage.id());
