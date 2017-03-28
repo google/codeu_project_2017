@@ -20,17 +20,16 @@ import java.sql.Statement;
 
 public class Connector {
 
-   //private static Statement myStmt;
-   private Connection myConn;
-   private static String tableName = "UserAccount";
-   private static final String dbName = "CodeU_2017DB";
-   private static final String hostname = "ec2-176-34-225-252.eu-west-1.compute.amazonaws.com";
-   private static final String DBusername = "group34";
-   private static final String DBpassword = "codeu2017";
-
-   //the constructor can only create once per run.
-   private
-   PreparedStatement delete, getUsers, add, update, verify_selectPassword, selectUsername, dropAll, selectCount;
+  //private static Statement myStmt;
+  private Connection myConn;
+  private static String tableName = "UserAccount";
+  private static final String dbName = "CodeU_2017DB";
+  private static final String hostname = "ec2-176-34-225-252.eu-west-1.compute.amazonaws.com";
+  private static final String DBusername = "group34";
+  private static final String DBpassword = "codeu2017";
+  //the constructor can only create once per run.
+  private PreparedStatement
+       delete, getUsers, add, update, verify_selectPassword, selectUsername, dropAll, selectCount;
 
   public Connector() {
     try {
@@ -62,9 +61,9 @@ public class Connector {
 
     } catch (SQLException ex) {
       // handle any errors
-      System.out.println("SQLException: " + ex.getMessage());
-      System.out.println("SQLState: " + ex.getSQLState());
-      System.out.println("VendorError: " + ex.getErrorCode());
+      System.err.println("SQLException: " + ex.getMessage());
+      System.err.println("SQLState: " + ex.getSQLState());
+      System.err.println("VendorError: " + ex.getErrorCode());
     }
   }
 
@@ -80,7 +79,7 @@ public class Connector {
       int size = resultSize.getInt(1);
       String[] userNames = new String[size];
 
-      if (! result.first()) {
+      if (size == 0) {
         System.out.println("the table is empty");
         resultSize.close();
         return null;
@@ -144,6 +143,7 @@ public class Connector {
         resultUser.beforeFirst();
         resultSize.close();
         resultUser.close();
+        System.err.println("the account exists");
         return false;
       }
 
@@ -172,17 +172,18 @@ public class Connector {
    *
    * @return true if the data has been cleaned
    */
-
   boolean dropAllAccounts() {
     try{
         dropAll.executeUpdate();
         System.out.println("the table has been cleared");
+        return true;
     }
     catch(SQLException e){
-      System.out.println(e.getMessage());
+      System.err.println(e.getMessage());
+      System.err.println("the table is not able to be cleared");
       return false;
     }
-    return true;
+
   }
 
   /**
@@ -217,6 +218,7 @@ public class Connector {
           if (!passwordInDB.equals(password)) {
             resultUsername.close();
             resultPassword.close();
+            System.err.println("the password does not match");
             return false;
           }
           // the account exits and log in successfully
@@ -225,7 +227,7 @@ public class Connector {
           return true;
         }
       }
-
+      System.err.println("the account exists");
       // the account does not exit
       resultUsername.close();
       return false;
@@ -244,7 +246,7 @@ public class Connector {
   }
 
   /**
-   * delete the existing account
+   * delete the existing account; deletion requires the user to sign in first
    * 
    * @param username
    * @return false if the deletion fails; true if succeeds
@@ -300,8 +302,8 @@ public class Connector {
    * when all has been done with database, call close to end the connection.
    * can restart by creating a new instance of connector
    */
-  public void closeConnection(){
-    try{
+  public void closeConnection() {
+    try {
       delete.close();
       getUsers.close();
       add.close();
@@ -310,9 +312,10 @@ public class Connector {
       selectUsername.close();
       dropAll.close();
       selectCount.close();
-    } catch (SQLException e) {
+      myConn.close();
+    }
+    catch (SQLException e) {
       e.printStackTrace();
     }
-    try{myConn.close();}catch (SQLException e) {e.printStackTrace();}
   }
 }
