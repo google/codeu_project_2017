@@ -86,10 +86,10 @@ public final class ClientConversation {
     printConversation(currentSummary, userContext);
   }
 
-  public void startConversation(String title, Uuid owner) {
+  public void startConversation(String title, Uuid owner, String passHash, String salt) {
     final boolean validInputs = isValidTitle(title);
 
-    final Conversation conv = (validInputs) ? controller.newConversation(title, owner) : null;
+    final Conversation conv = (validInputs) ? controller.newConversation(title, owner, passHash, salt) : null;
 
     if (conv == null) {
       System.out.format("Error: conversation not created - %s.\n",
@@ -187,5 +187,15 @@ public final class ClientConversation {
   // Print Conversation outside of User context.
   public static void printConversation(ConversationSummary c) {
     printConversation(c, null);
+  }
+
+  //Checks if the conversation exists
+  public boolean exists(String title){
+    //updateAllConversations();
+    ConversationSummary conSum = summariesSortedByTitle.first((title));
+    if (conSum != null)
+            return true;
+    else
+      return false;
   }
 }
