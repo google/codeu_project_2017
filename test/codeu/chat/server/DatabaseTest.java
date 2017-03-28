@@ -2,9 +2,8 @@ package codeu.chat.server;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.util.UUID;
 import org.junit.Test;
+import java.util.UUID;
 
 
 public final class DatabaseTest {
