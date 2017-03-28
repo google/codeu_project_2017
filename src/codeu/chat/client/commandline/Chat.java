@@ -14,6 +14,7 @@
 
 package codeu.chat.client.commandline;
 
+import java.io.Console;
 import java.util.Scanner;
 
 import codeu.chat.client.ClientContext;
@@ -128,7 +129,25 @@ public final class Chat {
           System.out.println("ERROR: Conversation title not supplied.");
         } else {
           final String title = tokenScanner.nextLine().trim();
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
+          String response = null;
+          boolean isPrivate = false;
+          String passHash = "password";
+          String salt = Password.generateSalt();
+          while(response == null){
+            System.out.print("Add password to conversation? (y/n): ");
+            response = lineScanner.nextLine().trim();
+            if(response.equalsIgnoreCase("y"))
+              isPrivate = true;
+            else if(response.equalsIgnoreCase("n"))
+              isPrivate = false;
+            else
+              response = null;
+          }
+          if(isPrivate){
+            System.out.print("Please enter a password: ");
+            passHash = Password.getHashCode(lineScanner.nextLine().trim(), salt);
+          }
+          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id, passHash, salt);
         }
       }
 
@@ -322,5 +341,12 @@ public final class Chat {
       clientContext.conversation.setCurrent(newCurrent);
       clientContext.conversation.updateAllConversations(true);
     }
+  }
+
+  public void selectPrivateConversation(){
+    //check if the conversation exists
+    clientContext.conversation.updateAllConversations(false);
+
+    //ask for password
   }
 }

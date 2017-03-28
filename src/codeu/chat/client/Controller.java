@@ -99,7 +99,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner)  {
+  public Conversation newConversation(String title, Uuid owner, String passHash, String salt)  {
 
     Conversation response = null;
 
@@ -108,6 +108,8 @@ public class Controller implements BasicController {
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_CONVERSATION_REQUEST);
       Serializers.STRING.write(connection.out(), title);
       Uuids.SERIALIZER.write(connection.out(), owner);
+      Serializers.STRING.write(connection.out(), passHash);
+      Serializers.STRING.write(connection.out(), salt);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());
