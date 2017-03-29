@@ -23,6 +23,7 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
 import codeu.chat.util.store.Store;
+import codeu.chat.client.commandline.Password;
 
 public final class ClientUser {
 
@@ -69,7 +70,7 @@ public final class ClientUser {
     updateUsers();
 
     final User prev = current;
-    if (name != null) {
+    if (name != null && Password.authenticateUser(name)) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;
@@ -95,8 +96,9 @@ public final class ClientUser {
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+              (validInputs) ? "server failure" : "bad input value");
     } else {
+      Password.createPassword(name);
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }
@@ -139,7 +141,7 @@ public final class ClientUser {
 
   public static String getUserInfoString(User user) {
     return (user == null) ? "Null user" :
-        String.format(" User: %s\n   Id: %s\n   created: %s\n", user.name, user.id, user.creation);
+            String.format(" User: %s\n   Id: %s\n   created: %s\n", user.name, user.id, user.creation);
   }
 
   public String showUserInfo(String uname) {

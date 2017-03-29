@@ -1,0 +1,14 @@
+Mar 29, 2017 12:17:49 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Mar 29, 2017 12:17:49 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Mar 29, 2017 12:17:49 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Mar 29, 2017 12:17:49 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Mar 29, 2017 12:18:01 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Mar 29, 2017 12:18:01 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.733608898] user.name=ron user.time=29-Mar-2017 12:18:01.447)
+Mar 29, 2017 12:18:01 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
