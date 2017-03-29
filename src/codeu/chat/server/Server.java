@@ -22,6 +22,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -39,6 +41,8 @@ import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
 
 import codeu.chat.server.database.UserTable;
+import codeu.chat.server.database.UserSchema;
+import codeu.chat.database.DBObject;
 
 public final class Server {
 
