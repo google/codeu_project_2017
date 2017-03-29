@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52e7acb2-440d-4e44-a3c4-0590dd08cdb7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientUser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientUser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -57,6 +57,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3426">
+              <caret line="325" column="0" lean-forward="true" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#10605#0" expanded="true" />
+                <element signature="e#1288#1289#0" expanded="true" />
+                <element signature="e#1349#1350#0" expanded="true" />
+                <element signature="e#2736#2737#0" expanded="true" />
+                <element signature="e#2770#2771#0" expanded="true" />
+                <element signature="e#8731#8732#0" expanded="true" />
+                <element signature="e#8773#8774#0" expanded="true" />
+                <element signature="e#8846#8847#0" expanded="true" />
+                <element signature="e#8889#8890#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -72,6 +92,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/codeu/chat/client/commandline/Password.java" />
         <option value="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java" />
       </list>
     </option>
   </component>
@@ -607,12 +628,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1490814709459</updated>
-      <workItem from="1490814711825" duration="409000" />
+      <workItem from="1490814711825" duration="550000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="409000" />
+    <option name="totallyTimeSpent" value="550000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -692,6 +713,24 @@
             <element signature="e#3091#3092#0" expanded="true" />
             <element signature="e#3353#3354#0" expanded="true" />
             <element signature="e#3387#3388#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3426">
+          <caret line="325" column="0" lean-forward="true" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10605#0" expanded="true" />
+            <element signature="e#1288#1289#0" expanded="true" />
+            <element signature="e#1349#1350#0" expanded="true" />
+            <element signature="e#2736#2737#0" expanded="true" />
+            <element signature="e#2770#2771#0" expanded="true" />
+            <element signature="e#8731#8732#0" expanded="true" />
+            <element signature="e#8773#8774#0" expanded="true" />
+            <element signature="e#8846#8847#0" expanded="true" />
+            <element signature="e#8889#8890#0" expanded="true" />
           </folding>
         </state>
       </provider>
