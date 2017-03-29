@@ -17,7 +17,9 @@ package codeu.chat.client.simplegui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,7 +31,10 @@ import codeu.chat.common.User;
 @SuppressWarnings("serial")
 public final class UserPanel extends JPanel {
 
+  private final long POLLING_PERIOD_MS = 1000;
+  private final long POLLING_DELAY_MS = 0;
   private final ClientContext clientContext;
+  private User lastUser;
 
   public UserPanel(ClientContext clientContext) {
     super(new GridBagLayout());
@@ -142,7 +147,9 @@ public final class UserPanel extends JPanel {
     userUpdateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        UserPanel.this.getAllUsers(listModel);
+        final String selected = userList.getSelectedValue();
+        UserPanel.this.getAllUsers(listModel, true);
+        userList.setSelectedValue(selected, false);
       }
     });
 
@@ -161,11 +168,11 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
-            null, null, "");
+                UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
+                null, null, "");
         if (s != null && s.length() > 0) {
           clientContext.user.addUser(s);
-          UserPanel.this.getAllUsers(listModel);
+          UserPanel.this.getAllUsers(listModel, false);
         }
       }
     });
@@ -180,16 +187,42 @@ public final class UserPanel extends JPanel {
       }
     });
 
-    getAllUsers(listModel);
+    getAllUsers(listModel, true);
+
+    // Poll the server for updates
+    java.util.Timer userUpdateTimer = new java.util.Timer();
+    userUpdateTimer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+
+        // Remember what user was selected
+        final String selected = userList.getSelectedValue();
+
+        // Update the user display panel
+        UserPanel.this.getAllUsers(listModel, false);
+
+        // Reselect the user
+        userList.setSelectedValue(selected, false);
+      }
+    }, POLLING_DELAY_MS, POLLING_PERIOD_MS);
   }
 
   // Swing UI: populate ListModel object - updates display objects.
-  private void getAllUsers(DefaultListModel<String> usersList) {
+  private void getAllUsers(DefaultListModel<String> usersList, boolean replaceAll) {
     clientContext.user.updateUsers();
-    usersList.clear();
+    if (replaceAll) {
+      usersList.clear();
+      lastUser = null;
+    }
 
     for (final User u : clientContext.user.getUsers()) {
-      usersList.addElement(u.name);
+      if (replaceAll
+              || lastUser == null
+              || (u.creation.compareTo(lastUser.creation) >= 0
+              && !u.id.equals(lastUser.id))) {
+        usersList.addElement(u.name);
+        lastUser = u;
+      }
     }
   }
 }

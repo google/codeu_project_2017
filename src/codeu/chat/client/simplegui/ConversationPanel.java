@@ -18,6 +18,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,8 +31,11 @@ import codeu.chat.common.ConversationSummary;
 @SuppressWarnings("serial")
 public final class ConversationPanel extends JPanel {
 
+  private final long POLLING_PERIOD_MS = 1000;
+  private final long POLLING_DELAY_MS = 0;
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
+  private ConversationSummary lastConversation;
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
@@ -60,12 +65,12 @@ public final class ConversationPanel extends JPanel {
     final GridBagConstraints listPanelC = new GridBagConstraints();
 
     final DefaultListModel<String> listModel = new DefaultListModel<>();
-    final JList<String> objectList = new JList<>(listModel);
-    objectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    objectList.setVisibleRowCount(15);
-    objectList.setSelectedIndex(-1);
+    final JList<String> conversationList = new JList<>(listModel);
+    conversationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    conversationList.setVisibleRowCount(15);
+    conversationList.setSelectedIndex(-1);
 
-    final JScrollPane listScrollPane = new JScrollPane(objectList);
+    final JScrollPane listScrollPane = new JScrollPane(conversationList);
     listShowPanel.add(listScrollPane);
     listScrollPane.setMinimumSize(new Dimension(250, 200));
 
@@ -112,7 +117,9 @@ public final class ConversationPanel extends JPanel {
     updateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        ConversationPanel.this.getAllConversations(listModel);
+        final String selected = conversationList.getSelectedValue();
+        ConversationPanel.this.getAllConversations(listModel, true);
+        conversationList.setSelectedValue(selected, false);
       }
     });
 
@@ -122,11 +129,11 @@ public final class ConversationPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (clientContext.user.hasCurrent()) {
           final String s = (String) JOptionPane.showInputDialog(
-              ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+                  ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,
+                  null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
-            ConversationPanel.this.getAllConversations(listModel);
+            ConversationPanel.this.getAllConversations(listModel, false);
           }
         } else {
           JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
@@ -135,12 +142,12 @@ public final class ConversationPanel extends JPanel {
     });
 
     // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
-    objectList.addListSelectionListener(new ListSelectionListener() {
+    conversationList.addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent e) {
-        if (objectList.getSelectedIndex() != -1) {
-          final int index = objectList.getSelectedIndex();
-          final String data = objectList.getSelectedValue();
+        if (conversationList.getSelectedIndex() != -1) {
+          final int index = conversationList.getSelectedIndex();
+          final String data = conversationList.getSelectedValue();
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
 
           clientContext.conversation.setCurrent(cs);
@@ -150,17 +157,44 @@ public final class ConversationPanel extends JPanel {
       }
     });
 
-    getAllConversations(listModel);
+    getAllConversations(listModel, true);
+
+    // Poll the server for updates
+    Timer userUpdateTimer = new Timer();
+    userUpdateTimer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+
+        // Remember what conversation was selected
+        final String selected = conversationList.getSelectedValue();
+
+        // Update the conversation display panel
+        ConversationPanel.this.getAllConversations(listModel, false);
+
+        // Reselect the conversation
+        conversationList.setSelectedValue(selected, false);
+
+      }
+    }, POLLING_DELAY_MS, POLLING_PERIOD_MS);
   }
 
   // Populate ListModel - updates display objects.
-  private void getAllConversations(DefaultListModel<String> convDisplayList) {
+  private void getAllConversations(DefaultListModel<String> convDisplayList, boolean replaceAll) {
 
     clientContext.conversation.updateAllConversations(false);
-    convDisplayList.clear();
+    if (replaceAll) {
+      convDisplayList.clear();
+      lastConversation = null;
+    }
 
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {
-      convDisplayList.addElement(conv.title);
+      if (replaceAll
+              || lastConversation == null
+              || (conv.creation.compareTo(lastConversation.creation) >= 0
+              && !conv.id.equals(lastConversation.id))) {
+        convDisplayList.addElement(conv.title);
+        lastConversation = conv;
+      }
     }
   }
 
