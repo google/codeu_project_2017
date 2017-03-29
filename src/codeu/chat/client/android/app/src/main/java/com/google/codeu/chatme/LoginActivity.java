@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.codeu.chatme.controller.UserController;
+import com.google.codeu.chatme.controller.Controller;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    openChatActivity();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i(TAG, "signUpWithEmail:success" + currentUser.getUid());
 
                             // saves new user to real-time database
-                            UserController.addUser(currentUser.getUid(), currentUser.getDisplayName());
+                            Controller.addUser(currentUser.getUid(), currentUser.getDisplayName());
                             openChatActivity();
                         }
                     }

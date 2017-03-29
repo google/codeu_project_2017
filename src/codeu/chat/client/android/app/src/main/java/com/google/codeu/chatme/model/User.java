@@ -4,12 +4,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.sql.Time;
 
-/**
- * Created by Yash on 3/29/2017.
- */
-
 @IgnoreExtraProperties
-public class User {
+public final class User {
 
     public String id;
     public String name;
@@ -18,9 +14,9 @@ public class User {
     public User() {
     }
 
-    public User(String name, long timeCreated) {
+    public User(String name) {
         this.name = name;
-        this.timeCreated = timeCreated;
+        this.timeCreated = System.currentTimeMillis();
     }
 
     public String getId() {
