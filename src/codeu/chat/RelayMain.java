@@ -18,13 +18,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import codeu.chat.common.Hub;
 import codeu.chat.common.Secret;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.relay.Server;
 import codeu.chat.relay.ServerFrontEnd;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Timeline;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
@@ -49,6 +49,8 @@ final class RelayMain {
 
     try (final ConnectionSource source = ServerConnectionSource.forPort(myPort)) {
 
+      // Limit the number of messages that the server tracks to be 1024 and limit the
+      // max number of messages that the relay will send out to be 16.
       final Server relay = new Server(1024, 16);
 
       LOG.info("Relay object created.");
@@ -69,36 +71,37 @@ final class RelayMain {
   }
 
   private static void startRelay(Server relay, ConnectionSource source) {
-
+    
     final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
-
     LOG.info("Relay front end object created.");
+
+    final Timeline timeline = new Timeline();
+    LOG.info("Relay timeline created.");
 
     LOG.info("Starting relay main loop...");
 
-    final Runnable hub = new Hub(source, new Hub.Handler() {
+    while (true) {
+      try {
 
-      @Override
-      public void handle(Connection connection) throws Exception {
+        LOG.info("Establishing connection...");
+        final Connection connection = source.connect();
+        LOG.info("Connection established.");
 
-        frontEnd.handleConnection(connection);
+        timeline.scheduleNow(new Runnable() {
+          @Override
+          public void run() {
+            try {
+              frontEnd.handleConnection(connection);
+            } catch (Exception ex) {
+              LOG.error(ex, "Exception handling connection.");
+            }
+          }
+        });
 
+      } catch (IOException ex) {
+        LOG.error(ex, "Failed to establish connection.");
       }
-
-      @Override
-      public void onException(Exception ex) {
-
-        System.out.println("ERROR: front end failed to handle connection. Check log for details.");
-        LOG.error(ex, "Exception handling connection.");
-
-      }
-    });
-
-    LOG.info("Starting hub...");
-
-    hub.run();
-
-    LOG.info("Hub exited.");
+    }
   }
 
   private static void loadTeamInfo(Server relay, String file) {
