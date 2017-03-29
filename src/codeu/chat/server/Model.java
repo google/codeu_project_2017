@@ -16,6 +16,7 @@ package codeu.chat.server;
 
 import java.util.Comparator;
 
+import codeu.chat.DerbyStore;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LinearUuidGenerator;
@@ -64,12 +65,23 @@ public final class Model {
   private final Store<Uuid, Message> messageById = new Store<>(UUID_COMPARE);
   private final Store<Time, Message> messageByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Message> messageByText = new Store<>(STRING_COMPARE);
+  
+  // DERBY connection
+  DerbyStore ds = new DerbyStore();
 
   private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1, Integer.MAX_VALUE);
   private Uuid currentUserGeneration = userGenerations.make();
 
   public void add(User user) {
     currentUserGeneration = userGenerations.make();
+    
+    try {
+		ds.addUser(user);
+	}
+	catch (Exception ex) {
+		System.out.println("Saving a user did not work.");
+		ex.printStackTrace();
+	}
 
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
@@ -93,6 +105,13 @@ public final class Model {
   }
 
   public void add(Conversation conversation) {
+	  try {
+			ds.addConversation(conversation);
+		}
+		catch (Exception ex) {
+			System.out.println("Saving a conversation did not work.");
+			ex.printStackTrace();
+		}
     conversationById.insert(conversation.id, conversation);
     conversationByTime.insert(conversation.creation, conversation);
     conversationByText.insert(conversation.title, conversation);
@@ -111,6 +130,13 @@ public final class Model {
   }
 
   public void add(Message message) {
+	try {
+		ds.addMessage(message);
+	}
+	catch (Exception ex) {
+		System.out.println("Saving a message did not work.");
+		ex.printStackTrace();
+	}
     messageById.insert(message.id, message);
     messageByTime.insert(message.creation, message);
     messageByText.insert(message.content, message);

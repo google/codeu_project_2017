@@ -35,7 +35,7 @@ import codeu.chat.util.connections.ConnectionSource;
 // VIEW
 //
 // This is the view component of the Model-View-Controller pattern used by the
-// the client to reterive readonly data from the server. All methods are blocking
+// the client to retrieve readonly data from the server. All methods are blocking
 // calls.
 public final class View implements BasicView, LogicalView{
 
