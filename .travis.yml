@@ -12,5 +12,5 @@ os:
 
 script:
   - ./clean.sh
-  - ./build.sh
+  - ./make.sh
   - ./test.sh
