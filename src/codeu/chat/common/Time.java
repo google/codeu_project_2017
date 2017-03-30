@@ -25,56 +25,48 @@ import codeu.chat.util.Serializers;
 
 public final class Time implements Comparable<Time> {
 
-  public static final Serializer<Time> SERIALIZER = new Serializer<Time>() {
+    public static final Serializer<Time> SERIALIZER = new Serializer<Time>() {
+
+        @Override
+        public void write(OutputStream out, Time value) throws IOException {
+
+            Serializers.LONG.write(out, value.totalMs);
+
+        }
+
+        @Override
+        public Time read(InputStream in) throws IOException {
+
+            return Time.fromMs(Serializers.LONG.read(in));
+
+        }
+    };
+
+    private static final SimpleDateFormat formatter =
+            new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
+
+    private final long totalMs;
+
+    private Time(long totalMs) { this.totalMs = totalMs; }
+
+    public long inMs() { return totalMs; }
 
     @Override
-    public void write(OutputStream out, Time value) throws IOException {
+    public int compareTo(Time other) {
+        return Long.compare(totalMs, other.totalMs);
+    }
 
-<<<<<<< HEAD
-		Serializers.LONG.write(out, value.totalMs);
-=======
-      Serializers.LONG.write(out, value.totalMs);
->>>>>>> 851e5cd912b95b6ea34f8b0b8da60fcd1c816909
-
+    public boolean inRange(Time start, Time end) {
+        return totalMs >= start.totalMs && totalMs <= end.totalMs;
     }
 
     @Override
-    public Time read(InputStream in) throws IOException {
-
-<<<<<<< HEAD
-		return Time.fromMs(Serializers.LONG.read(in));
-=======
-      return Time.fromMs(Serializers.LONG.read(in));
->>>>>>> 851e5cd912b95b6ea34f8b0b8da60fcd1c816909
-
+    public String toString() {
+        return formatter.format(new Date(totalMs));
     }
-  };
 
-  private static final SimpleDateFormat formatter =
-      new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
+    public static Time fromMs(long ms) { return new Time(ms); }
 
-  private final long totalMs;
-
-  private Time(long totalMs) { this.totalMs = totalMs; }
-
-  public long inMs() { return totalMs; }
-
-  @Override
-  public int compareTo(Time other) {
-    return Long.compare(totalMs, other.totalMs);
-  }
-
-  public boolean inRange(Time start, Time end) {
-    return totalMs >= start.totalMs && totalMs <= end.totalMs;
-  }
-
-  @Override
-  public String toString() {
-    return formatter.format(new Date(totalMs));
-  }
-
-  public static Time fromMs(long ms) { return new Time(ms); }
-
-  public static Time now() { return Time.fromMs(System.currentTimeMillis()); }
+    public static Time now() { return Time.fromMs(System.currentTimeMillis()); }
 
 }
