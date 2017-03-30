@@ -60,7 +60,8 @@ public final class MessagePanel extends JPanel {
                     ((owningConversation == null) ? "" : owningConversation.owner) :
                     u.name));
 
-    messageConversationLabel.setText("Conversation: " + owningConversation.title);
+    messageConversationLabel.setText("Conversation: " +
+            (owningConversation == null ? "" : owningConversation.title));
 
     getAllMessages(owningConversation, true);
   }
@@ -206,6 +207,7 @@ public final class MessagePanel extends JPanel {
       lastMessage = null;
     }
 
+    Message newLast = lastMessage;
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       if (replaceAll
               || lastMessage == null
@@ -220,8 +222,11 @@ public final class MessagePanel extends JPanel {
 
         messageListModel.addElement(displayString);
 
-        lastMessage = m;
+        if (newLast == null || m.creation.compareTo(lastMessage.creation) > 0) {
+          newLast = m;
+        }
       }
     }
+    lastMessage = newLast;
   }
 }

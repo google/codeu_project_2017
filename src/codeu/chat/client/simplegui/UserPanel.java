@@ -214,15 +214,18 @@ public final class UserPanel extends JPanel {
       usersList.clear();
       lastUser = null;
     }
-
+    User newLast = lastUser;
     for (final User u : clientContext.user.getUsers()) {
       if (replaceAll
               || lastUser == null
               || (u.creation.compareTo(lastUser.creation) >= 0
               && !u.id.equals(lastUser.id))) {
         usersList.addElement(u.name);
-        lastUser = u;
+        if (newLast == null || u.creation.compareTo(newLast.creation) >= 0) {
+          newLast = u;
+        }
       }
     }
+    lastUser = newLast;
   }
 }

@@ -133,7 +133,8 @@ public final class ConversationPanel extends JPanel {
                   null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
-            ConversationPanel.this.getAllConversations(listModel, false);
+            ConversationPanel.this.getAllConversations(listModel, true);
+            conversationList.setSelectedValue(s, true);
           }
         } else {
           JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
@@ -186,16 +187,19 @@ public final class ConversationPanel extends JPanel {
       convDisplayList.clear();
       lastConversation = null;
     }
-
+    ConversationSummary newLast = lastConversation;
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {
       if (replaceAll
               || lastConversation == null
               || (conv.creation.compareTo(lastConversation.creation) >= 0
               && !conv.id.equals(lastConversation.id))) {
         convDisplayList.addElement(conv.title);
-        lastConversation = conv;
+        if (newLast == null || conv.creation.compareTo(newLast.creation) > 0 ) {
+          newLast = conv;
+        }
       }
     }
+    lastConversation = newLast;
   }
 
   // Locate the Conversation object for a selected title string.
