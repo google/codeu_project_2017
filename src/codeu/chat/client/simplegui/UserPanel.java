@@ -209,23 +209,36 @@ public final class UserPanel extends JPanel {
 
   // Swing UI: populate ListModel object - updates display objects.
   private void getAllUsers(DefaultListModel<String> usersList, boolean replaceAll) {
+
+    // Get all of the users
     clientContext.user.updateUsers();
+
+    // If reloading all users, the panel should be empty and there is no last user displayed
     if (replaceAll) {
       usersList.clear();
       lastUser = null;
     }
+
+    // The most recent user that has been displayed
     User newLast = lastUser;
+
     for (final User u : clientContext.user.getUsers()) {
+
+      // Display the user's name if it is not in the panel yet
       if (replaceAll
               || lastUser == null
               || (u.creation.compareTo(lastUser.creation) >= 0
               && !u.id.equals(lastUser.id))) {
+
         usersList.addElement(u.name);
+
+        // Remember the most recently displayed user
         if (newLast == null || u.creation.compareTo(newLast.creation) >= 0) {
           newLast = u;
         }
       }
     }
+    // Store the last user to be displayed
     lastUser = newLast;
   }
 }

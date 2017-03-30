@@ -182,23 +182,35 @@ public final class ConversationPanel extends JPanel {
   // Populate ListModel - updates display objects.
   private void getAllConversations(DefaultListModel<String> convDisplayList, boolean replaceAll) {
 
+    // Get all of the conversations
     clientContext.conversation.updateAllConversations(false);
+
+    // If reloading all conversations, the panel should be empty and there is no last conversation displayed
     if (replaceAll) {
       convDisplayList.clear();
       lastConversation = null;
     }
+
+    // The last conversation to be displayed
     ConversationSummary newLast = lastConversation;
+
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {
+
+      // Display the conversation's title if it isn't in the panel yet
       if (replaceAll
               || lastConversation == null
               || (conv.creation.compareTo(lastConversation.creation) >= 0
               && !conv.id.equals(lastConversation.id))) {
+
         convDisplayList.addElement(conv.title);
+
+        // Remember the most recently displayed conversation
         if (newLast == null || conv.creation.compareTo(newLast.creation) > 0 ) {
           newLast = conv;
         }
       }
     }
+    // Store the most recently displayed conversation
     lastConversation = newLast;
   }
 

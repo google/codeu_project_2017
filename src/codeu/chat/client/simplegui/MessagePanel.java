@@ -202,31 +202,41 @@ public final class MessagePanel extends JPanel {
 
   // Populate ListModel
   private void getAllMessages(ConversationSummary conversation, boolean replaceAll) {
+
+    // If reloading all messages, the panel should be empty and there is no last message displayed
     if (replaceAll) {
       messageListModel.clear();
       lastMessage = null;
     }
 
+    // The most recent message that has been displayed
     Message newLast = lastMessage;
+
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
+
+      // Display the message if it is not in the panel yet.
       if (replaceAll
               || lastMessage == null
               || (m.creation.compareTo(lastMessage.creation) >= 0
               && !m.id.equals(lastMessage.id))
               ) {
+
         // Display author name if available.  Otherwise display the author UUID.
         final String authorName = clientContext.user.getName(m.author);
 
+        // Display message in the format Author: [Date Time]: Content
         final String displayString = String.format("%s: [%s]: %s",
                 ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
         messageListModel.addElement(displayString);
 
-        if (newLast == null || m.creation.compareTo(lastMessage.creation) > 0) {
+        // Remember the most recently displayed message
+        if (newLast == null || m.creation.compareTo(newLast.creation) > 0) {
           newLast = m;
         }
       }
     }
+    // Store the most recent message
     lastMessage = newLast;
   }
 }
