@@ -27,7 +27,7 @@ import codeu.chat.common.User;
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
-public final class UserPanel extends JPanel {
+public final class UserPanel extends JStylePanel {
 
   private final ClientContext clientContext;
 
@@ -35,6 +35,7 @@ public final class UserPanel extends JPanel {
     super(new GridBagLayout());
     this.clientContext = clientContext;
     initialize();
+    stylePanel(UserPanel.this);
   }
 
   private void initialize() {
@@ -45,12 +46,15 @@ public final class UserPanel extends JPanel {
     // Title bar - also includes name of currently signed-in user.
     final JPanel titlePanel = new JPanel(new GridBagLayout());
     final GridBagConstraints titlePanelC = new GridBagConstraints();
+    stylePanel(titlePanel);
 
     final JLabel titleLabel = new JLabel("Users", JLabel.LEFT);
     final GridBagConstraints titleLabelC = new GridBagConstraints();
     titleLabelC.gridx = 0;
     titleLabelC.gridy = 0;
     titleLabelC.anchor = GridBagConstraints.PAGE_START;
+    titleLabel.setForeground(Color.white);
+    styleLabel(titleLabel);
 
     final GridBagConstraints titleGapC = new GridBagConstraints();
     titleGapC.gridx = 1;
@@ -63,6 +67,8 @@ public final class UserPanel extends JPanel {
     titleUserC.gridx = 2;
     titleUserC.gridy = 0;
     titleUserC.anchor = GridBagConstraints.LINE_END;
+    userSignedInLabel.setForeground(Color.white);
+    styleLabel(userSignedInLabel);
 
     titlePanel.add(titleLabel, titleLabelC);
     titlePanel.add(Box.createHorizontalGlue(), titleGapC);
@@ -72,6 +78,7 @@ public final class UserPanel extends JPanel {
     // User List panel.
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
+    stylePanel(listShowPanel);
 
     final DefaultListModel<String> listModel = new DefaultListModel<>();
     final JList<String> userList = new JList<>(listModel);
@@ -86,6 +93,7 @@ public final class UserPanel extends JPanel {
     // Current User panel
     final JPanel currentPanel = new JPanel();
     final GridBagConstraints currentPanelC = new GridBagConstraints();
+    stylePanel(currentPanel);
 
     final JTextArea userInfoPanel = new JTextArea();
     final JScrollPane userInfoScrollPane = new JScrollPane(userInfoPanel);
@@ -95,10 +103,15 @@ public final class UserPanel extends JPanel {
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
+    stylePanel(buttonPanel);
 
     final JButton userUpdateButton = new JButton("Update");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userAddButton = new JButton("Add");
+
+    styleButton(userUpdateButton);
+    styleButton(userSignInButton);
+    styleButton(userAddButton);
 
     buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
@@ -192,4 +205,5 @@ public final class UserPanel extends JPanel {
       usersList.addElement(u.name);
     }
   }
+
 }

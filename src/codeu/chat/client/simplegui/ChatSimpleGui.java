@@ -53,7 +53,7 @@ public final class ChatSimpleGui {
   }
 
   private Border paneBorder() {
-    Border outside = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
+    Border outside = BorderFactory.createLineBorder(Color.WHITE);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
   }
@@ -70,6 +70,8 @@ public final class ChatSimpleGui {
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
+    mainViewPanel.setOpaque(true);
+    mainViewPanel.setBackground(Color.WHITE);
 
     // Build main panels - Users, Conversations, Messages.
     final JPanel usersViewPanel = new UserPanel(clientContext);
