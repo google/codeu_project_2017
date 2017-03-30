@@ -30,22 +30,14 @@ public final class Time implements Comparable<Time> {
     @Override
     public void write(OutputStream out, Time value) throws IOException {
 
-<<<<<<< HEAD
-		Serializers.LONG.write(out, value.totalMs);
-=======
       Serializers.LONG.write(out, value.totalMs);
->>>>>>> 851e5cd912b95b6ea34f8b0b8da60fcd1c816909
 
     }
 
     @Override
     public Time read(InputStream in) throws IOException {
 
-<<<<<<< HEAD
-		return Time.fromMs(Serializers.LONG.read(in));
-=======
       return Time.fromMs(Serializers.LONG.read(in));
->>>>>>> 851e5cd912b95b6ea34f8b0b8da60fcd1c816909
 
     }
   };
