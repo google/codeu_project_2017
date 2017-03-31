@@ -13,33 +13,52 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 /**
- * Created by Yash on 3/30/2017.
+ * Following MVP design pattern, this class encapsulates the functionality to
+ * store and retrieve data related to current user's conversations from Firebase
+ * database
  */
-
 public class ChatActivityPresenter implements ChatActivityInteractor {
+
+    private static final String TAG = ChatActivityPresenter.class.getName();
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
+    /**
+     * {@link ChatListAdapter} reference to update list of conversations
+     */
     private final ChatListAdapter view;
 
+    /**
+     * Constructor to accept a reference to a recycler view adapter to bind
+     * conversation data to views
+     *
+     * @param view {@link ChatListAdapter} reference
+     */
     public ChatActivityPresenter(ChatListAdapter view) {
         this.view = view;
     }
 
-    public void loadUserChats() {
+    /**
+     * Loads conversations of the current user from Firebase
+     */
+    public void loadConversations() {
         mRootRef.child("conversations").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Conversation> conversations = new ArrayList<>();
-                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     conversations.add(data.getValue(Conversation.class));
-                    Log.d("LOG_TAG", data.getValue(Conversation.class).getOwner());
+                    Log.d(TAG, data.getValue(Conversation.class).getOwner());
                 }
+
+                // updates list of conversations (and the corresponding views) in adapter
                 view.setChatList(conversations);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "loadConversations:failure " + databaseError.getMessage());
             }
         });
     }

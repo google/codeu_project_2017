@@ -14,17 +14,20 @@ import com.google.codeu.chatme.presenter.ChatActivityPresenter;
 import java.util.ArrayList;
 
 /**
- * Created by Yash on 3/30/2017.
+ * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
+ * data to the recyclerview in {@link ChatActivity}
  */
-
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
         implements ChatListAdapterView {
 
+    /**
+     * List of conversations
+     */
     private ArrayList<Conversation> conversations = new ArrayList<>();
 
     private ChatActivityPresenter presenter;
 
-    public ChatListAdapter(ChatActivity view) {
+    public ChatListAdapter() {
         this.presenter = new ChatActivityPresenter(this);
     }
 
@@ -40,27 +43,41 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         holder.tvSender.setText(current.getOwner());
     }
 
+    /**
+     * @return number of conversations
+     */
     @Override
     public int getItemCount() {
         return conversations.size();
     }
 
-    public void loadUserChats() {
-        this.presenter.loadUserChats();
+    /**
+     * Loads conversations of the current user from Firebase database
+     */
+    public void loadConversations() {
+        this.presenter.loadConversations();
     }
 
+    /**
+     * Resets the list of conversations and updates the recycler view
+     *
+     * @param conversations new list of conversations
+     */
     public void setChatList(ArrayList<Conversation> conversations) {
         this.conversations = conversations;
         notifyDataSetChanged();
     }
 
+    /**
+     * A {@link android.support.v7.widget.RecyclerView.ViewHolder} class to encapsulate
+     * various views of a conversation list item
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvSender;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
             tvSender = (TextView) itemView.findViewById(R.id.tvSender);
         }
     }
