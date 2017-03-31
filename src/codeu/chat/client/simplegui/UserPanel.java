@@ -151,8 +151,12 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+            // TO DO: add a new field for password
+          if (clientContext.user.signInUser(data, password){
+              userSignedInLabel.setText("Hello " + data);
+          } else{
+              userSignedInLabel.setText("User Not Found");
+          }
         }
       }
     });

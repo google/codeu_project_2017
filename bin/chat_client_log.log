@@ -1,0 +1,45 @@
+Mar 14, 2017 12:13:31 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 14, 2017 12:13:31 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 14, 2017 12:13:31 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 14, 2017 12:13:31 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 14, 2017 12:18:47 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 14, 2017 12:18:47 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 14, 2017 12:18:47 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "thao" UUID=[UUID:100.101.2102073541]
+Mar 14, 2017 12:19:38 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "Intro" UUID= [UUID:100.101.3581427987]
+Mar 14, 2017 12:19:38 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="Intro" UUID=[UUID:100.101.3581427987] first=[UUID:0] last=[UUID:0]
+
+Mar 14, 2017 12:19:38 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Intro" UUID=[UUID:100.101.3581427987] first=[UUID:0] last=[UUID:0]
+
+Mar 14, 2017 12:19:38 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Mar 14, 2017 12:19:38 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.101.3581427987] (Intro).
+
+Mar 14, 2017 12:19:54 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:100.101.2102073541] UUID= [UUID:100.101.2114849935]
+Mar 14, 2017 12:19:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Intro" UUID=[UUID:100.101.3581427987] first=[UUID:100.101.2114849935] last=[UUID:100.101.2114849935]
+
+Mar 14, 2017 12:19:54 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=false firstMessage=[UUID:100.101.2114849935]
+Mar 14, 2017 12:19:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:100.101.3581427987] (Intro).
+
+Mar 14, 2017 12:21:48 PM codeu.chat.client.commandline.Chat handleCommand
+SEVERE: Exception during command processing
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:73)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:282)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+

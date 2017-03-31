@@ -46,6 +46,8 @@ public final class ClientUser {
 
   // Validate the username string
   static public boolean isValidName(String userName) {
+    // TO DO: check that new userName is unique!!!
+      
     boolean clean = true;
     if (userName.length() == 0) {
       clean = false;
@@ -56,6 +58,10 @@ public final class ClientUser {
     }
     return clean;
   }
+    
+  static public boolean isValidPassword(String password) {
+    return (!(password.length()==0));
+  }
 
   public boolean hasCurrent() {
     return (current != null);
@@ -65,7 +71,7 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, String password) {
     updateUsers();
 
     final User prev = current;
@@ -73,9 +79,10 @@ public final class ClientUser {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;
+        String truePassword = newCurrent.password;
       }
     }
-    return (prev != current);
+    return (prev != current) && (password.equals(truePassword));
   }
 
   public boolean signOutUser() {
@@ -88,10 +95,10 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
-
-    final User user = (validInputs) ? controller.newUser(name) : null;
+  public void addUser(String name, String password) {
+    final boolean validName = isValidName(name);
+    final boolean validPassword = isValidPassword(password);
+    final User user = (validName && validPassword) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
