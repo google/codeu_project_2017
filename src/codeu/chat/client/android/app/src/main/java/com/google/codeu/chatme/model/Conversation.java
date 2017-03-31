@@ -12,18 +12,15 @@ public final class Conversation {
     public String owner;
     public long timeCreated;
 
-    public String firstMessage = null;
-    public String lastMessage = null;
-
-    public final List<String> participants = new ArrayList<>();
+    private final List<String> participants = new ArrayList<>();
 
     public Conversation() {
     }
 
     public Conversation(String owner) {
         this.owner = owner;
-        this.timeCreated = System.currentTimeMillis();
         this.participants.add(owner);
+        this.timeCreated = System.currentTimeMillis();
     }
 
     public String getId() {

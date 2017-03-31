@@ -2,8 +2,6 @@ package com.google.codeu.chatme.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.sql.Time;
-
 @IgnoreExtraProperties
 public final class User {
 
