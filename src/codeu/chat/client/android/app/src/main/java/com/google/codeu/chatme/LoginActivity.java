@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.codeu.chatme.controller.Controller;
+import com.google.codeu.chatme.presenter.LoginActivityPresenter;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,13 +20,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getName();
 
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
     /**
      * Progress loader
      */
     private ProgressDialog mProgressDialog;
+
+    private LoginActivityPresenter presenter;
 
     /**
      * Sets up {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
@@ -38,109 +38,33 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    openChatActivity();
-                } else {
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
+        presenter = new LoginActivityPresenter(this);
     }
 
     /**
-     * Adds {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
+     * Delegates presenter to add {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
      * {@link FirebaseAuth} which is the entry point to Firebase SDK
      */
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        presenter.setAuthStateListener();
     }
 
     /**
-     * Removes {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} from
-     * {@link FirebaseAuth} if it exists
+     * Delegates presenter to remove {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener}
+     * from {@link FirebaseAuth} if it exists
      */
     @Override
     protected void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    /**
-     * Attempts to create an account with given account credentials
-     *
-     * @param email    user email
-     * @param password user password
-     */
-    private void signUp(String email, String password) {
-        showProgressDialog(getString(R.string.progress_sign_up));
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signUpWithEmail:onComplete:" + task.isSuccessful());
-                        hideProgressDialog();
-
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signUpWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
-                            Log.i(TAG, "signUpWithEmail:success" + currentUser.getUid());
-
-                            // saves new user to real-time database
-                            Controller.addUser(currentUser.getUid(), currentUser.getDisplayName());
-                            openChatActivity();
-                        }
-                    }
-                });
-    }
-
-    /**
-     * Attempts to log user in with given credentials
-     *
-     * @param email    user email
-     * @param password user password
-     */
-    private void signIn(String email, String password) {
-        showProgressDialog(getString(R.string.progress_sign_in));
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                        hideProgressDialog();
-
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Log.i(TAG, "signInwithEmail:success:"
-                                    + mAuth.getCurrentUser().getUid());
-                            hideProgressDialog();
-                        }
-                    }
-                });
+        presenter.removeAuthStateListener();
     }
 
     /**
      * Launches {@link ChatActivity}, usually on successful sign up or sign in
      */
-    private void openChatActivity() {
+    public void openChatActivity() {
         Intent mIntent = new Intent(LoginActivity.this, ChatActivity.class);
         startActivity(mIntent);
     }
@@ -167,5 +91,14 @@ public class LoginActivity extends AppCompatActivity {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+    }
+
+    /**
+     * Creates a long toast message on the {@link LoginActivity} frame
+     *
+     * @param message message to be toasted
+     */
+    public void makeToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
