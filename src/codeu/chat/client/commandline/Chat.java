@@ -149,6 +149,7 @@ public final class Chat {
           }
           clientContext.conversation.startConversation(
               title, clientContext.user.getCurrent().id, passHash, salt);
+
         }
       }
 
@@ -218,6 +219,7 @@ public final class Chat {
   }
 
   // Sign in a user.
+
   private void signInUser(String name, String password) {
     if (!clientContext.user.signInUser(name, password)) {
       System.out.println("Error: sign in failed (invalid name or password?)");
@@ -343,5 +345,12 @@ public final class Chat {
       clientContext.conversation.setCurrent(newCurrent);
       clientContext.conversation.updateAllConversations(true);
     }
+  }
+
+  public void selectPrivateConversation(){
+    //check if the conversation exists
+    clientContext.conversation.updateAllConversations(false);
+
+    //ask for password
   }
 }
