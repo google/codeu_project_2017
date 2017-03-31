@@ -24,6 +24,7 @@ import java.util.Arrays;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
+import codeu.chat.client.commandline.Password;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -153,8 +154,25 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+          int i=0; int MAX_TRIALS=3;
+          while(true) {
+              String message = (i==0) ? "Enter Password" : "TryAgain";
+              final String password = (String) JOptionPane.showInputDialog(
+                      UserPanel.this, message, "Sign In", JOptionPane.PLAIN_MESSAGE,
+                      null, null, "");
+              if (password != null && password.length() > 0){
+                  if(Password.authenticateUserGUI(data, password)){
+                      clientContext.user.signInUser(data, 1);
+                      userSignedInLabel.setText("Hello " + data);
+                      break;
+                  }
+              }
+              i++;
+              if(i==MAX_TRIALS) {
+                  JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Password!", "Error", JOptionPane.ERROR_MESSAGE );
+                  break;
+              }
+          }
         }
       }
     });
@@ -199,7 +217,6 @@ public final class UserPanel extends JPanel {
         panel.add(confirmPassword, constraints);
 
 
-
         String[] options = new String[]{"OK", "Cancel"};
         int option = JOptionPane.showOptionDialog(null, panel, "Add User", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
         if (option == 0 ) {
@@ -217,7 +234,7 @@ public final class UserPanel extends JPanel {
             }
 
         }
-        if(option==1) break;
+        if(option==1) break;//click cancel to exit
     }
 
       }

@@ -195,10 +195,10 @@ public final class Chat {
 
   // Sign in a user.
   private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
+    if (!clientContext.user.signInUser(name, 0)) {
       System.out.println("Error: sign in failed (invalid name or password?)");
     }
-    System.out.format("%s signed in\n", name);
+    else System.out.format("%s signed in\n", name);
   }
 
   // Sign out a user.

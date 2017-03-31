@@ -66,11 +66,11 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, int mode) { //mode 0 is signing in via commandline while mode 1 is signing in via GUI
     updateUsers();
 
     final User prev = current;
-    if (name != null && Password.authenticateUser(name)) {
+    if (( name!=null && mode==1)|| (name != null && Password.authenticateUserCommandline(name) && mode==0)) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;

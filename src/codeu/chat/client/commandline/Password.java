@@ -32,21 +32,9 @@ public class Password {
 
 
     public static void createPassword(String user, String password){
-        //Console console = System.console();
-    //    while(true) {
+
             try {
-//                String password = new String(console.readPassword("Enter Password: "));
-//                String confirmPassword = new String(console.readPassword("Confirm Password: "));
-//                final boolean validPass = ClientUser.isValidName(password) && password.equals(confirmPassword);
-//
-//                password = validPass ? password : null;
-//
-//                if (password == null) {
-//                    System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Invalid password. Try Again");
-               // } else {
-                    encryptPassword(user, password, getSaltvalue());
-                   // break;
-               // }
+                encryptPassword(user, password, getSaltvalue());
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidKeySpecException e) {
@@ -67,7 +55,7 @@ public class Password {
             else return password;
         }
     }
-    public static boolean authenticateUser(String name){
+    public static boolean authenticateUserCommandline(String name){
         Console console = System.console();
         int i=0;
         boolean correctPass=false;
@@ -76,10 +64,10 @@ public class Password {
             while(true) {
                 correctPass = verifyPassword(name, password);
                 // System.out.println(correctPass);
-                i++;
                 if (i == MAX_TRIALS || correctPass)
                     break;
                 password = String.valueOf((console.readPassword("Try again: ")));
+                i++;
             }
         }
         catch (NoSuchAlgorithmException e) {
@@ -88,6 +76,19 @@ public class Password {
             System.out.println(e.getMessage());
         }
         return correctPass;
+    }
+
+    public static boolean authenticateUserGUI(String user, String password){
+        boolean isCorrect=false;
+        try{
+            isCorrect=verifyPassword(user, password);
+        }
+        catch (NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidKeySpecException e) {
+            System.out.println(e.getMessage());
+        }
+        return isCorrect;
     }
 
     public static final boolean verifyPassword(String username, String password)throws NoSuchAlgorithmException, InvalidKeySpecException{

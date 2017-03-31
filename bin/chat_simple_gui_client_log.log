@@ -644,3 +644,243 @@ Mar 30, 2017 7:54:20 PM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 Mar 30, 2017 7:54:20 PM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "asrat" UUID=[UUID:100.101.1612910822]
+Mar 30, 2017 8:34:47 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 30, 2017 8:34:47 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 30, 2017 8:34:47 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 30, 2017 8:34:47 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 30, 2017 8:34:47 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 30, 2017 8:34:48 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 30, 2017 8:49:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 30, 2017 8:49:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 30, 2017 8:49:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 30, 2017 8:49:55 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 30, 2017 8:49:56 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 30, 2017 8:49:57 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 30, 2017 8:51:15 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 30, 2017 8:51:15 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 30, 2017 8:51:15 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "navas" UUID=[UUID:100.101.3981541917]
+Mar 30, 2017 8:52:42 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 30, 2017 8:52:42 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 30, 2017 8:52:42 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqssssssss" UUID=[UUID:100.101.100858462]
+Mar 31, 2017 9:55:34 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 9:55:34 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 9:55:34 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 9:55:34 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 9:55:34 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 9:55:36 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 9:55:53 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 9:55:53 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 9:55:53 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Robert Kinini" UUID=[UUID:100.101.1126784841]
+Mar 31, 2017 9:56:09 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 9:56:09 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 9:56:09 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "samuel mwangi" UUID=[UUID:100.101.57970938]
+Mar 31, 2017 9:56:20 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 9:56:20 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 9:56:20 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "asrat alemu" UUID=[UUID:100.101.2298550072]
+Mar 31, 2017 9:56:32 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 9:56:32 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 9:56:32 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "laszlo laszlo" UUID=[UUID:100.101.3505933981]
+Mar 31, 2017 9:57:06 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 9:57:06 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 9:57:06 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "holy masters" UUID=[UUID:100.101.106075984]
+Mar 31, 2017 9:59:47 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 9:59:47 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 9:59:47 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 9:59:47 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 9:59:47 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 9:59:48 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:00:43 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:00:43 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:00:43 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "joseph" UUID=[UUID:100.101.2016798585]
+Mar 31, 2017 10:03:38 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:03:38 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:03:38 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:03:38 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:03:39 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:03:40 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:03:51 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:03:51 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:03:51 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "samuwl" UUID=[UUID:100.101.2946085489]
+Mar 31, 2017 10:06:52 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:06:52 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:06:52 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "titus" UUID=[UUID:100.101.2265537085]
+Mar 31, 2017 10:11:56 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:11:56 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:11:56 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "james" UUID=[UUID:100.101.589074232]
+Mar 31, 2017 10:15:49 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:15:49 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:15:49 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:15:49 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:15:49 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:15:50 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:15:59 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:15:59 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:15:59 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "george" UUID=[UUID:100.101.791361519]
+Mar 31, 2017 10:18:04 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:18:04 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:18:04 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:18:04 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:18:04 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:18:05 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:18:11 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:18:11 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:18:11 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "x" UUID=[UUID:100.101.3016038372]
+Mar 31, 2017 10:19:03 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:19:03 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:19:03 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:19:03 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:19:03 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:19:04 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:19:10 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:19:10 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:19:10 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "z" UUID=[UUID:100.101.3227100312]
+Mar 31, 2017 10:20:21 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:20:21 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:20:21 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:20:21 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:20:22 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:20:23 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:20:30 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:20:30 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:20:30 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "as" UUID=[UUID:100.101.4034481384]
+Mar 31, 2017 10:21:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:21:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:21:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:21:24 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:21:25 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:21:26 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:21:31 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:21:31 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:21:31 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "w" UUID=[UUID:100.101.4268033815]
+Mar 31, 2017 10:21:50 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 10:21:50 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 10:21:50 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 10:21:50 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 10:21:51 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 10:21:52 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 10:21:59 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:21:59 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:22:00 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "k" UUID=[UUID:100.101.703642849]
+Mar 31, 2017 10:24:37 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 10:24:37 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 10:24:37 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "man" UUID=[UUID:100.101.434043724]
