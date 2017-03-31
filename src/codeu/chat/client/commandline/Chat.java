@@ -23,7 +23,7 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
 
 // Chat - top-level client application.
-public final class Chat {
+public final class  Chat {
 
   private final static Logger.Log LOG = Logger.newLog(Chat.class);
 
@@ -49,7 +49,7 @@ public final class Chat {
     System.out.println("   sign-out  - sign out current user.");
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
+    System.out.println("   u-add <name> <password> - add a new user.");
     System.out.println("   u-list-all    - list all users known to system.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
@@ -89,7 +89,9 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        String username = tokenScanner.nextLine();
+        System.out.println("Please enter the password.");
+        signInUser(username.trim());
       }
 
     } else if (token.equals("sign-out")) {
@@ -109,7 +111,12 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        String username = tokenScanner.nextLine().trim();
+        if (!tokenScanner.hasNext()) {
+          System.out.println("ERROR: Password not supplied.");
+        } else {
+          addUser(username, tokenScanner.nextLine().trim());
+        }
       }
 
     } else if (token.equals("u-list-all")) {
@@ -266,8 +273,8 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String name, String password) {
+    clientContext.user.addUser(name, password);
   }
 
   // Display all users known to server.

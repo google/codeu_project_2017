@@ -33,6 +33,7 @@ public final class User {
       Uuids.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
+      Serializers.STRING.write(out, value.password);
 
     }
 
@@ -42,7 +43,8 @@ public final class User {
       return new User(
           Uuids.SERIALIZER.read(in),
           Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
+          Time.SERIALIZER.read(in),
+          Serializers.STRING.read(in)
       );
 
     }
@@ -52,11 +54,44 @@ public final class User {
   public final String name;
   public final Time creation;
 
+  private String password = null;
+
   public User(Uuid id, String name, Time creation) {
 
     this.id = id;
     this.name = name;
     this.creation = creation;
 
+  }
+
+  /**
+   * Create a new user with a password
+   * @param id
+   * @param name
+   * @param creation
+   * @param password
+   */
+  public User(Uuid id, String name, Time creation, String password) {
+    this.id = id;
+    this.name = name;
+    this.creation = creation;
+    this.password = password;
+  }
+
+  /**
+   * Reset the password
+   * @param newPassword
+   */
+  public void resetPassword(String newPassword) {
+    this.password = newPassword;
+  }
+
+  /**
+   * Check the correctness of password
+   * @param aPassword the password need be checked
+   * @return true if the password is correct
+   */
+  public boolean checkPassword(String aPassword) {
+    return this.password.equals(aPassword);
   }
 }
