@@ -70,10 +70,10 @@ public final class User {
     else return true;
   }
 
-  public boolean isPassword(String password) {
-    String passHashAttempt = Password.getHashCode(password, this.salt);
-    if (passHashAttempt.equals(this.passwordHash)) return true;
-    else return false;
+
+  public boolean isPassword(String password){
+    String hashAttempt = Password.getHashCode(password, this.salt);
+    return (hashAttempt.equals(this.passwordHash));
   }
 
   public String getPasswordHash() {

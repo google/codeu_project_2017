@@ -16,6 +16,7 @@ package codeu.chat.client;
 
 import java.util.*;
 
+import codeu.chat.common.Password;
 import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
@@ -62,21 +63,20 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, String password) {
     updateUsers();
 
     final User prev = current;
     if (name != null) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
-        System.out.print("Please enter the password: ");
-        boolean userAccess = newCurrent.isPassword(new Scanner(System.in).nextLine().trim());
+        boolean userAccess = newCurrent.isPassword(password);
         if (userAccess) current = newCurrent;
-        else System.out.println("Incorrect password!");
       }
     }
     return (prev != current);
   }
+
 
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();

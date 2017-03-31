@@ -27,11 +27,11 @@ import codeu.chat.util.Logger;
 // Chat - top-level client application.
 public final class Chat {
 
-  private final static Logger.Log LOG = Logger.newLog(Chat.class);
+  private static final Logger.Log LOG = Logger.newLog(Chat.class);
 
   private static final String PROMPT = ">>";
 
-  private final static int PAGE_SIZE = 10;
+  private static final int PAGE_SIZE = 10;
 
   private boolean alive = true;
 
@@ -91,7 +91,10 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        String userName = tokenScanner.nextLine().trim();
+        System.out.print("Please enter the password: ");
+        String password = lineScanner.next().trim();
+        signInUser(userName, password);
       }
 
     } else if (token.equals("sign-out")) {
@@ -133,21 +136,20 @@ public final class Chat {
           boolean isPrivate = false;
           String passHash = "password";
           String salt = Password.generateSalt();
-          while(response == null){
+          while (response == null) {
             System.out.print("Add password to conversation? (y/n): ");
             response = lineScanner.nextLine().trim();
-            if(response.equalsIgnoreCase("y"))
-              isPrivate = true;
-            else if(response.equalsIgnoreCase("n"))
-              isPrivate = false;
-            else
-              response = null;
+            if (response.equalsIgnoreCase("y")) isPrivate = true;
+            else if (response.equalsIgnoreCase("n")) isPrivate = false;
+            else response = null;
           }
-          if(isPrivate){
+          if (isPrivate) {
             System.out.print("Please enter a password: ");
             passHash = Password.getHashCode(lineScanner.nextLine().trim(), salt);
           }
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id, passHash, salt);
+          clientContext.conversation.startConversation(
+              title, clientContext.user.getCurrent().id, passHash, salt);
+
         }
       }
 
@@ -169,7 +171,8 @@ public final class Chat {
         if (!tokenScanner.hasNext()) {
           System.out.println("ERROR: Message body not supplied.");
         } else {
-          clientContext.message.addMessage(clientContext.user.getCurrent().id,
+          clientContext.message.addMessage(
+              clientContext.user.getCurrent().id,
               clientContext.conversation.getCurrentId(),
               tokenScanner.nextLine().trim());
         }
@@ -207,16 +210,18 @@ public final class Chat {
     } else {
 
       System.out.format("Command not recognized: %s\n", token);
-      System.out.format("Command line rejected: %s%s\n", token,
-          (tokenScanner.hasNext()) ? tokenScanner.nextLine() : "");
+      System.out.format(
+          "Command line rejected: %s%s\n",
+          token, (tokenScanner.hasNext()) ? tokenScanner.nextLine() : "");
       System.out.println("Type \"help\" for help.");
     }
     tokenScanner.close();
   }
 
   // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
+
+  private void signInUser(String name, String password) {
+    if (!clientContext.user.signInUser(name, password)) {
       System.out.println("Error: sign in failed (invalid name or password?)");
     }
   }
@@ -233,8 +238,8 @@ public final class Chat {
     if (clientContext.conversation.currentMessageCount() == 0) {
       System.out.println(" -- no messages in conversation --");
     } else {
-      System.out.format(" conversation has %d messages.\n",
-                        clientContext.conversation.currentMessageCount());
+      System.out.format(
+          " conversation has %d messages.\n", clientContext.conversation.currentMessageCount());
       if (!clientContext.message.hasCurrent()) {
         System.out.println(" -- no current message --");
       } else {
@@ -327,8 +332,7 @@ public final class Chat {
     } else {
       final ListNavigator<ConversationSummary> navigator =
           new ListNavigator<ConversationSummary>(
-              clientContext.conversation.getConversationSummaries(),
-              lineScanner, PAGE_SIZE);
+              clientContext.conversation.getConversationSummaries(), lineScanner, PAGE_SIZE);
       if (navigator.chooseFromList()) {
         newCurrent = navigator.getSelectedChoice();
         clientContext.message.resetCurrent(newCurrent != previous);

@@ -22,6 +22,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
+import codeu.chat.common.Password;
 import codeu.chat.common.User;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
@@ -151,8 +152,17 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+          final String password = (String) JOptionPane.showInputDialog(
+                  UserPanel.this, "Enter Password:", "Password", JOptionPane.PLAIN_MESSAGE,
+                  null, null, ""
+          );
+          boolean signedIn = clientContext.user.signInUser(data,password);
+          if(signedIn){
+            userSignedInLabel.setText("Hello " + data);
+          }
+          else{
+            JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Username or Password");
+          }
         }
       }
     });
@@ -163,8 +173,13 @@ public final class UserPanel extends JPanel {
         final String s = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
+        final String p = (String) JOptionPane.showInputDialog(
+                UserPanel.this, "Enter Password:", "Add Password", JOptionPane.PLAIN_MESSAGE,
+                null, null, ""
+        );
+        final String salt = Password.generateSalt();
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s, "password", "salt");
+          clientContext.user.addUser(s,Password.getHashCode(p,salt) , salt);
           UserPanel.this.getAllUsers(listModel);
         }
       }

@@ -122,7 +122,12 @@ public final class ClientConversation {
   }
 
   private void joinConversation(String match) {
-    Method.notImplemented();
+    //Check to see if match has a conversatin associated with it
+    ConversationSummary conv = summariesSortedByTitle.first(match);
+    //Check to see if there is a password, if so enter password
+
+    //
+
   }
 
   private void leaveCurrentConversation() {

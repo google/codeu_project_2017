@@ -77,7 +77,6 @@ public class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(connection.out(), name);
-      //TO DO, Check with Server Controller for input from Client Controller
       Serializers.STRING.write(connection.out(), passwordHash);
       Serializers.STRING.write(connection.out(), salt);
 
