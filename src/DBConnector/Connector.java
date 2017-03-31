@@ -5,6 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import sun.awt.image.ImageWatched.Link;
 
 /**
  * JDBC connector is needed to connects java program to the database.
@@ -38,35 +45,22 @@ public class Connector {
   /**
    * print all the current useNnames
    */
-  public String[] getAllUsers() {
+  public List<String> getAllUsers() {
 
-    String sqlSelectCount = "select count(*) from "+tableName;
     String sqlSelectUsername = "select username from " + tableName;
-    String[] userNames = null;
+    LinkedList<String> userNames = new LinkedList<>();
 
-    try(PreparedStatement selectCount = myConn.prepareStatement(sqlSelectCount)) {
-      try (ResultSet getSize = selectCount.executeQuery()) {
-        getSize.next();
-        int size = getSize.getInt(1);
-        userNames = new String[size];
-        if (size == 0) {
-          System.out.println("the table is empty");
-          return userNames;
-        }
-      }
-    } catch (SQLException e1){e1.printStackTrace(); return userNames;}
-
-    //if the size is not 0, and there are users indeed
     try(PreparedStatement getUsers = myConn.prepareStatement(sqlSelectUsername)){
       try(ResultSet users= getUsers.executeQuery()){
-        int i = 0;
-        while (users.next()) {
-          userNames[i]= users.getString("username");
-          i++;
-        }
+        while (users.next()) {userNames.add(users.getString("username"));}
         return userNames;
       }
-    } catch (SQLException e) {e.printStackTrace();return userNames;}
+    }
+    catch (SQLException e) {
+      System.out.println("the error occurred from database");
+      e.printStackTrace();
+      return null;
+    }
   }
 
   /**
@@ -78,41 +72,7 @@ public class Connector {
    */
   public boolean addAccount(String username, String password) {
 
-    String sqlSelectUsername = "select username from "+tableName+" where username = ?";
     String sqlInsertAccount = "insert into "+tableName + "(username, password)" + "values(?,?)";
-    String sqlSelectCount = "select count(*) from "+tableName;
-
-    int size = 0;
-    try( PreparedStatement selectCount = myConn.prepareStatement(sqlSelectCount)){
-      try(ResultSet getSize = selectCount.executeQuery()) {
-        if (getSize.next()) {
-          size = getSize.getInt(1);
-          getSize.beforeFirst();
-        }
-      }
-    }catch (SQLException e1){e1.printStackTrace();return false;}
-
-    if (size == 0){
-      try (PreparedStatement insertAccount = myConn.prepareStatement(sqlInsertAccount)) {
-        insertAccount.setString(1, username);
-        insertAccount.setString(2, password);
-        insertAccount.executeUpdate();
-        return true;
-      } catch (SQLException e2){e2.printStackTrace();return false;}
-    }
-
-    //if there are more than one user, return false if there exists one target already
-    try(PreparedStatement selectUsername2 = myConn.prepareStatement(sqlSelectUsername)){
-      selectUsername2.setString(1,username);
-      try(ResultSet getUser = selectUsername2.executeQuery()){
-        if (getUser.next()) {
-          // move the cursor all the way back to the starting point
-          getUser.beforeFirst();
-          System.err.println("the account exists");
-          return false;
-        }
-      }
-    } catch (SQLException e) {e.printStackTrace();return false;}
 
     try(PreparedStatement insertAccount = myConn.prepareStatement(sqlInsertAccount)) {
       insertAccount.setString(1, username);
@@ -128,7 +88,9 @@ public class Connector {
    * @return true if the data has been cleaned
    */
   public boolean dropAllAccounts() {
+
     String sqlDrop = "truncate table "+ tableName;
+
     try(PreparedStatement dropAll = myConn.prepareStatement(sqlDrop)){
         dropAll.executeUpdate();
         System.out.println("the table has been cleared");
@@ -150,41 +112,29 @@ public class Connector {
    * @return true if the account is verified, else, false, if the account is not valid
    */
   public boolean verifyAccount(String username, String password) {
+
     String sqlSelectPassword = "select password from "+tableName+" where username = ?";
-    String sqlSelectUsername = "select username from "+tableName+" where username = ?";
-    boolean accountExits = false;
 
-    try(PreparedStatement selectUsername = myConn.prepareStatement(sqlSelectUsername)) {
-      selectUsername.setString(1, username);
-      try (ResultSet resultUsername = selectUsername.executeQuery()) {
-        // check the existence
-        if (resultUsername.next()) {
-          resultUsername.beforeFirst();
-          accountExits = true;
-        }
-      }
-    } catch (SQLException e1){e1.printStackTrace(); return false;}
-
-    if(accountExits){
-      try (PreparedStatement selectPassword = myConn.prepareStatement(sqlSelectPassword)){
-        // the account exists, check password
-        selectPassword.setString(1, username);
-        try (ResultSet resultPassword = selectPassword.executeQuery()) {
-          if (resultPassword.next()) {
-            // get the stored password from database
-            String passwordInDB = resultPassword.getString(1);
-            resultPassword.beforeFirst();
-            // password does not match
-            if (!passwordInDB.equals(password)) {
-              System.err.println("the password does not match");
-              return false;
-            }
-            System.out.println("the account exists");
-            return true;
+    try (PreparedStatement selectPassword = myConn.prepareStatement(sqlSelectPassword)){
+      // the account exists, check password
+      selectPassword.setString(1, username);
+      try (ResultSet resultPassword = selectPassword.executeQuery()) {
+        if (resultPassword.next()){
+          // get the stored password from database
+          String passwordInDB = resultPassword.getString(1);
+          // password does not match
+          if (!passwordInDB.equals(password)) {
+            System.err.println("the password does not match");
+            return false;
           }
+          System.out.println("the account exists");
+          return true;
         }
       }
-      catch (SQLException e2){e2.printStackTrace(); return false;}
+    }
+    catch (SQLException e2){
+      e2.printStackTrace();
+      return false;
     }
     System.err.println("the account does not exist");
     return false;
@@ -199,22 +149,11 @@ public class Connector {
   public boolean deleteAccount(String username) {
 
     String sqlDeleteAccount = "DELETE  FROM "+tableName+" WHERE username = ?";
-    String sqlSelectUsername = "select username from "+tableName+" where username = ?";
 
-    try(PreparedStatement selectUsername = myConn.prepareStatement(sqlSelectUsername)) {
-      selectUsername.setString(1, username);
-      try (ResultSet getUsername = selectUsername.executeQuery()) {
-        if (getUsername.next()) {
-          getUsername.beforeFirst();
-          try (PreparedStatement deleteAccount = myConn.prepareStatement(sqlDeleteAccount)) {
-            deleteAccount.setString(1, username);
-            deleteAccount.executeUpdate();
-            return true;
-          }
-        }
-        //if the account does not exist
-        return false;
-      }
+    try (PreparedStatement deleteAccount = myConn.prepareStatement(sqlDeleteAccount)) {
+      deleteAccount.setString(1, username);
+      if(deleteAccount.executeUpdate() == 1)return true;
+      else return false;
     }
     catch (SQLException e) {
       e.printStackTrace();
