@@ -5,10 +5,10 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.codeu.chatme.LoginActivity;
 import com.google.codeu.chatme.R;
-import com.google.codeu.chatme.controller.Controller;
 import com.google.codeu.chatme.model.User;
+import com.google.codeu.chatme.view.login.LoginActivity;
+import com.google.codeu.chatme.view.login.LoginView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +24,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
 
     private static final String TAG = LoginActivityPresenter.class.getName();
 
-    private final LoginActivity view;
+    private final LoginView view;
 
     private static final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -39,7 +39,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      *
      * @param view a reference to {@link LoginActivity}
      */
-    public LoginActivityPresenter(final LoginActivity view) {
+    public LoginActivityPresenter(final LoginView view) {
         this.view = view;
 
         this.mAuth = FirebaseAuth.getInstance();
@@ -65,7 +65,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      */
     @Override
     public void signUp(String email, String password) {
-        view.showProgressDialog(view.getString(R.string.progress_sign_up));
+        view.showProgressDialog(R.string.progress_sign_up);
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -119,7 +119,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      * @param password user password
      */
     public void signIn(String email, String password) {
-        view.showProgressDialog(view.getString(R.string.progress_sign_in));
+        view.showProgressDialog(R.string.progress_sign_in);
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -1,22 +1,17 @@
-package com.google.codeu.chatme;
+package com.google.codeu.chatme.view.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.codeu.chatme.controller.Controller;
+import com.google.codeu.chatme.view.ChatActivity;
+import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.presenter.LoginActivityPresenter;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private static final String TAG = LoginActivity.class.getName();
 
@@ -72,12 +67,12 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Shows progress loader with the given message
      *
-     * @param messsage message to display
+     * @param messsage resource Id of string message to display
      */
-    public void showProgressDialog(String messsage) {
+    public void showProgressDialog(int messsage) {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(messsage);
+            mProgressDialog.setMessage(getString(messsage));
             mProgressDialog.setIndeterminate(true);
         }
 

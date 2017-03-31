@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.codeu.chatme.ChatActivity;
+import com.google.codeu.chatme.view.ChatActivity;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;

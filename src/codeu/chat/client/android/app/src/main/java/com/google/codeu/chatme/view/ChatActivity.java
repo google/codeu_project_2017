@@ -1,10 +1,11 @@
-package com.google.codeu.chatme;
+package com.google.codeu.chatme.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.view.adapter.ChatListAdapter;
 
 public class ChatActivity extends AppCompatActivity {
