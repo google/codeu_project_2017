@@ -8,9 +8,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.codeu.chatme.LoginActivity;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.controller.Controller;
+import com.google.codeu.chatme.model.User;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Following MVP design pattern, this class encapsulates the functionality to
@@ -21,6 +25,8 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
     private static final String TAG = LoginActivityPresenter.class.getName();
 
     private final LoginActivity view;
+
+    private static final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     private FirebaseAuth mAuth;
 
@@ -70,18 +76,40 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
                         view.hideProgressDialog();
 
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signUpWithEmail:failure", task.getException());
+                            Log.w(TAG, "signUp:failure", task.getException());
                             view.makeToast(task.getException().getMessage());
                         } else {
                             FirebaseUser currentUser = mAuth.getCurrentUser();
-                            Log.i(TAG, "signUp:success" + currentUser.getUid());
+                            Log.i(TAG, "signUp:success:" + currentUser.getUid());
 
                             // saves new user to real-time database
-                            Controller.addUser(currentUser.getUid(), currentUser.getDisplayName());
+                            addUser(currentUser.getUid(), currentUser.getDisplayName());
                             view.openChatActivity();
                         }
                     }
                 });
+    }
+
+    /**
+     * Saves a new user to Firebase real-time database
+     *
+     * @param id   id of {@link User}
+     * @param name display name of {@link User}
+     */
+    private void addUser(final String id, String name) {
+        User newUser = new User(name);
+
+        mRootRef.child("users").child(id).setValue(newUser, new DatabaseReference.CompletionListener() {
+
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    Log.w(TAG, "addUser:failure " + databaseError.getMessage());
+                } else {
+                    Log.i(TAG, "addUser:success " + id);
+                }
+            }
+        });
     }
 
     /**
