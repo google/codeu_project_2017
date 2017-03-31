@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.util.Arrays;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
@@ -99,6 +100,7 @@ public final class UserPanel extends JPanel {
     final JButton userUpdateButton = new JButton("Update");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userAddButton = new JButton("Add");
+   // final
 
     buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
@@ -156,19 +158,84 @@ public final class UserPanel extends JPanel {
         }
       }
     });
-
     userAddButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
-            null, null, "");
-        if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
-          UserPanel.this.getAllUsers(listModel);
+    while(true) {
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10, 10, 10, 10);
+
+        JLabel textLabel = new JLabel("Enter Name");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        panel.add(textLabel, constraints);
+
+        JTextField textField = new JTextField();
+        textField.setColumns(16);
+        constraints.gridx = 1;
+        panel.add(textField, constraints);
+
+
+        JLabel passLabel = new JLabel("Enter Password");
+        constraints.gridy = 1;
+        constraints.gridx = 0;
+        panel.add(passLabel, constraints);
+
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setColumns(16);
+        constraints.gridx = 1;
+        panel.add(passwordField, constraints);
+
+        JLabel confirmField = new JLabel("Confirm Password");
+        constraints.gridy = 2;
+        constraints.gridx = 0;
+        panel.add(confirmField, constraints);
+
+        JPasswordField confirmPassword = new JPasswordField();
+        confirmPassword.setColumns(16);
+        constraints.gridx = 1;
+        panel.add(confirmPassword, constraints);
+
+
+
+        String[] options = new String[]{"OK", "Cancel"};
+        int option = JOptionPane.showOptionDialog(null, panel, "Add User", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+        if (option == 0 ) {
+            String s=textField.getText();
+            String pass_one = String.valueOf(passwordField.getPassword());
+            String pass_two = String.valueOf(confirmPassword.getPassword());
+            if (pass_one.equals(pass_two) && (s != null && s.length() > 0)) {
+                clientContext.user.addUser(s,pass_one);
+                UserPanel.this.getAllUsers(listModel);
+                break;
+            }
+            else{
+                if(!pass_one.equals(pass_two)) JOptionPane.showMessageDialog(panel, "Passwords don't match!", "Error", JOptionPane.ERROR_MESSAGE );
+                if(s== null || s.length() == 0) JOptionPane.showMessageDialog(panel, "Empty Username!", "Error", JOptionPane.ERROR_MESSAGE );
+            }
+
         }
+        if(option==1) break;
+    }
+
       }
     });
+
+//    userAddButton.addActionListener(new ActionListener() {
+//      @Override
+//      public void actionPerformed(ActionEvent e) {
+//        final String s = (String) JOptionPane.showInputDialog(
+//            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
+//            null, null, "");
+//        if (s != null && s.length() > 0) {
+//          //TODO modify 2nd arg
+//          clientContext.user.addUser(s,s);
+//          UserPanel.this.getAllUsers(listModel);
+//        }
+//      }
+//    });
 
     userList.addListSelectionListener(new ListSelectionListener() {
       @Override

@@ -198,7 +198,7 @@ public final class Chat {
     if (!clientContext.user.signInUser(name)) {
       System.out.println("Error: sign in failed (invalid name or password?)");
     }
-    System.out.format("%s signed in\n, name");
+    System.out.format("%s signed in\n", name);
   }
 
   // Sign out a user.
@@ -269,7 +269,7 @@ public final class Chat {
 
   // Add a new user.
   private void addUser(String name) {
-    clientContext.user.addUser(name);
+    clientContext.user.addUser(name, Password.promptForPassword());
   }
 
   // Display all users known to server.

@@ -31,30 +31,42 @@ public class Password {
     private static Map<String, String> DB = new HashMap<String, String>();
 
 
-    public static void createPassword(String user){
-        Console console = System.console();
-        while(true) {
+    public static void createPassword(String user, String password){
+        //Console console = System.console();
+    //    while(true) {
             try {
-                String password = new String(console.readPassword("Enter Password: "));
-                String confirmPassword = new String(console.readPassword("Confirm Password: "));
-                final boolean validPass = ClientUser.isValidName(password) && password.equals(confirmPassword);
-
-                password = validPass ? password : null;
-
-                if (password == null) {
-                    System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Invalid password. Try Again");
-                } else {
+//                String password = new String(console.readPassword("Enter Password: "));
+//                String confirmPassword = new String(console.readPassword("Confirm Password: "));
+//                final boolean validPass = ClientUser.isValidName(password) && password.equals(confirmPassword);
+//
+//                password = validPass ? password : null;
+//
+//                if (password == null) {
+//                    System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Invalid password. Try Again");
+               // } else {
                     encryptPassword(user, password, getSaltvalue());
-                    break;
-                }
+                   // break;
+               // }
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidKeySpecException e) {
                 System.out.println(e.getMessage());
             }
+        //}
+    }
+    public static String promptForPassword(){
+        Console console = System.console();
+        while(true){
+            String password = new String(console.readPassword("Enter Password: "));
+            String confirmPassword = new String(console.readPassword("Confirm Password: "));
+            final boolean validPass = ClientUser.isValidName(password) && password.equals(confirmPassword);
+            password = validPass ? password : null;
+            if (password == null) {
+                System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Invalid password. Try Again");
+            }
+            else return password;
         }
     }
-
     public static boolean authenticateUser(String name){
         Console console = System.console();
         int i=0;
@@ -141,26 +153,5 @@ public class Password {
     }
 
 }
-/*  public static boolean authenticateUser(String name){
- Console console = System.console();
- int i=0;
- boolean correctPass=false;
- String password = new String(console.readPassword("Enter Password: "));
- try{
- while(true) {
- correctPass = verifyPassword(name, password);
- // System.out.println(correctPass);
- i++;
- if (i == MAX_TRIALS || correctPass)
- break;
- password = String.valueOf((console.readPassword("Try again: ")));
- }
- }
- catch (NoSuchAlgorithmException e) {
- System.out.println(e.getMessage());
- } catch (InvalidKeySpecException e) {
- System.out.println(e.getMessage());
- }
- return correctPass;
- }*/
+
 
