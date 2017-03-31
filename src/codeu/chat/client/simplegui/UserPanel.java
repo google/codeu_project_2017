@@ -177,7 +177,7 @@ public final class UserPanel extends JStylePanel {
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
+          clientContext.user.addUser(s, new String("DEFAULT"));
           UserPanel.this.getAllUsers(listModel);
         }
       }
