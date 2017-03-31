@@ -44,11 +44,6 @@ final class ClientMain {
     final RemoteAddress address = RemoteAddress.parse(args[0]);
 
     final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
-    //Adding encryption
-    //1.) Generate public and private key to pass to controller and view
-    //2.) Send public key to server
-    //3.) Get public key from server
-    //4.) Pass server public key to the controller and view
     final Controller controller = new Controller(source);
     final View view = new View(source);
 
