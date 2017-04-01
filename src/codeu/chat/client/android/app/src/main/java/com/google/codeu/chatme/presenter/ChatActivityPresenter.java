@@ -3,14 +3,17 @@ package com.google.codeu.chatme.presenter;
 import android.util.Log;
 
 import com.google.codeu.chatme.model.Conversation;
+import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.adapter.ChatListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Following MVP design pattern, this class encapsulates the functionality to
@@ -42,14 +45,22 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
      * Loads conversations of the current user from Firebase
      */
     public void loadConversations() {
-        mRootRef.child("conversations").addValueEventListener(new ValueEventListener() {
+        Query conversationsQuery = mRootRef.child("conversations").orderByChild("timeCreated");
+        conversationsQuery.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Conversation> conversations = new ArrayList<>();
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    conversations.add(data.getValue(Conversation.class));
-                    Log.d(TAG, data.getValue(Conversation.class).getOwner());
+                    Conversation conv = data.getValue(Conversation.class);
+                    if (conv.getParticipants().contains(FirebaseUtil.getCurrentUserUid())) {
+                        conversations.add(conv);
+                        Log.d(TAG, "loadConversations:onDataChange:ownerId:" + conv.getOwner());
+                    }
+
+                    // reverses list of conversations to order acc to timeCreated in desc order
+                    Collections.reverse(conversations);
                 }
 
                 // updates list of conversations (and the corresponding views) in adapter

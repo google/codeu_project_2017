@@ -46,4 +46,8 @@ public final class Conversation {
     public void setTimeCreated(long timeCreated) {
         this.timeCreated = timeCreated;
     }
+
+    public List<String> getParticipants() {
+        return participants;
+    }
 }
