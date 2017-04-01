@@ -884,3 +884,39 @@ Mar 31, 2017 10:24:37 AM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 Mar 31, 2017 10:24:37 AM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "man" UUID=[UUID:100.101.434043724]
+Mar 31, 2017 3:55:17 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 3:55:17 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 3:55:17 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 3:55:17 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 3:55:18 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 3:55:18 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 3:55:30 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 3:55:30 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 3:55:30 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "joseph" UUID=[UUID:100.101.1017124046]
+Mar 31, 2017 6:39:10 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 6:39:10 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 6:39:10 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Mar 31, 2017 6:39:10 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Mar 31, 2017 6:39:10 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Mar 31, 2017 6:39:11 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Mar 31, 2017 6:42:12 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 6:42:12 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 6:42:12 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "jk" UUID=[UUID:100.101.3431563080]

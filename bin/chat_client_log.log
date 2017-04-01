@@ -428,3 +428,101 @@ java.lang.NullPointerException
 	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
 	at codeu.chat.ClientMain.main(ClientMain.java:57)
 
+Mar 31, 2017 3:34:45 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 3:34:45 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 3:34:45 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 31, 2017 3:34:45 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 31, 2017 3:34:55 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:73)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:95)
+	at codeu.chat.client.commandline.Chat.addUser(Chat.java:272)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:113)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+
+Mar 31, 2017 3:35:13 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:73)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:95)
+	at codeu.chat.client.commandline.Chat.addUser(Chat.java:272)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:113)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+
+Mar 31, 2017 3:48:17 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 3:48:17 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 3:48:17 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 31, 2017 3:48:17 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 31, 2017 3:48:24 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:73)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:99)
+	at codeu.chat.client.commandline.Chat.addUser(Chat.java:272)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:113)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+
+Mar 31, 2017 3:54:32 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 3:54:32 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 3:54:32 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 31, 2017 3:54:32 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 31, 2017 3:54:47 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 3:54:47 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 3:54:47 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 31, 2017 3:54:47 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 31, 2017 3:54:58 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 31, 2017 3:54:58 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 31, 2017 3:54:58 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "qw" UUID=[UUID:100.101.2135542867]

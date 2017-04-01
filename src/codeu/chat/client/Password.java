@@ -1,4 +1,4 @@
-package codeu.chat.client.commandline;
+package codeu.chat.client;
 
 /**
  * Created by Kinini on 3/13/17.
@@ -21,6 +21,8 @@ import java.math.BigInteger;
 import java.lang.*;
 
 import codeu.chat.client.ClientUser;
+import codeu.chat.util.store.Store;
+import codeu.chat.common.User;
 
 public class Password {
     private static final int ITERATIONS = 10000;
@@ -31,17 +33,20 @@ public class Password {
     private static Map<String, String> DB = new HashMap<String, String>();
 
 
-    public static void createPassword(String user, String password){
+
+    public static void createPassword(String user, String password, Store<String, String> passwordDB){
 
             try {
-                encryptPassword(user, password, getSaltvalue());
+                encryptPassword(passwordDB, user, password, getSaltvalue());
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidKeySpecException e) {
                 System.out.println(e.getMessage());
             }
-        //}
+
     }
+
+
     public static String promptForPassword(){
         Console console = System.console();
         while(true){
@@ -55,14 +60,14 @@ public class Password {
             else return password;
         }
     }
-    public static boolean authenticateUserCommandline(String name){
+    public static boolean authenticateUserCommandline(String name, Store<String, String> passwordDB){
         Console console = System.console();
         int i=0;
         boolean correctPass=false;
         String password = new String(console.readPassword("Enter Password: "));
         try{
             while(true) {
-                correctPass = verifyPassword(name, password);
+                correctPass = verifyPassword(passwordDB, name, password);
                 // System.out.println(correctPass);
                 if (i == MAX_TRIALS || correctPass)
                     break;
@@ -81,7 +86,7 @@ public class Password {
     public static boolean authenticateUserGUI(String user, String password){
         boolean isCorrect=false;
         try{
-            isCorrect=verifyPassword(user, password);
+            isCorrect=verifyPassword(ClientUser.passwordsDB, user, password);
         }
         catch (NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
@@ -91,8 +96,9 @@ public class Password {
         return isCorrect;
     }
 
-    public static final boolean verifyPassword(String username, String password)throws NoSuchAlgorithmException, InvalidKeySpecException{
-        String[] stored_pass=DB.get(username).split("\\$");
+    public static final boolean verifyPassword(Store<String, String> passwordDB, String username, String password)throws NoSuchAlgorithmException, InvalidKeySpecException{
+       // String[] stored_pass=DB.get(username).split("\\$");
+        String[] stored_pass=passwordDB.first(username).split("\\$");
         int iterations=Integer.parseInt(stored_pass[0]);
         byte[] salt=convertToBytes(stored_pass[1]);
         byte[] hash=convertToBytes(stored_pass[2]);
@@ -111,12 +117,13 @@ public class Password {
     }
 
 
-    public static final void encryptPassword(String username, String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static final void encryptPassword( Store<String, String> passwordDB, String username, String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String encrypted_pass = ITERATIONS + "$" + convertToHex(salt) + "$" + convertToHex(hash(password, salt));
 
         if (encrypted_pass == null) throw new NoSuchAlgorithmException();
 
-        DB.put(username, encrypted_pass);
+        //DB.put(username, encrypted_pass);
+        passwordDB.insert(username, encrypted_pass);
     }
 
     private static final byte[] hash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {

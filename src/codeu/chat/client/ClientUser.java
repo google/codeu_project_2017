@@ -23,7 +23,7 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
 import codeu.chat.util.store.Store;
-import codeu.chat.client.commandline.Password;
+import codeu.chat.client.Password;
 
 public final class ClientUser {
 
@@ -39,6 +39,10 @@ public final class ClientUser {
 
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
+
+  //set of passwords known by the server
+  public static Store<String, String> passwordsDB = new Store<>(String.CASE_INSENSITIVE_ORDER);
+
 
   public ClientUser(Controller controller, View view) {
     this.controller = controller;
@@ -70,7 +74,7 @@ public final class ClientUser {
     updateUsers();
 
     final User prev = current;
-    if (( name!=null && mode==1)|| (name != null && Password.authenticateUserCommandline(name) && mode==0)) {
+    if (( name!=null && mode==1)|| (name != null && Password.authenticateUserCommandline(name, passwordsDB) && mode==0)) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;
@@ -98,10 +102,14 @@ public final class ClientUser {
       System.out.format("Error: user not created - %s.\n",
               (validInputs) ? "server failure" : "bad input value");
     } else {
-      Password.createPassword(name, password);
+      Password.createPassword(name, password, passwordsDB);
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }
+  }
+//to be able to acccess the passwords database in an external class
+  public final Store<String, String> getPasswordDB(){
+    return passwordsDB;
   }
 
   public void showAllUsers() {

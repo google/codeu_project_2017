@@ -24,7 +24,7 @@ import java.util.Arrays;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
-import codeu.chat.client.commandline.Password;
+import codeu.chat.client.Password;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -165,7 +165,7 @@ public final class UserPanel extends JPanel {
                       clientContext.user.signInUser(data, 1);
                       userSignedInLabel.setText("Hello " + data);
                       break;
-                  }
+                 }
               }
               i++;
               if(i==MAX_TRIALS) {

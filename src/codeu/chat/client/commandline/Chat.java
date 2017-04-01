@@ -21,7 +21,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
-import codeu.chat.client.commandline.Password;
+import codeu.chat.client.Password;
 
 // Chat - top-level client application.
 public final class Chat {
