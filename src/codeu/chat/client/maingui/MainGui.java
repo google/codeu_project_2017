@@ -9,16 +9,19 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
 import codeu.chat.common.LoginInputCallback;
+import codeu.chat.common.LogoutCallback;
 import codeu.chat.common.User;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
-public final class MainGui implements LoginInputCallback{
+public final class MainGui implements LoginInputCallback, LogoutCallback{
 
   private final static Logger.Log LOG = Logger.newLog(MainGui.class);
 
   private JFrame mainFrame;
+  private JPanel mainViewPanel;
 
   private final ClientContext clientContext;
+
 
   // Constructor - sets up the Chat Application
   public MainGui(Controller controller, View view) {
@@ -54,21 +57,38 @@ public final class MainGui implements LoginInputCallback{
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
-    //mainFrame.setPreferredSize(new Dimension(790,450));
 
-    // Main View - outermost graphics panel.
-    final JPanel mainViewPanel = new JPanel(new BorderLayout());
+     // Main View - outermost graphics panel.
+    mainViewPanel = new JPanel(new BorderLayout());
 
-    // Build login panel
-    final JPanel loginViewPanel = new LoginPanel(clientContext,this);
-
-    // Show login if user not connected
-    mainViewPanel.add(loginViewPanel,BorderLayout.CENTER);
+    // Check if user is logged in order to open the LoginPanel or the other panels.
+    if(!clientContext.user.hasCurrent()){
+      loadLoginPanel();
+    }else{
+      loadChatPanels();
+    }
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
+  public void loadLoginPanel(){
+    final LoginPanel loginViewPanel = new LoginPanel(clientContext,this);
 
+    mainViewPanel.add(loginViewPanel,BorderLayout.CENTER);
+    mainFrame.pack();
+  }
+  
+  public void loadChatPanels(){
+    final MessagePanel messageViewPanel = new MessagePanel(clientContext);
+    final ConversationPanel conversationsPanel = new ConversationPanel(clientContext, messageViewPanel);
+    final MenuBarPanel menuBarPanel = new MenuBarPanel(clientContext,this);
+
+    mainViewPanel.add(messageViewPanel,BorderLayout.CENTER);
+    mainViewPanel.add(conversationsPanel,BorderLayout.WEST);
+    mainViewPanel.add(menuBarPanel,BorderLayout.NORTH);
+    mainFrame.pack();
+    
+  }
   // Login request callback function 
   @Override
   public void onLoginRequest(String username, String pswd){
@@ -79,14 +99,15 @@ public final class MainGui implements LoginInputCallback{
     if(loginUser != null){
 
       // Check if user is already logged
-      if(clientContext.user.getCurrent() == null){
+      if(!clientContext.user.hasCurrent()){
 
         // Sign in with the returned user from the database
         if(clientContext.user.signInUser(loginUser)){
 
           // User successfully signed in
           JOptionPane.showMessageDialog(mainFrame,"Hello " + clientContext.user.getCurrent().display_name);
-          mainFrame.getContentPane().removeAll();
+          mainViewPanel.removeAll();
+          loadChatPanels();
         }
       }else{
 
@@ -99,4 +120,16 @@ public final class MainGui implements LoginInputCallback{
       System.out.println("User not found or incorrect password");
     }
   }
+
+  @Override
+  public void onLogoutRequest(){
+    if(clientContext.user.signOutUser()){
+      clientContext.conversation.setCurrent(null);
+      mainViewPanel.removeAll();
+      loadLoginPanel();
+    }else{
+      JOptionPane.showMessageDialog(mainFrame,"Error in logout");
+    }
+  }
+
 }
