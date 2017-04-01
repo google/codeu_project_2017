@@ -156,22 +156,40 @@ public final class UserPanel extends JPanel {
           final String data = userList.getSelectedValue();
           int i=0; int MAX_TRIALS=3;
           while(true) {
+              JPanel signinPanel=new JPanel(new GridBagLayout());
+              GridBagConstraints constraints = new GridBagConstraints();
+              constraints.anchor = GridBagConstraints.WEST;
+              constraints.insets = new Insets(10, 10, 10, 10);
+
               String message = (i==0) ? "Enter Password" : "TryAgain";
-              final String password = (String) JOptionPane.showInputDialog(
-                      UserPanel.this, message, "Sign In", JOptionPane.PLAIN_MESSAGE,
-                      null, null, "");
-              if (password != null && password.length() > 0){
-                  if(Password.authenticateUserGUI(data, password)){
-                      clientContext.user.signInUser(data, 1);
-                      userSignedInLabel.setText("Hello " + data);
+              JLabel pLabel=new JLabel(message);
+              constraints.gridx = 0;
+              constraints.gridy = 0;
+              signinPanel.add(pLabel, constraints);
+
+              JPasswordField pField=new JPasswordField();
+              pField.setColumns(16);
+              constraints.gridx=1;
+              signinPanel.add(pField, constraints);
+
+              String[] options = new String[]{"OK", "Cancel"};
+              int option = JOptionPane.showOptionDialog(null, signinPanel, "Sign-in", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+              if (option == 0 ) {
+                  final String password = String.valueOf(pField.getPassword());
+                  if (password != null && password.length() > 0) {
+                      if (Password.authenticateUserGUI(data, password)) {
+                          clientContext.user.signInUser(data, 1);
+                          userSignedInLabel.setText("Hello " + data);
+                          break;
+                      }
+                  }
+                  i++;
+                  if (i == MAX_TRIALS) {
+                      JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Password!", "Error", JOptionPane.ERROR_MESSAGE);
                       break;
-                 }
+                  }
               }
-              i++;
-              if(i==MAX_TRIALS) {
-                  JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Password!", "Error", JOptionPane.ERROR_MESSAGE );
-                  break;
-              }
+              if(option==1) break;//click cancel to exit
           }
         }
       }

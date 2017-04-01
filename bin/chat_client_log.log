@@ -526,3 +526,11 @@ Mar 31, 2017 3:54:58 PM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 Mar 31, 2017 3:54:58 PM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "qw" UUID=[UUID:100.101.2135542867]
+Mar 31, 2017 9:38:24 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 31, 2017 9:38:24 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 31, 2017 9:38:24 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 31, 2017 9:38:24 PM codeu.chat.ClientMain main
+INFO: Created client
