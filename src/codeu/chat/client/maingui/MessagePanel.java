@@ -149,7 +149,10 @@ public final class MessagePanel extends JPanel{
             sendMessageTextArea.setText("");
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
           }*/
-          getAllMessages(clientContext.conversation.getCurrent());
+          /*System.out.println("getAllMessages...");
+          clientContext.message.updateMessages(true);*/
+          clientContext.conversation.updateAllConversations(true);
+          MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
         }
       }
     });
