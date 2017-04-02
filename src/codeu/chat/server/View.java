@@ -36,8 +36,8 @@ import codeu.chat.common.SinglesView;
 import codeu.chat.common.Time;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
-import codeu.chat.util.store.StoreAccessor;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.store.StoreAccessor;
 
 public final class View implements BasicView, LogicalView, SinglesView {
 

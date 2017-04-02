@@ -26,9 +26,9 @@ import codeu.chat.common.Time;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
-import codeu.chat.util.Uuid;
 
 public final class RemoteRelay implements Relay {
 

@@ -34,8 +34,8 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Timeline;
-import codeu.chat.util.connections.Connection;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.connections.Connection;
 
 public final class Server {
 
