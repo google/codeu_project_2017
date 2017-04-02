@@ -19,16 +19,16 @@ import codeu.chat.common.Uuids;
 
 public class CompressionEngine{
 
-  private GsonBuilder builder = new GsonBuilder();
+    private GsonBuilder builder = new GsonBuilder();
 
-	public static String compressMessage(Message msg){
-    Gson gson = builder.create();
-    return compress(gson.toJson(msg));
-  }
-	public static Message decompressMessage(String packet){
-    Gson gson = builder.create();
-    return gson.fromJson(decompress(packet), Message.class)
-  }
+    public static String compressMessage(Message msg){
+        Gson gson = builder.create();
+        return compress(gson.toJson(msg));
+    }
+    public static Message decompressMessage(String packet){
+        Gson gson = builder.create();
+        return gson.fromJson(decompress(packet), Message.class)
+    }
 }
 
 // Class for decompressing strings, taken from https://github.com/diogoduailibe/lzstring4j
