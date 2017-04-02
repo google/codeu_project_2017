@@ -14,6 +14,8 @@
 
 package codeu.chat.common;
 
+import codeu.chat.util.Time;
+
 // RAW CONTROLLER
 //
 // A controller that grants a large amount of control over how data is inserted

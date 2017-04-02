@@ -18,10 +18,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import codeu.chat.util.Serializer;
-import codeu.chat.util.Serializers;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
+import codeu.chat.util.Serializer;
+import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
 
 public final class Message {
 

@@ -24,10 +24,10 @@ import java.util.Queue;
 
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Time;
 
 public final class Server implements Relay {
 

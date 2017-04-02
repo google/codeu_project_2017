@@ -21,10 +21,10 @@ import org.junit.Before;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.RawController;
-import codeu.chat.common.Time;
 import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
+import codeu.chat.util.Time;
 
 public final class RawControllerTest {
 

@@ -16,8 +16,7 @@ package codeu.chat.common;
 
 import java.util.Collection;
 
-import codeu.chat.common.Time;
-import codeu.chat.common.Uuid;
+import codeu.chat.util.Time;
 
 // RELAY
 //
