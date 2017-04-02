@@ -14,5 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+TEAMS_FILE="$(pwd)/teams"
+
 cd './bin'
-java codeu.chat.RelayMain "2008"
+java codeu.chat.RelayMain '2008' "$TEAMS_FILE"
