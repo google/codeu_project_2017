@@ -19,12 +19,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import codeu.chat.common.Secret;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.relay.Server;
 import codeu.chat.relay.ServerFrontEnd;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Timeline;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
@@ -71,7 +70,7 @@ final class RelayMain {
   }
 
   private static void startRelay(Server relay, ConnectionSource source) {
-    
+
     final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
     LOG.info("Relay front end object created.");
 
@@ -127,7 +126,7 @@ final class RelayMain {
             // this line that it is not worth trying to handle ahead of time.
             // So instead just try to parse it and catch any exception.
 
-            final Uuid id = Uuids.fromString(tokens[0].trim());
+            final Uuid id = Uuid.fromString(tokens[0].trim());
             final byte[] secret = Secret.parse(tokens[1].trim());
 
             relay.addTeam(id, secret);
