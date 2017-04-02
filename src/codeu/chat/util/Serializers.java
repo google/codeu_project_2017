@@ -39,12 +39,13 @@ public final class Serializers {
     @Override
     public void write(StringBuffer message, Boolean value) {
       // todo implement
+      message.append(value ? 1 : 0);
     }
 
     @Override
     public Boolean read(StringTokenizer tokenizer) {
       // todo implement
-      return null;
+      return Integer.parseInt(tokenizer.nextToken()) != 0;
     }
   };
 
@@ -75,12 +76,13 @@ public final class Serializers {
     @Override
     public void write(StringBuffer message, Integer value) {
       // todo implement
+      message.append(value);
     }
 
     @Override
     public Integer read(StringTokenizer tokenizer) {
       // todo implement
-      return null;
+      return Integer.parseInt(tokenizer.nextToken());
     }
   };
 
@@ -111,12 +113,13 @@ public final class Serializers {
     @Override
     public void write(StringBuffer message, Long value) {
       // todo implement
+      message.append(value);
     }
 
     @Override
     public Long read(StringTokenizer tokenizer) {
       // todo implement
-      return null;
+      return Long.parseLong(tokenizer.nextToken());
     }
   };
 
@@ -147,12 +150,27 @@ public final class Serializers {
 
     @Override
     public void write(StringBuffer message, byte[] value) {
+      // todo implement
+      INTEGER.write(message, value.length);
+
+      for (int i = 0; i < value.length; i++) {
+        message.append(";" + value[i]);
+      }
 
     }
 
     @Override
     public byte[] read(StringTokenizer tokenizer) {
-      return new byte[0];
+      // todo implement
+
+      final int length = INTEGER.read(tokenizer);
+      final byte[] array = new byte[length];
+
+      for (int i = 0; i < length; i++) {
+        array[i] = Byte.parseByte(tokenizer.nextToken());
+      }
+
+      return array;
     }
   };
 
@@ -176,12 +194,13 @@ public final class Serializers {
     @Override
     public void write(StringBuffer message, String value) {
       // todo implement
+      message.append(value);
     }
 
     @Override
     public String read(StringTokenizer tokenizer) {
       // todo implement
-      return null;
+      return tokenizer.nextToken();
     }
   };
 
@@ -211,12 +230,23 @@ public final class Serializers {
       @Override
       public void write(StringBuffer message, Collection<T> value) {
         // todo implement
+        INTEGER.write(message, value.size());
+        for (final T x : value) {
+          message.append(';');
+          serializer.write(message, x);
+        }
       }
 
       @Override
       public Collection<T> read(StringTokenizer tokenizer) {
         // todo implement
-        return null;
+        final int size = INTEGER.read(tokenizer);
+        Collection<T> list = new ArrayList<T>(size);
+        for (int i = 0; i < size; i++) {
+          list.add(serializer.read(tokenizer));
+        }
+
+        return list;
       }
     };
   }
@@ -247,12 +277,19 @@ public final class Serializers {
       @Override
       public void write(StringBuffer message, T value) {
         // todo implement
+        if (value == null) {
+          message.append("NO_VALUE");
+        } else {
+          message.append("YES_VALUE");
+          message.append(";");
+          serializer.write(message, value);
+        }
       }
 
       @Override
       public T read(StringTokenizer tokenizer) {
         // todo implement
-        return null;
+        return tokenizer.nextToken().equals("NO_VALUE") ? null : serializer.read(tokenizer);
       }
     };
   }
