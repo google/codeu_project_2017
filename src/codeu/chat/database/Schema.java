@@ -41,11 +41,13 @@ public abstract class Schema {
    *
    * @param name The name of the table.
    * @param database The database to create the table in.
+   *
+   * @return Whether the table exists after running the update.
    */
-  public void createTable(String name, Database database) {
+  public boolean createTable(String name, Database database) {
     Connection connection = database.getConnection();
     if (connection == null) {
-      return;
+      return false;
     }
 
     // Build the update query.
@@ -61,9 +63,11 @@ public abstract class Schema {
     // Run the update.
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.executeUpdate();
+      return true;
     } catch (SQLException ex) {
       LOG.error("Failed to create table: ", ex.getMessage());
     }
+    return false;
   }
 
   /**
@@ -72,20 +76,24 @@ public abstract class Schema {
    *
    * @param name The name of the table.
    * @param database The database to drop the table from.
+   *
+   * @return Whether the table no longer exists after the update.
    */
-  public void dropTable(String name, Database database) {
+  public boolean dropTable(String name, Database database) {
     Connection connection = database.getConnection();
     if (connection == null) {
-      return;
+      return false;
     }
 
     // Run the update to drop the table.
     String query = String.format("DROP TABLE IF EXISTS %s", name);
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.executeUpdate();
+      return true;
     } catch (SQLException ex) {
       LOG.error("Failed to drop table: ", ex.getMessage());
     }
+    return false;
   }
 
 }

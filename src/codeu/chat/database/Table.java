@@ -28,11 +28,11 @@ public abstract class Table<S extends Schema> {
 
   /**
    * Destroy the table.
-
-   * @throws SQLException If an SQL error occurs.
+   *
+   * @return Whether the table was destroyed.
    */
-  public void destroy() throws SQLException {
-    schema.dropTable(name, database);
+  public boolean destroy() {
+    return schema.dropTable(name, database);
   }
 
   /**
@@ -210,7 +210,6 @@ public abstract class Table<S extends Schema> {
 
     // Run the query to update the object.
     String query = String.format("UPDATE %s SET %s WHERE _id = ?", name, updates.toString());
-    System.out.println(query);
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       int i = 1;
       for (String value : fields.values()) {
