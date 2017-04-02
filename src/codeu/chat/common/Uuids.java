@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
+import java.util.StringTokenizer;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
@@ -78,6 +79,18 @@ public final class Uuids {
       }
 
       return head;
+    }
+
+
+    @Override
+    public void write(StringBuffer message, Uuid value) {
+      // todo implement
+    }
+
+    @Override
+    public Uuid read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
 
     private Uuid deserializedUuid(final Uuid root, final int id) {

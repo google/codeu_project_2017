@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.StringTokenizer;
 
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
@@ -59,6 +60,18 @@ public final class Conversation {
 
       return value;
 
+    }
+
+
+    @Override
+    public void write(StringBuffer message, Conversation value) {
+      // todo implement
+    }
+
+    @Override
+    public Conversation read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 

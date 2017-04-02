@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
@@ -39,6 +40,18 @@ public final class Time implements Comparable<Time> {
 
       return Time.fromMs(Serializers.LONG.read(in));
 
+    }
+
+
+    @Override
+    public void write(StringBuffer message, Time value) {
+      // todo implement
+    }
+
+    @Override
+    public Time read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 

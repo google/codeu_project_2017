@@ -17,6 +17,7 @@ package codeu.chat.common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.StringTokenizer;
 
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
@@ -47,6 +48,17 @@ public final class ConversationSummary implements ListViewable {
           Serializers.STRING.read(in)
       );
 
+    }
+
+    @Override
+    public void write(StringBuffer message, ConversationSummary value) {
+      // todo implement
+    }
+
+    @Override
+    public ConversationSummary read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 

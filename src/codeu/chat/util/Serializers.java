@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.StringTokenizer;
 
 public final class Serializers {
 
@@ -32,6 +33,18 @@ public final class Serializers {
     @Override
     public Boolean read(InputStream in) throws IOException {
       return in.read() != 0;
+    }
+
+
+    @Override
+    public void write(StringBuffer message, Boolean value) {
+      // todo implement
+    }
+
+    @Override
+    public Boolean read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 
@@ -58,6 +71,17 @@ public final class Serializers {
       return value;
 
     }
+
+    @Override
+    public void write(StringBuffer message, Integer value) {
+      // todo implement
+    }
+
+    @Override
+    public Integer read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
+    }
   };
 
   public static final Serializer<Long> LONG = new Serializer<Long>() {
@@ -82,6 +106,17 @@ public final class Serializers {
 
       return value;
 
+    }
+
+    @Override
+    public void write(StringBuffer message, Long value) {
+      // todo implement
+    }
+
+    @Override
+    public Long read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 
@@ -108,6 +143,17 @@ public final class Serializers {
       return array;
 
     }
+
+
+    @Override
+    public void write(StringBuffer message, byte[] value) {
+
+    }
+
+    @Override
+    public byte[] read(StringTokenizer tokenizer) {
+      return new byte[0];
+    }
   };
 
   public static final Serializer<String> STRING = new Serializer<String>() {
@@ -124,6 +170,18 @@ public final class Serializers {
 
       return new String(BYTES.read(input));
 
+    }
+
+
+    @Override
+    public void write(StringBuffer message, String value) {
+      // todo implement
+    }
+
+    @Override
+    public String read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 
@@ -148,6 +206,18 @@ public final class Serializers {
         }
         return list;
       }
+
+
+      @Override
+      public void write(StringBuffer message, Collection<T> value) {
+        // todo implement
+      }
+
+      @Override
+      public Collection<T> read(StringTokenizer tokenizer) {
+        // todo implement
+        return null;
+      }
     };
   }
 
@@ -171,6 +241,18 @@ public final class Serializers {
       @Override
       public T read(InputStream in) throws IOException {
         return in.read() == NO_VALUE ? null : serializer.read(in);
+      }
+
+
+      @Override
+      public void write(StringBuffer message, T value) {
+        // todo implement
+      }
+
+      @Override
+      public T read(StringTokenizer tokenizer) {
+        // todo implement
+        return null;
       }
     };
   }

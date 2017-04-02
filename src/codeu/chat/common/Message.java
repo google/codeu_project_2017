@@ -17,6 +17,7 @@ package codeu.chat.common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.StringTokenizer;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
@@ -51,6 +52,17 @@ public final class Message {
           Serializers.STRING.read(in)
       );
 
+    }
+
+    @Override
+    public void write(StringBuffer message, Message value) {
+      // todo implement
+    }
+
+    @Override
+    public Message read(StringTokenizer tokenizer) {
+      // todo implement
+      return null;
     }
   };
 
