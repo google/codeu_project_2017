@@ -161,7 +161,7 @@ public final class UserPanel extends JPanel {
               constraints.anchor = GridBagConstraints.WEST;
               constraints.insets = new Insets(10, 10, 10, 10);
 
-              String message = (i==0) ? "Enter Password" : "TryAgain";
+              String message = (i==0) ? "Enter Password" : "Try Again";
               JLabel pLabel=new JLabel(message);
               constraints.gridx = 0;
               constraints.gridy = 0;
@@ -242,6 +242,7 @@ public final class UserPanel extends JPanel {
             String pass_one = String.valueOf(passwordField.getPassword());
             String pass_two = String.valueOf(confirmPassword.getPassword());
             if (pass_one.equals(pass_two) && (s != null && s.length() > 0)) {
+                JOptionPane.showMessageDialog(panel, Password.passwordStrength(pass_one), "PASSWORD STRENGTH", JOptionPane.INFORMATION_MESSAGE );
                 clientContext.user.addUser(s,pass_one);
                 UserPanel.this.getAllUsers(listModel);
                 break;
@@ -294,4 +295,18 @@ public final class UserPanel extends JPanel {
       usersList.addElement(u.name);
     }
   }
+
+  /*private boolean isValidEntry(String entry, int mode){
+      //Todo: make regex for entries
+      boolean clean=false;
+      switch(mode){
+          case 0://username regex
+              clean=userName.matches("[A-Za-z0-9_ @]+");
+              break;
+          case 1://conversation title regex
+              clean=userName.matches("[A-Za-z0-9_]+");
+          case 2://password regex
+              clean=userName.matches("[A-Za-z0-9_ @]#$&*()|\?+");
+      }
+    }*/
 }

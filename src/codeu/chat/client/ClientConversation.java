@@ -61,7 +61,7 @@ public final class ClientConversation {
     if ((title.length() <= 0) || (title.length() > 64)) {
       clean = false;
     } else {
-
+      clean=title.matches("[A-Za-z0-9_ ]+");//use regex to validate conversation title
       // TODO: check for invalid characters
 
     }

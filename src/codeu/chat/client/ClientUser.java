@@ -56,6 +56,7 @@ public final class ClientUser {
       clean = false;
     } else {
 
+      clean=userName.matches("[A-Za-z0-9_ @]+");
       // TODO: check for invalid characters
 
     }

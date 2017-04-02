@@ -52,12 +52,15 @@ public class Password {
         while(true){
             String password = new String(console.readPassword("Enter Password: "));
             String confirmPassword = new String(console.readPassword("Confirm Password: "));
-            final boolean validPass = ClientUser.isValidName(password) && password.equals(confirmPassword);
+            final boolean validPass = password.length()!=0 && password.equals(confirmPassword);
             password = validPass ? password : null;
             if (password == null) {
-                System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Invalid password. Try Again");
+                System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Passwords don't match. Try Again!");
             }
-            else return password;
+            else {
+                System.out.println("Password Strength: "+ passwordStrength(password));
+                return password;
+            }
         }
     }
     public static boolean authenticateUserCommandline(String name, Store<String, String> passwordDB){
@@ -159,6 +162,21 @@ public class Password {
         }
         return bytes;
     }
+
+    public static final String passwordStrength(String password){
+
+        //a very strong password has special, lowercase, uppercase, digit characters, now hitespace and has length of at least 8
+        if(password.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}")) return "Very Strong!";
+
+        //a strong password has a lowercase, uppercase and either a digit or special character and has at least 6 characters
+        if(password.matches("(?=.*[a-z])(?=.*[A-Z])((?=.*[0-9])|(?=.*[@#$%^&+=])).{6,}")) return "Strong!";
+
+        //a medium strength password has a length of at least 6 and has both lower and uppercase characters.
+        if(password.matches("(?=.*[a-z])(?=.*[A-Z]).{6,}")) return "Medium!";
+
+        //the rest are weak passwords
+        return "Weak!";
+        }
 
 }
 
