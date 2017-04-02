@@ -47,7 +47,7 @@ public class Password {
     }
 
 
-    public static String promptForPassword(){
+    public static String promptForPassword(String name){
         Console console = System.console();
         while(true){
             String password = new String(console.readPassword("Enter Password: "));
@@ -59,6 +59,7 @@ public class Password {
             }
             else {
                 System.out.println("Password Strength: "+ passwordStrength(password));
+                ClientUser.passwordRecoveryDB.insert(name, collectPasswordRecoveryInfo(name));
                 return password;
             }
         }
@@ -72,8 +73,13 @@ public class Password {
             while(true) {
                 correctPass = verifyPassword(passwordDB, name, password);
                 // System.out.println(correctPass);
-                if (i == MAX_TRIALS || correctPass)
+                if (correctPass)
                     break;
+                if(i==MAX_TRIALS) {
+                    System.out.println("Error: Sign in failed, invalid password");
+                    changePassword(name);
+                    break;
+                }
                 password = String.valueOf((console.readPassword("Try again: ")));
                 i++;
             }
@@ -84,6 +90,26 @@ public class Password {
             System.out.println(e.getMessage());
         }
         return correctPass;
+    }
+
+    private static void changePassword(String name) {
+        System.out.println("Forgotten password? Y N");
+        Scanner input = new Scanner(System.in);
+        String choice=input.nextLine();
+        if (choice.equals("Y") || choice.equals("y")) {
+            if (ClientUser.passwordRecoveryDB.first(name).equals(collectPasswordRecoveryInfo(name))) {
+                String newPassword = promptForPassword(name);
+                //delete old passwords when Store implements delete
+                createPassword(name, newPassword, ClientUser.passwordsDB);
+                System.out.println("Password changed. Try signing in again");
+            }
+            else{
+                System.out.println("Error: Unable to recover password");
+            }
+        }
+        else{
+            System.out.println("Error: Sign in failed, invalid password");
+        }
     }
 
     public static boolean authenticateUserGUI(String user, String password){
@@ -100,7 +126,6 @@ public class Password {
     }
 
     public static final boolean verifyPassword(Store<String, String> passwordDB, String username, String password)throws NoSuchAlgorithmException, InvalidKeySpecException{
-       // String[] stored_pass=DB.get(username).split("\\$");
         String[] stored_pass=passwordDB.first(username).split("\\$");
         int iterations=Integer.parseInt(stored_pass[0]);
         byte[] salt=convertToBytes(stored_pass[1]);
@@ -177,6 +202,25 @@ public class Password {
         //the rest are weak passwords
         return "Weak!";
         }
+
+    public static final String collectPasswordRecoveryInfo(String name){
+        System.out.println("Choose one security question: ");
+        System.out.println("1 : What is the name of your elementary school?");
+        System.out.println("2: What is the name of your pet?");
+        System.out.println("3. Which city did you meet your spouse?");
+
+        Scanner input=new Scanner(System.in);
+        int question=input.nextInt();
+
+        System.out.println("Answer: ");
+        Scanner scanner=new Scanner(System.in);
+        String answer=scanner.nextLine();
+
+        return String.valueOf(input) + "$" + answer;
+
+    }
+
+    //using username temporarily to store recovery passwords instead of UID
 
 }
 

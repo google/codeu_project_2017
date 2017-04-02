@@ -1283,3 +1283,187 @@ Apr 01, 2017 10:54:50 PM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 Apr 01, 2017 10:54:50 PM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "r" UUID=[UUID:100.101.3096085904]
+Apr 01, 2017 11:50:00 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 01, 2017 11:50:00 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 01, 2017 11:50:00 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 01, 2017 11:50:00 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 01, 2017 11:50:25 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 01, 2017 11:50:25 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 01, 2017 11:50:25 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "rob" UUID=[UUID:100.101.1840031348]
+Apr 01, 2017 11:51:46 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 01, 2017 11:51:46 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 01, 2017 11:51:46 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 01, 2017 11:51:46 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 01, 2017 11:52:38 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 01, 2017 11:52:38 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 01, 2017 11:52:38 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "w" UUID=[UUID:100.101.319509771]
+Apr 01, 2017 11:53:28 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 01, 2017 11:53:28 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 01, 2017 11:53:28 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 01, 2017 11:53:29 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 01, 2017 11:53:48 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 01, 2017 11:53:48 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 01, 2017 11:53:48 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "me" UUID=[UUID:100.101.843802277]
+Apr 01, 2017 11:58:10 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 01, 2017 11:58:10 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 01, 2017 11:58:10 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 01, 2017 11:58:10 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:27:32 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:27:32 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:27:32 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:27:32 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:28:02 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:28:02 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:28:02 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "robert" UUID=[UUID:100.101.2346686240]
+Apr 02, 2017 12:31:39 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:31:39 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:31:39 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:31:39 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:31:45 AM codeu.chat.client.commandline.Chat handleCommand
+SEVERE: Exception during command processing
+java.util.InputMismatchException
+	at java.util.Scanner.throwFor(Scanner.java:864)
+	at java.util.Scanner.next(Scanner.java:1485)
+	at java.util.Scanner.nextInt(Scanner.java:2117)
+	at java.util.Scanner.nextInt(Scanner.java:2076)
+	at codeu.chat.client.Password.collectPasswordRecoveryInfo(Password.java:207)
+	at codeu.chat.client.Password.promptForPassword(Password.java:62)
+	at codeu.chat.client.commandline.Chat.addUser(Chat.java:272)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:113)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+
+Apr 02, 2017 12:32:26 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:32:26 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:32:26 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "rob" UUID=[UUID:100.101.794446100]
+Apr 02, 2017 12:38:52 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:38:52 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:38:52 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:38:52 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:38:59 AM codeu.chat.client.commandline.Chat handleCommand
+SEVERE: Exception during command processing
+java.util.InputMismatchException
+	at java.util.Scanner.throwFor(Scanner.java:864)
+	at java.util.Scanner.next(Scanner.java:1485)
+	at java.util.Scanner.nextInt(Scanner.java:2117)
+	at java.util.Scanner.nextInt(Scanner.java:2076)
+	at codeu.chat.client.Password.collectPasswordRecoveryInfo(Password.java:209)
+	at codeu.chat.client.Password.promptForPassword(Password.java:62)
+	at codeu.chat.client.commandline.Chat.addUser(Chat.java:272)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:113)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+
+Apr 02, 2017 12:39:09 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:39:09 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:39:10 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "q" UUID=[UUID:100.101.1150573736]
+Apr 02, 2017 12:39:57 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:39:57 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:39:57 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:39:57 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:40:05 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:40:05 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:40:06 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "c" UUID=[UUID:100.101.2325534571]
+Apr 02, 2017 12:42:22 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:42:22 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:42:22 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:42:22 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:42:33 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:42:33 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:42:33 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "d" UUID=[UUID:100.101.3306130657]
+Apr 02, 2017 12:50:08 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:50:08 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:50:08 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:50:08 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:50:18 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:50:18 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:50:18 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "robert" UUID=[UUID:100.101.2809209018]
+Apr 02, 2017 12:51:55 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:51:55 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:51:55 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:51:55 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:52:03 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 12:52:03 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 12:52:03 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 12:52:03 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 12:52:13 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 12:52:13 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 12:52:13 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "ty" UUID=[UUID:100.101.3812663252]
