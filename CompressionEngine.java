@@ -10,42 +10,25 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+//Use once project is compatible with Maven
+//import com.google.gson.Gson
+
 import codeu.chat.common.Time;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 
-//TODO: Figure out where to put this in the pipeline
-// Message.java read/write
-// Server.java sendToRelay
-
 public class CompressionEngine{
 
-	public static String[] compressMessage(Message msg){}
-	public static Message decompressMessage(String[] packet){}
+  private GsonBuilder builder = new GsonBuilder();
 
-	private String compressString(String message){
-		return LZString.compress(message);
-	}
-
-	private String convertUuid(Uuid id){
-		return id.toString();
-	}
-
-	private String convertTime (Time time){
-		return time.toString();
-	}
-
-	private String decompressString(String message){
-		return LZString.decompress(String(message));
-	}
-
-	private Uuid convertToUuid(String id){
-		return Uuid.fromString(id);
-	}
-
-	private Time convertToTime(String time){
-		return Time.fromString(time); // Will need to create this function
-	}
+	public static String compressMessage(Message msg){
+    Gson gson = builder.create();
+    return compress(gson.toJson(msg));
+  }
+	public static Message decompressMessage(String packet){
+    Gson gson = builder.create();
+    return gson.fromJson(decompress(packet), Message.class)
+  }
 }
 
 // Class for decompressing strings, taken from https://github.com/diogoduailibe/lzstring4j
