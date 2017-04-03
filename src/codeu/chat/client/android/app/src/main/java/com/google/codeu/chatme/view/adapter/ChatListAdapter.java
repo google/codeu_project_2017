@@ -12,6 +12,7 @@ import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
@@ -23,7 +24,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     /**
      * List of conversations
      */
-    private ArrayList<Conversation> conversations = new ArrayList<>();
+    private List<Conversation> conversations = new ArrayList<>();
 
     private ChatActivityPresenter presenter;
 
@@ -63,7 +64,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
      *
      * @param conversations new list of conversations
      */
-    public void setChatList(ArrayList<Conversation> conversations) {
+    public void setChatList(List<Conversation> conversations) {
         this.conversations = conversations;
         notifyDataSetChanged();
     }

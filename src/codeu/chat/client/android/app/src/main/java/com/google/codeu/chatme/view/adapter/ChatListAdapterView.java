@@ -2,7 +2,7 @@ package com.google.codeu.chatme.view.adapter;
 
 import com.google.codeu.chatme.model.Conversation;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An interface to handle presenter-delegated actions in order to
@@ -15,6 +15,6 @@ public interface ChatListAdapterView {
      *
      * @param conversations new list of conversations
      */
-    public void setChatList(ArrayList<Conversation> conversations);
+    public void setChatList(List<Conversation> conversations);
 
 }

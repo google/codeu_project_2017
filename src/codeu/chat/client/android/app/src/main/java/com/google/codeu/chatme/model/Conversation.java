@@ -12,6 +12,10 @@ public final class Conversation {
     public String owner;
     public long timeCreated;
 
+    /**
+     * List of participants of a conversation (participants may be added or
+     * removed in case "groups" are implemented)
+     */
     private final List<String> participants = new ArrayList<>();
 
     public Conversation() {
@@ -47,7 +51,14 @@ public final class Conversation {
         this.timeCreated = timeCreated;
     }
 
+    /**
+     * @return reference to a mutable list of participants
+     */
     public List<String> getParticipants() {
         return participants;
+    }
+
+    public void addParticipant(String participantId) {
+        participants.add(participantId);
     }
 }

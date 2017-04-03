@@ -58,10 +58,10 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
                         conversations.add(conv);
                         Log.d(TAG, "loadConversations:onDataChange:ownerId:" + conv.getOwner());
                     }
-
-                    // reverses list of conversations to order acc to timeCreated in desc order
-                    Collections.reverse(conversations);
                 }
+
+                // reverses list of conversations to order acc to timeCreated in desc order
+                Collections.reverse(conversations);
 
                 // updates list of conversations (and the corresponding views) in adapter
                 view.setChatList(conversations);

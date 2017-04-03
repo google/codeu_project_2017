@@ -134,7 +134,6 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
                         } else {
                             Log.i(TAG, "signInwithEmail:success:"
                                     + mAuth.getCurrentUser().getUid());
-                            view.hideProgressDialog();
                         }
                     }
                 });
