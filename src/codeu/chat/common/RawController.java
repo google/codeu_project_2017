@@ -15,6 +15,7 @@
 package codeu.chat.common;
 
 import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 
 // RAW CONTROLLER
 //
