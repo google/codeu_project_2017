@@ -55,6 +55,17 @@ public final class ClientUser {
     return clean;
   }
 
+  //Validate the password string
+  public static boolean isValidPassword(String password) {
+    boolean clean = true;
+    if (password.length() <= 6) {
+      clean = false;
+    } else {
+      // TODO: check for password criteria
+    }
+    return clean;
+  }
+
   public boolean hasCurrent() {
     return (current != null);
   }
@@ -77,7 +88,6 @@ public final class ClientUser {
     return (prev != current);
   }
 
-
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -88,10 +98,12 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name, String passHash, String salt) {
-    final boolean validInputs = isValidName(name);
+  public void addUser(String name, String password) {
+    final boolean validInputs = isValidName(name) && isValidPassword(password);
+    String salt = Password.generateSalt();
+    String passwordHash = Password.getHashCode(password, salt);
 
-    final User user = (validInputs) ? controller.newUser(name, passHash, salt) : null;
+    final User user = (validInputs) ? controller.newUser(name, passwordHash, salt) : null;
 
     if (user == null) {
       System.out.format(

@@ -114,9 +114,8 @@ public final class Chat {
         System.out.println("ERROR: Username not supplied.");
       } else {
         System.out.print("Please enter a password: ");
-        String salt = Password.generateSalt();
-        String passHash = Password.getHashCode(lineScanner.nextLine().trim(), salt);
-        addUser(tokenScanner.nextLine().trim(), passHash, salt);
+        String password = lineScanner.nextLine().trim();
+        addUser(tokenScanner.nextLine().trim(), password);
       }
 
     } else if (token.equals("u-list-all")) {
@@ -149,7 +148,6 @@ public final class Chat {
           }
           clientContext.conversation.startConversation(
               title, clientContext.user.getCurrent().id, passHash, salt);
-
         }
       }
 
@@ -293,8 +291,8 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name, String passHash, String salt) {
-    clientContext.user.addUser(name, passHash, salt);
+  private void addUser(String name, String password) {
+    clientContext.user.addUser(name, password);
   }
 
   // Display all users known to server.
@@ -347,7 +345,7 @@ public final class Chat {
     }
   }
 
-  public void selectPrivateConversation(){
+  public void selectPrivateConversation() {
     //check if the conversation exists
     clientContext.conversation.updateAllConversations(false);
 
