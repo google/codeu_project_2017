@@ -58,19 +58,22 @@ public class Password {
 * this method calls methods to encrypt the password and the security question answer
 * it stores all the encrypted security question in a string separated by $
 * */
-    public static void createPassword(String user, String password){
-
+    public static String createPassword(String user, String password){
             try {
                 String[] securityDetails=password.split("\\$");
                 String encryptedPass=encryptPassword(user, securityDetails[0], getSaltvalue());
                 String encryptedAnswer=encryptPassword(user, securityDetails[2], getSaltvalue());
-                ClientUser.passwordsDB.insert(user, encryptedPass+"$" + securityDetails[1] +"$" +encryptedAnswer);
+                String loginDetails=encryptedPass+"$" + securityDetails[1] +"$" +encryptedAnswer;
+                ClientUser.passwordsDB.insert(user,loginDetails );
+
+                return loginDetails;
+
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidKeySpecException e) {
                 System.out.println(e.getMessage());
             }
-
+            return null;
     }
 
 /*
@@ -78,14 +81,14 @@ public class Password {
 * it calls respective methods to validate the password
 * */
 
-    public static boolean authenticateUserCommandline(String name){
+    public static boolean authenticateUserCommandline(String name, User user){
         Console console = System.console();
         int i=0;
         boolean correctPass=false;
         String password = new String(console.readPassword("Enter Password: "));
         try{
             while(true) {
-                correctPass = verifyPassword(name, password, 0);
+                correctPass = verifyPassword(name, password, 0, user);
                 // System.out.println(correctPass);
                 if (correctPass)
                     break;
@@ -112,7 +115,7 @@ public class Password {
     public static boolean authenticateUserGUI(String user, String password){
         boolean isCorrect=false;
         try{
-            isCorrect=verifyPassword(user, password, 0);
+            isCorrect=verifyPassword(user, password, 0, ClientUser.usersByName.first(user));
         }
         catch (NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
@@ -137,7 +140,7 @@ public class Password {
             String[] securityDetails=ClientUser.passwordsDB.first(name).split("\\$");
             if (securityDetails[3].equals(recoveryDetails[0])) {//security question matches
                 try {
-                    if (verifyPassword(name, recoveryDetails[1], 1)) { //verify security question
+                    if (verifyPassword(name, recoveryDetails[1], 1, ClientUser.usersByName.first(name))) { //verify security question
                         System.out.println("Let's create you new login password:");
                         String newPassword = promptForPassword(name);
                         //delete old passwords when Store implements delete
@@ -168,7 +171,7 @@ public class Password {
     public static boolean passedsecurityTestGUI(String name, String answer){
         boolean passed=false;
         try{
-            passed=verifyPassword(name, answer, 1);
+            passed=verifyPassword(name, answer, 1, ClientUser.usersByName.first(name));
         }
         catch (NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
@@ -182,9 +185,10 @@ public class Password {
     * this method takes in  the password and the user name, encypts them and compares them with the initially stored encrypted security information.
     * Returns true if the password/security question answer matches the ones stored initially.
     * */
-    public static final boolean verifyPassword(String username, String password, int code)throws NoSuchAlgorithmException, InvalidKeySpecException{
-        String[] stored_pass=ClientUser.passwordsDB.first(username).split("\\$");
+    public static final boolean verifyPassword(String username, String password, int code, User user)throws NoSuchAlgorithmException, InvalidKeySpecException{
+       // String[] stored_pass=ClientUser.passwordsDB.first(username).split("\\$");
         //decrypting password
+        String[] stored_pass=user.security.split("\\$");
             int iterations = Integer.parseInt(stored_pass[0]);
             byte[] salt = convertToBytes(stored_pass[1]);
             byte[] hash = convertToBytes(stored_pass[2]);

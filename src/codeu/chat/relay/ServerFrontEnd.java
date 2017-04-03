@@ -42,6 +42,7 @@ public final class ServerFrontEnd {
       final Uuid id = Uuids.SERIALIZER.read(in);
       final String text = Serializers.STRING.read(in);
       final Time time = Time.SERIALIZER.read(in);
+      String security=Serializers.STRING.read(in);//TODO : not sure
 
       // I could have passed the relay and use its "pack" method but that would
       // have been more work than just building an object here.
@@ -52,6 +53,8 @@ public final class ServerFrontEnd {
         public String text() { return text; }
         @Override
         public Time time() { return time; }
+        @Override
+        public String security() { return security; }
       };
     }
 

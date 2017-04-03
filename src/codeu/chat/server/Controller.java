@@ -44,8 +44,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(String name) {
-    return newUser(createId(), name, Time.now());
+  public User newUser(String name, String security) {
+    return newUser(createId(), name, Time.now(), security);
   }
 
   @Override
@@ -103,28 +103,30 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(Uuid id, String name, Time creationTime, String security) {
 
     User user = null;
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime);
+      user = new User(id, name, creationTime, security);
       model.add(user);
 
       LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s)",
+          "newUser success (user.id=%s user.name=%s user.time=%s user.security=%s)",
           id,
           name,
-          creationTime);
+          creationTime,
+              security);
 
     } else {
 
       LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
+          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s user.security=%s)",
           id,
           name,
-          creationTime);
+          creationTime,
+              security);
     }
 
     return user;

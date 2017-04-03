@@ -50,9 +50,9 @@ public final class ServerTest {
 
     assertTrue(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
   }
 
   @Test
@@ -65,9 +65,9 @@ public final class ServerTest {
 
     assertFalse(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(), null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(), null),
+                           relay.pack(makeTestUuid(6), "Hello World", Time.now(), null)));
   }
 
   @Test
@@ -83,9 +83,9 @@ public final class ServerTest {
 
     assertFalse(relay.write(team,
                            wrongSecret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
   }
 
   @Test
@@ -100,9 +100,9 @@ public final class ServerTest {
 
     assertTrue(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuids.NULL, 1);
     assertTrue(read.size() == 1);
@@ -131,9 +131,9 @@ public final class ServerTest {
 
     assertFalse(relay.write(team,
                             wrongSecret,
-                            relay.pack(makeTestUuid(4), "User", Time.now()),
-                            relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                            relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                            relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                            relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                            relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
   }
 
   @Test
@@ -148,9 +148,9 @@ public final class ServerTest {
 
     assertFalse(relay.write(makeTestUuid(33),
                             secret,
-                            relay.pack(makeTestUuid(4), "User", Time.now()),
-                            relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                            relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                            relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                            relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                            relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
   }
 
   @Test
@@ -165,15 +165,15 @@ public final class ServerTest {
 
     assertTrue(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
 
     assertTrue(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(7), "Hello World... again", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(7), "Hello World... again", Time.now(),null)));
 
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuids.NULL, 2);
@@ -192,15 +192,15 @@ public final class ServerTest {
 
     assertTrue(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(6), "Hello World", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(6), "Hello World", Time.now(),null)));
 
     assertTrue(relay.write(team,
                            secret,
-                           relay.pack(makeTestUuid(4), "User", Time.now()),
-                           relay.pack(makeTestUuid(5), "Conversation", Time.now()),
-                           relay.pack(makeTestUuid(7), "Hello World... again", Time.now())));
+                           relay.pack(makeTestUuid(4), "User", Time.now(),null),
+                           relay.pack(makeTestUuid(5), "Conversation", Time.now(),null),
+                           relay.pack(makeTestUuid(7), "Hello World... again", Time.now(),null)));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuids.NULL, 2);
     assertTrue(read.size() == 1);

@@ -38,11 +38,13 @@ public final class Server implements Relay {
     private final Uuid id;
     private final String text;
     private final Time time;
+    String security;
 
-    public Component(Uuid id, String text, Time time) {
+    public Component(Uuid id, String text, Time time, String security) {
       this.id = id;
       this.text = text;
       this.time = time;
+      this.security=security;
     }
 
     @Override
@@ -53,6 +55,9 @@ public final class Server implements Relay {
 
     @Override
     public Time time() { return time; }
+
+    @Override
+    public String security() { return security; }
 
   }
 
@@ -160,8 +165,8 @@ public final class Server implements Relay {
   }
 
   @Override
-  public Relay.Bundle.Component pack(Uuid id, String text, Time time) {
-    return new Component(id, text, time);
+  public Relay.Bundle.Component pack(Uuid id, String text, Time time, String security) {
+    return new Component(id, text, time, security);
   }
 
   @Override

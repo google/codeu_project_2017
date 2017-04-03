@@ -101,7 +101,9 @@ public final class Server {
 
       final String name = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      String security=Serializers.STRING.read(in);//TODO:confirm
+
+      final User user = controller.newUser(name, security);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -225,7 +227,7 @@ public final class Server {
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time(), relayUser.security());
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
@@ -260,8 +262,8 @@ public final class Server {
 
     relay.write(id,
                 secret,
-                relay.pack(user.id, user.name, user.creation),
-                relay.pack(conversation.id, conversation.title, conversation.creation),
-                relay.pack(message.id, message.content, message.creation));
+                relay.pack(user.id, user.name, user.creation, user.security),//maybe needed change
+                relay.pack(conversation.id, conversation.title, conversation.creation, null),
+                relay.pack(message.id, message.content, message.creation, null));
   }
 }

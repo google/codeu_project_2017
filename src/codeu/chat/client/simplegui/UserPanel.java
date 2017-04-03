@@ -26,6 +26,7 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
 import codeu.chat.client.Password;
 import codeu.chat.client.ClientUser;
+import codeu.chat.common.User;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID

@@ -40,11 +40,13 @@ public final class RemoteRelay implements Relay {
     private final Uuid id;
     private final Time time;
     private final String text;
+    String security;
 
-    public Component(Uuid id, Time time, String text) {
+    public Component(Uuid id, Time time, String text, String security) {
       this.id = id;
       this.time = time;
       this.text = text;
+      this.security=security;
     }
 
     @Override
@@ -55,6 +57,9 @@ public final class RemoteRelay implements Relay {
 
     @Override
     public String text() { return text; }
+
+    @Override
+    public String security() { return security; }
   }
 
   private static final Serializer<Relay.Bundle.Component> COMPONENT_SERIALIZER =
@@ -66,8 +71,9 @@ public final class RemoteRelay implements Relay {
       final Uuid id = Uuids.SERIALIZER.read(in);
       final String text = Serializers.STRING.read(in);
       final Time time = Time.SERIALIZER.read(in);
+      String security=Serializers.STRING.read(in);
 
-      return new Component(id, time, text);
+      return new Component(id, time, text, security);
     }
 
     @Override
@@ -125,8 +131,8 @@ public final class RemoteRelay implements Relay {
   }
 
   @Override
-  public Relay.Bundle.Component pack(Uuid id, String text, Time time) {
-    return new Component(id, time, text);
+  public Relay.Bundle.Component pack(Uuid id, String text, Time time, String security) {
+    return new Component(id, time, text, security);
   }
 
   @Override

@@ -33,7 +33,7 @@ public final class User {
       Uuids.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
-     // Serializers.STRING.write(out, value.security);
+     Serializers.STRING.write(out, value.security);
     }
 
     @Override
@@ -42,8 +42,8 @@ public final class User {
       return new User(
           Uuids.SERIALIZER.read(in),
           Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
-              //Serializers.STRING.read(in)
+          Time.SERIALIZER.read(in),
+              Serializers.STRING.read(in)
       );
 
     }
@@ -52,13 +52,13 @@ public final class User {
   public final Uuid id;
   public final String name;
   public final Time creation;
-  //public final String security;//might need to change from final
+  public  String security;//might need to change from final
 
-  public User(Uuid id, String name, Time creation/*, String security*/) {
+  public User(Uuid id, String name, Time creation, String security) {
 
     this.id = id;
     this.name = name;
     this.creation = creation;
-   // this.security=security;
+    this.security=security;
   }
 }
