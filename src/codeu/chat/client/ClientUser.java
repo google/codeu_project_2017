@@ -60,7 +60,7 @@ public final class ClientUser {
   }
     
   static public boolean isValidPassword(String password) {
-    return (!(password.length()==0));
+    return ((password != null) && (password.length()!=0));
   }
 
   public boolean hasCurrent() {
@@ -73,13 +73,13 @@ public final class ClientUser {
 
   public boolean signInUser(String name, String password) {
     updateUsers();
-
+    String truePassword;
     final User prev = current;
     if (name != null) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;
-        String truePassword = newCurrent.password;
+        truePassword = newCurrent.password;
       }
     }
     return (prev != current) && (password.equals(truePassword));
@@ -102,7 +102,7 @@ public final class ClientUser {
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+          (validName) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();

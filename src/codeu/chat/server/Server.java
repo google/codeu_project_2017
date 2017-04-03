@@ -138,8 +138,9 @@ public final class Server {
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
       final String name = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final User user = controller.newUser(name, password);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);

@@ -82,6 +82,11 @@ public final class UserPanel extends JPanel {
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
     userListScrollPane.setPreferredSize(new Dimension(150, 150));
+      
+    //PASSWORD FIELD
+    final JTextField passwordField = new JTextField();
+    listShowPanel.add(passwordField);
+    passwordField.setPreferredSize(new Dimension(100, 20));
 
     // Current User panel
     final JPanel currentPanel = new JPanel();
@@ -150,10 +155,10 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
-          final String data = userList.getSelectedValue();
-            // TO DO: add a new field for password
-          if (clientContext.user.signInUser(data, password){
-              userSignedInLabel.setText("Hello " + data);
+          final String name = userList.getSelectedValue();
+          final String password = passwordField.getText();
+          if (clientContext.user.signInUser(name, password)){
+              userSignedInLabel.setText("Hello " + name);
           } else{
               userSignedInLabel.setText("User Not Found");
           }
@@ -167,8 +172,14 @@ public final class UserPanel extends JPanel {
         final String s = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
+        
+        //CHECK VALID UNIQUE USERNAME: either here or ClientUser.java
+        final String password = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Set password:", "Add password", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+          
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
+          clientContext.user.addUser(s, password);
           UserPanel.this.getAllUsers(listModel);
         }
       }
