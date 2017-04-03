@@ -65,7 +65,7 @@ final class SimpleGuiClientMain {
     final ChatSimpleGui chatSimpleGui = new ChatSimpleGui(controller, view);
 
     LOG.info("Created client");
-
+    System.out.println("Test team 17");
     chatSimpleGui.run();
 
     LOG.info("chat client is running.");
