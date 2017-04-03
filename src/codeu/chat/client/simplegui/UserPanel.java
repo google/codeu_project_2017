@@ -184,9 +184,6 @@ public final class UserPanel extends JPanel {
                                     userSignedInLabel.setText("Hello " + data);
                                     break;
                                 }
-//                                else{
-//                                    JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Password!", "Error", JOptionPane.ERROR_MESSAGE);
-//                                }
                             }
                             i++;
                             if (i == MAX_TRIALS) {
@@ -208,7 +205,7 @@ public final class UserPanel extends JPanel {
         userAddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createPasswordInputDialog(listModel);
+                createPasswordInputDialog(listModel, 0);
             }
         });
 
@@ -252,14 +249,15 @@ public final class UserPanel extends JPanel {
 
     //  });
     // }
-    private void createPasswordInputDialog(DefaultListModel<String> listModel) {
+    private void createPasswordInputDialog(DefaultListModel<String> listModel, int mode) {
         while (true) {
             JPanel panel = new JPanel(new GridBagLayout());
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.anchor = GridBagConstraints.WEST;
             constraints.insets = new Insets(10, 10, 10, 10);
 
-            JLabel textLabel = new JLabel("Enter Name");
+            String labelMessage=(mode==0) ? "Enter Name" : "Reenter name";
+            JLabel textLabel = new JLabel(labelMessage);
             constraints.gridx = 0;
             constraints.gridy = 0;
             panel.add(textLabel, constraints);
@@ -269,8 +267,8 @@ public final class UserPanel extends JPanel {
             constraints.gridx = 1;
             panel.add(textField, constraints);
 
-
-            JLabel passLabel = new JLabel("Enter Password");
+            String passwordMessage=(mode==0) ? "Enter Password:" : "Enter new Password:";
+            JLabel passLabel = new JLabel(passwordMessage);
             constraints.gridy = 1;
             constraints.gridx = 0;
             panel.add(passLabel, constraints);
@@ -280,7 +278,8 @@ public final class UserPanel extends JPanel {
             constraints.gridx = 1;
             panel.add(passwordField, constraints);
 
-            JLabel confirmField = new JLabel("Confirm Password");
+            String confirmMessage=(mode==0) ? "Confirm Password:" : "Confirm new Password:";
+            JLabel confirmField = new JLabel(confirmMessage);
             constraints.gridy = 2;
             constraints.gridx = 0;
             panel.add(confirmField, constraints);
@@ -290,7 +289,8 @@ public final class UserPanel extends JPanel {
             constraints.gridx = 1;
             panel.add(confirmPassword, constraints);
 
-            JLabel questionField = new JLabel("Security Question:");
+            String qnMessage=(mode==0) ? "Security Question:" : "New Security Question:";
+            JLabel questionField = new JLabel(qnMessage);
             constraints.gridx = 0;
             constraints.gridy = 3;
             panel.add(questionField, constraints);
@@ -362,7 +362,6 @@ public final class UserPanel extends JPanel {
         JComboBox<String> comboBox = new JComboBox<>(choices);
         constraints_two.gridx = 1;
         panel.add(comboBox);
-        String securityQuestion = (String) comboBox.getSelectedItem();
 
         JLabel answerLabel = new JLabel("Answer");
         constraints_two.gridx = 0;
@@ -373,16 +372,20 @@ public final class UserPanel extends JPanel {
         answerField.setColumns(10);
         constraints_two.gridx = 1;
         panel.add(answerField, constraints_two);
-        String answer = answerField.getText();
 
         String[] panel_options = new String[]{"OK", "Cancel"};
         int opt = JOptionPane.showOptionDialog(null, panel, "Recover Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, panel_options, panel_options[1]);
         if (opt == 0) {
+            String securityQuestion = (String) comboBox.getSelectedItem();
+            String answer = answerField.getText();
+
             //TODO delete old user when store implements delete
             String[] securityDetails=ClientUser.passwordsDB.first(data).split("\\$");
             if (securityDetails[3].equals(securityQuestion)){//questions match
-                createPasswordInputDialog(listModel);
-                JOptionPane.showMessageDialog(panel, "Password Successfully Changed!", "PASSWORD STRENGTH", JOptionPane.INFORMATION_MESSAGE);
+                if(Password.passedsecurityTestGUI(data, answer)) {
+                    createPasswordInputDialog(listModel, 1);
+                    JOptionPane.showMessageDialog(panel, "Password Successfully Changed!", "PASSWORD STRENGTH", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
             else
                 JOptionPane.showMessageDialog(panel, "Error: Unable to recover password!", "ERROR", JOptionPane.ERROR_MESSAGE);

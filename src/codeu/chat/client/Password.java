@@ -103,11 +103,23 @@ public class Password {
             String[] recoveryDetails=collectPasswordRecoveryInfo(name).split("\\$");
             String[] securityDetails=ClientUser.passwordsDB.first(name).split("\\$");
             if (securityDetails[3].equals(recoveryDetails[0])) {//security question matches
-                String newPassword = promptForPassword(name);
-                //delete old passwords when Store implements delete
-                createPassword(name, newPassword);
-                System.out.println("Password changed. Try signing in again");
+                try {
+                    if (verifyPassword(name, recoveryDetails[1], 1)) { //verify security question
+                        System.out.println("Let's create you new login password:");
+                        String newPassword = promptForPassword(name);
+                        //delete old passwords when Store implements delete
+                        createPassword(name, newPassword);
+                        System.out.println("Password changed. Try signing in again");
+                    } else
+                        System.out.println("Error: Unable to recover password");
+                }
+                catch (NoSuchAlgorithmException e) {
+                    System.out.println(e.getMessage());
+                } catch (InvalidKeySpecException e) {
+                    System.out.println(e.getMessage());
+                }
             }
+
             else{
                 System.out.println("Error: Unable to recover password");
             }
@@ -129,7 +141,18 @@ public class Password {
         }
         return isCorrect;
     }
-
+    public static boolean passedsecurityTestGUI(String name, String answer){
+        boolean passed=false;
+        try{
+            passed=verifyPassword(name, answer, 1);
+        }
+        catch (NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidKeySpecException e) {
+            System.out.println(e.getMessage());
+        }
+        return passed;
+    }
     public static final boolean verifyPassword(String username, String password, int code)throws NoSuchAlgorithmException, InvalidKeySpecException{
         String[] stored_pass=ClientUser.passwordsDB.first(username).split("\\$");
         //decrypting password
