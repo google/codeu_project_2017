@@ -78,7 +78,7 @@ public final class ClientUser {
     updateUsers();
 
     final User prev = current;
-    if (( name!=null && mode==1)|| (name != null && Password.authenticateUserCommandline(name, passwordsDB) && mode==0)) {
+    if (( name!=null && mode==1)|| (name != null && Password.authenticateUserCommandline(name) && mode==0)) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;
@@ -106,7 +106,7 @@ public final class ClientUser {
       System.out.format("Error: user not created - %s.\n",
               (validInputs) ? "server failure" : "bad input value");
     } else {
-      Password.createPassword(name, password, passwordsDB);
+      Password.createPassword(name, password);
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }

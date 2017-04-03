@@ -154,7 +154,6 @@ public final class UserPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (userList.getSelectedIndex() != -1) {
-                    final String data = userList.getSelectedValue();
                     int i = 0;
                     int MAX_TRIALS = 3;
                     while (true) {
@@ -177,6 +176,7 @@ public final class UserPanel extends JPanel {
                         String[] options = new String[]{"OK", "Cancel"};
                         int option = JOptionPane.showOptionDialog(null, signinPanel, "Sign-in", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
                         if (option == 0) {
+                            final String data = userList.getSelectedValue();
                             final String password = String.valueOf(pField.getPassword());
                             if (password != null && password.length() > 0) {
                                 if (Password.authenticateUserGUI(data, password)) {
@@ -184,12 +184,16 @@ public final class UserPanel extends JPanel {
                                     userSignedInLabel.setText("Hello " + data);
                                     break;
                                 }
+//                                else{
+//                                    JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Password!", "Error", JOptionPane.ERROR_MESSAGE);
+//                                }
                             }
                             i++;
                             if (i == MAX_TRIALS) {
                                 JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Password!", "Error", JOptionPane.ERROR_MESSAGE);
                                 String[] options_one = new String[]{"YES", "NO"};
-                                int option_one = JOptionPane.showOptionDialog(null, signinPanel, "Forgot Password?", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options_one, options_one[1]);
+                                JPanel simplePanel=new JPanel();
+                                int option_one = JOptionPane.showOptionDialog(null, simplePanel, "Forgot Password?", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options_one, options_one[1]);
                                 if (option_one == 0)
                                     recoverPassword(data, listModel);
                                 break;
@@ -286,7 +290,7 @@ public final class UserPanel extends JPanel {
             constraints.gridx = 1;
             panel.add(confirmPassword, constraints);
 
-            JLabel questionField = new JLabel("Security Question");
+            JLabel questionField = new JLabel("Security Question:");
             constraints.gridx = 0;
             constraints.gridy = 3;
             panel.add(questionField, constraints);
@@ -299,7 +303,6 @@ public final class UserPanel extends JPanel {
             JComboBox<String> questionList = new JComboBox<>(choices);
             constraints.gridx = 1;
             panel.add(questionList, constraints);
-            String question = (String) questionList.getSelectedItem();
 
             JLabel answerLabel = new JLabel("Answer");
             constraints.gridy = 4;
@@ -310,29 +313,28 @@ public final class UserPanel extends JPanel {
             answerField.setColumns(10);
             constraints.gridx = 1;
             panel.add(answerField, constraints);
-            String answer = answerField.getText();
 
 
             String[] options = new String[]{"OK", "Cancel"};
             int option = JOptionPane.showOptionDialog(null, panel, "Add User", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
             if (option == 0) {
-                String s = textField.getText();
-                int j = 0;//store the index of the question
-                for (int i = 0; i < 3; i++) {
-                    if (s.equals(choices[i])) j = i;
-                }
+                String userName = textField.getText();
+                String answer = answerField.getText();
+
                 String pass_one = String.valueOf(passwordField.getPassword());
                 String pass_two = String.valueOf(confirmPassword.getPassword());
-                if (pass_one.equals(pass_two) && (s != null && s.length() > 0)) {
+                String question = (String) questionList.getSelectedItem();
+
+                if (pass_one.equals(pass_two) && (userName != null && userName.length() > 0)) {
                     JOptionPane.showMessageDialog(panel, Password.passwordStrength(pass_one), "PASSWORD STRENGTH", JOptionPane.INFORMATION_MESSAGE);
-                    clientContext.user.addUser(s, pass_one);
-                    ClientUser.passwordRecoveryDB.insert(s, String.valueOf(j) + "$" + answer);//TODO store the index not the element
+                    String securityDetails=pass_one + "$" + question + "$" + answer;
+                    clientContext.user.addUser(userName, securityDetails);
                     UserPanel.this.getAllUsers(listModel);
                     break;
                 } else {
                     if (!pass_one.equals(pass_two))
                         JOptionPane.showMessageDialog(panel, "Passwords don't match!", "Error", JOptionPane.ERROR_MESSAGE);
-                    if (s == null || s.length() == 0)
+                    if (userName == null || userName.length() == 0)
                         JOptionPane.showMessageDialog(panel, "Empty Username!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -361,11 +363,6 @@ public final class UserPanel extends JPanel {
         constraints_two.gridx = 1;
         panel.add(comboBox);
         String securityQuestion = (String) comboBox.getSelectedItem();
-        int n = 0;
-        for (int k = 0; k < 3; k++) {
-            if (securityQuestion.equals(choices[k])) n = k;
-        }
-
 
         JLabel answerLabel = new JLabel("Answer");
         constraints_two.gridx = 0;
@@ -382,12 +379,13 @@ public final class UserPanel extends JPanel {
         int opt = JOptionPane.showOptionDialog(null, panel, "Recover Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, panel_options, panel_options[1]);
         if (opt == 0) {
             //TODO delete old user when store implements delete
-            if (ClientUser.passwordRecoveryDB.first(data).equals(String.valueOf(n) + "$" + answer)){
+            String[] securityDetails=ClientUser.passwordsDB.first(data).split("\\$");
+            if (securityDetails[3].equals(securityQuestion)){//questions match
                 createPasswordInputDialog(listModel);
                 JOptionPane.showMessageDialog(panel, "Password Successfully Changed!", "PASSWORD STRENGTH", JOptionPane.INFORMATION_MESSAGE);
             }
             else
-                System.out.println("Error: Unable to recover password");
+                JOptionPane.showMessageDialog(panel, "Error: Unable to recover password!", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

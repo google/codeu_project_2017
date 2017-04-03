@@ -34,10 +34,13 @@ public class Password {
 
 
 
-    public static void createPassword(String user, String password, Store<String, String> passwordDB){
+    public static void createPassword(String user, String password){
 
             try {
-                encryptPassword(passwordDB, user, password, getSaltvalue());
+                String[] securityDetails=password.split("\\$");
+                String encryptedPass=encryptPassword(user, securityDetails[0], getSaltvalue());
+                String encryptedAnswer=encryptPassword(user, securityDetails[2], getSaltvalue());
+                ClientUser.passwordsDB.insert(user, encryptedPass+"$" + securityDetails[1] +"$" +encryptedAnswer);
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e.getMessage());
             } catch (InvalidKeySpecException e) {
@@ -59,19 +62,19 @@ public class Password {
             }
             else {
                 System.out.println("Password Strength: "+ passwordStrength(password));
-                ClientUser.passwordRecoveryDB.insert(name, collectPasswordRecoveryInfo(name));
-                return password;
+               // ClientUser.passwordRecoveryDB.insert(name, collectPasswordRecoveryInfo(name));
+                return password + "$" +collectPasswordRecoveryInfo(name);
             }
         }
     }
-    public static boolean authenticateUserCommandline(String name, Store<String, String> passwordDB){
+    public static boolean authenticateUserCommandline(String name){
         Console console = System.console();
         int i=0;
         boolean correctPass=false;
         String password = new String(console.readPassword("Enter Password: "));
         try{
             while(true) {
-                correctPass = verifyPassword(passwordDB, name, password);
+                correctPass = verifyPassword(name, password, 0);
                 // System.out.println(correctPass);
                 if (correctPass)
                     break;
@@ -97,10 +100,12 @@ public class Password {
         Scanner input = new Scanner(System.in);
         String choice=input.nextLine();
         if (choice.equals("Y") || choice.equals("y")) {
-            if (ClientUser.passwordRecoveryDB.first(name).equals(collectPasswordRecoveryInfo(name))) {
+            String[] recoveryDetails=collectPasswordRecoveryInfo(name).split("\\$");
+            String[] securityDetails=ClientUser.passwordsDB.first(name).split("\\$");
+            if (securityDetails[3].equals(recoveryDetails[0])) {//security question matches
                 String newPassword = promptForPassword(name);
                 //delete old passwords when Store implements delete
-                createPassword(name, newPassword, ClientUser.passwordsDB);
+                createPassword(name, newPassword);
                 System.out.println("Password changed. Try signing in again");
             }
             else{
@@ -115,7 +120,7 @@ public class Password {
     public static boolean authenticateUserGUI(String user, String password){
         boolean isCorrect=false;
         try{
-            isCorrect=verifyPassword(ClientUser.passwordsDB, user, password);
+            isCorrect=verifyPassword(user, password, 0);
         }
         catch (NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
@@ -125,12 +130,18 @@ public class Password {
         return isCorrect;
     }
 
-    public static final boolean verifyPassword(Store<String, String> passwordDB, String username, String password)throws NoSuchAlgorithmException, InvalidKeySpecException{
-        String[] stored_pass=passwordDB.first(username).split("\\$");
-        int iterations=Integer.parseInt(stored_pass[0]);
-        byte[] salt=convertToBytes(stored_pass[1]);
-        byte[] hash=convertToBytes(stored_pass[2]);
+    public static final boolean verifyPassword(String username, String password, int code)throws NoSuchAlgorithmException, InvalidKeySpecException{
+        String[] stored_pass=ClientUser.passwordsDB.first(username).split("\\$");
+        //decrypting password
+            int iterations = Integer.parseInt(stored_pass[0]);
+            byte[] salt = convertToBytes(stored_pass[1]);
+            byte[] hash = convertToBytes(stored_pass[2]);
 
+        if(code==1){//decrypting security question
+            iterations=Integer.parseInt(stored_pass[4]);
+            salt=convertToBytes(stored_pass[5]);
+            hash=convertToBytes(stored_pass[6]);
+        }
         byte[] hash_of_input =hash(password, salt);
 
         /*use bit manipulation to compare both hashes(xor the lengths of both(should give 0),
@@ -145,13 +156,14 @@ public class Password {
     }
 
 
-    public static final void encryptPassword( Store<String, String> passwordDB, String username, String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static final String encryptPassword(String username, String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String encrypted_pass = ITERATIONS + "$" + convertToHex(salt) + "$" + convertToHex(hash(password, salt));
 
         if (encrypted_pass == null) throw new NoSuchAlgorithmException();
 
+        return encrypted_pass;
         //DB.put(username, encrypted_pass);
-        passwordDB.insert(username, encrypted_pass);
+       // passwordDB.insert(username, encrypted_pass);
     }
 
     private static final byte[] hash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -204,19 +216,30 @@ public class Password {
         }
 
     public static final String collectPasswordRecoveryInfo(String name){
-        System.out.println("Choose one security question: ");
-        System.out.println("1 : What is the name of your elementary school?");
-        System.out.println("2: What is the name of your pet?");
-        System.out.println("3. Which city did you meet your spouse?");
+        int choice=0;
 
-        Scanner input=new Scanner(System.in);
-        int question=input.nextInt();
+        while(choice<=0 || choice>3) {
+            System.out.println("Choose one security question: ");
+            System.out.println("1 : What is the name of your elementary school?");
+            System.out.println("2: What is the name of your pet?");
+            System.out.println("3. Which city did you meet your spouse?");
+
+            Scanner input = new Scanner(System.in);
+            choice = input.nextInt();
+        }
+
+        String question="";
+        if(choice==1) question="What is the name of your elementary school?";
+        if(choice==2) question="What is the name of your pet?";
+        if(choice==3) question="Which city did you meet your spouse?";
+
+
 
         System.out.println("Answer: ");
         Scanner scanner=new Scanner(System.in);
         String answer=scanner.nextLine();
 
-        return String.valueOf(input) + "$" + answer;
+        return  question + "$" + answer;
 
     }
 
