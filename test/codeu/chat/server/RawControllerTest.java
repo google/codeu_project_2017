@@ -48,37 +48,27 @@ public final class RawControllerTest {
   @Test
   public void testAddUser() {
 
-    final User user = controller.newUser(userId, "user", Time.now());
+    final User user =
+        controller.newUser(userId, "user", Time.now(), "test passwordHash", "saltCode");
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuids.equals(user.id, userId));
+    assertFalse("Check that user has a valid reference", user == null);
+    assertTrue("Check that the user has the correct id", Uuids.equals(user.id, userId));
   }
 
   @Test
   public void testAddConversation() {
 
-    final User user = controller.newUser(userId, "user", Time.now());
+    final User user =
+        controller.newUser(userId, "user", Time.now(), "test passwordHash", "saltCode");
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuids.equals(user.id, userId));
+    assertFalse("Check that user has a valid reference", user == null);
+    assertTrue("Check that the user has the correct id", Uuids.equals(user.id, userId));
 
-    final Conversation conversation = controller.newConversation(
-        conversationId,
-        "conversation",
-        user.id,
-        Time.now());
+    final Conversation conversation =
+        controller.newConversation(
+            conversationId, "conversation", user.id, Time.now(), "passHash", "salt");
 
-    assertFalse(
-        "Check that conversation has a valid reference",
-        conversation == null);
+    assertFalse("Check that conversation has a valid reference", conversation == null);
     assertTrue(
         "Check that the conversation has the correct id",
         Uuids.equals(conversation.id, conversationId));
@@ -87,49 +77,40 @@ public final class RawControllerTest {
   @Test
   public void testAddMessage() {
 
-    final User user = controller.newUser(userId, "user", Time.now());
+    final User user =
+        controller.newUser(userId, "user", Time.now(), "test passwordHash", "saltCode");
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuids.equals(user.id, userId));
+    assertFalse("Check that user has a valid reference", user == null);
+    assertTrue("Check that the user has the correct id", Uuids.equals(user.id, userId));
 
-    final Conversation conversation = controller.newConversation(
-        conversationId,
-        "conversation",
-        user.id,
-        Time.now());
+    final Conversation conversation =
+        controller.newConversation(
+            conversationId, "conversation", user.id, Time.now(), "passHash", "salt");
 
-    assertFalse(
-        "Check that conversation has a valid reference",
-        conversation == null);
+    assertFalse("Check that conversation has a valid reference", conversation == null);
     assertTrue(
         "Check that the conversation has the correct id",
         Uuids.equals(conversation.id, conversationId));
 
-    final Message message = controller.newMessage(
-        messageId,
-        user.id,
-        conversation.id,
-        "Hello World",
-        Time.now());
+    final Message message =
+        controller.newMessage(messageId, user.id, conversation.id, "Hello World", Time.now());
 
-    assertFalse(
-        "Check that the message has a valid reference",
-        message == null);
-    assertTrue(
-        "Check that the message has the correct id",
-        Uuids.equals(message.id, messageId));
+    assertFalse("Check that the message has a valid reference", message == null);
+    assertTrue("Check that the message has the correct id", Uuids.equals(message.id, messageId));
   }
 
   private static Uuid newTestId(final int id) {
-    return Uuids.complete(new Uuid() {
-      @Override
-      public Uuid root() { return null; }
-      @Override
-      public int id() { return id; }
-    });
+    return Uuids.complete(
+        new Uuid() {
+          @Override
+          public Uuid root() {
+            return null;
+          }
+
+          @Override
+          public int id() {
+            return id;
+          }
+        });
   }
 }

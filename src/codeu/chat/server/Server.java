@@ -138,8 +138,9 @@ public final class Server {
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
       final String name = Serializers.STRING.read(in);
-
-      final User user = controller.newUser(name);
+      final String passHash = Serializers.STRING.read(in);
+      final String salt = Serializers.STRING.read(in);
+      final User user = controller.newUser(name, passHash, salt);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -148,8 +149,10 @@ public final class Server {
 
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuids.SERIALIZER.read(in);
+      final String passHash = Serializers.STRING.read(in);
+      final String salt = Serializers.STRING.read(in);
 
-      final Conversation conversation = controller.newConversation(title, owner);
+      final Conversation conversation = controller.newConversation(title, owner, passHash, salt);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
@@ -263,7 +266,7 @@ public final class Server {
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time(), "Fix onBundle passwordHash", "Fix onBundle Server salt");
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
@@ -276,7 +279,9 @@ public final class Server {
       conversation = controller.newConversation(relayConversation.id(),
                                                 relayConversation.text(),
                                                 user.id,
-                                                relayConversation.time());
+                                                relayConversation.time(),
+                                                "passHash",
+                                                  "salt");
     }
 
     Message message = model.messageById().first(relayMessage.id());

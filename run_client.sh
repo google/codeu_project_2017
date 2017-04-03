@@ -17,5 +17,4 @@
 LOCAL_MACHINE="localhost@2007"
 
 cd './bin'
-
 java codeu.chat.ClientMain "$LOCAL_MACHINE"

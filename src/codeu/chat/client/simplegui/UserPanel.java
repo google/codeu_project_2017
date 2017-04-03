@@ -22,6 +22,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
+import codeu.chat.common.Password;
 import codeu.chat.common.User;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
@@ -139,46 +140,81 @@ public final class UserPanel extends JPanel {
     this.add(buttonPanel, buttonPanelC);
     this.add(currentPanel, currentPanelC);
 
-    userUpdateButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        UserPanel.this.getAllUsers(listModel);
-      }
-    });
+    userUpdateButton.addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            UserPanel.this.getAllUsers(listModel);
+          }
+        });
 
-    userSignInButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
-          final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
-        }
-      }
-    });
+    userSignInButton.addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            if (userList.getSelectedIndex() != -1) {
+              final String data = userList.getSelectedValue();
+              final String password =
+                  (String)
+                      JOptionPane.showInputDialog(
+                          UserPanel.this,
+                          "Enter Password:",
+                          "Password",
+                          JOptionPane.PLAIN_MESSAGE,
+                          null,
+                          null,
+                          "");
+              boolean signedIn = clientContext.user.signInUser(data, password);
+              if (signedIn) {
+                userSignedInLabel.setText("Hello " + data);
+              } else {
+                JOptionPane.showMessageDialog(UserPanel.this, "Incorrect Username or Password");
+              }
+            }
+          }
+        });
 
-    userAddButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
-            null, null, "");
-        if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
-          UserPanel.this.getAllUsers(listModel);
-        }
-      }
-    });
+    userAddButton.addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            final String userName =
+                (String)
+                    JOptionPane.showInputDialog(
+                        UserPanel.this,
+                        "Enter user name:",
+                        "Add User",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+            final String password =
+                (String)
+                    JOptionPane.showInputDialog(
+                        UserPanel.this,
+                        "Enter Password:",
+                        "Add Password",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+            if (userName != null && userName.length() > 0) {
+              clientContext.user.addUser(userName, password);
+              UserPanel.this.getAllUsers(listModel);
+            }
+          }
+        });
 
-    userList.addListSelectionListener(new ListSelectionListener() {
-      @Override
-      public void valueChanged(ListSelectionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
-          final String data = userList.getSelectedValue();
-          userInfoPanel.setText(clientContext.user.showUserInfo(data));
-        }
-      }
-    });
+    userList.addListSelectionListener(
+        new ListSelectionListener() {
+          @Override
+          public void valueChanged(ListSelectionEvent e) {
+            if (userList.getSelectedIndex() != -1) {
+              final String data = userList.getSelectedValue();
+              userInfoPanel.setText(clientContext.user.showUserInfo(data));
+            }
+          }
+        });
 
     getAllUsers(listModel);
   }

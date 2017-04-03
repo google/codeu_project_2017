@@ -38,55 +38,38 @@ public final class BasicControllerTest {
   @Test
   public void testAddUser() {
 
-    final User user = controller.newUser("user");
+    final User user = controller.newUser("user", "TestPasswordHash", "saltCode");
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
+    assertFalse("Check that user has a valid reference", user == null);
   }
 
   @Test
   public void testAddConversation() {
 
-    final User user = controller.newUser("user");
+    final User user = controller.newUser("user", "testPasswordHash", "saltCode");
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
+    assertFalse("Check that user has a valid reference", user == null);
 
-    final Conversation conversation = controller.newConversation(
-        "conversation",
-        user.id);
+    final Conversation conversation =
+        controller.newConversation("conversation", user.id, "pashHash", "salt");
 
-    assertFalse(
-        "Check that conversation has a valid reference",
-        conversation == null);
+    assertFalse("Check that conversation has a valid reference", conversation == null);
   }
 
   @Test
   public void testAddMessage() {
 
-    final User user = controller.newUser("user");
+    final User user = controller.newUser("user", "TestPasswordHash", "saltCode");
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
+    assertFalse("Check that user has a valid reference", user == null);
 
-    final Conversation conversation = controller.newConversation(
-        "conversation",
-        user.id);
+    final Conversation conversation =
+        controller.newConversation("conversation", user.id, "passHash", "salt");
 
-    assertFalse(
-        "Check that conversation has a valid reference",
-        conversation == null);
+    assertFalse("Check that conversation has a valid reference", conversation == null);
 
-    final Message message = controller.newMessage(
-        user.id,
-        conversation.id,
-        "Hello World");
+    final Message message = controller.newMessage(user.id, conversation.id, "Hello World");
 
-    assertFalse(
-        "Check that the message has a valid reference",
-        message == null);
+    assertFalse("Check that the message has a valid reference", message == null);
   }
 }

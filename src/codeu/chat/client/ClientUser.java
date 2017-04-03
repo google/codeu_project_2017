@@ -14,11 +14,9 @@
 
 package codeu.chat.client;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import codeu.chat.common.Password;
 import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
@@ -26,7 +24,7 @@ import codeu.chat.util.store.Store;
 
 public final class ClientUser {
 
-  private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
+  private static final Logger.Log LOG = Logger.newLog(ClientUser.class);
 
   private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
   private final Controller controller;
@@ -45,7 +43,7 @@ public final class ClientUser {
   }
 
   // Validate the username string
-  static public boolean isValidName(String userName) {
+  public static boolean isValidName(String userName) {
     boolean clean = true;
     if (userName.length() == 0) {
       clean = false;
@@ -53,6 +51,17 @@ public final class ClientUser {
 
       // TODO: check for invalid characters
 
+    }
+    return clean;
+  }
+
+  //Validate the password string
+  public static boolean isValidPassword(String password) {
+    boolean clean = true;
+    if (password.length() <= 6) {
+      clean = false;
+    } else {
+      // TODO: check for password criteria
     }
     return clean;
   }
@@ -65,14 +74,15 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, String password) {
     updateUsers();
 
     final User prev = current;
     if (name != null) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
-        current = newCurrent;
+        boolean userAccess = newCurrent.isPassword(password);
+        if (userAccess) current = newCurrent;
       }
     }
     return (prev != current);
@@ -88,14 +98,16 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
+  public void addUser(String name, String password) {
+    final boolean validInputs = isValidName(name) && isValidPassword(password);
+    String salt = Password.generateSalt();
+    String passwordHash = Password.getHashCode(password, salt);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, passwordHash, salt) : null;
 
     if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+      System.out.format(
+          "Error: user not created - %s.\n", (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
@@ -138,8 +150,10 @@ public final class ClientUser {
   }
 
   public static String getUserInfoString(User user) {
-    return (user == null) ? "Null user" :
-        String.format(" User: %s\n   Id: %s\n   created: %s\n", user.name, user.id, user.creation);
+    return (user == null)
+        ? "Null user"
+        : String.format(
+            " User: %s\n   Id: %s\n   created: %s\n ", user.name, user.id, user.creation);
   }
 
   public String showUserInfo(String uname) {

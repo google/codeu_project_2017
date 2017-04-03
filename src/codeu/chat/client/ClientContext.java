@@ -31,4 +31,6 @@ public final class ClientContext {
     conversation = new ClientConversation(controller, view, user);
     message = new ClientMessage(controller, view, user, conversation);
   }
+
+
 }
