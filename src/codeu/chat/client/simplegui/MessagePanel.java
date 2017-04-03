@@ -30,8 +30,8 @@ import codeu.chat.common.User;
 public final class MessagePanel extends JPanel {
 
   // These objects are modified by the Conversation Panel.
-  private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
-  private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.LEFT);
+  private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.CENTER);
+  private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.CENTER);
   private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
 
   private final ClientContext clientContext;
@@ -89,6 +89,8 @@ public final class MessagePanel extends JPanel {
     // messageOwnerLabel is an instance variable of Conversation panel
     // can update it.
     messageOwnerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    messageOwnerLabel.setPreferredSize(new Dimension(245, 15));
+
     titleOwnerPanel.add(messageOwnerLabel);
 
     titlePanel.add(titleConvPanel, titleConvPanelC);
@@ -108,14 +110,21 @@ public final class MessagePanel extends JPanel {
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
-    userListScrollPane.setMinimumSize(new Dimension(500, 200));
-    userListScrollPane.setPreferredSize(new Dimension(500, 200));
+    userListScrollPane.setMinimumSize(new Dimension(350, 200));
+    userListScrollPane.setPreferredSize(new Dimension(350, 200));
 
     // Button panel
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
+    final JLabel messagePrompt = new JLabel("Send message: ");
+
+    final JTextArea messageField = new JTextArea(3, 25);
+    final JScrollPane messageScroll = new JScrollPane(messageField);
+
     final JButton addButton = new JButton("Add");
+    buttonPanel.add(messagePrompt);
+    buttonPanel.add(messageScroll);
     buttonPanel.add(addButton);
 
     // Placement of title, list panel, buttons, and current user panel.
@@ -135,7 +144,7 @@ public final class MessagePanel extends JPanel {
     listPanelC.weighty = 0.8;
 
     buttonPanelC.gridx = 0;
-    buttonPanelC.gridy = 11;
+    buttonPanelC.gridy = 10;
     buttonPanelC.gridwidth = 10;
     buttonPanelC.gridheight = 1;
     buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
@@ -154,9 +163,8 @@ public final class MessagePanel extends JPanel {
         } else if (!clientContext.conversation.hasCurrent()) {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
-          final String messageText = (String) JOptionPane.showInputDialog(
-              MessagePanel.this, "Enter message:", "Add Message", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+          final String messageText = messageField.getText();
+          messageField.setText("");
           if (messageText != null && messageText.length() > 0) {
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,

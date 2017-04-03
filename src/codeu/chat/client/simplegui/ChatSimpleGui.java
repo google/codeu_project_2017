@@ -65,7 +65,8 @@ public final class ChatSimpleGui {
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mainFrame.setSize(790, 450);
+    mainFrame.setPreferredSize(new Dimension(1070, 450));
+    mainFrame.setMinimumSize(new Dimension(1070, 450));
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
@@ -102,8 +103,8 @@ public final class ChatSimpleGui {
     conversationViewC.weightx = 0.7;
     conversationViewC.weighty = 0.3;
 
-    messagesViewC.gridx = 0;
-    messagesViewC.gridy = 1;
+    messagesViewC.gridx = 2;
+    messagesViewC.gridy = 0;
     messagesViewC.gridwidth = 2;
     messagesViewC.gridheight = 1;
     messagesViewC.fill = GridBagConstraints.BOTH;
