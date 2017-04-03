@@ -1,0 +1,5 @@
+.idea/workspace.xml
+ bin/chat_client_log.log
+bin/chat_server_log.log
+bin/chat_simple_gui_client_log.log
+

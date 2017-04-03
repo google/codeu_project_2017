@@ -1467,3 +1467,28 @@ Apr 02, 2017 12:52:13 AM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 Apr 02, 2017 12:52:13 AM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "ty" UUID=[UUID:100.101.3812663252]
+Apr 02, 2017 4:56:48 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 4:56:48 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 4:56:48 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 4:56:48 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 02, 2017 4:56:56 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 02, 2017 4:56:56 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 02, 2017 4:56:57 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "w" UUID=[UUID:100.101.4280535797]
+Apr 02, 2017 4:58:35 PM codeu.chat.client.commandline.Chat handleCommand
+SEVERE: Exception during command processing
+java.lang.NullPointerException
+	at codeu.chat.client.Password.verifyPassword(Password.java:129)
+	at codeu.chat.client.Password.authenticateUserCommandline(Password.java:74)
+	at codeu.chat.client.ClientUser.signInUser(ClientUser.java:81)
+	at codeu.chat.client.commandline.Chat.signInUser(Chat.java:198)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:93)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+
