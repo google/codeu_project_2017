@@ -1467,6 +1467,7 @@ Apr 02, 2017 12:52:13 AM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 Apr 02, 2017 12:52:13 AM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "ty" UUID=[UUID:100.101.3812663252]
+<<<<<<< Updated upstream
 Apr 02, 2017 4:56:48 PM codeu.chat.ClientMain main
 INFO: ============================= START OF LOG =============================
 Apr 02, 2017 4:56:48 PM codeu.chat.ClientMain main
@@ -1492,3 +1493,13 @@ java.lang.NullPointerException
 	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:284)
 	at codeu.chat.ClientMain.main(ClientMain.java:57)
 
+=======
+Apr 02, 2017 9:54:30 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 9:54:30 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 02, 2017 9:54:30 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 02, 2017 9:54:30 AM codeu.chat.ClientMain main
+INFO: Created client
+>>>>>>> Stashed changes

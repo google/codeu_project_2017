@@ -1,0 +1,13 @@
+Apr 02, 2017 8:28:54 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 02, 2017 8:28:54 PM codeu.chat.ServerMain main
+SEVERE: Failed to establish connections
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:382)
+	at java.net.ServerSocket.bind(ServerSocket.java:375)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at java.net.ServerSocket.<init>(ServerSocket.java:128)
+	at codeu.chat.util.connections.ServerConnectionSource.forPort(ServerConnectionSource.java:68)
+	at codeu.chat.ServerMain.main(ServerMain.java:61)
+
