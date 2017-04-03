@@ -14,5 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Create main Database
+cd './db'
+createDatabase.sh
+cd '..'
+
+# Run Server
 cd './bin'
 java codeu.chat.ServerMain "100.101" "ABABAB" "2007"

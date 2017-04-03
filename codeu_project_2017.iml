@@ -8,6 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="third_party" level="project" />
+    <orderEntry type="library" exported="" name="third_party" level="project" />
+    <orderEntry type="library" name="sqlite3" level="project" />
   </component>
 </module>
