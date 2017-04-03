@@ -44,7 +44,7 @@ public final class ClientUser {
   public static Store<String, String> passwordsDB = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
   //set of security questions known by the server
-  public static Store<String, String> passwordRecoveryDB = new Store<>(String.CASE_INSENSITIVE_ORDER);
+  //public static Store<String, String> passwordRecoveryDB = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
 
   public ClientUser(Controller controller, View view) {

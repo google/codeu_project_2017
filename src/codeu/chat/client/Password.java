@@ -32,8 +32,32 @@ public class Password {
     private static final Random RANDOM = new SecureRandom();
     private static Map<String, String> DB = new HashMap<String, String>();
 
+    /*
+    This method interacts with the user ro collect all security details via commandline
+    * It also calls a regex based method(passwordStrength) to give feedback on the strength of the password
+    * */
 
-
+    public static String promptForPassword(String name){
+        Console console = System.console();
+        while(true){
+            String password = new String(console.readPassword("Enter Password: "));
+            String confirmPassword = new String(console.readPassword("Confirm Password: "));
+            final boolean validPass = password.length()!=0 && password.equals(confirmPassword);
+            password = validPass ? password : null;
+            if (password == null) {
+                System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Passwords don't match. Try Again!");
+            }
+            else {
+                System.out.println("Password Strength: "+ passwordStrength(password));
+                // ClientUser.passwordRecoveryDB.insert(name, collectPasswordRecoveryInfo(name));
+                return password + "$" +collectPasswordRecoveryInfo(name);
+            }
+        }
+    }
+/*
+* this method calls methods to encrypt the password and the security question answer
+* it stores all the encrypted security question in a string separated by $
+* */
     public static void createPassword(String user, String password){
 
             try {
@@ -49,24 +73,11 @@ public class Password {
 
     }
 
+/*
+* This methos interacts with the user on cmd to read the entered password
+* it calls respective methods to validate the password
+* */
 
-    public static String promptForPassword(String name){
-        Console console = System.console();
-        while(true){
-            String password = new String(console.readPassword("Enter Password: "));
-            String confirmPassword = new String(console.readPassword("Confirm Password: "));
-            final boolean validPass = password.length()!=0 && password.equals(confirmPassword);
-            password = validPass ? password : null;
-            if (password == null) {
-                System.out.format("Password not created - %s.\n", validPass ? "server failure" : "Passwords don't match. Try Again!");
-            }
-            else {
-                System.out.println("Password Strength: "+ passwordStrength(password));
-               // ClientUser.passwordRecoveryDB.insert(name, collectPasswordRecoveryInfo(name));
-                return password + "$" +collectPasswordRecoveryInfo(name);
-            }
-        }
-    }
     public static boolean authenticateUserCommandline(String name){
         Console console = System.console();
         int i=0;
@@ -94,6 +105,28 @@ public class Password {
         }
         return correctPass;
     }
+
+    /*
+    * This method coordinates user authentication via GUI
+    * */
+    public static boolean authenticateUserGUI(String user, String password){
+        boolean isCorrect=false;
+        try{
+            isCorrect=verifyPassword(user, password, 0);
+        }
+        catch (NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidKeySpecException e) {
+            System.out.println(e.getMessage());
+        }
+        return isCorrect;
+    }
+    /*
+    * This method intercats with the user to change the password on CMD
+    * in case the user has lost the password
+    * The user is required to rememeber the security question and answer so as to change the password
+    * The security answer is encrypted and stored with the encrypted password
+    * */
 
     private static void changePassword(String name) {
         System.out.println("Forgotten password? Y N");
@@ -129,18 +162,9 @@ public class Password {
         }
     }
 
-    public static boolean authenticateUserGUI(String user, String password){
-        boolean isCorrect=false;
-        try{
-            isCorrect=verifyPassword(user, password, 0);
-        }
-        catch (NoSuchAlgorithmException e) {
-            System.out.println(e.getMessage());
-        } catch (InvalidKeySpecException e) {
-            System.out.println(e.getMessage());
-        }
-        return isCorrect;
-    }
+  /*
+  * this is a GUI helper method to validate the correctness of the security question answer so as to be able to change the password on GUI
+  * */
     public static boolean passedsecurityTestGUI(String name, String answer){
         boolean passed=false;
         try{
@@ -153,6 +177,11 @@ public class Password {
         }
         return passed;
     }
+
+    /*
+    * this method takes in  the password and the user name, encypts them and compares them with the initially stored encrypted security information.
+    * Returns true if the password/security question answer matches the ones stored initially.
+    * */
     public static final boolean verifyPassword(String username, String password, int code)throws NoSuchAlgorithmException, InvalidKeySpecException{
         String[] stored_pass=ClientUser.passwordsDB.first(username).split("\\$");
         //decrypting password
@@ -185,10 +214,12 @@ public class Password {
         if (encrypted_pass == null) throw new NoSuchAlgorithmException();
 
         return encrypted_pass;
-        //DB.put(username, encrypted_pass);
-       // passwordDB.insert(username, encrypted_pass);
     }
 
+/*
+* this method hashes the password using the SHA 256 algorithm .
+* It returns the encoded salted password in bytes
+* */
     private static final byte[] hash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, ITERATIONS, DESIRED_KEYLEN);
@@ -198,7 +229,10 @@ public class Password {
         byte[] hash = key.getEncoded();
         return hash;
     }
-
+/*
+*
+* returns a randomized secure salt value to solve the problem of similar passwords
+* */
     private static final byte[] getSaltvalue() throws NoSuchAlgorithmException {
         byte[] salt = new byte[SALT_LENGTH];
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
@@ -223,6 +257,9 @@ public class Password {
         return bytes;
     }
 
+    /*
+    * Uses regex to give feedback on password strength
+    * */
     public static final String passwordStrength(String password){
 
         //a very strong password has special, lowercase, uppercase, digit characters, now hitespace and has length of at least 8
@@ -238,6 +275,10 @@ public class Password {
         return "Weak!";
         }
 
+
+        /*
+        * Interacts with user to collect password recovery information
+        * */
     public static final String collectPasswordRecoveryInfo(String name){
         int choice=0;
 
