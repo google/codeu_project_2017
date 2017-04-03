@@ -24,6 +24,12 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
+
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public final class Controller implements RawController, BasicController {
 
@@ -59,6 +65,30 @@ public final class Controller implements RawController, BasicController {
     final Conversation foundConversation = model.conversationById().first(conversation);
 
     Message message = null;
+    Connection connection = null;
+    Statement stmt = null;
+
+    if(sqlValidConversation(author, conversation)){
+      try{
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+        connection.setAutoCommit(false);
+
+        stmt = connection.createStatement();
+
+        String sql = "INSERT INTO MESSAGES(ID, USERID, CONVERSATIONID, TimeCreated, MESSAGE)" +
+                "VALUES("+sqlID(id)+","+sqlID(author)+","+sqlID(conversation)+","+sqlBody(body)+","+sqlCreationTime(creationTime)+");";
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+        connection.commit();
+        connection.close();
+      }catch (Exception e) {
+        System.out.println("Error adding message to conversation");
+        System.err.println(e.getClass().getName() +": " + e.getMessage());
+        System.exit(0);
+      }
+    }
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
@@ -104,7 +134,39 @@ public final class Controller implements RawController, BasicController {
   @Override
   public User newUser(Uuid id, String name, Time creationTime, String password) {
 
+    Connection connection = null;
+    Statement stmt = null;
     User user = null;
+
+
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      connection.setAutoCommit(false);
+      user = new User(id, name, creationTime, password);
+      stmt = connection.createStatement();
+      String sql = "INSERT INTO USERS (ID,UNAME,TIMECREATED,PASSWORD) " +
+              "VALUES ("+sqlID(id)+", "+sqlName(name)+", "+sqlCreationTime(creationTime)+", "+sqlPassword(password)+");";
+      stmt.executeUpdate(sql);
+
+      LOG.info(
+              "newUser success (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+
+      stmt.close();
+      connection.commit();
+      connection.close();
+    } catch ( Exception e ) {
+      LOG.info(
+              "newUser fail - Database insertion error (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
 
     if (isIdFree(id)) {
 
@@ -133,8 +195,32 @@ public final class Controller implements RawController, BasicController {
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
 
     final User foundOwner = model.userById().first(owner);
-
     Conversation conversation = null;
+    Connection connection = null;
+    Statement stmt = null;
+
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      connection.setAutoCommit(false);
+      stmt = connection.createStatement();
+      String sql = "INSERT INTO CONVERSATIONS (ID,CNAME,OWNERID,TimeCreated) " +
+              "VALUES ("+sqlID(id)+", "+sqlName(title)+", "+sqlID(owner)+", "+sqlCreationTime(creationTime)+");";
+      stmt.executeUpdate(sql);
+
+      conversation = new Conversation(id, owner, creationTime, title);
+
+      LOG.info("Conversation added: " + conversation.id);
+
+      stmt.close();
+      connection.commit();
+      connection.close();
+    } catch ( Exception e ) {
+      LOG.info(
+              "newConversation fail - Verify connection and try again shortly");
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
 
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
@@ -161,6 +247,67 @@ public final class Controller implements RawController, BasicController {
     }
 
     return candidate;
+  }
+
+  private String sqlID(Uuid userID){
+    String sqlID = userID.toString();
+    sqlID = sqlID.replace("[UUID:","");
+    sqlID = sqlID.replace("]","");
+    sqlID = "'" + sqlID + "'";
+    return sqlID;
+  }
+
+  private String sqlName(String userName){
+    String sqlName = "'" + userName + "'";
+    return sqlName;
+  }
+
+  private String sqlCreationTime(Time userTime){
+    SimpleDateFormat sqlFormatter = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+    String sqlCreationTime = sqlFormatter.format(new Date(userTime.inMs())).toString();
+    sqlCreationTime = "'" + sqlCreationTime + "'";
+    return sqlCreationTime;
+  }
+
+  private String sqlPassword(String userPassword){
+    String sqlPassword = "'" + userPassword + "'";
+    return sqlPassword;
+  }
+
+  private String sqlBody(String userBody){
+    String sqlBody = "'" + userBody + "'";
+    return sqlBody;
+  }
+
+  private boolean sqlValidConversation(Uuid userID, Uuid conversationID){
+    boolean validConversation = false;
+
+    Connection connection = null;
+    Statement stmt = null;
+
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      connection.setAutoCommit(false);
+
+      stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery( "SELECT * " +
+              "FROM USER_CONVERSATION" +
+              "WHERE  USERID = "+sqlID(userID)+"" +
+              "AND    CONVERSATIONID = "+sqlID(conversationID)+";" );
+      if(rs.next()){
+        validConversation = true;
+        System.out.println("Conversation exists and User is a member");
+      }
+      rs.close();
+      stmt.close();
+      connection.close();
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    return validConversation;
   }
 
   private boolean isIdInUse(Uuid id) {

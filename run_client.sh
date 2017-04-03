@@ -23,4 +23,4 @@ if [[ "$HOST" == "" || "$PORT" == "" ]] ; then
 fi
 
 cd './bin'
-java codeu.chat.ClientMain "$HOST@$PORT"
+java -cp ./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.ClientMain "$HOST@$PORT"

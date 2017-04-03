@@ -42,13 +42,13 @@ fi
 
 cd './bin'
 if [ "$RELAY_ADDRESS" == "" ] ; then
-  java codeu.chat.ServerMain \
+  java -cp ./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
+  java -cp ./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
