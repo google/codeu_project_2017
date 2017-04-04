@@ -56,6 +56,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.awt.Desktop;
+import java.net.URL;
+
 /**
  * Simple server to demonstrate how to use Google+ Sign-In and make a request
  * via your own server.
@@ -125,6 +128,11 @@ public class Signin {
     servletHandler.addServletWithMapping(PeopleServlet.class, "/people");
     servletHandler.addServletWithMapping(MainServlet.class, "/");
     server.start();
+    try {
+      Desktop.getDesktop().browse(new URL("http://localhost:4567").toURI());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     server.join();
   }
 
