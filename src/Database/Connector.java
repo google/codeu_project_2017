@@ -1,15 +1,12 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import javax.xml.crypto.Data;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.commons.dbcp2.DataSourceConnectionFactory;
 
 /**
  * JDBC connector is needed to connects java program to the database.
