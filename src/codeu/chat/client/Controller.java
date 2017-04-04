@@ -91,6 +91,7 @@ public class Controller implements BasicController {
     return response;
   }
 
+    
   @Override
   public Conversation newConversation(String title, Uuid owner)  {
 

@@ -243,6 +243,18 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
+    } else if (type == NetworkCode.SIGN_IN_REQUEST) {
+
+      final String name = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
+
+      //final User user = controller.newUser(name, password);
+      User response = view.getSignInStatus(name, password);
+      
+      Serializers.INTEGER.write(out, NetworkCode.SIGN_IN_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, response);
+
+
     } else {
 
       // In the case that the message was not handled make a dummy message with
@@ -263,9 +275,9 @@ public final class Server {
 
     User user = model.userById().first(relayUser.id());
 
-    if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
-    }
+    // if (user == null) {
+    //	user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+    //}
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
 

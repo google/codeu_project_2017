@@ -68,4 +68,6 @@ public interface LogicalView {
   //   no messages will be returned.
   Collection<Message> getMessages(Uuid rootMessage, int range);
 
+  User getSignInStatus(String name, String password);
+
 }

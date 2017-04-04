@@ -281,4 +281,32 @@ public final class View implements BasicView, LogicalView{
 
     return messages;
   }
+
+  @Override
+  public User getSignInStatus(String name, String password){
+
+     
+      User user = null;
+      
+      try(final Connection connection = source.connect()){
+	  Serializers.INTEGER.write(connection.out(), NetworkCode.SIGN_IN_REQUEST);
+	  Serializers.STRING.write(connection.out(), name);
+	  Serializers.STRING.write(connection.out(), password);
+	  LOG.info("%s Sign in request completed.", name);
+
+	  if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SIGN_IN_RESPONSE){
+	      //should read a boolean value, if fails, try using Serializers.nullable(Boolean....
+	      user = Serializers.nullable(User.SERIALIZER).read(connection.in());
+	      LOG.info("Sign in status response completed.");
+	  } else {
+	      LOG.error("Response from server sign in failed");
+	  }
+      } catch (Exception ex) {
+	  System.out.println("ERROR: Exception during call on server. Check log for details.");
+	  LOG.error(ex, "Exception during call on server.");
+      }
+
+      return user;
+      
+  }
 }

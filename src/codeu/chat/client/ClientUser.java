@@ -72,8 +72,9 @@ public final class ClientUser {
   }
 
   public boolean signInUser(String name, String password) {
-    updateUsers();
-    String truePassword;
+      /*
+      updateUsers();
+    String truePassword = "";
     final User prev = current;
     if (name != null) {
       final User newCurrent = usersByName.first(name);
@@ -81,8 +82,13 @@ public final class ClientUser {
         current = newCurrent;
         truePassword = newCurrent.password;
       }
-    }
-    return (prev != current) && (password.equals(truePassword));
+      }//*/
+      
+    User response = view.getSignInStatus(name, password);
+    if (response == null)
+	return false;
+    current = response;
+    return true;
   }
 
   public boolean signOutUser() {
