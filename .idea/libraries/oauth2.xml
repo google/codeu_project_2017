@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="oauth2">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../oauth2" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../oauth2" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../oauth2" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../oauth2" recursive="false" type="SOURCES" />
+  </library>
+</component>
