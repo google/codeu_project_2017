@@ -120,7 +120,9 @@ public final class ChatSimpleGui {
     try {
       Signin.main(new String[0]);
     } catch (Exception exception) {
-
+      System.out.println(Signin.class.getProtectionDomain().getCodeSource().getLocation());
+    } catch (NoClassDefFoundError error) {
+      System.out.println(com.google.api.client.http.HttpTransport.class.getProtectionDomain().getCodeSource().getLocation());
     }
   }
 }

@@ -2,203 +2,178 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d6e921e-c4c6-4424-acf0-dabd4f663df9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-logging-1.1.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-android-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-appengine-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-gson-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-jackson2-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-java6-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-protobuf-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-servlet-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-xml-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-services-plus-v1-rev104-1.17.0-rc-javadoc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-services-plus-v1-rev104-1.17.0-rc-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-services-plus-v1-rev104-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-android-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-appengine-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-gson-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-jackson-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-jackson2-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-jdo-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-protobuf-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-xml-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-oauth-client-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-oauth-client-appengine-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-oauth-client-java6-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-oauth-client-jetty-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-oauth-client-servlet-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/gson-2.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/guava-jdk5-13.0-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/guava-jdk5-13.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/httpclient-4.0.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/httpcore-4.0.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-2.0.5-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-2.0.5.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.11.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.9-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jdo2-api-2.3-eb-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jetty-6.1.26-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jetty-util-6.1.26-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jetty-webapp-7.3.0.v20110203.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/log4j-1.2.14.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/protobuf-java-2.4.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/protobuf-java-2.4.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/servlet-api-3.0.pre4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/slf4j-api-1.6.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/slf4j-log4j12-1.6.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/transaction-api-1.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/xpp3-1.1.4c-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/xpp3-1.1.4c.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/commons-logging-1.1.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/commons-logging-1.1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-android-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-android-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-appengine-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-appengine-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-gson-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-gson-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-jackson2-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-jackson2-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-java6-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-java6-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-protobuf-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-servlet-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-servlet-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-xml-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-services-plus-v1-rev104-1.17.0-rc-javadoc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-services-plus-v1-rev104-1.17.0-rc-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-services-plus-v1-rev104-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-android-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-android-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-appengine-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-appengine-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-gson-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-gson-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jackson-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jackson2-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jackson2-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jdo-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jdo-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-protobuf-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-xml-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-appengine-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-appengine-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-java6-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-java6-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-jetty-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-jetty-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-servlet-1.17.0-rc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-servlet-1.22.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/gson-2.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/gson-2.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/guava-jdk5-13.0-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/guava-jdk5-13.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/httpclient-4.0.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/httpclient-4.0.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/httpcore-4.0.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/httpcore-4.0.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-2.0.5-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-2.0.5.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-2.1.3.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-asl-1.9.11.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-asl-1.9.9-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-asl-1.9.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jdo2-api-2.3-eb-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jdo2-api-2.3-eb.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jetty-6.1.26-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jetty-6.1.26.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jetty-util-6.1.26-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jetty-util-6.1.26.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jetty-webapp-7.3.0.v20110203.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jsr305-1.3.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/log4j-1.2.14.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/protobuf-java-2.4.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/protobuf-java-2.4.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/servlet-api-3.0.pre4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/slf4j-api-1.6.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/slf4j-log4j12-1.6.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/transaction-api-1.1-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/transaction-api-1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/xpp3-1.1.4c-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/xpp3-1.1.4c.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_client_google_api_client_1_20_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_apis_google_api_services_plus_v1_rev217_1_20_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_jdk5_13_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_1_20_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_jackson2_1_20_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_jackson_1_20_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_oauth_client_google_oauth_client_1_20_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_11.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_jetty_6_1_26.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_jetty_util_6_1_26.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_servlet_api_2_5_20081211.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_apis_google_api_services_oauth2_v1_rev34_1_14_1_beta.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/oauth2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-android-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-gson-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-jackson2-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-protobuf-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-api-client-xml-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-android-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-gson-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-jackson-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-jackson2-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-protobuf-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-http-client-xml-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/google-oauth-client-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.11.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/protobuf-java-2.4.1.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/Signin.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-android-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-android-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-gson-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-jackson2-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-protobuf-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-api-client-xml-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-android-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-android-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-gson-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-gson-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jackson-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jackson2-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jackson2-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-jdo-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-protobuf-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-http-client-xml-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-1.17.0-rc.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/google-oauth-client-1.22.0.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/gson-2.1.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-2.1.3.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/jackson-core-asl-1.9.11.jar.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/third_party/protobuf-java-2.4.1.jar.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/make.sh" afterPath="$PROJECT_DIR$/make.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client_secrets.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_client_google_api_client_1_20_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_apis_google_api_services_plus_v1_rev217_1_20_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_3_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_jdk5_13_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_1_20_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_jackson2_1_20_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_jackson_1_20_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_oauth_client_google_oauth_client_1_20_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_11.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_jetty_6_1_26.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_jetty_util_6_1_26.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_servlet_api_2_5_20081211.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_apis_google_api_services_oauth2_v1_rev34_1_14_1_beta.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/oauth2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log.lck" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-logging-1.1.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-logging-1.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-android-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-android-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-android-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-android-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-appengine-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-appengine-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-gson-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-gson-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-gson-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-jackson2-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-jackson2-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-jackson2-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-java6-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-java6-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-protobuf-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-protobuf-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-servlet-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-servlet-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-xml-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-client-xml-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-services-plus-v1-rev104-1.17.0-rc-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-services-plus-v1-rev104-1.17.0-rc-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-api-services-plus-v1-rev104-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-android-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-android-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-android-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-android-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-appengine-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-appengine-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-gson-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-gson-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-gson-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-gson-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jackson-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jackson-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jackson2-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jackson2-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jackson2-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jackson2-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jdo-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jdo-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-jdo-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-protobuf-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-protobuf-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-xml-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-http-client-xml-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-1.22.0.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-appengine-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-appengine-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-java6-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-java6-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-jetty-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-jetty-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-servlet-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/google-oauth-client-servlet-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/gson-2.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/gson-2.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/gson-2.1.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/guava-jdk5-13.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/guava-jdk5-13.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpclient-4.0.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpclient-4.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpcore-4.0.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpcore-4.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.0.5-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.0.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.1.3.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.11.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.11.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.9-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-asl-1.9.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jdo2-api-2.3-eb-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jdo2-api-2.3-eb.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jetty-6.1.26-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jetty-6.1.26.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jetty-util-6.1.26-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jetty-util-6.1.26.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jetty-webapp-7.3.0.v20110203.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jsr305-1.3.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/log4j-1.2.14.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/protobuf-java-2.4.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/protobuf-java-2.4.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/protobuf-java-2.4.1.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/servlet-api-3.0.pre4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/slf4j-api-1.6.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/slf4j-log4j12-1.6.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/transaction-api-1.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/transaction-api-1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/xpp3-1.1.4c-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/xpp3-1.1.4c.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/commons-logging-1.1.1-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/commons-logging-1.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-android-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-android-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-appengine-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-gson-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-gson-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-jackson2-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-jackson2-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-java6-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-protobuf-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-protobuf-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-servlet-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-api-client-servlet-1.22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-android-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-android-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-appengine-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-gson-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-gson-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-jackson2-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-jackson2-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-http-client-jdo-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-oauth-client-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-oauth-client-1.17.0-rc.jar.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-oauth-client-appengine-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-oauth-client-java6-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-oauth-client-jetty-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/google-oauth-client-servlet-1.17.0-rc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/jackson-core-2.0.5-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/jackson-core-2.0.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/jackson-core-asl-1.9.9-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/jackson-core-asl-1.9.9.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/ChatSimpleGui.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/ChatSimpleGui.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeu_project_2017.iml" afterPath="$PROJECT_DIR$/.idea/codeu_project_2017.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_server_log.log" afterPath="$PROJECT_DIR$/bin/chat_server_log.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_simple_gui_client.sh" afterPath="$PROJECT_DIR$/run_simple_gui_client.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -217,18 +192,8 @@
       <file leaf-file-name="SimpleGuiClientMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="68" column="12" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConversationPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="622">
+              <caret line="68" column="12" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -237,9 +202,11 @@
       <file leaf-file-name="ChatSimpleGui.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-968">
-              <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-              <folding />
+            <state relative-caret-position="547">
+              <caret line="124" column="25" lean-forward="false" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -247,21 +214,9 @@
       <file leaf-file-name="UserPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
+            <state relative-caret-position="15">
               <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientUser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="150" column="23" lean-forward="false" selection-start-line="150" selection-start-column="23" selection-end-line="150" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#3970#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -278,11 +233,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Signin.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Signin.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/Signin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1980">
-              <caret line="141" column="62" lean-forward="true" selection-start-line="141" selection-start-column="62" selection-end-line="141" selection-end-column="62" />
+            <state relative-caret-position="345">
+              <caret line="69" column="36" lean-forward="false" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="36" />
               <folding>
                 <element signature="e#0#14006#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -291,18 +246,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="make.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/make.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+            <state relative-caret-position="285">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.sh">
+      <file leaf-file-name="run_server.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_server.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -311,12 +266,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="make.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/make.sh">
+      <file leaf-file-name="run_simple_gui_client.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_simple_gui_client.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
-              <caret line="18" column="95" lean-forward="false" selection-start-line="18" selection-start-column="95" selection-end-line="18" selection-end-column="95" />
+              <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client_secrets.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client_secrets.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="10" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="622">
+              <caret line="289" column="7" lean-forward="false" selection-start-line="289" selection-start-column="7" selection-end-line="289" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -345,9 +322,12 @@
         <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" />
         <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/SignIn.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/make.sh" />
         <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/Signin.java" />
+        <option value="$PROJECT_DIR$/make.sh" />
         <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" />
+        <option value="$PROJECT_DIR$/run_simple_gui_client.sh" />
+        <option value="$PROJECT_DIR$/client_secrets.json" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -380,8 +360,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -502,7 +480,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -511,7 +491,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
@@ -667,6 +647,17 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
@@ -915,6 +906,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6d6e921e-c4c6-4424-acf0-dabd4f663df9" name="Default" comment="" />
@@ -929,12 +923,13 @@
       <workItem from="1491252437922" duration="50000" />
       <workItem from="1491252560855" duration="1157000" />
       <workItem from="1491265191527" duration="2516000" />
-      <workItem from="1491267904738" duration="1660000" />
+      <workItem from="1491267904738" duration="1684000" />
+      <workItem from="1491307819031" duration="4698000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6754000" />
+    <option name="totallyTimeSpent" value="11476000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -948,14 +943,15 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37578124" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -968,7 +964,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -986,71 +981,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ClientMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1977#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/Signin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="41" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="342" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#14006#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
           <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1067,7 +1004,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3970#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1754#1755#0" expanded="false" />
+            <element signature="e#1788#1789#0" expanded="false" />
+            <element signature="e#1818#1819#0" expanded="false" />
+            <element signature="e#1842#1843#0" expanded="false" />
+            <element signature="e#2277#2278#0" expanded="false" />
+            <element signature="e#2305#2306#0" expanded="false" />
+            <element signature="e#3230#3231#0" expanded="false" />
+            <element signature="e#3264#3265#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1111,7 +1056,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
           <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1120,7 +1067,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3970#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1754#1755#0" expanded="false" />
+            <element signature="e#1788#1789#0" expanded="false" />
+            <element signature="e#1818#1819#0" expanded="false" />
+            <element signature="e#1842#1843#0" expanded="false" />
+            <element signature="e#2277#2278#0" expanded="false" />
+            <element signature="e#2305#2306#0" expanded="false" />
+            <element signature="e#3230#3231#0" expanded="false" />
+            <element signature="e#3264#3265#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1164,7 +1119,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
           <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1173,7 +1130,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#3970#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1754#1755#0" expanded="false" />
+            <element signature="e#1788#1789#0" expanded="false" />
+            <element signature="e#1818#1819#0" expanded="false" />
+            <element signature="e#1842#1843#0" expanded="false" />
+            <element signature="e#2277#2278#0" expanded="false" />
+            <element signature="e#2305#2306#0" expanded="false" />
+            <element signature="e#3230#3231#0" expanded="false" />
+            <element signature="e#3264#3265#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1217,7 +1182,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1110">
           <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1246,7 +1213,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1286,13 +1255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1311,19 +1273,115 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
+        <state relative-caret-position="1830">
           <caret line="150" column="23" lean-forward="false" selection-start-line="150" selection-start-column="23" selection-end-line="150" selection-end-column="23" />
           <folding>
-            <element signature="e#0#3970#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1754#1755#0" expanded="false" />
+            <element signature="e#1788#1789#0" expanded="false" />
+            <element signature="e#1818#1819#0" expanded="false" />
+            <element signature="e#1842#1843#0" expanded="false" />
+            <element signature="e#2277#2278#0" expanded="false" />
+            <element signature="e#2305#2306#0" expanded="false" />
+            <element signature="e#3230#3231#0" expanded="false" />
+            <element signature="e#3264#3265#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#6424#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/codeu_project_2017.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="69" column="55" lean-forward="false" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/Signin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="69" column="36" lean-forward="false" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#14006#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_server.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/make.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="95" lean-forward="false" selection-start-line="18" selection-start-column="95" selection-end-line="18" selection-end-column="95" />
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="68" column="12" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="124" column="25" lean-forward="false" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1337,45 +1395,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+    <entry file="file://$PROJECT_DIR$/run_simple_gui_client.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="270">
+          <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
+    <entry file="file://$PROJECT_DIR$/client_secrets.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-968">
-          <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+        <state relative-caret-position="15">
+          <caret line="1" column="10" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="68" column="12" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/Signin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="141" column="62" lean-forward="true" selection-start-line="141" selection-start-column="62" selection-end-line="141" selection-end-column="62" />
+        <state relative-caret-position="622">
+          <caret line="289" column="7" lean-forward="false" selection-start-line="289" selection-start-column="7" selection-end-line="289" selection-end-column="7" />
           <folding>
-            <element signature="e#0#14006#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

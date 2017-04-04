@@ -1,24 +1,12 @@
-Apr 03, 2017 9:19:45 PM codeu.chat.ServerMain main
+Apr 04, 2017 9:40:28 AM codeu.chat.ServerMain main
 INFO: ============================= START OF LOG =============================
-Apr 03, 2017 9:19:45 PM codeu.chat.ServerMain main
+Apr 04, 2017 9:40:29 AM codeu.chat.ServerMain main
 INFO: Starting server...
-Apr 03, 2017 9:19:45 PM codeu.chat.ServerMain runServer
+Apr 04, 2017 9:40:29 AM codeu.chat.ServerMain runServer
 INFO: Server object created.
-Apr 03, 2017 9:19:46 PM codeu.chat.ServerMain runServer
+Apr 04, 2017 9:40:29 AM codeu.chat.ServerMain runServer
 INFO: Starting hub...
-Apr 03, 2017 9:19:53 PM codeu.chat.server.Server handleConnection
+Apr 04, 2017 9:40:34 AM codeu.chat.server.Server handleConnection
 INFO: Handling new connection...
-Apr 03, 2017 9:19:53 PM codeu.chat.server.Server handleConnection
-INFO: Handling new connection...
-Apr 03, 2017 9:29:12 PM codeu.chat.ServerMain main
-INFO: ============================= START OF LOG =============================
-Apr 03, 2017 9:29:12 PM codeu.chat.ServerMain main
-INFO: Starting server...
-Apr 03, 2017 9:29:12 PM codeu.chat.ServerMain runServer
-INFO: Server object created.
-Apr 03, 2017 9:29:12 PM codeu.chat.ServerMain runServer
-INFO: Starting hub...
-Apr 03, 2017 9:29:17 PM codeu.chat.server.Server handleConnection
-INFO: Handling new connection...
-Apr 03, 2017 9:29:17 PM codeu.chat.server.Server handleConnection
+Apr 04, 2017 9:40:34 AM codeu.chat.server.Server handleConnection
 INFO: Handling new connection...
