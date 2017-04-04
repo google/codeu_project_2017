@@ -1,30 +1,10 @@
-Apr 03, 2017 8:30:27 PM codeu.chat.SimpleGuiClientMain main
+Apr 03, 2017 10:23:53 PM codeu.chat.SimpleGuiClientMain main
 INFO: ============================= START OF LOG =============================
-Apr 03, 2017 8:30:27 PM codeu.chat.SimpleGuiClientMain main
+Apr 03, 2017 10:23:53 PM codeu.chat.SimpleGuiClientMain main
 INFO: Starting chat client...
-Apr 03, 2017 8:30:27 PM codeu.chat.SimpleGuiClientMain main
+Apr 03, 2017 10:23:53 PM codeu.chat.SimpleGuiClientMain main
 INFO: Creating client...
-Apr 03, 2017 8:30:27 PM codeu.chat.SimpleGuiClientMain runClient
+Apr 03, 2017 10:23:53 PM codeu.chat.SimpleGuiClientMain runClient
 INFO: Created client
-Apr 03, 2017 8:30:31 PM codeu.chat.SimpleGuiClientMain runClient
-INFO: chat client is running.
-Apr 03, 2017 8:40:08 PM codeu.chat.SimpleGuiClientMain main
-INFO: ============================= START OF LOG =============================
-Apr 03, 2017 8:40:08 PM codeu.chat.SimpleGuiClientMain main
-INFO: Starting chat client...
-Apr 03, 2017 8:40:08 PM codeu.chat.SimpleGuiClientMain main
-INFO: Creating client...
-Apr 03, 2017 8:40:08 PM codeu.chat.SimpleGuiClientMain runClient
-INFO: Created client
-Apr 03, 2017 8:40:12 PM codeu.chat.SimpleGuiClientMain runClient
-INFO: chat client is running.
-Apr 03, 2017 8:40:26 PM codeu.chat.SimpleGuiClientMain main
-INFO: ============================= START OF LOG =============================
-Apr 03, 2017 8:40:26 PM codeu.chat.SimpleGuiClientMain main
-INFO: Starting chat client...
-Apr 03, 2017 8:40:26 PM codeu.chat.SimpleGuiClientMain main
-INFO: Creating client...
-Apr 03, 2017 8:40:26 PM codeu.chat.SimpleGuiClientMain runClient
-INFO: Created client
-Apr 03, 2017 8:40:29 PM codeu.chat.SimpleGuiClientMain runClient
+Apr 03, 2017 10:23:58 PM codeu.chat.SimpleGuiClientMain runClient
 INFO: chat client is running.

@@ -3,6 +3,7 @@ package codeu.chat.client.simplegui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -20,12 +21,18 @@ public final class ChatGuiFX extends Application {
     private final static Logger.Log LOG = Logger.newLog(ChatGuiFX.class);
 
 
-    Button signInButton;
-    Label signInLabel;
-    BorderPane signInPane;
-    Scene signInScene, mainScene;
-    Stage thestage;
-    private ClientContext clientContext;
+    private static final double WIDTH = 1000;
+    private static final double HEIGHT = 500;
+
+    private Stage thestage;                         // Holds the scene that user is currently viewing
+    private Scene signInScene, mainScene;           // Scenes to hold all the elements for each page
+    private BorderPane signInPane;                  // Root panes for both pages (panes provide structure to scene elements)
+    private FlowPane signInLabelPane;               // Panes to hold labels (so that they can be aligned in the root pane)
+    private GridPane inputPane;                     // Pane to position username/password input fields and labels, as well as sign-in button
+    private Label signInLabel;                    // Labels for the main page and sign in page
+    private Button signInButton;                    // Buttons to switch between main page and sign in page
+    private TextField userInput, passInput;         // Text fields for entering username and password
+    private ClientContext clientContext;            //
 
     public void run(String [] args) {
         try {
@@ -49,6 +56,29 @@ public final class ChatGuiFX extends Application {
 
         // Sign in page
 
+        this.thestage = primaryStage;            // Initialize the main stage
+
+        signInPane = new BorderPane();                      // Initialize panes
+        signInLabelPane = new FlowPane();
+        signInLabelPane.setAlignment(Pos.BOTTOM_CENTER);       // Make sure label will be in center
+
+        signInLabel = new Label("Sign-in screen");      // Initialize label
+        signInLabel.setFont(Font.font(20));                 // Set style
+
+        signInButton = new Button("Sign in");                      // Initialize sign in button
+        signInButton.setOnAction((event)-> ButtonClicked(event));       // Initialize its event handler
+
+
+        userInput = new TextField("Username");
+        passInput = new TextField("Password");
+
+        signInLabelPane.getChildren().add(signInLabel);         // Add labels to their respective panes
+
+        signInPane.setTop(signInLabelPane);
+        signInPane.setCenter(signInButton);                 // Add buttons and labels to panes
+
+
+        signInScene = new Scene(signInPane, WIDTH, HEIGHT);
 
 
 
@@ -116,8 +146,13 @@ public final class ChatGuiFX extends Application {
         container.setCenter(hboxClient);
         // container.setTop(menuBar);
 
-        Scene scene = new Scene(container, 1000, 600);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        mainScene = new Scene(container, WIDTH, HEIGHT);
+        thestage.setScene(signInScene);
+        thestage.show();
+    }
+
+    public void ButtonClicked(ActionEvent e)
+    {
+        thestage.setScene(mainScene);
     }
 }
