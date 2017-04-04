@@ -1,14 +1,15 @@
 package codeu.chat.server;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.Assert.*;
+
+import database.Connector;
 import java.util.UUID;
+import org.junit.Test;
 
 
 public final class DatabaseTest {
 
-  private static final DBConnector.Connector con = new DBConnector.Connector();
+  private static final database.Connector con = new database.Connector();
 
   @Test
   public void testAddUser() {
@@ -37,8 +38,8 @@ public final class DatabaseTest {
     assertTrue(con.addAccount(randomUN, randomPW));
   }
 
-  @Test
+  /*@Test
   public void testUpdatePassword() {
     //
-  }
+  }*/
 }
