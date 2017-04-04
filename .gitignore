@@ -2,4 +2,6 @@
 .project
 .settings/
 .idea/
+db/main.db
+chat_server_log.log
 bin/
