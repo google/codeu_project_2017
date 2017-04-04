@@ -14,7 +14,6 @@
 
 package codeu.chat.server;
 
-import java.sql.Statement;
 import java.util.Comparator;
 
 import codeu.chat.common.Conversation;
@@ -27,9 +26,7 @@ import codeu.chat.common.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.store.StoreAccessor;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 
 
 
@@ -37,10 +34,7 @@ import java.sql.SQLException;
 
 public final class Model {
 
-  //DATABASE SET UP
-  private Connection dbConn = null;
-  private String dbUrl = "jdbc:sqlite:db/sample.db";
-
+  private DatabaseWrapper dbWrapper = new DatabaseWrapper();
 
   private static final Comparator<Uuid> UUID_COMPARE = new Comparator<Uuid>() {
 
@@ -83,15 +77,6 @@ public final class Model {
   private Uuid currentUserGeneration = userGenerations.make();
 
 
-  public Model(){
-    try{
-      dbConn = DriverManager.getConnection(dbUrl);
-      System.out.println("Connection to SQLite has been established.");
-    } catch (SQLException e){
-      System.out.println(e.getMessage());
-    }
-  }
-
   public void add(User user) {
     currentUserGeneration = userGenerations.make();
 
@@ -99,22 +84,11 @@ public final class Model {
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
 
-    //This code below will be moved to a designated Database Wrapper Class
-    try{
-      System.out.println("Adding User to Db");
-      Statement stmnt = dbConn.createStatement();
-      String sql = "INSERT INTO Users(id,username) VALUES("
-                    + user.id.id()
-                    + ", \""
-                    + user.name
-                    + "\")";
-      stmnt.execute(sql);
-    }catch (Exception e){
-      System.out.println(e.getMessage());
-    }
+    dbWrapper.addUser(user);
   }
 
   public StoreAccessor<Uuid, User> userById() {
+    //Query Db for Users here
     return userById;
   }
 
