@@ -2,14 +2,14 @@ package codeu.chat.server;
 
 import static org.junit.Assert.*;
 
-import database.Connector;
+import Database.Connector;
 import java.util.UUID;
 import org.junit.Test;
 
 
 public final class DatabaseTest {
 
-  private static final database.Connector con = new database.Connector();
+  private static final Database.Connector con = new Database.Connector();
 
   @Test
   public void testAddUser() {
