@@ -38,7 +38,7 @@ public final class ClientUser {
   private final Map<Uuid, User> usersById = new HashMap<>();
 
   // This is the set of users known to the server, sorted by name.
-  protected static Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
+  public static Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
   //set of passwords known by the server
   public static Store<String, String> passwordsDB = new Store<>(String.CASE_INSENSITIVE_ORDER);
@@ -107,8 +107,6 @@ public final class ClientUser {
       System.out.format("Error: user not created - %s.\n",
               (validInputs) ? "server failure" : "bad input value");
     } else {
-     // Password.createPassword(name, password);
-     // user.security=passwordsDB.first(name);
       LOG.info("New user complete, Name= \"%s\" UUID=\"%s\" security=%s", user.name, user.id, user.security);
       updateUsers();
     }

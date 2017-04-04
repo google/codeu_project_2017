@@ -49,7 +49,6 @@ public class Password {
             }
             else {
                 System.out.println("Password Strength: "+ passwordStrength(password));
-                // ClientUser.passwordRecoveryDB.insert(name, collectPasswordRecoveryInfo(name));
                 return password + "$" +collectPasswordRecoveryInfo(name);
             }
         }
@@ -64,7 +63,6 @@ public class Password {
                 String encryptedPass=encryptPassword(user, securityDetails[0], getSaltvalue());
                 String encryptedAnswer=encryptPassword(user, securityDetails[2], getSaltvalue());
                 String loginDetails=encryptedPass+"$" + securityDetails[1] +"$" +encryptedAnswer;
-                ClientUser.passwordsDB.insert(user,loginDetails );
 
                 return loginDetails;
 
@@ -89,7 +87,6 @@ public class Password {
         try{
             while(true) {
                 correctPass = verifyPassword(name, password, 0, user);
-                // System.out.println(correctPass);
                 if (correctPass)
                     break;
                 if(i==MAX_TRIALS) {
@@ -137,14 +134,14 @@ public class Password {
         String choice=input.nextLine();
         if (choice.equals("Y") || choice.equals("y")) {
             String[] recoveryDetails=collectPasswordRecoveryInfo(name).split("\\$");
-            String[] securityDetails=ClientUser.passwordsDB.first(name).split("\\$");
+            String[] securityDetails=ClientUser.usersByName.first(name).security.split("\\$");
             if (securityDetails[3].equals(recoveryDetails[0])) {//security question matches
                 try {
                     if (verifyPassword(name, recoveryDetails[1], 1, ClientUser.usersByName.first(name))) { //verify security question
                         System.out.println("Let's create you new login password:");
                         String newPassword = promptForPassword(name);
-                        //delete old passwords when Store implements delete
-                        createPassword(name, newPassword);
+                        //overwrite previouspasswords still does not work effectively
+                        ClientUser.usersByName.first(name).security=createPassword(name, newPassword);
                         System.out.println("Password changed. Try signing in again");
                     } else
                         System.out.println("Error: Unable to recover password");
@@ -186,8 +183,6 @@ public class Password {
     * Returns true if the password/security question answer matches the ones stored initially.
     * */
     public static final boolean verifyPassword(String username, String password, int code, User user)throws NoSuchAlgorithmException, InvalidKeySpecException{
-       // String[] stored_pass=ClientUser.passwordsDB.first(username).split("\\$");
-        //decrypting password
         String[] stored_pass=user.security.split("\\$");
             int iterations = Integer.parseInt(stored_pass[0]);
             byte[] salt = convertToBytes(stored_pass[1]);
@@ -310,8 +305,6 @@ public class Password {
         return  question + "$" + answer;
 
     }
-
-    //using username temporarily to store recovery passwords instead of UID
 
 }
 

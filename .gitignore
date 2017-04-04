@@ -1,3 +1,13 @@
+README.md
+clean.sh
+make.sh
+run_client.sh
+run_server.sh
+run_simple_gui_client.sh
+test/
+test.sh
+third_party/
+bin/
 .idea/workspace.xml
  bin/chat_client_log.log
 bin/chat_server_log.log
