@@ -17,7 +17,7 @@ package codeu.chat;
 import java.io.IOException;
 
 import codeu.chat.client.Controller;
-import codeu.chat.client.simplegui.ChatSimpleGui;
+import codeu.chat.client.simplegui.ChatGuiFX;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
@@ -52,7 +52,7 @@ final class SimpleGuiClientMain {
 
       LOG.info("Creating client...");
 
-      runClient(controller, view);
+      runClient(controller, view, args);
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception setting up client. Check log for details.");
@@ -60,13 +60,15 @@ final class SimpleGuiClientMain {
     }
   }
 
-  private static void runClient(Controller controller, View view) {
+  private static void runClient(Controller controller, View view, String [] args) {
 
-    final ChatSimpleGui chatSimpleGui = new ChatSimpleGui(controller, view);
+    //final ChatGuiFX chatGuiFX = new ChatGuiFX(controller, view);
+
+    final ChatGuiFX chatGuiFX = new ChatGuiFX();
 
     LOG.info("Created client");
 
-    chatSimpleGui.run();
+    chatGuiFX.launch(controller, view);
 
     LOG.info("chat client is running.");
   }
