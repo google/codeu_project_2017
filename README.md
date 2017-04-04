@@ -1,6 +1,16 @@
 
 # CODEU CHAT SERVER | README
 
+Features added 4/4/17 --
+
+User login information is now password protected. Adding a new user prompts
+for a password. This password is connected to the user and stored in the server
+models.
+
+To sign in, the user must submit the correct password. The password is compared
+server end and the result is returned. If passwords match, sign in proceeds as
+normal. Otherwise the user cannot sign in.
+
 
 ## DISCLAIMER
 
