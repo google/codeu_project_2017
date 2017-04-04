@@ -112,6 +112,15 @@ public final class ClientMessage {
     updateMessages(false);
   }
 
+  // For m-remove command.
+  public void removeMessage(String stringIndex) {
+    int index = Integer.parseInt(stringIndex);
+    conversationContents.remove(index);
+
+    LOG.info("Message removed: Index= \"%s\"\n", stringIndex);
+    System.out.format("Message removed: Index= \"%s\"\n", stringIndex);
+  }
+
   // For m-list-all command.
   // Show all messages attached to the current conversation. This will balk if the conversation
   // has too many messages (use m-next and m-show instead).
