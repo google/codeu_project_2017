@@ -1,3 +1,2 @@
-sqlite3 sample.db < create.sql
-
-
+#!/usr/bin/env bash
+sqlite3 main.db < create.sql

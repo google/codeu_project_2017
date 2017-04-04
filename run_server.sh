@@ -16,9 +16,8 @@
 
 # Create main Database
 cd './db'
-createDatabase.sh
+sh createDatabase.sh
 cd '..'
 
 # Run Server
-cd './bin'
-java codeu.chat.ServerMain "100.101" "ABABAB" "2007"
+java -classpath ./bin:./third_party/sqlite3.jar codeu.chat.ServerMain "100.101" "ABABAB" "2007"
