@@ -140,7 +140,6 @@ public class Password {
                     if (verifyPassword(name, recoveryDetails[1], 1, ClientUser.usersByName.first(name))) { //verify security question
                         System.out.println("Let's create you new login password:");
                         String newPassword = promptForPassword(name);
-                        //overwrite previouspasswords still does not work effectively
                         ClientUser.usersByName.first(name).security=createPassword(name, newPassword);
                         System.out.println("Password changed. Try signing in again");
                     } else
@@ -295,9 +294,6 @@ public class Password {
         if(choice==1) question="What is the name of your elementary school?";
         if(choice==2) question="What is the name of your pet?";
         if(choice==3) question="Which city did you meet your spouse?";
-
-
-
         System.out.println("Answer: ");
         Scanner scanner=new Scanner(System.in);
         String answer=scanner.nextLine();
