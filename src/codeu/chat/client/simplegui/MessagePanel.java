@@ -17,7 +17,9 @@ package codeu.chat.client.simplegui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
 import javax.swing.*;
+import java.util.Timer;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
@@ -34,7 +36,11 @@ public final class MessagePanel extends JPanel {
   private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.LEFT);
   private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
 
+
+  private final long POLLING_PERIOD_MS = 1000;
+  private final long POLLING_DELAY_MS = 0;
   private final ClientContext clientContext;
+  private Message lastMessage;
 
   public MessagePanel(ClientContext clientContext) {
     super(new GridBagLayout());
@@ -46,17 +52,18 @@ public final class MessagePanel extends JPanel {
   public void update(ConversationSummary owningConversation) {
 
     final User u = (owningConversation == null) ?
-        null :
-        clientContext.user.lookup(owningConversation.owner);
+            null :
+            clientContext.user.lookup(owningConversation.owner);
 
     messageOwnerLabel.setText("Owner: " +
-        ((u==null) ?
-            ((owningConversation==null) ? "" : owningConversation.owner) :
-            u.name));
+            ((u == null) ?
+                    ((owningConversation == null) ? "" : owningConversation.owner) :
+                    u.name));
 
-    messageConversationLabel.setText("Conversation: " + owningConversation.title);
+    messageConversationLabel.setText("Conversation: " +
+            (owningConversation == null ? "" : owningConversation.title));
 
-    getAllMessages(owningConversation);
+    getAllMessages(owningConversation, true);
   }
 
   private void initialize() {
@@ -101,12 +108,12 @@ public final class MessagePanel extends JPanel {
 
     // messageListModel is an instance variable so Conversation panel
     // can update it.
-    final JList<String> userList = new JList<>(messageListModel);
-    userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    userList.setVisibleRowCount(15);
-    userList.setSelectedIndex(-1);
+    final JList<String> messageList = new JList<>(messageListModel);
+    messageList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    messageList.setVisibleRowCount(15);
+    messageList.setSelectedIndex(-1);
 
-    final JScrollPane userListScrollPane = new JScrollPane(userList);
+    final JScrollPane userListScrollPane = new JScrollPane(messageList);
     listShowPanel.add(userListScrollPane);
     userListScrollPane.setMinimumSize(new Dimension(500, 200));
     userListScrollPane.setPreferredSize(new Dimension(500, 200));
@@ -155,36 +162,81 @@ public final class MessagePanel extends JPanel {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
           final String messageText = (String) JOptionPane.showInputDialog(
-              MessagePanel.this, "Enter message:", "Add Message", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+                  MessagePanel.this, "Enter message:", "Add Message", JOptionPane.PLAIN_MESSAGE,
+                  null, null, "");
           if (messageText != null && messageText.length() > 0) {
             clientContext.message.addMessage(
-                clientContext.user.getCurrent().id,
-                clientContext.conversation.getCurrentId(),
-                messageText);
-            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+                    clientContext.user.getCurrent().id,
+                    clientContext.conversation.getCurrentId(),
+                    messageText);
+            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), true);
           }
         }
       }
     });
 
     // Panel is set up. If there is a current conversation, Populate the conversation list.
-    getAllMessages(clientContext.conversation.getCurrent());
+    getAllMessages(clientContext.conversation.getCurrent(), true);
+
+    // Poll the server for updates
+    Timer messageUpdateTimer = new Timer();
+    messageUpdateTimer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+
+        // Remember what message is selected
+        final String selected = messageList.getSelectedValue();
+
+        // Get new messages
+        clientContext.message.updateMessages(false);
+
+        // Update the message display panel
+        MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), false);
+
+        // Reselect the message
+        messageList.setSelectedValue(selected, false);
+
+      }
+    }, POLLING_DELAY_MS, POLLING_PERIOD_MS);
   }
 
   // Populate ListModel
-  // TODO: don't refetch messages if current conversation not changed
-  private void getAllMessages(ConversationSummary conversation) {
-    messageListModel.clear();
+  private void getAllMessages(ConversationSummary conversation, boolean replaceAll) {
+
+    // If reloading all messages, the panel should be empty and there is no last message displayed
+    if (replaceAll) {
+      messageListModel.clear();
+      lastMessage = null;
+    }
+
+    // The most recent message that has been displayed
+    Message newLast = lastMessage;
 
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
-      // Display author name if available.  Otherwise display the author UUID.
-      final String authorName = clientContext.user.getName(m.author);
 
-      final String displayString = String.format("%s: [%s]: %s",
-          ((authorName == null) ? m.author : authorName), m.creation, m.content);
+      // Display the message if it is not in the panel yet.
+      if (replaceAll
+              || lastMessage == null
+              || (m.creation.compareTo(lastMessage.creation) >= 0
+              && !m.id.equals(lastMessage.id))
+              ) {
 
-      messageListModel.addElement(displayString);
+        // Display author name if available.  Otherwise display the author UUID.
+        final String authorName = clientContext.user.getName(m.author);
+
+        // Display message in the format Author: [Date Time]: Content
+        final String displayString = String.format("%s: [%s]: %s",
+                ((authorName == null) ? m.author : authorName), m.creation, m.content);
+
+        messageListModel.addElement(displayString);
+
+        // Remember the most recently displayed message
+        if (newLast == null || m.creation.compareTo(newLast.creation) > 0) {
+          newLast = m;
+        }
+      }
     }
+    // Store the most recent message
+    lastMessage = newLast;
   }
 }
