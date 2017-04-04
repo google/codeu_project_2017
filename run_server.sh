@@ -14,5 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cd './bin'
-java codeu.chat.ServerMain "100.101" "ABABAB" "2007"
+# Create main Database
+cd './db'
+sh createDatabase.sh
+cd '..'
+
+# Run Server
+java -classpath ./bin:./third_party/sqlite3.jar codeu.chat.ServerMain "100.101" "ABABAB" "2007"

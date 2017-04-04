@@ -26,7 +26,15 @@ import codeu.chat.util.store.Store;
 import codeu.chat.util.store.StoreAccessor;
 import codeu.chat.util.Uuid;
 
+
+
+
+
+
+
 public final class Model {
+
+  private DatabaseWrapper dbWrapper = new DatabaseWrapper();
 
   private static final Comparator<Uuid> UUID_COMPARE = new Comparator<Uuid>() {
 
@@ -68,15 +76,19 @@ public final class Model {
   private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1, Integer.MAX_VALUE);
   private Uuid currentUserGeneration = userGenerations.make();
 
+
   public void add(User user) {
     currentUserGeneration = userGenerations.make();
 
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
+
+    dbWrapper.addUser(user);
   }
 
   public StoreAccessor<Uuid, User> userById() {
+    //Query Db for Users here
     return userById;
   }
 
