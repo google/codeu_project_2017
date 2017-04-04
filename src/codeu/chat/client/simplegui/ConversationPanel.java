@@ -129,7 +129,7 @@ public final class ConversationPanel extends JPanel {
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {
-          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
+          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });

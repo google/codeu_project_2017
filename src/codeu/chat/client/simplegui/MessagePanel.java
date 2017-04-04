@@ -15,8 +15,6 @@
 package codeu.chat.client.simplegui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.*; 
 
 import javax.swing.*;
@@ -162,7 +160,7 @@ public final class MessagePanel extends JPanel {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
           
-          final String messageText = textField.getText();
+          final String messageText = textField.getText().trim();
           
           if (messageText != null && messageText.length() > 0) {
         	textField.setText(""); //clears the text field after use
@@ -176,18 +174,18 @@ public final class MessagePanel extends JPanel {
       }
     });
     
-    //Responds if user enters ENTER or RETURN
+    //Responds if user enters ENTER or RETURN the message sends
     textField.addKeyListener(new KeyListener() {
     	@Override
       	public void keyTyped(KeyEvent e) {
       		if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
       			if (!clientContext.user.hasCurrent()) {
-      	          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
+      				JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
       	        } else if (!clientContext.conversation.hasCurrent()) {
-      	          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+      	          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
       	        } else {
       	          
-      	          final String messageText = textField.getText();
+      	          final String messageText = textField.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces
       	          
       	          if (messageText != null && messageText.length() > 0) {
       	        	textField.setText(""); //clears the text field after use

@@ -146,20 +146,52 @@ public final class ChatSimpleGui {
 	  JMenuBar topMenuBar = new JMenuBar(); //the menu bar
 	  JMenu topMenuGeneral = new JMenu("General"); //first category of menu
 	  JMenu topMenuColorSelector = new JMenu("Color Selector"); //first category of menu
-	  JMenuItem topMenuItem = new JMenuItem("How to Use"); 
+	  JMenuItem topMenuItem = new JMenuItem("How to Use"); //details how to use the app
+	  JMenuItem coders = new JMenuItem("Coders"); //coders on this app or equivalent to credits
 	  
 	  //adds the How to Use information at the top of this menu bar
-	  topMenuBar.add(topMenuGeneral); 
-	  topMenuBar.add(topMenuColorSelector);
+	  topMenuBar.add(topMenuGeneral);
+	  topMenuBar.add(topMenuItem);
+	  
+	  //constructs the topMenuGeneral drop down menu with submenus 
+	  topMenuGeneral.add(coders); 
+	  
+	  //topMenuBar.add(topMenuColorSelector);
 	  
 	  topMenuItem.addActionListener(new ActionListener(){
 		  @Override 
 		  public void actionPerformed(ActionEvent e) {
-			  	JOptionPane.showMessageDialog(topMenuItem, "This menu allows you to learn what to do and not what to do.");
+			  	//message on how to use the application
+			  	final String howToUseMessage = "To use this application, you must first add a user. "
+			  									+ "Then, you must sign in the user and add a conversation. "
+			  									+ "Then, you may begin chatting!\n\n"
+			  									+ "To add a user:\n"
+			  										+"1) Click the “Add” button\n"
+			  										+"2) Enter the user’s name\n"
+			  										+"3) Click “OK” or press ENTER\n\n"
+			  									+"To sign in a user:\n"
+			  										+"1) Click on the user’s name until it is highlighted\n"
+			  										+"2) Click on the “Sign In” button\n\n"
+			  									+"To add a conversation:\n" 
+			  										+"1) Click the “Add” button\n"
+			  										+"2) Enter the title of the conversation\n"
+			  										+"3) Click “OK” or press ENTER\n\n"
+			  									+"To switch conversations:\n"
+			  										+"1) Click on the title of the conversation to which you would like to switch\n\n"
+			  									+"To send a message:\n"
+			  										+"1) Type your message in the white text editor to the left of the “Send Message” button\n"
+			  										+"2) Once you are done typing your message, either press the “Send Message” button, press ENTER, or press RETURN"; 
+			  	
+			  	JOptionPane.showMessageDialog(topMenuItem, howToUseMessage, "How to Use", JOptionPane.PLAIN_MESSAGE); //need to add help information
 		  }
 	  });
 	  
-	  topMenuGeneral.add(topMenuItem); 
+	  coders.addActionListener(new ActionListener(){
+		  @Override 
+		  public void actionPerformed(ActionEvent e) {
+			  	JOptionPane.showMessageDialog(topMenuItem, "Created by Google, Mathangi Ganesh, Jess Abramson, and Sarah Depew", "Coders", JOptionPane.PLAIN_MESSAGE); //Needs Updating
+		  }
+	  });
 	  
 	  return topMenuBar; 
   }
