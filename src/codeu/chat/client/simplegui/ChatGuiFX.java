@@ -17,8 +17,14 @@ import codeu.chat.util.Logger;
 
 public final class ChatGuiFX extends Application {
 
-      private final static Logger.Log LOG = Logger.newLog(ChatGuiFX.class);
+    private final static Logger.Log LOG = Logger.newLog(ChatGuiFX.class);
 
+
+    Button signInButton;
+    Label signInLabel;
+    BorderPane signInPane;
+    Scene signInScene, mainScene;
+    Stage thestage;
     private ClientContext clientContext;
 
     public void run(String [] args) {
@@ -40,6 +46,14 @@ public final class ChatGuiFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // Sign in page
+
+
+
+
+        // Main Page
+
         HBox hboxClient = new HBox();
         HBox hboxInput = new HBox();
         VBox userVBox = new VBox();
