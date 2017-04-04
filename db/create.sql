@@ -1,5 +1,5 @@
 /*
- * Schema used to set up Main Database
+ * Schema used to set up Main Database (main.db)
  */
 
 DROP TABLE IF EXISTS Users;
