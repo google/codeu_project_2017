@@ -19,13 +19,12 @@ import java.io.IOException;
 
 import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.server.NoOpRelay;
 import codeu.chat.server.RemoteRelay;
 import codeu.chat.server.Server;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
@@ -47,7 +46,7 @@ final class ServerMain {
 
     LOG.info("============================= START OF LOG =============================");
 
-    final Uuid id = Uuids.fromString(args[0]);
+    final Uuid id = Uuid.fromString(args[0]);
     final byte[] secret = Secret.parse(args[1]);
 
     final int myPort = Integer.parseInt(args[2]);
