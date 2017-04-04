@@ -3,3 +3,5 @@ language: java
 install:
     - ./clean.sh
     - ./make.sh
+
+script: sh test.sh
