@@ -53,7 +53,7 @@ public final class ChatSimpleGui {
   }
 
   private Border paneBorder() {
-    Border outside = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
+    Border outside = BorderFactory.createLineBorder(Color.BLUE);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
   }
@@ -70,12 +70,14 @@ public final class ChatSimpleGui {
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
-
+/*
     // Build main panels - Users, Conversations, Messages.
     final JPanel usersViewPanel = new UserPanel(clientContext);
     usersViewPanel.setBorder(paneBorder());
     final GridBagConstraints usersViewC = new GridBagConstraints();
-
+*/
+    final JMenuBar menuFile = new UserPanel(clientContext);
+    
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
     messagesViewPanel.setBorder(paneBorder());
     final GridBagConstraints messagesViewC = new GridBagConstraints();
@@ -84,8 +86,8 @@ public final class ChatSimpleGui {
     final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
     conversationsViewPanel.setBorder(paneBorder());
     final GridBagConstraints conversationViewC = new GridBagConstraints();
-
-    // Placement of main panels.
+    
+  /*  // Placement of main panels.
     usersViewC.gridx = 0;
     usersViewC.gridy = 0;
     usersViewC.gridwidth = 1;
@@ -93,7 +95,7 @@ public final class ChatSimpleGui {
     usersViewC.fill = GridBagConstraints.BOTH;
     usersViewC.weightx = 0.3;
     usersViewC.weighty = 0.3;
-
+*/
     conversationViewC.gridx = 1;
     conversationViewC.gridy = 0;
     conversationViewC.gridwidth = 1;
@@ -109,7 +111,18 @@ public final class ChatSimpleGui {
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
 
-    mainViewPanel.add(usersViewPanel, usersViewC);
+    /*//add menubar to GUI
+    JMenuBar menuBar = new JMenuBar();
+    JMenu menuFile = new JMenu("File");
+    JMenuItem menuItemExit = new JMenuItem("Exit");
+    menuFile.add(menuItemExit);
+     
+    menuBar.add(menuFile);
+     */
+    // adds menu bar to the frame
+    mainFrame.setJMenuBar(menuFile);
+
+    //mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
 

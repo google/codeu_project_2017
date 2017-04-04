@@ -27,12 +27,12 @@ import codeu.chat.common.User;
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
-public final class UserPanel extends JPanel {
+public final class UserPanel extends JMenuBar {
 
   private final ClientContext clientContext;
 
   public UserPanel(ClientContext clientContext) {
-    super(new GridBagLayout());
+    //super(new GridBagLayout());
     this.clientContext = clientContext;
     initialize();
   }
@@ -42,6 +42,21 @@ public final class UserPanel extends JPanel {
     // This panel contains from top to bottom; a title bar, a list of users,
     // information about the current (selected) user, and a button bar.
 
+	//JMenuBar menuBar = new JMenuBar();
+	JMenu menuFile = new JMenu("User");
+	JMenuItem menuItemAdd = new JMenuItem("Add");
+	JMenu menuSignIn = new JMenu("Sign-In");
+	JMenuItem menuItemUpdate = new JMenuItem("Update");
+	
+	
+	
+	
+	 
+	
+	// adds menu bar to the frame
+	//mainFrame.setJMenuBar(menuBar);
+	  
+/*	  
     // Title bar - also includes name of currently signed-in user.
     final JPanel titlePanel = new JPanel(new GridBagLayout());
     final GridBagConstraints titlePanelC = new GridBagConstraints();
@@ -68,7 +83,7 @@ public final class UserPanel extends JPanel {
     titlePanel.add(Box.createHorizontalGlue(), titleGapC);
     titlePanel.add(userSignedInLabel, titleUserC);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
+*/
     // User List panel.
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
@@ -82,6 +97,16 @@ public final class UserPanel extends JPanel {
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
     userListScrollPane.setPreferredSize(new Dimension(150, 150));
+   
+    menuFile.addSeparator();
+	menuSignIn.add(userList);
+	
+	menuFile.add(menuSignIn);
+	menuFile.add(menuItemAdd);
+	menuFile.add(menuItemUpdate);
+	
+	this.add(menuFile);
+    
 
     // Current User panel
     final JPanel currentPanel = new JPanel();
@@ -91,7 +116,7 @@ public final class UserPanel extends JPanel {
     final JScrollPane userInfoScrollPane = new JScrollPane(userInfoPanel);
     currentPanel.add(userInfoScrollPane);
     userInfoScrollPane.setPreferredSize(new Dimension(245, 85));
-
+    /*
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
@@ -138,26 +163,28 @@ public final class UserPanel extends JPanel {
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
     this.add(currentPanel, currentPanelC);
-
-    userUpdateButton.addActionListener(new ActionListener() {
+*/
+    menuItemUpdate.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         UserPanel.this.getAllUsers(listModel);
       }
     });
 
-    userSignInButton.addActionListener(new ActionListener() {
+    userList.addListSelectionListener(new ListSelectionListener() {
       @Override
-      public void actionPerformed(ActionEvent e) {
+      public void valueChanged(ListSelectionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
           clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+          //userSignedInLabel.setText("Hello " + data);
+          //userList.setVisible(false);
+          javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
         }
       }
     });
 
-    userAddButton.addActionListener(new ActionListener() {
+    menuItemAdd.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         final String s = (String) JOptionPane.showInputDialog(
@@ -175,7 +202,7 @@ public final class UserPanel extends JPanel {
       public void valueChanged(ListSelectionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          userInfoPanel.setText(clientContext.user.showUserInfo(data));
+         // userInfoPanel.setText(clientContext.user.showUserInfo(data));
         }
       }
     });
