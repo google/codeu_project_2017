@@ -93,7 +93,7 @@ public final class ClientConversation {
   }
 
   public void showCurrent() {
-	System.out.println(this.getClass().toString() + " currentMessageCount()");
+	System.out.println(this.getClass().toString() + " showCurrent()");
     printConversation(currentSummary, userContext);
   }
 

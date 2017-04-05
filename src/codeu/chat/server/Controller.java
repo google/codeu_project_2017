@@ -79,6 +79,16 @@ public final class Controller implements RawController, BasicController {
       } else {
         final Message lastMessage = model.messageById().first(foundConversation.lastMessage);
         lastMessage.next = message.id;
+       
+        
+        // Updating the next message for the last message
+        try {
+        	model.ds.updateLastMessage(lastMessage);
+        }
+        catch (Exception ex) {
+        	ex.printStackTrace();
+        }
+       
       }
 
       // If the first message points to NULL it means that the conversation was empty and that
@@ -97,6 +107,15 @@ public final class Controller implements RawController, BasicController {
       if (!foundConversation.users.contains(foundUser)) {
         foundConversation.users.add(foundUser.id);
       }
+    }
+    
+    // EDIT - Malik Graham
+    // Update the conversations first and last message
+    try {
+    	model.ds.updateConversation(foundConversation);
+    }
+    catch (Exception ex) {
+    	ex.printStackTrace();
     }
 
     return message;

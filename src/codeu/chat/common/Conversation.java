@@ -42,6 +42,7 @@ public final class Conversation {
 
     }
 
+
     @Override
     public Conversation read(InputStream in) throws IOException {
 
@@ -68,7 +69,7 @@ public final class Conversation {
   public final Uuid owner;
   public final Time creation;
   public final String title;
-  public final Collection<Uuid> users = new HashSet<>();
+  public final Collection<Uuid> users;
   public Uuid firstMessage = Uuids.NULL;
   public Uuid lastMessage = Uuids.NULL;
 
@@ -78,8 +79,23 @@ public final class Conversation {
     this.owner = owner;
     this.creation = creation;
     this.title = title;
+    this.users = new HashSet<>();
 
     this.summary = new ConversationSummary(id, owner, creation, title);
 
+  }
+  
+  // EDIT - Malik Graham
+  // Added a new constructor when conversation is pulled from database
+  public Conversation(Uuid id, Uuid owner, Time creation, String title, Collection<Uuid> users, Uuid firstMessage, Uuid lastMessage) {
+	  	this.id = id;
+	    this.owner = owner;
+	    this.creation = creation;
+	    this.title = title;
+	    this.users = users; 
+	    this.firstMessage = firstMessage;
+	    this.lastMessage = lastMessage;
+
+	    this.summary = new ConversationSummary(id, owner, creation, title);
   }
 }
