@@ -17,10 +17,11 @@
 TEAM_ID="$1"
 TEAM_SECRET="$2"
 PORT="$3"
-RELAY_ADDRESS="$4"
+PERSISTENT="$4"
+RELAY_ADDRESS="$5"
 
-if [[ "TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" ]] ; then
-  echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> [RELAY ADDRESS]'
+if [[ "TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT" == "" ]] ; then
+  echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> <PERSISENT> [RELAY ADDRESS]'
   exit 1
 fi
 
@@ -29,11 +30,13 @@ if [ "$RELAY_ADDRESS" == "" ] ; then
   java codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
-      "$PORT"
+      "$PORT" \
+      "$PERSISTENT"
 else
   java codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
+      "$PERSISTENT" \
       "$RELAY_ADDRESS"
 fi
