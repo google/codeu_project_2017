@@ -139,6 +139,7 @@ public class Signin {
   /**
    * Initialize a session for the current user, and render index.html.
    */
+  @SuppressWarnings("serial")
   public static class MainServlet extends HttpServlet {
 
     @Override
@@ -193,6 +194,7 @@ public class Signin {
    * POST body of request should be the authorization code.
    * Example URI: /connect?state=...&gplus_id=...
    */
+  @SuppressWarnings("serial")
   public static class ConnectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -270,6 +272,7 @@ public class Signin {
   /**
    * Revoke current user's token and reset their session.
    */
+  @SuppressWarnings("serial")
   public static class DisconnectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -312,6 +315,7 @@ public class Signin {
   /**
    * Get list of people user has shared with this app.
    */
+  @SuppressWarnings("serial")
   public static class PeopleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
