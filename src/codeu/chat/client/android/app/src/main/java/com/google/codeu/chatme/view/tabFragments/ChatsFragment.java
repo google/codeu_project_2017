@@ -1,4 +1,4 @@
-package com.google.codeu.chatme;
+package com.google.codeu.chatme.view.tabFragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,17 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.google.codeu.chatme.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link UsersFragment.OnFragmentInteractionListener} interface
+ * {@link ChatsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link UsersFragment#newInstance} factory method to
+ * Use the {@link ChatsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UsersFragment extends Fragment {
+public class ChatsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +30,7 @@ public class UsersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public UsersFragment() {
+    public ChatsFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +40,11 @@ public class UsersFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UsersFragment.
+     * @return A new instance of fragment ChatsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UsersFragment newInstance(String param1, String param2) {
-        UsersFragment fragment = new UsersFragment();
+    public static ChatsFragment newInstance(String param1, String param2) {
+        ChatsFragment fragment = new ChatsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +65,7 @@ public class UsersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_users, container, false);
+        return inflater.inflate(R.layout.fragment_chats, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -1,4 +1,4 @@
-package com.google.codeu.chatme;
+package com.google.codeu.chatme.view;
 /*
 
   This class controls the tab panel for switching between the three main fragments:
@@ -14,6 +14,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.google.codeu.chatme.R;
+
 
 public class TabsActivity extends AppCompatActivity {
 

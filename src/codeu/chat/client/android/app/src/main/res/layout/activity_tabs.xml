@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/ChatMe_Red"
     android:orientation="vertical"
-    tools:context="com.google.codeu.chatme.TabsActivity">
+    tools:context="com.google.codeu.chatme.view.TabsActivity">
 
     <FrameLayout
         android:id="@+id/content"

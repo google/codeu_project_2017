@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ChatMe_Red"
-    tools:context="com.google.codeu.chatme.ChatsFragment">
+    tools:context=".view.tabFragments.ChatsFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.google.codeu.chatme.UserFragment"
+        android:name="com.google.codeu.chatme.view.basicFragments.UserFragment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         tools:layout="@layout/fragment_user"
@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/fragment3"
-        android:name="com.google.codeu.chatme.UserFragment"
+        android:name="com.google.codeu.chatme.view.basicFragments.UserFragment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
@@ -62,7 +62,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.google.codeu.chatme.UserFragment"
+        android:name="com.google.codeu.chatme.view.basicFragments.UserFragment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         tools:layout="@layout/fragment_user"

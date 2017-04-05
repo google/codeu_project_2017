@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:background="@color/chatMe_Lighter_Red"
-    tools:context="com.google.codeu.chatme.ChatFragment">
+    tools:context=".view.basicFragments.ChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

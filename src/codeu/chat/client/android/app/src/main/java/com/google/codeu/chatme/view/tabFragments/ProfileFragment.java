@@ -1,4 +1,4 @@
-package com.google.codeu.chatme;
+package com.google.codeu.chatme.view.tabFragments;
 
 import android.content.Context;
 import android.net.Uri;
