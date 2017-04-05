@@ -34,38 +34,52 @@ public class DerbyStore {
 			Class.forName(driver).newInstance();
 			
 			// Connect to the Database
-			conn = DriverManager.getConnection(protocol + "chat;create=true", null);
+			conn = DriverManager.getConnection(protocol + "chatapp;create=true", null);
 			
 			// Create a statement object to send queries
 			stmt = conn.createStatement();
 			
-			// If this table exists then we just return to prevent the further
-			// code from executing.
-			if (stmt.execute("SELECT * FROM chatuser")) return;
+			// If this table exists then we just continue
+			// since we don't want to create tables that exist
+			stmt.execute("SELECT * FROM chatuser");
 			
-			// Create the chat user table
-			stmt.execute("CREATE TABLE chatuser(id varchar(255), name varchar(255), creation BIGINT)");
-			
-			// Create the conversations table
-			stmt.execute("CREATE TABLE conversations(id varchar(255), "
-					+ "owner varchar(255), creation BIGINT, title varchar(255), users varchar(255), firstMessage varchar(255)," +
-			"lastMessage varchar(255))");
-			
-			// Create the message table
-			stmt.execute("CREATE TABLE message(id varchar(255),"
-					 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
-			
-			// Give confirmation of execution
-			System.out.println("Executed");
+			// Give confirmation of connection
+			System.out.println("Tables exist. Connection made.");
 		}
 		catch (Exception ex) {
-			ex.printStackTrace();
+						try {
+						// Create the chat user table
+						stmt.execute("CREATE TABLE chatuser(id varchar(255), name varchar(255), password varchar(255), creation BIGINT)");
+						
+						// Create the conversations table
+						stmt.execute("CREATE TABLE conversation(id varchar(255), "
+								+ "owner varchar(255), creation BIGINT, title varchar(255), users varchar(255), firstMessage varchar(255)," +
+						"lastMessage varchar(255))");
+						
+						// Create the message table
+						stmt.execute("CREATE TABLE message(id varchar(255),"
+								 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
+						
+						// Give confirmation of execution.
+						System.out.println("Tables do not exists. Table creation executed.");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+			//ex.printStackTrace();
 		}
+	}
+	
+	public boolean checkForUsername(String username) throws SQLException {
+		return stmt.execute("SELECT * FROM chatuser WHERE password = '" + username + "'" );
+	}
+	
+	public boolean checkForPassword(String password) throws SQLException {
+		return stmt.execute("SELECT * FROM chatuser WHERE password = '" + password + "'" );
 	}
 	
 	public void addUser(User u) throws SQLException {
 		stmt.execute("INSERT INTO chatuser VALUES(" + "\'" + removeCharsInUuid(u.id.toString()) + "\'" +
-				"," + "\'" + u.name + "\'" + "," + u.creation.inMs() + ")");
+				"," + "\'" + u.name + "\'" + ", 'test', " + u.creation.inMs() + ")");
 	}
 	
 	public void addMessage(Message m) throws SQLException {
@@ -83,13 +97,13 @@ public class DerbyStore {
 			usersInvolved.append(" ");
 		}
 		
-		stmt.execute("INSERT INTO conversations VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
+		stmt.execute("INSERT INTO conversation VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
 				"," +  "\'" + removeCharsInUuid(c.owner.toString()) +  "\'" + "," + c.creation.inMs() + "," + "\'" + c.title + "\'" + "," +  "\'" + usersInvolved.toString() +  "\'" + 
 				"," +  "\'" + removeCharsInUuid(c.firstMessage.toString()) +  "\'" +  "," + "\'" + removeCharsInUuid(c.lastMessage.toString()) +  "\'" + ")");
 	}
 	
 	public void updateConversation(Conversation c) throws SQLException {
-		stmt.execute("UPDATE conversations SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
+		stmt.execute("UPDATE conversation SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
 			+ "\'" + ", lastMessage = " + "\'" + removeCharsInUuid(c.lastMessage.toString()) + "\'" + " WHERE id = " + "\'" + removeCharsInUuid(c.id.toString()) + "\'");
 	}
 	
@@ -109,7 +123,7 @@ public class DerbyStore {
 				
 				String uuid = allUsersResponse.getString(1);
 				String name = allUsersResponse.getString(2);
-				Long creation = allUsersResponse.getLong(3);
+				Long creation = allUsersResponse.getLong(4);
 				
 				// Creation of uuid object from database
 				Uuid userid = Uuids.fromString(uuid);
@@ -135,7 +149,7 @@ public class DerbyStore {
 		Store<Uuid, Conversation> allConversations = new Store<>(UUID_COMPARE);
 		
 		try {
-			ResultSet allConversationsResponse = stmt.executeQuery("SELECT * FROM conversations");
+			ResultSet allConversationsResponse = stmt.executeQuery("SELECT * FROM conversation");
 			
 			
 			HashSet<Uuid> ownersUuid = new HashSet<>();
