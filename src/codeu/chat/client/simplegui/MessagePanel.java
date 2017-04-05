@@ -155,9 +155,9 @@ public final class MessagePanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (!clientContext.user.hasCurrent()) {
-          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
+        	JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!clientContext.conversation.hasCurrent()) {
-          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+        	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
           
           final String messageText = textField.getText().trim();
