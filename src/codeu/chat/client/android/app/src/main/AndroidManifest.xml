@@ -20,7 +20,26 @@
         <activity android:name=".ChatActivity" />
         <activity
             android:name=".TabsActivity"
-            android:label="@string/title_activity_users"></activity>
+            android:label="@string/title_activity_users" />
+        <activity
+            android:name=".CreateChatActivity"
+            android:label="@string/title_activity_create_chat"
+            android:parentActivityName=".TabsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.google.codeu.chatme.TabsActivity" />
+        </activity>
+        <activity
+            android:name=".AddUsersActivity"
+            android:label="@string/title_activity_add_users" />
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".ChatActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.google.codeu.chatme.ChatActivity" />
+        </activity>
     </application>
 
 </manifest>

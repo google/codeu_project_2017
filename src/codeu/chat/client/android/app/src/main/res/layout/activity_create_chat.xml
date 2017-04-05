@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ChatMe_Red"
+    tools:context="com.google.codeu.chatme.ChatsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <EditText
+        android:id="@+id/chatNameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addUserButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="131dp"
+        android:ems="10"
+        android:hint="Chat Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/createChatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/chatNameInput"
+        android:layout_alignStart="@+id/chatNameInput"
+        android:layout_centerVertical="true"
+        android:background="@color/ChatMe_Blue"
+        android:elevation="0dp"
+        android:text="Create Chat"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/addUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        app:srcCompat="@android:drawable/ic_menu_add"
+        android:layout_alignTop="@+id/ChatTitle"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/ChatTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="9dp"
+        android:text="Create New Chat"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

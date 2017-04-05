@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true" />
 
     <ImageView
-        android:id="@+id/newChatButton"
+        android:id="@+id/addUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="9dp"
@@ -34,7 +34,7 @@
         android:layout_marginEnd="7dp"
         app:srcCompat="@android:drawable/ic_menu_search"
         android:layout_alignBottom="@+id/navBar"
-        android:layout_toStartOf="@+id/newChatButton"
+        android:layout_toStartOf="@+id/addUserButton"
         android:layout_marginBottom="11dp" />
 
     <TextView

@@ -8,6 +8,19 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <Button
+        android:id="@+id/addUsersButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="113dp"
+        android:background="@color/ChatMe_Blue"
+        android:elevation="0dp"
+        android:text="Add Users"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/navBar"
         android:layout_width="match_parent"
@@ -19,15 +32,15 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/fragmentTitle"
+        android:id="@+id/activityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Users"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:text="Add Chat Users"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <fragment
         android:id="@+id/fragment"

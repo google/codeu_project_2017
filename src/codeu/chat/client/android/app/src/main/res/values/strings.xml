@@ -49,4 +49,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_create_chat">CreateChatActivity</string>
+    <string name="title_activity_add_users">AddUsersActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

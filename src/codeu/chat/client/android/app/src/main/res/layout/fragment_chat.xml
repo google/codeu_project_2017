@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/chatTitle"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CodeUGroup31"
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:layout_marginEnd="11dp"
         android:layout_above="@+id/chatSender"
-        android:layout_alignEnd="@+id/chatContent" />
+        android:layout_alignEnd="@+id/messageContent" />
 
     <TextView
         android:id="@+id/chatSender"
@@ -29,10 +29,10 @@
         android:textColor="@android:color/background_dark"
         android:textSize="12sp"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/chatContent" />
+        android:layout_alignStart="@+id/messageContent" />
 
     <TextView
-        android:id="@+id/chatContent"
+        android:id="@+id/messageContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -43,13 +43,13 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/chatTime"
+        android:id="@+id/messageTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="9:03 AM"
         android:textSize="12sp"
         android:layout_marginEnd="10dp"
-        android:layout_alignBottom="@+id/chatTitle"
+        android:layout_alignBottom="@+id/name"
         android:layout_toStartOf="@+id/chatArrow" />
 
     <TextView
@@ -58,26 +58,26 @@
         android:layout_height="wrap_content"
         android:text=">"
         android:textSize="12sp"
-        android:layout_alignBaseline="@+id/chatTime"
-        android:layout_alignBottom="@+id/chatTime"
+        android:layout_alignBaseline="@+id/messageTime"
+        android:layout_alignBottom="@+id/messageTime"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="7dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/messageIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/stat_notify_chat"
         android:layout_above="@+id/chatSender"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp" />
+        android:layout_marginStart="10dp"
+        app:srcCompat="@android:drawable/stat_notify_chat" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/unreadIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_notification_overlay"
-        android:layout_alignTop="@+id/chatTitle"
-        android:layout_alignStart="@+id/chatSender" />
+        android:layout_alignStart="@+id/chatSender"
+        android:layout_alignTop="@+id/name"
+        app:srcCompat="@android:drawable/ic_notification_overlay" />
 
 </RelativeLayout>
