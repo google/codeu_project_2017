@@ -24,10 +24,10 @@ import java.util.Queue;
 
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Time;
+import codeu.chat.util.Logger;
+import codeu.chat.util.Uuid;
 
 public final class Server implements Relay {
 
@@ -221,7 +221,7 @@ public final class Server implements Relay {
       // Writing is a one way flag (once set it will not be unset) that switches
       // between looking for the starting message and writing all messages to the
       // output.
-      boolean writing = root == Uuids.NULL || root == null;
+      boolean writing = root == Uuid.NULL || root == null;
 
       for (final Relay.Bundle message : history) {
 
@@ -233,7 +233,7 @@ public final class Server implements Relay {
 
         // Only update "writing" after the check as the root is already known and
         // should not be included in the output.
-        writing |= Uuids.equals(root, message.id());
+        writing |= Uuid.equals(root, message.id());
       }
 
       LOG.info(
