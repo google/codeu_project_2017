@@ -24,6 +24,12 @@ import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
 import codeu.chat.util.store.Store;
 
+import javax.crypto.SecretKeyFactory;
+import java.security.spec.InvalidKeySpecException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import javax.crypto.spec.PBEKeySpec;
+
 public final class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
@@ -35,6 +41,10 @@ public final class ClientUser {
   private User current = null;
 
   private final Map<Uuid, User> usersById = new HashMap<>();
+
+  //for password security
+  private static final int ITERATIONS = 10000;
+  private static final int KEY_LENGTH = 256;
 
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
@@ -65,17 +75,54 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String input) {
     updateUsers();
 
+    String[] parsedInput = input.trim().split(",");
+    if(parsedInput.length != 2){
+      System.out.println("ERROR: <username>, <password> not supplied.");
+    }
+
     final User prev = current;
-    if (name != null) {
-      final User newCurrent = usersByName.first(name);
-      if (newCurrent != null) {
+    if (parsedInput[0] != null) {
+      final User newCurrent = usersByName.first(parsedInput[0]);
+      //TODO: This will not work until the user password and salt are hashed correctly
+      boolean validPassword = validatePassword(parsedInput[1], newCurrent.salt, newCurrent.password);
+      if (validPassword && newCurrent != null) {
         current = newCurrent;
       }
     }
     return (prev != current);
+  }
+
+  private boolean validatePassword(String password, byte[] salt, byte[] expectedPassword){
+    char[] bytePassword = password.toCharArray();
+    byte[] hashedPassword = hash(bytePassword, salt);
+    password = null;
+    Arrays.fill(bytePassword, Character.MIN_VALUE);
+    if(hashedPassword.length != expectedPassword.length){
+      return false;
+    }
+    for(int i=0; i< expectedPassword.length; i++){
+      if(hashedPassword[i] != expectedPassword[i]){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  //hash the password
+  private byte[] hash(char[] password, byte[] salt){
+    PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
+    Arrays.fill(password, Character.MIN_VALUE);
+    try {
+      SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+      return skf.generateSecret(spec).getEncoded();
+    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+      throw new AssertionError("Error while hashing a password ");
+    } finally {
+      spec.clearPassword();
+    }
   }
 
   public boolean signOutUser() {
@@ -88,10 +135,11 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  public void addUser(String name, byte[] salt, byte[] password) {
+
     final boolean validInputs = isValidName(name);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, salt, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",

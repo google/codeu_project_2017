@@ -1,0 +1,662 @@
+Apr 05, 2017 11:22:10 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 11:22:10 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 11:22:10 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 11:22:10 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 11:22:36 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:22:36 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.751753253] user.name=lauren user.time=05-Apr-2017 11:22:36.913)
+Apr 05, 2017 11:22:36 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:53:02 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 11:53:02 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 11:53:02 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 11:53:02 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 11:53:23 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:53:23 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1441073853] user.name=hithere user.time=05-Apr-2017 11:53:23.375)
+Apr 05, 2017 11:53:23 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:54:45 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 11:54:45 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 11:54:45 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 11:54:45 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 11:54:49 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:54:49 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.4029849987] user.name=hi user.time=05-Apr-2017 11:54:49.845)
+Apr 05, 2017 11:54:49 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:55:52 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 11:55:52 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 11:55:52 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 11:55:52 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 11:56:00 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:56:00 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.4180145600] user.name=hi user.time=05-Apr-2017 11:56:00.634)
+Apr 05, 2017 11:56:00 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 11:56:22 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 11:56:22 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 11:56:22 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 11:56:22 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 11:59:50 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 11:59:50 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 11:59:50 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 11:59:50 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:00:01 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:00:01 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.889158395] user.name=lho1 user.time=05-Apr-2017 12:00:01.276)
+Apr 05, 2017 12:00:01 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:01:52 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:01:52 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:01:52 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:01:52 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:02:08 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:02:08 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1911972569] user.name=usernameHere user.time=05-Apr-2017 12:02:08.276)
+Apr 05, 2017 12:02:08 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:03:50 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:03:50 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:03:50 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:03:50 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:03:57 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:03:57 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.300044888] user.name=lhi user.time=05-Apr-2017 12:03:57.527)
+Apr 05, 2017 12:03:57 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:13:53 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:13:53 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:13:53 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:13:53 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:14:02 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:14:02 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1123050668] user.name=username here user.time=05-Apr-2017 12:14:02.030)
+Apr 05, 2017 12:14:02 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:21:49 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:21:49 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:21:49 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:21:49 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:22:02 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:22:02 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3145180329] user.name=hey there user.time=05-Apr-2017 12:22:02.043)
+Apr 05, 2017 12:22:02 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:25:23 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:25:23 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:25:23 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:25:23 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:25:28 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:25:28 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.91937296] user.name=there user.time=05-Apr-2017 12:25:28.641)
+Apr 05, 2017 12:25:28 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:27:46 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:27:46 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:27:46 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:27:46 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:27:53 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:27:53 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3854791406] user.name=hi, there user.time=05-Apr-2017 12:27:53.580)
+Apr 05, 2017 12:27:53 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:29:03 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:29:03 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:29:03 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:29:03 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:29:09 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:29:09 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.677058295] user.name=hi user.time=05-Apr-2017 12:29:09.299)
+Apr 05, 2017 12:29:09 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:29:33 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:29:33 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:29:33 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:29:33 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:29:39 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:29:39 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3430583579] user.name=here user.time=05-Apr-2017 12:29:39.570)
+Apr 05, 2017 12:29:39 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:30:11 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:30:11 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:30:11 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:30:11 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:30:17 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:30:17 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.787004535] user.name=hi  user.time=05-Apr-2017 12:30:17.945)
+Apr 05, 2017 12:30:17 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:31:32 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 12:31:32 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 12:31:32 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 12:31:32 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 12:31:42 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:31:42 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2751037112] user.name=lho user.time=05-Apr-2017 12:31:42.910)
+Apr 05, 2017 12:31:42 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:31:49 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 12:31:49 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2275840611] user.name=lho user.time=05-Apr-2017 12:31:49.690)
+Apr 05, 2017 12:31:49 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:40:21 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 2:40:21 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 2:40:21 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 2:40:21 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 2:40:31 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:40:31 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.261098982] user.name=username user.time=05-Apr-2017 14:40:31.570)
+Apr 05, 2017 2:40:31 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:40:37 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:40:37 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2106715100] user.name=uernse user.time=05-Apr-2017 14:40:37.369)
+Apr 05, 2017 2:40:37 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:40:55 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:40:55 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3045801669] user.name=ueran user.time=05-Apr-2017 14:40:55.128)
+Apr 05, 2017 2:40:55 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:51:31 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 2:51:31 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 2:51:31 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 2:51:31 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 2:51:36 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:51:36 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1087285686] user.name=laur user.time=05-Apr-2017 14:51:36.419)
+Apr 05, 2017 2:51:36 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:51:44 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 2:51:44 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1527996235] user.name=jkls user.time=05-Apr-2017 14:51:44.484)
+Apr 05, 2017 2:51:44 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 3:18:30 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 3:18:30 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 3:18:30 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 3:18:30 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 3:18:40 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 3:18:40 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.4191171603] user.name=lho user.time=05-Apr-2017 15:18:40.572)
+Apr 05, 2017 3:18:40 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 3:19:44 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 3:19:44 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 3:19:44 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 3:19:44 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 3:19:51 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 3:19:51 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.269718868] user.name=lho user.time=05-Apr-2017 15:19:51.691)
+Apr 05, 2017 3:19:51 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 8:41:00 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 8:41:00 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 8:41:00 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 8:41:00 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 8:41:07 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 8:41:07 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1858168507] user.name=lho1 user.time=05-Apr-2017 20:41:07.077)
+Apr 05, 2017 8:41:07 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 8:41:42 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 8:41:42 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 8:41:42 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 8:41:42 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 8:41:48 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 05, 2017 8:41:48 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 05, 2017 8:41:48 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 05, 2017 8:41:48 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 05, 2017 8:41:56 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 05, 2017 8:41:56 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2947854013] user.name=lho1 user.time=05-Apr-2017 20:41:56.344)
+Apr 05, 2017 8:41:56 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:51:11 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:51:11 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1932529816] user.name=jsdkl user.time=06-Apr-2017 00:51:11.813)
+Apr 06, 2017 12:51:11 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:57:49 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 12:57:49 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 12:57:49 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 12:57:49 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 12:57:55 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:57:55 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.957549744] user.name=sdf user.time=06-Apr-2017 00:57:55.801)
+Apr 06, 2017 12:57:55 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:03:59 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 1:03:59 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 1:03:59 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 1:03:59 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 1:04:10 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:04:10 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.783580300] user.name=jkl user.time=06-Apr-2017 01:04:10.228)
+Apr 06, 2017 1:04:10 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:33:52 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 1:33:52 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 1:33:52 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 1:33:52 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 1:34:02 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:34:02 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.871076999] user.name=lho1 user.time=06-Apr-2017 01:34:02.280)
+Apr 06, 2017 1:34:02 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:38:03 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 1:38:03 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 1:38:03 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 1:38:03 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 1:38:13 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:38:13 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1436240841] user.name=lho1 user.time=06-Apr-2017 01:38:13.872)
+Apr 06, 2017 1:38:13 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:42:19 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 1:42:19 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 1:42:19 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 1:42:19 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 1:43:21 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 1:43:21 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 1:43:21 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 1:43:21 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 1:43:34 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:43:34 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2379320047] user.name=lho1 user.time=06-Apr-2017 01:43:34.852)
+Apr 06, 2017 1:43:34 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 1:55:40 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 1:55:40 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 1:55:40 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 1:55:40 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:06:55 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:06:55 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:06:55 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:06:55 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:07:03 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:07:03 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3838524317] user.name=lho1 user.time=06-Apr-2017 02:07:03.645)
+Apr 06, 2017 2:07:03 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:07:57 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:07:57 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:07:57 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:07:57 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:08:05 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:08:05 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2588906385] user.name=lho1 user.time=06-Apr-2017 02:08:05.909)
+Apr 06, 2017 2:08:05 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:08:28 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:08:28 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:08:28 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:08:28 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:08:44 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:08:44 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:08:44 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:08:44 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:08:50 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:08:50 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.796992840] user.name=lho1 user.time=06-Apr-2017 02:08:50.120)
+Apr 06, 2017 2:08:50 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:09:17 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:09:17 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:09:17 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:09:17 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:09:23 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:09:23 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.427695193] user.name=lho1 user.time=06-Apr-2017 02:09:23.635)
+Apr 06, 2017 2:09:23 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:17:46 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:17:46 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:17:46 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:17:46 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:17:57 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:17:57 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2068584666] user.name=lho1 user.time=06-Apr-2017 02:17:57.428)
+Apr 06, 2017 2:17:57 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:18:15 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:18:48 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:18:48 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:18:48 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:18:48 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:18:56 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:18:56 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3307753604] user.name=lho1 user.time=06-Apr-2017 02:18:56.390)
+Apr 06, 2017 2:18:56 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:19:01 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:19:35 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:19:35 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:19:35 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:19:35 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:19:41 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:19:41 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:19:41 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:19:41 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:19:48 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:19:48 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3135294152] user.name=lho1 user.time=06-Apr-2017 02:19:48.133)
+Apr 06, 2017 2:19:48 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:19:55 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:21:47 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 2:21:47 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 2:21:47 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 2:21:47 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 2:21:54 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:21:54 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.2835326283] user.name=lho1 user.time=06-Apr-2017 02:21:54.937)
+Apr 06, 2017 2:21:54 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 2:22:01 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 11:30:37 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 11:30:37 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 11:30:37 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 11:30:37 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 11:30:46 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 11:30:46 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3575036659] user.name=lho1 user.time=06-Apr-2017 11:30:46.905)
+Apr 06, 2017 11:30:46 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 11:31:23 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 11:31:23 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 11:31:23 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 11:31:23 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 11:31:31 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 11:31:31 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1050511946] user.name=lho1 user.time=06-Apr-2017 11:31:31.622)
+Apr 06, 2017 11:31:31 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 11:33:17 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 11:33:17 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 11:33:17 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 11:33:17 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 11:33:33 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 11:33:33 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.3288965723] user.name=lho1 user.time=06-Apr-2017 11:33:33.387)
+Apr 06, 2017 11:33:33 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:06:42 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 12:06:42 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 12:06:42 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 12:06:42 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 12:06:51 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:06:51 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.810541588] user.name=lho1 user.time=06-Apr-2017 12:06:51.247)
+Apr 06, 2017 12:06:51 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:07:30 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 12:07:30 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 12:07:30 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 12:07:30 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 12:07:36 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:07:36 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1317148620] user.name=lho1 user.time=06-Apr-2017 12:07:36.050)
+Apr 06, 2017 12:07:36 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:10:59 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 12:10:59 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 12:10:59 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 12:10:59 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 12:11:05 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:11:05 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1957076342] user.name=lho1 user.time=06-Apr-2017 12:11:05.713)
+Apr 06, 2017 12:11:05 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:21:19 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 06, 2017 12:21:19 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 06, 2017 12:21:19 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 06, 2017 12:21:19 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 06, 2017 12:21:27 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:21:27 PM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1147266395] user.name=lho1 user.time=06-Apr-2017 12:21:27.264)
+Apr 06, 2017 12:21:27 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 06, 2017 12:21:31 PM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...

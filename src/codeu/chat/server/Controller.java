@@ -44,8 +44,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(String name) {
-    return newUser(createId(), name, Time.now());
+  public User newUser(String name, byte[] salt, byte[] password) {
+    return newUser(createId(), name, salt, password, Time.now());
   }
 
   @Override
@@ -103,13 +103,13 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(Uuid id, String name, byte[] salt, byte[] password, Time creationTime) {
 
     User user = null;
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime);
+      user = new User(id, name, salt, password, creationTime);
       model.add(user);
 
       LOG.info(

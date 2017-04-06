@@ -25,13 +25,25 @@ import codeu.chat.common.Uuids;
 
 public final class User {
 
+
   public static final Serializer<User> SERIALIZER = new Serializer<User>() {
+
+    private  byte[] salt;
+    private  byte[] password;
 
     @Override
     public void write(OutputStream out, User value) throws IOException {
 
       Uuids.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
+      //TODO: fix this portion. necessary for the password to be saved.
+      salt = value.salt;
+      password = value.password;
+      System.out.println("This is the name: " + value.name);
+      System.out.println("Following the salt: "+value.salt);
+      System.out.println("Following the password: "  +value.password);
+      // out.write(value.salt);
+      // out.write(value.password);
       Time.SERIALIZER.write(out, value.creation);
 
     }
@@ -42,6 +54,7 @@ public final class User {
       return new User(
           Uuids.SERIALIZER.read(in),
           Serializers.STRING.read(in),
+          salt, password,
           Time.SERIALIZER.read(in)
       );
 
@@ -51,12 +64,23 @@ public final class User {
   public final Uuid id;
   public final String name;
   public final Time creation;
+  public final byte[] salt;
+  public final byte[] password;
 
-  public User(Uuid id, String name, Time creation) {
+  public User(Uuid id, String name, byte[] salt, byte[] password, Time creation) {
 
     this.id = id;
     this.name = name;
     this.creation = creation;
+    this.salt = salt;
+    this.password = password;
 
+    System.out.println("User salt: "+ salt);
+    System.out.println("User password: " + password);
+
+  }
+
+  public byte[] getHashedPassword(){
+    return this.password;
   }
 }
