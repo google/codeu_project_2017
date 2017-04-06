@@ -16,6 +16,7 @@ package codeu.chat.server;
 
 import java.util.Comparator;
 
+import codeu.chat.DerbyStore;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LinearUuidGenerator;
@@ -52,24 +53,44 @@ public final class Model {
   };
 
   private static final Comparator<String> STRING_COMPARE = String.CASE_INSENSITIVE_ORDER;
+  
+  DerbyStore ds = new DerbyStore();
 
-  private final Store<Uuid, User> userById = new Store<>(UUID_COMPARE);
+  //private final Store<Uuid, User> userById = new Store<>(UUID_COMPARE);
+  
+  // EDIT - Malik Graham
+  // Object are now initialized with the information from the databases
+  private final Store<Uuid, User> userById = ds.getAllUsers();
   private final Store<Time, User> userByTime = new Store<>(TIME_COMPARE);
   private final Store<String, User> userByText = new Store<>(STRING_COMPARE);
 
-  private final Store<Uuid, Conversation> conversationById = new Store<>(UUID_COMPARE);
+  //private final Store<Uuid, Conversation> conversationById = new Store<>(UUID_COMPARE);
+  private final Store<Uuid, Conversation> conversationById = ds.getAllConversations();
   private final Store<Time, Conversation> conversationByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Conversation> conversationByText = new Store<>(STRING_COMPARE);
 
-  private final Store<Uuid, Message> messageById = new Store<>(UUID_COMPARE);
+  //private final Store<Uuid, Message> messageById = new Store<>(UUID_COMPARE);
+  private final Store<Uuid, Message> messageById = ds.getAllMessages();
   private final Store<Time, Message> messageByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Message> messageByText = new Store<>(STRING_COMPARE);
+  
 
   private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1, Integer.MAX_VALUE);
   private Uuid currentUserGeneration = userGenerations.make();
+  
 
   public void add(User user) {
     currentUserGeneration = userGenerations.make();
+    
+    // EDIT - Malik Graham
+    // Save the information in the user table
+    try {
+		ds.addUser(user);
+	}
+	catch (Exception ex) {
+		System.out.println("Saving a user did not work.");
+		ex.printStackTrace();
+	}
 
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
@@ -93,9 +114,18 @@ public final class Model {
   }
 
   public void add(Conversation conversation) {
-    conversationById.insert(conversation.id, conversation);
-    conversationByTime.insert(conversation.creation, conversation);
-    conversationByText.insert(conversation.title, conversation);
+	// EDIT - Malik Graham
+	// Save the information in the conversation table
+	try {
+		ds.addConversation(conversation);
+	}
+	catch (Exception ex) {
+		System.out.println("Saving a conversation did not work.");
+		ex.printStackTrace();
+	}
+	conversationById.insert(conversation.id, conversation);
+	conversationByTime.insert(conversation.creation, conversation);
+	conversationByText.insert(conversation.title, conversation);
   }
 
   public StoreAccessor<Uuid, Conversation> conversationById() {
@@ -111,6 +141,15 @@ public final class Model {
   }
 
   public void add(Message message) {
+	// EDIT - Malik Graham
+	// Save the information in the message table
+	try {
+		ds.addMessage(message);
+	}
+	catch (Exception ex) {
+		System.out.println("Saving a message did not work.");
+		ex.printStackTrace();
+	}
     messageById.insert(message.id, message);
     messageByTime.insert(message.creation, message);
     messageByText.insert(message.content, message);

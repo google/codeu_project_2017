@@ -49,6 +49,8 @@ public final class ClientConversation {
     this.controller = controller;
     this.view = view;
     this.userContext = userContext;
+    
+    System.out.println(this.getClass().toString() + " instantiate ClientConversation");
   }
 
   public void setMessageContext(ClientMessage messageContext) {
@@ -57,6 +59,7 @@ public final class ClientConversation {
 
   // Validate the title of the conversation
   static public boolean isValidTitle(String title) {
+	  
     boolean clean = true;
     if ((title.length() <= 0) || (title.length() > 64)) {
       clean = false;
@@ -65,28 +68,37 @@ public final class ClientConversation {
       // TODO: check for invalid characters
 
     }
+    System.out.println("Client Conversation " + " isValidTitle");
     return clean;
   }
 
   public boolean hasCurrent() {
+	System.out.println(this.getClass().toString() + " hasCurrent()");
     return (currentSummary != null);
   }
 
   public ConversationSummary getCurrent() {
+	System.out.println(this.getClass().toString() + " getCurrent()");
     return currentSummary;
   }
 
-  public Uuid getCurrentId() { return (currentSummary != null) ? currentSummary.id : null; }
+  public Uuid getCurrentId() { 
+	  System.out.println(this.getClass().toString() + " getCurrentId()");
+	  return (currentSummary != null) ? currentSummary.id : null; 
+  }
 
   public int currentMessageCount() {
+	System.out.println(this.getClass().toString() + " currentMessageCount()");
     return messageContext.currentMessageCount();
   }
 
   public void showCurrent() {
+	System.out.println(this.getClass().toString() + " showCurrent()");
     printConversation(currentSummary, userContext);
   }
 
   public void startConversation(String title, Uuid owner) {
+	System.out.println(this.getClass().toString() + " startConversation()");
     final boolean validInputs = isValidTitle(title);
 
     final Conversation conv = (validInputs) ? controller.newConversation(title, owner) : null;
@@ -103,9 +115,13 @@ public final class ClientConversation {
     }
   }
 
-  public void setCurrent(ConversationSummary conv) { currentSummary = conv; }
+  public void setCurrent(ConversationSummary conv) { 
+	  System.out.println(this.getClass().toString() + " setCurrent()");
+	  currentSummary = conv; 
+  }
 
   public void showAllConversations() {
+	System.out.println(this.getClass().toString() + " showAllConversations()");
     updateAllConversations(false);
 
     for (final ConversationSummary c : summariesByUuid.values()) {
@@ -115,6 +131,7 @@ public final class ClientConversation {
 
   // Get a single conversation from the server.
   public Conversation getConversation(Uuid conversationId) {
+	System.out.println(this.getClass().toString() + " getConversation()");
     for (final Conversation c : view.getConversations(Arrays.asList(conversationId))) {
       return c;
     }
@@ -130,6 +147,7 @@ public final class ClientConversation {
   }
 
   private void updateCurrentConversation() {
+	System.out.println(this.getClass().toString() + " updateCurrentConversation()");
     if (currentSummary == null) {
       currentConversation = null;
     } else {
@@ -146,10 +164,12 @@ public final class ClientConversation {
   }
 
   public int conversationsCount() {
+   System.out.println(this.getClass().toString() + " conversationsCount()");
    return summariesByUuid.size();
   }
 
   public Iterable<ConversationSummary> getConversationSummaries() {
+	  System.out.println(this.getClass().toString() + " getConversationSummaries()");
     return summariesSortedByTitle.all();
   }
 
@@ -157,7 +177,7 @@ public final class ClientConversation {
   // If the input currentChanged is true, then re-establish the state of
   // the current Conversation, including its messages.
   public void updateAllConversations(boolean currentChanged) {
-
+	  System.out.println(this.getClass().toString() + " updateAllConversations()");
     summariesByUuid.clear();
     summariesSortedByTitle = new Store<>(String.CASE_INSENSITIVE_ORDER);
 

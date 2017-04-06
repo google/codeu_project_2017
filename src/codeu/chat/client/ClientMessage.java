@@ -48,6 +48,7 @@ public final class ClientMessage {
 
   public ClientMessage(Controller controller, View view, ClientUser userContext,
                        ClientConversation conversationContext) {
+	System.out.println(this.getClass().toString() + " instantiate ClientMessage");
     this.controller = controller;
     this.view = view;
     this.userContext = userContext;
@@ -57,6 +58,7 @@ public final class ClientMessage {
 
   // Validate the message body.
   public static boolean isValidBody(String body) {
+	System.out.println(" isValidBody");
     boolean clean = true;
     if ((body.length() <= 0) || (body.length() > 1024)) {
       clean = false;
@@ -69,26 +71,32 @@ public final class ClientMessage {
   }
 
   public boolean hasCurrent() {
+    System.out.println(this.getClass().toString() + " hasCurrent()");
     return (current != null);
   }
 
   public Message getCurrent() {
+	  System.out.println(this.getClass().toString() + " getCurrent()");
     return current;
   }
 
   public void showCurrent() {
+	  System.out.println(this.getClass().toString() + " showCurrent()");
     printMessage(current, userContext);
   }
 
   public void resetCurrent(boolean replaceAll) {
+	System.out.println(this.getClass().toString() + " resetCurrent()");
     updateMessages(replaceAll);
   }
 
   public int currentMessageCount() {
+	System.out.println(this.getClass().toString() + " currentMessageCount()");
     return (conversationContents == null) ? 0 : conversationContents.size();
   }
 
   public List<Message> getConversationContents(ConversationSummary summary) {
+	System.out.println(this.getClass().toString() + " getConversationContents()");
     if (conversationHead == null || summary == null || !conversationHead.id.equals(summary.id)) {
       updateMessages(summary, true);
     }
@@ -97,6 +105,7 @@ public final class ClientMessage {
 
   // For m-add command.
   public void addMessage(Uuid author, Uuid conversation, String body) {
+	System.out.println(this.getClass().toString() + " addMessage()");
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
     final Message message = (validInputs) ? controller.newMessage(author, conversation, body) : null;
@@ -115,6 +124,7 @@ public final class ClientMessage {
   // Show all messages attached to the current conversation. This will balk if the conversation
   // has too many messages (use m-next and m-show instead).
   public void showAllMessages() {
+	  System.out.println(this.getClass().toString() + " showAllMessages()");
     if (conversationContents.size() == 0) {
       System.out.println(" Current Conversation has no messages");
     } else {
@@ -136,6 +146,7 @@ public final class ClientMessage {
   // Accept an int for number of messages to attempt to show (1 by default).
   // Negative values go from newest to oldest.
   public void showMessages(int count) {
+	  System.out.println(this.getClass().toString() + " showMessages()");
     for (final Message m : conversationContents) {
       printMessage(m, userContext);
     }
@@ -152,6 +163,7 @@ public final class ClientMessage {
   // Determine the next message ID of the current conversation to start pulling.
   // This requires a read of the last read message to determine if the chain has been extended.
   private Uuid getCurrentMessageFetchId(boolean replaceAll) {
+	System.out.println(this.getClass().toString() + " getCurrentMessageFetchId()");
     if (replaceAll || conversationContents.isEmpty()) {
       // Fetch/refetch all the messages.
       conversationContents.clear();
@@ -165,6 +177,7 @@ public final class ClientMessage {
   }
 
   private Uuid getCurrentTailMessageId() {
+	System.out.println(this.getClass().toString() + " getCurrentTailMessageId()");
     Uuid nextMessageId = conversationContents.get(conversationContents.size() - 1).id;
     final List<Message> messageTail = new ArrayList<>(view.getMessages(nextMessageId, 1));
     if (messageTail.size() > 0) {
@@ -182,12 +195,14 @@ public final class ClientMessage {
   // Update the list of messages for the current conversation.
   // Currently rereads the entire message chain.
   public void updateMessages(boolean replaceAll) {
+	  System.out.println(this.getClass().toString() + " updateMessages() bool");
     updateMessages(conversationContext.getCurrent(), replaceAll);
   }
 
   // Update the list of messages for the given conversation.
   // Currently rereads the entire message chain.
   public void updateMessages(ConversationSummary conversation, boolean replaceAll) {
+	  System.out.println(this.getClass().toString() + " updateMessages() ConversationSummary");
     if (conversation == null) {
       LOG.error("conversation argument is null - do nothing.");
       return;
@@ -228,6 +243,7 @@ public final class ClientMessage {
 
   // Print Message.  User context is used to map from author UUID to name.
   public static void printMessage(Message m, ClientUser userContext) {
+	  System.out.println(" printMessage");
     if (m == null) {
       System.out.println("Null message.");
     } else {

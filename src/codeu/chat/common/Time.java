@@ -47,7 +47,7 @@ public final class Time implements Comparable<Time> {
 
   private final long totalMs;
 
-  private Time(long totalMs) { this.totalMs = totalMs; }
+  public Time(long totalMs) { this.totalMs = totalMs; }
 
   public long inMs() { return totalMs; }
 
