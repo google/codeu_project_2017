@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.codeu.chatme.view.ChatActivity;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
@@ -16,7 +15,7 @@ import java.util.List;
 
 /**
  * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
- * data to the recyclerview in {@link ChatActivity}
+ * data to the recyclerview in {@link com.google.codeu.chatme.view.tabs.ChatsFragment}
  */
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
         implements ChatListAdapterView {

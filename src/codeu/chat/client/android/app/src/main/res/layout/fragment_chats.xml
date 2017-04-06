@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ChatMe_Red"
-    tools:context=".view.tabFragments.ChatsFragment">
+    tools:context=".view.tabs.ChatsFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -12,58 +12,36 @@
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/ChatMe_Red"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:theme="?attr/actionBarTheme" />
 
     <ImageView
         android:id="@+id/addUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="9dp"
-        app:srcCompat="@android:drawable/ic_menu_add"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/searchButton"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginEnd="9dp"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
     <ImageView
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        app:srcCompat="@android:drawable/ic_menu_search"
         android:layout_alignBottom="@+id/navBar"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="7dp"
         android:layout_toStartOf="@+id/addUserButton"
-        android:layout_marginBottom="11dp" />
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
-    <TextView
-        android:id="@+id/fragmentTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/searchButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:text="ChatMe"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <fragment
-        android:id="@+id/chatFragment2"
-        android:name="com.google.codeu.chatme.view.basicFragments.ChatFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        tools:layout="@layout/fragment_chat"
-        android:layout_below="@+id/chatFragment"
-        android:layout_alignParentStart="true" />
-
-    <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.google.codeu.chatme.view.basicFragments.ChatFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        tools:layout="@layout/fragment_chat"
-        android:layout_below="@+id/navBar"
-        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvChatList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

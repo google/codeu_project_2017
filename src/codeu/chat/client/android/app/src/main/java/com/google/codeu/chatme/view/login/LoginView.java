@@ -1,5 +1,7 @@
 package com.google.codeu.chatme.view.login;
 
+import com.google.codeu.chatme.view.tabs.TabsActivity;
+
 /**
  * Following MVP design pattern, this interface provides functions
  * which are implemented in {@link LoginActivity}
@@ -7,7 +9,7 @@ package com.google.codeu.chatme.view.login;
 public interface LoginView {
 
     /**
-     * Launches {@link com.google.codeu.chatme.view.ChatActivity}
+     * Launches {@link TabsActivity}
      * usually on successful sign up or sign in
      */
     void openChatActivity();

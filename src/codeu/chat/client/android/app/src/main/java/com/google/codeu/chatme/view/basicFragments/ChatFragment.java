@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.codeu.chatme.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

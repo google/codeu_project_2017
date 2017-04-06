@@ -10,37 +10,34 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
+
         <activity android:name=".view.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".view.ChatActivity" />
+
         <activity
-            android:name=".view.TabsActivity"
+            android:name=".view.tabs.TabsActivity"
             android:label="@string/title_activity_users" />
+
         <activity
             android:name=".view.CreateChatActivity"
             android:label="@string/title_activity_create_chat"
-            android:parentActivityName=".view.TabsActivity">
+            android:parentActivityName=".view.tabs.TabsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.google.codeu.chatme.view.TabsActivity" />
+                android:value="com.google.codeu.chatme.view.tabs.TabsActivity" />
         </activity>
+
         <activity
             android:name=".view.AddUsersActivity"
             android:label="@string/title_activity_add_users" />
+
         <activity
             android:name=".view.SearchActivity"
-            android:label="@string/title_activity_search"
-            android:parentActivityName=".view.ChatActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.google.codeu.chatme.view.ChatActivity" />
-        </activity>
+            android:label="@string/title_activity_search" />
     </application>
 
 </manifest>
