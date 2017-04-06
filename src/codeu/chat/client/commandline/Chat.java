@@ -128,12 +128,8 @@ public final class Chat {
 
         //generate the salt
         byte[] salt = getSalt();
-        
         //create the hash
         byte[] hashedPassword = hash(password, salt);
-        
-        System.out.println(salt);
-        System.out.println(hashedPassword);
         
         addUser(input[0], salt, hashedPassword);
       }
@@ -221,7 +217,7 @@ public final class Chat {
   // Sign in a user.
   private void signInUser(String name) {
     if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
+      System.out.println("Error: sign in failed (invalid name or password?)");
     }
   }
 

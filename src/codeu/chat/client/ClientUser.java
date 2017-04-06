@@ -86,7 +86,6 @@ public final class ClientUser {
     final User prev = current;
     if (parsedInput[0] != null) {
       final User newCurrent = usersByName.first(parsedInput[0]);
-      //TODO: This will not work until the user password and salt are hashed correctly
       boolean validPassword = validatePassword(parsedInput[1], newCurrent.salt, newCurrent.password);
       if (validPassword && newCurrent != null) {
         current = newCurrent;
