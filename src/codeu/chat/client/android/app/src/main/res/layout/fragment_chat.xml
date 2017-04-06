@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/chatMe_Lighter_Red"
+    tools:context=".view.basicFragments.ChatFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CodeUGroup31"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="11dp"
+        android:layout_above="@+id/chatSender"
+        android:layout_alignEnd="@+id/messageContent" />
+
+    <TextView
+        android:id="@+id/chatSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jacob Langely"
+        android:textColor="@android:color/background_dark"
+        android:textSize="12sp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/messageContent" />
+
+    <TextView
+        android:id="@+id/messageContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:text="Just submitted a pull request!"
+        android:textColor="@android:color/background_light"
+        android:textSize="12sp"
+        android:layout_below="@+id/chatSender"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/messageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9:03 AM"
+        android:textSize="12sp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignBottom="@+id/name"
+        android:layout_toStartOf="@+id/chatArrow" />
+
+    <TextView
+        android:id="@+id/chatArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=">"
+        android:textSize="12sp"
+        android:layout_alignBaseline="@+id/messageTime"
+        android:layout_alignBottom="@+id/messageTime"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="7dp" />
+
+    <ImageView
+        android:id="@+id/messageIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/chatSender"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        app:srcCompat="@android:drawable/stat_notify_chat" />
+
+    <ImageView
+        android:id="@+id/unreadIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/chatSender"
+        android:layout_alignTop="@+id/name"
+        app:srcCompat="@android:drawable/ic_notification_overlay" />
+
+</RelativeLayout>
