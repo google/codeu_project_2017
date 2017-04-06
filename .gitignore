@@ -1,7 +1,6 @@
 .classpath
 .project
 .settings/
-bin/
 chat_client_log.log
 chat_server_log.log
 derby.log
