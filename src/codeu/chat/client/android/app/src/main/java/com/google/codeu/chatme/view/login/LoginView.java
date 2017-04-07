@@ -33,4 +33,17 @@ public interface LoginView {
      */
     void makeToast(String message);
 
+    /**
+     * Displays an error for {@link LoginActivity#etEmail} field
+     *
+     * @param err_et_email resource id of email field error message
+     */
+    void setEmailFieldError(int err_et_email);
+
+    /**
+     * Displays an error for {@link LoginActivity#etPassword} field
+     *
+     * @param err_et_password resource id of password field error message
+     */
+    void setPasswordFieldError(int err_et_password);
 }

@@ -65,6 +65,11 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      */
     @Override
     public void signUp(String email, String password) {
+        boolean isValid = validateInput(email, password);
+        if (!isValid) {
+            return;
+        }
+        
         view.showProgressDialog(R.string.progress_sign_up);
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -119,6 +124,11 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      * @param password user password
      */
     public void signIn(String email, String password) {
+        boolean isValid = validateInput(email, password);
+        if (!isValid) {
+            return;
+        }
+
         view.showProgressDialog(R.string.progress_sign_in);
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -137,6 +147,25 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
                         }
                     }
                 });
+    }
+
+    /**
+     * Validates user email and password for login form
+     *
+     * @param email    email the user entered
+     * @param password password the user enterd
+     * @return true if the inputs are valid
+     */
+    private boolean validateInput(String email, String password) {
+        if (email.isEmpty()) {
+            view.setEmailFieldError(R.string.err_et_email);
+            return false;
+        }
+        if (password.isEmpty()) {
+            view.setPasswordFieldError(R.string.err_et_password);
+            return false;
+        }
+        return true;
     }
 
     /**

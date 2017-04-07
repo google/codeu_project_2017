@@ -11,52 +11,48 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.login.LoginActivity">
 
-
-    <EditText
-        android:id="@+id/password_text"
+    <TextView
+        android:id="@+id/tvChatMeLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/etEmail"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="222dp"
+        android:layout_marginBottom="64dp"
+        android:text="ChatMe"
+        android:textColor="@color/ChatMe_Blue"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/etEmail"
+        android:layout_below="@+id/etEmail"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/username_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/password_text"
-        android:layout_alignStart="@+id/password_text"
-        android:layout_marginBottom="44dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName" />
-
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/password_text"
-        android:layout_alignStart="@+id/password_text"
-        android:layout_below="@+id/username_text"
-        android:layout_marginTop="13dp"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true"
         android:background="@color/ChatMe_Blue"
         android:text="Log In"
         android:textColor="@android:color/background_light"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/chatme_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/username_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp"
-        android:text="ChatMe"
-        android:textColor="@color/ChatMe_Blue"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        tools:text="ChatMe" />
 </RelativeLayout>
