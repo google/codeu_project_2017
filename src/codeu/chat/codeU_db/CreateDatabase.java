@@ -6,7 +6,7 @@ public class CreateDatabase
 {
     public static void main( String args[] )
     {
-        Connection c = null;
+        Connection c         = null;
         Statement stmt = null;
 
         try {

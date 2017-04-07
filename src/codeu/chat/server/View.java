@@ -61,7 +61,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
     final Collection<ConversationSummary> summaries = new ArrayList<>();
 
     for (final Conversation conversation : model.conversationById().all()) {
-        summaries.add(conversation.summary);
+      summaries.add(conversation.summary);
     }
 
     return summaries;
@@ -133,8 +133,8 @@ public final class View implements BasicView, LogicalView, SinglesView {
     final List<Message> foundMessages = new ArrayList<>();
 
     Message current = (foundConversation == null) ?
-        null :
-        model.messageById().first(foundConversation.firstMessage);
+            null :
+            model.messageById().first(foundConversation.firstMessage);
 
     while (current != null && current.creation.compareTo(start) < 0) {
       current = model.messageById().first(current.next);
