@@ -84,13 +84,39 @@ public final class Uuids {
 
     @Override
     public void write(StringBuffer message, Uuid value) {
-      // todo implement
+      int length = 0;
+      for (Uuid current = value; current != null; current = current.root()) {
+        length+=1;
+      }
+      if (length >= 0 && length <= 255) {
+        message.append(length);
+      } else {
+        throw new RuntimeException("Max supported Uuid chain length is 255");
+      }
+
+      for (Uuid current = value; current != null; current = current.root()) {
+        message.append(";");
+        Serializers.INTEGER.write(message, current.id());
+      }
+
     }
 
     @Override
     public Uuid read(StringTokenizer tokenizer) {
-      // todo implement
-      return null;
+      final int length = Integer.parseInt(tokenizer.nextToken());
+      final int[] chain = new int[length];
+
+      for (int i = 0; i < length; i++) {
+        chain[i] = Serializers.INTEGER.read(tokenizer);
+      }
+
+      Uuid head = null;
+
+      for (int i = length - 1; i >= 0; i--) {
+        head = complete(deserializedUuid(head, chain[i]));
+      }
+
+      return head;
     }
 
     private Uuid deserializedUuid(final Uuid root, final int id) {
