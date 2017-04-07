@@ -21,6 +21,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
+import codeu.chat.common.Password;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -109,7 +110,10 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        System.out.print("Enter your password: ");
+        String salt = Password.createSalt();
+        String hash = Password.createHash(lineScanner.nextLine().trim(), salt);
+        addUser(tokenScanner.nextLine().trim(), hash, salt);
       }
 
     } else if (token.equals("u-list-all")) {
@@ -195,7 +199,7 @@ public final class Chat {
   // Sign in a user.
   private void signInUser(String name) {
     if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
+      System.out.println("Error: sign in failed (invalid name? invalid password?)");
     }
   }
 
@@ -266,8 +270,8 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String name, String hash, String salt) {
+    clientContext.user.addUser(name, hash, salt);
   }
 
   // Display all users known to server.
