@@ -26,7 +26,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
 
     private final LoginView view;
 
-    private static final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mRootRef;
 
     private FirebaseAuth mAuth;
 
@@ -41,8 +41,14 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      */
     public LoginActivityPresenter(final LoginView view) {
         this.view = view;
+    }
+
+    @javax.annotation.PostConstruct
+    public void construct() {
+        this.mRootRef = FirebaseDatabase.getInstance().getReference();
 
         this.mAuth = FirebaseAuth.getInstance();
+
         this.mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -69,7 +75,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
         if (!isValid) {
             return;
         }
-        
+
         view.showProgressDialog(R.string.progress_sign_up);
 
         mAuth.createUserWithEmailAndPassword(email, password)
