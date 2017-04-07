@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: MAGENTA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar style="-fx-background-color: MAGENTA;">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane VBox.vgrow="ALWAYS">
+         <items>
+            <SplitPane dividerPositions="0.3483709273182957">
+              <items>
+                <AnchorPane>
+                     <children>
+                        <SplitPane dividerPositions="0.7733990147783252" orientation="VERTICAL" prefHeight="611.0" prefWidth="274.0">
+                          <items>
+                              <ListView style="-fx-background-color: MAGENTA;" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="155.0" prefWidth="272.0" style="-fx-background-color: MAGENTA;">
+                                 <children>
+                                    <Text layoutX="31.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currently logged in as: bob" />
+                                    <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="31.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../../Pictures/Brian+Stelter+CNN+Worldwide+Star+2014+Winter+_OK8q80l2eml.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                  <SplitPane dividerPositions="0.7692307692307693" orientation="VERTICAL">
+                    <items>
+                        <ListView style="-fx-background-color: MAGENTA;" />
+                        <SplitPane dividerPositions="0.621">
+                          <items>
+                              <TextArea prefHeight="137.0" prefWidth="363.0" style="-fx-background-color: MAGENTA;" />
+                              <Button mnemonicParsing="false" prefHeight="148.0" prefWidth="62.0" style="-fx-background-color: MAGENTA;" text="Send" />
+                          </items>
+                        </SplitPane>
+                    </items>
+                  </SplitPane>
+              </items>
+            </SplitPane>
+         </items>
+      </SplitPane>
+   </children>
+</VBox>
