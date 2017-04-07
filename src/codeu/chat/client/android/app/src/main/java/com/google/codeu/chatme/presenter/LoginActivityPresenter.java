@@ -36,6 +36,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      * Sets up the presenter with a reference to the {@link LoginActivity}.
      * Additionally, adds {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener}
      * to {@link FirebaseAuth} instance to detect changed in user authentication status
+     * Refer to {@link LoginActivityPresenter#postConstruct()}
      *
      * @param view a reference to {@link LoginActivity}
      */
@@ -44,7 +45,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
     }
 
     @javax.annotation.PostConstruct
-    public void construct() {
+    public void postConstruct() {
         this.mRootRef = FirebaseDatabase.getInstance().getReference();
 
         this.mAuth = FirebaseAuth.getInstance();
@@ -162,7 +163,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      * @param password password the user enterd
      * @return true if the inputs are valid
      */
-    private boolean validateInput(String email, String password) {
+    public boolean validateInput(String email, String password) {
         if (email.isEmpty()) {
             view.setEmailFieldError(R.string.err_et_email);
             return false;
