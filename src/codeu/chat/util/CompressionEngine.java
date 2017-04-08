@@ -5,20 +5,21 @@
 //Converts all aspects of a message into a string format
 //Compresses the message content into a more storage-efficient format
 
+package codeu.chat.util;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
 
 
 public class CompressionEngine{
 
     private static GsonBuilder builder = new GsonBuilder();
 
-    //TODO: Figure out why asserts are not working
     public static String compressMessage(Message msg){
         Gson gson = builder.create();
         String compressed = LZString.compress(gson.toJson(msg));
