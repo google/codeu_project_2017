@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         setContentView(R.layout.activity_login);
 
         presenter = new LoginActivityPresenter(this);
+        presenter.postConstruct();
 
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
