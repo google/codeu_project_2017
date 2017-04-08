@@ -143,6 +143,15 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
 
+    } else if (type == NetworkCode.REMOVE_USER_REQUEST) {
+
+      final Uuid id = Uuid.SERIALIZER.read(in);
+
+      final User user = controller.removeUser(id);
+
+      Serializers.INTEGER.write(out, NetworkCode.REMOVE_USER_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, user);
+
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
       final String title = Serializers.STRING.read(in);

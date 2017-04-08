@@ -17,6 +17,8 @@ package codeu.chat.client;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -61,9 +63,10 @@ public final class ClientConversation {
     if ((title.length() <= 0) || (title.length() > 64)) {
       clean = false;
     } else {
-
-      // TODO: check for invalid characters
-
+      // only accepts conversation titles that contain alphabets and spaces.
+      Pattern validPattern = Pattern.compile("^[ A-z]+$");
+      Matcher match = validPattern.matcher(title);
+      clean = match.matches();
     }
     return clean;
   }

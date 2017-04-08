@@ -19,6 +19,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.lang.Object;
+import java.util.regex;
+
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -51,7 +54,10 @@ public final class ClientUser {
       clean = false;
     } else {
 
-      // TODO: check for invalid characters
+      // only accepts names that contain alphabets and spaces.
+      Pattern validPattern = Pattern.compile("^[ A-z]+$");
+      Matcher match = validPattern.matcher(userName);
+      clean = match.matches();
 
     }
     return clean;
@@ -99,6 +105,24 @@ public final class ClientUser {
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
+    }
+  }
+
+  public void deleteUser(Uuid id) {
+    
+    // check if user exists in the system OR usersById.containsKey(id)
+    User removeUser = lookup(id);
+
+    if (removeUser != null) {
+      final User user = controller.removeUser(id);
+      if (user == null) {
+        System.out.format("Error: user not deleted - server failure");
+      } else {
+        LOG.info("Remove user complete, Name=\"%s\" UUID=%s", removeUser.name, removeUser.id);
+        updateUsers();
+      }
+    } else {
+      System.out.format("Error: user not deleted - user not found, check input!");
     }
   }
 

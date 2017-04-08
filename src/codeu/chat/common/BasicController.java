@@ -27,7 +27,7 @@ public interface BasicController {
 
   // NEW MESSAGE
   //
-  //   Create a new message on the server. All parameters must be provided
+  //   Csreate a new message on the server. All parameters must be provided
   //   or else the server won't apply the change. If the operation is
   //   successful, a Message object will be returned representing the full
   //   state of the message on the server.
@@ -41,6 +41,14 @@ public interface BasicController {
   //   state of the user on the server. Whether user names can be shared
   //   is undefined.
   User newUser(String name);
+
+  // DELETE USER
+
+  // Deletes an existing user on the server. All parameters must be provided
+  // or else the server won't apply the change. Depending on whether the operation
+  // is successful or not, a User object will be returned representing the 
+  // outcome of the method.
+  User deleteUser(Uuid id);
 
   // NEW CONVERSATION
   //

@@ -99,10 +99,12 @@ public final class UserPanel extends JPanel {
     final JButton userUpdateButton = new JButton("Update");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userAddButton = new JButton("Add");
+    final JButton userRemoveButton = new JButton("Remove");
 
     buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
     buttonPanel.add(userAddButton);
+    buttonPanel.add(userRemoveButton);
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -169,6 +171,19 @@ public final class UserPanel extends JPanel {
         }
       }
     });
+
+    userRemoveButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        final String s = (String) JOptionPane.showInputDialog(
+          UserPanel.this, "Enter user name:", "Delete User", JOptionPane.PLAIN_MESSAGE,
+          null, null, "");
+        if (s != null && s.length() > 0) {
+          clientContext.user.deleteUser(s);
+          UserPanel.this.getAllUsers(listModel);
+        }
+      }
+    }); 
 
     userList.addListSelectionListener(new ListSelectionListener() {
       @Override

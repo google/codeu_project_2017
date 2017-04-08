@@ -15,6 +15,8 @@
 package codeu.chat.server;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -32,6 +34,8 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
+  private final Map<Uuid, User> usersById = new HashMap<>();
+
   public Controller(Uuid serverId, Model model) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
@@ -45,6 +49,11 @@ public final class Controller implements RawController, BasicController {
   @Override
   public User newUser(String name) {
     return newUser(createId(), name, Time.now());
+  }
+
+  @Override
+  public User deleteUser(Uuid id) {
+    return deleteUser(id, Time.now());
   }
 
   @Override
@@ -109,6 +118,7 @@ public final class Controller implements RawController, BasicController {
     if (isIdFree(id)) {
 
       user = new User(id, name, creationTime);
+      usersById.put(user.id, user);
       model.add(user);
 
       LOG.info(
@@ -124,6 +134,30 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
+    }
+
+    return user;
+  }
+
+  @Override User deleteUser(Uuid id, Time deletionTime) {
+
+    if (usersById.containsKey(id)) {
+
+      User user = usersById.get(id);
+      usersById.remove(id);
+      model.remove(user);
+
+      LOG.info(
+          "removeUser success (user.id=%s user.name=%s user.time=%s)",
+          user.id,
+          user.name,
+          user.creation);
+
+    } else {
+
+      LOG.info(
+          "deleteUser failed - id not found (user.id=%s)",
+          id);
     }
 
     return user;

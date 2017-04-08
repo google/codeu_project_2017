@@ -1,0 +1,53 @@
+Mar 11, 2017 1:41:44 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 11, 2017 1:41:44 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 11, 2017 1:41:44 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 11, 2017 1:41:44 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 11, 2017 1:44:33 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Mar 11, 2017 1:44:33 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Mar 11, 2017 1:44:33 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "neil" UUID=[UUID:100.101.4140046785]
+Mar 11, 2017 1:45:17 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "Friends" UUID= [UUID:100.101.2763977401]
+Mar 11, 2017 1:45:17 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="Friends" UUID=[UUID:100.101.2763977401] first=[UUID:0] last=[UUID:0]
+
+Mar 11, 2017 1:45:17 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Friends" UUID=[UUID:100.101.2763977401] first=[UUID:0] last=[UUID:0]
+
+Mar 11, 2017 1:45:17 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Mar 11, 2017 1:45:17 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.101.2763977401] (Friends).
+
+Mar 11, 2017 1:46:54 PM codeu.chat.ClientMain main
+INFO: chat client has exited.
+Mar 11, 2017 2:16:46 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 11, 2017 2:16:47 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 11, 2017 2:16:47 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 11, 2017 2:16:47 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 11, 2017 4:17:44 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 11, 2017 4:17:44 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 11, 2017 4:17:44 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 11, 2017 4:17:45 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 11, 2017 6:54:42 PM codeu.chat.client.commandline.Chat handleCommand
+SEVERE: Exception during command processing
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:73)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:282)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+

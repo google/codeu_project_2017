@@ -50,6 +50,7 @@ public final class Chat {
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
     System.out.println("   u-add <name>  - add a new user.");
+    System.out.println("   u-delete <user ID> - delete an existing user");
     System.out.println("   u-list-all    - list all users known to system.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
@@ -112,7 +113,15 @@ public final class Chat {
         addUser(tokenScanner.nextLine().trim());
       }
 
-    } else if (token.equals("u-list-all")) {
+    } else if (token.equals("u-delete")) {
+      if (!tokenScanner.hasNext()) {
+        System.out.println("ERROR: User ID not supplied.");
+      } else {
+        deleteUser(tokenScanner.nextLine().trim());
+      }
+    }
+
+      else if (token.equals("u-list-all")) {
 
       showAllUsers();
 
@@ -268,6 +277,11 @@ public final class Chat {
   // Add a new user.
   private void addUser(String name) {
     clientContext.user.addUser(name);
+  }
+
+  // Delete a user
+  private void deleteUser(Uuid id) {
+    clientContext.user.deleteUser(id);
   }
 
   // Display all users known to server.
