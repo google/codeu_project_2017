@@ -20,6 +20,7 @@ import java.io.OutputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
 public final class ConversationSummary implements ListViewable {
