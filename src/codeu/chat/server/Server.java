@@ -18,6 +18,7 @@ package codeu.chat.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PushbackInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
@@ -30,6 +31,7 @@ import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.User;
+import codeu.chat.server.model.Request;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
@@ -114,7 +116,53 @@ public final class Server {
     });
   }
 
+  /**
+   *
+   * Switch between serialized and restful modes. We use a neat trick here to do so.
+   * Byte looking at the first byte of an incoming request, we can determine whether it is
+   * restful or serial.
+   *
+   * Typically you'd want to do something like inserting a signal byte, but
+   * because we want to connect relay we cannot rely on such a byte being present. Likewise,
+   * we cannot rely on a restful client to append any byte before his request.
+   *
+   * However, since Network Codes are always less than 31, which are numbers with values that correspond to the
+   * ASCII control characters, which will never lead a restful request. Therefore, we can simply check whether
+   * this first byte is less than 31 to make a determination on how to process the incoming data.
+   *
+   * Create a PushbackInputStream so we can restore our input buffer after checking the lead byte.
+   *
+   * @param in input stream from remote.
+   * @param out output stream to remote.
+   * @return success
+   * @throws IOException
+   */
   private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+    PushbackInputStream pb = new PushbackInputStream(in);
+    int leadByte = pb.read();
+    pb.unread(leadByte);
+    if (leadByte < NetworkCode.MAX_NETWORK_CODE) {
+      return onSerialMessage(pb, out);
+    } else {
+      return onRestfulMessage(pb, out);
+    }
+  }
+
+  private boolean onRestfulMessage(InputStream in, OutputStream out) throws IOException {
+    LOG.info("Receiving a RESTful message.");
+    Request r = RequestHandler.parseRaw(in);
+    switch (r.getHeader("type")) {
+      case ("NEW_MESSAGE_REQUEST"):
+
+        break;
+    }
+    //RequestHandler.handleResponse(out, body);
+    //RequestHandler.failResponse(out);
+    return true;
+  }
+
+  private boolean onSerialMessage(InputStream in, OutputStream out) throws IOException {
+    LOG.info("Receiving a serial message.");
 
     final int type = Serializers.INTEGER.read(in);
 
