@@ -1,12 +1,16 @@
 package codeu.chat.database;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -24,13 +28,13 @@ public final class DatabaseTest {
   }
 
   private class TestTable extends Table<TestSchema> {
-    public TestTable(Database database) {
+    public TestTable(Database database) throws SQLException {
       super(new TestSchema(), database, "test");
     }
   }
 
   @Before
-  public void setupDatabase() {
+  public void setupDatabase() throws SQLException {
     database = new Database("test.db");
     schema = new TestSchema();
     schema.dropTable("test", database);
@@ -39,27 +43,26 @@ public final class DatabaseTest {
   @Test
   public void testDatabaseValid() {
     Connection connection = database.getConnection();
-    assertNotNull(connection);
   }
 
   @Test
-  public void testCreateTable() {
-    assertTrue(schema.createTable("test", database));
+  public void testCreateTable() throws SQLException {
+    schema.createTable("test", database);
   }
 
   @Test
-  public void testDropTable() {
-    assertTrue(schema.dropTable("test", database));
+  public void testDropTable() throws SQLException {
+    schema.dropTable("test", database);
   }
 
   @Test
-  public void testDropTableObject() {
+  public void testDropTableObject() throws SQLException {
     TestTable table = new TestTable(database);
-    assertTrue(table.destroy());
+    table.destroy();
   }
 
   @Test
-  public void testCreateObject() {
+  public void testCreateObject() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -68,7 +71,7 @@ public final class DatabaseTest {
   }
 
   @Test
-  public void testFindObject() {
+  public void testFindObject() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -79,7 +82,7 @@ public final class DatabaseTest {
   }
 
   @Test
-  public void testFindObjectUnique() {
+  public void testFindObjectUnique() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -91,7 +94,7 @@ public final class DatabaseTest {
   }
 
   @Test
-  public void testFindObjectField() {
+  public void testFindObjectField() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -103,7 +106,7 @@ public final class DatabaseTest {
   }
 
   @Test
-  public void testFindObjectField2() {
+  public void testFindObjectField2() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -115,7 +118,7 @@ public final class DatabaseTest {
   }
 
   @Test
-  public void testFindObjectQuery() {
+  public void testFindObjectQuery() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -127,7 +130,7 @@ public final class DatabaseTest {
   }
 
   @Test
-  public void testUpdateObject() {
+  public void testUpdateObject() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
@@ -135,20 +138,20 @@ public final class DatabaseTest {
     int id = table.create(fields);
     assertTrue(id != -1);
     fields.put("bar", "earth");
-    assertTrue(table.update(id, fields));
+    table.update(id, fields);
     List<DBObject<TestSchema>> objects = table.find("bar", "earth");
     assertTrue(objects.size() > 0);
   }
 
   @Test
-  public void testDeleteObject() {
+  public void testDeleteObject() throws SQLException {
     TestTable table = new TestTable(database);
     Map<String, String> fields = new HashMap<String, String>();
     fields.put("foo", "hello");
     fields.put("bar", "world");
     int id = table.create(fields);
     assertTrue(id != -1);
-    assertTrue(table.remove(id));
+    table.remove(id);
     assertNull(table.find(id));
   }
 

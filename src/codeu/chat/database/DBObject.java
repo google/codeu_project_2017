@@ -1,17 +1,28 @@
 package codeu.chat.database;
 
-import java.sql.*;
+import java.sql.SQLException;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a row with a unique ID in the database.
+ * Each DBObject is associated with exactly one row.
+ */
 public final class DBObject<S extends Schema> {
 
   private final Table<S> table;
-  private int id;
+  private final int id;
 
   private Map<String, String> fields;
 
+  /**
+   * Creates a representation of a table row.
+   *
+   * @param table The table associated with the object.
+   * @param id The unique ID of the row.
+   * @param fields The fields of the row.
+   */
   public DBObject(Table<S> table, int id, Map<String, String> fields) {
     this.table = table;
     this.id = id;
@@ -44,33 +55,32 @@ public final class DBObject<S extends Schema> {
   /**
    * Update the fields from the database.
    *
-   * @return Whether the update was successful.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean refresh() {
+  public void refresh() throws SQLException {
     // Find the updated object and copy the fields.
     DBObject<S> updated = table.find(id);
-    if (updated == null) return false;
+    if (updated == null) return;
     this.fields = updated.fields;
-    return true;
   }
 
   /**
    * Save the object.
    *
-   * @return Whether the save was successful.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean save() {
-    return table.update(id, fields);
+  public void save() throws SQLException {
+    table.update(id, fields);
   }
 
   /**
    * Remove the object.
    * The object should no longer be used after this is called.
    *
-   * @return Whether the removal was successful.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean remove() {
-    return table.remove(id);
+  public void remove() throws SQLException {
+    table.remove(id);
   }
 
 }

@@ -1,28 +1,36 @@
 package codeu.chat.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import codeu.chat.util.Logger;
 
-public final class Database {
+/**
+ * Handles SQL database connections.
+ */
+public class Database {
 
-  private final static Logger.Log LOG = Logger.newLog(Database.class);
+  private static final Logger.Log LOG = Logger.newLog(Database.class);
 
   private final String dbPath;
   private Connection connection;
 
+  /**
+   * Creates a database connection manager.
+   *
+   * @param dbPath The path to the SQLite database.
+   */
   public Database(String dbPath) {
       this.dbPath = dbPath;
   }
 
   /**
-   * Attempts to validate the connection.
+   * Attempts to connect to the the database if needed.
    * If the connection is closed or does not exist, the function will try
    * to reconnect.
-   *
-   * @return Whether the connection was succesfully validated.
    */
-  private boolean validateConnection() {
+  private void connectIfRequired() {
     try {
       // If the connection is null or is closed, create a new one.
       if (connection == null || !connection.isValid(0)) {
@@ -30,26 +38,27 @@ public final class Database {
         connection = DriverManager.getConnection(String.format("jdbc:sqlite:%s", dbPath));
       }
 
-      // Any other state implies the connection is valid.
-      return true;
-    } catch (Exception ex) {
-      LOG.error("Database failed to connect: %s", ex.getMessage());
-      return false;
+      // Return early.
+      return;
+    } catch (ClassNotFoundException ex) {
+      LOG.error(ex, "Database failed to connect.");
+    } catch (SQLException ex) {
+      LOG.error(ex, "Database failed to connect.");
     }
+
+    // Failed to connect, so end the program.
+    System.exit(1);
   }
 
   /**
    * Get the current database connection.
-   * The function will attempt to validate the connection. If the
-   * connection cannot be validated, then the function returns null.
+   * The function will attempt to reconnect if necessary.
    *
    * @return The current database connection.
    */
   public Connection getConnection() {
-    if (validateConnection()) {
-      return connection;
-    }
-    return null;
+    connectIfRequired();
+    return connection;
   }
 
 }

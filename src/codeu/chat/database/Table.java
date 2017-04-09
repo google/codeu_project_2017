@@ -1,6 +1,10 @@
 package codeu.chat.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +13,9 @@ import java.util.Map;
 
 import codeu.chat.util.Logger;
 
+/**
+ * Represents a table in a database.
+ */
 public abstract class Table<S extends Schema> {
 
   private final static Logger.Log LOG = Logger.newLog(Table.class);
@@ -17,7 +24,16 @@ public abstract class Table<S extends Schema> {
   private final Database database;
   private final String name;
 
-  public Table(S schema, Database database, String name) {
+  /**
+   * Creates a table with a given schema in the given database with a given name.
+   *
+   * @param schema The schema to use.
+   * @param database The database to use.
+   * @param name The name to use.
+   *
+   * @throws SQLException If an SQL error occurs.
+   */
+  public Table(S schema, Database database, String name) throws SQLException {
     this.schema = schema;
     this.database = database;
     this.name = name;
@@ -29,10 +45,10 @@ public abstract class Table<S extends Schema> {
   /**
    * Destroy the table.
    *
-   * @return Whether the table was destroyed.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean destroy() {
-    return schema.dropTable(name, database);
+  public void destroy() throws SQLException {
+    schema.dropTable(name, database);
   }
 
   /**
@@ -51,10 +67,11 @@ public abstract class Table<S extends Schema> {
    * @param values The values for the query.
    *
    * @return The list of DBObjects found.
+   *
+   * @throws SQLException If a SQL error occurs.
    */
-  public List<DBObject<S>> findQuery(String query, String... values) {
+  public List<DBObject<S>> findQuery(String query, String... values) throws SQLException {
     Connection connection = database.getConnection();
-    if (connection == null) return new ArrayList<DBObject<S>>();
 
     List<DBObject<S>> objects = new ArrayList<DBObject<S>>();
 
@@ -84,6 +101,7 @@ public abstract class Table<S extends Schema> {
       }
     } catch (SQLException ex) {
       LOG.error("Failed to query database: ", ex.getMessage());
+      throw ex;
     }
 
     // Return the found objects.
@@ -96,14 +114,17 @@ public abstract class Table<S extends Schema> {
    * @param parameters The field and value pairs.
    *
    * @return The list of DBObjects found.
+   *
+   * @throws SQLException If a SQL error occurs.
    */
-  public List<DBObject<S>> find(Map<String, String> parameters) {
+  public List<DBObject<S>> find(Map<String, String> parameters) throws SQLException {
     // Build the query.
     StringBuilder query = new StringBuilder();
     int numFields = parameters.size();
     for (String field : parameters.keySet()) {
       query.append(String.format("%s = ?", field));
-      if (-- numFields > 0) {
+      numFields --;
+      if (numFields > 0) {
         query.append(" AND ");
       }
     }
@@ -117,8 +138,15 @@ public abstract class Table<S extends Schema> {
    * @param pairs The field and value pairs.
    *
    * @return The list of DBObjects found.
+   *
+   * @throws SQLException If a SQL error occurs.
    */
-  public List<DBObject<S>> find(String... pairs) {
+  public List<DBObject<S>> find(String... pairs) throws SQLException {
+    // Make sure the size of the array is a multiple of 2.
+    if (pairs.length % 2 == 1) {
+      throw new IllegalArgumentException("Odd number of arguments given to find().");
+    }
+
     Map<String, String> fields = new HashMap<String, String>();
     for (int i = 0; i < pairs.length; i += 2) {
       fields.put(pairs[i], pairs[i + 1]);
@@ -132,8 +160,10 @@ public abstract class Table<S extends Schema> {
    * @param id The ID.
    *
    * @return The DBObject if found, null otherwise.
+   *
+   * @throws SQLException If a SQL error occurs.
    */
-  public DBObject<S> find(int id) {
+  public DBObject<S> find(int id) throws SQLException {
     List<DBObject<S>> found = find("_id", Integer.toString(id));
     if (found.size() > 0) {
       return found.get(0);
@@ -148,10 +178,11 @@ public abstract class Table<S extends Schema> {
    * @param fields The fields to use.
    *
    * @return The ID of the new object if successful, -1 otherwise.
+   *
+   * @throws SQLException If a SQL error occurs.
    */
-  public int create(Map<String, String> fields) {
+  public int create(Map<String, String> fields) throws SQLException {
     Connection connection = database.getConnection();
-    if (connection == null) return -1;
 
     // Get the field names and values.
     StringBuilder names = new StringBuilder();
@@ -166,7 +197,7 @@ public abstract class Table<S extends Schema> {
       }
     }
 
-	  // Run an update to create the object.
+    // Run an update to create the object.
     String query = String.format(
       "INSERT INTO %s (%s) VALUES (%s)",
       name, names.toString(), values.toString());
@@ -181,9 +212,8 @@ public abstract class Table<S extends Schema> {
       }
     } catch (SQLException ex) {
       LOG.error("Failed to update database: ", ex.getMessage());
+      throw ex;
     }
-
-    return -1;
   }
 
   /**
@@ -192,11 +222,10 @@ public abstract class Table<S extends Schema> {
    * @param id The ID of the object to update.
    * @param fields The fields to update.
    *
-   * @return Whether the update was successful.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean update(int id, Map<String, String> fields) {
+  public void update(int id, Map<String, String> fields) throws SQLException {
     Connection connection = database.getConnection();
-    if (connection == null) return false;
 
     // Build the query.
     StringBuilder updates = new StringBuilder();
@@ -217,12 +246,10 @@ public abstract class Table<S extends Schema> {
       }
       stmt.setInt(i, id);
       stmt.executeUpdate();
-      return true;
     } catch (SQLException ex) {
       LOG.error("Failed to update database: ", ex.getMessage());
+      throw ex;
     }
-
-    return false;
   }
 
   /**
@@ -230,23 +257,20 @@ public abstract class Table<S extends Schema> {
    *
    * @param id The ID of the object to remove.
    *
-   * @return Whether the removal was successful.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean remove(int id) {
+  public void remove(int id) throws SQLException {
     Connection connection = database.getConnection();
-    if (connection == null) return false;
 
     // Run the query to remove the object.
     String query = String.format("DELETE FROM %s WHERE _id = ?", name);
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setInt(1, id);
       stmt.executeUpdate();
-      return true;
     } catch (SQLException ex) {
       LOG.error("Failed to update database: ", ex.getMessage());
+      throw ex;
     }
-
-    return false;
   }
 
 }

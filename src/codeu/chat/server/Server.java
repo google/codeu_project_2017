@@ -22,8 +22,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+
+import java.sql.SQLException;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -59,7 +60,7 @@ public final class Server {
   private Uuid lastSeen = Uuids.NULL;
 
   private final Database database;
-  private UserTable userTable = null;
+  private UserTable userTable;
 
   public Server(Uuid id, byte[] secret, Relay relay, Database database) {
 
@@ -281,9 +282,14 @@ public final class Server {
   }
 
   private void setupDatabase() {
-    userTable = new UserTable(database);
+    try {
+      userTable = new UserTable(database);
 
-    LOG.info("Database initialized.");
+      LOG.info("Database initialized.");
+    } catch (SQLException ex) {
+      LOG.error(ex, "Database failed to initialize.");
+      System.exit(1);
+    }
   }
 
 }

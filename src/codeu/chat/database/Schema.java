@@ -1,17 +1,25 @@
 package codeu.chat.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 import codeu.chat.util.Logger;
 
+/**
+ * Represents a database schema.
+ */
 public abstract class Schema {
 
-  private final static Logger.Log LOG = Logger.newLog(Schema.class);
+  private static final Logger.Log LOG = Logger.newLog(Schema.class);
 
   private final Map<String, String> fields;
 
+  /**
+   * Creates a schema.
+   */
   public Schema() {
     this.fields = new HashMap<String, String>();
   }
@@ -20,7 +28,8 @@ public abstract class Schema {
    * Add a field to the schema.
    *
    * @param name The name of the field.
-   * @param props The properties associated with the field.
+   * @param props The properties associated with the field in SQL, such
+   *              as "VARCHAR(255) NOT NULL".
    */
   protected void addField(String name, String props) {
     fields.put(name, props);
@@ -42,13 +51,10 @@ public abstract class Schema {
    * @param name The name of the table.
    * @param database The database to create the table in.
    *
-   * @return Whether the table exists after running the update.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean createTable(String name, Database database) {
+  public void createTable(String name, Database database) throws SQLException {
     Connection connection = database.getConnection();
-    if (connection == null) {
-      return false;
-    }
 
     // Build the update query.
     StringBuilder fields = new StringBuilder();
@@ -63,11 +69,10 @@ public abstract class Schema {
     // Run the update.
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.executeUpdate();
-      return true;
     } catch (SQLException ex) {
-      LOG.error("Failed to create table: ", ex.getMessage());
+      LOG.error(ex, "Failed to create table.");
+	  throw ex;
     }
-    return false;
   }
 
   /**
@@ -77,23 +82,19 @@ public abstract class Schema {
    * @param name The name of the table.
    * @param database The database to drop the table from.
    *
-   * @return Whether the table no longer exists after the update.
+   * @throws SQLException If a SQL error occurs.
    */
-  public boolean dropTable(String name, Database database) {
+  public void dropTable(String name, Database database) throws SQLException {
     Connection connection = database.getConnection();
-    if (connection == null) {
-      return false;
-    }
 
     // Run the update to drop the table.
     String query = String.format("DROP TABLE IF EXISTS %s", name);
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.executeUpdate();
-      return true;
     } catch (SQLException ex) {
-      LOG.error("Failed to drop table: ", ex.getMessage());
+      LOG.error(ex, "Failed to drop table.");
+	  throw ex;
     }
-    return false;
   }
 
 }
