@@ -499,3 +499,57 @@ Apr 09, 2017 2:24:56 PM codeu.chat.client.Controller deleteUser
 INFO: deleteUser: Response completed.
 Apr 09, 2017 2:24:56 PM codeu.chat.client.ClientUser deleteUser
 INFO: Remove user complete, Name="jahnabi" UUID=[UUID:24.3853404975]
+Apr 09, 2017 2:28:58 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "hello" UUID= [UUID:24.3859739879]
+Apr 09, 2017 2:28:58 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="hello" UUID=[UUID:24.3859739879] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:28:58 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="hello" UUID=[UUID:24.3859739879] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:28:58 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Apr 09, 2017 2:28:58 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:24.3859739879] (hello).
+
+Apr 09, 2017 2:29:03 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "hi" UUID= [UUID:24.565823612]
+Apr 09, 2017 2:29:03 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="hi" UUID=[UUID:24.565823612] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:29:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="hi" UUID=[UUID:24.565823612] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:29:03 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Apr 09, 2017 2:29:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:24.565823612] (hi).
+
+Apr 09, 2017 2:29:05 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "random" UUID= [UUID:24.3250053733]
+Apr 09, 2017 2:29:05 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="random" UUID=[UUID:24.3250053733] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:29:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="random" UUID=[UUID:24.3250053733] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:29:05 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Apr 09, 2017 2:29:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:24.3250053733] (random).
+
+Apr 09, 2017 2:29:14 PM codeu.chat.client.ClientConversation deleteConversation
+INFO: Deleted conversation: Title= "hi" UUID= [UUID:24.565823612]
+Apr 09, 2017 2:29:14 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="random" UUID=[UUID:24.3250053733] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:29:14 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="random" UUID=[UUID:24.3250053733] first=[UUID:0] last=[UUID:0]
+
+Apr 09, 2017 2:29:14 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Apr 09, 2017 2:29:14 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:24.3250053733] (random).
+
+Apr 09, 2017 2:29:41 PM codeu.chat.client.ClientConversation deleteConversation
+INFO: Deleted conversation: Title= "random" UUID= [UUID:24.3250053733]
