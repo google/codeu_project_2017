@@ -22,6 +22,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
+
+import java.sql.SQLException;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -33,9 +36,14 @@ import codeu.chat.common.Time;
 import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
+import codeu.chat.database.Database;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
+
+import codeu.chat.server.database.UserTable;
+import codeu.chat.server.database.UserSchema;
+import codeu.chat.database.DBObject;
 
 public final class Server {
 
@@ -51,13 +59,21 @@ public final class Server {
   private final Relay relay;
   private Uuid lastSeen = Uuids.NULL;
 
-  public Server(Uuid id, byte[] secret, Relay relay) {
+  private final Database database;
+  private UserTable userTable;
+
+  public Server(Uuid id, byte[] secret, Relay relay, Database database) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
     this.controller = new Controller(id, model);
     this.relay = relay;
+
+    this.database = database;
+
+    // Setup the database.
+    setupDatabase();
   }
 
   public void syncWithRelay(int maxReadSize) throws Exception {
@@ -264,4 +280,16 @@ public final class Server {
                 relay.pack(conversation.id, conversation.title, conversation.creation),
                 relay.pack(message.id, message.content, message.creation));
   }
+
+  private void setupDatabase() {
+    try {
+      userTable = new UserTable(database);
+
+      LOG.info("Database initialized.");
+    } catch (SQLException ex) {
+      LOG.error(ex, "Database failed to initialize.");
+      System.exit(1);
+    }
+  }
+
 }
