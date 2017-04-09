@@ -1,6 +1,6 @@
 package codeU;
 
-public class CodeU {
+public class CodeU extends GUI{
 
 	/**
 	 * @param args
@@ -8,8 +8,10 @@ public class CodeU {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Hello");
+		final GUI gui = new GUI();
+		gui.createAndShowGUI();
 
+		
 	}
 
 }
