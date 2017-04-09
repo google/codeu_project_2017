@@ -38,8 +38,9 @@ public final class ClientUser {
 
   private User current = null;
 
+  private final Map<String, User> usersByUsername = new HashMap<>();
   private final Map<Uuid, User> usersById = new HashMap<>();
-
+  
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
@@ -105,21 +106,27 @@ public final class ClientUser {
           (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      usersByUsername.put(user.name, user);
       updateUsers();
     }
   }
 
-  public void deleteUser(Uuid id) {
+  public void deleteUser(String name) {
     
     // check if user exists in the system OR usersById.containsKey(id)
-    User removeUser = lookup(id);
 
-    if (removeUser != null) {
-      final User user = controller.deleteUser(id);
+    if (usersByUsername.containsKey(name)) {
+      User removeUser = usersByUsername.get(name);
+      final User user = controller.deleteUser(name);
       if (user == null) {
         System.out.format("Error: user not deleted - server failure");
       } else {
-        LOG.info("Remove user complete, Name=\"%s\" UUID=%s", removeUser.name, removeUser.id);
+        LOG.info("Remove user complete, Name=\"%s\" UUID=%s", user.name, user.id);
+        usersByUsername.remove(user.name);
+        // System.out.format("user by name -%s", usersByName.first(user.name).name);
+        // System.out.format("user by id-%s", usersById.get(user.id).name);
+        // usersByName.remove(user.name);
+        // usersById.remove(user.id);
         updateUsers();
       }
     } else {

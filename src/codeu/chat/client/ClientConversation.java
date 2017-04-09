@@ -106,8 +106,19 @@ public final class ClientConversation {
     }
   }
 
-  public void deleteConversation(Uuid id) {
-    Conversation c = getConversation(id);
+  public void deleteConversation(String title) {
+    final Conversation c = controller.deleteConversation(title);
+    if (c == null) {
+      System.out.format("Error: conversation not deleted. Server failure");
+    } else {
+      LOG.info("Deleted conversation: Title= \"%s\" UUID= %s", c.title, c.id);
+      Boolean currentDeleted = getCurrentId().equals(c.id);
+      if (currentDeleted) {
+        currentSummary = null;
+        updateCurrentConversation();
+      }
+      updateAllConversations(currentSummary != null);
+    }
   }
 
   public void setCurrent(ConversationSummary conv) { currentSummary = conv; }

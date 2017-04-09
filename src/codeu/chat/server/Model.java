@@ -77,8 +77,7 @@ public final class Model {
   }
 
   public void remove(User user) {
-    // TODO: implement remove for store
-    
+
     userById.remove(user.id);
     userByTime.remove(user.creation);
     userByText.remove(user.name);
@@ -107,7 +106,7 @@ public final class Model {
   }
 
   public void remove(Conversation conversation) {
-    // TODO: implement remove for store
+    
     conversationById.remove(conversation.id);  
     conversationByTime.remove(conversation.creation);
     conversationByText.remove(conversation.title);

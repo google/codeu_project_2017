@@ -51,13 +51,13 @@ public final class Chat {
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
     System.out.println("   u-add <name>  - add a new user.");
-    System.out.println("   u-delete <user ID> - delete an existing user");
+    System.out.println("   u-delete <username> - delete an existing user");
     System.out.println("   u-list-all    - list all users known to system.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
     System.out.println("   c-list-all       - list all conversations known to system.");
     System.out.println("   c-select <index> - select conversation from list.");
-    System.out.println("   c-delete <id> - delete a conversation by ID");
+    System.out.println("   c-delete <title> - delete a conversation by ID");
     System.out.println("Message commands:");
     System.out.println("   m-add <body>     - add a new message to the current conversation.");
     System.out.println("   m-list-all       - list all messages in the current conversation.");
@@ -117,11 +117,12 @@ public final class Chat {
 
     } else if (token.equals("u-delete")) {
       if (!tokenScanner.hasNext()) {
-        System.out.println("ERROR: User ID not supplied.");
+        System.out.println("ERROR: Username not supplied.");
       } else {
         String parseId = tokenScanner.nextLine().trim();
-        Uuid userId = Uuid.fromString(parseId);
-        deleteUser(userId);
+        System.out.format("PRINT: Username: %s\n", parseId);
+        //Uuid userId = Uuid.fromString(parseId);
+        deleteUser(parseId);
       }
     }
 
@@ -148,11 +149,12 @@ public final class Chat {
         System.out.println("ERROR: Not signed in.");
       } else {
         if (!tokenScanner.hasNext()) {
-          System.out.println("ERROR: Conversation ID not supplied.");
+          System.out.println("ERROR: Conversation name not supplied.");
         } else {
           final String title = tokenScanner.nextLine().trim();
-          Uuid conversationID = Uuid.fromString(title);
-          clientContext.conversation.deleteConversation(conversationID);
+          clientContext.conversation.deleteConversation(title);
+          //Uuid conversationID = Uuid.fromString(title);
+          //clientContext.conversation.deleteConversation(conversationID);
         }
       }
 
@@ -298,8 +300,8 @@ public final class Chat {
   }
 
   // Delete a user
-  private void deleteUser(Uuid id) {
-    clientContext.user.deleteUser(id);
+  private void deleteUser(String name) {
+    clientContext.user.deleteUser(name);
   }
 
   // Display all users known to server.

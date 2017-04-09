@@ -34,8 +34,8 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
-  private final Map<Uuid, User> usersById = new HashMap<>();
-  private final Map<Uuid, Conversation> conversationsById = new HashMap<>();
+  private final Map<String, User> usersByName = new HashMap<>();
+  private final Map<String, Conversation> conversationsByTitle = new HashMap<>();
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
@@ -53,8 +53,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User deleteUser(Uuid id) {
-    return deleteUser(id, Time.now());
+  public User deleteUser(String name) {
+    return deleteUser(name, Time.now());
   }
 
   @Override
@@ -63,8 +63,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation deleteConversation(Uuid id) {
-    return deleteConversation(id, Time.now());
+  public Conversation deleteConversation(String title) {
+    return deleteConversation(title, Time.now());
   }
 
   @Override
@@ -124,7 +124,7 @@ public final class Controller implements RawController, BasicController {
     if (isIdFree(id)) {
 
       user = new User(id, name, creationTime);
-      usersById.put(user.id, user);
+      usersByName.put(name, user);
       model.add(user);
 
       LOG.info(
@@ -146,12 +146,13 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override 
-  public User deleteUser(Uuid id, Time deletionTime) {
+  public User deleteUser(String name, Time deletionTime) {
+    System.out.println("In deleteUser");
     User user = null;
-    if (usersById.containsKey(id)) {
+    if (usersByName.containsKey(name)) {
 
-      user = usersById.get(id);
-      usersById.remove(id);
+      user = usersByName.get(name);
+      usersByName.remove(name);
       model.remove(user);
 
       LOG.info(
@@ -163,8 +164,8 @@ public final class Controller implements RawController, BasicController {
     } else {
 
       LOG.info(
-          "deleteUser failed - id not found (user.id=%s)",
-          id);
+          "deleteUser failed - name not found (user.id=%s)",
+          name);
     }
 
     return user;
@@ -179,7 +180,7 @@ public final class Controller implements RawController, BasicController {
 
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
-      conversationsById.put(id, conversation);
+      conversationsByTitle.put(title, conversation);
       model.add(conversation);
 
       LOG.info("Conversation added: " + conversation.id);
@@ -189,11 +190,11 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation deleteConversation(Uuid id, Time deletionTime) {
+  public Conversation deleteConversation(String title, Time deletionTime) {
     Conversation conversation = null;
-    if (conversationsById.containsKey(id)) {
-      conversation = conversationsById.get(id);
-      conversationsById.remove(id);
+    if (conversationsByTitle.containsKey(title)) {
+      conversation = conversationsByTitle.get(title);
+      conversationsByTitle.remove(title);
       model.remove(conversation);
 
       LOG.info(
@@ -204,8 +205,8 @@ public final class Controller implements RawController, BasicController {
     } else {
 
       LOG.info(
-          "deleteConversation failed - id not found (user.id=%s)",
-          id);
+          "deleteConversation failed - title not found (user.id=%s)",
+          title);
     }
 
     return conversation;

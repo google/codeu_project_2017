@@ -69,13 +69,13 @@ public final class RawControllerTest {
         "Check that the user has the correct id",
         Uuid.equals(user.id, userId));
 
-    final User delUser = controller.deleteUser(userId, Time.now());
+    final User delUser = controller.deleteUser("user", Time.now());
 
     assertFalse(
         "Check that user ID has a valid reference",
         delUser == null);
     assertTrue(
-        "Check that the user has the correct id",
+        "Check that the user has the correct username",
         Uuid.equals(delUser.id, userId));
   }
 
@@ -130,7 +130,7 @@ public final class RawControllerTest {
         "Check that the conversation has the correct id",
         Uuid.equals(conversation.id, conversationId));
 
-    final Conversation delConversation = controller.deleteConversation(conversationId, Time.now());
+    final Conversation delConversation = controller.deleteConversation("conversation", Time.now());
 
     assertFalse(
         "Check that conversation has a valid reference",

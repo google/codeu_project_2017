@@ -90,13 +90,13 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public User deleteUser(Uuid userID) {
+  public User deleteUser(String name) {
 
     User response = null;
 
     try (final Connection connection = source.connect()) {
       Serializers.INTEGER.write(connection.out(), NetworkCode.REMOVE_USER_REQUEST);
-      Uuid.SERIALIZER.write(connection.out(), userID);
+      Serializers.STRING.write(connection.out(), name);
       LOG.info("deleteUser: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.REMOVE_USER_RESPONSE) {
@@ -138,13 +138,13 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public Conversation deleteConversation(Uuid id) {
+  public Conversation deleteConversation(String title) {
 
     Conversation response = null;
 
     try (final Connection connection = source.connect()) {
       Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_CONVERSATION_REQUEST);
-      Uuid.SERIALIZER.write(connection.out(), id);
+      Serializers.STRING.write(connection.out(), title);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());
