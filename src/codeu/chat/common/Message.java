@@ -23,12 +23,13 @@ import codeu.chat.util.Serializers;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public final class Message {
 
   public static final Serializer<Message> SERIALIZER = new Serializer<Message>() {
 
-
-    //TODO: Will changing write/read to first compress the message insert into the pipeline?
 
     @Override
     public void write(OutputStream out, Message value) throws IOException {
@@ -63,6 +64,9 @@ public final class Message {
   public final Uuid author;
   public final String content;
   public Uuid next;
+  //Global fields for utilizing gson
+  private static final GsonBuilder builder = new GsonBuilder();
+  private static final Gson gson = builder.create();
 
   public Message(Uuid id, Uuid next, Uuid previous, Time creation, Uuid author, String content) {
 
@@ -74,4 +78,20 @@ public final class Message {
     this.content = content;
 
   }
+
+    /**
+     * @return String representation of Message, formattted
+     * as a JSON object
+     */
+    public String toString(){
+        return gson.toJson(this);
+    }
+
+    /**
+     * @param str The string that is used to build the message
+     * @return A message built from the passed in JSON string
+     */
+    public static Message fromString(String str){
+        return gson.fromJson(str, Message.class);
+    }
 }
