@@ -49,9 +49,9 @@ public class RequestHandler {
         out.write((body).getBytes());
     }
 
-    public static void failResponse(OutputStream out) throws IOException {
-        out.write(("HTTP/1.x 400 OK\r\n\r\n").getBytes());
-        out.write(("Bad Request.").getBytes());
+    public static void failResponse(OutputStream out, String message) throws IOException {
+        out.write(("HTTP/1.x 400 Bad Request\r\n\r\n").getBytes());
+        out.write((message).getBytes());
     }
 
 }

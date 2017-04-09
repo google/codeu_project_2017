@@ -152,8 +152,28 @@ public final class Server {
     LOG.info("Receiving a RESTful message.");
     Request r = RequestHandler.parseRaw(in);
     switch (r.getHeader("type")) {
-      case ("NEW_MESSAGE_REQUEST"):
 
+      case ("NEW_MESSAGE_REQUEST"):
+        final Uuid author = Uuid.fromString(r.getHeader("author"));
+        final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
+        final String content = r.getHeader("content");
+        if (author == null || conversation == null || content == null) {
+          RequestHandler.failResponse(out, "Missing author, conversation, or content header.");
+          break;
+        }
+        final Message message = controller.newMessage(author, conversation, content);
+        if (message == null) {
+          RequestHandler.failResponse(out, "Invalid author, conversation, or content.");
+          break;
+        }
+        RequestHandler.successResponse(out, message.toString());
+        break;
+
+      case ("NEW_USER_REQUEST"):
+        final String name = r.getHeader("name");
+        final User user = controller.newUser(name);
+        System.out.println(user.name);
+        RequestHandler.successResponse(out, user.id.toString());
         break;
     }
     //RequestHandler.handleResponse(out, body);
