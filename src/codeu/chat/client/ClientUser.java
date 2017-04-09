@@ -38,11 +38,14 @@ public final class ClientUser {
 
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
+  private Store<String, User> usersByNickname = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
   public ClientUser(Controller controller, View view) {
     this.controller = controller;
     this.view = view;
   }
+
+  // TODO: Decide what to do with existed name and nickname
 
   // Validate the username string
   static public boolean isValidName(String userName) {
@@ -55,6 +58,24 @@ public final class ClientUser {
 
     }
     return clean;
+  }
+
+  // Check if this userName has already existed
+  public boolean ifExistedName(String userName) {
+    final User user = usersByName.first(userName);
+    return (user != null);
+  }
+
+  // Validate the nickname string
+  static public boolean isValidNickname(String nickname) {
+    //TODO: check for valid nickname
+    return true;
+  }
+  
+  // Check if this nickname has already existed
+  public boolean ifExistedNickname(String nickname) {
+    // TODO: check for existed nickname
+    return false;
   }
 
   public boolean hasCurrent() {
@@ -78,6 +99,21 @@ public final class ClientUser {
     return (prev != current);
   }
 
+  public boolean signInUser(String name, String pass) {
+    // System.out.println("Pass in signInUser "+ pass);
+    updateUsers();
+
+    final User prev = current;
+    if (name != null) {
+      final User newCurrent = usersByName.first(name);
+      final boolean ifCorrectPassword = newCurrent.ifCorrectPassword(pass);
+      if (newCurrent != null && ifCorrectPassword) {
+        current = newCurrent;
+      }
+    }
+    return (prev != current);
+  }
+
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -90,15 +126,58 @@ public final class ClientUser {
 
   public void addUser(String name) {
     final boolean validInputs = isValidName(name);
+    final boolean existed = ifExistedName(name);
+    final boolean valid = (validInputs && !existed);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = !valid ? null : controller.newUser(name);
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+          (!validInputs) ? "bad input value" : ((existed) ? "existed username" : "server failure"));
     } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      LOG.info("New user complete, Name= \"%s\" Nickname= \"%s\" UUID=%s", user.name, user.nickname, user.id);
       updateUsers();
+    }
+  }
+
+  public void addUser(String name, String nickname, String pass) {
+    final boolean validInputs = isValidName(name) && isValidNickname(nickname);
+    final boolean existed = ifExistedName(name) || ifExistedNickname(nickname);
+    final boolean valid = (validInputs && !existed);
+
+    final User user = !valid ? null : controller.newUser(name, nickname, pass);
+
+    // System.out.println("in addUser clientUser");
+
+    if (user == null) {
+      System.out.format("Error: user not created - %s.\n",
+          (!validInputs) ? "bad input value" : ((existed) ? "existed username/nickname" : "server failure"));
+    } else {
+      LOG.info("New user complete, Name= \"%s\" Nickname= \"%s\" UUID=%s", user.name, user.nickname, user.id);
+      updateUsers();
+    }
+  }
+
+  public void addNickname(String name) {
+    final boolean validInputs = isValidNickname(name);
+    final boolean existed = ifExistedNickname(name);
+
+    final boolean valid = (validInputs && !existed);
+
+    if (current == null){
+      System.out.println("Please sign in before setting nickname");
+    } else if (!valid) {
+      System.out.format("Error: nickname not added - %s.\n",
+          (!validInputs) ? "bad input value" : ((existed) ? "existed nickname" : "server failure"));
+    } else {
+      final boolean response = controller.setNickname(current, name);
+      if (response){
+        LOG.info("Nickname added complete for the current user, Name= \"%s\" Nickname= \"%s\" UUID=%s", current.name, current.nickname, current.id);
+        updateUsers();
+      }
+      else{
+        LOG.info("Cannot set nickname");
+      }
     }
   }
 
@@ -130,16 +209,18 @@ public final class ClientUser {
   public void updateUsers() {
     usersById.clear();
     usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
+    usersByNickname = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
     for (final User user : view.getUsersExcluding(EMPTY)) {
       usersById.put(user.id, user);
       usersByName.insert(user.name, user);
+      usersByNickname.insert(user.nickname, user);
     }
   }
 
   public static String getUserInfoString(User user) {
     return (user == null) ? "Null user" :
-        String.format(" User: %s\n   Id: %s\n   created: %s\n", user.name, user.id, user.creation);
+        String.format(" User: %s\n   Nickname: %s\n   Id: %s\n   created: %s\n", user.name, user.nickname, user.id, user.creation);
   }
 
   public String showUserInfo(String uname) {

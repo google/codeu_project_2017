@@ -50,7 +50,10 @@ public final class Chat {
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
     System.out.println("   u-add <name>  - add a new user.");
+    System.out.println("   u-add <name> n-add <nickname> - add a new user with nickname");
     System.out.println("   u-list-all    - list all users known to system.");
+    System.out.println("Nickname commands:");
+    System.out.println("   n-add <name>  - set a new nickname for the current user");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
     System.out.println("   c-list-all       - list all conversations known to system.");
@@ -89,7 +92,10 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        String username = tokenScanner.nextLine().trim();
+        System.out.println("Enter your password:");
+        String pass = lineScanner.nextLine().trim();
+        signInUser(username, pass);
       }
 
     } else if (token.equals("sign-out")) {
@@ -109,12 +115,24 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        String username = tokenScanner.nextLine().trim();
+        System.out.println("Enter your password:");
+        String pass = lineScanner.nextLine().trim();
+        // System.out.println(pass);
+        addUser(username, pass);
       }
 
     } else if (token.equals("u-list-all")) {
 
       showAllUsers();
+
+    } else if (token.equals("n-add")) {
+
+      if (!tokenScanner.hasNext()) {
+        System.out.println("ERROR: Nickname not supplied.");
+      } else {
+        addNickname(tokenScanner.nextLine().trim());
+      }
 
     } else if (token.equals("c-add")) {
 
@@ -193,8 +211,8 @@ public final class Chat {
   }
 
   // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
+  private void signInUser(String name, String pass) {
+    if (!clientContext.user.signInUser(name, pass)) {
       System.out.println("Error: sign in failed (invalid name?)");
     }
   }
@@ -266,8 +284,16 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String name, String pass) {
+    String[] name_nickname = name.split("n-add");
+    String fullname = name_nickname[0].trim();
+    String nickname = name_nickname.length == 1 ? "" : name_nickname[1].trim();
+    clientContext.user.addUser(fullname, nickname, pass);
+  }
+
+  // Add a new nickname.
+  private void addNickname(String name) {
+    clientContext.user.addNickname(name);
   }
 
   // Display all users known to server.

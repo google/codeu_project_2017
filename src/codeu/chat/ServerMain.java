@@ -83,7 +83,7 @@ final class ServerMain {
 
     final Server server = new Server(id, secret, relay);
 
-    LOG.info("Server object created.");
+    LOG.info("Server object created...");
 
     final Runnable hub = new Hub(serverSource, new Hub.Handler() {
 

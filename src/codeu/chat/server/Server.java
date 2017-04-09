@@ -75,7 +75,6 @@ public final class Server {
   }
 
   private boolean onMessage(InputStream in, OutputStream out) throws IOException {
-
     final int type = Serializers.INTEGER.read(in);
 
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
@@ -100,11 +99,24 @@ public final class Server {
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
       final String name = Serializers.STRING.read(in);
+      final String nickname = Serializers.STRING.read(in);
+      final String pass = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final User user = controller.newUser(name, nickname, pass);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
+
       Serializers.nullable(User.SERIALIZER).write(out, user);
+
+    } else if (type == NetworkCode.NEW_NICKNAME_REQUEST) {
+
+      final Uuid uuid = Uuids.SERIALIZER.read(in);
+      final String nickname = Serializers.STRING.read(in);
+
+      final User response = controller.setNickname(uuid, nickname);
+
+      Serializers.INTEGER.write(out, NetworkCode.NEW_NICKNAME_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, response);
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 

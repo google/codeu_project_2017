@@ -29,28 +29,32 @@ public final class User {
 
     @Override
     public void write(OutputStream out, User value) throws IOException {
-
+      // System.out.println("in write User");
       Uuids.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
-
+      Serializers.STRING.write(out, value.nickname);
+      Serializers.STRING.write(out, value.getPassword());
     }
 
     @Override
     public User read(InputStream in) throws IOException {
-
+      // System.out.println("in read User");
       return new User(
           Uuids.SERIALIZER.read(in),
           Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
+          Time.SERIALIZER.read(in),
+          Serializers.STRING.read(in),
+          Serializers.STRING.read(in)
       );
-
     }
   };
 
   public final Uuid id;
   public final String name;
   public final Time creation;
+  public String nickname;
+  private String password;
 
   public User(Uuid id, String name, Time creation) {
 
@@ -58,5 +62,32 @@ public final class User {
     this.name = name;
     this.creation = creation;
 
+  }
+
+  public User(Uuid id, String name, Time creation, String nickname, String pass) {
+
+    this.id = id;
+    this.name = name;
+    this.nickname = nickname;
+    this.creation = creation;
+    this.password = pass;
+
+  }
+
+  public void setNickname(String nickname){
+    this.nickname = nickname; 
+  }
+
+  public String getNickname(){
+    return this.nickname;
+  }
+
+  public boolean ifCorrectPassword(String pass){
+    return this.password.equals(pass);
+  }
+
+  //TODO: fix this
+  public String getPassword(){
+    return this.password;
   }
 }

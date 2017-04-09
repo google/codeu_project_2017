@@ -68,6 +68,12 @@ public final class ClientConversation {
     return clean;
   }
 
+  // Check if this has already existed
+  public boolean ifExistedTitle(String titleName) {
+    final ConversationSummary title = summariesSortedByTitle.first(titleName);
+    return (title != null);
+  }
+
   public boolean hasCurrent() {
     return (currentSummary != null);
   }
@@ -88,12 +94,13 @@ public final class ClientConversation {
 
   public void startConversation(String title, Uuid owner) {
     final boolean validInputs = isValidTitle(title);
+    final boolean existed = ifExistedTitle(title);
 
-    final Conversation conv = (validInputs) ? controller.newConversation(title, owner) : null;
+    final Conversation conv = (validInputs && !existed) ? controller.newConversation(title, owner) : null;
 
     if (conv == null) {
       System.out.format("Error: conversation not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+          (!validInputs) ? "bad input value" : ((existed) ? "existed title" : "server failure"));
     } else {
       LOG.info("New conversation: Title= \"%s\" UUID= %s", conv.title, conv.id);
 
