@@ -42,8 +42,9 @@ public final class Time implements Comparable<Time> {
     }
   };
 
+  //changed the date format to be simpler 
   private static final SimpleDateFormat formatter =
-      new SimpleDateFormat("MM/dd/yy KK:mm aa"); //changed the date format to be simpler 
+      new SimpleDateFormat("MM/dd/yy KK:mm aa"); 
 
   private final long totalMs;
 

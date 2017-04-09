@@ -70,17 +70,6 @@ public final class ChatSimpleGui {
     mainFrame.setSize(790, 450);
     mainFrame.setJMenuBar(menuBar());
     
-    /*
-    //Search Panel
-    final JPanel searchPanel = new JPanel(new GridBagLayout()); 
-    final JTextField searchBar = new JTextField(20); 
-    final JButton searchButton = new JButton("Search Messages");
-    searchPanel.setBorder(paneBorder()); 
-    
-    searchPanel.add(searchButton); 
-    //final GridBagConstraints searchBarViewC = new GridBagConstraints();
-    */
-    
     // Main View - outermost graphics panel
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     
@@ -124,19 +113,9 @@ public final class ChatSimpleGui {
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
     
-    /*
-    searchBarViewC.gridx = 0;
-    searchBarViewC.gridy = -1;
-    searchBarViewC.gridwidth = 10;
-    searchBarViewC.gridheight = 1;
-    searchBarViewC.fill = GridBagConstraints.HORIZONTAL;
-    searchBarViewC.anchor = GridBagConstraints.FIRST_LINE_START;
-   */
-    
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
-   // mainViewPanel.add(searchBar, searchBarViewC); 
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
@@ -146,7 +125,6 @@ public final class ChatSimpleGui {
   private JMenuBar menuBar(){
 	  JMenuBar topMenuBar = new JMenuBar(); //the menu bar
 	  JMenu topMenuGeneral = new JMenu("General"); //first category of menu
-	  JMenu topMenuColorSelector = new JMenu("Color Selector"); //first category of menu
 	  JMenuItem topMenuItem = new JMenuItem("How to Use"); //details how to use the app
 	  JMenuItem coders = new JMenuItem("Coders"); //coders on this app or equivalent to credits
 	  
