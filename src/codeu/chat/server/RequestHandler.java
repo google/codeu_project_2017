@@ -3,7 +3,6 @@ package codeu.chat.server;
 import codeu.chat.server.model.Request;
 
 import java.io.*;
-import java.util.StringJoiner;
 
 public class RequestHandler {
 
@@ -36,11 +35,11 @@ public class RequestHandler {
         }
 
         // Extract body.
-        StringJoiner body = new StringJoiner(" ");
+        StringBuilder body = new StringBuilder();
         for (i++; i < struct.length; i++) {
-            body.add(struct[i]);
+            body.append(" " + struct[i]);
         }
-        r.setBody(body.toString());
+        r.setBody(body.toString().substring(1));
 
         return r;
     }
