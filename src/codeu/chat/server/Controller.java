@@ -139,11 +139,12 @@ public final class Controller implements RawController, BasicController {
     return user;
   }
 
-  @Override User deleteUser(Uuid id, Time deletionTime) {
-
+  @Override 
+  public User deleteUser(Uuid id, Time deletionTime) {
+    User user = null;
     if (usersById.containsKey(id)) {
 
-      User user = usersById.get(id);
+      user = usersById.get(id);
       usersById.remove(id);
       model.remove(user);
 

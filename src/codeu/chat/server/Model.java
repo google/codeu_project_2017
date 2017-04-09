@@ -77,9 +77,9 @@ public final class Model {
   }
 
   public void remove(User user) {
-    usersById.remove(user.id);
-    usersByTime.remove(user.creation);
-    usersByText.remove(user.name);
+    userById.remove(user.id);
+    userByTime.remove(user.creation);
+    userByText.remove(user.name);
   }
 
   public StoreAccessor<Uuid, User> userById() {

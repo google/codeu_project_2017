@@ -147,7 +147,7 @@ public final class Server {
 
       final Uuid id = Uuid.SERIALIZER.read(in);
 
-      final User user = controller.removeUser(id);
+      final User user = controller.deleteUser(id);
 
       Serializers.INTEGER.write(out, NetworkCode.REMOVE_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);

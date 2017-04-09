@@ -90,7 +90,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public User removeUser(Uuid userID) {
+  public User deleteUser(Uuid userID) {
 
     User response = null;
 

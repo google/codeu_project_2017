@@ -20,7 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import java.lang.Object;
-import java.util.regex;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
@@ -114,7 +115,7 @@ public final class ClientUser {
     User removeUser = lookup(id);
 
     if (removeUser != null) {
-      final User user = controller.removeUser(id);
+      final User user = controller.deleteUser(id);
       if (user == null) {
         System.out.format("Error: user not deleted - server failure");
       } else {

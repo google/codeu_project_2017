@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
+import codeu.chat.util.Uuid;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -176,10 +177,11 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         final String s = (String) JOptionPane.showInputDialog(
-          UserPanel.this, "Enter user name:", "Delete User", JOptionPane.PLAIN_MESSAGE,
+          UserPanel.this, "Enter user id:", "Delete User", JOptionPane.PLAIN_MESSAGE,
           null, null, "");
         if (s != null && s.length() > 0) {
-          clientContext.user.deleteUser(s);
+          Uuid id = Uuid.fromString(s);
+          clientContext.user.deleteUser(id);
           UserPanel.this.getAllUsers(listModel);
         }
       }
