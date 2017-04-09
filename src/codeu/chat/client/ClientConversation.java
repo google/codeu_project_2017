@@ -106,6 +106,10 @@ public final class ClientConversation {
     }
   }
 
+  public void deleteConversation(Uuid id) {
+    Conversation c = getConversation(id);
+  }
+
   public void setCurrent(ConversationSummary conv) { currentSummary = conv; }
 
   public void showAllConversations() {

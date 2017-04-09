@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.util.Uuid;
 
 // NOTE: JPanel is serializable, but there is no need to serialize ConversationPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -75,10 +76,12 @@ public final class ConversationPanel extends JPanel {
 
     final JButton updateButton = new JButton("Update");
     final JButton addButton = new JButton("Add");
+    final JButton deleteButton = new JButton("Delete");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
     buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
+    buttonPanel.add(deleteButton);
 
     // Put panels together
     titlePanelC.gridx = 0;
@@ -126,6 +129,25 @@ public final class ConversationPanel extends JPanel {
               null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
+            ConversationPanel.this.getAllConversations(listModel);
+          }
+        } else {
+          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
+        }
+      }
+    });
+
+    // User clicks Conversations Delete button.
+    deleteButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (clientContext.user.hasCurrent()) {
+          final String s = (String) JOptionPane.showInputDialog(
+            ConversationPanel.this, "Enter ID:", "Delete Conversation", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+          if (s != null && s.length() > 0) {
+            Uuid conversationID = Uuid.fromString(s);
+            clientContext.conversation.deleteConversation(conversationID);
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {

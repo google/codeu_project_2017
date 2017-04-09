@@ -59,4 +59,12 @@ public interface BasicController {
   //  Whether conversations can have the same title is undefined.
   Conversation newConversation(String title, Uuid owner);
 
+  // DELETE USER
+
+  // Deletes an existing converstaion on the server. All parameters must be provided
+  // or else the server won't apply the change. Depending on whether the operation
+  // is successful or not, a Conversation object will be returned representing the 
+  // outcome of the method.
+  Conversation deleteConversation(Uuid id);
+
 }

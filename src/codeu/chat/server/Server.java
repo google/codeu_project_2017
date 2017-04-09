@@ -162,6 +162,15 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
 
+    } else if (type == NetworkCode.DELETE_CONVERSATION_REQUEST) {
+
+      final Uuid conversationID = Uuid.SERIALIZER.read(in);
+
+      final Conversation conversation = controller.deleteConversation(conversationID);
+
+      Serializers.INTEGER.write(out, NetworkCode.DELETE_CONVERSATION_RESPONSE);
+      Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
+
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
 
       final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);

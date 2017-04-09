@@ -35,6 +35,7 @@ public final class Controller implements RawController, BasicController {
   private final Uuid.Generator uuidGenerator;
 
   private final Map<Uuid, User> usersById = new HashMap<>();
+  private final Map<Uuid, Conversation> conversationsById = new HashMap<>();
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
@@ -59,6 +60,11 @@ public final class Controller implements RawController, BasicController {
   @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
+  }
+
+  @Override
+  public Conversation deleteConversation(Uuid id) {
+    return deleteConversation(id, Time.now());
   }
 
   @Override
@@ -173,9 +179,33 @@ public final class Controller implements RawController, BasicController {
 
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
+      conversationsById.put(id, conversation);
       model.add(conversation);
 
       LOG.info("Conversation added: " + conversation.id);
+    }
+
+    return conversation;
+  }
+
+  @Override
+  public Conversation deleteConversation(Uuid id, Time deletionTime) {
+    Conversation conversation = null;
+    if (conversationsById.containsKey(id)) {
+      conversation = conversationsById.get(id);
+      conversationsById.remove(id);
+      model.remove(conversation);
+
+      LOG.info(
+          "removeConversation success (conversation.id=%s conversation.owner=%s conversation.title=%s)",
+          conversation.id,
+          conversation.owner,
+          conversation.title);
+    } else {
+
+      LOG.info(
+          "deleteConversation failed - id not found (user.id=%s)",
+          id);
     }
 
     return conversation;
