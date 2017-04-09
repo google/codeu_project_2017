@@ -146,8 +146,8 @@ public final class ConversationPanel extends JPanel {
             ConversationPanel.this, "Enter ID:", "Delete Conversation", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
           if (s != null && s.length() > 0) {
-            Uuid conversationID = Uuid.fromString(s);
-            clientContext.conversation.deleteConversation(conversationID);
+            //Uuid conversationID = Uuid.fromString(s);
+            clientContext.conversation.deleteConversation(s);
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {

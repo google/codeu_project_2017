@@ -54,10 +54,10 @@ public final class BasicControllerTest {
         "Check that user has a valid reference",
         user == null);
 
-    final User delUser = controller.deleteUser(user.id);
+    final User delUser = controller.deleteUser(user.name);
 
     assertFalse(
-      "Check that user id entered is valid",
+      "Check that user name entered is valid",
       delUser == null);
   }
 
@@ -96,7 +96,7 @@ public final class BasicControllerTest {
         "Check that conversation has a valid reference",
         conversation == null);
 
-    final Conversation delConversation = controller.deleteConversation(conversation.id);
+    final Conversation delConversation = controller.deleteConversation(conversation.title);
 
     assertFalse(
         "Check that conversation ID is valid",

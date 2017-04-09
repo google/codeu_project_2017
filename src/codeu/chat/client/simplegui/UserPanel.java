@@ -180,8 +180,8 @@ public final class UserPanel extends JPanel {
           UserPanel.this, "Enter user id:", "Delete User", JOptionPane.PLAIN_MESSAGE,
           null, null, "");
         if (s != null && s.length() > 0) {
-          Uuid id = Uuid.fromString(s);
-          clientContext.user.deleteUser(id);
+          //Uuid id = Uuid.fromString(s);
+          clientContext.user.deleteUser(s);
           UserPanel.this.getAllUsers(listModel);
         }
       }

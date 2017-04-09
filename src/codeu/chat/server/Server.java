@@ -145,9 +145,10 @@ public final class Server {
 
     } else if (type == NetworkCode.REMOVE_USER_REQUEST) {
 
-      final Uuid id = Uuid.SERIALIZER.read(in);
+      //final Uuid id = Uuid.SERIALIZER.read(in);
+      final String name = Serializers.STRING.read(in);
 
-      final User user = controller.deleteUser(id);
+      final User user = controller.deleteUser(name);
 
       Serializers.INTEGER.write(out, NetworkCode.REMOVE_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -164,9 +165,9 @@ public final class Server {
 
     } else if (type == NetworkCode.DELETE_CONVERSATION_REQUEST) {
 
-      final Uuid conversationID = Uuid.SERIALIZER.read(in);
+      final String title = Serializers.STRING.read(in);
 
-      final Conversation conversation = controller.deleteConversation(conversationID);
+      final Conversation conversation = controller.deleteConversation(title);
 
       Serializers.INTEGER.write(out, NetworkCode.DELETE_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
