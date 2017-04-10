@@ -172,7 +172,7 @@ public final class Uuid {
   }
 
   private static void buildString(Uuid current, StringBuilder build) {
-    final long mask = (1L << 32) - 1;  // removes sign extension
+    long mask = (1L << 32) - 1;
     if (current != null) {
       buildString(current.root(), build);
       build.append(".").append(current.id() & mask);
@@ -188,7 +188,7 @@ public final class Uuid {
 
   private static Uuid fromString(final Uuid root, String[] tokens, int index) {
 
-    final int id = Integer.parseInt(tokens[index]);
+    final int id = (int) Long.parseLong(tokens[index]);
 
     final Uuid link = new Uuid(root, id);
 
