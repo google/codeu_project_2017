@@ -28,7 +28,7 @@ public interface RawController {
   //
   // Add a new message to the model with a specific id. If the id is already
   // in use, the call will fail and null will be returned.
-  Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime);
+  Message newMessage(Uuid id, Uuid author, Uuid conversation, Uuid group, String body, Time creationTime);
 
   // NEW USER
   //

@@ -229,6 +229,7 @@ public final class RawControllerTest {
         messageId,
         user.id,
         conversation.id,
+        group.id,
         "Hello World",
         Time.now());
 

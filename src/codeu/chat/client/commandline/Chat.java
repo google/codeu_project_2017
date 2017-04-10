@@ -224,7 +224,7 @@ public final class Chat {
           System.out.println("ERROR: Message body not supplied.");
         } else {
           clientContext.message.addMessage(clientContext.user.getCurrent().id,
-              clientContext.conversation.getCurrentId(),
+              clientContext.conversation.getCurrentId(), clientContext.group.getCurrentId(),
               tokenScanner.nextLine().trim());
         }
       }
