@@ -17,16 +17,14 @@ package codeu.chat;
 
 import java.io.IOException;
 
-import codeu.chat.common.Hub;
 import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.server.NoOpRelay;
 import codeu.chat.server.RemoteRelay;
 import codeu.chat.server.Server;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
@@ -48,7 +46,7 @@ final class ServerMain {
 
     LOG.info("============================= START OF LOG =============================");
 
-    final Uuid id = Uuids.fromString(args[0]);
+    final Uuid id = Uuid.fromString(args[0]);
     final byte[] secret = Secret.parse(args[1]);
 
     final int myPort = Integer.parseInt(args[2]);
@@ -83,30 +81,21 @@ final class ServerMain {
 
     final Server server = new Server(id, secret, relay);
 
-    LOG.info("Server object created.");
+    LOG.info("Created server.");
 
-    final Runnable hub = new Hub(serverSource, new Hub.Handler() {
+    while (true) {
 
-      @Override
-      public void handle(Connection connection) throws Exception {
+      try {
+
+        LOG.info("Established connection...");
+        final Connection connection = serverSource.connect();
+        LOG.info("Connection established.");
 
         server.handleConnection(connection);
 
+      } catch (IOException ex) {
+        LOG.error(ex, "Failed to establish connection.");
       }
-
-      @Override
-      public void onException(Exception ex) {
-
-        System.out.println("ERROR: Exception during server tick. Check log for details.");
-        LOG.error(ex, "Exception during server tick.");
-
-      }
-    });
-
-    LOG.info("Starting hub...");
-
-    hub.run();
-
-    LOG.info("Hub exited.");
+    }
   }
 }
