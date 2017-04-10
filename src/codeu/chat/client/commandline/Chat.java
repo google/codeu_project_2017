@@ -144,7 +144,6 @@ public final class Chat {
 
       showAllUsers();
 
-<<<<<<< HEAD
     } else if (token.equals("n-add")) {
 
       if (!tokenScanner.hasNext()) {
@@ -153,7 +152,6 @@ public final class Chat {
         addNickname(tokenScanner.nextLine().trim());
       }
 
-=======
     } else if (token.equals("g-add")) {
 
       if (!clientContext.user.hasCurrent()) {
@@ -175,7 +173,6 @@ public final class Chat {
 
       selectGroup(lineScanner);
 
->>>>>>> 9888ea48f9f99133d3e0de3d4b84b0f18d2a5326
     } else if (token.equals("c-add")) {
 
       if (!clientContext.user.hasCurrent()) {

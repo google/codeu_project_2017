@@ -179,6 +179,10 @@ public final class Controller implements RawController, BasicController {
           name,
           nickname,
           creationTime);
+    }
+
+    return user;
+  }
 
   @Override
   public User deleteUser(String name, Time deletionTime) {
@@ -228,6 +232,7 @@ public final class Controller implements RawController, BasicController {
     if (model.userById().first(id).ifCorrectPassword(pass))
       return model.userById().first(id);
     return null;
+  }
 
   @Override
   public Conversation deleteConversation(String title, Time deletionTime) {

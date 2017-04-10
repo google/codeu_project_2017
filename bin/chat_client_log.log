@@ -1492,4 +1492,43 @@ java.net.NoRouteToHostException: No route to host
 	at codeu.chat.client.commandline.Chat.addUser(Chat.java:328)
 	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:120)
 	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:345)
-	at codeu.chat.ClientMain.main(ClientMain.java:57)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)Apr 09, 2017 10:53:09 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 09, 2017 10:53:09 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 09, 2017 10:53:09 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 09, 2017 10:53:09 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 09, 2017 10:53:15 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 09, 2017 10:53:15 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 09, 2017 10:53:15 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "duong" Nickname= "" UUID=[UUID:0.577382372]
+Apr 09, 2017 10:53:32 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 09, 2017 10:53:32 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 09, 2017 10:53:33 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 09, 2017 10:53:33 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 09, 2017 10:53:38 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 09, 2017 10:53:38 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 09, 2017 10:53:38 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "duong" Nickname= "" UUID=[UUID:0.1141100808]
+Apr 09, 2017 10:53:41 PM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Request completed.
+Apr 09, 2017 10:53:41 PM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Response completed.
+Apr 09, 2017 10:53:51 PM codeu.chat.client.Controller ifCorrectPassword
+INFO: checkPassword: Request completed.
+Apr 09, 2017 10:53:51 PM codeu.chat.client.Controller ifCorrectPassword
+INFO: checkPassword: Response completed.
+Apr 09, 2017 10:53:54 PM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Request completed.
+Apr 09, 2017 10:53:54 PM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Response completed.

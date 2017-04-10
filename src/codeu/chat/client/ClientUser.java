@@ -166,6 +166,8 @@ public final class ClientUser {
       else{
         LOG.info("Cannot set nickname");
       }
+    }
+  }
 
   public void deleteUser(String name) {
     
