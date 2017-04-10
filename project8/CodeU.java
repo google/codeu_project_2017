@@ -1,5 +1,7 @@
 package codeU;
 
+import javax.swing.SwingUtilities;
+
 public class CodeU extends GUI{
 
 	/**
@@ -7,11 +9,7 @@ public class CodeU extends GUI{
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		final GUI gui = new GUI();
-		gui.createAndShowGUI();
-
-		
+        SwingUtilities.invokeLater(new GUI());	
 	}
 
 }
