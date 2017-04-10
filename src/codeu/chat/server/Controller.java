@@ -44,8 +44,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Message newMessage(Uuid author, Uuid conversation, String body) {
-    return newMessage(createId(), author, conversation, body, Time.now());
+  public Message newMessage(Uuid author, Uuid conversation, Uuid group, String body) {
+    return newMessage(createId(), author, conversation, group, body, Time.now());
   }
 
   @Override
@@ -85,7 +85,7 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
+  public Message newMessage(Uuid id, Uuid author, Uuid conversation, Uuid group, String body, Time creationTime) {
 
     final User foundUser = model.userById().first(author);
     final Conversation foundConversation = model.conversationById().first(conversation);

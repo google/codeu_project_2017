@@ -155,6 +155,7 @@ public final class BasicControllerTest {
     final Message message = controller.newMessage(
         user.id,
         conversation.id,
+        group.id,
         "Hello World");
 
     assertFalse(

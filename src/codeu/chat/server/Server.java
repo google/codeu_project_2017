@@ -126,16 +126,12 @@ public final class Server {
       final Uuid group = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
-      final Message message = controller.newMessage(author, conversation, content);
+      final Message message = controller.newMessage(author, conversation, group, content);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 
-      timeline.scheduleNow(createSendToRelayEvent(
-          author,
-          conversation,
-          group,
-          message.id));
+      timeline.scheduleNow(createSendToRelayEvent(author, conversation, group, message.id));
 
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
@@ -381,6 +377,7 @@ public final class Server {
       message = controller.newMessage(relayMessage.id(),
                                       user.id,
                                       conversation.id,
+                                      group.id,
                                       relayMessage.text(),
                                       relayMessage.time());
     }
