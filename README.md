@@ -44,9 +44,10 @@ JAVA&nbsp;7 when working with this project.
      You must specify the following startup arguments for `run_server.sh:
      + `<team_id>` and `<team_secret>`: a numeric id for your team, and a secret
        code, which are used to authenticate your server with the Relay server.
-       You can specify any integer value for `<team_id>`, and any string for
-       `<team_secret>` when you launch the server in your local setup since it
-       will not connect to the Relay server.
+       You can specify any integer value for `<team_id>`, and a value expressed
+       in hexadecimal format (using numbers `0-9` or letters in the range `A-F`)
+       for `<team_secret>` when you launch the server in your local setup since
+       it will not connect to the Relay server.
      + `<port>`: the TCP port that your Server will listen on for connections
        from the Client. You can use any value between 1024 and 65535, as long as
        there is no other service currently listening on that port in your
