@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Magenta Messenger</title>
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- dependencies -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script>
+      // YOU DO NOT NEED TO EDIT THIS CODE
+      if (!/(&|\?)username=/.test(window.location.search)) {
+        var newSearch = window.location.search;
+        if (newSearch !== '' & newSearch !== '?') {
+          newSearch += '&';
+        }
+        newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+        window.location.search = newSearch;
+      }
+    </script>
+    <!-- your scripts -->
+    <script src="env/config.js"></script>
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Magenta Messenger</h1>
+
+        <form id="send">
+          <input type="text" name="message">
+          <input class="submit" type="submit" name="" value="Send message">
+        </form>
+
+        <form id="create-convo">
+          <input type="text" name="new-convo-name">
+          <input class="submit" type="submit" name="" value="Create a new convo">
+        </form>
+
+
+      <div id="convos">
+        Convo:
+        <select id="convoSelect">
+          <option value="lobby" selected>lobby</option>
+        </select>
+      </div>
+      <!-- Your HTML goes here! -->
+    </div>
+    <div id="chats">
+
+    </div>
+  </body>
+</html>
