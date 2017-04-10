@@ -57,11 +57,16 @@ public final class ChatSimpleGui {
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
   }
-
+  
   // Initialize the GUI
   private void initialize() {
+     
+  //Main Page, Outermost frame
 
-    // Outermost frame.
+  final JPanel welcomeViewPanel = new WelcomePanel(clientContext);
+  welcomeViewPanel.setBorder(paneBorder());
+//  final GridBagConstraints welcomeViewC = new GridBagConstraints();
+
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,11 +113,18 @@ public final class ChatSimpleGui {
     messagesViewC.gridheight = 1;
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
-
+    
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
+//  welcomePanel.add(welcomePanel, welcomeViewC);    
 
+    mainFrame.add(welcomeViewPanel);
+//  mainFrame.add(mainViewPanel);
+    mainFrame.pack();
+  }
+
+  private void linkPage(){
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
