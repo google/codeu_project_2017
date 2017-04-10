@@ -58,6 +58,28 @@ public final class RawControllerTest {
   }
 
   @Test
+  public void testDeleteUser() {
+
+    final User user = controller.newUser(userId, "user", Time.now());
+
+    assertFalse(
+        "Check that user has a valid reference",
+        user == null);
+    assertTrue(
+        "Check that the user has the correct id",
+        Uuid.equals(user.id, userId));
+
+    final User delUser = controller.deleteUser("user", Time.now());
+
+    assertFalse(
+        "Check that user ID has a valid reference",
+        delUser == null);
+    assertTrue(
+        "Check that the user has the correct username",
+        Uuid.equals(delUser.id, userId));
+  }
+
+  @Test
   public void testAddConversation() {
 
     final User user = controller.newUser(userId, "user", Time.now());
@@ -81,6 +103,42 @@ public final class RawControllerTest {
     assertTrue(
         "Check that the conversation has the correct id",
         Uuid.equals(conversation.id, conversationId));
+  }
+
+  @Test
+  public void testDeleteConversation() {
+
+    final User user = controller.newUser(userId, "user", Time.now());
+
+    assertFalse(
+        "Check that user has a valid reference",
+        user == null);
+    assertTrue(
+        "Check that the user has the correct id",
+        Uuid.equals(user.id, userId));
+
+    final Conversation conversation = controller.newConversation(
+        conversationId,
+        "conversation",
+        user.id,
+        Time.now());
+
+    assertFalse(
+        "Check that conversation has a valid reference",
+        conversation == null);
+    assertTrue(
+        "Check that the conversation has the correct id",
+        Uuid.equals(conversation.id, conversationId));
+
+    final Conversation delConversation = controller.deleteConversation("conversation", Time.now());
+
+    assertFalse(
+        "Check that conversation has a valid reference",
+        delConversation == null);
+    assertTrue(
+        "Check that the conversation has the correct id",
+        Uuid.equals(delConversation.id, conversationId));
+
   }
 
   @Test

@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
+import codeu.chat.common.User;
 
 public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
 
@@ -65,6 +66,30 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     if (closestLink == null || comparator.compare(newLink.key, closestLink.key) != 0) {
       index.put(key, newLink);
     }
+  }
+
+  public void remove(KEY key) {
+
+    StoreLink<KEY, VALUE> current = rootLink;
+    System.out.println("entered method");
+
+    while (current.next != null && comparator.compare(current.next.key, key) < 0) {
+      current = current.next;
+      System.out.println("entered loop");
+    }
+
+    StoreLink<KEY, VALUE> previous = current;
+
+    if (current.next != null && current.next.key.equals(key)) {
+      index.remove(key);
+      current = current.next;
+      if (current.next == null) {
+        previous.next = null;
+      } else {
+        previous.next = current.next;
+      }
+    }
+
   }
 
   @Override

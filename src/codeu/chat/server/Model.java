@@ -76,6 +76,13 @@ public final class Model {
     userByText.insert(user.name, user);
   }
 
+  public void remove(User user) {
+
+    userById.remove(user.id);
+    userByTime.remove(user.creation);
+    userByText.remove(user.name);
+  }
+
   public StoreAccessor<Uuid, User> userById() {
     return userById;
   }
@@ -96,6 +103,13 @@ public final class Model {
     conversationById.insert(conversation.id, conversation);
     conversationByTime.insert(conversation.creation, conversation);
     conversationByText.insert(conversation.title, conversation);
+  }
+
+  public void remove(Conversation conversation) {
+    
+    conversationById.remove(conversation.id);  
+    conversationByTime.remove(conversation.creation);
+    conversationByText.remove(conversation.title);
   }
 
   public StoreAccessor<Uuid, Conversation> conversationById() {

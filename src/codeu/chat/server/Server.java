@@ -154,7 +154,15 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_NICKNAME_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, response);
+    } else if (type == NetworkCode.REMOVE_USER_REQUEST) {
 
+      //final Uuid id = Uuid.SERIALIZER.read(in);
+      final String name = Serializers.STRING.read(in);
+
+      final User user = controller.deleteUser(name);
+
+      Serializers.INTEGER.write(out, NetworkCode.REMOVE_USER_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, user);
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
       final String title = Serializers.STRING.read(in);
@@ -163,6 +171,15 @@ public final class Server {
       final Conversation conversation = controller.newConversation(title, owner);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
+      Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
+
+    } else if (type == NetworkCode.DELETE_CONVERSATION_REQUEST) {
+
+      final String title = Serializers.STRING.read(in);
+
+      final Conversation conversation = controller.deleteConversation(title);
+
+      Serializers.INTEGER.write(out, NetworkCode.DELETE_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
 
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {

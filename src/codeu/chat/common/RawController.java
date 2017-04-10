@@ -36,10 +36,22 @@ public interface RawController {
   // use, the call will fail and null will be returned.
   User newUser(Uuid id, String name, Time creationTime);
 
+  // DELETE USER
+
+  // Deletes a user from the model with a specific name. If the id doesn't exist,
+  // the call with fail and the method will return False.
+  User deleteUser(String name, Time deletionTime);
+
   // NEW CONVERSATION
   //
   // Add a new conversation to the model with a specific if. If the id is
   // already in use, the call will fail and null will be returned.
   Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime);
+
+  // DELETE CONVERSATION
+
+  // Deletes a conversation from the model with a specific title. If the id doesn't exist,
+  // the call with fail and the method will return False.
+  Conversation deleteConversation(String title, Time deletionTime);
 
 }

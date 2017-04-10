@@ -22,6 +22,7 @@ import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
 import java.io.Console;
+import codeu.chat.util.Uuid;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -50,8 +51,8 @@ public final class Chat {
     System.out.println("   sign-out  - sign out current user.");
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
-    System.out.println("   u-add <name> n-add <nickname> - add a new user with nickname");
+    System.out.println("   u-add <name> [n-add <nickname>] - add a new user [with nickname]");
+    System.out.println("   u-delete <username> - delete an existing user");
     System.out.println("   u-list-all    - list all users known to system.");
     System.out.println("Nickname commands:");
     System.out.println("   n-add <name>  - set a new nickname for the current user");
@@ -59,6 +60,7 @@ public final class Chat {
     System.out.println("   c-add <title>    - add a new conversation.");
     System.out.println("   c-list-all       - list all conversations known to system.");
     System.out.println("   c-select <index> - select conversation from list.");
+    System.out.println("   c-delete <title> - delete a conversation by ID");
     System.out.println("Message commands:");
     System.out.println("   m-add <body>     - add a new message to the current conversation.");
     System.out.println("   m-list-all       - list all messages in the current conversation.");
@@ -123,7 +125,18 @@ public final class Chat {
         addUser(name, pass, confirm);
       }
 
-    } else if (token.equals("u-list-all")) {
+    } else if (token.equals("u-delete")) {
+      if (!tokenScanner.hasNext()) {
+        System.out.println("ERROR: Username not supplied.");
+      } else {
+        String parseId = tokenScanner.nextLine().trim();
+        System.out.format("PRINT: Username: %s\n", parseId);
+        //Uuid userId = Uuid.fromString(parseId);
+        deleteUser(parseId);
+      }
+    }
+
+      else if (token.equals("u-list-all")) {
 
       showAllUsers();
 
@@ -145,6 +158,21 @@ public final class Chat {
         } else {
           final String title = tokenScanner.nextLine().trim();
           clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
+        }
+      }
+
+    } else if (token.equals("c-delete")) {
+
+      if (!clientContext.user.hasCurrent()) {
+        System.out.println("ERROR: Not signed in.");
+      } else {
+        if (!tokenScanner.hasNext()) {
+          System.out.println("ERROR: Conversation name not supplied.");
+        } else {
+          final String title = tokenScanner.nextLine().trim();
+          clientContext.conversation.deleteConversation(title);
+          //Uuid conversationID = Uuid.fromString(title);
+          //clientContext.conversation.deleteConversation(conversationID);
         }
       }
 
@@ -299,6 +327,11 @@ public final class Chat {
   // Add a new nickname.
   private void addNickname(String name) {
     clientContext.user.addNickname(name);
+  }
+
+  // Delete a user
+  private void deleteUser(String name) {
+    clientContext.user.deleteUser(name);
   }
 
   // Display all users known to server.

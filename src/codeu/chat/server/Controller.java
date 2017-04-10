@@ -15,6 +15,8 @@
 package codeu.chat.server;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -31,6 +33,9 @@ public final class Controller implements RawController, BasicController {
 
   private final Model model;
   private final Uuid.Generator uuidGenerator;
+
+  private final Map<String, User> usersByName = new HashMap<>();
+  private final Map<String, Conversation> conversationsByTitle = new HashMap<>();
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
@@ -59,8 +64,18 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
+  public User deleteUser(String name) {
+    return deleteUser(name, Time.now());
+  }
+
+  @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
+  }
+
+  @Override
+  public Conversation deleteConversation(String title) {
+    return deleteConversation(title, Time.now());
   }
 
   @Override
@@ -120,6 +135,7 @@ public final class Controller implements RawController, BasicController {
     if (isIdFree(id)) {
 
       user = new User(id, name, creationTime);
+      usersByName.put(name, user);
       model.add(user);
 
       LOG.info(
@@ -158,14 +174,26 @@ public final class Controller implements RawController, BasicController {
           nickname,
           creationTime);
 
+  @Override 
+  public User deleteUser(String name, Time deletionTime) {
+    System.out.println("In deleteUser");
+    User user = null;
+    if (usersByName.containsKey(name)) {
+
+      user = usersByName.get(name);
+      usersByName.remove(name);
+      model.remove(user);
+
+      LOG.info(
+          "removeUser success (user.id=%s user.name=%s user.time=%s)",
+          user.id,
+          user.name,
+          user.creation);
+
     } else {
 
       LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.nickname=%s user.time=%s)",
-          id,
-          name,
-          nickname,
-          creationTime);
+          "deleteUser failed - name not found (user.id=%s)", name);
     }
 
     return user;
@@ -180,6 +208,7 @@ public final class Controller implements RawController, BasicController {
 
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
+      conversationsByTitle.put(title, conversation);
       model.add(conversation);
 
       LOG.info("Conversation added: " + conversation.id);
@@ -193,6 +222,28 @@ public final class Controller implements RawController, BasicController {
     if (model.userById().first(id).ifCorrectPassword(pass))
       return model.userById().first(id);
     return null;
+
+  @Override
+  public Conversation deleteConversation(String title, Time deletionTime) {
+    Conversation conversation = null;
+    if (conversationsByTitle.containsKey(title)) {
+      conversation = conversationsByTitle.get(title);
+      conversationsByTitle.remove(title);
+      model.remove(conversation);
+
+      LOG.info(
+          "removeConversation success (conversation.id=%s conversation.owner=%s conversation.title=%s)",
+          conversation.id,
+          conversation.owner,
+          conversation.title);
+    } else {
+
+      LOG.info(
+          "deleteConversation failed - title not found (user.id=%s)",
+          title);
+    }
+
+    return conversation;
   }
 
   private Uuid createId() {

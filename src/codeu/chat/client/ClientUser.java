@@ -19,6 +19,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.lang.Object;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -34,8 +38,9 @@ public final class ClientUser {
 
   private User current = null;
 
+  private final Map<String, User> usersByUsername = new HashMap<>();
   private final Map<Uuid, User> usersById = new HashMap<>();
-
+  
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
   private Store<String, User> usersByNickname = new Store<>(String.CASE_INSENSITIVE_ORDER);
@@ -54,7 +59,10 @@ public final class ClientUser {
       clean = false;
     } else {
 
-      // TODO: check for invalid characters
+      // only accepts names that contain alphabets and spaces.
+      Pattern validPattern = Pattern.compile("^[ A-z]+$");
+      Matcher match = validPattern.matcher(userName);
+      clean = match.matches();
 
     }
     return clean;
@@ -133,6 +141,7 @@ public final class ClientUser {
           (!validInputs) ? "bad input value" : ((existed) ? "existed username/nickname" : "server failure"));
     } else {
       LOG.info("New user complete, Name= \"%s\" Nickname= \"%s\" UUID=%s", user.name, user.nickname, user.id);
+      usersByUsername.put(user.name, user);
       updateUsers();
     }
   }
@@ -157,6 +166,27 @@ public final class ClientUser {
       else{
         LOG.info("Cannot set nickname");
       }
+
+  public void deleteUser(String name) {
+    
+    // check if user exists in the system OR usersById.containsKey(id)
+
+    if (usersByUsername.containsKey(name)) {
+      User removeUser = usersByUsername.get(name);
+      final User user = controller.deleteUser(name);
+      if (user == null) {
+        System.out.format("Error: user not deleted - server failure");
+      } else {
+        LOG.info("Remove user complete, Name=\"%s\" UUID=%s", user.name, user.id);
+        usersByUsername.remove(user.name);
+        // System.out.format("user by name -%s", usersByName.first(user.name).name);
+        // System.out.format("user by id-%s", usersById.get(user.id).name);
+        // usersByName.remove(user.name);
+        // usersById.remove(user.id);
+        updateUsers();
+      }
+    } else {
+      System.out.format("Error: user not deleted - user not found, check input!");
     }
   }
 
