@@ -147,7 +147,7 @@ public final class Server {
 
     } else if (type == NetworkCode.NEW_NICKNAME_REQUEST) {
 
-      final Uuid uuid = Uuids.SERIALIZER.read(in);
+      final Uuid uuid = Uuid.SERIALIZER.read(in);
       final String nickname = Serializers.STRING.read(in);
 
       final User response = controller.setNickname(uuid, nickname);
@@ -252,6 +252,16 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
+
+    } else if (type == NetworkCode.CHECK_PASSWORD_REQUEST) {
+
+      final Uuid uuid = Uuid.SERIALIZER.read(in);
+      final String pass = Serializers.STRING.read(in);
+
+      final User response = controller.ifCorrectPassword(uuid, pass);
+
+      Serializers.INTEGER.write(out, NetworkCode.CHECK_PASSWORD_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, response);
 
     } else {
 

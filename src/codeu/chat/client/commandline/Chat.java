@@ -21,6 +21,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
+import java.io.Console;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -93,8 +94,8 @@ public final class Chat {
         System.out.println("ERROR: No user name supplied.");
       } else {
         String username = tokenScanner.nextLine().trim();
-        System.out.println("Enter your password:");
-        String pass = lineScanner.nextLine().trim();
+        Console console = System.console();
+        String pass = new String(console.readPassword("Enter your secret password: "));
         signInUser(username, pass);
       }
 
@@ -115,11 +116,11 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        String username = tokenScanner.nextLine().trim();
-        System.out.println("Enter your password:");
-        String pass = lineScanner.nextLine().trim();
-        // System.out.println(pass);
-        addUser(username, pass);
+        String name = tokenScanner.nextLine().trim();
+        Console console = System.console();
+        String pass = new String(console.readPassword("Enter your secret password: "));
+        String confirm = new String(console.readPassword("Confirm your password: "));
+        addUser(name, pass, confirm);
       }
 
     } else if (token.equals("u-list-all")) {
@@ -284,11 +285,15 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name, String pass) {
+  private void addUser(String name, String pass, String confirm) {
+    if (!pass.equals(confirm)){
+      System.out.println("Password doesn't match");
+      return;
+    }
     String[] name_nickname = name.split("n-add");
-    String fullname = name_nickname[0].trim();
+    String username = name_nickname[0].trim();
     String nickname = name_nickname.length == 1 ? "" : name_nickname[1].trim();
-    clientContext.user.addUser(fullname, nickname, pass);
+    clientContext.user.addUser(username, nickname, pass);
   }
 
   // Add a new nickname.

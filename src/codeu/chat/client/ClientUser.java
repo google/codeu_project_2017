@@ -87,16 +87,7 @@ public final class ClientUser {
   }
 
   public boolean signInUser(String name) {
-    updateUsers();
-
-    final User prev = current;
-    if (name != null) {
-      final User newCurrent = usersByName.first(name);
-      if (newCurrent != null) {
-        current = newCurrent;
-      }
-    }
-    return (prev != current);
+    return signInUser(name, "");
   }
 
   public boolean signInUser(String name, String pass) {
@@ -106,7 +97,7 @@ public final class ClientUser {
     final User prev = current;
     if (name != null) {
       final User newCurrent = usersByName.first(name);
-      final boolean ifCorrectPassword = newCurrent.ifCorrectPassword(pass);
+      final boolean ifCorrectPassword = controller.ifCorrectPassword(newCurrent, pass);
       if (newCurrent != null && ifCorrectPassword) {
         current = newCurrent;
       }
@@ -125,19 +116,7 @@ public final class ClientUser {
   }
 
   public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
-    final boolean existed = ifExistedName(name);
-    final boolean valid = (validInputs && !existed);
-
-    final User user = !valid ? null : controller.newUser(name);
-
-    if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
-          (!validInputs) ? "bad input value" : ((existed) ? "existed username" : "server failure"));
-    } else {
-      LOG.info("New user complete, Name= \"%s\" Nickname= \"%s\" UUID=%s", user.name, user.nickname, user.id);
-      updateUsers();
-    }
+    addUser(name, "", "");
   }
 
   public void addUser(String name, String nickname, String pass) {

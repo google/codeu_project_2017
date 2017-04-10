@@ -66,27 +66,7 @@ public class Controller implements BasicController {
 
   @Override
   public User newUser(String name) {
-    User response = null;
-
-    try (final Connection connection = source.connect()) {
-
-      Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
-      Serializers.STRING.write(connection.out(), name);
-      Serializers.STRING.write(connection.out(), "");
-      LOG.info("newUser: Request completed.");
-
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {
-        response = Serializers.nullable(User.SERIALIZER).read(connection.in());
-        LOG.info("newUser: Response completed.");
-      } else {
-        LOG.error("Response from server failed.");
-      }
-    } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
-    }
-
-    return response;
+    return newUser(name, "", "");
   }
 
   public User newUser(String name, String nickname, String pass) {
@@ -122,13 +102,37 @@ public class Controller implements BasicController {
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_NICKNAME_REQUEST);
-      Uuids.SERIALIZER.write(connection.out(), user.id);
+      Uuid.SERIALIZER.write(connection.out(), user.id);
       Serializers.STRING.write(connection.out(), nickname);
       LOG.info("setNickname: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_NICKNAME_RESPONSE) {
         response = Serializers.nullable(User.SERIALIZER).read(connection.in());
         LOG.info("setNickname: Response completed.");
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return response != null;
+  }
+
+  public boolean ifCorrectPassword(User user, String password) {
+    User response = null;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.CHECK_PASSWORD_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), user.id);
+      Serializers.STRING.write(connection.out(), password);
+      LOG.info("checkPassword: Request completed.");
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.CHECK_PASSWORD_RESPONSE) {
+        response = Serializers.nullable(User.SERIALIZER).read(connection.in());
+        LOG.info("checkPassword: Response completed.");
       } else {
         LOG.error("Response from server failed.");
       }

@@ -48,7 +48,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   public User newUser(String name, String nickname, String pass) {
-    return newUser(createId(), name, Time.now(), nickname, pass);
+    User user = newUser(createId(), name, Time.now(), nickname, pass);
+    return user;
   }
 
   public User setNickname(Uuid id, String nickname){
@@ -145,7 +146,9 @@ public final class Controller implements RawController, BasicController {
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime, nickname, pass);
+      user = new User(id, name, creationTime, nickname);
+      //TODO: fix it
+      user.setPassword(pass);
       model.add(user);
 
       LOG.info(
@@ -183,6 +186,13 @@ public final class Controller implements RawController, BasicController {
     }
 
     return conversation;
+  }
+
+  public User ifCorrectPassword(Uuid id, String pass){
+    if (model.userById().first(id) == null) return null;
+    if (model.userById().first(id).ifCorrectPassword(pass))
+      return model.userById().first(id);
+    return null;
   }
 
   private Uuid createId() {

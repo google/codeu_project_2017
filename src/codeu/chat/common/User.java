@@ -34,19 +34,19 @@ public final class User {
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.nickname);
-      Serializers.STRING.write(out, value.getPassword());
     }
 
     @Override
     public User read(InputStream in) throws IOException {
       // System.out.println("in read User");
-      return new User(
+      User user = new User(
           Uuid.SERIALIZER.read(in),
           Serializers.STRING.read(in),
           Time.SERIALIZER.read(in),
-          Serializers.STRING.read(in),
-          Serializers.STRING.read(in)
-      );
+          Serializers.STRING.read(in));
+      //TODO: encrypt password
+      // user.setPassword(Serializers.STRING.read(in));
+      return user;
     }
   };
 
@@ -64,14 +64,21 @@ public final class User {
 
   }
 
-  public User(Uuid id, String name, Time creation, String nickname, String pass) {
+  // public User(Uuid id, String name, Time creation, String nickname, String pass) {
 
+  //   this.id = id;
+  //   this.name = name;
+  //   this.nickname = nickname;
+  //   this.creation = creation;
+  //   this.password = pass;
+
+  // }
+
+  public User(Uuid id, String name, Time creation, String nickname) {
     this.id = id;
     this.name = name;
     this.nickname = nickname;
     this.creation = creation;
-    this.password = pass;
-
   }
 
   public void setNickname(String nickname){
@@ -87,7 +94,7 @@ public final class User {
   }
 
   //TODO: fix this
-  public String getPassword(){
-    return this.password;
+  public void setPassword(String password){
+    this.password = password;
   }
 }
