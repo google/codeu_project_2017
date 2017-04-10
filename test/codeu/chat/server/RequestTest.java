@@ -12,6 +12,7 @@ import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
 import okhttp3.*;
 import okhttp3.Request;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -37,10 +38,6 @@ public final class RequestTest {
 
         public Server getServer() {
             return servlet;
-        }
-
-        public void kill() {
-            servlet.kill();
         }
 
         @Override
@@ -85,9 +82,11 @@ public final class RequestTest {
 
     }
 
+    private Servlet servlet;
+
     @Before
     public void doBefore() throws IOException {
-        Servlet servlet = new Servlet(8000);
+        servlet = new Servlet(8000);
         new Thread(servlet).start();
     }
 
@@ -105,7 +104,13 @@ public final class RequestTest {
         Submit sub = new Submit(request);
         new Thread(sub).start();
         Thread.sleep(100);
+
         assertTrue("Unable to create user, received " + sub.getResult() + "instead.", sub.getResult().startsWith("[UUID:"));
+    }
+
+    @After
+    public void doAfter() throws IOException {
+        servlet.getServer().kill();
     }
 
 }

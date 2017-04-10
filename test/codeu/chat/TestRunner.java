@@ -32,7 +32,7 @@ public final class TestRunner {
              codeu.chat.util.store.StoreTest.class
          );
       for (final Failure failure : result.getFailures()) {
-         System.out.println(failure.toString());
+         System.out.println(failure.getException());
       }
       System.out.println(result.wasSuccessful());
    }
