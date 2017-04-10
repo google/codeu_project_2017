@@ -40,11 +40,12 @@ public class Controller implements BasicController {
     this.source = source;
   }
 
-  @Override
+  
   public Message newMessage(Uuid author, Uuid conversation, String body) {
     return newMessage(author, conversation, null, body);
   }
 
+  @Override
   public Message newMessage(Uuid author, Uuid conversation, Uuid group, String body) {
 
     Message response = null;

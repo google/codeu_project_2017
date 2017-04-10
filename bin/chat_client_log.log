@@ -2021,3 +2021,45 @@ Apr 10, 2017 1:07:13 AM codeu.chat.client.ClientMessage updateMessages
 INFO: Retrieved 1 messages for conversation [UUID:0.2547880307] (c).
 >>>>>>> 7f1e845cfcf5513f421ecd262cd341453290719c
 
+Apr 10, 2017 1:40:53 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 10, 2017 1:40:53 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 10, 2017 1:40:53 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 10, 2017 1:40:53 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 10, 2017 1:41:05 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 10, 2017 1:41:05 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 10, 2017 1:41:05 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "neil" Nickname= "" UUID=[UUID:24.3825312317]
+Apr 10, 2017 1:41:20 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 10, 2017 1:41:20 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 10, 2017 1:41:20 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "random" Nickname= "" UUID=[UUID:24.2218147108]
+Apr 10, 2017 1:41:30 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 10, 2017 1:41:30 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 10, 2017 1:41:30 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "john" Nickname= "" UUID=[UUID:24.4262684592]
+Apr 10, 2017 1:41:41 AM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Request completed.
+Apr 10, 2017 1:41:41 AM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Response completed.
+Apr 10, 2017 1:41:41 AM codeu.chat.client.ClientUser deleteUser
+INFO: Remove user complete, Name="random" UUID=[UUID:24.2218147108]
+Apr 10, 2017 1:41:54 AM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Request completed.
+Apr 10, 2017 1:41:54 AM codeu.chat.client.Controller deleteUser
+INFO: deleteUser: Response completed.
+Apr 10, 2017 1:41:54 AM codeu.chat.client.ClientUser deleteUser
+INFO: Remove user complete, Name="john" UUID=[UUID:24.4262684592]
+Apr 10, 2017 1:42:09 AM codeu.chat.client.Controller ifCorrectPassword
+INFO: checkPassword: Request completed.
+Apr 10, 2017 1:42:09 AM codeu.chat.client.Controller ifCorrectPassword
+INFO: checkPassword: Response completed.
