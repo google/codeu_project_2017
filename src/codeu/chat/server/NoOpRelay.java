@@ -50,6 +50,7 @@ public final class NoOpRelay implements Relay {
                        byte[] teamSecret,
                        Relay.Bundle.Component user,
                        Relay.Bundle.Component conversation,
+                       Relay.Bundle.Component group,
                        Relay.Bundle.Component message) {
 
     return true;

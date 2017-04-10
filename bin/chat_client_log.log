@@ -553,3 +553,39 @@ INFO: Retrieved 0 messages for conversation [UUID:24.3250053733] (random).
 
 Apr 09, 2017 2:29:41 PM codeu.chat.client.ClientConversation deleteConversation
 INFO: Deleted conversation: Title= "random" UUID= [UUID:24.3250053733]
+Apr 09, 2017 6:52:48 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 09, 2017 6:52:48 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 09, 2017 6:52:48 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 09, 2017 6:52:48 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 09, 2017 8:33:46 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 09, 2017 8:33:46 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 09, 2017 8:33:46 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 09, 2017 8:33:46 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 09, 2017 8:33:53 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.NoRouteToHostException: No route to host
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:73)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:102)
+	at codeu.chat.client.commandline.Chat.addUser(Chat.java:328)
+	at codeu.chat.client.commandline.Chat.doOneCommand(Chat.java:120)
+	at codeu.chat.client.commandline.Chat.handleCommand(Chat.java:345)
+	at codeu.chat.ClientMain.main(ClientMain.java:57)
+

@@ -46,12 +46,18 @@ public interface RawController {
   //
   // Add a new conversation to the model with a specific if. If the id is
   // already in use, the call will fail and null will be returned.
-  Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime);
+  Conversation newConversation(Uuid id, String title, Uuid owner, Uuid group, Time creationTime);
 
   // DELETE CONVERSATION
 
   // Deletes a conversation from the model with a specific title. If the id doesn't exist,
   // the call with fail and the method will return False.
   Conversation deleteConversation(String title, Time deletionTime);
+
+  // NEW GROUP
+  //
+  // Add a new group to the model with a specific if. If the id is
+  // already in use, the call will fail and null will be returned.
+  Group newGroup(Uuid id, String title, Uuid owner, Time creationTime);
 
 }

@@ -19,6 +19,7 @@ import java.io.StringWriter;
 import java.lang.Thread;
 
 import codeu.chat.common.BasicController;
+import codeu.chat.common.Group;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
@@ -114,7 +115,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner)  {
+  public Conversation newConversation(String title, Uuid owner, Uuid group)  {
 
     Conversation response = null;
 
@@ -158,4 +159,28 @@ public class Controller implements BasicController {
 
     return response;
   }
+
+      @Override
+    public Group newGroup(String title, Uuid owner)  {
+
+      Group response = null;
+
+      try (final Connection connection = source.connect()) {
+
+        Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_GROUP_REQUEST);
+        Serializers.STRING.write(connection.out(), title);
+        Uuid.SERIALIZER.write(connection.out(), owner);
+
+        if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_GROUP_RESPONSE) {
+          response = Serializers.nullable(Group.SERIALIZER).read(connection.in());
+        } else {
+          LOG.error("Response from server failed.");
+        }
+      } catch (Exception ex) {
+        System.out.println("ERROR: Exception during call on server. Check log for details.");
+        LOG.error(ex, "Exception during call on server.");
+      }
+
+      return response;
+    }
 }

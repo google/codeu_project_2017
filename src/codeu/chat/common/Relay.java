@@ -96,6 +96,11 @@ public interface Relay {
     // All the infromation about the conversation that the message is part of.
     Component conversation();
 
+    // GROUP
+    //
+    // All the infromation about the group that the conversation is part of.
+    Component group();
+
     // MESSAGE
     //
     // All the information about the message that was sent from the server to
@@ -121,6 +126,7 @@ public interface Relay {
                 byte[] teamSecret,
                 Bundle.Component user,
                 Bundle.Component conversation,
+                Bundle.Component group,
                 Bundle.Component message);
 
   // READ

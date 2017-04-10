@@ -71,11 +71,11 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   public void remove(KEY key) {
 
     StoreLink<KEY, VALUE> current = rootLink;
-    System.out.println("entered method");
+    //System.out.println("entered method");
 
     while (current.next != null && comparator.compare(current.next.key, key) < 0) {
       current = current.next;
-      System.out.println("entered loop");
+      //System.out.println("entered loop");
     }
 
     StoreLink<KEY, VALUE> previous = current;

@@ -20,6 +20,7 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
@@ -53,6 +54,10 @@ public final class Chat {
     System.out.println("   u-add <name>  - add a new user.");
     System.out.println("   u-delete <username> - delete an existing user");
     System.out.println("   u-list-all    - list all users known to system.");
+    System.out.println("Group commands:");
+    System.out.println("   g-add <title>    - add a new group.");
+    System.out.println("   g-list-all       - list all groups known to system.");
+    System.out.println("   g-select <index> - select group from list.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
     System.out.println("   c-list-all       - list all conversations known to system.");
@@ -124,22 +129,44 @@ public final class Chat {
         //Uuid userId = Uuid.fromString(parseId);
         deleteUser(parseId);
       }
-    }
 
-      else if (token.equals("u-list-all")) {
+    } else if (token.equals("u-list-all")) {
 
       showAllUsers();
 
-    } else if (token.equals("c-add")) {
+    } else if (token.equals("g-add")) {
 
       if (!clientContext.user.hasCurrent()) {
         System.out.println("ERROR: Not signed in.");
       } else {
         if (!tokenScanner.hasNext()) {
+          System.out.println("ERROR: Group name not supplied.");
+        } else {
+          final String name = tokenScanner.nextLine().trim();
+          clientContext.group.startGroup(name, clientContext.user.getCurrent().id);
+        }
+      }
+
+    } else if (token.equals("g-list-all")) {
+
+      clientContext.group.showAllGroups();
+
+    } else if (token.equals("g-select")) {
+
+      selectGroup(lineScanner);
+
+    } else if (token.equals("c-add")) {
+
+      if (!clientContext.user.hasCurrent()) {
+        System.out.println("ERROR: Not signed in.");
+    } else if (!clientContext.group.hasCurrent()) {
+        System.out.println("ERROR: No group selected.");
+      } else {
+        if (!tokenScanner.hasNext()) {
           System.out.println("ERROR: Conversation title not supplied.");
         } else {
           final String title = tokenScanner.nextLine().trim();
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
+          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id, clientContext.group.getCurrent().id);
         }
       }
 
@@ -170,6 +197,8 @@ public final class Chat {
 
       if (!clientContext.user.hasCurrent()) {
         System.out.println("ERROR: Not signed in.");
+      } else if (!clientContext.group.hasCurrent()) {
+        System.out.println("ERROR: No group selected.");
       } else if (!clientContext.conversation.hasCurrent()) {
         System.out.println("ERROR: No conversation selected.");
       } else {
@@ -352,6 +381,36 @@ public final class Chat {
     if (newCurrent != previous) {
       clientContext.conversation.setCurrent(newCurrent);
       clientContext.conversation.updateAllConversations(true);
+    }
+  }
+
+  public void selectGroup(Scanner lineScanner) {
+
+    clientContext.group.updateAllGroups(false);
+    final int selectionSize = clientContext.group.groupsCount();
+    System.out.format("Selection contains %d entries.\n", selectionSize);
+
+    final GroupSummary previous = clientContext.group.getCurrent();
+    GroupSummary newCurrent = null;
+
+    if (selectionSize == 0) {
+      System.out.println("Nothing to select.");
+    } else {
+      final ListNavigator<GroupSummary> navigator =
+          new ListNavigator<GroupSummary>(
+              clientContext.group.getGroupSummaries(),
+              lineScanner, PAGE_SIZE);
+      if (navigator.chooseFromList()) {
+        newCurrent = navigator.getSelectedChoice();
+        clientContext.message.resetCurrent(newCurrent != previous);
+        System.out.format("OK. Group \"%s\" selected.\n", newCurrent.title);
+      } else {
+        System.out.println("OK. Current Group is unchanged.");
+      }
+    }
+    if (newCurrent != previous) {
+      clientContext.group.setCurrent(newCurrent);
+      clientContext.group.updateAllGroups(true);
     }
   }
 }

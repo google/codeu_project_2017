@@ -73,6 +73,7 @@ public final class ServerFrontEnd {
       final Uuid team = Uuid.SERIALIZER.read(in);
       final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
       final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
+      final Relay.Bundle.Component group = COMPONENT_SERIALIZER.read(in);
       final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
 
       return new Relay.Bundle() {
@@ -87,6 +88,8 @@ public final class ServerFrontEnd {
         @Override
         public Relay.Bundle.Component conversation() { return conversation; }
         @Override
+        public Relay.Bundle.Component group() { return group; }
+        @Override
         public Relay.Bundle.Component message() { return message; }
       };
     }
@@ -98,6 +101,7 @@ public final class ServerFrontEnd {
       Uuid.SERIALIZER.write(out, value.team());
       COMPONENT_SERIALIZER.write(out, value.user());
       COMPONENT_SERIALIZER.write(out, value.conversation());
+      COMPONENT_SERIALIZER.write(out, value.group());
       COMPONENT_SERIALIZER.write(out, value.message());
     }
   };
@@ -153,6 +157,7 @@ public final class ServerFrontEnd {
     final byte[] teamSecret = Serializers.BYTES.read(connection.in());
     final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(connection.in());
     final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(connection.in());
+    final Relay.Bundle.Component group = COMPONENT_SERIALIZER.read(connection.in());
     final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(connection.in());
 
     LOG.info(
@@ -160,12 +165,14 @@ public final class ServerFrontEnd {
         teamId,
         user.id(),
         conversation.id(),
+        group.id(),
         message.id());
 
     final boolean result = backEnd.write(teamId,
                                          teamSecret,
                                          user,
                                          conversation,
+                                         group,
                                          message);
 
     LOG.info("Writing result=%s", result ? "success" : "fail");

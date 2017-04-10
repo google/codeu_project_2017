@@ -15,13 +15,17 @@
 package codeu.chat.client;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.List;
 import java.util.regex.Matcher;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Group;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
 import codeu.chat.util.Uuid;
@@ -38,6 +42,7 @@ public final class ClientConversation {
   private Conversation currentConversation = null;
 
   private final ClientUser userContext;
+  private final ClientGroup groupContext;
   private ClientMessage messageContext = null;
 
   // This is the set of conversations known to the server.
@@ -47,10 +52,12 @@ public final class ClientConversation {
   private Store<String, ConversationSummary> summariesSortedByTitle =
       new Store<>(String.CASE_INSENSITIVE_ORDER);
 
-  public ClientConversation(Controller controller, View view, ClientUser userContext) {
+  public ClientConversation(Controller controller, View view, ClientUser userContext, ClientGroup groupContext) {
     this.controller = controller;
     this.view = view;
     this.userContext = userContext;
+    this.groupContext = groupContext;
+    this.groupContext.setConversationContext(this);
   }
 
   public void setMessageContext(ClientMessage messageContext) {
@@ -63,6 +70,7 @@ public final class ClientConversation {
     if ((title.length() <= 0) || (title.length() > 64)) {
       clean = false;
     } else {
+
       // only accepts conversation titles that contain alphabets and spaces.
       Pattern validPattern = Pattern.compile("^[ A-z]+$");
       Matcher match = validPattern.matcher(title);
@@ -86,13 +94,27 @@ public final class ClientConversation {
   }
 
   public void showCurrent() {
-    printConversation(currentSummary, userContext);
+    printConversation(currentSummary, userContext, groupContext);
   }
 
-  public void startConversation(String title, Uuid owner) {
+  public void resetCurrent(boolean replaceAll) {
+    updateConversations(replaceAll);
+  }
+
+  // Update the list of conversations for the current group.
+  public void updateConversations(boolean replaceAll) {
+    updateConversations(groupContext.getCurrent(), replaceAll);
+  }
+
+  // Update the list of conversations for the given group.
+  public void updateConversations(GroupSummary group, boolean replaceAll) {
+
+  }
+
+  public void startConversation(String title, Uuid owner, Uuid group) {
     final boolean validInputs = isValidTitle(title);
 
-    final Conversation conv = (validInputs) ? controller.newConversation(title, owner) : null;
+    final Conversation conv = (validInputs) ? controller.newConversation(title, owner, group) : null;
 
     if (conv == null) {
       System.out.format("Error: conversation not created - %s.\n",
@@ -127,7 +149,7 @@ public final class ClientConversation {
     updateAllConversations(false);
 
     for (final ConversationSummary c : summariesByUuid.values()) {
-      printConversation(c, userContext);
+      printConversation(c, userContext, groupContext);
     }
   }
 
@@ -191,19 +213,21 @@ public final class ClientConversation {
   }
 
   // Print Conversation.  User context is used to map from owner UUID to name.
-  public static void printConversation(ConversationSummary c, ClientUser userContext) {
+  public static void printConversation(ConversationSummary c, ClientUser userContext, ClientGroup groupContext) {
     if (c == null) {
       System.out.println("Null conversation");
     } else {
       final String name = (userContext == null) ? null : userContext.getName(c.owner);
       final String ownerName = (name == null) ? "" : String.format(" (%s)", name);
+      final String groupName = (groupContext == null) ? null : groupContext.getGroup(c.group).title;
+      final String groupNameFormatted = (groupName == null) ? "" : String.format(" (%s)", groupName);
       System.out.format(" Title: %s\n", c.title);
-      System.out.format("    Id: %s owner: %s%s created %s\n", c.id, c.owner, ownerName, c.creation);
+      System.out.format("    Id: %s owner: %s%s group: %s%s created %s\n", c.id, c.owner, ownerName, c.group, groupNameFormatted, c.creation);
     }
   }
 
   // Print Conversation outside of User context.
   public static void printConversation(ConversationSummary c) {
-    printConversation(c, null);
+    printConversation(c, null, null);
   }
 }

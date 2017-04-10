@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import codeu.chat.common.BasicView;
+import codeu.chat.common.Group;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LogicalView;
@@ -114,6 +116,52 @@ public final class View implements BasicView, LogicalView{
     }
 
     return conversations;
+  }
+
+  @Override
+  public Collection<GroupSummary> getAllGroups() {
+
+    final Collection<GroupSummary> summaries = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.GET_ALL_GROUPS_REQUEST);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_ALL_GROUPS_RESPONSE) {
+        summaries.addAll(Serializers.collection(GroupSummary.SERIALIZER).read(connection.in()));
+      } else {
+        LOG.error("Response from server failed.");
+      }
+
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return summaries;
+  }
+
+  @Override
+  public Collection<Group> getGroups(Collection<Uuid> ids) {
+
+    final Collection<Group> groups = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.GET_GROUPS_BY_ID_REQUEST);
+      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_GROUPS_BY_ID_RESPONSE) {
+        groups.addAll(Serializers.collection(Group.SERIALIZER).read(connection.in()));
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return groups;
   }
 
   @Override
@@ -229,6 +277,53 @@ public final class View implements BasicView, LogicalView{
     }
 
     return conversations;
+  }
+
+  @Override
+  public Collection<Group> getGroups(Time start, Time end) {
+
+    final Collection<Group> groups = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.GET_GROUPS_BY_TIME_REQUEST);
+      Time.SERIALIZER.write(connection.out(), start);
+      Time.SERIALIZER.write(connection.out(), end);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
+        groups.addAll(Serializers.collection(Group.SERIALIZER).read(connection.in()));
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return groups;
+  }
+
+  @Override
+  public Collection<Group> getGroups(String filter) {
+
+    final Collection<Group> groups = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.GET_GROUPS_BY_TITLE_REQUEST);
+      Serializers.STRING.write(connection.out(), filter);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_GROUPS_BY_TITLE_RESPONSE) {
+        groups.addAll(Serializers.collection(Group.SERIALIZER).read(connection.in()));
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return groups;
   }
 
   @Override

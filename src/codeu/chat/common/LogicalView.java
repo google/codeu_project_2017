@@ -39,17 +39,31 @@ public interface LogicalView {
 
   // GET CONVERSATIONS
   //
+  //   Get a collection of conversations given a regex expression that will be
+  //   used against every conversation's title. All conversations whose title
+  //   matches the given regex expression will be returned.
+  Collection<Conversation> getConversations(String filter);
+
+  // GET CONVERSATIONS
+  //
   //   Get a collection of conversations given the start and end of a time series.
   //   all conversations that are found to have been created between the start
   //   and end time will be returned.
   Collection<Conversation> getConversations(Time start, Time end);
 
-  // GET CONVERSATIONS
+  // GET GROUPS
   //
-  //   Get a collection of conversations given a regex expression that will be
-  //   used against every conversation's title. All conversations whose title
+  //   Get a collection of groups given a regex expression that will be
+  //   used against every groups's title. All groups whose title
   //   matches the given regex expression will be returned.
-  Collection<Conversation> getConversations(String filter);
+  Collection<Group> getGroups(String filter);
+
+  // GET GROUPS
+  //
+  //   Get a collection of groups given the start and end of a time series.
+  //   all groups that are found to have been created between the start
+  //   and end time will be returned.
+  Collection<Group> getGroups(Time start, Time end);
 
   // GET MESSAGES
   //

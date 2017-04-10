@@ -30,6 +30,8 @@ import java.util.regex.Pattern;
 import codeu.chat.common.BasicView;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Group;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.common.LogicalView;
 import codeu.chat.common.Message;
 import codeu.chat.common.SinglesView;
@@ -71,6 +73,24 @@ public final class View implements BasicView, LogicalView, SinglesView {
   @Override
   public Collection<Conversation> getConversations(Collection<Uuid> ids) {
     return intersect(model.conversationById(), ids);
+  }
+
+  @Override
+  public Collection<GroupSummary> getAllGroups() {
+
+    final Collection<GroupSummary> summaries = new ArrayList<>();
+
+    for (final Group group : model.groupById().all()) {
+        summaries.add(group.summary);
+    }
+
+    return summaries;
+
+  }
+
+  @Override
+  public Collection<Group> getGroups(Collection<Uuid> ids) {
+    return intersect(model.groupById(), ids);
   }
 
   @Override
@@ -119,6 +139,33 @@ public final class View implements BasicView, LogicalView, SinglesView {
     for (final Conversation conversation : model.conversationByText().all()) {
       if (Pattern.matches(filter, conversation.title)) {
         found.add(conversation);
+      }
+    }
+
+    return found;
+  }
+
+  @Override
+  public Collection<Group> getGroups(Time start, Time end) {
+
+    final Collection<Group> groups = new ArrayList<>();
+
+    for (final Group group : model.groupByTime().range(start, end)) {
+      groups.add(group);
+    }
+
+    return groups;
+
+  }
+
+  @Override
+  public Collection<Group> getGroups(String filter) {
+
+    final Collection<Group> found = new ArrayList<>();
+
+    for (final Group group : model.groupByText().all()) {
+      if (Pattern.matches(filter, group.title)) {
+        found.add(group);
       }
     }
 
@@ -187,6 +234,9 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
   @Override
   public Conversation findConversation(Uuid id) { return model.conversationById().first(id); }
+
+  @Override
+  public Group findGroup(Uuid id) { return model.groupById().first(id); }
 
   @Override
   public Message findMessage(Uuid id) { return model.messageById().first(id); }

@@ -18,6 +18,8 @@ import java.util.Comparator;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Group;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
@@ -60,6 +62,10 @@ public final class Model {
   private final Store<Uuid, Conversation> conversationById = new Store<>(UUID_COMPARE);
   private final Store<Time, Conversation> conversationByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Conversation> conversationByText = new Store<>(STRING_COMPARE);
+
+  private final Store<Uuid, Group> groupById = new Store<>(UUID_COMPARE);
+  private final Store<Time, Group> groupByTime = new Store<>(TIME_COMPARE);
+  private final Store<String, Group> groupByText = new Store<>(STRING_COMPARE);
 
   private final Store<Uuid, Message> messageById = new Store<>(UUID_COMPARE);
   private final Store<Time, Message> messageByTime = new Store<>(TIME_COMPARE);
@@ -122,6 +128,24 @@ public final class Model {
 
   public StoreAccessor<String, Conversation> conversationByText() {
     return conversationByText;
+  }
+
+  public void add(Group group) {
+    groupById.insert(group.id, group);
+    groupByTime.insert(group.creation, group);
+    groupByText.insert(group.title, group);
+  }
+
+  public StoreAccessor<Uuid, Group> groupById() {
+    return groupById;
+  }
+
+  public StoreAccessor<Time, Group> groupByTime() {
+    return groupByTime;
+  }
+
+  public StoreAccessor<String, Group> groupByText() {
+    return groupByText;
   }
 
   public void add(Message message) {

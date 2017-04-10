@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import codeu.chat.common.Conversation;
+import codeu.chat.common.Group;
 import codeu.chat.common.Message;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
@@ -32,6 +33,7 @@ public final class RawControllerTest {
 
   private Uuid userId;
   private Uuid conversationId;
+  private Uuid groupId;
   private Uuid messageId;
 
   @Before
@@ -42,6 +44,7 @@ public final class RawControllerTest {
     userId = new Uuid(1);
     conversationId = new Uuid(2);
     messageId = new Uuid(3);
+    groupId = new Uuid(4);
   }
 
   @Test
@@ -91,10 +94,20 @@ public final class RawControllerTest {
         "Check that the user has the correct id",
         Uuid.equals(user.id, userId));
 
+    final Group group = controller.newGroup(groupId, "group", user.id, Time.now());
+
+    assertFalse(
+        "Check that group has a valid reference",
+        group == null);
+    assertTrue(
+        "Check that the group has the correct id",
+        Uuid.equals(group.id, groupId));
+
     final Conversation conversation = controller.newConversation(
         conversationId,
         "conversation",
         user.id,
+        group.id,
         Time.now());
 
     assertFalse(
@@ -117,10 +130,20 @@ public final class RawControllerTest {
         "Check that the user has the correct id",
         Uuid.equals(user.id, userId));
 
+    final Group group = controller.newGroup(groupId, "group", user.id, Time.now());
+
+    assertFalse(
+        "Check that group has a valid reference",
+        group == null);
+    assertTrue(
+        "Check that the group has the correct id",
+        Uuid.equals(group.id, groupId));
+
     final Conversation conversation = controller.newConversation(
         conversationId,
         "conversation",
         user.id,
+        group.id,
         Time.now());
 
     assertFalse(
@@ -142,6 +165,32 @@ public final class RawControllerTest {
   }
 
   @Test
+  public void testAddGroup() {
+
+    final User user = controller.newUser(userId, "user", Time.now());
+
+    assertFalse(
+        "Check that user has a valid reference",
+        user == null);
+    assertTrue(
+        "Check that the user has the correct id",
+        Uuid.equals(user.id, userId));
+
+    final Group group = controller.newGroup(
+        groupId,
+        "group",
+        user.id,
+        Time.now());
+
+    assertFalse(
+        "Check that group has a valid reference",
+        group == null);
+    assertTrue(
+        "Check that the group has the correct id",
+        Uuid.equals(group.id, groupId));
+  }
+
+  @Test
   public void testAddMessage() {
 
     final User user = controller.newUser(userId, "user", Time.now());
@@ -153,10 +202,20 @@ public final class RawControllerTest {
         "Check that the user has the correct id",
         Uuid.equals(user.id, userId));
 
+    final Group group = controller.newGroup(groupId, "group", user.id, Time.now());
+
+    assertFalse(
+    "Check that group has a valid reference",
+        group == null);
+    assertTrue(
+    "Check that the group has the correct id",
+        Uuid.equals(group.id, groupId));
+
     final Conversation conversation = controller.newConversation(
         conversationId,
         "conversation",
         user.id,
+        group.id,
         Time.now());
 
     assertFalse(

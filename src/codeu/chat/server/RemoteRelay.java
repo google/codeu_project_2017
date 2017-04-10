@@ -88,6 +88,7 @@ public final class RemoteRelay implements Relay {
       final Uuid team = Uuid.SERIALIZER.read(in);
       final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
       final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
+      final Relay.Bundle.Component group = COMPONENT_SERIALIZER.read(in);
       final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
 
       return new Relay.Bundle() {
@@ -102,6 +103,8 @@ public final class RemoteRelay implements Relay {
         @Override
         public Relay.Bundle.Component conversation() { return conversation; }
         @Override
+        public Relay.Bundle.Component group() { return group; }
+        @Override
         public Relay.Bundle.Component message() { return message; }
       };
     }
@@ -113,6 +116,7 @@ public final class RemoteRelay implements Relay {
       Uuid.SERIALIZER.write(out, value.team());
       COMPONENT_SERIALIZER.write(out, value.user());
       COMPONENT_SERIALIZER.write(out, value.conversation());
+      COMPONENT_SERIALIZER.write(out, value.group());
       COMPONENT_SERIALIZER.write(out, value.message());
     }
   };
@@ -133,6 +137,7 @@ public final class RemoteRelay implements Relay {
                        byte[] teamSecret,
                        Relay.Bundle.Component user,
                        Relay.Bundle.Component conversation,
+                       Relay.Bundle.Component group,
                        Relay.Bundle.Component message) {
 
     boolean result = false;
@@ -144,6 +149,7 @@ public final class RemoteRelay implements Relay {
       Serializers.BYTES.write(connection.out(), teamSecret);
       COMPONENT_SERIALIZER.write(connection.out(), user);
       COMPONENT_SERIALIZER.write(connection.out(), conversation);
+      COMPONENT_SERIALIZER.write(connection.out(), group);
       COMPONENT_SERIALIZER.write(connection.out(), message);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.RELAY_WRITE_RESPONSE) {

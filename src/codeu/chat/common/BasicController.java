@@ -27,7 +27,7 @@ public interface BasicController {
 
   // NEW MESSAGE
   //
-  //   Csreate a new message on the server. All parameters must be provided
+  //   Create a new message on the server. All parameters must be provided
   //   or else the server won't apply the change. If the operation is
   //   successful, a Message object will be returned representing the full
   //   state of the message on the server.
@@ -46,7 +46,7 @@ public interface BasicController {
 
   // Deletes an existing user on the server. All parameters must be provided
   // or else the server won't apply the change. Depending on whether the operation
-  // is successful or not, a User object will be returned representing the 
+  // is successful or not, a User object will be returned representing the
   // outcome of the method.
   User deleteUser(String name);
 
@@ -57,14 +57,21 @@ public interface BasicController {
   //  operation is successful, a Conversation object will be returned
   //  representing the full state of the conversation on the server.
   //  Whether conversations can have the same title is undefined.
-  Conversation newConversation(String title, Uuid owner);
+  Conversation newConversation(String title, Uuid owner, Uuid group);
 
   // DELETE CONVERSATION
 
   // Deletes an existing converstaion on the server. All parameters must be provided
   // or else the server won't apply the change. Depending on whether the operation
-  // is successful or not, a Conversation object will be returned representing the 
+  // is successful or not, a Conversation object will be returned representing the
   // outcome of the method.
   Conversation deleteConversation(String title);
+
+
+  // NEW GROUP
+  //
+  // Add a new group to the model with a specific if. If the id is
+  // already in use, the call will fail and null will be returned.
+  Group newGroup(String title, Uuid owner);
 
 }
