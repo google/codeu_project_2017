@@ -82,10 +82,13 @@ public final class Server {
           LOG.error(ex, "Failed to read update from relay.");
 
         }
-
         timeline.scheduleIn(RELAY_REFRESH_MS, this);
       }
     });
+  }
+
+  public void kill() {
+    timeline.stop();
   }
 
   public void handleConnection(final Connection connection) {
@@ -151,34 +154,61 @@ public final class Server {
   private boolean onRestfulMessage(InputStream in, OutputStream out) throws IOException {
     LOG.info("Receiving a RESTful message.");
     Request r = RequestHandler.parseRaw(in);
-    switch (r.getHeader("type")) {
 
-      case ("NEW_MESSAGE_REQUEST"):
-        final Uuid author = Uuid.fromString(r.getHeader("author"));
-        final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
-        final String content = r.getHeader("content");
-        if (author == null || conversation == null || content == null) {
-          RequestHandler.failResponse(out, "Missing author, conversation, or content header.");
-          break;
-        }
-        final Message message = controller.newMessage(author, conversation, content);
-        if (message == null) {
-          RequestHandler.failResponse(out, "Invalid author, conversation, or content.");
-          break;
-        }
-        RequestHandler.successResponse(out, message.toString());
-        break;
-
-      case ("NEW_USER_REQUEST"):
-        final String name = r.getHeader("name");
-        final User user = controller.newUser(name);
-        System.out.println(user.name);
-        RequestHandler.successResponse(out, user.id.toString());
-        break;
+    if (r.getHeader("type") == null) {
+      return RequestHandler.failResponse(out, "Missing type header, which specifies which function to run.");
     }
-    //RequestHandler.handleResponse(out, body);
-    //RequestHandler.failResponse(out);
-    return true;
+
+    if (r.getVerb().equals("POST")) {
+
+      switch (r.getHeader("type")) {
+
+        case ("NEW_MESSAGE_REQUEST"):
+          final Uuid author = Uuid.fromString(r.getHeader("author"));
+          final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
+          final String content = r.getHeader("content");
+          if (author == null || conversation == null || content == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
+          }
+          final Message message = controller.newMessage(author, conversation, content);
+          if (message == null) {
+            return RequestHandler.failResponse(out, "Invalid message.");
+          }
+          return RequestHandler.successResponse(out, message.toString());
+
+        case ("NEW_USER_REQUEST"):
+          final String name = r.getBody();
+          if (name == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid name header.");
+          }
+          final User user = controller.newUser(name);
+          if (user == null) {
+            return RequestHandler.failResponse(out, "Invalid username.");
+          }
+          return RequestHandler.successResponse(out, user.id.toString());
+
+        case ("NEW_CONVERSATION_REQUEST"):
+          final String title = r.getBody();
+          final Uuid owner = Uuid.fromString(r.getHeader("owner"));
+          if (title == null || owner == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid title or owner header.");
+          }
+          final Conversation conv = controller.newConversation(title, owner);
+          if (conv == null) {
+            return RequestHandler.failResponse(out, "Invalid conversation.");
+          }
+          return RequestHandler.successResponse(out, conv.id.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
+
+      }
+
+    } else if (r.getVerb().equals("GET")) {
+      return false;
+    } else {
+      return RequestHandler.failResponse(out, "Unknown HTTP verb.");
+    }
   }
 
   private boolean onSerialMessage(InputStream in, OutputStream out) throws IOException {

@@ -1,7 +1,11 @@
 package codeu.chat.server;
 
 import codeu.chat.server.model.Request;
-
+/**
+ * Controller for HTTP requests.
+ *
+ * @author  Nick Petosa
+ */
 import java.io.*;
 
 public class RequestHandler {
@@ -44,14 +48,16 @@ public class RequestHandler {
         return r;
     }
 
-    public static void successResponse(OutputStream out, String body) throws IOException {
-        out.write(("HTTP/1.x 200 OK\r\n\r\n").getBytes());
+    public static boolean successResponse(OutputStream out, String body) throws IOException {
+        out.write(("HTTP/1.1 200 OK\r\n\r\n").getBytes());
         out.write((body).getBytes());
+        return true;
     }
 
-    public static void failResponse(OutputStream out, String message) throws IOException {
-        out.write(("HTTP/1.x 400 Bad Request\r\n\r\n").getBytes());
+    public static boolean failResponse(OutputStream out, String message) throws IOException {
+        out.write(("HTTP/1.1 400 Bad Request\r\n\r\n").getBytes());
         out.write((message).getBytes());
+        return false;
     }
 
 }
