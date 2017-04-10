@@ -29,13 +29,12 @@ import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 
 public final class Server {
@@ -54,7 +53,7 @@ public final class Server {
   private final Controller controller;
 
   private final Relay relay;
-  private Uuid lastSeen = Uuids.NULL;
+  private Uuid lastSeen = Uuid.NULL;
 
   public Server(final Uuid id, final byte[] secret, final Relay relay) {
 
@@ -121,8 +120,8 @@ public final class Server {
 
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
-      final Uuid author = Uuids.SERIALIZER.read(in);
-      final Uuid conversation = Uuids.SERIALIZER.read(in);
+      final Uuid author = Uuid.SERIALIZER.read(in);
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
       final Message message = controller.newMessage(author, conversation, content);
@@ -147,7 +146,7 @@ public final class Server {
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
       final String title = Serializers.STRING.read(in);
-      final Uuid owner = Uuids.SERIALIZER.read(in);
+      final Uuid owner = Uuid.SERIALIZER.read(in);
 
       final Conversation conversation = controller.newConversation(title, owner);
 
@@ -156,7 +155,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<User> users = view.getUsers(ids);
 
@@ -172,7 +171,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<Conversation> conversations = view.getConversations(ids);
 
@@ -181,7 +180,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<Message> messages = view.getMessages(ids);
 
@@ -191,11 +190,11 @@ public final class Server {
     } else if (type == NetworkCode.GET_USER_GENERATION_REQUEST) {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_RESPONSE);
-      Uuids.SERIALIZER.write(out, view.getUserGeneration());
+      Uuid.SERIALIZER.write(out, view.getUserGeneration());
 
     } else if (type == NetworkCode.GET_USERS_EXCLUDING_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<User> users = view.getUsersExcluding(ids);
 
@@ -223,7 +222,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
 
-      final Uuid conversation = Uuids.SERIALIZER.read(in);
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
       final Time startTime = Time.SERIALIZER.read(in);
       final Time endTime = Time.SERIALIZER.read(in);
 
@@ -234,7 +233,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
 
-      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
+      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
       final int range = Serializers.INTEGER.read(in);
 
       final Collection<Message> messages = view.getMessages(rootMessage, range);
