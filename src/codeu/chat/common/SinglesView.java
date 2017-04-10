@@ -33,9 +33,15 @@ public interface SinglesView {
 
   // FIND CONVERSATION
   //
-  // Find the conversation whose id matches the given id. If no conversation's
+  // Find the conversation whose id matches the given id. If no conversation
   // matches the given id, null will be returned.
   Conversation findConversation(Uuid id);
+
+  // FIND GROUP
+  //
+  // Find the group whose id matches the given id. If no group
+  // matches the given id, null will be returned.
+  Group findGroup(Uuid id);
 
   // FIND MESSAGE
   //

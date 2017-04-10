@@ -40,7 +40,7 @@ public final class ClientUser {
 
   private final Map<String, User> usersByUsername = new HashMap<>();
   private final Map<Uuid, User> usersById = new HashMap<>();
-  
+
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
   private Store<String, User> usersByNickname = new Store<>(String.CASE_INSENSITIVE_ORDER);

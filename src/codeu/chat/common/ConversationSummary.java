@@ -32,6 +32,7 @@ public final class ConversationSummary implements ListViewable {
 
       Uuid.SERIALIZER.write(out, value.id);
       Uuid.SERIALIZER.write(out, value.owner);
+      Uuid.SERIALIZER.write(out, value.group);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
 
@@ -43,6 +44,7 @@ public final class ConversationSummary implements ListViewable {
       return new ConversationSummary(
           Uuid.SERIALIZER.read(in),
           Uuid.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );
@@ -52,13 +54,15 @@ public final class ConversationSummary implements ListViewable {
 
   public final Uuid id;
   public final Uuid owner;
+  public final Uuid group;
   public final Time creation;
   public final String title;
 
-  public ConversationSummary(Uuid id, Uuid owner, Time creation, String title) {
+  public ConversationSummary(Uuid id, Uuid owner, Uuid group, Time creation, String title) {
 
     this.id = id;
     this.owner = owner;
+    this.group = group;
     this.creation = creation;
     this.title = title;
 

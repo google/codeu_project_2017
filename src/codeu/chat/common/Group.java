@@ -20,34 +20,32 @@ import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
 
-import codeu.chat.util.Serializer;
-import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.Serializer;
+import codeu.chat.util.Serializers;
 
-public final class Conversation {
+public final class Group {
 
-  public static final Serializer<Conversation> SERIALIZER = new Serializer<Conversation>() {
+  public static final Serializer<Group> SERIALIZER = new Serializer<Group>() {
 
     @Override
-    public void write(OutputStream out, Conversation value) throws IOException {
+    public void write(OutputStream out, Group value) throws IOException {
 
       Uuid.SERIALIZER.write(out, value.id);
       Uuid.SERIALIZER.write(out, value.owner);
-      Uuid.SERIALIZER.write(out, value.group);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
       Serializers.collection(Uuid.SERIALIZER).write(out, value.users);
-      Uuid.SERIALIZER.write(out, value.firstMessage);
-      Uuid.SERIALIZER.write(out, value.lastMessage);
+      Uuid.SERIALIZER.write(out, value.firstConversation);
+      Uuid.SERIALIZER.write(out, value.lastConversation);
 
     }
 
     @Override
-    public Conversation read(InputStream in) throws IOException {
+    public Group read(InputStream in) throws IOException {
 
-      final Conversation value = new Conversation(
-          Uuid.SERIALIZER.read(in),
+      final Group value = new Group(
           Uuid.SERIALIZER.read(in),
           Uuid.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
@@ -56,34 +54,32 @@ public final class Conversation {
 
       value.users.addAll(Serializers.collection(Uuid.SERIALIZER).read(in));
 
-      value.firstMessage = Uuid.SERIALIZER.read(in);
-      value.lastMessage = Uuid.SERIALIZER.read(in);
+      value.firstConversation = Uuid.SERIALIZER.read(in);
+      value.lastConversation = Uuid.SERIALIZER.read(in);
 
       return value;
 
     }
   };
 
-  public final ConversationSummary summary;
+  public final GroupSummary summary;
 
   public final Uuid id;
   public final Uuid owner;
-  public final Uuid group;
   public final Time creation;
   public final String title;
   public final Collection<Uuid> users = new HashSet<>();
-  public Uuid firstMessage = Uuid.NULL;
-  public Uuid lastMessage = Uuid.NULL;
+  public Uuid firstConversation = Uuid.NULL;
+  public Uuid lastConversation = Uuid.NULL;
 
-  public Conversation(Uuid id, Uuid owner, Uuid group, Time creation, String title) {
+  public Group(Uuid id, Uuid owner, Time creation, String title) {
 
     this.id = id;
     this.owner = owner;
-    this.group = group;
     this.creation = creation;
     this.title = title;
 
-    this.summary = new ConversationSummary(id, owner, group, creation, title);
+    this.summary = new GroupSummary(id, owner, creation, title);
 
   }
 }

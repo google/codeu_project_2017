@@ -51,6 +51,7 @@ public final class ServerTest {
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(6), "Hello World", Time.now())));
   }
 
@@ -66,6 +67,7 @@ public final class ServerTest {
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(6), "Hello World", Time.now())));
   }
 
@@ -84,6 +86,7 @@ public final class ServerTest {
                            wrongSecret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(6), "Hello World", Time.now())));
   }
 
@@ -101,6 +104,7 @@ public final class ServerTest {
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(6), "Hello World", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuid.NULL, 1);
@@ -113,6 +117,7 @@ public final class ServerTest {
       assertTrue(Uuid.equals(bundle.team(), team));
       assertTrue(Uuid.equals(bundle.user().id(), new Uuid(4)));
       assertTrue(Uuid.equals(bundle.conversation().id(), new Uuid(5)));
+      assertTrue(Uuid.equals(bundle.group().id(), new Uuid(8)));
       assertTrue(Uuid.equals(bundle.message().id(), new Uuid(6)));
     }
   }
@@ -132,6 +137,7 @@ public final class ServerTest {
                             wrongSecret,
                             relay.pack(new Uuid(4), "User", Time.now()),
                             relay.pack(new Uuid(5), "Conversation", Time.now()),
+                            relay.pack(new Uuid(8), "Group", Time.now()),
                             relay.pack(new Uuid(6), "Hello World", Time.now())));
   }
 
@@ -149,6 +155,7 @@ public final class ServerTest {
                             secret,
                             relay.pack(new Uuid(4), "User", Time.now()),
                             relay.pack(new Uuid(5), "Conversation", Time.now()),
+                            relay.pack(new Uuid(8), "Group", Time.now()),
                             relay.pack(new Uuid(6), "Hello World", Time.now())));
   }
 
@@ -166,12 +173,14 @@ public final class ServerTest {
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(6), "Hello World", Time.now())));
 
     assertTrue(relay.write(team,
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(7), "Hello World... again", Time.now())));
 
 
@@ -193,12 +202,14 @@ public final class ServerTest {
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(6), "Hello World", Time.now())));
 
     assertTrue(relay.write(team,
                            secret,
                            relay.pack(new Uuid(4), "User", Time.now()),
                            relay.pack(new Uuid(5), "Conversation", Time.now()),
+                           relay.pack(new Uuid(8), "Group", Time.now()),
                            relay.pack(new Uuid(7), "Hello World... again", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuid.NULL, 2);
@@ -211,6 +222,7 @@ public final class ServerTest {
       assertTrue(Uuid.equals(bundle.team(), team));
       assertTrue(Uuid.equals(bundle.user().id(), new Uuid(4)));
       assertTrue(Uuid.equals(bundle.conversation().id(), new Uuid(5)));
+      assertTrue(Uuid.equals(bundle.group().id(), new Uuid(8)));
       assertTrue(Uuid.equals(bundle.message().id(), new Uuid(7)));
     }
   }

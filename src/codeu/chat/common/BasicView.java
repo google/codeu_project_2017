@@ -18,6 +18,8 @@ import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Group;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
@@ -46,6 +48,16 @@ public interface BasicView {
   //
   //   Return all conversations whose id is found in the given collection.
   Collection<Conversation> getConversations(Collection<Uuid> ids);
+
+  // GET ALL GROUPS
+  //
+  //   Return a summary of each group.
+  Collection<GroupSummary> getAllGroups();
+
+  // GET GROUPS
+  //
+  //   Return all groups whose id is found in the given collection.
+  Collection<Group> getGroups(Collection<Uuid> ids);
 
   // GET MESSAGES
   //

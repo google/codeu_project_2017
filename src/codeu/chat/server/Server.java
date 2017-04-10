@@ -25,6 +25,8 @@ import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Group;
+import codeu.chat.common.GroupSummary;
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
@@ -121,6 +123,7 @@ public final class Server {
 
       final Uuid author = Uuid.SERIALIZER.read(in);
       final Uuid conversation = Uuid.SERIALIZER.read(in);
+      final Uuid group = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
       final Message message = controller.newMessage(author, conversation, content);
@@ -131,6 +134,7 @@ public final class Server {
       timeline.scheduleNow(createSendToRelayEvent(
           author,
           conversation,
+          group,
           message.id));
 
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
@@ -167,8 +171,9 @@ public final class Server {
 
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuid.SERIALIZER.read(in);
+      final Uuid group = Uuid.SERIALIZER.read(in);
 
-      final Conversation conversation = controller.newConversation(title, owner);
+      final Conversation conversation = controller.newConversation(title, owner, group);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
@@ -181,6 +186,16 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.DELETE_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
+
+    } else if (type == NetworkCode.NEW_GROUP_REQUEST) {
+
+      final String title = Serializers.STRING.read(in);
+      final Uuid owner = Uuid.SERIALIZER.read(in);
+
+      final Group group = controller.newGroup(title, owner);
+
+      Serializers.INTEGER.write(out, NetworkCode.NEW_GROUP_RESPONSE);
+      Serializers.nullable(Group.SERIALIZER).write(out, group);
 
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
 
@@ -206,6 +221,22 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE);
       Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+
+    } else if (type == NetworkCode.GET_ALL_GROUPS_REQUEST) {
+
+      final Collection<GroupSummary> groups = view.getAllGroups();
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_ALL_GROUPS_RESPONSE);
+      Serializers.collection(GroupSummary.SERIALIZER).write(out, groups);
+
+    } else if (type == NetworkCode.GET_GROUPS_BY_ID_REQUEST) {
+
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
+
+      final Collection<Group> groups = view.getGroups(ids);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_GROUPS_BY_ID_RESPONSE);
+      Serializers.collection(Group.SERIALIZER).write(out, groups);
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
 
@@ -248,6 +279,25 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE);
       Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+
+    } else if (type == NetworkCode.GET_GROUPS_BY_TIME_REQUEST) {
+
+      final Time startTime = Time.SERIALIZER.read(in);
+      final Time endTime = Time.SERIALIZER.read(in);
+
+      final Collection<Group> groups = view.getGroups(startTime, endTime);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_GROUPS_BY_TIME_RESPONSE);
+      Serializers.collection(Group.SERIALIZER).write(out, groups);
+
+  } else if (type == NetworkCode.GET_GROUPS_BY_TITLE_REQUEST) {
+
+      final String filter = Serializers.STRING.read(in);
+
+      final Collection<Group> groups = view.getGroups(filter);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_GROUPS_BY_TITLE_RESPONSE);
+      Serializers.collection(Group.SERIALIZER).write(out, groups);
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
 
@@ -296,12 +346,19 @@ public final class Server {
 
     final Relay.Bundle.Component relayUser = bundle.user();
     final Relay.Bundle.Component relayConversation = bundle.conversation();
+    final Relay.Bundle.Component relayGroup = bundle.group();
     final Relay.Bundle.Component relayMessage = bundle.user();
 
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
       user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+    }
+
+    Group group = model.groupById().first(relayGroup.id());
+
+    if (group == null) {
+      group = controller.newGroup(relayGroup.id(), relayGroup.text(), user.id, relayGroup.time());
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
@@ -314,6 +371,7 @@ public final class Server {
       conversation = controller.newConversation(relayConversation.id(),
                                                 relayConversation.text(),
                                                 user.id,
+                                                group.id,
                                                 relayConversation.time());
     }
 
@@ -330,17 +388,20 @@ public final class Server {
 
   private Runnable createSendToRelayEvent(final Uuid userId,
                                           final Uuid conversationId,
+                                          final Uuid groupId,
                                           final Uuid messageId) {
     return new Runnable() {
       @Override
       public void run() {
         final User user = view.findUser(userId);
         final Conversation conversation = view.findConversation(conversationId);
+        final Group group = view.findGroup(groupId);
         final Message message = view.findMessage(messageId);
         relay.write(id,
                     secret,
                     relay.pack(user.id, user.name, user.creation),
                     relay.pack(conversation.id, conversation.title, conversation.creation),
+                    relay.pack(group.id, group.title, group.creation),
                     relay.pack(message.id, message.content, message.creation));
       }
     };

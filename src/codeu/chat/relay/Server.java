@@ -63,6 +63,7 @@ public final class Server implements Relay {
     private final Uuid team;
     private final Component user;
     private final Component conversation;
+    private final Component group;
     private final Component message;
 
     public Bundle(Uuid id,
@@ -70,6 +71,7 @@ public final class Server implements Relay {
                   Uuid team,
                   Component user,
                   Component conversation,
+                  Component group,
                   Component message) {
 
       this.id = id;
@@ -77,6 +79,7 @@ public final class Server implements Relay {
       this.team = team;
       this.user = user;
       this.conversation = conversation;
+      this.group = group;
       this.message = message;
 
     }
@@ -95,6 +98,9 @@ public final class Server implements Relay {
 
     @Override
     public Component conversation() { return conversation; }
+
+    @Override
+    public Component group() { return group; }
 
     @Override
     public Component message() { return message; }
@@ -169,6 +175,7 @@ public final class Server implements Relay {
                        byte[] teamSecret,
                        Relay.Bundle.Component user,
                        Relay.Bundle.Component conversation,
+                       Relay.Bundle.Component group,
                        Relay.Bundle.Component message) {
 
     if (authenticate(teamId, teamSecret)) {
@@ -178,6 +185,7 @@ public final class Server implements Relay {
           teamId,
           user.id(),
           conversation.id(),
+          group.id(),
           message.id());
 
       if (history.size() >= maxHistory) {
@@ -190,6 +198,7 @@ public final class Server implements Relay {
           teamId,
           user,
           conversation,
+          group,
           message));
     } else {
 
@@ -198,6 +207,7 @@ public final class Server implements Relay {
           teamId,
           user.id(),
           conversation.id(),
+          group.id(),
           message.id());
 
       return false;

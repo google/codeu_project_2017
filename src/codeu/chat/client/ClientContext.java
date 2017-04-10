@@ -14,6 +14,7 @@
 
 package codeu.chat.client;
 
+import codeu.chat.client.ClientGroup;
 import codeu.chat.client.ClientConversation;
 import codeu.chat.client.ClientMessage;
 import codeu.chat.client.ClientUser;
@@ -23,12 +24,14 @@ import codeu.chat.client.View;
 public final class ClientContext {
 
   public final ClientUser user;
+  public final ClientGroup group;
   public final ClientConversation conversation;
   public final ClientMessage message;
 
   public ClientContext(Controller controller, View view) {
     user = new ClientUser(controller, view);
-    conversation = new ClientConversation(controller, view, user);
+    group = new ClientGroup(controller, view, user);
+    conversation = new ClientConversation(controller, view, user, group);
     message = new ClientMessage(controller, view, user, conversation);
   }
 }

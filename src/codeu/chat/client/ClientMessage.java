@@ -61,7 +61,7 @@ public final class ClientMessage {
     if ((body.length() <= 0) || (body.length() > 1024)) {
       clean = false;
     } else {
-      
+
       // TODO: check for invalid characters
 
     }

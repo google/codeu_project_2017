@@ -20,6 +20,7 @@ import org.junit.Before;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
+import codeu.chat.common.Group;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
@@ -47,7 +48,7 @@ public final class BasicControllerTest {
 
   @Test
   public void testDeleteUser() {
-    
+
     final User user = controller.newUser("user");
 
     assertFalse(
@@ -70,9 +71,15 @@ public final class BasicControllerTest {
         "Check that user has a valid reference",
         user == null);
 
+    final Group group = controller.newGroup("group", user.id);
+
+    assertFalse(
+        "Check that group has a valid reference",
+        group == null);
+
     final Conversation conversation = controller.newConversation(
         "conversation",
-        user.id);
+        user.id, group.id);
 
     assertFalse(
         "Check that conversation has a valid reference",
@@ -88,9 +95,15 @@ public final class BasicControllerTest {
       "Check that user has a valid reference",
       user == null);
 
+    final Group group = controller.newGroup("group", user.id);
+
+    assertFalse(
+      "Check that group has a valid reference",
+      group == null);
+
     final Conversation conversation = controller.newConversation(
       "conversation",
-      user.id);
+      user.id, group.id);
 
     assertFalse(
         "Check that conversation has a valid reference",
@@ -104,7 +117,7 @@ public final class BasicControllerTest {
   }
 
   @Test
-  public void testAddMessage() {
+  public void testAddGroup() {
 
     final User user = controller.newUser("user");
 
@@ -112,9 +125,28 @@ public final class BasicControllerTest {
         "Check that user has a valid reference",
         user == null);
 
+    final Group group = controller.newGroup(
+        "group",
+        user.id);
+
+    assertFalse(
+        "Check that conversation has a valid reference",
+        group == null);
+  }
+
+  @Test
+  public void testAddMessage() {
+
+    final User user = controller.newUser("user");
+    final Group group = controller.newGroup("group", user.id);
+
+    assertFalse(
+        "Check that user has a valid reference",
+        user == null);
+
     final Conversation conversation = controller.newConversation(
         "conversation",
-        user.id);
+        user.id, group.id);
 
     assertFalse(
         "Check that conversation has a valid reference",

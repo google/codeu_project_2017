@@ -20,6 +20,7 @@ import java.util.Map;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
+import codeu.chat.common.Group;
 import codeu.chat.common.Message;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
@@ -69,13 +70,18 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner) {
-    return newConversation(createId(), title, owner, Time.now());
+  public Conversation newConversation(String title, Uuid owner, Uuid group) {
+    return newConversation(createId(), title, owner, group, Time.now());
   }
 
   @Override
   public Conversation deleteConversation(String title) {
     return deleteConversation(title, Time.now());
+  }
+
+  @Override
+  public Group newGroup(String title, Uuid owner) {
+    return newGroup(createId(), title, owner, Time.now());
   }
 
   @Override
@@ -174,9 +180,9 @@ public final class Controller implements RawController, BasicController {
           nickname,
           creationTime);
 
-  @Override 
+  @Override
   public User deleteUser(String name, Time deletionTime) {
-    System.out.println("In deleteUser");
+    //System.out.println("In deleteUser");
     User user = null;
     if (usersByName.containsKey(name)) {
 
@@ -200,14 +206,14 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
+  public Conversation newConversation(Uuid id, String title, Uuid owner, Uuid group, Time creationTime) {
 
     final User foundOwner = model.userById().first(owner);
 
     Conversation conversation = null;
 
     if (foundOwner != null && isIdFree(id)) {
-      conversation = new Conversation(id, owner, creationTime, title);
+      conversation = new Conversation(id, owner, group, creationTime, title);
       conversationsByTitle.put(title, conversation);
       model.add(conversation);
 
@@ -246,6 +252,23 @@ public final class Controller implements RawController, BasicController {
     return conversation;
   }
 
+  @Override
+  public Group newGroup(Uuid id, String title, Uuid owner, Time creationTime) {
+
+    final User foundOwner = model.userById().first(owner);
+
+    Group group = null;
+
+    if (foundOwner != null && isIdFree(id)) {
+      group = new Group(id, owner, creationTime, title);
+      model.add(group);
+
+      LOG.info("Conversation added: " + group.id);
+    }
+
+    return group;
+  }
+
   private Uuid createId() {
 
     Uuid candidate;
@@ -266,6 +289,7 @@ public final class Controller implements RawController, BasicController {
   private boolean isIdInUse(Uuid id) {
     return model.messageById().first(id) != null ||
            model.conversationById().first(id) != null ||
+           model.groupById().first(id) != null ||
            model.userById().first(id) != null;
   }
 

@@ -17,73 +17,56 @@ package codeu.chat.common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Collection;
-import java.util.HashSet;
 
-import codeu.chat.util.Serializer;
-import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.Serializer;
+import codeu.chat.util.Serializers;
 
-public final class Conversation {
+public final class GroupSummary implements ListViewable {
 
-  public static final Serializer<Conversation> SERIALIZER = new Serializer<Conversation>() {
+  public static final Serializer<GroupSummary> SERIALIZER = new Serializer<GroupSummary>() {
 
     @Override
-    public void write(OutputStream out, Conversation value) throws IOException {
+    public void write(OutputStream out, GroupSummary value) throws IOException {
 
       Uuid.SERIALIZER.write(out, value.id);
       Uuid.SERIALIZER.write(out, value.owner);
-      Uuid.SERIALIZER.write(out, value.group);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
-      Serializers.collection(Uuid.SERIALIZER).write(out, value.users);
-      Uuid.SERIALIZER.write(out, value.firstMessage);
-      Uuid.SERIALIZER.write(out, value.lastMessage);
 
     }
 
     @Override
-    public Conversation read(InputStream in) throws IOException {
+    public GroupSummary read(InputStream in) throws IOException {
 
-      final Conversation value = new Conversation(
-          Uuid.SERIALIZER.read(in),
+      return new GroupSummary(
           Uuid.SERIALIZER.read(in),
           Uuid.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );
 
-      value.users.addAll(Serializers.collection(Uuid.SERIALIZER).read(in));
-
-      value.firstMessage = Uuid.SERIALIZER.read(in);
-      value.lastMessage = Uuid.SERIALIZER.read(in);
-
-      return value;
-
     }
   };
 
-  public final ConversationSummary summary;
-
   public final Uuid id;
   public final Uuid owner;
-  public final Uuid group;
   public final Time creation;
   public final String title;
-  public final Collection<Uuid> users = new HashSet<>();
-  public Uuid firstMessage = Uuid.NULL;
-  public Uuid lastMessage = Uuid.NULL;
 
-  public Conversation(Uuid id, Uuid owner, Uuid group, Time creation, String title) {
+  public GroupSummary(Uuid id, Uuid owner, Time creation, String title) {
 
     this.id = id;
     this.owner = owner;
-    this.group = group;
     this.creation = creation;
     this.title = title;
 
-    this.summary = new ConversationSummary(id, owner, group, creation, title);
+  }
 
+  // How this object should appear in a user-viewable list
+  @Override
+  public String listView() {
+    return title;
   }
 }
