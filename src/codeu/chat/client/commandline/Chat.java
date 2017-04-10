@@ -225,6 +225,7 @@ public final class Chat {
         } else {
           clientContext.message.addMessage(clientContext.user.getCurrent().id,
               clientContext.conversation.getCurrentId(),
+              clientContext.group.getCurrentId(),
               tokenScanner.nextLine().trim());
         }
       }

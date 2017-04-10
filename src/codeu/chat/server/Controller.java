@@ -136,30 +136,7 @@ public final class Controller implements RawController, BasicController {
   @Override
   public User newUser(Uuid id, String name, Time creationTime) {
 
-    User user = null;
-
-    if (isIdFree(id)) {
-
-      user = new User(id, name, creationTime);
-      usersByName.put(name, user);
-      model.add(user);
-
-      LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
-
-    } else {
-
-      LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
-    }
-
-    return user;
+    return newUser(id, name, creationTime, "", "");
   }
 
   public User newUser(Uuid id, String name, Time creationTime, String nickname, String pass) {
@@ -171,6 +148,7 @@ public final class Controller implements RawController, BasicController {
       user = new User(id, name, creationTime, nickname);
       //TODO: fix it
       user.setPassword(pass);
+      usersByName.put(name, user);
       model.add(user);
 
       LOG.info(

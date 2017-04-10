@@ -79,12 +79,6 @@ public final class ClientUser {
     //TODO: check for valid nickname
     return true;
   }
-  
-  // Check if this nickname has already existed
-  public boolean ifExistedNickname(String nickname) {
-    // TODO: check for existed nickname
-    return false;
-  }
 
   public boolean hasCurrent() {
     return (current != null);
@@ -129,7 +123,7 @@ public final class ClientUser {
 
   public void addUser(String name, String nickname, String pass) {
     final boolean validInputs = isValidName(name) && isValidNickname(nickname);
-    final boolean existed = ifExistedName(name) || ifExistedNickname(nickname);
+    final boolean existed = ifExistedName(name);
     final boolean valid = (validInputs && !existed);
 
     final User user = !valid ? null : controller.newUser(name, nickname, pass);
@@ -138,7 +132,7 @@ public final class ClientUser {
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (!validInputs) ? "bad input value" : ((existed) ? "existed username/nickname" : "server failure"));
+          (!validInputs) ? "bad input value" : ((existed) ? "existed username" : "server failure"));
     } else {
       LOG.info("New user complete, Name= \"%s\" Nickname= \"%s\" UUID=%s", user.name, user.nickname, user.id);
       usersByUsername.put(user.name, user);
@@ -148,15 +142,12 @@ public final class ClientUser {
 
   public void addNickname(String name) {
     final boolean validInputs = isValidNickname(name);
-    final boolean existed = ifExistedNickname(name);
-
-    final boolean valid = (validInputs && !existed);
 
     if (current == null){
       System.out.println("Please sign in before setting nickname");
-    } else if (!valid) {
+    } else if (!validInputs) {
       System.out.format("Error: nickname not added - %s.\n",
-          (!validInputs) ? "bad input value" : ((existed) ? "existed nickname" : "server failure"));
+          (!validInputs) ? "bad input value" : "server failure");
     } else {
       final boolean response = controller.setNickname(current, name);
       if (response){
