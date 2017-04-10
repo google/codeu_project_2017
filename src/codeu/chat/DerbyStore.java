@@ -22,7 +22,7 @@ import java.sql.Connection;
 public class DerbyStore {
 	
 	public String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-	public String protocol = "jdbc:derby://localhost:1527/";
+	public String protocol = "jdbc:derby:test";
 	
 	Connection conn;
 	Statement stmt;
@@ -66,7 +66,7 @@ public class DerbyStore {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-			//ex.printStackTrace();
+			ex.printStackTrace();
 		}
 	}
 	

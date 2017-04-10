@@ -5,3 +5,4 @@ chat_client_log.log
 chat_server_log.log
 derby.log
 db-derby-10.13.1.1-bin/javadoc/
+.DS_Store
