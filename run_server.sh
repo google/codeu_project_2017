@@ -14,5 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cd './bin'
-java codeu.chat.ServerMain "100.101" "ABABAB" "2008"
+# cd './bin'
+java -cp "third_party/derby.jar:./bin" codeu.chat.ServerMain "100.101" "ABABAB" "2008"

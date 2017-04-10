@@ -62,7 +62,7 @@ public class DerbyStore {
 								 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
 						
 						// Give confirmation of execution.
-						System.out.println("Tables do not exists. Table creation executed.");
+						System.out.println("Tables do not exist. Table creation executed.");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
