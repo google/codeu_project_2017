@@ -39,7 +39,7 @@ public final class WelcomePanel extends JPanel {
   buttonPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
  
   this.add(buttonPanel, buttonPanelC);
-  }
+  
   
    startButton.addActionListener(new ActionListener() {
       @Override
@@ -47,4 +47,5 @@ public final class WelcomePanel extends JPanel {
         ChatSimpleGui.this.linkPage();
       }
    });
+  }
 }
