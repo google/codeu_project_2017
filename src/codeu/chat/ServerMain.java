@@ -24,6 +24,7 @@ import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.server.NoOpRelay;
 import codeu.chat.server.RemoteRelay;
+import codeu.chat.database.Database;
 import codeu.chat.server.Server;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
@@ -53,8 +54,10 @@ final class ServerMain {
 
     final int myPort = Integer.parseInt(args[2]);
 
-    final RemoteAddress relayAddress = args.length > 3 ?
-                                       RemoteAddress.parse(args[3]) :
+    final String dbPath = args[3];
+
+    final RemoteAddress relayAddress = args.length > 4 ?
+                                       RemoteAddress.parse(args[4]) :
                                        null;
 
     try (
@@ -63,7 +66,7 @@ final class ServerMain {
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, relaySource);
+      runServer(id, secret, serverSource, relaySource, dbPath);
 
     } catch (IOException ex) {
 
@@ -75,13 +78,16 @@ final class ServerMain {
   private static void runServer(Uuid id,
                                 byte[] secret,
                                 ConnectionSource serverSource,
-                                ConnectionSource relaySource) {
+                                ConnectionSource relaySource,
+                                String dbPath) {
 
     final Relay relay = relaySource == null ?
                         new NoOpRelay() :
                         new RemoteRelay(relaySource);
 
-    final Server server = new Server(id, secret, relay);
+    final Database database = new Database(dbPath);
+
+    final Server server = new Server(id, secret, relay, database);
 
     LOG.info("Server object created.");
 
