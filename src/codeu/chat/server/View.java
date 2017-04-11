@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+// Added import to get access to time functions
+
 
 package codeu.chat.server;
 
@@ -126,7 +128,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public Collection<Message> getMessages(Uuid conversation, Time start, Time end) {
+  public Collection<Message> getMessages(Uuid conversation, Time start, Time end) { 
 
     final Conversation foundConversation = model.conversationById().first(conversation);
 
@@ -153,6 +155,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
     int remaining = Math.abs(range);
     LOG.info("in getMessage: UUID=%s range=%d", rootMessage, range);
+    
 
     // We want to return the messages in order. If the range was negative
     // the messages would be backwards. Use a linked list as it supports

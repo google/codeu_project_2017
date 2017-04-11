@@ -154,7 +154,7 @@ public final class Chat {
       }
 
     } else if (token.equals("m-list-all")) {
-
+    	
       if (!clientContext.conversation.hasCurrent()) {
         System.out.println("ERROR: No conversation selected.");
       } else {
@@ -162,7 +162,7 @@ public final class Chat {
       }
 
     } else if (token.equals("m-next")) {
-
+      
       // TODO: Implement m-next command to jump to an index in the message chain.
       if (!clientContext.conversation.hasCurrent()) {
         System.out.println("ERROR: No conversation selected.");

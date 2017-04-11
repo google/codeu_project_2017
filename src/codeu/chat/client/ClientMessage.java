@@ -119,9 +119,17 @@ public final class ClientMessage {
     if (conversationContents.size() == 0) {
       System.out.println(" Current Conversation has no messages");
     } else {
+      // Get the time at the start
+      long initialTime = System.currentTimeMillis();
       for (final Message m : conversationContents) {
         printMessage(m, userContext);
       }
+      
+      // Get the time at the end and subtract by the start time to get the total time
+      long finalTime = System.currentTimeMillis();
+      System.out.println(finalTime);
+      long timeDifference = finalTime - initialTime;
+      System.out.println("Time to get messages: " + timeDifference);
     }
   }
 
@@ -130,20 +138,34 @@ public final class ClientMessage {
   // Message 1 is the head of the Conversation's message chain.
   // Message -1 is the tail of the Conversation's message chain.
   public void selectMessage(int index) {
-    Method.notImplemented();
+	    Method.notImplemented();
   }
 
   // Processing for m-show command.
   // Accept an int for number of messages to attempt to show (1 by default).
   // Negative values go from newest to oldest.
   public void showMessages(int count) {
-    for (final Message m : conversationContents) {
-      printMessage(m, userContext);
+ 
+    if(count < 0){
+    	showPreviousMessages(count);
+    }else{
+    	showNextMessages(count);
     }
   }
 
   private void showNextMessages(int count) {
-    Method.notImplemented();
+	
+	// Loop to run through the desired count of messages. If the count exceeds
+	// the number of messages, display an error. Otherwise, print the 
+	// desired number of messages.
+    for(int i = count; i > 0; i--){
+    	if(count >= conversationContents.size()){
+    		System.out.println("Error: number of messages exceeds message count.");
+    		return;
+    	}else{
+    		printMessage(conversationContents.get(i), userContext);
+    	}
+    }
   }
 
   private void showPreviousMessages(int count) {
