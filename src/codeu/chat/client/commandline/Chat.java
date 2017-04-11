@@ -40,14 +40,8 @@ public final class Chat {
   // Constructor - sets up the Chat Application
   public Chat(Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
-    broadCastReceiver = new BroadCastReceiver(new ClientConnectionSource("localhost", 2025),
-            new BroadCastReceiver.BroadcastEvent() {
-              @Override
-              public void onBroadcast(Message message) {
-                ClientMessage.printMessage(message,clientContext.user);
-              }
-            }
-    );
+    broadCastReceiver = new BroadCastReceiver(new ClientConnectionSource("localhost", 2025));
+    broadCastReceiver.onBroadCast( (message) -> ClientMessage.printMessage(message,clientContext.user) );
     broadCastReceiver.start();
   }
 
