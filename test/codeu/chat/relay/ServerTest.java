@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
+import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
 public final class ServerTest {

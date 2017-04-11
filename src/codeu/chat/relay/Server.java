@@ -24,7 +24,8 @@ import java.util.Queue;
 
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
+import codeu.chat.util.Logger;
+import codeu.chat.util.Time;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
