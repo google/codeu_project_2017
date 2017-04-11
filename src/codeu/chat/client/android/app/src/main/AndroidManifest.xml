@@ -23,7 +23,7 @@
             android:label="@string/title_activity_users" />
 
         <activity
-            android:name=".view.CreateChatActivity"
+            android:name=".view.MessagesActivity"
             android:label="@string/title_activity_create_chat"
             android:parentActivityName=".view.tabs.TabsActivity">
             <meta-data

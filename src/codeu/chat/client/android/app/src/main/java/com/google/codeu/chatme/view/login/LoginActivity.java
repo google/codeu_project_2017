@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.codeu.chatme.R;
@@ -11,7 +14,7 @@ import com.google.codeu.chatme.presenter.LoginActivityPresenter;
 import com.google.codeu.chatme.view.tabs.TabsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends AppCompatActivity implements LoginView, View.OnClickListener {
 
     private static final String TAG = LoginActivity.class.getName();
 
@@ -21,6 +24,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private ProgressDialog mProgressDialog;
 
     private LoginActivityPresenter presenter;
+
+    private Button btnLogin;
+    private EditText etPassword;
+    private EditText etEmail;
 
     /**
      * Sets up {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
@@ -34,6 +41,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
 
         presenter = new LoginActivityPresenter(this);
+        presenter.postConstruct();
+
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(this);
     }
 
     /**
@@ -95,5 +109,43 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
      */
     public void makeToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Displays an error for {@link LoginActivity#etEmail} field
+     *
+     * @param err_et_email resource id of email field error message
+     */
+    @Override
+    public void setEmailFieldError(int err_et_email) {
+        etEmail.setError(getString(err_et_email));
+    }
+
+    /**
+     * Displays an error for {@link LoginActivity#etPassword} field
+     *
+     * @param err_et_password resource id of password field error message
+     */
+    @Override
+    public void setPasswordFieldError(int err_et_password) {
+        etPassword.setError(getString(err_et_password));
+    }
+
+    /**
+     * Handles click events on views implementing {@link android.view.View.OnClickListener}
+     *
+     * @param view clicked view
+     */
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            // login button clicked
+            case R.id.btnLogin:
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+                presenter.signIn(email, password);
+                break;
+        }
     }
 }

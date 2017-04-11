@@ -1,5 +1,7 @@
 package com.google.codeu.chatme.view.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
+import com.google.codeu.chatme.view.MessagesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.List;
  */
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
         implements ChatListAdapterView {
+
+    public static final String CONV_ID_EXTRA = "CONV_ID_EXTRA";
 
     /**
      * List of conversations
@@ -39,8 +44,27 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Conversation current = conversations.get(position);
-        holder.tvSender.setText(current.getOwner());
+        final Conversation conversation = conversations.get(position);
+        holder.tvSender.setText(conversation.getOwner());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMessagesActivity(view.getContext(), conversation.getId());
+            }
+        });
+    }
+
+    /**
+     * Launches {@link MessagesActivity} for the specific conversation
+     *
+     * @param context        context to create a startActivity intent
+     * @param conversationId id of conversation to display messages of
+     */
+    private void openMessagesActivity(Context context, String conversationId) {
+        Intent mIntent = new Intent(context, MessagesActivity.class);
+        mIntent.putExtra(CONV_ID_EXTRA, conversationId);
+        context.startActivity(mIntent);
     }
 
     /**

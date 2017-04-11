@@ -26,7 +26,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
 
     private final LoginView view;
 
-    private static final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mRootRef;
 
     private FirebaseAuth mAuth;
 
@@ -36,13 +36,20 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      * Sets up the presenter with a reference to the {@link LoginActivity}.
      * Additionally, adds {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener}
      * to {@link FirebaseAuth} instance to detect changed in user authentication status
+     * Refer to {@link LoginActivityPresenter#postConstruct()}
      *
      * @param view a reference to {@link LoginActivity}
      */
     public LoginActivityPresenter(final LoginView view) {
         this.view = view;
+    }
+
+    @javax.annotation.PostConstruct
+    public void postConstruct() {
+        this.mRootRef = FirebaseDatabase.getInstance().getReference();
 
         this.mAuth = FirebaseAuth.getInstance();
+
         this.mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -65,6 +72,11 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      */
     @Override
     public void signUp(String email, String password) {
+        boolean isValid = validateInput(email, password);
+        if (!isValid) {
+            return;
+        }
+
         view.showProgressDialog(R.string.progress_sign_up);
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -119,6 +131,11 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
      * @param password user password
      */
     public void signIn(String email, String password) {
+        boolean isValid = validateInput(email, password);
+        if (!isValid) {
+            return;
+        }
+
         view.showProgressDialog(R.string.progress_sign_in);
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -137,6 +154,25 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
                         }
                     }
                 });
+    }
+
+    /**
+     * Validates user email and password for login form
+     *
+     * @param email    email the user entered
+     * @param password password the user enterd
+     * @return true if the inputs are valid
+     */
+    public boolean validateInput(String email, String password) {
+        if (email.isEmpty()) {
+            view.setEmailFieldError(R.string.err_et_email);
+            return false;
+        }
+        if (password.isEmpty()) {
+            view.setPasswordFieldError(R.string.err_et_password);
+            return false;
+        }
+        return true;
     }
 
     /**

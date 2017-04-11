@@ -43,4 +43,6 @@
     <string name="title_activity_create_chat">CreateChatActivity</string>
     <string name="title_activity_add_users">AddUsersActivity</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="err_et_email">Invalid email</string>
+    <string name="err_et_password">Enter password</string>
 </resources>
