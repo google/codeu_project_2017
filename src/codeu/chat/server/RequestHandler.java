@@ -43,6 +43,7 @@ public class RequestHandler {
         for (i++; i < struct.length; i++) {
             body.append(" " + struct[i]);
         }
+        if (!r.getVerb().equals("GET"))
         r.setBody(body.toString().substring(1));
 
         return r;

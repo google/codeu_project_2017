@@ -21,8 +21,10 @@ import java.io.OutputStream;
 import java.io.PushbackInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -205,6 +207,18 @@ public final class Server {
       }
 
     } else if (r.getVerb().equals("GET")) {
+      switch (r.getHeader("type")) {
+        case ("GET_USERS_EXCLUDING_REQUEST"):
+          final String ids = r.getHeader("ids");
+          final List<String> l = Arrays.asList(ids.replaceAll(" ", "").split(","));
+          final List excl = new ArrayList<Uuid>();
+          for (String i : l) {
+            excl.add(Uuid.fromString(i));
+          }
+          final Collection<User> users = view.getUsersExcluding(excl);
+
+          return RequestHandler.successResponse(out, users.toString());
+      }
       return false;
     } else {
       return RequestHandler.failResponse(out, "Unknown HTTP verb.");
