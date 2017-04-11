@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.StringTokenizer;
 
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
@@ -61,7 +62,18 @@ public final class ServerFrontEnd {
       Serializers.STRING.write(out, value.text());
       Time.SERIALIZER.write(out, value.time());
     }
-  };
+
+
+        @Override
+        public void write(StringBuffer message, Relay.Bundle.Component value) {
+
+        }
+
+        @Override
+        public Relay.Bundle.Component read(StringTokenizer tokenizer) {
+          return null;
+        }
+      };
 
   private static final Serializer<Relay.Bundle> BUNDLE_SERIALIZER =
       new Serializer<Relay.Bundle>() {
@@ -101,7 +113,17 @@ public final class ServerFrontEnd {
       COMPONENT_SERIALIZER.write(out, value.conversation());
       COMPONENT_SERIALIZER.write(out, value.message());
     }
-  };
+
+        @Override
+        public void write(StringBuffer message, Relay.Bundle value) {
+
+        }
+
+        @Override
+        public Relay.Bundle read(StringTokenizer tokenizer) {
+          return null;
+        }
+      };
 
   private final Relay backEnd;
 

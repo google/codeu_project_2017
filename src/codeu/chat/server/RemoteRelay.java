@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.StringTokenizer;
 
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
@@ -76,7 +77,17 @@ public final class RemoteRelay implements Relay {
       Serializers.STRING.write(out, value.text());
       Time.SERIALIZER.write(out, value.time());
     }
-  };
+
+        @Override
+        public void write(StringBuffer message, Bundle.Component value) {
+
+        }
+
+        @Override
+        public Bundle.Component read(StringTokenizer tokenizer) {
+          return null;
+        }
+      };
 
   private static final Serializer<Relay.Bundle> BUNDLE_SERIALIZER =
       new Serializer<Relay.Bundle>() {
@@ -116,7 +127,17 @@ public final class RemoteRelay implements Relay {
       COMPONENT_SERIALIZER.write(out, value.conversation());
       COMPONENT_SERIALIZER.write(out, value.message());
     }
-  };
+
+        @Override
+        public void write(StringBuffer message, Bundle value) {
+
+        }
+
+        @Override
+        public Bundle read(StringTokenizer tokenizer) {
+          return null;
+        }
+      };
 
   private final ConnectionSource source;
 
