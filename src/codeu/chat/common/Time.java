@@ -32,6 +32,7 @@ public final class Time implements Comparable<Time> {
 
             Serializers.LONG.write(out, value.totalMs);
 
+
         }
 
         @Override
@@ -42,8 +43,9 @@ public final class Time implements Comparable<Time> {
         }
     };
 
-    private static final SimpleDateFormat formatter =
-            new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
+  //changed the date format to be simpler 
+  private static final SimpleDateFormat formatter =
+      new SimpleDateFormat("MM/dd/yy KK:mm aa"); 
 
     private final long totalMs;
 

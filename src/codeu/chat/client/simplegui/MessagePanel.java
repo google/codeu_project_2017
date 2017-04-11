@@ -15,8 +15,8 @@
 package codeu.chat.client.simplegui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*; 
+
 import javax.swing.*;
 
 import codeu.chat.client.ClientContext;
@@ -68,7 +68,7 @@ public final class MessagePanel extends JPanel {
     // Title bar - current conversation and owner
     final JPanel titlePanel = new JPanel(new GridBagLayout());
     final GridBagConstraints titlePanelC = new GridBagConstraints();
-
+    
     final JPanel titleConvPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     final GridBagConstraints titleConvPanelC = new GridBagConstraints();
     titleConvPanelC.gridx = 0;
@@ -111,12 +111,15 @@ public final class MessagePanel extends JPanel {
     userListScrollPane.setMinimumSize(new Dimension(500, 200));
     userListScrollPane.setPreferredSize(new Dimension(500, 200));
 
-    // Button panel
+    // Button panel and text field
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
+    final JTextField textField = new JTextField(20);
 
-    final JButton addButton = new JButton("Add");
+    final JButton addButton = new JButton("Send Message");
+    buttonPanel.add(textField); //Adds the message box before the "Send Message" button
     buttonPanel.add(addButton);
+    
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -146,18 +149,21 @@ public final class MessagePanel extends JPanel {
     this.add(buttonPanel, buttonPanelC);
 
     // User click Messages Add button - prompt for message body and add new Message to Conversation
+    
+    //Add button is pressed
     addButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (!clientContext.user.hasCurrent()) {
-          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
+        	JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!clientContext.conversation.hasCurrent()) {
-          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+        	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-          final String messageText = (String) JOptionPane.showInputDialog(
-              MessagePanel.this, "Enter message:", "Add Message", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+          
+          final String messageText = textField.getText().trim();
+          
           if (messageText != null && messageText.length() > 0) {
+        	textField.setText(""); //clears the text field after use
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
@@ -167,11 +173,41 @@ public final class MessagePanel extends JPanel {
         }
       }
     });
-
+    
+    //Responds if user enters ENTER or RETURN the message sends
+    textField.addKeyListener(new KeyListener() {
+    	@Override
+      	public void keyTyped(KeyEvent e) {
+      		if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
+      			if (!clientContext.user.hasCurrent()) {
+      				JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+      	        } else if (!clientContext.conversation.hasCurrent()) {
+      	          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+      	        } else {
+      	          
+      	          final String messageText = textField.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces
+      	          
+      	          if (messageText != null && messageText.length() > 0) {
+      	        	textField.setText(""); //clears the text field after use
+      	            clientContext.message.addMessage(
+      	                clientContext.user.getCurrent().id,
+      	                clientContext.conversation.getCurrentId(),
+      	                messageText);
+      	            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+      	          }
+      	        }
+      		}
+      	} 
+      	@Override
+      	public void keyPressed(KeyEvent e) {}
+      	@Override
+      	public void keyReleased(KeyEvent e) {}
+      });
+    
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
   }
-
+  
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
