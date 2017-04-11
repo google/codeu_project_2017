@@ -51,20 +51,18 @@ final class ServerMain {
 
     final int myPort = Integer.parseInt(args[2]);
 
-    final int myBroadCastPort = Integer.parseInt(args[3]);
 
-    final RemoteAddress relayAddress = args.length > 4 ?
-                                       RemoteAddress.parse(args[4]) :
+    final RemoteAddress relayAddress = args.length > 3 ?
+                                       RemoteAddress.parse(args[3]) :
                                        null;
 
     try (
         final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
-        final ConnectionSource broadcastSource = ServerConnectionSource.forPort(myBroadCastPort);
         final ConnectionSource relaySource = relayAddress == null ? null : new ClientConnectionSource(relayAddress.host, relayAddress.port)
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, broadcastSource ,relaySource);
+      runServer(id, secret, serverSource ,relaySource);
 
     } catch (IOException ex) {
 
@@ -76,17 +74,15 @@ final class ServerMain {
   private static void runServer(Uuid id,
                                 byte[] secret,
                                 ConnectionSource serverSource,
-                                ConnectionSource broadcastSource,
                                 ConnectionSource relaySource) {
 
 
-    BroadCastSystem broadCastSystem = new BroadCastSystem();
 
     final Relay relay = relaySource == null ?
                         new NoOpRelay() :
                         new RemoteRelay(relaySource);
 
-    final Server server = new Server(id, secret, relay, broadCastSystem);
+    final Server server = new Server(id, secret, relay);
 
     LOG.info("Server object created.");
 

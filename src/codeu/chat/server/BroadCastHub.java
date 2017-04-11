@@ -131,8 +131,8 @@ public final class BroadCastHub implements Runnable {
         connectionThread.start();
         handlerThread.start();
 
-        //forceJoin(connectionThread);
-        //forceJoin(handlerThread);
+        forceJoin(connectionThread);
+        forceJoin(handlerThread);
 
     }
 

@@ -81,14 +81,14 @@ public final class Server {
   }
 
 
-  public Server(Uuid id, byte[] secret, Relay relay, BroadCastSystem broadCastSystem) {
+  public Server(Uuid id, byte[] secret, Relay relay) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
     this.controller = new Controller(id, model);
     this.relay = relay;
-    this.broadCastSystem = broadCastSystem;
+    this.broadCastSystem = new BroadCastSystem();
   }
 
   public void syncWithRelay(int maxReadSize) throws Exception {
@@ -288,9 +288,6 @@ public final class Server {
       System.out.println("Connection switched");
 
     }
-
-
-
 
     else {
 

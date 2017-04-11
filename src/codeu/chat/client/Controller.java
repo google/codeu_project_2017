@@ -117,7 +117,7 @@ public class Controller implements BasicController {
 
       InputStream in = receiver.getInputStream();
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
+      if (receiver.getType() == NetworkCode.NEW_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(Conversation.SERIALIZER).read(in);
       } else {
         LOG.error("Response from server failed.");
