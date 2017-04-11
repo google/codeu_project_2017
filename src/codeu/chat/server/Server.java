@@ -52,6 +52,35 @@ public final class Server {
   private Uuid lastSeen = Uuids.NULL;
   private BroadCastSystem broadCastSystem = null;
 
+
+  private class ConnectionListener implements Runnable {
+
+    private Connection myConnection;
+
+
+    public ConnectionListener(Connection myConnection) {
+      this.myConnection = myConnection;
+    }
+
+    @Override
+    public void run() {
+
+      // Connection listener will always listen to this connection until an exception
+      // is given off
+
+      try {
+
+        while (onMessage(myConnection, myConnection.in(), myConnection.out()));
+
+      } catch (IOException exc) {
+        System.out.println("IOException in BroadCast System");
+      }
+      System.out.println("*********************Thread Exiting *****************");
+    }
+
+  }
+
+
   public Server(Uuid id, byte[] secret, Relay relay, BroadCastSystem broadCastSystem) {
 
     this.id = id;
@@ -73,12 +102,21 @@ public final class Server {
 
     LOG.info("Handling new connection...");
 
-    return onMessage(connection.in(), connection.out());
+    ConnectionListener connectionListener = new ConnectionListener(connection);
+    Thread connectionThread = new Thread(connectionListener);
+    connectionThread.start();
+
+    return true;
   }
 
-  private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+  private boolean onMessage(Connection connection, InputStream in, OutputStream out) throws IOException {
 
     final int type = Serializers.INTEGER.read(in);
+
+    // if the type is -1 the client has closed connection
+    if (type == -1) {
+      return false;
+    }
 
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
@@ -208,7 +246,25 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
-    } else {
+    } else if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
+
+      System.out.println("Conversation request received");
+
+      ConversationSummary old = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
+      ConversationSummary newCon = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
+
+      broadCastSystem.switchConversation(connection, old, newCon);
+
+      // can send join conversation response
+
+      System.out.println("Connection switched");
+
+    }
+
+
+
+
+    else {
 
       // In the case that the message was not handled make a dummy message with
       // the type "NO_MESSAGE" so that the client still gets something.

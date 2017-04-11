@@ -90,7 +90,7 @@ final class ServerMain {
 
     LOG.info("Server object created.");
 
-    final Runnable hub = new Hub(serverSource, new Hub.Handler() {
+    final Runnable hub = new BroadCastHub(serverSource, new BroadCastHub.Handler() {
 
       @Override
       public void handle(Connection connection) throws Exception {
@@ -108,32 +108,12 @@ final class ServerMain {
       }
     });
 
-    final Runnable broadcastHub = new BroadCastHub(broadcastSource, new BroadCastHub.Handler() {
-      @Override
-      public void handle(Connection connection) throws Exception {
-
-        broadCastSystem.handleConnection(connection);
-
-      }
-
-      @Override
-      public void onException(Exception ex) {
-        System.out.println("ERROR: Exception during broadcast system tick. Check log");
-        LOG.error(ex, "Exception suring broadcast system tick");
-      }
-    });
-    LOG.info("Starting BroadCast Hub....");
-
-    broadcastHub.run();
 
     LOG.info("Starting hub...");
 
     hub.run();
 
     LOG.info("Hub exited.");
-
-
-
 
 
   }
