@@ -55,6 +55,7 @@ public final class ChatSimpleGui {
   }
 
   private Border paneBorder() {
+
     Border outside = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
@@ -95,22 +96,23 @@ public final class ChatSimpleGui {
     usersViewC.gridwidth = 1;
     usersViewC.gridheight = 1;
     usersViewC.fill = GridBagConstraints.BOTH;
-    usersViewC.weightx = 0.3;
-    usersViewC.weighty = 0.3;
+    usersViewC.weightx = 0.2;
+    usersViewC.weighty = 0.5;
 
-    conversationViewC.gridx = 1;
-    conversationViewC.gridy = 0;
+    conversationViewC.gridx = 0;
+    conversationViewC.gridy = 1;
     conversationViewC.gridwidth = 1;
     conversationViewC.gridheight = 1;
     conversationViewC.fill = GridBagConstraints.BOTH;
-    conversationViewC.weightx = 0.7;
-    conversationViewC.weighty = 0.3;
+    conversationViewC.weightx = 0.2;
+    conversationViewC.weighty = 0.5;
 
-    messagesViewC.gridx = 0;
-    messagesViewC.gridy = 1;
+    messagesViewC.gridx = 1;
+    messagesViewC.gridy = 0;
     messagesViewC.gridwidth = 2;
-    messagesViewC.gridheight = 1;
+    messagesViewC.gridheight = 2;
     messagesViewC.fill = GridBagConstraints.BOTH;
+
     messagesViewC.weighty = 0.7;
     
     mainViewPanel.add(usersViewPanel, usersViewC);
