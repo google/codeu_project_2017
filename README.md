@@ -37,7 +37,7 @@ JAVA&nbsp;7 when working with this project.
      the following two commands in separate shells:
 
        ```
-       $ sh run_server.sh <team_id> <team_secret> <port>
+       $ sh run_server.sh <team_id> <team_secret> <port> <persistent-dir>
        $ sh run_client.sh <host> <port>
        ```
 
@@ -58,6 +58,8 @@ JAVA&nbsp;7 when working with this project.
          ```
 
        if the port is already in use.
+     + `<persistent-dir>`: the path where you want the server to save data between
+       runs.
 
      The startup arguments for `run_client.sh` are the following:
      + `<host>`: the hostname or IP address of the computer on which the server
