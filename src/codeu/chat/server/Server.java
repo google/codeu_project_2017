@@ -180,7 +180,7 @@ public final class Server {
           return RequestHandler.successResponse(out, message.toString());
 
         // Creates a new user
-        case ("NEW_USER_REQUEST"):
+        case ("NEW_USER"):
           final String name = r.getBody();
           if (name == null) {
             return RequestHandler.failResponse(out, "Missing or invalid name header.");
@@ -192,7 +192,7 @@ public final class Server {
           return RequestHandler.successResponse(out, user.toString());
 
         // Creates a new conversation
-        case ("NEW_CONVERSATION_REQUEST"):
+        case ("NEW_CONVERSATION"):
           final String title = r.getBody();
           final Uuid owner = Uuid.fromString(r.getHeader("owner"));
           if (title == null || owner == null) {
@@ -213,21 +213,9 @@ public final class Server {
 
       switch (r.getHeader("type")) {
 
-        // Returns a list of all users not in blacklist provided
-        case ("GET_USERS_EXCLUDING_REQUEST"):
-          String ids = r.getHeader("ids");
+        // Returns a list of all users
+        case ("ALL_USERS"):
           final List<Uuid> excl = new ArrayList<Uuid>();
-          ids = ids.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\"", "").replaceAll(" ", "");
-          if (ids != null && !ids.equals("")) {
-            final String[] l = ids.split(",");
-            for (String i : l) {
-              try {
-                excl.add(Uuid.fromString(i));
-              } catch (NumberFormatException e) {
-                return RequestHandler.failResponse(out, "Malformed UUID provided");
-              }
-            }
-          }
           final Collection<User> users = view.getUsersExcluding(excl);
           return RequestHandler.successResponse(out, users.toString());
 

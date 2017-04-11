@@ -113,7 +113,7 @@ public final class RequestTest {
             Request request = new Request.Builder()
                     .url("http://127.0.0.1:8000/")
                     .post(body)
-                    .addHeader("type", "NEW_USER_REQUEST")
+                    .addHeader("type", "NEW_USER")
                     .build();
 
             new Thread(servlet).start();
@@ -133,8 +133,7 @@ public final class RequestTest {
         Request request = new Request.Builder()
                 .url("http://127.0.0.1:8000/")
                 .get()
-                .addHeader("type", "GET_USERS_EXCLUDING_REQUEST")
-                .addHeader("ids", "[" + users.get(0) + "]")
+                .addHeader("type", "ALL_USERS")
                 .build();
 
         new Thread(servlet).start();
@@ -143,7 +142,7 @@ public final class RequestTest {
         Thread.sleep(200);
         JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
         assertTrue("Unable to create user, received " + sub.getResult() + " instead.",
-                jsonArray.size() == 2);
+                jsonArray.size() == 3);
     }
 
     @AfterClass
