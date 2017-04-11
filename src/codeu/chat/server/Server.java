@@ -21,8 +21,10 @@ import java.io.OutputStream;
 import java.io.PushbackInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -163,6 +165,7 @@ public final class Server {
 
       switch (r.getHeader("type")) {
 
+        // Creates a new message
         case ("NEW_MESSAGE_REQUEST"):
           final Uuid author = Uuid.fromString(r.getHeader("author"));
           final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
@@ -176,7 +179,8 @@ public final class Server {
           }
           return RequestHandler.successResponse(out, message.toString());
 
-        case ("NEW_USER_REQUEST"):
+        // Creates a new user
+        case ("NEW_USER"):
           final String name = r.getBody();
           if (name == null) {
             return RequestHandler.failResponse(out, "Missing or invalid name header.");
@@ -185,9 +189,10 @@ public final class Server {
           if (user == null) {
             return RequestHandler.failResponse(out, "Invalid username.");
           }
-          return RequestHandler.successResponse(out, user.id.toString());
+          return RequestHandler.successResponse(out, user.toString());
 
-        case ("NEW_CONVERSATION_REQUEST"):
+        // Creates a new conversation
+        case ("NEW_CONVERSATION"):
           final String title = r.getBody();
           final Uuid owner = Uuid.fromString(r.getHeader("owner"));
           if (title == null || owner == null) {
@@ -205,10 +210,23 @@ public final class Server {
       }
 
     } else if (r.getVerb().equals("GET")) {
-      return false;
+
+      switch (r.getHeader("type")) {
+
+        // Returns a list of all users
+        case ("ALL_USERS"):
+          final List<Uuid> excl = new ArrayList<Uuid>();
+          final Collection<User> users = view.getUsersExcluding(excl);
+          return RequestHandler.successResponse(out, users.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
+      }
+
     } else {
       return RequestHandler.failResponse(out, "Unknown HTTP verb.");
     }
+
   }
 
   private boolean onSerialMessage(InputStream in, OutputStream out) throws IOException {

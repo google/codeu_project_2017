@@ -28,13 +28,13 @@ echo 'Server script called.'
 cd './bin'
 if [ "$RELAY_ADDRESS" == "" ] ; then
   echo 'Not connecting to relay.'
-  java codeu.chat.ServerMain \
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT"
 else
   echo 'Connecting to relay with address' $RELAY_ADDRESS
-  java codeu.chat.ServerMain \
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
