@@ -41,10 +41,10 @@ public final class View implements BasicView, LogicalView{
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
-  private final ConnectionSource source;
+  private final BroadCastReceiver receiver;
 
-  public View(ConnectionSource source) {
-    this.source = source;
+  public View(BroadCastReceiver receiver) {
+    this.receiver = receiver;
   }
 
   @Override

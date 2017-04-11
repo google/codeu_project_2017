@@ -38,9 +38,9 @@ public final class Chat {
   private final BroadCastReceiver broadCastReceiver;
 
   // Constructor - sets up the Chat Application
-  public Chat(Controller controller, View view) {
+  public Chat(BroadCastReceiver receiver, Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
-    broadCastReceiver = new BroadCastReceiver(new ClientConnectionSource("localhost", 2025));
+    broadCastReceiver = receiver;
     broadCastReceiver.onBroadCast( (message) -> ClientMessage.printMessage(message,clientContext.user) );
     broadCastReceiver.start();
   }

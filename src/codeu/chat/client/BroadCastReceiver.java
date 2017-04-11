@@ -21,7 +21,7 @@ public class BroadCastReceiver extends Thread{
     private BroadcastEvent myResponse;
     private boolean alive;
     private InputStream in;
-    private boolean recievedResponse;
+    private boolean receivedResponse;
     private int lastType;
 
     // A broadcast event will be fired whenever a new broadcast is pushed to the client.
@@ -45,7 +45,7 @@ public class BroadCastReceiver extends Thread{
 
             while (alive) {
 
-                if (!recievedResponse) {
+                if (!receivedResponse) {
 
                     int type = Serializers.INTEGER.read(in);
 
@@ -58,7 +58,7 @@ public class BroadCastReceiver extends Thread{
                     } else {
                         // todo if the type is a response to a request that was sent
                         this.lastType = type;
-                        recievedResponse = true;
+                        receivedResponse = true;
                     }
                 }
             }
@@ -99,18 +99,18 @@ public class BroadCastReceiver extends Thread{
 
     public int getType() {
 
-        while (!recievedResponse);
+        while (!receivedResponse);
         return this.lastType;
 
     }
 
     public InputStream getInputStream() {
-        while (!recievedResponse) { }
+        while (!receivedResponse) { }
         return in;
     }
 
     public void responseProcessed() {
-        recievedResponse = false;
+        receivedResponse = false;
     }
 
     public OutputStream out() {
