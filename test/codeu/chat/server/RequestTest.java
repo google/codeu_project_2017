@@ -10,17 +10,22 @@ import static org.junit.Assert.*;
 import codeu.chat.common.*;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
+import com.google.gson.*;
 import okhttp3.*;
 import okhttp3.Request;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.Before;
+import org.junit.*;
 
 import codeu.chat.util.Uuid;
+import org.junit.runners.MethodSorters;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public final class RequestTest {
+
+    private int teamNumber = 16;
 
 
     /**
@@ -32,7 +37,7 @@ public final class RequestTest {
         ConnectionSource serverSource;
 
         public Servlet(int port) throws IOException {
-            servlet = new Server(Uuid.fromString("16"), Secret.parse("16"), new NoOpRelay());
+            servlet = new Server(Uuid.fromString(String.valueOf(teamNumber)), Secret.parse("16"), new NoOpRelay());
             serverSource = ServerConnectionSource.forPort(port);
         }
 
@@ -82,34 +87,67 @@ public final class RequestTest {
 
     }
 
-    private Servlet servlet;
+    private static Servlet servlet;
+    private static List<String> users;
 
+
+    private static boolean setUpIsDone = false;
     @Before
-    public void doBefore() throws IOException {
+    public void setUp() throws IOException {
+        if (setUpIsDone) {
+            return;
+        }
         servlet = new Servlet(8000);
-        new Thread(servlet).start();
+        users = new ArrayList<>();
+        setUpIsDone = true;
     }
 
     @Test
     public void testAddUser() throws IOException, InterruptedException {
 
-        MediaType mediaType = MediaType.parse("application/octet-stream");
-        RequestBody body = RequestBody.create(mediaType, "Geroeo");
-        Request request = new Request.Builder()
-                .url("http://127.0.0.1:8000/")
-                .post(body)
-                .addHeader("type", "NEW_USER_REQUEST")
-                .build();
+        String[] usernames = {"George P. Burdell", "Satya Nadella", "Johnny Ives"};
 
-        Submit sub = new Submit(request);
-        new Thread(sub).start();
-        Thread.sleep(100);
+        for (String st : usernames) {
+            MediaType mediaType = MediaType.parse("application/octet-stream");
+            RequestBody body = RequestBody.create(mediaType, st);
+            Request request = new Request.Builder()
+                    .url("http://127.0.0.1:8000/")
+                    .post(body)
+                    .addHeader("type", "NEW_USER_REQUEST")
+                    .build();
 
-        assertTrue("Unable to create user, received " + sub.getResult() + "instead.", sub.getResult().startsWith("[UUID:"));
+            new Thread(servlet).start();
+            Submit sub = new Submit(request);
+            new Thread(sub).start();
+            Thread.sleep(200);
+            JsonObject jsonObject = (new JsonParser()).parse(sub.getResult()).getAsJsonObject();
+            users.add(jsonObject.get("uuid").toString());
+            assertTrue("Unable to create user " + st + ".",
+                    jsonObject.get("name").toString().equals("\"" + st + "\""));
+        }
     }
 
-    @After
-    public void doAfter() throws IOException {
+    @Test
+    public void testListUsers() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "GET_USERS_EXCLUDING_REQUEST")
+                .addHeader("ids", "[" + users.get(0) + "]")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        assertTrue("Unable to create user, received " + sub.getResult() + " instead.",
+                jsonArray.size() == 2);
+    }
+
+    @AfterClass
+    public static void doAfter() throws IOException {
         servlet.getServer().kill();
     }
 

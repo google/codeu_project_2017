@@ -165,6 +165,7 @@ public final class Server {
 
       switch (r.getHeader("type")) {
 
+        // Creates a new message
         case ("NEW_MESSAGE_REQUEST"):
           final Uuid author = Uuid.fromString(r.getHeader("author"));
           final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
@@ -178,6 +179,7 @@ public final class Server {
           }
           return RequestHandler.successResponse(out, message.toString());
 
+        // Creates a new user
         case ("NEW_USER_REQUEST"):
           final String name = r.getBody();
           if (name == null) {
@@ -187,8 +189,9 @@ public final class Server {
           if (user == null) {
             return RequestHandler.failResponse(out, "Invalid username.");
           }
-          return RequestHandler.successResponse(out, user.id.toString());
+          return RequestHandler.successResponse(out, user.toString());
 
+        // Creates a new conversation
         case ("NEW_CONVERSATION_REQUEST"):
           final String title = r.getBody();
           final Uuid owner = Uuid.fromString(r.getHeader("owner"));
@@ -207,22 +210,35 @@ public final class Server {
       }
 
     } else if (r.getVerb().equals("GET")) {
+
       switch (r.getHeader("type")) {
+
+        // Returns a list of all users not in blacklist provided
         case ("GET_USERS_EXCLUDING_REQUEST"):
-          final String ids = r.getHeader("ids");
-          final List<String> l = Arrays.asList(ids.replaceAll(" ", "").split(","));
-          final List excl = new ArrayList<Uuid>();
-          for (String i : l) {
-            excl.add(Uuid.fromString(i));
+          String ids = r.getHeader("ids");
+          final List<Uuid> excl = new ArrayList<Uuid>();
+          ids = ids.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\"", "").replaceAll(" ", "");
+          if (ids != null && !ids.equals("")) {
+            final String[] l = ids.split(",");
+            for (String i : l) {
+              try {
+                excl.add(Uuid.fromString(i));
+              } catch (NumberFormatException e) {
+                return RequestHandler.failResponse(out, "Malformed UUID provided");
+              }
+            }
           }
           final Collection<User> users = view.getUsersExcluding(excl);
-
           return RequestHandler.successResponse(out, users.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
       }
-      return false;
+
     } else {
       return RequestHandler.failResponse(out, "Unknown HTTP verb.");
     }
+
   }
 
   private boolean onSerialMessage(InputStream in, OutputStream out) throws IOException {
