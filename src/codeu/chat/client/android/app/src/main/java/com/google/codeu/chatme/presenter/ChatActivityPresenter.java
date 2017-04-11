@@ -55,8 +55,9 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Conversation conv = data.getValue(Conversation.class);
                     if (conv.getParticipants().contains(FirebaseUtil.getCurrentUserUid())) {
+                        conv.setId(data.getKey());
                         conversations.add(conv);
-                        Log.d(TAG, "loadConversations:onDataChange:ownerId:" + conv.getOwner());
+                        Log.d(TAG, "loadConversations:onDataChange:convId:" + conv.getId());
                     }
                 }
 
