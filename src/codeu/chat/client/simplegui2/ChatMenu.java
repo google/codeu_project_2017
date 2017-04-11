@@ -29,6 +29,7 @@ private final ClientContext clientContext;
     public ChatMenu(ClientContext clientContext){
         this.clientContext=clientContext;
 
+
         initialize();
         stage = new Stage();
         scene= new Scene(mainWindow);
