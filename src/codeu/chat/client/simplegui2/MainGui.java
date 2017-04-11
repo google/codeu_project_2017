@@ -42,6 +42,7 @@ public class MainGui{
 
     private void initialize(){
 
+        //create ChatMenu object and display stage
         ChatMenu mainFrame= new ChatMenu(clientContext);
         mainFrame.display();
     }
