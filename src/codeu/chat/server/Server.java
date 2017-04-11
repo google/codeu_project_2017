@@ -18,10 +18,13 @@ package codeu.chat.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PushbackInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -29,17 +32,22 @@ import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
+import codeu.chat.server.model.Request;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
+import codeu.chat.util.Timeline;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 
 public final class Server {
 
-  private final static Logger.Log LOG = Logger.newLog(Server.class);
+  private static final Logger.Log LOG = Logger.newLog(Server.class);
+
+  private static final int RELAY_REFRESH_MS = 5000;  // 5 seconds
+
+  private final Timeline timeline = new Timeline();
 
   private final Uuid id;
   private final byte[] secret;
@@ -49,39 +57,187 @@ public final class Server {
   private final Controller controller;
 
   private final Relay relay;
-  private Uuid lastSeen = Uuids.NULL;
+  private Uuid lastSeen = Uuid.NULL;
 
-  public Server(Uuid id, byte[] secret, Relay relay) {
+  public Server(final Uuid id, final byte[] secret, final Relay relay) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
     this.controller = new Controller(id, model);
     this.relay = relay;
+
+    timeline.scheduleNow(new Runnable() {
+      @Override
+      public void run() {
+        try {
+
+          LOG.info("Reading update from relay...");
+
+          for (final Relay.Bundle bundle : relay.read(id, secret, lastSeen, 32)) {
+            onBundle(bundle);
+            lastSeen = bundle.id();
+          }
+
+        } catch (Exception ex) {
+
+          LOG.error(ex, "Failed to read update from relay.");
+
+        }
+        timeline.scheduleIn(RELAY_REFRESH_MS, this);
+      }
+    });
   }
 
-  public void syncWithRelay(int maxReadSize) throws Exception {
-    for (final Relay.Bundle bundle :  relay.read(id, secret, lastSeen, maxReadSize)) {
-      onBundle(bundle);
-      lastSeen = bundle.id();
+  public void kill() {
+    timeline.stop();
+  }
+
+  public void handleConnection(final Connection connection) {
+    timeline.scheduleNow(new Runnable() {
+      @Override
+      public void run() {
+        try {
+
+          LOG.info("Handling connection...");
+
+          final boolean success = onMessage(
+              connection.in(),
+              connection.out());
+
+          LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
+        } catch (Exception ex) {
+
+          LOG.error(ex, "Exception while handling connection.");
+
+        }
+
+        try {
+          connection.close();
+        } catch (Exception ex) {
+          LOG.error(ex, "Exception while closing connection.");
+        }
+      }
+    });
+  }
+
+  /**
+   *
+   * Switch between serialized and restful modes. We use a neat trick here to do so.
+   * Byte looking at the first byte of an incoming request, we can determine whether it is
+   * restful or serial.
+   *
+   * Typically you'd want to do something like inserting a signal byte, but
+   * because we want to connect relay we cannot rely on such a byte being present. Likewise,
+   * we cannot rely on a restful client to append any byte before his request.
+   *
+   * However, since Network Codes are always less than 31, which are numbers with values that correspond to the
+   * ASCII control characters, which will never lead a restful request. Therefore, we can simply check whether
+   * this first byte is less than 31 to make a determination on how to process the incoming data.
+   *
+   * Create a PushbackInputStream so we can restore our input buffer after checking the lead byte.
+   *
+   * @param in input stream from remote.
+   * @param out output stream to remote.
+   * @return success
+   * @throws IOException
+   */
+  private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+    PushbackInputStream pb = new PushbackInputStream(in);
+    int leadByte = pb.read();
+    pb.unread(leadByte);
+    if (leadByte < NetworkCode.MAX_NETWORK_CODE) {
+      return onSerialMessage(pb, out);
+    } else {
+      return onRestfulMessage(pb, out);
     }
   }
 
-  public boolean handleConnection(Connection connection) throws Exception {
+  private boolean onRestfulMessage(InputStream in, OutputStream out) throws IOException {
+    LOG.info("Receiving a RESTful message.");
+    Request r = RequestHandler.parseRaw(in);
 
-    LOG.info("Handling new connection...");
+    if (r.getHeader("type") == null) {
+      return RequestHandler.failResponse(out, "Missing type header, which specifies which function to run.");
+    }
 
-    return onMessage(connection.in(), connection.out());
+    if (r.getVerb().equals("POST")) {
+
+      switch (r.getHeader("type")) {
+
+        // Creates a new message
+        case ("NEW_MESSAGE_REQUEST"):
+          final Uuid author = Uuid.fromString(r.getHeader("author"));
+          final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
+          final String content = r.getHeader("content");
+          if (author == null || conversation == null || content == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
+          }
+          final Message message = controller.newMessage(author, conversation, content);
+          if (message == null) {
+            return RequestHandler.failResponse(out, "Invalid message.");
+          }
+          return RequestHandler.successResponse(out, message.toString());
+
+        // Creates a new user
+        case ("NEW_USER"):
+          final String name = r.getBody();
+          if (name == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid name header.");
+          }
+          final User user = controller.newUser(name);
+          if (user == null) {
+            return RequestHandler.failResponse(out, "Invalid username.");
+          }
+          return RequestHandler.successResponse(out, user.toString());
+
+        // Creates a new conversation
+        case ("NEW_CONVERSATION"):
+          final String title = r.getBody();
+          final Uuid owner = Uuid.fromString(r.getHeader("owner"));
+          if (title == null || owner == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid title or owner header.");
+          }
+          final Conversation conv = controller.newConversation(title, owner);
+          if (conv == null) {
+            return RequestHandler.failResponse(out, "Invalid conversation.");
+          }
+          return RequestHandler.successResponse(out, conv.id.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
+
+      }
+
+    } else if (r.getVerb().equals("GET")) {
+
+      switch (r.getHeader("type")) {
+
+        // Returns a list of all users
+        case ("ALL_USERS"):
+          final List<Uuid> excl = new ArrayList<Uuid>();
+          final Collection<User> users = view.getUsersExcluding(excl);
+          return RequestHandler.successResponse(out, users.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
+      }
+
+    } else {
+      return RequestHandler.failResponse(out, "Unknown HTTP verb.");
+    }
+
   }
 
-  private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+  private boolean onSerialMessage(InputStream in, OutputStream out) throws IOException {
+    LOG.info("Receiving a serial message.");
 
     final int type = Serializers.INTEGER.read(in);
 
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
-      final Uuid author = Uuids.SERIALIZER.read(in);
-      final Uuid conversation = Uuids.SERIALIZER.read(in);
+      final Uuid author = Uuid.SERIALIZER.read(in);
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
       final Message message = controller.newMessage(author, conversation, content);
@@ -89,13 +245,10 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 
-      // Unlike the other calls - we need to send something the result of this
-      // call to the relay. Waiting until after the server has written back to
-      // the client allows the client to get the response, but the network
-      // connection has not been closed. However to wait after until the client-server
-      // connection was closed before sending would be very complicated.
-
-      sendToRelay(author, conversation, message.id);
+      timeline.scheduleNow(createSendToRelayEvent(
+          author,
+          conversation,
+          message.id));
 
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
@@ -109,7 +262,7 @@ public final class Server {
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
       final String title = Serializers.STRING.read(in);
-      final Uuid owner = Uuids.SERIALIZER.read(in);
+      final Uuid owner = Uuid.SERIALIZER.read(in);
 
       final Conversation conversation = controller.newConversation(title, owner);
 
@@ -118,7 +271,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<User> users = view.getUsers(ids);
 
@@ -134,7 +287,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<Conversation> conversations = view.getConversations(ids);
 
@@ -143,7 +296,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<Message> messages = view.getMessages(ids);
 
@@ -153,11 +306,11 @@ public final class Server {
     } else if (type == NetworkCode.GET_USER_GENERATION_REQUEST) {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_RESPONSE);
-      Uuids.SERIALIZER.write(out, view.getUserGeneration());
+      Uuid.SERIALIZER.write(out, view.getUserGeneration());
 
     } else if (type == NetworkCode.GET_USERS_EXCLUDING_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
       final Collection<User> users = view.getUsersExcluding(ids);
 
@@ -185,7 +338,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
 
-      final Uuid conversation = Uuids.SERIALIZER.read(in);
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
       final Time startTime = Time.SERIALIZER.read(in);
       final Time endTime = Time.SERIALIZER.read(in);
 
@@ -196,7 +349,7 @@ public final class Server {
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
 
-      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
+      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
       final int range = Serializers.INTEGER.read(in);
 
       final Collection<Message> messages = view.getMessages(rootMessage, range);
@@ -252,16 +405,21 @@ public final class Server {
     }
   }
 
-  private void sendToRelay(Uuid userId, Uuid conversationId, Uuid messageId) {
-
-    final User user = view.findUser(userId);
-    final Conversation conversation = view.findConversation(conversationId);
-    final Message message = view.findMessage(messageId);
-
-    relay.write(id,
-                secret,
-                relay.pack(user.id, user.name, user.creation),
-                relay.pack(conversation.id, conversation.title, conversation.creation),
-                relay.pack(message.id, message.content, message.creation));
+  private Runnable createSendToRelayEvent(final Uuid userId,
+                                          final Uuid conversationId,
+                                          final Uuid messageId) {
+    return new Runnable() {
+      @Override
+      public void run() {
+        final User user = view.findUser(userId);
+        final Conversation conversation = view.findConversation(conversationId);
+        final Message message = view.findMessage(messageId);
+        relay.write(id,
+                    secret,
+                    relay.pack(user.id, user.name, user.creation),
+                    relay.pack(conversation.id, conversation.title, conversation.creation),
+                    relay.pack(message.id, message.content, message.creation));
+      }
+    };
   }
 }

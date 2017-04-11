@@ -1,0 +1,6 @@
+/.idea
+/bin
+codeu_project_2017.iml
+/out
+chat_server_log.*
+.DS_Store

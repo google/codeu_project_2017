@@ -14,5 +14,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+TEAM_ID="$1"
+TEAM_SECRET="$2"
+PORT="$3"
+RELAY_ADDRESS="$4"
+
+if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" ]] ; then
+  echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> [RELAY ADDRESS]'
+  exit 1
+fi
+echo 'Server script called.'
+
 cd './bin'
-java codeu.chat.ServerMain "100.101" "ABABAB" "2007"
+if [ "$RELAY_ADDRESS" == "" ] ; then
+  echo 'Not connecting to relay.'
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
+      "$TEAM_ID" \
+      "$TEAM_SECRET" \
+      "$PORT"
+else
+  echo 'Connecting to relay with address' $RELAY_ADDRESS
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
+      "$TEAM_ID" \
+      "$TEAM_SECRET" \
+      "$PORT" \
+      "$RELAY_ADDRESS"
+fi
