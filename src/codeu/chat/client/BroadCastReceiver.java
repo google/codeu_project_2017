@@ -17,20 +17,22 @@ import java.io.OutputStream;
  */
 public class BroadCastReceiver extends Thread{
 
-    ConnectionSource mySource;
-    OutputStream out;
-    BroadcastEvent myResponse;
-    boolean alive;
-    InputStream in;
-
+    private ConnectionSource mySource;
+    private OutputStream out;
+    private BroadcastEvent myResponse;
+    private boolean alive;
+    private InputStream in;
+    private ResponseEvent responseEvent;
 
     // A broadcast event will be fired whenever a new broadcast is pushed to the client.
     @FunctionalInterface
     public interface BroadcastEvent { void onBroadcast(Message message); }
 
-    public BroadCastReceiver(ConnectionSource mySource, BroadcastEvent broadcastEvent) {
+    @FunctionalInterface
+    public interface ResponseEvent { void onResponse(InputStream in);  }
+
+    public BroadCastReceiver(ConnectionSource mySource) {
         this.mySource = mySource;
-        this.myResponse = broadcastEvent;
         this.alive = true;
     }
 
@@ -49,12 +51,15 @@ public class BroadCastReceiver extends Thread{
 
                 if (type == NetworkCode.NEW_BROADCAST) {
                     Message message = Message.SERIALIZER.read(in);
-                    myResponse.onBroadcast(message);
+                    if (myResponse != null) myResponse.onBroadcast(message);
                     // todo send a broadcast response to inform server that broadcast was received
                 }
 
                 else if(type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
                     System.out.println("Conversation response received");
+                } else {
+                    // todo if the type is a response to a request that was sent
+                    if (responseEvent != null) responseEvent.onResponse(in);
                 }
 
             }
@@ -88,5 +93,12 @@ public class BroadCastReceiver extends Thread{
         }
     }
 
+    private void onBroadCast(BroadcastEvent broadcastEvent) {
+        this.myResponse = broadcastEvent;
+    }
+
+    private void onResponse(ResponseEvent responseEvent) {
+        this.responseEvent = responseEvent;
+    }
 
 }
