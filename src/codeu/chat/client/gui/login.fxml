@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: MAGENTA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" />
+      <MenuBar style="-fx-background-color: purple;">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane VBox.vgrow="ALWAYS">
+         <items>
+            <SplitPane dividerPositions="0.5">
+              <items>
+                  <SplitPane orientation="VERTICAL" prefHeight="611.0" prefWidth="274.0" style="-fx-background-color: pink;">
+                    <items>
+                        <TitledPane animated="false" text="Currently Logged in as: Bob" />
+                    </items>
+                  </SplitPane>
+                  <SplitPane dividerPositions="0.7697715289982425, 0.7838312829525483" orientation="VERTICAL">
+                    <items>
+                        <ListView style="-fx-background-color: MAGENTA;" />
+                        <ListView style="-fx-background-color: MAGENTA;" />
+                        <SplitPane dividerPositions="0.621">
+                          <items>
+                              <TextArea prefHeight="137.0" prefWidth="363.0" style="-fx-background-color: MAGENTA;" text="Oh hello friend of mine! It is Bob!" />
+                              <Button mnemonicParsing="false" prefHeight="148.0" prefWidth="62.0" style="-fx-background-color: MAGENTA;" text="Send" />
+                          </items>
+                        </SplitPane>
+                    </items>
+                  </SplitPane>
+              </items>
+            </SplitPane>
+         </items>
+      </SplitPane>
+   </children>
+</VBox>
