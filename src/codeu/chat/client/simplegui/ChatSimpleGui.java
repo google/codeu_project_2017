@@ -125,8 +125,8 @@ public final class ChatSimpleGui {
   private JMenuBar menuBar(){
 	  JMenuBar topMenuBar = new JMenuBar(); //the menu bar
 	  JMenu topMenuGeneral = new JMenu("General"); //first category of menu
-	  JMenuItem topMenuItem = new JMenuItem("How to Use"); //details how to use the app
-	  JMenuItem coders = new JMenuItem("Coders"); //coders on this app or equivalent to credits
+	  final JMenuItem topMenuItem = new JMenuItem("How to Use"); //details how to use the app
+	  final JMenuItem coders = new JMenuItem("Coders"); //coders on this app or equivalent to credits
 	  
 	  //adds the How to Use information at the top of this menu bar
 	  topMenuBar.add(topMenuGeneral);
@@ -145,7 +145,7 @@ public final class ChatSimpleGui {
 			  									+ "Then, you must sign in the user and add a conversation. "
 			  									+ "Then, you may begin chatting!\n\n"
 			  									+ "To add a user:\n"
-			  										+"1) Click the Add button\n"
+			  										+"1) Click the  Add button\n"
 			  										+"2) Enter the user's name\n"
 			  										+"3) Click OK or press ENTER\n\n"
 			  									+"To sign in a user:\n"
