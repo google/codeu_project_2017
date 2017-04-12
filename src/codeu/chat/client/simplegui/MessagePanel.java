@@ -40,14 +40,15 @@ public final class MessagePanel extends JPanel {
 
   private final BroadCastReceiver receiver;
 
-  public MessagePanel(ClientContext clientContext) {
+  public MessagePanel(ClientContext clientContext, BroadCastReceiver receiver) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
 
-    this.receiver = new BroadCastReceiver(new ClientConnectionSource("localhost", 2025),
-            new BroadCastReceiver.BroadcastEvent() {
-              @Override
-              public void onBroadcast(Message message) {
+    this.receiver = receiver;
+
+    this.receiver.onBroadCast(
+
+            (message) -> {
 
                 // Display author name if available.  Otherwise display the author UUID.
                 final String authorName = clientContext.user.getName(message.author);
@@ -57,8 +58,8 @@ public final class MessagePanel extends JPanel {
 
                 messageListModel.addElement(displayString);
 
-              }
             }
+
     );
 
 
@@ -194,7 +195,6 @@ public final class MessagePanel extends JPanel {
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
 
-    receiver.start();
   }
 
   // Populate ListModel
