@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="ChatMe_Blue">#14333d</color>
+    <color name="ChatMe_Red">#6c2324</color>
+    <color name="ChatMe_Panel_Red">#b14b4d</color>
+    <color name="chatMe_Lighter_Red">#992e31</color>
+</resources>
