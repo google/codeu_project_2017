@@ -36,19 +36,23 @@ if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_
   echo '                 the ip address of the relay server and PORT is the port'
   echo '                 the relay server is listing on.'
   echo ''
+
   exit 1
 fi
+echo 'Server script called.'
 
 
 cd './bin'
 if [ "$RELAY_ADDRESS" == "" ] ; then
-  java codeu.chat.ServerMain \
+  echo 'Not connecting to relay.'
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
+  echo 'Connecting to relay with address' $RELAY_ADDRESS
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \

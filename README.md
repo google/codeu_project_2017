@@ -1,5 +1,26 @@
+[![Build Status](https://travis-ci.org/petosa/codeu_project_2017.svg?branch=master)](https://travis-ci.org/petosa/codeu_project_2017)
+# Magenta Messenger
 
-# CODEU CHAT SERVER | README
+## WHAT'S NEW?
+I implemented a REST web api for this server backend provided by Google.
+Out of the box, the communication mechanism used serializiation and an arbitrary
+protocol using network codes to direct traffic. This is practically impossible to
+use in the Javascript context we were looking for, so it was necessary to implement
+a RESTful api on top of the existing server.
+
+The API is implemented in such way that the server can receive both HTTP requests and
+Google encoded requests in the same stream: it intelligently detects incoming messages
+and switches functionality based off protocol. I kept Google protocol functionality to
+allow for communication with Relay, which supports the Google protocol rather than the
+RESTful protocol. That said, for purposes outside of Relay, the REST API enjoys wide-
+spread support form libraries like Ajax for use within Javascript. It would almost
+be impossible to implement a Node.js webserver frontend with a RESTful API to communicate
+with the backend, especially since the Google protocol relayed serialized Java objects,
+making it a language dependent protocol.
+
+Each REST API function is fully tested, with JUnit tests automatically running in Travis
+CI after each push. The Wiki section of the project now sports thorough API documentation
+so that web developers can easily implement functionality (for u Ayesha).
 
 
 ## DISCLAIMER
