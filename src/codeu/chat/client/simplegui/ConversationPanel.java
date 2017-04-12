@@ -73,7 +73,7 @@ public final class ConversationPanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    final JButton updateButton = new JButton("Update");
+    final JButton updateButton = new JButton("Choose Conversation");
     final JButton addButton = new JButton("Add");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -129,7 +129,7 @@ public final class ConversationPanel extends JPanel {
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {
-          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
+          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
