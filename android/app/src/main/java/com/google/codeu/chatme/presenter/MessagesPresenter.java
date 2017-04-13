@@ -13,6 +13,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Following MVP design pattern, this class encapsulates the functionality to
+ * handle messaging in a particular conversation
+ *
+ * @see MessagesInteractor for documentation on interface methods
+ */
 public class MessagesPresenter implements MessagesInteractor {
 
     private static final String TAG = MessagesPresenter.class.getName();
@@ -40,6 +46,8 @@ public class MessagesPresenter implements MessagesInteractor {
                     messages.add(message);
                     Log.d(TAG, "loadMessages:onDataChange:messageId:" + message.getId());
                 }
+
+                // TODO: call adapterView.loadMessages() to display messages
             }
 
             @Override
@@ -47,5 +55,21 @@ public class MessagesPresenter implements MessagesInteractor {
                 Log.e(TAG, "loadMessages:failure " + databaseError.getMessage());
             }
         });
+    }
+
+    public void sendMessage(Message newMessage) {
+        final String newMessageId = mRootRef.child("messages").push().getKey();
+
+        mRootRef.child("messages").child(newMessageId).setValue(newMessage,
+                new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            Log.w(TAG, "addMessage:failure " + databaseError.getMessage());
+                        } else {
+                            Log.i(TAG, "addMessage:success " + newMessageId);
+                        }
+                    }
+                });
     }
 }

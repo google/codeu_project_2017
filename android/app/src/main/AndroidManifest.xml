@@ -24,20 +24,7 @@
 
         <activity
             android:name=".view.message.MessagesActivity"
-            android:label="@string/title_activity_create_chat"
-            android:parentActivityName=".view.tabs.TabsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.google.codeu.chatme.view.tabs.TabsActivity" />
-        </activity>
-
-        <activity
-            android:name=".view.AddUsersActivity"
-            android:label="@string/title_activity_add_users" />
-
-        <activity
-            android:name=".view.SearchActivity"
-            android:label="@string/title_activity_search" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>

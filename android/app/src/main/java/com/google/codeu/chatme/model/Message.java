@@ -28,4 +28,16 @@ public final class Message {
     public String getId() {
         return id;
     }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setConversation(String conversation) {
+        this.conversation = conversation;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
