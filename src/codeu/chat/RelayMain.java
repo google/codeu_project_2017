@@ -114,7 +114,9 @@ final class RelayMain {
 
         line = line.trim();
 
-        if (line.startsWith("#")) {
+        if (line.length() == 0) {
+          // This line is blank, skip it
+        } else if (line.startsWith("#")) {
           // this is a comment, skip it
         } else {
 
