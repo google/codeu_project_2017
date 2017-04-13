@@ -51,9 +51,8 @@ public class BroadCastReceiver extends Thread{
                     Message message = Message.SERIALIZER.read(in);
                     myResponse.onBroadcast(message);
                     // todo send a broadcast response to inform server that broadcast was received
-                }
 
-                else if(type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
+                } else if(type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
                     System.out.println("Conversation response received");
                 }
 
