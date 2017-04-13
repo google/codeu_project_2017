@@ -19,7 +19,7 @@ public class MessagesPresenter implements MessagesInteractor {
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-    private final MessagesView 2view;
+    private final MessagesView view;
 
     public MessagesPresenter(MessagesView view) {
         this.view = view;
