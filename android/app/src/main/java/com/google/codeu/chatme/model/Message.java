@@ -20,4 +20,12 @@ public final class Message {
         this.conversation = conversation;
         this.timeCreated = System.currentTimeMillis();
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 }
