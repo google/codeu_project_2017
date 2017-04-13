@@ -14,6 +14,9 @@ import com.google.codeu.chatme.presenter.LoginActivityPresenter;
 import com.google.codeu.chatme.view.tabs.TabsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * @see LoginView for documentation of interface methods
+ */
 public class LoginActivity extends AppCompatActivity implements LoginView, View.OnClickListener {
 
     private static final String TAG = LoginActivity.class.getName();
@@ -78,11 +81,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         startActivity(mIntent);
     }
 
-    /**
-     * Shows progress loader with the given message
-     *
-     * @param messsage resource Id of string message to display
-     */
     public void showProgressDialog(int messsage) {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -93,39 +91,21 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         mProgressDialog.show();
     }
 
-    /**
-     * Hides progress loader
-     */
     public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
     }
 
-    /**
-     * Creates a long toast message on the {@link LoginActivity} frame
-     *
-     * @param message message to be toasted
-     */
     public void makeToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * Displays an error for {@link LoginActivity#etEmail} field
-     *
-     * @param err_et_email resource id of email field error message
-     */
     @Override
     public void setEmailFieldError(int err_et_email) {
         etEmail.setError(getString(err_et_email));
     }
 
-    /**
-     * Displays an error for {@link LoginActivity#etPassword} field
-     *
-     * @param err_et_password resource id of password field error message
-     */
     @Override
     public void setPasswordFieldError(int err_et_password) {
         etPassword.setError(getString(err_et_password));

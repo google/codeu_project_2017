@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * Following MVP design pattern, this class encapsulates the functionality to
  * perform user sign up and sign in using Firebase
+ *
+ * @see LoginActivityInteractor for documentation on interface methods
  */
 public class LoginActivityPresenter implements LoginActivityInteractor {
 
@@ -64,12 +66,6 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
         };
     }
 
-    /**
-     * Attempts to create an account with given account credentials
-     *
-     * @param email    user email
-     * @param password user password
-     */
     @Override
     public void signUp(String email, String password) {
         boolean isValid = validateInput(email, password);
@@ -124,12 +120,6 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
         });
     }
 
-    /**
-     * Attempts to log user in with given credentials
-     *
-     * @param email    user email
-     * @param password user password
-     */
     public void signIn(String email, String password) {
         boolean isValid = validateInput(email, password);
         if (!isValid) {
@@ -175,19 +165,11 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
         return true;
     }
 
-    /**
-     * Adds {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
-     * {@link FirebaseAuth} which is the entry point to Firebase SDK
-     */
     @Override
     public void setAuthStateListener() {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    /**
-     * Removes {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} from
-     * {@link FirebaseAuth} if it exists
-     */
     @Override
     public void removeAuthStateListener() {
         if (mAuthListener != null) {

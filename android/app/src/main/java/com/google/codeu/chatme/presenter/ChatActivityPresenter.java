@@ -19,6 +19,8 @@ import java.util.Collections;
  * Following MVP design pattern, this class encapsulates the functionality to
  * store and retrieve data related to current user's conversations from Firebase
  * database
+ *
+ * @see ChatActivityInteractor for documentation of interface methods
  */
 public class ChatActivityPresenter implements ChatActivityInteractor {
 
@@ -41,9 +43,6 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
         this.view = view;
     }
 
-    /**
-     * Loads conversations of the current user from Firebase
-     */
     public void loadConversations() {
         Query conversationsQuery = mRootRef.child("conversations").orderByChild("timeCreated");
         conversationsQuery.addValueEventListener(new ValueEventListener() {
