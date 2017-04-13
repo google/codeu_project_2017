@@ -21,7 +21,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import codeu.chat.client.ClientContext;
+import codeu.chat.client.core.ClientContext;
 import codeu.chat.common.User;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel

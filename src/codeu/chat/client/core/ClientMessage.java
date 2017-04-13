@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.client;
+package codeu.chat.client.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,19 +53,6 @@ public final class ClientMessage {
     this.userContext = userContext;
     this.conversationContext = conversationContext;
     this.conversationContext.setMessageContext(this);
-  }
-
-  // Validate the message body.
-  public static boolean isValidBody(String body) {
-    boolean clean = true;
-    if ((body.length() <= 0) || (body.length() > 1024)) {
-      clean = false;
-    } else {
-
-      // TODO: check for invalid characters
-
-    }
-    return clean;
   }
 
   public boolean hasCurrent() {
@@ -243,5 +230,18 @@ public final class ClientMessage {
   // Print Message outside of user context.
   public static void printMessage(Message m) {
     printMessage(m, null);
+  }
+
+  // Validate the message body.
+  public static boolean isValidBody(String body) {
+    boolean clean = true;
+    if ((body.length() <= 0) || (body.length() > 1024)) {
+      clean = false;
+    } else {
+
+      // TODO: check for invalid characters
+
+    }
+    return clean;
   }
 }

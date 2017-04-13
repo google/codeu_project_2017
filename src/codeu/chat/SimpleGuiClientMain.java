@@ -16,9 +16,8 @@ package codeu.chat;
 
 import java.io.IOException;
 
-import codeu.chat.client.Controller;
+import codeu.chat.client.core.ClientContext;
 import codeu.chat.client.simplegui.ChatSimpleGui;
-import codeu.chat.client.View;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
@@ -44,30 +43,19 @@ final class SimpleGuiClientMain {
 
     final RemoteAddress address = RemoteAddress.parse(args[0]);
 
-    try (
-      final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
-    ) {
-      final Controller controller = new Controller(source);
-      final View view = new View(source);
+    try (final ConnectionSource source = new ClientConnectionSource(
+        address.host, address.port)) {
 
       LOG.info("Creating client...");
+      final ChatSimpleGui chatSimpleGui =
+          new ChatSimpleGui(new ClientContext(source));
 
-      runClient(controller, view);
+      LOG.info("Starting client...");
+      chatSimpleGui.run();
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception setting up client. Check log for details.");
       LOG.error(ex, "Exception setting up client.");
     }
-  }
-
-  private static void runClient(Controller controller, View view) {
-
-    final ChatSimpleGui chatSimpleGui = new ChatSimpleGui(controller, view);
-
-    LOG.info("Created client");
-
-    chatSimpleGui.run();
-
-    LOG.info("chat client is running.");
   }
 }

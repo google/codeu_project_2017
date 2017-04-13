@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.client;
+package codeu.chat.client.core;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,9 +26,9 @@ import codeu.chat.util.store.Store;
 
 public final class ClientUser {
 
-  private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
-
+  private static final Logger.Log LOG = Logger.newLog(ClientUser.class);
   private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
+
   private final Controller controller;
   private final View view;
 
@@ -42,19 +42,6 @@ public final class ClientUser {
   public ClientUser(Controller controller, View view) {
     this.controller = controller;
     this.view = view;
-  }
-
-  // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
-
-      // TODO: check for invalid characters
-
-    }
-    return clean;
   }
 
   public boolean hasCurrent() {
@@ -149,5 +136,18 @@ public final class ClientUser {
   // Move to User's toString()
   public static void printUser(User user) {
     System.out.println(getUserInfoString(user));
+  }
+
+  // Validate the username string
+  public static boolean isValidName(String userName) {
+    boolean clean = true;
+    if (userName.length() == 0) {
+      clean = false;
+    } else {
+
+      // TODO: check for invalid characters
+
+    }
+    return clean;
   }
 }

@@ -12,13 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.client;
+package codeu.chat.client.core;
 
-import codeu.chat.client.ClientConversation;
-import codeu.chat.client.ClientMessage;
-import codeu.chat.client.ClientUser;
-import codeu.chat.client.Controller;
-import codeu.chat.client.View;
+import codeu.chat.util.connections.ConnectionSource;
 
 public final class ClientContext {
 
@@ -26,7 +22,11 @@ public final class ClientContext {
   public final ClientConversation conversation;
   public final ClientMessage message;
 
-  public ClientContext(Controller controller, View view) {
+  public ClientContext(ConnectionSource source) {
+
+    final Controller controller = new Controller(source);
+    final View view = new View(source);
+
     user = new ClientUser(controller, view);
     conversation = new ClientConversation(controller, view, user);
     message = new ClientMessage(controller, view, user, conversation);
