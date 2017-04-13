@@ -93,6 +93,8 @@ public final class MessagePanel extends JPanel {
 
     titlePanel.add(titleConvPanel, titleConvPanelC);
     titlePanel.add(titleOwnerPanel, titleOwnerPanelC);
+    titleOwnerPanel.setBackground(Color.orange);
+    titleConvPanel.setBackground(Color.orange);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
     // User List panel.
@@ -144,6 +146,9 @@ public final class MessagePanel extends JPanel {
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
+    titlePanel.setBackground(Color.orange);
+    listShowPanel.setBackground(Color.orange);
+    buttonPanel.setBackground(Color.orange);
 
     // User click Messages Add button - prompt for message body and add new Message to Conversation
     addButton.addActionListener(new ActionListener() {
