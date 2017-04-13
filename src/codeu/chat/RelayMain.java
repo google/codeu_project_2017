@@ -63,7 +63,9 @@ final class RelayMain {
     }
   }
 
-  private static void startRelay(Server relay, ConnectionSource source, String teamFile) {
+  private static void startRelay(final Server relay,
+                                 final ConnectionSource source,
+                                 final String teamFile) {
 
     final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
     LOG.info("Relay front end object created.");
