@@ -9,14 +9,29 @@
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="27dp"
         android:background="@color/ChatMe_Blue"
         android:elevation="0dp"
         android:text="Save Changes"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         android:layout_below="@+id/passwrord_text"
+        android:layout_alignEnd="@+id/passwrord_text"
         android:layout_alignStart="@+id/passwrord_text" />
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/save_button"
+        android:layout_alignStart="@+id/save_button"
+        android:layout_below="@+id/save_button"
+        android:layout_marginTop="26dp"
+        android:background="@android:color/holo_red_dark"
+        android:elevation="0dp"
+        android:text="Log Out"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/username_text"

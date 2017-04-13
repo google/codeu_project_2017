@@ -92,7 +92,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
 
                             // saves new user to real-time database
                             addUser(currentUser.getUid(), currentUser.getDisplayName());
-                            view.openChatActivity();
+
                         }
                     }
                 });
