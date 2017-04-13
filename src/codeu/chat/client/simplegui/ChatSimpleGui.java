@@ -55,7 +55,7 @@ public final class ChatSimpleGui {
   }
 
   private Border paneBorder() {
-    Border outside = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
+    Border outside = BorderFactory.createLineBorder(Color.BLACK);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
   }
@@ -77,16 +77,21 @@ public final class ChatSimpleGui {
 
     // Build main panels - Users, Conversations, Messages
     final JPanel usersViewPanel = new UserPanel(clientContext);
-    usersViewPanel.setBorder(paneBorder()); 
+
+    usersViewPanel.setBorder(paneBorder());
+    usersViewPanel.setBackground(Color.orange); //
+
     final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
     messagesViewPanel.setBorder(paneBorder());
+    messagesViewPanel.setBackground(Color.orange);
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
     final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
     conversationsViewPanel.setBorder(paneBorder());
+    conversationsViewPanel.setBackground(Color.orange);
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels and search bar.
@@ -95,27 +100,30 @@ public final class ChatSimpleGui {
     usersViewC.gridwidth = 1;
     usersViewC.gridheight = 1;
     usersViewC.fill = GridBagConstraints.BOTH;
-    usersViewC.weightx = 0.3;
-    usersViewC.weighty = 0.3;
+    usersViewC.weightx = 0.2;
+    usersViewC.weighty = 0.1;
 
-    conversationViewC.gridx = 1;
-    conversationViewC.gridy = 0;
+    conversationViewC.gridx = 0;
+    conversationViewC.gridy = 1;
     conversationViewC.gridwidth = 1;
     conversationViewC.gridheight = 1;
     conversationViewC.fill = GridBagConstraints.BOTH;
-    conversationViewC.weightx = 0.7;
-    conversationViewC.weighty = 0.3;
+    conversationViewC.weightx = 0.2;
+    conversationViewC.weighty = 0.7;
 
-    messagesViewC.gridx = 0;
-    messagesViewC.gridy = 1;
+    messagesViewC.gridx = 1;
+    messagesViewC.gridy = 0;
     messagesViewC.gridwidth = 2;
-    messagesViewC.gridheight = 1;
+    messagesViewC.gridheight = 2;
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
-    
+    messagesViewC.weightx = 0.7;
+
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
+    mainViewPanel.setBackground(Color.pink); //I just changed
+    //usersViewPanel.setBackground(Color.orange);
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
