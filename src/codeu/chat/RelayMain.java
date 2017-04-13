@@ -80,8 +80,8 @@ final class RelayMain {
         loadTeamInfo(relay, teamFile);
         LOG.info("Done loading team data.");
 
-        // Add this again in 1 minute so that new entries to the time line will
-        // be added. This won't support updating entries.
+        // Add this again in 1 minute so that new team entries will be added to
+        // the relay. This won't support updating entries.
         timeline.scheduleIn(60000, this);
       }
     });
