@@ -19,6 +19,8 @@ import java.util.List;
 /**
  * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
  * data to the recyclerview in {@link com.google.codeu.chatme.view.tabs.ChatsFragment}
+ *
+ * @see ChatListAdapterView for documentation on interface methods
  */
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
         implements ChatListAdapterView {
@@ -82,11 +84,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         this.presenter.loadConversations();
     }
 
-    /**
-     * Resets the list of conversations and updates the recycler view
-     *
-     * @param conversations new list of conversations
-     */
     public void setChatList(List<Conversation> conversations) {
         this.conversations = conversations;
         notifyDataSetChanged();
