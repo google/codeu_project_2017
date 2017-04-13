@@ -182,9 +182,21 @@ public final class Chat {
         clientContext.message.showMessages(count);
       }
 
+    } else if (token.equals("m-find")){
+    	
+      if(!clientContext.conversation.hasCurrent()){
+          System.out.println("ERROR: No conversation selected.");
+      } else{
+    	  if(!tokenScanner.hasNext()){
+    		  System.out.println("ERROR: keyword not supplied.");
+    	  }else{
+    		  clientContext.message.findMessages(tokenScanner.nextLine().trim());
+    	  }
+      }
+    	
     } else {
 
-      System.out.format("Command not recognized: %s\n", token);
+      System.out.format("Command not recognized:d %s\n", token);
       System.out.format("Command line rejected: %s%s\n", token,
           (tokenScanner.hasNext()) ? tokenScanner.nextLine() : "");
       System.out.println("Type \"help\" for help.");

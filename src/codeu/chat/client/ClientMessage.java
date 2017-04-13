@@ -145,31 +145,32 @@ public final class ClientMessage {
   // Accept an int for number of messages to attempt to show (1 by default).
   // Negative values go from newest to oldest.
   public void showMessages(int count) {
- 
-    if(count < 0){
-    	showPreviousMessages(count);
-    }else{
-    	showNextMessages(count);
-    }
+      for (final Message m : conversationContents) {
+          printMessage(m, userContext);
+        }
   }
 
   private void showNextMessages(int count) {
-	
-	// Loop to run through the desired count of messages. If the count exceeds
-	// the number of messages, display an error. Otherwise, print the 
-	// desired number of messages.
-    for(int i = count; i > 0; i--){
-    	if(count >= conversationContents.size()){
-    		System.out.println("Error: number of messages exceeds message count.");
-    		return;
-    	}else{
-    		printMessage(conversationContents.get(i), userContext);
-    	}
-    }
+	    Method.notImplemented();
   }
 
   private void showPreviousMessages(int count) {
     Method.notImplemented();
+  }
+  
+  /**
+   * Method to find messages that contain the desired keyword.
+   * 
+   * @param keyword
+   * 				Keyword to find in the messages.
+   */
+  public void findMessages(String keyword){
+	  
+	  for(final Message m : conversationContents){
+		  if(m.content.contains(keyword)){
+			  printMessage(m, userContext);
+		  }
+	  }
   }
 
   // Determine the next message ID of the current conversation to start pulling.
