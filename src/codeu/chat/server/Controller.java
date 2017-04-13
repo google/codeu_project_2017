@@ -38,7 +38,6 @@ public final class Controller implements RawController, BasicController {
 
   private final Model model;
   private final Uuid.Generator uuidGenerator;
-  private SQLFormatter sqlFormatter;
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
@@ -70,27 +69,65 @@ public final class Controller implements RawController, BasicController {
     Connection connection = null;
     Statement stmt = null;
 
-    if(sqlFormatter.sqlValidConversation(author, conversation)){
-      try{
-        Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
-        connection.setAutoCommit(false);
+    String prevID = "";
 
+    try{
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      connection.setAutoCommit(false);
+
+      stmt = connection.createStatement();
+
+      ResultSet rs = stmt.executeQuery( "SELECT * FROM MESSAGES" +
+              "where CONVERSATIONID = "+SQLFormatter.sqlID(conversation)+" " +
+              "AND   MNEXTID = 'NULL';" );
+      if ( rs.next() ) {
+        prevID = rs.getString("ID");
+      }
+      rs.close();
+      stmt.close();
+    }catch (Exception e) {
+      System.out.println("Error adding message to conversation");
+      System.err.println(e.getClass().getName() +": " + e.getMessage());
+      System.exit(0);
+    }
+
+    if(SQLFormatter.sqlValidConversation(author, conversation)){
+      try{
         stmt = connection.createStatement();
 
+        message = new Message(id, Uuids.NULL, Uuids.fromString(prevID), creationTime, author, body);
         String sql = "INSERT INTO MESSAGES(ID, USERID, CONVERSATIONID, TimeCreated, MESSAGE)" +
-                "VALUES("+sqlFormatter.sqlID(id)+","+sqlFormatter.sqlID(author)+","+sqlFormatter.sqlID(conversation)+","+sqlFormatter.sqlBody(body)+","+sqlFormatter.sqlCreationTime(creationTime)+");";
+                "VALUES("+SQLFormatter.sqlID(id)+","+SQLFormatter.sqlID(author)+","+SQLFormatter.sqlID(conversation)+","+SQLFormatter.sqlBody(body)+","+SQLFormatter.sqlCreationTime(creationTime)+");";
         stmt.executeUpdate(sql);
 
         stmt.close();
         connection.commit();
-        connection.close();
       }catch (Exception e) {
         System.out.println("Error adding message to conversation");
         System.err.println(e.getClass().getName() +": " + e.getMessage());
         System.exit(0);
       }
     }
+
+    if(!prevID.equals("")){
+      try {
+
+        stmt = connection.createStatement();
+
+        String sql = "UPDATE MESSAGES set MNEXTID = "+ SQLFormatter.sqlID(id)+"where CONVERSATIONID = "+SQLFormatter.sqlID(conversation)+" AND   MNEXTID = 'NULL';";
+        stmt.executeUpdate(sql);
+
+        connection.commit();
+        stmt.close();
+        connection.close();
+      } catch ( Exception e ) {
+        System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        System.exit(0);
+      }
+    }
+
+    // Previous Model
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
@@ -148,7 +185,7 @@ public final class Controller implements RawController, BasicController {
       user = new User(id, name, creationTime, password);
       stmt = connection.createStatement();
       String sql = "INSERT INTO USERS (ID,UNAME,TIMECREATED,PASSWORD) " +
-              "VALUES ("+sqlFormatter.sqlID(id)+", "+sqlFormatter.sqlName(name)+", "+sqlFormatter.sqlCreationTime(creationTime)+", "+sqlFormatter.sqlPassword(password)+");";
+              "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(name)+", "+SQLFormatter.sqlCreationTime(creationTime)+", "+SQLFormatter.sqlPassword(password)+");";
       stmt.executeUpdate(sql);
 
       LOG.info(
@@ -169,6 +206,8 @@ public final class Controller implements RawController, BasicController {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
     }
+
+    // Previous Model
 
     if (isIdFree(id)) {
 
@@ -207,12 +246,31 @@ public final class Controller implements RawController, BasicController {
       connection.setAutoCommit(false);
       stmt = connection.createStatement();
       String sql = "INSERT INTO CONVERSATIONS (ID,CNAME,OWNERID,TimeCreated) " +
-              "VALUES ("+sqlFormatter.sqlID(id)+", "+sqlFormatter.sqlName(title)+", "+sqlFormatter.sqlID(owner)+", "+sqlFormatter.sqlCreationTime(creationTime)+");";
+              "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(title)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlCreationTime(creationTime)+");";
       stmt.executeUpdate(sql);
 
       conversation = new Conversation(id, owner, creationTime, title);
 
       LOG.info("Conversation added: " + conversation.id);
+
+      stmt.close();
+      connection.commit();
+    } catch ( Exception e ) {
+      LOG.info(
+              "newConversation fail - Verify connection and try again shortly");
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    try {
+      stmt = connection.createStatement();
+
+
+      String sql = "INSERT INTO USER_CONVERSATION (ID,USERID,CONVERSATIONID) " +
+              "VALUES ("+SQLFormatter.sqlID(id, owner)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlID(id)+";";
+      stmt.executeUpdate(sql);
+
+      LOG.info("User "+ conversation.owner +" added to: " + conversation.id);
 
       stmt.close();
       connection.commit();
@@ -223,6 +281,8 @@ public final class Controller implements RawController, BasicController {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
     }
+
+    // Previous Model
 
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);

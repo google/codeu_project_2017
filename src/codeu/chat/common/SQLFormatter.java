@@ -19,6 +19,17 @@ public class SQLFormatter {
         return sqlID;
     }
 
+    public static String sqlID(Uuid user1ID, Uuid user2ID){
+        String sql1ID = user1ID.toString();
+        String sql2ID = user2ID.toString();
+        sql1ID = sql1ID.replace("[UUID:","");
+        sql1ID = sql1ID.replace("]","");
+        sql2ID = sql2ID.replace("[UUID:","");
+        sql2ID = sql2ID.replace("]","");
+        String sqlID = "'" + sql1ID + sql2ID + "'";
+        return sqlID;
+    }
+
     public static String sqlName(String userName){
         String sqlName = "'" + userName + "'";
         return sqlName;
@@ -41,7 +52,7 @@ public class SQLFormatter {
         return sqlBody;
     }
 
-    public boolean sqlValidConversation(Uuid userID, Uuid conversationID){
+    public static boolean sqlValidConversation(Uuid userID, Uuid conversationID){
         boolean validConversation = false;
 
         Connection connection = null;
