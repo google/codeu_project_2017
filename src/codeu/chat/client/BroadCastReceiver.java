@@ -32,8 +32,7 @@ public class BroadCastReceiver extends Thread{
     public BroadCastReceiver(ConnectionSource mySource) {
         this.mySource = mySource;
         this.alive = true;
-        this.receivedResponse = new AtomicBoolean();
-        this.receivedResponse.set(false);
+        this.receivedResponse = new AtomicBoolean(false);
     }
 
 
@@ -57,9 +56,8 @@ public class BroadCastReceiver extends Thread{
                         if (myResponse != null) myResponse.onBroadcast(message);
                         // todo send a broadcast response to inform server that broadcast was received
                     } else if (type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
-                        System.out.println("Conversation response received");
+                        receivedResponse.set(true);
                     } else {
-                        // todo if the type is a response to a request that was sent
                         this.lastType = type;
                         receivedResponse.set(true);
                         Thread.yield();
@@ -68,7 +66,7 @@ public class BroadCastReceiver extends Thread{
             }
 
         } catch (IOException exc) {
-            System.out.println("Error connecting with broadcaster");
+            if(alive) System.out.println("Error connecting with broadcaster");
         }
 
     }
@@ -80,7 +78,8 @@ public class BroadCastReceiver extends Thread{
             Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_REQUEST);
             Serializers.nullable(ConversationSummary.SERIALIZER).write(out, old);
             Serializers.nullable(ConversationSummary.SERIALIZER).write(out, newCon);
-
+            while (!this.receivedResponse.get()) ;
+            this.receivedResponse.set(false);
         } catch (IOException exc) {
             System.out.println("Error in join conversation");
         }

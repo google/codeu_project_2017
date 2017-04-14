@@ -34,6 +34,7 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
 
@@ -284,6 +285,10 @@ public final class Server {
       broadCastSystem.switchConversation(connection, old, newCon);
 
       // can send join conversation response
+
+      synchronized (out) {
+        Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_RESPONSE);
+      }
 
       System.out.println("Connection switched");
 
