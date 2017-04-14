@@ -15,4 +15,4 @@
 # limitations under the License.
 
 cd './bin'
-java codeu.chat.ServerMain "100.101" "ABABAB" "2007" "2025"
+java codeu.chat.ServerMain "100.101" "ABABAB" "2007"

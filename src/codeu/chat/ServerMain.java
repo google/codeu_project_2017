@@ -51,20 +51,18 @@ final class ServerMain {
 
     final int myPort = Integer.parseInt(args[2]);
 
-    final int myBroadCastPort = Integer.parseInt(args[3]);
 
-    final RemoteAddress relayAddress = args.length > 4 ?
-                                       RemoteAddress.parse(args[4]) :
+    final RemoteAddress relayAddress = args.length > 3 ?
+                                       RemoteAddress.parse(args[3]) :
                                        null;
 
     try (
         final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
-        final ConnectionSource broadcastSource = ServerConnectionSource.forPort(myBroadCastPort);
         final ConnectionSource relaySource = relayAddress == null ? null : new ClientConnectionSource(relayAddress.host, relayAddress.port)
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, broadcastSource ,relaySource);
+      runServer(id, secret, serverSource ,relaySource);
 
     } catch (IOException ex) {
 
@@ -76,21 +74,19 @@ final class ServerMain {
   private static void runServer(Uuid id,
                                 byte[] secret,
                                 ConnectionSource serverSource,
-                                ConnectionSource broadcastSource,
                                 ConnectionSource relaySource) {
 
 
-    BroadCastSystem broadCastSystem = new BroadCastSystem();
 
     final Relay relay = relaySource == null ?
                         new NoOpRelay() :
                         new RemoteRelay(relaySource);
 
-    final Server server = new Server(id, secret, relay, broadCastSystem);
+    final Server server = new Server(id, secret, relay);
 
     LOG.info("Server object created.");
 
-    final Runnable hub = new Hub(serverSource, new Hub.Handler() {
+    final Runnable hub = new BroadCastHub(serverSource, new BroadCastHub.Handler() {
 
       @Override
       public void handle(Connection connection) throws Exception {
@@ -108,32 +104,12 @@ final class ServerMain {
       }
     });
 
-    final Runnable broadcastHub = new BroadCastHub(broadcastSource, new BroadCastHub.Handler() {
-      @Override
-      public void handle(Connection connection) throws Exception {
-
-        broadCastSystem.handleConnection(connection);
-
-      }
-
-      @Override
-      public void onException(Exception ex) {
-        System.out.println("ERROR: Exception during broadcast system tick. Check log");
-        LOG.error(ex, "Exception suring broadcast system tick");
-      }
-    });
-    LOG.info("Starting BroadCast Hub....");
-
-    broadcastHub.run();
 
     LOG.info("Starting hub...");
 
     hub.run();
 
     LOG.info("Hub exited.");
-
-
-
 
 
   }
