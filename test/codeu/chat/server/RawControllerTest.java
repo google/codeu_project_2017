@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
-import codeu.chat.common.Conversation;
+import codeu.chat.common.ConversationHeader;
 import codeu.chat.common.Message;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
@@ -69,7 +69,7 @@ public final class RawControllerTest {
         "Check that the user has the correct id",
         Uuid.equals(user.id, userId));
 
-    final Conversation conversation = controller.newConversation(
+    final ConversationHeader conversation = controller.newConversation(
         conversationId,
         "conversation",
         user.id,
@@ -95,7 +95,7 @@ public final class RawControllerTest {
         "Check that the user has the correct id",
         Uuid.equals(user.id, userId));
 
-    final Conversation conversation = controller.newConversation(
+    final ConversationHeader conversation = controller.newConversation(
         conversationId,
         "conversation",
         user.id,

@@ -23,8 +23,8 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
 
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.ConversationHeader;
+import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
@@ -148,35 +148,33 @@ public final class Server {
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuid.SERIALIZER.read(in);
 
-      final Conversation conversation = controller.newConversation(title, owner);
+      final ConversationHeader conversation = controller.newConversation(title, owner);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
-      Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
+      Serializers.nullable(ConversationHeader.SERIALIZER).write(out, conversation);
 
-    } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
+    } else if (type == NetworkCode.GET_USERS_REQUEST) {
 
-      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
+      final Collection<User> users = view.getUsers();
 
-      final Collection<User> users = view.getUsers(ids);
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_RESPONSE);
+      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_RESPONSE);
       Serializers.collection(User.SERIALIZER).write(out, users);
 
     } else if (type == NetworkCode.GET_ALL_CONVERSATIONS_REQUEST) {
 
-      final Collection<ConversationSummary> conversations = view.getAllConversations();
+      final Collection<ConversationHeader> conversations = view.getConversations();
 
       Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE);
-      Serializers.collection(ConversationSummary.SERIALIZER).write(out, conversations);
+      Serializers.collection(ConversationHeader.SERIALIZER).write(out, conversations);
 
     } else if (type == NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST) {
 
       final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
 
-      final Collection<Conversation> conversations = view.getConversations(ids);
+      final Collection<ConversationPayload> conversations = view.getConversationPayloads(ids);
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE);
-      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+      Serializers.collection(ConversationPayload.SERIALIZER).write(out, conversations);
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
 
@@ -185,60 +183,6 @@ public final class Server {
       final Collection<Message> messages = view.getMessages(ids);
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_RESPONSE);
-      Serializers.collection(Message.SERIALIZER).write(out, messages);
-
-    } else if (type == NetworkCode.GET_USER_GENERATION_REQUEST) {
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_RESPONSE);
-      Uuid.SERIALIZER.write(out, view.getUserGeneration());
-
-    } else if (type == NetworkCode.GET_USERS_EXCLUDING_REQUEST) {
-
-      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
-
-      final Collection<User> users = view.getUsersExcluding(ids);
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_RESPONSE);
-      Serializers.collection(User.SERIALIZER).write(out, users);
-
-    } else if (type == NetworkCode.GET_CONVERSATIONS_BY_TIME_REQUEST) {
-
-      final Time startTime = Time.SERIALIZER.read(in);
-      final Time endTime = Time.SERIALIZER.read(in);
-
-      final Collection<Conversation> conversations = view.getConversations(startTime, endTime);
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE);
-      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-
-    } else if (type == NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST) {
-
-      final String filter = Serializers.STRING.read(in);
-
-      final Collection<Conversation> conversations = view.getConversations(filter);
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE);
-      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-
-    } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
-
-      final Uuid conversation = Uuid.SERIALIZER.read(in);
-      final Time startTime = Time.SERIALIZER.read(in);
-      final Time endTime = Time.SERIALIZER.read(in);
-
-      final Collection<Message> messages = view.getMessages(conversation, startTime, endTime);
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE);
-      Serializers.collection(Message.SERIALIZER).write(out, messages);
-
-    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
-
-      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
-      final int range = Serializers.INTEGER.read(in);
-
-      final Collection<Message> messages = view.getMessages(rootMessage, range);
-
-      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
     } else {
@@ -265,7 +209,7 @@ public final class Server {
       user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
     }
 
-    Conversation conversation = model.conversationById().first(relayConversation.id());
+    ConversationHeader conversation = model.conversationById().first(relayConversation.id());
 
     if (conversation == null) {
 
@@ -296,7 +240,7 @@ public final class Server {
       @Override
       public void run() {
         final User user = view.findUser(userId);
-        final Conversation conversation = view.findConversation(conversationId);
+        final ConversationHeader conversation = view.findConversation(conversationId);
         final Message message = view.findMessage(messageId);
         relay.write(id,
                     secret,

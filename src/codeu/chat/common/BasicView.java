@@ -16,8 +16,8 @@ package codeu.chat.common;
 
 import java.util.Collection;
 
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.ConversationHeader;
+import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
@@ -35,17 +35,17 @@ public interface BasicView {
   // GET USERS
   //
   //   Return all users whose id is found in the given collection.
-  Collection<User> getUsers(Collection<Uuid> ids);
+  Collection<User> getUsers();
 
   // GET ALL CONVERSATIONS
   //
   //   Return a summary of each converation.
-  Collection<ConversationSummary> getAllConversations();
+  Collection<ConversationHeader> getConversations();
 
   // GET CONVERSATIONS
   //
   //   Return all conversations whose id is found in the given collection.
-  Collection<Conversation> getConversations(Collection<Uuid> ids);
+  Collection<ConversationPayload> getConversationPayloads(Collection<Uuid> ids);
 
   // GET MESSAGES
   //

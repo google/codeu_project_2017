@@ -17,7 +17,8 @@ package codeu.chat.server;
 import java.util.Collection;
 
 import codeu.chat.common.BasicController;
-import codeu.chat.common.Conversation;
+import codeu.chat.common.ConversationHeader;
+import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.Message;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
@@ -48,7 +49,7 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner) {
+  public ConversationHeader newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
   }
 
@@ -56,7 +57,7 @@ public final class Controller implements RawController, BasicController {
   public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
 
     final User foundUser = model.userById().first(author);
-    final Conversation foundConversation = model.conversationById().first(conversation);
+    final ConversationPayload foundConversation = model.conversationPayloadById().first(conversation);
 
     Message message = null;
 
@@ -92,10 +93,6 @@ public final class Controller implements RawController, BasicController {
       // Update the conversation to point to the new last message as it has changed.
 
       foundConversation.lastMessage = message.id;
-
-      if (!foundConversation.users.contains(foundUser)) {
-        foundConversation.users.add(foundUser.id);
-      }
     }
 
     return message;
@@ -130,17 +127,16 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
+  public ConversationHeader newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
 
     final User foundOwner = model.userById().first(owner);
 
-    Conversation conversation = null;
+    ConversationHeader conversation = null;
 
     if (foundOwner != null && isIdFree(id)) {
-      conversation = new Conversation(id, owner, creationTime, title);
+      conversation = new ConversationHeader(id, owner, creationTime, title);
       model.add(conversation);
-
-      LOG.info("Conversation added: " + conversation.id);
+      LOG.info("Conversation added: " + id);
     }
 
     return conversation;
