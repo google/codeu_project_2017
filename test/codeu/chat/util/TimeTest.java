@@ -12,37 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.common;
+package codeu.chat.util;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
+import org.junit.Before;
 
-public final class UuidsTest {
-
-  @Test
-  public void testValidSingleLink() {
-
-    final String string = "100";
-    final Uuid id = Uuids.fromString(string);
-
-    assertNotNull(id);
-    assertNull(id.root());
-    assertEquals(id.id(), 100);
-  }
+public final class TimeTest {
 
   @Test
-  public void testValidMultiLink() {
-
-    final String string = "100.200";
-    final Uuid id = Uuids.fromString(string);
-
-    assertNotNull(id);
-    assertNotNull(id.root());
-    assertNull(id.root().root());
-
-    assertEquals(id.id(), 200);
-    assertEquals(id.root().id(), 100);
+  public void testFromMs() {
+    assertEquals(0, Time.fromMs(0).inMs());
+    assertEquals(10, Time.fromMs(10).inMs());
   }
 }

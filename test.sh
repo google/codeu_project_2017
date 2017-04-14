@@ -14,4 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 java -cp ./third_party/junit4.jar:./third_party/sqlite-jdbc-3.16.1.jar:./third_party/gson.jar:./third_party/lzstring4j.jar:./bin codeu.chat.TestRunner
