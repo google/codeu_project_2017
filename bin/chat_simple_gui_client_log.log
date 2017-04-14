@@ -34,3 +34,15 @@ INFO: ConversationHead: Title="Hello World" UUID=[UUID:101.106.1449646686] first
 Apr 13, 2017 10:26:03 PM codeu.chat.client.ClientMessage updateMessages
 INFO: Retrieved 4 messages for conversation [UUID:101.106.1449646686] (Hello World).
 
+Apr 13, 2017 11:43:27 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 13, 2017 11:43:27 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 13, 2017 11:43:27 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 13, 2017 11:43:27 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 13, 2017 11:43:28 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 13, 2017 11:43:30 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.

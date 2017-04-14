@@ -128,7 +128,7 @@ public final class ChatSimpleGui {
   }
   
   //Creates and Builds the Menu Bar
-  private JMenuBar menuBar(){
+  public static JMenuBar menuBar(){
 	  JMenuBar topMenuBar = new JMenuBar(); //the menu bar
 	  JMenu topMenuGeneral = new JMenu("General"); //first category of menu
 	  final JMenuItem topMenuItem = new JMenuItem("How to Use"); //details how to use the app
