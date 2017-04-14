@@ -22,25 +22,27 @@ import java.util.Date;
 
 public final class Time implements Comparable<Time> {
 
-  public static final Serializer<Time> SERIALIZER = new Serializer<Time>() {
+    public static final Serializer<Time> SERIALIZER = new Serializer<Time>() {
 
-    @Override
-    public void write(OutputStream out, Time value) throws IOException {
+        @Override
+        public void write(OutputStream out, Time value) throws IOException {
 
       Serializers.LONG.write(out, value.inMs());
 
-    }
 
-    @Override
-    public Time read(InputStream in) throws IOException {
+        }
 
-      return Time.fromMs(Serializers.LONG.read(in));
+        @Override
+        public Time read(InputStream in) throws IOException {
 
-    }
-  };
+            return Time.fromMs(Serializers.LONG.read(in));
 
+        }
+    };
+
+  //changed the date format to be simpler 
   private static final SimpleDateFormat formatter =
-      new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
+      new SimpleDateFormat("MM/dd/yy KK:mm aa"); 
 
   private final Date date;
 
@@ -62,8 +64,8 @@ public final class Time implements Comparable<Time> {
     return formatter.format(date);
   }
 
-  public static Time fromMs(long ms) { return new Time(ms); }
+    public static Time fromMs(long ms) { return new Time(ms); }
 
-  public static Time now() { return Time.fromMs(System.currentTimeMillis()); }
+    public static Time now() { return Time.fromMs(System.currentTimeMillis()); }
 
 }

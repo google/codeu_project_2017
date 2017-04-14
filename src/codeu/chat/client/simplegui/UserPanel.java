@@ -62,12 +62,13 @@ public final class UserPanel extends JPanel {
     final GridBagConstraints titleUserC = new GridBagConstraints();
     titleUserC.gridx = 2;
     titleUserC.gridy = 0;
-    titleUserC.anchor = GridBagConstraints.LINE_END;
+    //titleUserC.anchor = GridBagConstraints.LINE_END;
 
     titlePanel.add(titleLabel, titleLabelC);
     titlePanel.add(Box.createHorizontalGlue(), titleGapC);
     titlePanel.add(userSignedInLabel, titleUserC);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    //titlePanel.setBackground(Color.black); //I just added this
 
     // User List panel.
     final JPanel listShowPanel = new JPanel();
@@ -81,26 +82,27 @@ public final class UserPanel extends JPanel {
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
-    userListScrollPane.setPreferredSize(new Dimension(150, 150));
+    userListScrollPane.setPreferredSize(new Dimension(245, 150));
 
     // Current User panel
     final JPanel currentPanel = new JPanel();
     final GridBagConstraints currentPanelC = new GridBagConstraints();
 
-    final JTextArea userInfoPanel = new JTextArea();
+    /*final JTextArea userInfoPanel = new JTextArea();
     final JScrollPane userInfoScrollPane = new JScrollPane(userInfoPanel);
     currentPanel.add(userInfoScrollPane);
     userInfoScrollPane.setPreferredSize(new Dimension(245, 85));
+    */
 
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    final JButton userUpdateButton = new JButton("Update");
+    //final JButton userUpdateButton = new JButton("Update");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userAddButton = new JButton("Add");
 
-    buttonPanel.add(userUpdateButton);
+    //buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
     buttonPanel.add(userAddButton);
 
@@ -138,13 +140,18 @@ public final class UserPanel extends JPanel {
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
     this.add(currentPanel, currentPanelC);
+    titlePanel.setBackground(Color.orange);
+    listShowPanel.setBackground(Color.orange);
+    currentPanel.setBackground(Color.orange);
+    buttonPanel.setBackground(Color.orange);
 
-    userUpdateButton.addActionListener(new ActionListener() {
+    /*userUpdateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         UserPanel.this.getAllUsers(listModel);
       }
     });
+    */
 
     userSignInButton.addActionListener(new ActionListener() {
       @Override
@@ -175,7 +182,7 @@ public final class UserPanel extends JPanel {
       public void valueChanged(ListSelectionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          userInfoPanel.setText(clientContext.user.showUserInfo(data));
+          //userInfoPanel.setText(clientContext.user.showUserInfo(data));
         }
       }
     });
