@@ -20,8 +20,8 @@ import java.io.OutputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,11 +34,11 @@ public final class Message {
     @Override
     public void write(OutputStream out, Message value) throws IOException {
 
-      Uuids.SERIALIZER.write(out, value.id);
-      Uuids.SERIALIZER.write(out, value.next);
-      Uuids.SERIALIZER.write(out, value.previous);
+      Uuid.SERIALIZER.write(out, value.id);
+      Uuid.SERIALIZER.write(out, value.next);
+      Uuid.SERIALIZER.write(out, value.previous);
       Time.SERIALIZER.write(out, value.creation);
-      Uuids.SERIALIZER.write(out, value.author);
+      Uuid.SERIALIZER.write(out, value.author);
       Serializers.STRING.write(out, value.content);
 
     }
@@ -47,11 +47,11 @@ public final class Message {
     public Message read(InputStream in) throws IOException {
 
       return new Message(
-          Uuids.SERIALIZER.read(in),
-          Uuids.SERIALIZER.read(in),
-          Uuids.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
-          Uuids.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );
 
