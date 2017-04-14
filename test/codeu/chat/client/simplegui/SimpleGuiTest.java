@@ -14,8 +14,7 @@ public final class SimpleGuiTest {
   
   @Test
   public void testSimpleGui() {
-	JMenuBar test = ChatSimpleGui.menuBar();
-	JMenuBar another = ChatSimpleGui.menuBar(); 
+	JMenuBar test = ChatSimpleGui.menuBar();  
 	 
 	assertNotNull(test); 
   }
