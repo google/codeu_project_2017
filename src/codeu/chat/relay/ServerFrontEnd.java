@@ -21,12 +21,11 @@ import java.util.Collection;
 
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 
 public final class ServerFrontEnd {
@@ -39,7 +38,7 @@ public final class ServerFrontEnd {
     @Override
     public Relay.Bundle.Component read(InputStream in) throws IOException {
 
-      final Uuid id = Uuids.SERIALIZER.read(in);
+      final Uuid id = Uuid.SERIALIZER.read(in);
       final String text = Serializers.STRING.read(in);
       final Time time = Time.SERIALIZER.read(in);
 
@@ -57,7 +56,7 @@ public final class ServerFrontEnd {
 
     @Override
     public void write(OutputStream out, Relay.Bundle.Component value) throws IOException {
-      Uuids.SERIALIZER.write(out, value.id());
+      Uuid.SERIALIZER.write(out, value.id());
       Serializers.STRING.write(out, value.text());
       Time.SERIALIZER.write(out, value.time());
     }
@@ -69,9 +68,9 @@ public final class ServerFrontEnd {
     @Override
     public Relay.Bundle read(InputStream in) throws IOException {
 
-      final Uuid id = Uuids.SERIALIZER.read(in);
+      final Uuid id = Uuid.SERIALIZER.read(in);
       final Time time = Time.SERIALIZER.read(in);
-      final Uuid team = Uuids.SERIALIZER.read(in);
+      final Uuid team = Uuid.SERIALIZER.read(in);
       final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
       final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
       final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
@@ -94,9 +93,9 @@ public final class ServerFrontEnd {
 
     @Override
     public void write(OutputStream out, Relay.Bundle value) throws IOException {
-      Uuids.SERIALIZER.write(out, value.id());
+      Uuid.SERIALIZER.write(out, value.id());
       Time.SERIALIZER.write(out, value.time());
-      Uuids.SERIALIZER.write(out, value.team());
+      Uuid.SERIALIZER.write(out, value.team());
       COMPONENT_SERIALIZER.write(out, value.user());
       COMPONENT_SERIALIZER.write(out, value.conversation());
       COMPONENT_SERIALIZER.write(out, value.message());
@@ -125,9 +124,9 @@ public final class ServerFrontEnd {
 
     LOG.info("Handling Read Message - start");
 
-    final Uuid teamId = Uuids.SERIALIZER.read(connection.in());
+    final Uuid teamId = Uuid.SERIALIZER.read(connection.in());
     final byte[] teamSecret = Serializers.BYTES.read(connection.in());
-    final Uuid root = Uuids.SERIALIZER.read(connection.in());
+    final Uuid root = Uuid.SERIALIZER.read(connection.in());
     final int range = Serializers.INTEGER.read(connection.in());
 
     LOG.info(
@@ -150,7 +149,7 @@ public final class ServerFrontEnd {
 
     LOG.info("Handling Write Message - start");
 
-    final Uuid teamId = Uuids.SERIALIZER.read(connection.in());
+    final Uuid teamId = Uuid.SERIALIZER.read(connection.in());
     final byte[] teamSecret = Serializers.BYTES.read(connection.in());
     final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(connection.in());
     final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(connection.in());
