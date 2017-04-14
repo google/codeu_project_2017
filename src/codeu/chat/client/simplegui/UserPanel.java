@@ -140,10 +140,10 @@ public final class UserPanel extends JPanel {
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
     this.add(currentPanel, currentPanelC);
-    titlePanel.setBackground(Color.orange);
-    listShowPanel.setBackground(Color.orange);
-    currentPanel.setBackground(Color.orange);
-    buttonPanel.setBackground(Color.orange);
+    titlePanel.setBackground(new Color(102, 162, 237));
+    listShowPanel.setBackground(new Color(102, 162, 237));
+    currentPanel.setBackground(new Color(102, 162, 237));
+    buttonPanel.setBackground(new Color(102, 162, 237));
 
     /*userUpdateButton.addActionListener(new ActionListener() {
       @Override

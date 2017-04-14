@@ -43,7 +43,6 @@ public final class ChatSimpleGui {
   public void run() {
 
     try {
-
       initialize();
       mainFrame.setVisible(true);
 
@@ -55,7 +54,7 @@ public final class ChatSimpleGui {
   }
 
   private Border paneBorder() {
-    Border outside = BorderFactory.createLineBorder(Color.BLACK);
+    Border outside = BorderFactory.createLineBorder(Color.white);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
   }
@@ -79,19 +78,19 @@ public final class ChatSimpleGui {
     final JPanel usersViewPanel = new UserPanel(clientContext);
 
     usersViewPanel.setBorder(paneBorder());
-    usersViewPanel.setBackground(Color.orange); //
+    usersViewPanel.setBackground(new Color(102, 162, 237)); 
 
     final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
     messagesViewPanel.setBorder(paneBorder());
-    messagesViewPanel.setBackground(Color.orange);
+    messagesViewPanel.setBackground(new Color(102, 162, 237));
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
     final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
     conversationsViewPanel.setBorder(paneBorder());
-    conversationsViewPanel.setBackground(Color.orange);
+    conversationsViewPanel.setBackground(new Color(102, 162, 237));
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels and search bar.
@@ -122,8 +121,7 @@ public final class ChatSimpleGui {
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
-    mainViewPanel.setBackground(Color.pink); //I just changed
-    //usersViewPanel.setBackground(Color.orange);
+    mainViewPanel.setBackground(Color.white); //I just changed
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
@@ -153,33 +151,34 @@ public final class ChatSimpleGui {
 			  									+ "Then, you must sign in the user and add a conversation. "
 			  									+ "Then, you may begin chatting!\n\n"
 			  									+ "To add a user:\n"
-			  										+"1) Click the  Add button\n"
+			  										+"1) Click the Add button\n"
 			  										+"2) Enter the user's name\n"
 			  										+"3) Click OK or press ENTER\n\n"
 			  									+"To sign in a user:\n"
-			  										+"1) Click on the users name until it is highlighted\n"
+			  										+"1) Click on the username until it is highlighted.\n"
 			  										+"2) Click on the Sign In button.\n\n"
 			  									+"To add a conversation:\n" 
 			  										+"1) Click the Add button\n"
 			  										+"2) Enter the title of the conversation\n"
 			  										+"3) Click OK or press ENTER\n\n"
 			  									+"To switch conversations:\n"
-			  										+"1) Click on the title of the conversation to which you would like to switch.\n\n"
+			  										+"1) Click on the title of the conversation to which you would like to switch and press Choose Conversation.\n\n"
 			  									+"To send a message:\n"
 			  										+"1) Type your message in the white text editor to the left of the Send Message button.\n"
 			  										+"2) Once you are done typing your message, either press the Send Message button, press ENTER, or press RETURN."; 
 			  	
-			  	JOptionPane.showMessageDialog(topMenuItem, howToUseMessage, "How to Use", JOptionPane.PLAIN_MESSAGE); //need to add help information
+			  	JOptionPane.showMessageDialog(topMenuItem, howToUseMessage, "How to Use", JOptionPane.PLAIN_MESSAGE);
 		  }
 	  });
 	  
 	  coders.addActionListener(new ActionListener(){
 		  @Override 
 		  public void actionPerformed(ActionEvent e) {
-			  	JOptionPane.showMessageDialog(topMenuItem, "Created by Google, Mathangi Ganesh, Jess Abramson, and Sarah Depew", "Coders", JOptionPane.PLAIN_MESSAGE); //Needs Updating
+			  	JOptionPane.showMessageDialog(topMenuItem, "Created by Google, Mathangi Ganesh, Jess Abramson, and Sarah Depew", "Coders", JOptionPane.PLAIN_MESSAGE);
 		  }
 	  });
-	  
+
+	  //return the constructed JMenuBar
 	  return topMenuBar; 
   }
 }

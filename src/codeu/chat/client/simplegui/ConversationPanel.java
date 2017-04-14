@@ -106,10 +106,10 @@ public final class ConversationPanel extends JPanel {
 
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
-    this.add(buttonPanel, buttonPanelC); //~~~~~~~~
-    titlePanel.setBackground(Color.orange);
-    listShowPanel.setBackground(Color.orange);
-    buttonPanel.setBackground(Color.orange);
+    this.add(buttonPanel, buttonPanelC); 
+    titlePanel.setBackground(new Color(102, 162, 237));
+    listShowPanel.setBackground(new Color(102, 162, 237));
+    buttonPanel.setBackground(new Color(102, 162, 237));
 
     // User clicks Conversations Update button.
     updateButton.addActionListener(new ActionListener() {
