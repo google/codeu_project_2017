@@ -33,8 +33,6 @@ import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.database.Database;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
@@ -80,7 +78,6 @@ public final class Server {
 
     // Setup the database.
     setupDatabase();
-  }
 
     timeline.scheduleNow(new Runnable() {
       @Override
