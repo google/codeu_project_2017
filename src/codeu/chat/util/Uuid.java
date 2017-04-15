@@ -188,6 +188,7 @@ public final class Uuid {
 
   private static Uuid fromString(final Uuid root, String[] tokens, int index) {
 
+    System.out.println(tokens[index]);
     final int id = Integer.parseInt(tokens[index]);
 
     final Uuid link = new Uuid(root, id);

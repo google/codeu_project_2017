@@ -187,13 +187,11 @@ public final class Controller implements RawController, BasicController {
       String sql = "INSERT INTO USERS (ID,UNAME,TIMECREATED,PASSWORD) " +
               "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(name)+", "+SQLFormatter.sqlCreationTime(creationTime)+", "+SQLFormatter.sqlPassword(password)+");";
       stmt.executeUpdate(sql);
-
       LOG.info(
               "newUser success (user.id=%s user.name=%s user.time=%s)",
               id,
               name,
               creationTime);
-
       stmt.close();
       connection.commit();
       connection.close();
