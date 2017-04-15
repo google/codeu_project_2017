@@ -40,4 +40,20 @@ public final class Message {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getConversation() {
+        return conversation;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public long getTimeCreated() {
+        return timeCreated;
+    }
 }

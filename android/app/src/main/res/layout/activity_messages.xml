@@ -6,6 +6,7 @@
     android:background="@drawable/messages_bg">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -19,8 +20,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomMessageBar"
+        android:layout_below="@+id/appBarLayout">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMessageList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
     <RelativeLayout
-        android:id="@+id/slyce_messaging_view_group_entry_field"
+        android:id="@+id/bottomMessageBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -30,7 +44,7 @@
         android:paddingTop="8dp">
 
         <RelativeLayout
-            android:id="@+id/frameMessage"
+            android:id="@+id/rlMessageField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
