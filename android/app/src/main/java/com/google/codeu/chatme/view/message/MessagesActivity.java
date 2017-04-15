@@ -35,6 +35,9 @@ public class MessagesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
+        // sets activity background (does not resize when keyboard opens)
+        getWindow().setBackgroundDrawableResource(R.drawable.messages_bg);
+
         conversationId = getIntent().getStringExtra(ChatListAdapter.CONV_ID_EXTRA);
 
         setupUI();
