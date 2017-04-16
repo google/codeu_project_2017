@@ -138,7 +138,11 @@ public final class Server {
 
       final String name = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final String hash = Serializers.STRING.read(in);
+
+      final String salt = Serializers.STRING.read(in);
+
+      final User user = controller.newUser(name, hash, salt);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -262,7 +266,7 @@ public final class Server {
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time(), "hash problem", "salt problem");
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
