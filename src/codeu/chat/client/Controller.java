@@ -29,6 +29,8 @@ import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 
+import codeu.chat.authentication.AuthenticationCode;
+
 public class Controller implements BasicController {
 
   private final static Logger.Log LOG = Logger.newLog(Controller.class);
@@ -65,18 +67,19 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public User newUser(String name) {
+  public int newUser(String username, String password) {
 
-    User response = null;
+    int response = AuthenticationCode.UNKNOWN;
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
-      Serializers.STRING.write(connection.out(), name);
+      Serializers.STRING.write(connection.out(), username);
+      Serializers.STRING.write(connection.out(), password);
       LOG.info("newUser: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {
-        response = Serializers.nullable(User.SERIALIZER).read(connection.in());
+        response = Serializers.INTEGER.read(connection.in());
         LOG.info("newUser: Response completed.");
       } else {
         LOG.error("Response from server failed.");
@@ -87,6 +90,33 @@ public class Controller implements BasicController {
     }
 
     return response;
+  }
+
+  @Override
+  public User login(String username, String password) {
+
+    User user = null;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.LOGIN_REQUEST);
+      Serializers.STRING.write(connection.out(), username);
+      Serializers.STRING.write(connection.out(), password);
+      LOG.info("login: Request completed.");
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.LOGIN_RESPONSE) {
+        user = Serializers.nullable(User.SERIALIZER).read(connection.in());
+        LOG.info("login: Response completed.");
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return user;
+
   }
 
   @Override

@@ -14,6 +14,8 @@
 
 package codeu.chat.server;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
@@ -24,31 +26,55 @@ import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
 
+import codeu.chat.database.Database;
+import codeu.chat.server.database.UserSchema;
+import codeu.chat.server.authentication.Authentication;
+import codeu.chat.authentication.AuthenticationCode;
+
 public final class BasicControllerTest {
 
   private Model model;
   private BasicController controller;
 
+  private Database database;
+  private UserSchema userSchema;
+  private Authentication authentication;
+
+  private User user;
+
   @Before
-  public void doBefore() {
+  public void doBefore() throws SQLException {
+    // Setup the database.
+    database = new Database("test.db");
+    userSchema = new UserSchema();
+    userSchema.dropTable("users", database);
+    authentication = new Authentication(database);
+
     model = new Model();
-    controller = new Controller(Uuid.NULL, model);
+    controller = new Controller(Uuid.NULL, model, authentication);
   }
 
   @Test
-  public void testAddUser() {
+  public void testRegister() {
 
-    final User user = controller.newUser("user");
+    int result = controller.newUser("username", "password");
+    assertEquals(result, AuthenticationCode.SUCCESS);
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
+  }
+
+  @Test
+  public void testLogin() {
+
+    testRegister();
+    user = controller.login("username", "password");
+    assertNotNull(user);
+
   }
 
   @Test
   public void testAddConversation() {
 
-    final User user = controller.newUser("user");
+    testLogin();
 
     assertFalse(
         "Check that user has a valid reference",
@@ -66,7 +92,7 @@ public final class BasicControllerTest {
   @Test
   public void testAddMessage() {
 
-    final User user = controller.newUser("user");
+    testLogin();
 
     assertFalse(
         "Check that user has a valid reference",

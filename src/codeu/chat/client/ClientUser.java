@@ -24,6 +24,8 @@ import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 
+import codeu.chat.authentication.AuthenticationCode;
+
 public final class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
@@ -44,19 +46,6 @@ public final class ClientUser {
     this.view = view;
   }
 
-  // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
-
-      // TODO: check for invalid characters
-
-    }
-    return clean;
-  }
-
   public boolean hasCurrent() {
     return (current != null);
   }
@@ -65,17 +54,17 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
-    updateUsers();
+  public boolean signInUser(String username, String password) {
+    current = controller.login(username, password);
 
-    final User prev = current;
-    if (name != null) {
-      final User newCurrent = usersByName.first(name);
-      if (newCurrent != null) {
-        current = newCurrent;
-      }
+    if (current != null) {
+      LOG.info("Login complete, Name= \"%s\"", username);
+      return true;
+    } else {
+      System.out.println("Error: invalid login");
     }
-    return (prev != current);
+
+    return false;
   }
 
   public boolean signOutUser() {
@@ -88,18 +77,27 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
+  public boolean addUser(String username, String password) {
+    final int result = controller.newUser(username, password);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
-
-    if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+    if (result == AuthenticationCode.SUCCESS) {
+      LOG.info("New user complete, Name= \"%s\"", username);
+      return true;
     } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
-      updateUsers();
+      switch(result) {
+        case AuthenticationCode.REGISTER_USER_EXISTS:
+          System.out.println("Error: user already exists");
+          break;
+        case AuthenticationCode.REGISTER_INVALID_INPUT:
+          System.out.println("Error: invalid input");
+          break;
+        default:
+          System.out.println("Error: server error");
+          break;
+      }
     }
+
+    return false;
   }
 
   public void showAllUsers() {

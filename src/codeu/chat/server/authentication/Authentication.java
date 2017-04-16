@@ -53,6 +53,15 @@ public final class Authentication {
    * @return An error code signifying the result of registration.
    */
   public int register(String username, String password) {
+    // Verify that the input is valid.
+    username = username.trim();
+    if (username.length() == 0 || username.length() > 255) {
+      return AuthenticationCode.REGISTER_INVALID_INPUT;
+    }
+    if (password.length() == 0) {
+      return AuthenticationCode.REGISTER_INVALID_INPUT;
+    }
+
     try {
       // Verify that a user with the username doesn't already exist.
       boolean userExists = userTable.findQuery("LOWER(username) = LOWER(?)", username).size() > 0;
@@ -88,6 +97,8 @@ public final class Authentication {
    * @return An error code signifying the result of logging in.
    */
   public int login(String username, String password) {
+    username = username.trim();
+
     try {
       // Check if the user exists.
       List<DBObject<UserSchema>> foundUsers = userTable.findQuery("LOWER(username) = LOWER(?)", username);

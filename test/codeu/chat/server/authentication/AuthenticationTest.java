@@ -1,4 +1,4 @@
-package codeu.chat.database;
+package codeu.chat.server.authentication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
+import codeu.chat.database.Database;
 import codeu.chat.server.database.UserSchema;
-import codeu.chat.server.authentication.Authentication;
 import codeu.chat.authentication.AuthenticationCode;
 
 public final class AuthenticationTest {

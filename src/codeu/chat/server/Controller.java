@@ -24,6 +24,8 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.server.authentication.Authentication;
+import codeu.chat.authentication.AuthenticationCode;
 
 public final class Controller implements RawController, BasicController {
 
@@ -32,9 +34,12 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
-  public Controller(Uuid serverId, Model model) {
+  private final Authentication authentication;
+
+  public Controller(Uuid serverId, Model model, Authentication authentication) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
+    this.authentication = authentication;
   }
 
   @Override
@@ -43,8 +48,13 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(String name) {
-    return newUser(createId(), name, Time.now());
+  public int newUser(String username, String password) {
+    return newUser(username, password, Time.now());
+  }
+
+  @Override
+  public User login(String username, String password) {
+    return login(createId(), username, password, Time.now());
   }
 
   @Override
@@ -102,28 +112,41 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public int newUser(String username, String password, Time creationTime) {
+    // Attempt to create the new user.
+    int result = authentication.register(username, password);
+    LOG.info(
+        "newUser result (user.name=%s user.time=%s result=%d)",
+        username,
+        creationTime,
+        result);
 
+    return result;
+  }
+
+  @Override
+  public User login(Uuid id, String username, String password, Time creationTime) {
     User user = null;
 
-    if (isIdFree(id)) {
+    // Attempt to login.
+    int result = authentication.login(username, password);
+    if (result == AuthenticationCode.SUCCESS) {
+      LOG.info(
+          "login success (user.id=%s user.name=%s user.time=%s)",
+          id,
+          username,
+          creationTime);
 
-      user = new User(id, name, creationTime);
+      // Create the new user.
+      user = new User(id, username, creationTime);
       model.add(user);
-
-      LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
-
     } else {
-
       LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
+          "login fail (user.id=%s user.name=%s user.time=%s result=%d)",
           id,
-          name,
-          creationTime);
+          username,
+          creationTime,
+          result);
     }
 
     return user;

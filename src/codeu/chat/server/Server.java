@@ -70,13 +70,12 @@ public final class Server {
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
-    this.controller = new Controller(id, model);
-    this.relay = relay;
-
-    this.database = database;
-
     // Set up the authentication manager.
-    authentication = new Authentication(database);
+    this.database = database;
+    this.authentication = new Authentication(database);
+
+    this.controller = new Controller(id, model, authentication);
+    this.relay = relay;
 
     // Server initialization finished.
     LOG.info("Server initialized.");
@@ -156,11 +155,22 @@ public final class Server {
 
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
-      final String name = Serializers.STRING.read(in);
+      final String username = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final int result = controller.newUser(username, password);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
+      Serializers.INTEGER.write(out, result);
+
+    } else if (type == NetworkCode.LOGIN_REQUEST) {
+
+      final String username = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
+
+      final User user = controller.login(username, password);
+
+      Serializers.INTEGER.write(out, NetworkCode.LOGIN_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
@@ -282,7 +292,9 @@ public final class Server {
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+      // Invalid user.
+      LOG.error("Invalid user received from relay.");
+      return;
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());

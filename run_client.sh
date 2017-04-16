@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+source ./classpath.sh
+
 HOST="$1"
 PORT="$2"
 
@@ -22,5 +24,4 @@ if [[ "$HOST" == "" || "$PORT" == "" ]] ; then
   exit 1
 fi
 
-cd './bin'
-java codeu.chat.ClientMain "$HOST@$PORT"
+java -cp $cp codeu.chat.ClientMain "$HOST@$PORT"
