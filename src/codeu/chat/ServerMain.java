@@ -56,7 +56,7 @@ final class ServerMain {
     RemoteAddress relayAddress = null;
 
     try {
-      id = Uuid.fromString(args[0]);
+      id = Uuid.parse(args[0]);
       secret = Secret.parse(args[1]);
       port = Integer.parseInt(args[2]);
       persistentPath = new File(args[3]);
