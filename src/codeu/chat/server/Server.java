@@ -41,9 +41,7 @@ import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 
-import codeu.chat.server.database.UserTable;
-import codeu.chat.server.database.UserSchema;
-import codeu.chat.database.DBObject;
+import codeu.chat.server.authentication.Authentication;
 
 public final class Server {
 
@@ -64,7 +62,8 @@ public final class Server {
   private Uuid lastSeen = Uuid.NULL;
 
   private final Database database;
-  private UserTable userTable;
+
+  private final Authentication authentication;
 
   public Server(final Uuid id, final byte[] secret, final Relay relay, final Database database) {
 
@@ -76,8 +75,11 @@ public final class Server {
 
     this.database = database;
 
-    // Setup the database.
-    setupDatabase();
+    // Set up the authentication manager.
+    authentication = new Authentication(database);
+
+    // Server initialization finished.
+    LOG.info("Server initialized.");
 
     timeline.scheduleNow(new Runnable() {
       @Override
@@ -323,17 +325,6 @@ public final class Server {
                     relay.pack(message.id, message.content, message.creation));
       }
     };
-  }
-
-  private void setupDatabase() {
-    try {
-      userTable = new UserTable(database);
-
-      LOG.info("Database initialized.");
-    } catch (SQLException ex) {
-      LOG.error(ex, "Database failed to initialize.");
-      System.exit(1);
-    }
   }
 
 }
