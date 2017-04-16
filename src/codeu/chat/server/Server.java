@@ -29,6 +29,7 @@ import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
+import codeu.chat.common.Secret;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
@@ -46,7 +47,7 @@ public final class Server {
   private final Timeline timeline = new Timeline();
 
   private final Uuid id;
-  private final byte[] secret;
+  private final Secret secret;
 
   private final Model model = new Model();
   private final View view = new View(model);
@@ -55,11 +56,10 @@ public final class Server {
   private final Relay relay;
   private Uuid lastSeen = Uuid.NULL;
 
-  public Server(final Uuid id, final byte[] secret, final Relay relay) {
+  public Server(final Uuid id, final Secret secret, final Relay relay) {
 
     this.id = id;
-    this.secret = Arrays.copyOf(secret, secret.length);
-
+    this.secret = secret;
     this.controller = new Controller(id, model);
     this.relay = relay;
 

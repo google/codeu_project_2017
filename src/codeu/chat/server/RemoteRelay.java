@@ -22,6 +22,7 @@ import java.util.Collection;
 
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
+import codeu.chat.common.Secret;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
@@ -130,7 +131,7 @@ public final class RemoteRelay implements Relay {
 
   @Override
   public boolean write(Uuid teamId,
-                       byte[] teamSecret,
+                       Secret teamSecret,
                        Relay.Bundle.Component user,
                        Relay.Bundle.Component conversation,
                        Relay.Bundle.Component message) {
@@ -141,7 +142,7 @@ public final class RemoteRelay implements Relay {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.RELAY_WRITE_REQUEST);
       Uuid.SERIALIZER.write(connection.out(), teamId);
-      Serializers.BYTES.write(connection.out(), teamSecret);
+      Secret.SERIALIZER.write(connection.out(), teamSecret);
       COMPONENT_SERIALIZER.write(connection.out(), user);
       COMPONENT_SERIALIZER.write(connection.out(), conversation);
       COMPONENT_SERIALIZER.write(connection.out(), message);
@@ -159,7 +160,7 @@ public final class RemoteRelay implements Relay {
   }
 
   @Override
-  public Collection<Relay.Bundle> read(Uuid teamId, byte[] teamSecret, Uuid root, int range) {
+  public Collection<Relay.Bundle> read(Uuid teamId, Secret teamSecret, Uuid root, int range) {
 
     final Collection<Relay.Bundle> result = new ArrayList<>();
 
@@ -167,7 +168,7 @@ public final class RemoteRelay implements Relay {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.RELAY_READ_REQUEST);
       Uuid.SERIALIZER.write(connection.out(), teamId);
-      Serializers.BYTES.write(connection.out(), teamSecret);
+      Secret.SERIALIZER.write(connection.out(), teamSecret);
       Uuid.SERIALIZER.write(connection.out(), root);
       Serializers.INTEGER.write(connection.out(), range);
 
