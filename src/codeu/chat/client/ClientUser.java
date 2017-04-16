@@ -17,8 +17,8 @@ package codeu.chat.client;
 import java.util.*;
 
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 
 public final class ClientUser {
