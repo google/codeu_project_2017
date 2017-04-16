@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Message;
@@ -50,11 +50,17 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
         if (message.getAuthor().equals(FirebaseUtil.getCurrentUserUid())) {
             holder.cvMessage.setCardBackgroundColor(ContextCompat.getColor(context, R.color.msgOutgoing));
 
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.cvMessage.getLayoutParams();
+            LayoutParams params = (LayoutParams) holder.cvMessage.getLayoutParams();
+            params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             holder.cvMessage.setLayoutParams(params);
         } else {
             holder.cvMessage.setCardBackgroundColor(ContextCompat.getColor(context, R.color.msgIncoming));
+
+            LayoutParams params = (LayoutParams) holder.cvMessage.getLayoutParams();
+            params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            holder.cvMessage.setLayoutParams(params);
         }
     }
 
