@@ -14,4 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-java -cp ./third_party/junit4.jar:./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.TestRunner
+source ./classpath.sh
+
+java -cp $cp codeu.chat.TestRunner
