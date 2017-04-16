@@ -16,16 +16,20 @@ import codeu.chat.util.store.Store;
 
 import codeu.chat.util.Uuid;
 
-
+import java.io.File;
 import java.sql.Connection;
 
 public class DerbyStore {
 	
-	public String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-	public String protocol = "jdbc:derby:test";
+	private String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+	private String protocol = "jdbc:derby:test";
 	
-	Connection conn;
-	Statement stmt;
+	private Connection conn;
+	private Statement stmt;
+	
+	private final String userTableName = "chatuser";
+	private final String conversationTableName = "conversation";
+	private final String messageTableName = "message";
 	
 	
 	public DerbyStore() {
@@ -34,57 +38,60 @@ public class DerbyStore {
 			// Load the class necessary
 			Class.forName(driver).newInstance();
 			
-			// Connect to the Database
+			// Checks to see if the database directory exist
+			File database = new File("testchatapp");
+					
+			// If it does exist then we connect to it, while
+			// not overwriting data.
+			if (database.exists() && database.isDirectory()) {
+				conn = DriverManager.getConnection(protocol + "chatapp;", null);
+				stmt = conn.createStatement();
+				System.out.println("Tables exist. Connection made.");
+				return;
+			}
+	
+			// Connect to the database while creating a new schema
 			conn = DriverManager.getConnection(protocol + "chatapp;create=true", null);
 			
 			// Create a statement object to send queries
 			stmt = conn.createStatement();
 			
-			// If this table exists then we just continue
-			// since we don't want to create tables that exist
-			stmt.execute("SELECT * FROM chatuser");
+			// Create the chat user table
+			stmt.execute("CREATE TABLE " + userTableName + "(id varchar(255), name varchar(255), password varchar(255), creation BIGINT)");
 			
-			// Give confirmation of connection
-			System.out.println("Tables exist. Connection made.");
+			// Create the conversations table
+			stmt.execute("CREATE TABLE " + conversationTableName + "(id varchar(255), "
+					+ "owner varchar(255), creation BIGINT, title varchar(255), users varchar(255), firstMessage varchar(255)," +
+			"lastMessage varchar(255))");
+			
+			// Create the message table
+			stmt.execute("CREATE TABLE " + messageTableName + "(id varchar(255),"
+					 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
+			
+			// Give confirmation of execution.
+			System.out.println("Tables do not exist. Table creation executed.");
+			
 		}
 		catch (Exception ex) {
-						try {
-						// Create the chat user table
-						stmt.execute("CREATE TABLE chatuser(id varchar(255), name varchar(255), password varchar(255), creation BIGINT)");
-						
-						// Create the conversations table
-						stmt.execute("CREATE TABLE conversation(id varchar(255), "
-								+ "owner varchar(255), creation BIGINT, title varchar(255), users varchar(255), firstMessage varchar(255)," +
-						"lastMessage varchar(255))");
-						
-						// Create the message table
-						stmt.execute("CREATE TABLE message(id varchar(255),"
-								 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
-						
-						// Give confirmation of execution.
-						System.out.println("Tables do not exist. Table creation executed.");
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
 			ex.printStackTrace();
 		}
 	}
 	
 	public boolean checkForUsername(String username) throws SQLException {
-		return stmt.execute("SELECT * FROM chatuser WHERE password = '" + username + "'" );
+		return stmt.execute("SELECT * FROM " + userTableName + " WHERE password = '" + username + "'" );
 	}
 	
-	public boolean checkForPassword(String password) throws SQLException {
-		return stmt.execute("SELECT * FROM chatuser WHERE password = '" + password + "'" );
+	public boolean checkForPassword(String password, String username) throws SQLException {
+		return stmt.execute("SELECT * FROM " + userTableName + " WHERE password = '" + password + "'" );
 	}
 	
 	public void addUser(User u) throws SQLException {
-		stmt.execute("INSERT INTO chatuser VALUES(" + "\'" + removeCharsInUuid(u.id.toString()) + "\'" +
+		stmt.execute("INSERT INTO " + userTableName + " VALUES(" + "\'" + removeCharsInUuid(u.id.toString()) + "\'" +
 				"," + "\'" + u.name + "\'" + ", 'test', " + u.creation.inMs() + ")");
 	}
 	
 	public void addMessage(Message m) throws SQLException {
-		stmt.execute("INSERT INTO message VALUES(" + "\'" +  removeCharsInUuid(m.id.toString()) +  "\'" +
+		stmt.execute("INSERT INTO " + messageTableName + " VALUES(" + "\'" +  removeCharsInUuid(m.id.toString()) +  "\'" +
 				","  +  "\'" + removeCharsInUuid(m.previous.toString()) +  "\'" + "," +  m.creation.inMs() + "," 
 				+  "\'" + removeCharsInUuid(m.author.toString()) +  "\'" + "," +  "\'" + m.content +  "\'" + "," +  "\'" + removeCharsInUuid(m.next.toString()) +  "\'" + ")");
 	}
@@ -98,13 +105,13 @@ public class DerbyStore {
 			usersInvolved.append(" ");
 		}
 		
-		stmt.execute("INSERT INTO conversation VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
+		stmt.execute("INSERT INTO " + conversationTableName + " VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
 				"," +  "\'" + removeCharsInUuid(c.owner.toString()) +  "\'" + "," + c.creation.inMs() + "," + "\'" + c.title + "\'" + "," +  "\'" + usersInvolved.toString() +  "\'" + 
 				"," +  "\'" + removeCharsInUuid(c.firstMessage.toString()) +  "\'" +  "," + "\'" + removeCharsInUuid(c.lastMessage.toString()) +  "\'" + ")");
 	}
 	
 	public void updateConversation(Conversation c) throws SQLException {
-		stmt.execute("UPDATE conversation SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
+		stmt.execute("UPDATE " + conversationTableName + " SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
 			+ "\'" + ", lastMessage = " + "\'" + removeCharsInUuid(c.lastMessage.toString()) + "\'" + " WHERE id = " + "\'" + removeCharsInUuid(c.id.toString()) + "\'");
 	}
 	
@@ -117,7 +124,7 @@ public class DerbyStore {
 		Store<Uuid, User> allUsers = new Store<>(UUID_COMPARE);
 		try {
 			// Get all of the users in the database
-			ResultSet allUsersResponse = stmt.executeQuery("SELECT * FROM chatuser");
+			ResultSet allUsersResponse = stmt.executeQuery("SELECT * FROM " + userTableName);
 			
 			
 			while (allUsersResponse.next()) {
@@ -150,7 +157,7 @@ public class DerbyStore {
 		Store<Uuid, Conversation> allConversations = new Store<>(UUID_COMPARE);
 		
 		try {
-			ResultSet allConversationsResponse = stmt.executeQuery("SELECT * FROM conversation");
+			ResultSet allConversationsResponse = stmt.executeQuery("SELECT * FROM " + conversationTableName);
 			
 			
 			HashSet<Uuid> ownersUuid = new HashSet<>();
@@ -187,7 +194,7 @@ public class DerbyStore {
 		Store<Uuid, Message> allMessages = new Store<>(UUID_COMPARE);
 		
 		try {
-			ResultSet allMessagesResponse = stmt.executeQuery("SELECT * FROM message");
+			ResultSet allMessagesResponse = stmt.executeQuery("SELECT * FROM " + messageTableName);
 
 			while (allMessagesResponse.next()) {
 				
