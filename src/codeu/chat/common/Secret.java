@@ -122,31 +122,33 @@ public final class Secret {
   // converted into a byte array.
   //
   // For example: "ABABAB" becomes { 0xAB, 0xAB, 0xAB }
-  public static Secret parse(String stringSecret) throws IOException {
+  public static Secret parse(String string) throws IOException {
 
-    // Make sure the string only has valid hex characters.
-    for (int i = 0; i < stringSecret.length(); i++) {
-      if (FROM_HEX.get(stringSecret.charAt(i)) == null) {
+    // A single byte requires two hex characters which means that for n bytes
+    // there must be 2 * n hex digits. It is not a problem if an odd number of
+    // hex characters are given - just pad the string at the start with a '0'.
+    final String paddedString = string.length() % 2 == 0 ?
+        string :
+        "0" + string;
+
+    // Make sure the string only has valid hex characters. Do it after we pad
+    // to make sure that we don't accodently invalidate the string.
+    for (int i = 0; i < paddedString.length(); i++) {
+      if (FROM_HEX.get(paddedString.charAt(i)) == null) {
         throw new IOException(String.format(
             "Unsupported character '%c'",
-            stringSecret.charAt(i)));
+            paddedString.charAt(i)));
       }
     }
 
-    final int[] expanded = new int[stringSecret.length() + stringSecret.length() % 2];
+    final byte[] bytes = new byte[paddedString.length() / 2];
 
-    final int offset = stringSecret.length() % 2;
-
-    for (int i = 0; i < stringSecret.length(); i++) {
-      expanded[offset + i] = FROM_HEX.get(stringSecret.charAt(i));
+    for (int i = 0; i < bytes.length; i++) {
+      final int head = FROM_HEX.get(paddedString.charAt(2 * i));
+      final int tail = FROM_HEX.get(paddedString.charAt(2 * i + 1));
+      bytes[i] = (byte) ((head << 4) | tail);
     }
 
-    final byte[] compressed = new byte[expanded.length / 2];
-
-    for (int i = 0; i < compressed.length; i++) {
-      compressed[i] = (byte) ((expanded[2 * i] << 4) | expanded[2 * i + 1]);
-    }
-
-    return new Secret(compressed);
+    return new Secret(bytes);
   }
 }
