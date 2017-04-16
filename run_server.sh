@@ -15,7 +15,6 @@
 # limitations under the License.
 
 source ./classpath.sh
-echo $cp
 
 TEAM_ID="$1"
 TEAM_SECRET="$2"
