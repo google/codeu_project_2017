@@ -58,7 +58,7 @@ public class MessagesActivity extends AppCompatActivity
         etTypeMessage.addTextChangedListener(messageTextWatcher);
 
         rvMessageList = (RecyclerView) findViewById(R.id.rvMessageList);
-        messagesAdapter = new MessagesAdapter();
+        messagesAdapter = new MessagesAdapter(getApplicationContext());
 
         rvMessageList.setLayoutManager(new LinearLayoutManager(this));
         rvMessageList.setAdapter(messagesAdapter);

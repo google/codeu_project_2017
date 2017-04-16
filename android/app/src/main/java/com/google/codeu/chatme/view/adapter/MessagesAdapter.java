@@ -1,14 +1,20 @@
 package com.google.codeu.chatme.view.adapter;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Message;
 import com.google.codeu.chatme.presenter.MessagesPresenter;
+import com.google.codeu.chatme.utility.FirebaseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +29,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
     private List<Message> messages = new ArrayList<>();
 
     private MessagesPresenter presenter;
+    private Context context;
 
-    public MessagesAdapter() {
+    public MessagesAdapter(Context context) {
         this.presenter = new MessagesPresenter(this);
+        this.context = context;
     }
 
     @Override
@@ -38,6 +46,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = messages.get(position);
         holder.tvMessage.setText(message.getContent());
+
+        if (message.getAuthor().equals(FirebaseUtil.getCurrentUserUid())) {
+            holder.cvMessage.setCardBackgroundColor(ContextCompat.getColor(context, R.color.msgOutgoing));
+
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.cvMessage.getLayoutParams();
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            holder.cvMessage.setLayoutParams(params);
+        } else {
+            holder.cvMessage.setCardBackgroundColor(ContextCompat.getColor(context, R.color.msgIncoming));
+        }
     }
 
     @Override
@@ -66,10 +84,12 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvMessage;
+        private CardView cvMessage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvMessage = (TextView) itemView.findViewById(R.id.tvMessage);
+            cvMessage = (CardView) itemView.findViewById(R.id.cvMessage);
         }
     }
 }
