@@ -183,14 +183,17 @@ public final class Chat {
       }
 
     } else if (token.equals("m-find")){
-    	
+    
       if(!clientContext.conversation.hasCurrent()){
           System.out.println("ERROR: No conversation selected.");
       } else{
     	  if(!tokenScanner.hasNext()){
     		  System.out.println("ERROR: keyword not supplied.");
     	  }else{
+    		  long timeStart = System.currentTimeMillis();    		  
     		  clientContext.message.findMessages(tokenScanner.nextLine().trim());
+    		  long timeEnd = System.currentTimeMillis();
+    		  System.out.println("TOTAL TIME: " + (timeEnd-timeStart));
     	  }
       }
     	
