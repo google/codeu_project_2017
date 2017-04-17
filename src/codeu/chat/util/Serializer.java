@@ -14,10 +14,7 @@
 
 package codeu.chat.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.StringTokenizer;
+import java.io.*;
 
 public interface Serializer<T> {
 
@@ -27,9 +24,9 @@ public interface Serializer<T> {
 
 
   // These two methods transition the current interface
-  void write(StringBuffer message, T value);
+  void write(PrintWriter out, T value);
 
-  T read(StringTokenizer tokenizer);
+  T read(BufferedReader in) throws IOException;
 
 
 }

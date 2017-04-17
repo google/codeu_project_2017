@@ -14,9 +14,8 @@
 
 package codeu.chat.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.StringTokenizer;
@@ -37,13 +36,13 @@ public final class Serializers {
 
 
     @Override
-    public void write(StringBuffer message, Boolean value) {
-      message.append(value ? 1 : 0);
+    public void write(PrintWriter out, Boolean value) {
+      out.println(value);
     }
 
     @Override
-    public Boolean read(StringTokenizer tokenizer) {
-      return Integer.parseInt(tokenizer.nextToken()) != 0;
+    public Boolean read(BufferedReader in) throws IOException {
+      return in.readLine().equals("true");
     }
   };
 
@@ -72,13 +71,13 @@ public final class Serializers {
     }
 
     @Override
-    public void write(StringBuffer message, Integer value) {
-      message.append(value);
+    public void write(PrintWriter out, Integer value) {
+      out.println(value);
     }
 
     @Override
-    public Integer read(StringTokenizer tokenizer) {
-      return Integer.parseInt(tokenizer.nextToken());
+    public Integer read(BufferedReader in) throws IOException {
+      return Integer.parseInt(in.readLine());
     }
   };
 
@@ -107,13 +106,13 @@ public final class Serializers {
     }
 
     @Override
-    public void write(StringBuffer message, Long value) {
-      message.append(value);
+    public void write(PrintWriter out, Long value) {
+      out.println(value);
     }
 
     @Override
-    public Long read(StringTokenizer tokenizer) {
-      return Long.parseLong(tokenizer.nextToken());
+    public Long read(BufferedReader in) throws IOException {
+      return Long.parseLong(in.readLine());
     }
   };
 
@@ -143,23 +142,23 @@ public final class Serializers {
 
 
     @Override
-    public void write(StringBuffer message, byte[] value) {
-      INTEGER.write(message, value.length);
+    public void write(PrintWriter out, byte[] value) {
+      INTEGER.write(out, value.length);
 
       for (int i = 0; i < value.length; i++) {
-        message.append(";" + value[i]);
+        out.println(value[i]);
       }
 
     }
 
     @Override
-    public byte[] read(StringTokenizer tokenizer) {
+    public byte[] read(BufferedReader in) throws IOException {
 
-      final int length = INTEGER.read(tokenizer);
+      final int length = INTEGER.read(in);
       final byte[] array = new byte[length];
 
       for (int i = 0; i < length; i++) {
-        array[i] = Byte.parseByte(tokenizer.nextToken());
+        array[i] = Byte.parseByte(in.readLine());
       }
 
       return array;
@@ -184,13 +183,13 @@ public final class Serializers {
 
 
     @Override
-    public void write(StringBuffer message, String value) {
-      message.append(value);
+    public void write(PrintWriter out, String value) {
+      out.println(value);
     }
 
     @Override
-    public String read(StringTokenizer tokenizer) {
-      return tokenizer.nextToken();
+    public String read(BufferedReader in) throws IOException {
+      return in.readLine();
     }
   };
 
@@ -218,20 +217,19 @@ public final class Serializers {
 
 
       @Override
-      public void write(StringBuffer message, Collection<T> value) {
-        INTEGER.write(message, value.size());
+      public void write(PrintWriter out, Collection<T> value) {
+        INTEGER.write(out, value.size());
         for (final T x : value) {
-          message.append(';');
-          serializer.write(message, x);
+          serializer.write(out, x);
         }
       }
 
       @Override
-      public Collection<T> read(StringTokenizer tokenizer) {
-        final int size = INTEGER.read(tokenizer);
+      public Collection<T> read(BufferedReader in) throws IOException{
+        final int size = INTEGER.read(in);
         Collection<T> list = new ArrayList<T>(size);
         for (int i = 0; i < size; i++) {
-          list.add(serializer.read(tokenizer));
+          list.add(serializer.read(in));
         }
 
         return list;
@@ -263,19 +261,18 @@ public final class Serializers {
 
 
       @Override
-      public void write(StringBuffer message, T value) {
+      public void write(PrintWriter out, T value) {
         if (value == null) {
-          message.append("NO_VALUE");
+          out.println("NO_VALUE");
         } else {
-          message.append("YES_VALUE");
-          message.append(";");
-          serializer.write(message, value);
+          out.println("YES_VALUE");
+          serializer.write(out, value);
         }
       }
 
       @Override
-      public T read(StringTokenizer tokenizer) {
-        return tokenizer.nextToken().equals("NO_VALUE") ? null : serializer.read(tokenizer);
+      public T read(BufferedReader in) throws IOException {
+        return in.readLine().equals("NO_VALUE") ? null : serializer.read(in);
       }
     };
   }
