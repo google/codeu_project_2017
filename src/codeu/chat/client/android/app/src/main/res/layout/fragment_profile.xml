@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ChatMe_Red"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@color/ChatMe_Blue"
+        android:elevation="0dp"
+        android:text="Save Changes"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_below="@+id/passwrord_text"
+        android:layout_alignStart="@+id/passwrord_text" />
+
+    <EditText
+        android:id="@+id/username_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="173dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Username"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/passwrord_text"
+        android:layout_alignStart="@+id/username_text"
+        android:layout_marginBottom="41dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Full Name" />
+
+    <EditText
+        android:id="@+id/passwrord_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/username_text"
+        android:layout_below="@+id/username_text"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="Password" />
+</RelativeLayout>

@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ChatMe_Red"
+    tools:context=".view.tabs.ChatsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <ImageView
+        android:id="@+id/addUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        app:srcCompat="@android:drawable/ic_menu_add"
+        android:layout_alignTop="@+id/ChatTitle"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/ChatTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="CodeUGroup31"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <fragment
+        android:id="@+id/fragment4"
+        android:name="com.google.codeu.chatme.view.basicFragments.MessageFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        tools:layout="@layout/fragment_message"
+        android:layout_below="@+id/fragment6"
+        android:layout_alignParentStart="true" />
+
+    <fragment
+        android:id="@+id/fragment6"
+        android:name="com.google.codeu.chatme.view.basicFragments.MessageFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fragment5"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/fragment5"
+        android:name="com.google.codeu.chatme.view.basicFragments.MessageFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_below="@+id/addUserButton"
+        android:layout_centerHorizontal="true"
+        tools:layout="@layout/fragment_message" />
+
+    <EditText
+        android:id="@+id/messageInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Chat here..." />
+
+</RelativeLayout>
