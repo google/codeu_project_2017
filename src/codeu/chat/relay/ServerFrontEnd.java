@@ -14,9 +14,7 @@
 
 package codeu.chat.relay;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Collection;
 import java.util.StringTokenizer;
 
@@ -65,12 +63,12 @@ public final class ServerFrontEnd {
 
 
         @Override
-        public void write(StringBuffer message, Relay.Bundle.Component value) {
+        public void write(PrintWriter out, Relay.Bundle.Component value) {
 
         }
 
         @Override
-        public Relay.Bundle.Component read(StringTokenizer tokenizer) {
+        public Relay.Bundle.Component read(BufferedReader in) throws IOException {
           return null;
         }
       };
@@ -115,12 +113,12 @@ public final class ServerFrontEnd {
     }
 
         @Override
-        public void write(StringBuffer message, Relay.Bundle value) {
+        public void write(PrintWriter out, Relay.Bundle value) {
 
         }
 
         @Override
-        public Relay.Bundle read(StringTokenizer tokenizer) {
+        public Relay.Bundle read(BufferedReader in) throws IOException  {
           return null;
         }
       };
