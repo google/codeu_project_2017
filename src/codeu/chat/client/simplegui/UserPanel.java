@@ -163,6 +163,11 @@ public final class UserPanel extends JPanel {
         final String s = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
+        try {
+          Signin.main(new String[0]);
+        } catch (Exception exception) {
+          System.out.println(exception);
+        }
         if (s != null && s.length() > 0) {
           clientContext.user.addUser(s);
           UserPanel.this.getAllUsers(listModel);

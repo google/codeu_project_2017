@@ -1,0 +1,158 @@
+Apr 04, 2017 9:04:04 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 9:04:04 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 9:04:04 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 9:04:04 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 9:04:05 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 9:06:48 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 9:06:48 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 9:06:48 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 9:06:48 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 9:06:49 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 9:34:09 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 9:34:09 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 9:34:09 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 9:34:09 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 9:34:10 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 9:40:34 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 9:40:34 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 9:40:34 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 9:40:34 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 9:40:34 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 11:20:06 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 11:20:06 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 11:20:06 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 11:20:06 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 11:20:07 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 11:20:41 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 11:20:41 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 11:20:41 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 11:20:41 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 11:20:41 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 11:31:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 11:31:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 11:31:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 11:31:24 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 11:31:25 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 11:32:06 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 11:32:06 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 11:32:06 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 11:32:06 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 11:32:07 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 11:32:56 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 11:32:56 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 11:32:56 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 11:32:56 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 11:32:56 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 1:10:59 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 1:10:59 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 1:10:59 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 1:10:59 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 1:11:00 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 3:09:04 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 3:09:04 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 3:09:04 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 3:09:04 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 3:09:04 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 3:11:56 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 3:11:56 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 3:11:56 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 3:11:56 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 3:11:56 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 3:11:57 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Apr 04, 2017 5:34:15 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 5:34:15 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 5:34:15 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 5:34:15 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 5:34:16 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 5:34:16 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Apr 04, 2017 5:37:46 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 5:37:46 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 5:37:46 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 5:37:46 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 5:37:47 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 5:37:48 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+Apr 04, 2017 5:57:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 04, 2017 5:57:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 04, 2017 5:57:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 04, 2017 5:57:52 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 04, 2017 5:57:53 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 04, 2017 5:57:54 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
