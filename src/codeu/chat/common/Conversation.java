@@ -14,9 +14,7 @@
 
 package codeu.chat.common;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.StringTokenizer;
@@ -64,14 +62,31 @@ public final class Conversation {
 
 
     @Override
-    public void write(StringBuffer message, Conversation value) {
-      // todo implement
+    public void write(PrintWriter out, Conversation value) {
+      Uuids.SERIALIZER.write(out, value.id);
+      Uuids.SERIALIZER.write(out, value.owner);
+      Time.SERIALIZER.write(out, value.creation);
+      Serializers.STRING.write(out, value.title);
+      Serializers.collection(Uuids.SERIALIZER).write(out, value.users);
+      Uuids.SERIALIZER.write(out, value.firstMessage);
+      Uuids.SERIALIZER.write(out, value.lastMessage);
     }
 
     @Override
-    public Conversation read(StringTokenizer tokenizer) {
-      // todo implement
-      return null;
+    public Conversation read(BufferedReader in) throws IOException {
+      final Conversation value = new Conversation(
+              Uuids.SERIALIZER.read(in),
+              Uuids.SERIALIZER.read(in),
+              Time.SERIALIZER.read(in),
+              Serializers.STRING.read(in)
+      );
+
+      value.users.addAll(Serializers.collection(Uuids.SERIALIZER).read(in));
+
+      value.firstMessage = Uuids.SERIALIZER.read(in);
+      value.lastMessage = Uuids.SERIALIZER.read(in);
+
+      return value;
     }
   };
 

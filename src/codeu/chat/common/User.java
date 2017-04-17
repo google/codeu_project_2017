@@ -14,9 +14,7 @@
 
 package codeu.chat.common;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.StringTokenizer;
 
 import codeu.chat.util.Serializer;
@@ -48,16 +46,20 @@ public final class User {
 
     }
 
-
     @Override
-    public void write(StringBuffer message, User value) {
-      // todo implement
+    public void write(PrintWriter out, User value) {
+        Uuids.SERIALIZER.write(out, value.id);
+        Serializers.STRING.write(out, value.name);
+        Time.SERIALIZER.write(out, value.creation);
     }
 
     @Override
-    public User read(StringTokenizer tokenizer) {
-      // todo implement
-      return null;
+    public User read(BufferedReader in) throws IOException {
+        return new User(
+                Uuids.SERIALIZER.read(in),
+                Serializers.STRING.read(in),
+                Time.SERIALIZER.read(in)
+        );
     }
   };
 

@@ -14,9 +14,7 @@
 
 package codeu.chat.common;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -44,14 +42,14 @@ public final class Time implements Comparable<Time> {
 
 
     @Override
-    public void write(StringBuffer message, Time value) {
-      // todo implement
+    public void write(PrintWriter out, Time value) {
+
+      Serializers.LONG.write(out, value.totalMs);
     }
 
     @Override
-    public Time read(StringTokenizer tokenizer) {
-      // todo implement
-      return null;
+    public Time read(BufferedReader in) throws IOException{
+      return Time.fromMs(Serializers.LONG.read(in));
     }
   };
 
