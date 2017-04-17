@@ -183,7 +183,7 @@ public final class Chat {
       }
 
     } else if (token.equals("m-find")){
-    	
+    
       if(!clientContext.conversation.hasCurrent()){
           System.out.println("ERROR: No conversation selected.");
       } else{
