@@ -14,10 +14,9 @@
 
 package codeu.chat.common;
 
+import java.io.*;
 import java.lang.StringBuilder;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.Buffer;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
@@ -83,31 +82,30 @@ public final class Uuids {
 
 
     @Override
-    public void write(StringBuffer message, Uuid value) {
+    public void write(PrintWriter out, Uuid value) {
       int length = 0;
       for (Uuid current = value; current != null; current = current.root()) {
         length+=1;
       }
       if (length >= 0 && length <= 255) {
-        message.append(length);
+        out.println(length);
       } else {
         throw new RuntimeException("Max supported Uuid chain length is 255");
       }
 
       for (Uuid current = value; current != null; current = current.root()) {
-        message.append(";");
-        Serializers.INTEGER.write(message, current.id());
+        Serializers.INTEGER.write(out, current.id());
       }
 
     }
 
     @Override
-    public Uuid read(StringTokenizer tokenizer) {
-      final int length = Integer.parseInt(tokenizer.nextToken());
+    public Uuid read(BufferedReader in) throws IOException {
+      final int length = Integer.parseInt(in.readLine());
       final int[] chain = new int[length];
 
       for (int i = 0; i < length; i++) {
-        chain[i] = Serializers.INTEGER.read(tokenizer);
+        chain[i] = Serializers.INTEGER.read(in);
       }
 
       Uuid head = null;
