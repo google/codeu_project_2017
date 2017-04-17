@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*; 
 
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
@@ -51,7 +52,7 @@ public final class ClientUser {
       clean = false;
     } else {
 
-      // TODO: check for invalid characters
+      // TODO: check for invalid characters and that the user's name is not a duplicate
 
     }
     return clean;
@@ -88,18 +89,51 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+	//change the type to a bool, so we can check if the user was created or not in the GUI
+  public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
-
-    final User user = (validInputs) ? controller.newUser(name) : null;
-
-    if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
-    } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
-      updateUsers();
-    }
+    
+    //Check there are users and if there are, get the users in a list
+      if(!usersById.isEmpty()){
+      	Iterator<User> users = usersById.values().iterator(); 
+      	while(users.hasNext()){
+      		if(users.next().name.toUpperCase().equals(name.toUpperCase())){
+      			System.out.format("Error: user not created due to duplicate name.\n");
+      			return false;           		
+      		}
+      	 }
+      	 //has gone through all names and none matched and check that the name doesn't already exist
+      	 final User user = (validInputs) ? controller.newUser(name) : null;
+	
+		//check that the user being created isn't empty
+    	if (user == null) {
+     	 System.out.format("Error: user not created - %s.\n",
+          	(validInputs) ? "server failure" : "bad input value");
+        	return false; 
+        
+   	 	} else {
+      	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      	updateUsers();
+      	return true; 
+    	}  	 
+      }
+      
+    //the users map is empty, so the user should be added and that the input is valid
+	else{
+    	final User user = (validInputs) ? controller.newUser(name) : null;
+	
+		//check that the user being created isn't empty
+    	if (user == null) {
+     	 System.out.format("Error: user not created - %s.\n",
+          	(validInputs) ? "server failure" : "bad input value");
+        return false; 
+        
+   	 	} else {
+      	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      	updateUsers();
+      	return true; 
+    	}
+    } 
   }
 
   public void showAllUsers() {
