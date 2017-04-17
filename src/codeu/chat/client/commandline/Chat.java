@@ -190,10 +190,7 @@ public final class Chat {
     	  if(!tokenScanner.hasNext()){
     		  System.out.println("ERROR: keyword not supplied.");
     	  }else{
-    		  long timeStart = System.currentTimeMillis();    		  
     		  clientContext.message.findMessages(tokenScanner.nextLine().trim());
-    		  long timeEnd = System.currentTimeMillis();
-    		  System.out.println("TOTAL TIME: " + (timeEnd-timeStart));
     	  }
       }
     	
