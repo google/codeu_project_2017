@@ -6,8 +6,8 @@ public final class AuthenticationCode {
     SUCCESS                = 0,
     REGISTER_USER_EXISTS   = 1,
     REGISTER_INVALID_INPUT = 2,
-	  LOGIN_FAILED           = 3,
-   	DB_ERROR               = 4,
+    LOGIN_FAILED           = 3,
+    DB_ERROR               = 4,
     UNKNOWN                = 5;
 
 }
