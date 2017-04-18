@@ -15,12 +15,11 @@
 package codeu.chat.common;
 
 import java.io.*;
-import java.util.StringTokenizer;
 
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 
 public final class ConversationSummary implements ListViewable {
 
@@ -29,8 +28,8 @@ public final class ConversationSummary implements ListViewable {
     @Override
     public void write(OutputStream out, ConversationSummary value) throws IOException {
 
-      Uuids.SERIALIZER.write(out, value.id);
-      Uuids.SERIALIZER.write(out, value.owner);
+      Uuid.SERIALIZER.write(out, value.id);
+      Uuid.SERIALIZER.write(out, value.owner);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
 
@@ -40,8 +39,8 @@ public final class ConversationSummary implements ListViewable {
     public ConversationSummary read(InputStream in) throws IOException {
 
       return new ConversationSummary(
-          Uuids.SERIALIZER.read(in),
-          Uuids.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );
@@ -50,8 +49,8 @@ public final class ConversationSummary implements ListViewable {
 
     @Override
     public void write(PrintWriter out, ConversationSummary value) {
-      Uuids.SERIALIZER.write(out, value.id);
-      Uuids.SERIALIZER.write(out, value.owner);
+      Uuid.SERIALIZER.write(out, value.id);
+      Uuid.SERIALIZER.write(out, value.owner);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
     }
@@ -59,8 +58,8 @@ public final class ConversationSummary implements ListViewable {
     @Override
     public ConversationSummary read(BufferedReader in) throws IOException {
       return new ConversationSummary(
-              Uuids.SERIALIZER.read(in),
-              Uuids.SERIALIZER.read(in),
+              Uuid.SERIALIZER.read(in),
+              Uuid.SERIALIZER.read(in),
               Time.SERIALIZER.read(in),
               Serializers.STRING.read(in)
       );
