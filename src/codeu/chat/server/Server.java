@@ -15,9 +15,7 @@
 
 package codeu.chat.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
@@ -71,10 +69,13 @@ public final class Server {
 
     LOG.info("Handling new connection...");
 
-    return onMessage(connection.in(), connection.out());
+    final BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    final PrintWriter out = new PrintWriter(connection.out());
+
+    return onMessage(in, out);
   }
 
-  private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+  private boolean onMessage(BufferedReader in, PrintWriter out) throws IOException {
 
     final int type = Serializers.INTEGER.read(in);
 
