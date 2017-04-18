@@ -43,7 +43,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Message newMessage(Uuid author, Uuid conversation, String body) {
+  public Message newMessage(Uuid author, Uuid token, Uuid conversation, String body) {
+    if (!checkToken(author, token)) return null;
     return newMessage(createId(), author, conversation, body, Time.now());
   }
 
@@ -58,7 +59,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner) {
+  public Conversation newConversation(String title, Uuid owner, Uuid token) {
+    if (!checkToken(owner, token)) return null;
     return newConversation(createId(), title, owner, Time.now());
   }
 
@@ -139,6 +141,7 @@ public final class Controller implements RawController, BasicController {
 
       // Create the new user.
       user = new User(id, username, creationTime);
+      user.token = createId();
       model.add(user);
     } else {
       LOG.info(
@@ -169,6 +172,21 @@ public final class Controller implements RawController, BasicController {
     return conversation;
   }
 
+  /**
+   * Verify that a user matches a given token.
+   *
+   * @param uuid The UUID of the user.
+   * @param token The token.
+   *
+   * @return Whether the user matches the given token.
+   */
+  public boolean checkToken(Uuid uuid, Uuid token) {
+    User user = model.userById().first(uuid);
+    if (user == null) return false;
+    if (user.token.equals(token)) return true;
+    return false;
+  }
+
   private Uuid createId() {
 
     Uuid candidate;
@@ -189,7 +207,8 @@ public final class Controller implements RawController, BasicController {
   private boolean isIdInUse(Uuid id) {
     return model.messageById().first(id) != null ||
            model.conversationById().first(id) != null ||
-           model.userById().first(id) != null;
+           model.userById().first(id) != null ||
+           model.userByToken().first(id) != null;
   }
 
   private boolean isIdFree(Uuid id) { return !isIdInUse(id); }

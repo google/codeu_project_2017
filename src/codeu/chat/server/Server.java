@@ -138,10 +138,11 @@ public final class Server {
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
       final Uuid author = Uuid.SERIALIZER.read(in);
+	  final Uuid token = Uuid.SERIALIZER.read(in);
       final Uuid conversation = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
-      final Message message = controller.newMessage(author, conversation, content);
+      final Message message = controller.newMessage(author, token, conversation, content);
 
       //Should encryption/compression occur here? When writing after creation of message?
 
@@ -172,13 +173,19 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.LOGIN_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
+      if (user == null) {
+        Serializers.nullable(Uuid.SERIALIZER).write(out, null);
+      } else {
+        Serializers.nullable(Uuid.SERIALIZER).write(out, user.token);
+      }
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuid.SERIALIZER.read(in);
+	  final Uuid token = Uuid.SERIALIZER.read(in);
 
-      final Conversation conversation = controller.newConversation(title, owner);
+      final Conversation conversation = controller.newConversation(title, owner, token);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);

@@ -42,7 +42,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public Message newMessage(Uuid author, Uuid conversation, String body) {
+  public Message newMessage(Uuid author, Uuid token, Uuid conversation, String body) {
 
     Message response = null;
 
@@ -50,6 +50,7 @@ public class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_MESSAGE_REQUEST);
       Uuid.SERIALIZER.write(connection.out(), author);
+      Uuid.SERIALIZER.write(connection.out(), token);
       Uuid.SERIALIZER.write(connection.out(), conversation);
       Serializers.STRING.write(connection.out(), body);
 
@@ -106,6 +107,8 @@ public class Controller implements BasicController {
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.LOGIN_RESPONSE) {
         user = Serializers.nullable(User.SERIALIZER).read(connection.in());
+        Uuid token = Serializers.nullable(Uuid.SERIALIZER).read(connection.in());
+        user.token = token;
         LOG.info("login: Response completed.");
       } else {
         LOG.error("Response from server failed.");
@@ -120,7 +123,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner)  {
+  public Conversation newConversation(String title, Uuid owner, Uuid token)  {
 
     Conversation response = null;
 
@@ -129,6 +132,7 @@ public class Controller implements BasicController {
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_CONVERSATION_REQUEST);
       Serializers.STRING.write(connection.out(), title);
       Uuid.SERIALIZER.write(connection.out(), owner);
+      Uuid.SERIALIZER.write(connection.out(), token);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());

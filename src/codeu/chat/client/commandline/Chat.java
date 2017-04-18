@@ -125,7 +125,7 @@ public final class Chat {
           System.out.println("ERROR: Conversation title not supplied.");
         } else {
           final String title = tokenScanner.nextLine().trim();
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
+          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id, clientContext.user.getCurrent().token);
         }
       }
 
@@ -148,6 +148,7 @@ public final class Chat {
           System.out.println("ERROR: Message body not supplied.");
         } else {
           clientContext.message.addMessage(clientContext.user.getCurrent().id,
+              clientContext.user.getCurrent().token,
               clientContext.conversation.getCurrentId(),
               tokenScanner.nextLine().trim());
         }

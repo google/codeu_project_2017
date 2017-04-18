@@ -20,10 +20,9 @@ TEAM_ID="$1"
 TEAM_SECRET="$2"
 PORT="$3"
 PERSISTENT_DIR="$4"
-DATABASE="$5"
-RELAY_ADDRESS="$6"
+RELAY_ADDRESS="$5"
 
-if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_DIR" == "" || "$DATABASE" == "" ]] ; then
+if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_DIR" == "" ]] ; then
   echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> <PERSISTENT> <DATABASE> [RELAY ADDRESS]'
   echo ''
   echo 'TEAM ID :        The id registered with the relay server. If you are'
@@ -34,7 +33,6 @@ if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_
   echo '                 connections. This can be anything from 1024 to 65535.'
   echo 'PERSISTENT DIR : The directory where the server can save data that will'
   echo '                 exists between runs.'
-  echo 'DATABASE :       The file to save the SQLite database in.'
   echo 'RELAY ADDRESS  : This value is optional. If you want to connect to a '
   echo '                 relay server, the address must be IP@PORT where IP is'
   echo '                 the ip address of the relay server and PORT is the port'
@@ -49,14 +47,12 @@ if [ "$RELAY_ADDRESS" == "" ] ; then
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
-      "$PERSISTENT_DIR" \
-	  "$DATABASE"
+      "$PERSISTENT_DIR"
 else
   java -cp $cp codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR" \
-	  "$DATABASE"
       "$RELAY_ADDRESS"
 fi

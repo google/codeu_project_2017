@@ -56,10 +56,8 @@ final class ServerMain {
     // of the server.
     final String persistentPath = args[3];
 
-    final String dbPath = args[4];
-
-    final RemoteAddress relayAddress = args.length > 5 ?
-                                       RemoteAddress.parse(args[5]) :
+    final RemoteAddress relayAddress = args.length > 4 ?
+                                       RemoteAddress.parse(args[4]) :
                                        null;
 
     try (
@@ -68,7 +66,7 @@ final class ServerMain {
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, relaySource, dbPath);
+      runServer(id, secret, serverSource, relaySource, persistentPath + "/server.db");
 
     } catch (IOException ex) {
 

@@ -82,7 +82,8 @@ public final class BasicControllerTest {
 
     final Conversation conversation = controller.newConversation(
         "conversation",
-        user.id);
+        user.id,
+        user.token);
 
     assertFalse(
         "Check that conversation has a valid reference",
@@ -100,7 +101,8 @@ public final class BasicControllerTest {
 
     final Conversation conversation = controller.newConversation(
         "conversation",
-        user.id);
+        user.id,
+        user.token);
 
     assertFalse(
         "Check that conversation has a valid reference",
@@ -108,6 +110,7 @@ public final class BasicControllerTest {
 
     final Message message = controller.newMessage(
         user.id,
+        user.token,
         conversation.id,
         "Hello World");
 
