@@ -9,6 +9,11 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
 
+/**
+ * @POST
+ * Generates a map from user ids to their display names. Accepts a list of
+ * user ids in the post request body
+ */
 exports.getUserNames = functions.https.onRequest((request, response) => {
 	var ref = admin.database().ref("users");
 	var result = {};
