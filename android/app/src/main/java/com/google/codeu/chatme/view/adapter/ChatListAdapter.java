@@ -14,6 +14,7 @@ import com.google.codeu.chatme.presenter.ChatActivityPresenter;
 import com.google.codeu.chatme.view.message.MessagesActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
      */
     private List<Conversation> conversations = new ArrayList<>();
 
+    private HashMap<String, String> convIdsToNames = new HashMap<>();
+
     private ChatActivityPresenter presenter;
 
     public ChatListAdapter() {
@@ -47,7 +50,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Conversation conversation = conversations.get(position);
-        holder.tvSender.setText(conversation.getOwner());
+
+        // TODO: clean this line
+        holder.tvSender.setText(convIdsToNames.get(conversation.getParticipants().get(1)));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +91,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
     public void setChatList(List<Conversation> conversations) {
         this.conversations = conversations;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void setIdsToNamesMap(HashMap<String, String> map) {
+        this.convIdsToNames = map;
         notifyDataSetChanged();
     }
 

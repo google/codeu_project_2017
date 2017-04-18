@@ -13,7 +13,13 @@ exports.getUserNames = functions.https.onRequest((request, response) => {
 	var ref = admin.database().ref("users");
 	var result = {};
 
-	async.map(request.body.ids, function(id, callback) {
+	if (typeof request.body.ids === 'string') {
+		ids = [ request.body.ids ]
+	} else {
+		ids = request.body.ids
+	}
+
+	async.map(ids, function(id, callback) {
 		ref.orderByKey().equalTo(id).on("child_added", function(snapshot) {
 			result[id] = snapshot.val().name;
 			return callback(null, snapshot.val().name);
