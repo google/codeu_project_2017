@@ -3,7 +3,6 @@ package com.google.codeu.chatme.controller;
 import android.util.Log;
 
 import com.google.codeu.chatme.model.Conversation;
-import com.google.codeu.chatme.model.Message;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,29 +39,6 @@ public class Controller {
                             Log.w(TAG, "addConversation:failure " + databaseError.getMessage());
                         } else {
                             Log.i(TAG, "addConversation:success " + newConversationId);
-                        }
-                    }
-                });
-    }
-
-    /**
-     * Saves a new message to Firebase real-time database
-     *
-     * @param newMessage {@link Message} object to be added
-     */
-    public static void addMessage(Message newMessage) {
-
-        // generates unique id for message to be saved
-        final String newMessageId = mRootRef.child("messages").push().getKey();
-
-        mRootRef.child("messages").child(newMessageId).setValue(newMessage,
-                new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        if (databaseError != null) {
-                            Log.w(TAG, "addMessage:failure " + databaseError.getMessage());
-                        } else {
-                            Log.i(TAG, "addMessage:success " + newMessageId);
                         }
                     }
                 });
