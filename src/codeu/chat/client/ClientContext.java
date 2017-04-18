@@ -46,6 +46,7 @@ public final class ClientContext {
 
                     LOG.info("Reading from server...");
 
+                    user.updateUsers();
                     //conversation.updateAllConversations(false);
                     message.updateMessages(false);
 
