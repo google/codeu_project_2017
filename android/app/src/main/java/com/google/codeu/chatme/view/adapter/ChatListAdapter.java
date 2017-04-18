@@ -11,11 +11,13 @@ import android.widget.TextView;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
+import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.message.MessagesActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
@@ -29,11 +31,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     public static final String CONV_ID_EXTRA = "CONV_ID_EXTRA";
 
     /**
-     * List of conversations
+     * List of conversations to display in the list
      */
     private List<Conversation> conversations = new ArrayList<>();
 
-    private HashMap<String, String> convIdsToNames = new HashMap<>();
+    /**
+     * A map from different conversation participants to their display names
+     */
+    private Map<String, String> participantsIdsToNames = new HashMap<>();
 
     private ChatActivityPresenter presenter;
 
@@ -51,8 +56,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Conversation conversation = conversations.get(position);
 
-        // TODO: clean this line
-        holder.tvSender.setText(convIdsToNames.get(conversation.getParticipants().get(1)));
+        String participantId = getRecipientId(conversation.getParticipants());
+        holder.tvSender.setText(participantsIdsToNames.get(participantId));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +65,23 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 openMessagesActivity(view.getContext(), conversation.getId());
             }
         });
+    }
+
+    /**
+     * Note: This function would need to altered if and when "groups" feature is introduced
+     *
+     * @param participants list of participant Ids for a particular conversation
+     * @return recipient id (in current user's scope)
+     */
+    private String getRecipientId(List<String> participants) {
+        if (participants.size() > 1) {
+            for (String id : participants) {
+                if (!FirebaseUtil.getCurrentUserUid().equals(id)) {
+                    return id;
+                }
+            }
+        }
+        return FirebaseUtil.getCurrentUserUid();    // should not be returned ideally
     }
 
     /**
@@ -74,9 +96,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         context.startActivity(mIntent);
     }
 
-    /**
-     * @return number of conversations
-     */
     @Override
     public int getItemCount() {
         return conversations.size();
@@ -89,14 +108,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         this.presenter.loadConversations();
     }
 
+    @Override
     public void setChatList(List<Conversation> conversations) {
         this.conversations = conversations;
         notifyDataSetChanged();
     }
 
     @Override
-    public void setIdsToNamesMap(HashMap<String, String> map) {
-        this.convIdsToNames = map;
+    public void setIdsToNamesMap(Map<String, String> map) {
+        this.participantsIdsToNames = map;
         notifyDataSetChanged();
     }
 

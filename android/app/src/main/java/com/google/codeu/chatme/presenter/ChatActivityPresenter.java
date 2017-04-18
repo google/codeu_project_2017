@@ -64,12 +64,11 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
                     if (conv.getParticipants().contains(FirebaseUtil.getCurrentUserUid())) {
                         conv.setId(data.getKey());
                         conversations.add(conv);
-                        Log.d(TAG, "loadConversations:onDataChange:convId:" + conv.getId());
                     }
                 }
 
-                // reverses list of conversations to order acc to timeCreated in desc order
                 Collections.reverse(conversations);
+                Log.i(TAG, "loadConversations:retrieved " + conversations.size());
 
                 // updates list of conversations (and the corresponding views) in adapter
                 view.setChatList(conversations);
@@ -84,30 +83,53 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
         });
     }
 
+    /**
+     * @param conversations list of conversations
+     * @return list of conversation participants ids for current user
+     */
     private List<String> getParticipantsFromConversations(ArrayList<Conversation> conversations) {
         Set participants = new HashSet();
         for (Conversation conv : conversations) {
             participants.addAll(conv.getParticipants());
         }
 
+        // removes self from set of participant Ids (saving API calls, one call at a time)
+        participants.remove(FirebaseUtil.getCurrentUserUid());
+
         return new ArrayList<>(participants);
     }
 
+    /**
+     * Retrieves a hash map which maps user ids to their display names. Uses Retrofit
+     * to make an API call to Firebase Functions (backend) by "posting" a list of user
+     * ids. Then, updates view by resetting {@link ChatListAdapter#participantsIdsToNames}
+     * <p>
+     * Note: This function would need to altered if and when "groups" feature is introduced
+     *
+     * @param conversations list of conversations
+     */
     private void setConversationNames(ArrayList<Conversation> conversations) {
         List<String> participants = getParticipantsFromConversations(conversations);
+        if (participants.size() == 0) {
+            Log.d(TAG, "setConversationNames: 0 conversations");
+            return;
+        }
 
         RetrofitBuilder.getService().getNamesFromIds(participants)
                 .enqueue(new Callback<HashMap<String, String>>() {
                     @Override
                     public void onResponse(Call<HashMap<String, String>> call,
                                            Response<HashMap<String, String>> response) {
-                        Log.d(TAG, "setConversationNames " + String.valueOf(response.body().size()));
+                        Log.i(TAG, "setConversationNames:retrieved "
+                                + String.valueOf(response.body().size()));
+
+                        // updates conversation names
                         view.setIdsToNamesMap(response.body());
                     }
 
                     @Override
                     public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
-                        Log.d(TAG, "setConversationNames:failure " + t.getMessage());
+                        Log.e(TAG, "setConversationNames:failure " + t.getMessage());
                     }
                 });
     }
