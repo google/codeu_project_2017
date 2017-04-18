@@ -35,12 +35,10 @@ final class Panel {
   // REGISTER
   //
   // Register the command to be called when the given command name is
-  // given on the command line. Returns a reference to 'this' so that
-  // register calls can be chained.
+  // given on the command line.
   //
-  public Panel register(String commandName, Command command) {
+  public void register(String commandName, Command command) {
     commands.put(commandName, command);
-    return this;
   }
 
   // HANDLE COMMAND

@@ -49,13 +49,14 @@ final class ClientMain {
 
     LOG.info("Created client");
 
-    final Scanner input = new Scanner(System.in);
+    boolean keepRunning = true;
 
-    while (chat.handleCommand(input)) {
-      // everything is done in "run"
+    try (final Scanner input = new Scanner(System.in)) {
+      while (keepRunning) {
+        System.out.print(">>> ");
+        keepRunning = chat.handleCommand(input.nextLine());
+      }
     }
-
-    input.close();
 
     LOG.info("chat client has exited.");
   }
