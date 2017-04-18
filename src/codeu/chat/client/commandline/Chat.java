@@ -14,310 +14,243 @@
 
 package codeu.chat.client.commandline;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Stack;
 
-import codeu.chat.client.ClientContext;
-import codeu.chat.client.Controller;
-import codeu.chat.client.View;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.util.Logger;
+import codeu.chat.client.core.Context;
+import codeu.chat.client.core.ConversationContext;
+import codeu.chat.client.core.MessageContext;
+import codeu.chat.client.core.UserContext;
 
-// Chat - top-level client application.
 public final class Chat {
-
-  private final static Logger.Log LOG = Logger.newLog(Chat.class);
 
   private static final String PROMPT = ">>";
 
-  private final static int PAGE_SIZE = 10;
+  private final Stack<Panel> panels = new Stack<>();
 
-  private boolean alive = true;
-
-  private final ClientContext clientContext;
-
-  // Constructor - sets up the Chat Application
-  public Chat(Controller controller, View view) {
-    clientContext = new ClientContext(controller, view);
+  public Chat(Context context) {
+    this.panels.push(createRootPanel(context));
   }
 
-  // Print help message.
-  private static void help() {
-    System.out.println("Chat commands:");
-    System.out.println("   exit      - exit the program.");
-    System.out.println("   help      - this help message.");
-    System.out.println("   sign-in <username>  - sign in as user <username>.");
-    System.out.println("   sign-out  - sign out current user.");
-    System.out.println("   current   - show current user, conversation, message.");
-    System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
-    System.out.println("   u-list-all    - list all users known to system.");
-    System.out.println("Conversation commands:");
-    System.out.println("   c-add <title>    - add a new conversation.");
-    System.out.println("   c-list-all       - list all conversations known to system.");
-    System.out.println("   c-select <index> - select conversation from list.");
-    System.out.println("Message commands:");
-    System.out.println("   m-add <body>     - add a new message to the current conversation.");
-    System.out.println("   m-list-all       - list all messages in the current conversation.");
-    System.out.println("   m-next <index>   - index of next message to view.");
-    System.out.println("   m-show <count>   - show next <count> messages.");
-  }
-
-  // Prompt for new command.
-  private void promptForCommand() {
+  public boolean handleCommand(Scanner input) {
     System.out.print(PROMPT);
-  }
 
-  // Parse and execute a single command.
-  private void doOneCommand(Scanner lineScanner) {
+    final Scanner tokens = new Scanner(input.nextLine().trim());
 
-    final Scanner tokenScanner = new Scanner(lineScanner.nextLine());
-    if (!tokenScanner.hasNext()) {
-      return;
+    final String command = tokens.hasNext() ? tokens.next() : "";
+
+    if ("exit".equals(command)) {
+      // The does not want to process anymore commands
+      return false;
     }
-    final String token = tokenScanner.next();
 
-    if (token.equals("exit")) {
-
-      alive = false;
-
-    } else if (token.equals("help")) {
-
-      help();
-
-    } else if (token.equals("sign-in")) {
-
-      if (!tokenScanner.hasNext()) {
-        System.out.println("ERROR: No user name supplied.");
-      } else {
-        signInUser(tokenScanner.nextLine().trim());
+    if ("back".equals(command)) {
+      // Do not allow the root panel to be removed
+      if (panels.size() > 1) {
+        panels.pop();
       }
-
-    } else if (token.equals("sign-out")) {
-
-      if (!clientContext.user.hasCurrent()) {
-        System.out.println("ERROR: Not signed in.");
-      } else {
-        signOutUser();
-      }
-
-    } else if (token.equals("current")) {
-
-      showCurrent();
-
-    } else if (token.equals("u-add")) {
-
-      if (!tokenScanner.hasNext()) {
-        System.out.println("ERROR: Username not supplied.");
-      } else {
-        addUser(tokenScanner.nextLine().trim());
-      }
-
-    } else if (token.equals("u-list-all")) {
-
-      showAllUsers();
-
-    } else if (token.equals("c-add")) {
-
-      if (!clientContext.user.hasCurrent()) {
-        System.out.println("ERROR: Not signed in.");
-      } else {
-        if (!tokenScanner.hasNext()) {
-          System.out.println("ERROR: Conversation title not supplied.");
-        } else {
-          final String title = tokenScanner.nextLine().trim();
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
-        }
-      }
-
-    } else if (token.equals("c-list-all")) {
-
-      clientContext.conversation.showAllConversations();
-
-    } else if (token.equals("c-select")) {
-
-      selectConversation(lineScanner);
-
-    } else if (token.equals("m-add")) {
-
-      if (!clientContext.user.hasCurrent()) {
-        System.out.println("ERROR: Not signed in.");
-      } else if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else {
-        if (!tokenScanner.hasNext()) {
-          System.out.println("ERROR: Message body not supplied.");
-        } else {
-          clientContext.message.addMessage(clientContext.user.getCurrent().id,
-              clientContext.conversation.getCurrentId(),
-              tokenScanner.nextLine().trim());
-        }
-      }
-
-    } else if (token.equals("m-list-all")) {
-
-      if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else {
-        clientContext.message.showAllMessages();
-      }
-
-    } else if (token.equals("m-next")) {
-
-      // TODO: Implement m-next command to jump to an index in the message chain.
-      if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else if (!tokenScanner.hasNextInt()) {
-        System.out.println("Command requires an integer message index.");
-      } else {
-        clientContext.message.selectMessage(tokenScanner.nextInt());
-      }
-
-    } else if (token.equals("m-show")) {
-
-      // TODO: Implement m-show command to show N messages (currently just show all)
-      if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else {
-        final int count = (tokenScanner.hasNextInt()) ? tokenScanner.nextInt() : 1;
-        clientContext.message.showMessages(count);
-      }
-
+    } else if (panels.peek().handleCommand(command, tokens)) {
+      // the command was handled
     } else {
-
-      System.out.format("Command not recognized: %s\n", token);
-      System.out.format("Command line rejected: %s%s\n", token,
-          (tokenScanner.hasNext()) ? tokenScanner.nextLine() : "");
-      System.out.println("Type \"help\" for help.");
+      System.out.println("ERROR: Unsupported command");
     }
-    tokenScanner.close();
+
+    return true;
   }
 
-  // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
-    }
+  private Panel createRootPanel(final Context context) {
+    return new Panel()
+        .register("help", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            System.out.println("ROOT MODE");
+            System.out.println("  u-list");
+            System.out.println("    List all users.");
+            System.out.println("  u-add <name>");
+            System.out.println("    Add a new user with the given name.");
+            System.out.println("  u-sign-in <name>");
+            System.out.println("    Sign in as the user with the given name.");
+            System.out.println("  exit");
+            System.out.println("    Exit the program.");
+          }})
+        .register("u-list", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            for (final UserContext user : context.allUsers()) {
+              System.out.format(
+                  "USER %s (%s)\n",
+                  user.user.name,
+                  user.user.id);
+            }
+          }})
+        .register("u-add", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            if (args.hasNext()) {
+              final UserContext user = context.create(args.next());
+              if (user == null) {
+                System.out.println("ERROR: Failed to create new user");
+              } else {
+                panels.push(createUserPanel(user));
+              }
+            } else {
+              System.out.println("ERROR: Missing <username>");
+            }
+          }})
+        .register("u-sign-in", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            if (args.hasNext()) {
+              final String name = args.next();
+              final UserContext user = findUser(name);
+              if (user == null) {
+                System.out.format("ERROR: Failed to sign in as '%s'\n", name);
+              } else {
+                panels.push(createUserPanel(user));
+              }
+            } else {
+              System.out.println("ERROR: Missing <username>");
+            }
+          }
+
+          private UserContext findUser(String name) {
+            for (final UserContext user : context.allUsers()) {
+              if (user.user.name.equals(name)) {
+                return user;
+              }
+            }
+            return null;
+          }});
   }
 
-  // Sign out a user.
-  private void signOutUser() {
-    if (!clientContext.user.signOutUser()) {
-      System.out.println("Error: sign out failed (not signed in?)");
-    }
+  private Panel createUserPanel(final UserContext user) {
+    return new Panel()
+        .register("help", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            System.out.println("USER MODE");
+            System.out.println("  c-list");
+            System.out.println("    List all conversation that the current user can interact with.");
+            System.out.println("  c-add <title>");
+            System.out.println("    Add a new conversation with the given title and join it as the current user.");
+            System.out.println("  c-join <title>");
+            System.out.println("    Join the conversation as the current user.");
+            System.out.println("  info");
+            System.out.println("    Display all info for the current user");
+            System.out.println("  back");
+            System.out.println("    Go back to ROOT MODE.");
+            System.out.println("  exit");
+            System.out.println("    Exit the program.");
+          }})
+        .register("c-list", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            for (final ConversationContext conversation : user.conversations()) {
+              System.out.format(
+                  "CONVERSATION %s (%s)\n",
+                  conversation.conversation.title,
+                  conversation.conversation.id);
+            }
+          }})
+        .register("c-add", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            if (args.hasNext()) {
+              final ConversationContext conversation = user.start(args.next());
+              if (conversation == null) {
+                System.out.println("ERROR: Failed to create new conversation");
+              } else {
+                panels.push(createConversationPanel(conversation));
+              }
+            } else {
+              System.out.println("ERROR: Missing <title>");
+            }
+          }})
+        .register("c-join", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            if (args.hasNext()) {
+              final String title = args.nextLine().trim();
+              final ConversationContext conversation = find(title);
+              if (conversation == null) {
+                System.out.format("ERROR: No conversation with name '%s'\n", title);
+              } else {
+                panels.push(createConversationPanel(conversation));
+              }
+            } else {
+              System.out.println("ERROR: Missing <title>");
+            }
+          }
+
+          private ConversationContext find(String title) {
+            for (final ConversationContext conversation : user.conversations()) {
+              if (title.equals(conversation.conversation.title)) {
+                return conversation;
+              }
+            }
+            return null;
+          }})
+        .register("info", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            System.out.println("User Info:");
+            System.out.format("  Name : %s\n", user.user.name);
+            System.out.format("  Id   : %s\n", user.user.id);
+          }});
   }
 
-  // Helper for showCurrent() - show message info.
-  private void showCurrentMessage() {
-    if (clientContext.conversation.currentMessageCount() == 0) {
-      System.out.println(" -- no messages in conversation --");
-    } else {
-      System.out.format(" conversation has %d messages.\n",
-                        clientContext.conversation.currentMessageCount());
-      if (!clientContext.message.hasCurrent()) {
-        System.out.println(" -- no current message --");
-      } else {
-        System.out.println("\nCurrent Message:");
-        clientContext.message.showCurrent();
-      }
-    }
-  }
-
-  // Show current user, conversation, message, if any
-  private void showCurrent() {
-    boolean displayed = false;
-    if (clientContext.user.hasCurrent()) {
-      System.out.println("User:");
-      clientContext.user.showCurrent();
-      System.out.println();
-      displayed = true;
-    }
-
-    if (clientContext.conversation.hasCurrent()) {
-      System.out.println("Conversation:");
-      clientContext.conversation.showCurrent();
-
-      showCurrentMessage();
-
-      System.out.println();
-      displayed = true;
-    }
-
-    if (!displayed) {
-      System.out.println("No current user or conversation.");
-    }
-  }
-
-  // Display current user.
-  private void showCurrentUser() {
-    if (clientContext.user.hasCurrent()) {
-      clientContext.user.showCurrent();
-    } else {
-      System.out.println("No current user.");
-    }
-  }
-
-  // Display current conversation.
-  private void showCurrentConversation() {
-    if (clientContext.conversation.hasCurrent()) {
-      clientContext.conversation.showCurrent();
-    } else {
-      System.out.println(" No current conversation.");
-    }
-  }
-
-  // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
-  }
-
-  // Display all users known to server.
-  private void showAllUsers() {
-    clientContext.user.showAllUsers();
-  }
-
-  public boolean handleCommand(Scanner lineScanner) {
-
-    try {
-      promptForCommand();
-      doOneCommand(lineScanner);
-    } catch (Exception ex) {
-      System.out.println("ERROR: Exception during command processing. Check log for details.");
-      LOG.error(ex, "Exception during command processing");
-    }
-
-    // "alive" may have been set to false while executing a command. Return
-    // the result to signal if the user wants to keep going.
-
-    return alive;
-  }
-
-  public void selectConversation(Scanner lineScanner) {
-
-    clientContext.conversation.updateAllConversations(false);
-    final int selectionSize = clientContext.conversation.conversationsCount();
-    System.out.format("Selection contains %d entries.\n", selectionSize);
-
-    final ConversationSummary previous = clientContext.conversation.getCurrent();
-    ConversationSummary newCurrent = null;
-
-    if (selectionSize == 0) {
-      System.out.println("Nothing to select.");
-    } else {
-      final ListNavigator<ConversationSummary> navigator =
-          new ListNavigator<ConversationSummary>(
-              clientContext.conversation.getConversationSummaries(),
-              lineScanner, PAGE_SIZE);
-      if (navigator.chooseFromList()) {
-        newCurrent = navigator.getSelectedChoice();
-        clientContext.message.resetCurrent(newCurrent != previous);
-        System.out.format("OK. Conversation \"%s\" selected.\n", newCurrent.title);
-      } else {
-        System.out.println("OK. Current Conversation is unchanged.");
-      }
-    }
-    if (newCurrent != previous) {
-      clientContext.conversation.setCurrent(newCurrent);
-      clientContext.conversation.updateAllConversations(true);
-    }
+  private Panel createConversationPanel(final ConversationContext conversation) {
+    return new Panel()
+        .register("help", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            System.out.println("USER MODE");
+            System.out.println("  m-list");
+            System.out.println("    List all messages in the current conversation.");
+            System.out.println("  m-add <title>");
+            System.out.println("    Add a new message to the current conversation as thecurrent user.");
+            System.out.println("  info");
+            System.out.println("    Display all info about the current conversation.");
+            System.out.println("  back");
+            System.out.println("    Go back to USER MODE.");
+            System.out.println("  exit");
+            System.out.println("    Exit the program.");
+          }})
+        .register("m-list", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            System.out.println("--- start of conversation ---");
+            for (MessageContext message = conversation.firstMessage();
+                                message != null;
+                                message = message.next()) {
+              System.out.println();
+              System.out.format("USER : %s\n", message.message.author);
+              System.out.format("SENT : %s\n", message.message.creation);
+              System.out.println();
+              System.out.println(message.message.content);
+              System.out.println();
+            }
+            System.out.println("---  end of conversation  ---");
+          }})
+        .register("m-add", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            final String message = args.hasNext() ? args.nextLine().trim() : "";
+            if (message.length() > 0) {
+              conversation.add(message);
+            } else {
+              System.out.println("ERROR: Messages must contain text");
+            }
+          }})
+        .register("info", new Panel.Command() {
+          @Override
+          public void invoke(Scanner args) {
+            System.out.println("Conversation Info:");
+            System.out.format("  Title : %s\n", conversation.conversation.title);
+            System.out.format("  Id    : %s\n", conversation.conversation.id);
+            System.out.format("  Owner : %s\n", conversation.conversation.owner);
+          }});
   }
 }
