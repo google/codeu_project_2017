@@ -86,7 +86,7 @@ public final class ChatSimpleGui {
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
-    final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
+    final ConversationPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
     conversationsViewPanel.setBorder(paneBorder());
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
@@ -129,7 +129,7 @@ public final class ChatSimpleGui {
 
                 LOG.info("Updating...");
 
-                //conversationsViewPanel.getAllConversations(listModel);
+                conversationsViewPanel.update();
                 messagesViewPanel.update(clientContext.conversation.getCurrent());
 
             } catch (Exception ex) {

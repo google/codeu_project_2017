@@ -44,15 +44,14 @@ public final class ClientContext {
             public void run() {
                 try {
 
-                    LOG.info("Reading from server...");
+                    LOG.info("Updating...");
 
                     user.updateUsers();
-                    //conversation.updateAllConversations(false);
                     message.updateMessages(false);
 
                 } catch (Exception ex) {
 
-                    LOG.error(ex, "Failed to read from server.");
+                    LOG.error(ex, "Failed to update.");
 
                 }
 
