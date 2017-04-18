@@ -70,7 +70,7 @@ public final class Server {
     LOG.info("Handling new connection...");
 
     final BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
-    final PrintWriter out = new PrintWriter(connection.out());
+    final PrintWriter out = new PrintWriter(connection.out(),true);
 
     return onMessage(in, out);
   }
