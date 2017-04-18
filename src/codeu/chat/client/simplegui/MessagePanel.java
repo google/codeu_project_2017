@@ -35,263 +35,263 @@ import codeu.chat.common.User;
 @SuppressWarnings("serial")
 public final class MessagePanel extends JPanel {
 
-	// These objects are modified by the Conversation Panel.
-	private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
-	private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.LEFT);
-	private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
+  // These objects are modified by the Conversation Panel.
+  private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
+  private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.LEFT);
+  private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
 
-	private final long POLLING_PERIOD_MS = 1000;
-	private final long POLLING_DELAY_MS = 0;
-	private final ClientContext clientContext;
-	private Message lastMessage;
+  private final long POLLING_PERIOD_MS = 1000;
+  private final long POLLING_DELAY_MS = 0;
+  private final ClientContext clientContext;
+  private Message lastMessage;
 
-	public MessagePanel(ClientContext clientContext) {
-		super(new GridBagLayout());
-		this.clientContext = clientContext;
-		initialize();
-	}
+  public MessagePanel(ClientContext clientContext) {
+    super(new GridBagLayout());
+    this.clientContext = clientContext;
+    initialize();
+  }
 
-	// External agent calls this to trigger an update of this panel's contents.
-	public void update(ConversationSummary owningConversation) {
+  // External agent calls this to trigger an update of this panel's contents.
+  public void update(ConversationSummary owningConversation) {
 
-		final User u = (owningConversation == null) ?
-				null :
-					clientContext.user.lookup(owningConversation.owner);
+    final User u = (owningConversation == null) ?
+        null :
+          clientContext.user.lookup(owningConversation.owner);
 
-		messageOwnerLabel.setText("Owner: " +
-				((u == null) ?
-						((owningConversation == null) ? "" : owningConversation.owner) :
-							u.name));
+    messageOwnerLabel.setText("Owner: " +
+        ((u == null) ?
+            ((owningConversation == null) ? "" : owningConversation.owner) :
+              u.name));
 
-		messageConversationLabel.setText("Conversation: " +
-				(owningConversation == null ? "" : owningConversation.title));
+    messageConversationLabel.setText("Conversation: " +
+        (owningConversation == null ? "" : owningConversation.title));
 
-		getAllMessages(owningConversation, true);
-	}
+    getAllMessages(owningConversation, true);
+  }
 
-	private void initialize() {
+  private void initialize() {
 
-		// This panel contains the messages in the current conversation.
-		// It has a title bar with the current conversation and owner,
-		// then a list panel with the messages, then a button bar.
+    // This panel contains the messages in the current conversation.
+    // It has a title bar with the current conversation and owner,
+    // then a list panel with the messages, then a button bar.
 
-		// Title bar - current conversation and owner
-		final JPanel titlePanel = new JPanel(new GridBagLayout());
-		final GridBagConstraints titlePanelC = new GridBagConstraints();
+    // Title bar - current conversation and owner
+    final JPanel titlePanel = new JPanel(new GridBagLayout());
+    final GridBagConstraints titlePanelC = new GridBagConstraints();
 
-		final JPanel titleConvPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		final GridBagConstraints titleConvPanelC = new GridBagConstraints();
-		titleConvPanelC.gridx = 0;
-		titleConvPanelC.gridy = 0;
-		titleConvPanelC.anchor = GridBagConstraints.PAGE_START;
+    final JPanel titleConvPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    final GridBagConstraints titleConvPanelC = new GridBagConstraints();
+    titleConvPanelC.gridx = 0;
+    titleConvPanelC.gridy = 0;
+    titleConvPanelC.anchor = GridBagConstraints.PAGE_START;
 
-		final JPanel titleOwnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		final GridBagConstraints titleOwnerPanelC = new GridBagConstraints();
-		titleOwnerPanelC.gridx = 0;
-		titleOwnerPanelC.gridy = 1;
-		titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
+    final JPanel titleOwnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    final GridBagConstraints titleOwnerPanelC = new GridBagConstraints();
+    titleOwnerPanelC.gridx = 0;
+    titleOwnerPanelC.gridy = 1;
+    titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
 
-		// messageConversationLabel is an instance variable of Conversation panel
-		// can update it.
-		messageConversationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		titleConvPanel.add(messageConversationLabel);
+    // messageConversationLabel is an instance variable of Conversation panel
+    // can update it.
+    messageConversationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    titleConvPanel.add(messageConversationLabel);
 
-		// messageOwnerLabel is an instance variable of Conversation panel
-		// can update it.
-		messageOwnerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		titleOwnerPanel.add(messageOwnerLabel);
+    // messageOwnerLabel is an instance variable of Conversation panel
+    // can update it.
+    messageOwnerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    titleOwnerPanel.add(messageOwnerLabel);
 
-		titlePanel.add(titleConvPanel, titleConvPanelC);
-		titlePanel.add(titleOwnerPanel, titleOwnerPanelC);
-		titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    titlePanel.add(titleConvPanel, titleConvPanelC);
+    titlePanel.add(titleOwnerPanel, titleOwnerPanelC);
+    titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		// User List panel.
-		final JPanel listShowPanel = new JPanel();
-		final GridBagConstraints listPanelC = new GridBagConstraints();
+    // User List panel.
+    final JPanel listShowPanel = new JPanel();
+    final GridBagConstraints listPanelC = new GridBagConstraints();
 
-		// messageListModel is an instance variable so Conversation panel
-		// can update it.
-		final JList<String> messageList = new JList<>(messageListModel);
-		messageList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		messageList.setVisibleRowCount(15);
-		messageList.setSelectedIndex(-1);
+    // messageListModel is an instance variable so Conversation panel
+    // can update it.
+    final JList<String> messageList = new JList<>(messageListModel);
+    messageList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    messageList.setVisibleRowCount(15);
+    messageList.setSelectedIndex(-1);
 
-		final JScrollPane userListScrollPane = new JScrollPane(messageList);
-		listShowPanel.add(userListScrollPane);
-		userListScrollPane.setMinimumSize(new Dimension(500, 200));
-		userListScrollPane.setPreferredSize(new Dimension(500, 200));
+    final JScrollPane userListScrollPane = new JScrollPane(messageList);
+    listShowPanel.add(userListScrollPane);
+    userListScrollPane.setMinimumSize(new Dimension(500, 200));
+    userListScrollPane.setPreferredSize(new Dimension(500, 200));
 
-		// Button panel
-		final JPanel buttonPanel = new JPanel();
-		final GridBagConstraints buttonPanelC = new GridBagConstraints();
+    // Button panel
+    final JPanel buttonPanel = new JPanel();
+    final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-		/* area for user to type in messages */
-		final JTextField messageField = new JTextField(60);
-		buttonPanel.add(messageField);
-		messageField.setEditable(true);
-		
-		/* allows user to hit enter key to submit a chat message*/
-		messageField.addKeyListener(new KeyListener() {
-			public void keyPressed(KeyEvent e){
-				if(e.getKeyChar() == KeyEvent.VK_ENTER){
+    /* area for user to type in messages */
+    final JTextField messageField = new JTextField(60);
+    buttonPanel.add(messageField);
+    messageField.setEditable(true);
 
-					if (!clientContext.user.hasCurrent()) {
-						JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
-					}
+    /* allows user to hit enter key to submit a chat message*/
+    messageField.addKeyListener(new KeyListener() {
+      public void keyPressed(KeyEvent e){
+        if(e.getKeyChar() == KeyEvent.VK_ENTER){
 
-					else if (!clientContext.conversation.hasCurrent()) {
-						JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
-					}
+          if (!clientContext.user.hasCurrent()) {
+            JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
+          }
 
-					else {
-						if (messageField.getText() != null && messageField.getText().length() > 0) {
-							clientContext.message.addMessage(
-									clientContext.user.getCurrent().id,
-									clientContext.conversation.getCurrentId(),
-									messageField.getText());
-							MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), true);
-							messageField.setText("");
-							
-							// scrolls to bottom of messages panel
-							JScrollBar verticalScroll = userListScrollPane.getVerticalScrollBar();
-							verticalScroll.setValue(verticalScroll.getMaximum());
-						}
-					}
+          else if (!clientContext.conversation.hasCurrent()) {
+            JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+          }
 
-				}       
-			}
+          else {
+            if (messageField.getText() != null && messageField.getText().length() > 0) {
+              clientContext.message.addMessage(
+                  clientContext.user.getCurrent().id,
+                  clientContext.conversation.getCurrentId(),
+                  messageField.getText());
+              MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), true);
+              messageField.setText("");
 
-			/* mandatory functions to include, left empty */
-			public void keyTyped(KeyEvent e) {
-			}
+              // scrolls to bottom of messages panel
+              JScrollBar verticalScroll = userListScrollPane.getVerticalScrollBar();
+              verticalScroll.setValue(verticalScroll.getMaximum());
+            }
+          }
 
-			public void keyReleased(KeyEvent e) {
+        }       
+      }
 
-			}
+      /* mandatory functions to include, left empty */
+      public void keyTyped(KeyEvent e) {
+      }
 
-		});
+      public void keyReleased(KeyEvent e) {
 
-		final JButton addButton = new JButton("Send");
-		buttonPanel.add(addButton);
+      }
 
-		// Placement of title, list panel, buttons, and current user panel.
-		titlePanelC.gridx = 0;
-		titlePanelC.gridy = 0;
-		titlePanelC.gridwidth = 10;
-		titlePanelC.gridheight = 1;
-		titlePanelC.fill = GridBagConstraints.HORIZONTAL;
-		titlePanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+    });
 
-		listPanelC.gridx = 0;
-		listPanelC.gridy = 1;
-		listPanelC.gridwidth = 10;
-		listPanelC.gridheight = 8;
-		listPanelC.fill = GridBagConstraints.BOTH;
-		listPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
-		listPanelC.weighty = 0.8;
+    final JButton addButton = new JButton("Send");
+    buttonPanel.add(addButton);
 
-		buttonPanelC.gridx = 0;
-		buttonPanelC.gridy = 11;
-		buttonPanelC.gridwidth = 10;
-		buttonPanelC.gridheight = 1;
-		buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
-		buttonPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+    // Placement of title, list panel, buttons, and current user panel.
+    titlePanelC.gridx = 0;
+    titlePanelC.gridy = 0;
+    titlePanelC.gridwidth = 10;
+    titlePanelC.gridheight = 1;
+    titlePanelC.fill = GridBagConstraints.HORIZONTAL;
+    titlePanelC.anchor = GridBagConstraints.FIRST_LINE_START;
 
-		this.add(titlePanel, titlePanelC);
-		this.add(listShowPanel, listPanelC);
-		this.add(buttonPanel, buttonPanelC);
+    listPanelC.gridx = 0;
+    listPanelC.gridy = 1;
+    listPanelC.gridwidth = 10;
+    listPanelC.gridheight = 8;
+    listPanelC.fill = GridBagConstraints.BOTH;
+    listPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+    listPanelC.weighty = 0.8;
 
-		// User click Messages Add button - prompt for message body and add new Message to Conversation
-		addButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!clientContext.user.hasCurrent()) {
-					JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
-				}
+    buttonPanelC.gridx = 0;
+    buttonPanelC.gridy = 11;
+    buttonPanelC.gridwidth = 10;
+    buttonPanelC.gridheight = 1;
+    buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
+    buttonPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
 
-				else if (!clientContext.conversation.hasCurrent()) {
-					JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
-				}
+    this.add(titlePanel, titlePanelC);
+    this.add(listShowPanel, listPanelC);
+    this.add(buttonPanel, buttonPanelC);
 
-				else {
-					if (messageField.getText() != null && messageField.getText().length() > 0) {
-						clientContext.message.addMessage(
-								clientContext.user.getCurrent().id,
-								clientContext.conversation.getCurrentId(),
-								messageField.getText());
-						MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), true);
-						messageField.setText("");
-						
-						// scrolls to bottom of messages panel
-						JScrollBar verticalScroll = userListScrollPane.getVerticalScrollBar();
-						verticalScroll.setValue(verticalScroll.getMaximum());
-					}
-				}
-			}
-		});
+    // User click Messages Add button - prompt for message body and add new Message to Conversation
+    addButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.user.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.");
+        }
 
-		// Panel is set up. If there is a current conversation, Populate the conversation list.
-		getAllMessages(clientContext.conversation.getCurrent(), true);
+        else if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+        }
 
-		// Poll the server for updates
-		Timer messageUpdateTimer = new Timer();
-		messageUpdateTimer.schedule(new TimerTask() {
-			@Override
-			public void run() {
+        else {
+          if (messageField.getText() != null && messageField.getText().length() > 0) {
+            clientContext.message.addMessage(
+                clientContext.user.getCurrent().id,
+                clientContext.conversation.getCurrentId(),
+                messageField.getText());
+            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), true);
+            messageField.setText("");
 
-				// Remember what message is selected
-				final String selected = messageList.getSelectedValue();
+            // scrolls to bottom of messages panel
+            JScrollBar verticalScroll = userListScrollPane.getVerticalScrollBar();
+            verticalScroll.setValue(verticalScroll.getMaximum());
+          }
+        }
+      }
+    });
 
-				// Get new messages
-				clientContext.message.updateMessages(false);
+    // Panel is set up. If there is a current conversation, Populate the conversation list.
+    getAllMessages(clientContext.conversation.getCurrent(), true);
 
-				// Update the message display panel
-				MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), false);
+    // Poll the server for updates
+    Timer messageUpdateTimer = new Timer();
+    messageUpdateTimer.schedule(new TimerTask() {
+      @Override
+      public void run() {
 
-				// Reselect the message
-				messageList.setSelectedValue(selected, false);
+        // Remember what message is selected
+        final String selected = messageList.getSelectedValue();
 
-			}
-		}, POLLING_DELAY_MS, POLLING_PERIOD_MS);
-	}
+        // Get new messages
+        clientContext.message.updateMessages(false);
 
-	// Populate ListModel
-	private void getAllMessages(ConversationSummary conversation, boolean replaceAll) {
+        // Update the message display panel
+        MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent(), false);
 
-		// If reloading all messages, the panel should be empty and there is no last message displayed
-		if (replaceAll) {
-			messageListModel.clear();
-			lastMessage = null;
-		}
+        // Reselect the message
+        messageList.setSelectedValue(selected, false);
 
-		// The most recent message that has been displayed
-		Message newLast = lastMessage;
+      }
+    }, POLLING_DELAY_MS, POLLING_PERIOD_MS);
+  }
 
-		for (final Message m : clientContext.message.getConversationContents(conversation)) {
+  // Populate ListModel
+  private void getAllMessages(ConversationSummary conversation, boolean replaceAll) {
 
-			// Display the message if it is not in the panel yet.
-			if (replaceAll
-					|| lastMessage == null
-					|| (m.creation.compareTo(lastMessage.creation) >= 0
-					&& !m.id.equals(lastMessage.id))
-					) {
+    // If reloading all messages, the panel should be empty and there is no last message displayed
+    if (replaceAll) {
+      messageListModel.clear();
+      lastMessage = null;
+    }
 
-				// Display author name if available.  Otherwise display the author UUID.
-				final String authorName = clientContext.user.getName(m.author);
+    // The most recent message that has been displayed
+    Message newLast = lastMessage;
 
-				// Display message in the format Author: [Date Time]: Content
-				final String displayString = String.format("%s: [%s]: %s",
-						((authorName == null) ? m.author : authorName), m.creation, m.content);
+    for (final Message m : clientContext.message.getConversationContents(conversation)) {
 
-				messageListModel.addElement(displayString);
+      // Display the message if it is not in the panel yet.
+      if (replaceAll
+          || lastMessage == null
+          || (m.creation.compareTo(lastMessage.creation) >= 0
+          && !m.id.equals(lastMessage.id))
+          ) {
 
-				// Remember the most recently displayed message
-				if (newLast == null || m.creation.compareTo(newLast.creation) > 0) {
-					newLast = m;
-				}
-			}
-		}
-		// Store the most recent message
-		lastMessage = newLast;
-	}
+        // Display author name if available.  Otherwise display the author UUID.
+        final String authorName = clientContext.user.getName(m.author);
+
+        // Display message in the format Author: [Date Time]: Content
+        final String displayString = String.format("%s: [%s]: %s",
+            ((authorName == null) ? m.author : authorName), m.creation, m.content);
+
+        messageListModel.addElement(displayString);
+
+        // Remember the most recently displayed message
+        if (newLast == null || m.creation.compareTo(newLast.creation) > 0) {
+          newLast = m;
+        }
+      }
+    }
+    // Store the most recent message
+    lastMessage = newLast;
+  }
 }
