@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import codeu.chat.util.Uuid;
+import codeu.chat.util.Time;
 
 /**
  * Created by strobe on 4/04/17.

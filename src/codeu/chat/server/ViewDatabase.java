@@ -10,10 +10,10 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 
 import codeu.chat.common.*;
-import codeu.chat.common.Time;
+import codeu.chat.util.Time;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.store.StoreAccessor;
-import codeu.chat.common.Uuids;
 
 /**
  * Created by strobe on 4/04/17.
@@ -41,7 +41,7 @@ public final class ViewDatabase {
                         "FROM USERS " +
                         "WHERE  ID = "+SQLFormatter.sqlID(id)+";" );
                 while (rs.next()){
-                    Uuid userID = Uuids.fromString(rs.getString("ID"));
+                    Uuid userID = Uuid.fromString(rs.getString("ID"));
                     String userName = rs.getString("UNAME");
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                     Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
@@ -83,11 +83,11 @@ public final class ViewDatabase {
                         "FROM CONVERSATIONS " +
                         "WHERE  ID = "+SQLFormatter.sqlID(id)+";" );
                 while (rs.next()){
-                    Uuid conversationID = Uuids.fromString(rs.getString("ID"));
+                    Uuid conversationID = Uuid.fromString(rs.getString("ID"));
                     String conversationName = rs.getString("CNAME");
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                     Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
-                    Uuid ownerID = Uuids.fromString(rs.getString("OWNERID"));
+                    Uuid ownerID = Uuid.fromString(rs.getString("OWNERID"));
 
 
                     Conversation conversation = new Conversation(conversationID, ownerID, Time.fromMs(date.getTime()), conversationName);
@@ -125,12 +125,12 @@ public final class ViewDatabase {
                         "FROM MESSAGES " +
                         "WHERE ID = "+SQLFormatter.sqlID(id)+";" );
                 while (rs.next()){
-                    Uuid messageID = Uuids.fromString(rs.getString("ID"));
-                    Uuid nextMessageID = Uuids.fromString(rs.getString("MNEXTID"));
-                    Uuid prevMessageID = Uuids.fromString(rs.getString("PNEXTID"));
+                    Uuid messageID = Uuid.fromString(rs.getString("ID"));
+                    Uuid nextMessageID = Uuid.fromString(rs.getString("MNEXTID"));
+                    Uuid prevMessageID = Uuid.fromString(rs.getString("PNEXTID"));
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                     Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
-                    Uuid authorID = Uuids.fromString(rs.getString("USERID"));
+                    Uuid authorID = Uuid.fromString(rs.getString("USERID"));
                     String content = rs.getString("MESSAGE");
 
                     Message message = new Message(messageID, nextMessageID, prevMessageID, Time.fromMs(date.getTime()), authorID, content);
@@ -165,8 +165,8 @@ public final class ViewDatabase {
             ResultSet rs = stmt.executeQuery( "SELECT * " +
                     "FROM CONVERSATIONS;" );
             while (rs.next()){
-                Uuid conversationID = Uuids.fromString(rs.getString("ID"));
-                Uuid userID = Uuids.fromString(rs.getString("OWNERID"));
+                Uuid conversationID = Uuid.fromString(rs.getString("ID"));
+                Uuid userID = Uuid.fromString(rs.getString("OWNERID"));
                 String conversationName = rs.getString("CNAME");
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                 Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
@@ -228,7 +228,7 @@ public final class ViewDatabase {
                     parameters + ";" );
             while (rs.next()){
                 System.out.println("Enters");
-                Uuid userID = Uuids.fromString(rs.getString("ID"));
+                Uuid userID = Uuid.fromString(rs.getString("ID"));
                 String userName = rs.getString("UNAME");
                 SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
                 String userDate = rs.getString("TimeCreated");
@@ -271,8 +271,8 @@ public final class ViewDatabase {
                     " AND TimeCreated < " + SQLFormatter.sqlCreationTime(end) +
                     " ORDER BY TimeCreated ASC;" );
             while (rs.next()){
-                Uuid conversationID = Uuids.fromString(rs.getString("ID"));
-                Uuid userID = Uuids.fromString(rs.getString("OWNERID"));
+                Uuid conversationID = Uuid.fromString(rs.getString("ID"));
+                Uuid userID = Uuid.fromString(rs.getString("OWNERID"));
                 String conversationName = rs.getString("CNAME");
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                 Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
@@ -312,8 +312,8 @@ public final class ViewDatabase {
                     "WHERE CNAME LIKE '%" + filter + "%';" );
 
             while (rs.next()){
-                Uuid conversationID = Uuids.fromString(rs.getString("ID"));
-                Uuid userID = Uuids.fromString(rs.getString("OWNERID"));
+                Uuid conversationID = Uuid.fromString(rs.getString("ID"));
+                Uuid userID = Uuid.fromString(rs.getString("OWNERID"));
                 String conversationName = rs.getString("CNAME");
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                 Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
@@ -356,12 +356,12 @@ public final class ViewDatabase {
                     " ORDER BY TimeCreated ASC;" );
 
             while (rs.next()){
-                Uuid messageID = Uuids.fromString(rs.getString("ID"));
-                Uuid nextMessageID = Uuids.fromString(rs.getString("MNEXTID"));
-                Uuid prevMessageID = Uuids.fromString(rs.getString("PNEXTID"));
+                Uuid messageID = Uuid.fromString(rs.getString("ID"));
+                Uuid nextMessageID = Uuid.fromString(rs.getString("MNEXTID"));
+                Uuid prevMessageID = Uuid.fromString(rs.getString("PNEXTID"));
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
                 Date date = sdf.parse(rs.getString("TimeCreated") + ".000");
-                Uuid authorID = Uuids.fromString(rs.getString("USERID"));
+                Uuid authorID = Uuid.fromString(rs.getString("USERID"));
                 String content = rs.getString("MESSAGE");
 
                 Message message = new Message(messageID, nextMessageID, prevMessageID, Time.fromMs(date.getTime()), authorID, content);
