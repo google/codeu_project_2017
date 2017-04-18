@@ -21,6 +21,7 @@ import java.util.Collection;
 
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
+import codeu.chat.common.Secret;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
@@ -125,7 +126,7 @@ public final class ServerFrontEnd {
     LOG.info("Handling Read Message - start");
 
     final Uuid teamId = Uuid.SERIALIZER.read(connection.in());
-    final byte[] teamSecret = Serializers.BYTES.read(connection.in());
+    final Secret teamSecret = Secret.SERIALIZER.read(connection.in());
     final Uuid root = Uuid.SERIALIZER.read(connection.in());
     final int range = Serializers.INTEGER.read(connection.in());
 
@@ -150,7 +151,7 @@ public final class ServerFrontEnd {
     LOG.info("Handling Write Message - start");
 
     final Uuid teamId = Uuid.SERIALIZER.read(connection.in());
-    final byte[] teamSecret = Serializers.BYTES.read(connection.in());
+    final Secret teamSecret = Secret.SERIALIZER.read(connection.in());
     final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(connection.in());
     final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(connection.in());
     final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(connection.in());

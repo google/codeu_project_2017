@@ -118,7 +118,7 @@ public interface Relay {
   // a message to the relay, a team must write their team id and team secret or
   // else the relay will reject the message.
   boolean write(Uuid teamId,
-                byte[] teamSecret,
+                Secret teamSecret,
                 Bundle.Component user,
                 Bundle.Component conversation,
                 Bundle.Component message);
@@ -131,6 +131,6 @@ public interface Relay {
   // collection. If the root is Uuids.NULL then the relay will start sending from
   // its earliest point. If the root is not found the relay will treat it as if it
   // was given Uuids.NULL.
-  Collection<Bundle> read(Uuid teamId, byte[] teamSecret, Uuid root, int range);
+  Collection<Bundle> read(Uuid teamId, Secret teamSecret, Uuid root, int range);
 
 }

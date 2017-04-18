@@ -24,9 +24,10 @@ import java.util.Queue;
 
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Relay;
+import codeu.chat.common.Secret;
+import codeu.chat.util.Logger;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
 public final class Server implements Relay {
@@ -102,7 +103,7 @@ public final class Server implements Relay {
   }
 
   private final Queue<Relay.Bundle> history = new LinkedList<>();
-  private final Map<Uuid, byte[]> teamSecrets = new HashMap<>();
+  private final Map<Uuid, Secret> teamSecrets = new HashMap<>();
 
   private final int maxHistory;
   private final int maxRead;
@@ -142,7 +143,7 @@ public final class Server implements Relay {
   // Let the relay know of a team's secret so that it will accept messages from that
   // team. If there is already a team entry, the secret will NOT be updated and the
   // call will return false.
-  public boolean addTeam(Uuid id, byte[] secret) {
+  public boolean addTeam(Uuid id, Secret secret) {
 
     LOG.info("Adding team to relay %s", id);
 
@@ -166,7 +167,7 @@ public final class Server implements Relay {
 
   @Override
   public boolean write(Uuid teamId,
-                       byte[] teamSecret,
+                       Secret teamSecret,
                        Relay.Bundle.Component user,
                        Relay.Bundle.Component conversation,
                        Relay.Bundle.Component message) {
@@ -205,7 +206,7 @@ public final class Server implements Relay {
   }
 
   @Override
-  public Collection<Relay.Bundle> read(Uuid teamId, byte[] teamSecret, Uuid root, int range) {
+  public Collection<Relay.Bundle> read(Uuid teamId, Secret teamSecret, Uuid root, int range) {
 
     final Collection<Relay.Bundle> found = new ArrayList<>();
 
@@ -245,7 +246,7 @@ public final class Server implements Relay {
     return found;
   }
 
-  private boolean authenticate(Uuid id, byte[] secret) {
-    return id != null && Arrays.equals(secret, teamSecrets.get(id));
+  private boolean authenticate(Uuid id, Secret secret) {
+    return id != null && secret != null && secret.equals(teamSecrets.get(id));
   }
 }
