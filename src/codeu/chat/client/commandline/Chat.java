@@ -51,17 +51,16 @@ public final class Chat {
 
     final String command = tokens.hasNext() ? tokens.next() : "";
 
-    // Because "exit" and "back" are appliable to every panel, handle
+    // Because "exit" and "back" are applicable to every panel, handle
     // those commands here to avoid having to implement them for each
     // panel.
 
     if ("exit".equals(command)) {
-      // The user does not want to process anymore commands
+      // The user does not want to process any more commands
       return false;
     }
 
-    // Do not allow the root panel to be removed so make sure there
-    // are enough panels before popping.
+    // Do not allow the root panel to be removed.
     if ("back".equals(command) && panels.size() > 1) {
       panels.pop();
       return true;
@@ -140,11 +139,8 @@ public final class Chat {
       public void invoke(Scanner args) {
         final String name = args.hasNext() ? args.nextLine().trim() : "";
         if (name.length() > 0) {
-          final UserContext user = context.create(name);
-          if (user == null) {
+          if (context.create(name) == null) {
             System.out.println("ERROR: Failed to create new user");
-          } else {
-            panels.push(createUserPanel(user));
           }
         } else {
           System.out.println("ERROR: Missing <username>");
@@ -204,7 +200,7 @@ public final class Chat {
       public void invoke(Scanner args) {
         System.out.println("USER MODE");
         System.out.println("  c-list");
-        System.out.println("    List all conversation that the current user can interact with.");
+        System.out.println("    List all conversations that the current user can interact with.");
         System.out.println("  c-add <title>");
         System.out.println("    Add a new conversation with the given title and join it as the current user.");
         System.out.println("  c-join <title>");
@@ -279,7 +275,7 @@ public final class Chat {
       }
 
       // Find the first conversation with the given name and return its context.
-      // If not conversation has the given name, this will return null.
+      // If no conversation has the given name, this will return null.
       private ConversationContext find(String title) {
         for (final ConversationContext conversation : user.conversations()) {
           if (title.equals(conversation.conversation.title)) {
