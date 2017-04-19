@@ -16,11 +16,11 @@ package codeu.chat.client.commandline;
 
 import java.util.Scanner;
 
-import codeu.chat.client.ClientContext;
-import codeu.chat.client.Controller;
-import codeu.chat.client.View;
+import codeu.chat.client.*;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Message;
 import codeu.chat.util.Logger;
+import codeu.chat.util.connections.ClientConnectionSource;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -35,9 +35,14 @@ public final class Chat {
 
   private final ClientContext clientContext;
 
+  private final BroadCastReceiver broadCastReceiver;
+
   // Constructor - sets up the Chat Application
-  public Chat(Controller controller, View view) {
+  public Chat(BroadCastReceiver receiver, Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
+    broadCastReceiver = receiver;
+    broadCastReceiver.onBroadCast( (message) -> ClientMessage.printMessage(message,clientContext.user) );
+    broadCastReceiver.start();
   }
 
   // Print help message.
@@ -79,6 +84,7 @@ public final class Chat {
     if (token.equals("exit")) {
 
       alive = false;
+      broadCastReceiver.exit();
 
     } else if (token.equals("help")) {
 
@@ -317,6 +323,7 @@ public final class Chat {
     }
     if (newCurrent != previous) {
       clientContext.conversation.setCurrent(newCurrent);
+      broadCastReceiver.joinConversation(previous,newCurrent);
       clientContext.conversation.updateAllConversations(true);
     }
   }

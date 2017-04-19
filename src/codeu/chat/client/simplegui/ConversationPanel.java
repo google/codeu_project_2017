@@ -141,11 +141,19 @@ public final class ConversationPanel extends JPanel {
         if (objectList.getSelectedIndex() != -1) {
           final int index = objectList.getSelectedIndex();
           final String data = objectList.getSelectedValue();
+          final ConversationSummary previous = clientContext.conversation.getCurrent();
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
+
 
           clientContext.conversation.setCurrent(cs);
 
+
+          messagePanel.getReceiver().joinConversation(previous, cs);
+
+
           messagePanel.update(cs);
+
+
         }
       }
     });

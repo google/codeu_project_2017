@@ -22,9 +22,7 @@ import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
-import codeu.chat.server.NoOpRelay;
-import codeu.chat.server.RemoteRelay;
-import codeu.chat.server.Server;
+import codeu.chat.server.*;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
@@ -53,6 +51,7 @@ final class ServerMain {
 
     final int myPort = Integer.parseInt(args[2]);
 
+
     final RemoteAddress relayAddress = args.length > 3 ?
                                        RemoteAddress.parse(args[3]) :
                                        null;
@@ -63,7 +62,7 @@ final class ServerMain {
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, relaySource);
+      runServer(id, secret, serverSource ,relaySource);
 
     } catch (IOException ex) {
 
@@ -77,6 +76,8 @@ final class ServerMain {
                                 ConnectionSource serverSource,
                                 ConnectionSource relaySource) {
 
+
+
     final Relay relay = relaySource == null ?
                         new NoOpRelay() :
                         new RemoteRelay(relaySource);
@@ -85,7 +86,7 @@ final class ServerMain {
 
     LOG.info("Server object created.");
 
-    final Runnable hub = new Hub(serverSource, new Hub.Handler() {
+    final Runnable hub = new BroadCastHub(serverSource, new BroadCastHub.Handler() {
 
       @Override
       public void handle(Connection connection) throws Exception {
@@ -103,10 +104,13 @@ final class ServerMain {
       }
     });
 
+
     LOG.info("Starting hub...");
 
     hub.run();
 
     LOG.info("Hub exited.");
+
+
   }
 }
