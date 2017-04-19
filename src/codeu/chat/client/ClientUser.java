@@ -135,6 +135,11 @@ public final class ClientUser {
     	}
     } 
   }
+  
+  //work on deleting user from map and store!!
+  public boolean deleteUser(String name){
+  	
+  }
 
   public void showAllUsers() {
     updateUsers();
