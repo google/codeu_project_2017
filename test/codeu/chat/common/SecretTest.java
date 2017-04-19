@@ -16,104 +16,97 @@ package codeu.chat.common;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import org.junit.Test;
 
 public final class SecretTest {
 
   @Test
-  public void testParseEvenLength() {
+  public void testParseEvenLength() throws IOException {
 
     final String input = "2345";
-    final byte[] expected = {0x23, 0x45};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte)0x23, (byte)0x45);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseEvenLengthWithUppercaseLetters() {
+  public void testParseEvenLengthWithUppercaseLetters() throws IOException {
 
     final String input = "ABCDEF";
-    final byte[] expected = {(byte) 0xAB, (byte) 0xCD, (byte) 0xEF};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte) 0xAB, (byte) 0xCD, (byte) 0xEF);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseEvenLengthWithLowercaseLetters() {
+  public void testParseEvenLengthWithLowercaseLetters() throws IOException {
 
     final String input = "abcdef";
-    final byte[] expected = {(byte) 0xAB, (byte) 0xCD, (byte) 0xEF};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte) 0xAB, (byte) 0xCD, (byte) 0xEF);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseEvenLengthWithLeadingZero() {
+  public void testParseEvenLengthWithLeadingZero() throws IOException {
 
     final String input = "012345";
-    final byte[] expected = {0x01, 0x23, 0x45};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte)0x01, (byte)0x23, (byte)0x45);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseEvenLengthWithLeadingDoubleZero() {
+  public void testParseEvenLengthWithLeadingDoubleZero() throws IOException {
 
     final String input = "00123456";
-    final byte[] expected = {0x00, 0x12, 0x34, 0x56};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte)0x00, (byte)0x12, (byte)0x34, (byte)0x56);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseOddLength() {
+  public void testParseOddLength() throws IOException {
 
     final String input = "12345";
-    final byte[] expected = {0x01, 0x23, 0x45};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte)0x01, (byte)0x23, (byte)0x45);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseOddLengthWithLeadingZero() {
+  public void testParseOddLengthWithLeadingZero() throws IOException {
 
     final String input = "0123456";
-    final byte[] expected = {0x00, 0x12, 0x34, 0x56};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte)0x00, (byte)0x12, (byte)0x34, (byte)0x56);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 
   @Test
-  public void testParseOddLengthWithLeadingDoubleZero() {
+  public void testParseOddLengthWithLeadingDoubleZero() throws IOException {
 
     final String input = "001234567";
-    final byte[] expected = {0x00, 0x01, 0x23, 0x45, 0x67};
-
-    final byte[] actual = Secret.parse(input);
+    final Secret expected = new Secret((byte)0x00, (byte)0x01, (byte)0x23, (byte)0x45, (byte)0x67);
+    final Secret actual = Secret.parse(input);
 
     assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
+    assertEquals(actual, expected);
   }
 }
