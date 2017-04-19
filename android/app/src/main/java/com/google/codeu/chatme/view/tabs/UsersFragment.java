@@ -3,10 +3,16 @@ package com.google.codeu.chatme.view.tabs;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
 import com.google.codeu.chatme.R;
+import com.google.codeu.chatme.view.adapter.ChatListAdapter;
+import com.google.codeu.chatme.view.adapter.UserListAdapter;
 
 
 /**
@@ -20,6 +26,12 @@ import com.google.codeu.chatme.R;
 public class UsersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    /**
+     * {@link RecyclerView} to hold the list of Users registered in the database
+     */
+    private RecyclerView rvUserList;
+    private UserListAdapter userListAdapter;
 
     /**
      * Required empty public constructor
@@ -48,6 +60,26 @@ public class UsersFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_users, container, false);
     }
+
+    ///////////////
+
+    /**
+     * Sets up user interface by loading the list of conversations for the current
+     * user in the recyclerview
+     *
+     * @param view inflated {@link ChatsFragment} layout view
+     */
+    private void initializeUI(View view) {
+        rvUserList = (RecyclerView) view.findViewById(R.id.userList);
+        //rvUserList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        userListAdapter = new UserListAdapter();
+        rvUserList.setAdapter(userListAdapter);
+
+        userListAdapter.loadUsers();
+    }
+    /////////////////////
+
 
     @Override
     public void onAttach(Context context) {
