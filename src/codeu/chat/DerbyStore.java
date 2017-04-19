@@ -13,7 +13,8 @@ import codeu.chat.common.Time;
 import codeu.chat.common.User;
 //import codeu.chat.common.Uuid;
 import codeu.chat.util.store.Store;
-
+import codeu.chat.util.Logger.Log;
+import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
 import java.io.File;
@@ -27,9 +28,12 @@ public class DerbyStore {
 	private Connection conn;
 	private Statement stmt;
 	
-	private final String userTableName = "chatuser";
+	private final String userTableName = "userInfo";
 	private final String conversationTableName = "conversation";
 	private final String messageTableName = "message";
+	private final String chatParticipantsTableName = "chatParticipants";
+	
+	private static final Logger.Log LOG = Logger.newLog(ServerMain.class);
 	
 	
 	public DerbyStore() {
@@ -46,7 +50,7 @@ public class DerbyStore {
 			if (database.exists() && database.isDirectory()) {
 				conn = DriverManager.getConnection(protocol + "chatapp;", null);
 				stmt = conn.createStatement();
-				System.out.println("Tables exist. Connection made.");
+				LOG.info("Tables exist. Connection made.");
 				return;
 			}
 	
@@ -68,8 +72,10 @@ public class DerbyStore {
 			stmt.execute("CREATE TABLE " + messageTableName + "(id varchar(255),"
 					 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
 			
+			stmt.execute("CREATE TABLE " + chatParticipantsTableName + "conversationid varchar(255), userid varchar(255)");
+			
 			// Give confirmation of execution.
-			System.out.println("Tables do not exist. Table creation executed.");
+			LOG.info("Tables do not exist. Table creation executed.");
 			
 		}
 		catch (Exception ex) {
@@ -77,12 +83,12 @@ public class DerbyStore {
 		}
 	}
 	
-	public boolean checkForUsername(String username) throws SQLException {
+	public boolean checkUsernameExists(String username) throws SQLException {
 		return stmt.execute("SELECT * FROM " + userTableName + " WHERE password = '" + username + "'" );
 	}
 	
-	public boolean checkForPassword(String password, String username) throws SQLException {
-		return stmt.execute("SELECT * FROM " + userTableName + " WHERE password = '" + password + "'" );
+	public boolean userLogin(String password, String username) throws SQLException {
+		return stmt.execute("SELECT * FROM " + userTableName + " WHERE username = '" + username + "' AND password = '" + password + "'");
 	}
 	
 	public void addUser(User u) throws SQLException {
@@ -101,9 +107,16 @@ public class DerbyStore {
 		StringBuilder usersInvolved = new StringBuilder();
 		
 		for (Uuid s : c.users) {
-			usersInvolved.append(removeCharsInUuid(s.toString()));
-			usersInvolved.append(" ");
+			//usersInvolved.append(removeCharsInUuid(s.toString()));
+			//usersInvolved.append(" ");
+			
+			// Adding chat participants for a specific conversation to a table specifically for it.
+			stmt.execute("INSERT INTO " + chatParticipantsTableName + " VALUES('" + c.id + "','" + removeCharsInUuid(s.toString()) + "')");
+			System.out.println("INSERT INTO " + chatParticipantsTableName + " VALUES('" + c.id + "','" + removeCharsInUuid(s.toString()) + "')");
 		}
+		
+		// TO DO: Remove participants field from conversations table
+		
 		
 		stmt.execute("INSERT INTO " + conversationTableName + " VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
 				"," +  "\'" + removeCharsInUuid(c.owner.toString()) +  "\'" + "," + c.creation.inMs() + "," + "\'" + c.title + "\'" + "," +  "\'" + usersInvolved.toString() +  "\'" + 
@@ -144,7 +157,7 @@ public class DerbyStore {
 				// Add each created user to the store object
 				allUsers.insert(userid, user);
 			}
-			System.out.println("Successfully retrieved users");
+			LOG.info("Accessed users table.");
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -159,12 +172,20 @@ public class DerbyStore {
 		try {
 			ResultSet allConversationsResponse = stmt.executeQuery("SELECT * FROM " + conversationTableName);
 			
-			
 			HashSet<Uuid> ownersUuid = new HashSet<>();
 			
 			while (allConversationsResponse.next()) {
 				
 				Uuid conversationid = Uuid.fromString(removeCharsInUuid(allConversationsResponse.getString(1)));
+				
+				// Retrieve the users that are a part of the conversation
+				ResultSet chatParticipants = stmt.executeQuery("SELECT userid FROM " + chatParticipantsTableName + " WHERE conversationid = " + allConversationsResponse.getString(1));
+				
+				// Iterate over the participants and them to the hashset
+				while (chatParticipants.next()) {
+					ownersUuid.add(Uuid.fromString(chatParticipants.getString(1)));
+				}
+				
 				Uuid ownerUuid = Uuid.fromString(allConversationsResponse.getString(2));
 				Time creation = new Time(allConversationsResponse.getLong(3));
 				String title = allConversationsResponse.getString(4);
@@ -172,16 +193,16 @@ public class DerbyStore {
 				Uuid firstMessage = Uuid.fromString(allConversationsResponse.getString(6));
 				Uuid lastMessage = Uuid.fromString(allConversationsResponse.getString(7));
 				
-				for (String uuid : owners.split(" ")) {
+				/*for (String uuid : owners.split(" ")) {
 					if (!uuid.isEmpty()) ownersUuid.add(Uuid.fromString(uuid));
-				}
+				}*/
 				
 				
 				Conversation c = new Conversation(conversationid, ownerUuid, creation, title, ownersUuid, firstMessage, lastMessage);
 				allConversations.insert(conversationid, c);
 	
 			}
-			System.out.println("Successfully retrieved conversations");
+			LOG.info("Accessed conversations table.");
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -209,7 +230,7 @@ public class DerbyStore {
 				allMessages.insert(messageid, m);
 					
 			}
-			System.out.println("Successfully retrieved messages");
+			LOG.info("Accessed messages table.");
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
@@ -218,6 +239,11 @@ public class DerbyStore {
 		return allMessages;
 	}
 	
+	// When Uuid is converted to a string
+	// it adds characters such as opening
+	// and closing brackets. This function removes
+	// them, and decreases the different numbers in 
+	// the uuid since it could be larger than an int.
 	public String removeCharsInUuid(String uuid) {
 		// Remove the characters when uuid is transformed to a string
 		uuid = uuid.replace("[", "");
