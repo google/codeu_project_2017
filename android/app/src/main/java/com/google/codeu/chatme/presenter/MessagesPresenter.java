@@ -3,7 +3,7 @@ package com.google.codeu.chatme.presenter;
 import android.util.Log;
 
 import com.google.codeu.chatme.model.Message;
-import com.google.codeu.chatme.view.message.MessagesView;
+import com.google.codeu.chatme.view.adapter.MessagesAdapterView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,9 +25,9 @@ public class MessagesPresenter implements MessagesInteractor {
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-    private final MessagesView view;
+    private final MessagesAdapterView view;
 
-    public MessagesPresenter(MessagesView view) {
+    public MessagesPresenter(MessagesAdapterView view) {
         this.view = view;
     }
 
@@ -47,7 +47,7 @@ public class MessagesPresenter implements MessagesInteractor {
                     Log.d(TAG, "loadMessages:onDataChange:messageId:" + message.getId());
                 }
 
-                // TODO: call adapterView.loadMessages() to display messages
+                view.setMessagesOnView(messages);
             }
 
             @Override

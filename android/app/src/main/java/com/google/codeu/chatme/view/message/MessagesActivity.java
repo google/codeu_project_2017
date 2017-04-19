@@ -2,6 +2,8 @@ package com.google.codeu.chatme.view.message;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,33 +13,32 @@ import android.widget.ImageView;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Message;
-import com.google.codeu.chatme.presenter.MessagesPresenter;
 import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.adapter.ChatListAdapter;
+import com.google.codeu.chatme.view.adapter.MessagesAdapter;
 
 /**
  *
  */
 public class MessagesActivity extends AppCompatActivity
-        implements MessagesView,
-        View.OnClickListener {
-
-    private MessagesPresenter presenter;
+        implements View.OnClickListener {
 
     private String conversationId;
 
     private EditText etTypeMessage;
     private ImageView btnSend;
+    private RecyclerView rvMessageList;
+    private MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        conversationId = getIntent().getStringExtra(ChatListAdapter.CONV_ID_EXTRA);
+        // sets activity background (does not resize when keyboard opens)
+        getWindow().setBackgroundDrawableResource(R.drawable.messages_bg);
 
-        presenter = new MessagesPresenter(this);
-        presenter.loadMessages(conversationId);
+        conversationId = getIntent().getStringExtra(ChatListAdapter.CONV_ID_EXTRA);
 
         setupUI();
     }
@@ -55,13 +56,21 @@ public class MessagesActivity extends AppCompatActivity
 
         etTypeMessage = (EditText) findViewById(R.id.etTypeMessage);
         etTypeMessage.addTextChangedListener(messageTextWatcher);
+
+        rvMessageList = (RecyclerView) findViewById(R.id.rvMessageList);
+        messagesAdapter = new MessagesAdapter(getApplicationContext());
+
+        rvMessageList.setLayoutManager(new LinearLayoutManager(this));
+        rvMessageList.setAdapter(messagesAdapter);
+
+        messagesAdapter.loadConversations(conversationId);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSend:
-                presenter.sendMessage(createMessageObject());
+                messagesAdapter.sendMessage(createMessageObject());
                 etTypeMessage.setText("");
                 break;
         }

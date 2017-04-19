@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/messages_bg">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -19,8 +19,22 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomMessageBar"
+        android:layout_below="@+id/appBarLayout">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMessageList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp" />
+
+    </ScrollView>
+
     <RelativeLayout
-        android:id="@+id/slyce_messaging_view_group_entry_field"
+        android:id="@+id/bottomMessageBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -30,7 +44,7 @@
         android:paddingTop="8dp">
 
         <RelativeLayout
-            android:id="@+id/frameMessage"
+            android:id="@+id/rlMessageField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -45,19 +59,20 @@
                 android:background="@android:color/transparent"
                 android:gravity="left"
                 android:hint="Enter a message..."
-                android:inputType="textCapSentences"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="3"
                 android:paddingBottom="6dp"
                 android:paddingTop="6dp"
-                android:textColor="#aa111111"
+                android:textColor="@color/messages"
                 android:textColorHint="#40616161"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/btnSend"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
