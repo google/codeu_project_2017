@@ -28,4 +28,8 @@ public final class User {
     public long getTimeCreated() {
         return timeCreated;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

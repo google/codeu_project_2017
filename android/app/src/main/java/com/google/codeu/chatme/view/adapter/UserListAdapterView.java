@@ -1,6 +1,5 @@
 package com.google.codeu.chatme.view.adapter;
 
-import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.model.User;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface UserListAdapterView {
     /**
      * Resets the list of users in {@link UserListAdapter}
      *
-     * @param users new list of conversations
+     * @param users new list of users
      */
-    public void setChatList(List<User> users);
+    public void setUserList(List<User> users);
 }
