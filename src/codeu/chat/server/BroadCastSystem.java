@@ -3,7 +3,7 @@ package codeu.chat.server;
 import codeu.chat.common.*;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
-
+import codeu.chat.util.Uuid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;

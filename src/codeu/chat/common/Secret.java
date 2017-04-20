@@ -30,13 +30,13 @@ public final class Secret {
     final int offset = stringSecret.length() % 2;
 
     for (int i = 0; i < stringSecret.length(); i++) {
-      expanded[offset + i] = (byte)toHex(stringSecret.charAt(i));
+      expanded[offset + i] = (byte) toHex(stringSecret.charAt(i));
     }
 
     final byte[] compressed = new byte[expanded.length / 2];
 
     for (int i = 0; i < compressed.length; i++) {
-      compressed[i] = (byte)((expanded[2 * i] << 4) | expanded[2 * i + 1]);
+      compressed[i] = (byte) ((expanded[2 * i] << 4) | expanded[2 * i + 1]);
     }
 
     return compressed;
@@ -46,7 +46,7 @@ public final class Secret {
 
     // If an invalid value was given, it will be treated as 0.
 
-    switch(c) {
+    switch (c) {
       case '0':
       case '1':
       case '2':
@@ -59,13 +59,21 @@ public final class Secret {
       case '9':
         return c - '0';
 
+      case 'a':
+      case 'b':
+      case 'c':
+      case 'd':
+      case 'e':
+      case 'f':
+        return c - 'a' + 10;
+
       case 'A':
       case 'B':
       case 'C':
       case 'D':
       case 'E':
       case 'F':
-        return c - 'A';
+        return c - 'A' + 10;
 
       default:
         return 0;
