@@ -78,11 +78,20 @@ public final class Server {
 
     final int type = Serializers.INTEGER.read(in);
 
-    if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
+    if (type == NetworkCode.NEW_MESSAGE_REQUEST || type == NetworkCode.NEW_FILE_MESSAGE_REQUEST) {
 
       final Uuid author = Uuids.SERIALIZER.read(in);
       final Uuid conversation = Uuids.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
+
+      // In a NEW_FILE_MESSAGE_REQUEST the content variable will hold the filename, including extension.
+      if(type == NetworkCode.NEW_FILE_MESSAGE_REQUEST) {
+
+        final byte[] file = Serializers.BYTES.read(in);
+
+        // At this point we have the file on the server as an array of bytes.
+        // We can do whatever we need with this here.
+      }
 
       final Message message = controller.newMessage(author, conversation, content);
 
