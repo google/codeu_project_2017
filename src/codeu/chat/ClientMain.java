@@ -14,8 +14,9 @@
 
 package codeu.chat;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 import codeu.chat.client.commandline.Chat;
 import codeu.chat.client.core.Context;
@@ -51,11 +52,13 @@ final class ClientMain {
 
     boolean keepRunning = true;
 
-    try (final Scanner input = new Scanner(System.in)) {
+    try (final BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
       while (keepRunning) {
         System.out.print(">>> ");
-        keepRunning = chat.handleCommand(input.nextLine());
+        keepRunning = chat.handleCommand(input.readLine().trim());
       }
+    } catch (IOException ex) {
+      LOG.error("Failed to read from input");
     }
 
     LOG.info("chat client has exited.");
