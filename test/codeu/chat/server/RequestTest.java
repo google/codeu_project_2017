@@ -141,8 +141,30 @@ public final class RequestTest {
         new Thread(sub).start();
         Thread.sleep(200);
         JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
-        assertTrue("Unable to create user, received " + sub.getResult() + " instead.",
+        assertTrue("Did not pull all users.",
                 jsonArray.size() == 3);
+    }
+
+    @Test
+    public void testGetUsers() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "GET_USERS")
+                .addHeader("uuids", "[" + users.get(0) + "]")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        System.out.println("\"George P. Burdell\"");
+        System.out.println(jsonObject.get("name"));
+        assertTrue("Did not get the requested users.",
+                jsonObject.get("name").toString().equals("\"George P. Burdell\"") && jsonArray.size() == 1);
     }
 
     @AfterClass

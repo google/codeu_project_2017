@@ -19,12 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PushbackInputStream;
+import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -40,6 +38,9 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public final class Server {
 
@@ -210,14 +211,40 @@ public final class Server {
       }
 
     } else if (r.getVerb().equals("GET")) {
+      Collection<User> users;
+      Collection<String> ids;
+      Collection<Uuid> uuids;
+      String value;
+      Gson g = new Gson();
+      Type listType = new TypeToken<ArrayList<String>>(){}.getType();
 
       switch (r.getHeader("type")) {
 
         // Returns a list of all users
         case ("ALL_USERS"):
-          final List<Uuid> excl = new ArrayList<Uuid>();
-          final Collection<User> users = view.getUsersExcluding(excl);
+          users = view.getUsersExcluding(new ArrayList<>());
           return RequestHandler.successResponse(out, users.toString());
+
+        // Return list of all users in the provided list of UUIDs
+        case ("GET_USERS"):
+          value = null;
+          String pos = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              pos = item;
+              uuids.add(Uuid.fromString(item));
+            }
+            users = view.getUsers(uuids);
+            return RequestHandler.successResponse(out, users.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + pos + ".");
+          }
+
 
         default:
           return RequestHandler.failResponse(out, "Unknown function type.");
