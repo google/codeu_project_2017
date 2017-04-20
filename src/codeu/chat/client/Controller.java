@@ -14,9 +14,11 @@
 
 package codeu.chat.client;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.Thread;
+import java.nio.file.Files;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -42,15 +44,31 @@ public class Controller implements BasicController {
 
   @Override
   public Message newMessage(Uuid author, Uuid conversation, String body) {
+    return processNewMessage(author, conversation, body, null);
+  }
 
+  public Message newFileMessage(Uuid author, Uuid conversation, String body, File file){
+    return processNewMessage(author, conversation, body, file);
+  }
+
+  private Message processNewMessage(Uuid author, Uuid conversation, String body, File file){
     Message response = null;
 
     try (final Connection connection = source.connect()) {
 
-      Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_MESSAGE_REQUEST);
+      if(file != null){
+        Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_FILE_MESSAGE_REQUEST);
+      } else {
+        Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_MESSAGE_REQUEST);
+      }
+
       Uuids.SERIALIZER.write(connection.out(), author);
       Uuids.SERIALIZER.write(connection.out(), conversation);
       Serializers.STRING.write(connection.out(), body);
+
+      if(file != null){
+        Serializers.BYTES.write(connection.out(), Files.readAllBytes(file.toPath()));
+      }
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_MESSAGE_RESPONSE) {
         response = Serializers.nullable(Message.SERIALIZER).read(connection.in());
@@ -63,6 +81,7 @@ public class Controller implements BasicController {
     }
 
     return response;
+
   }
 
   @Override

@@ -14,6 +14,7 @@
 
 package codeu.chat.client;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,18 +99,30 @@ public final class ClientMessage {
 
   // For m-add command.
   public void addMessage(Uuid author, Uuid conversation, String body) {
+    processAddMessage(author, conversation, body, null);
+    updateMessages(false);
+  }
+
+  public void addFileMessage(Uuid author, Uuid conversation, File file) {
+    processAddMessage(author, conversation, file.getName(), file);
+    updateMessages(false);
+  }
+
+  private void processAddMessage(Uuid author, Uuid conversation, String body, File file){
+
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
-    final Message message = (validInputs) ? controller.newMessage(author, conversation, body) : null;
+    final Message message = (validInputs) ? ((file != null) ?
+            controller.newFileMessage(author, conversation, body, file) :
+            controller.newMessage(author, conversation, body)) : null;
 
     if (message == null) {
       System.out.format("Error: message not created - %s.\n",
-          (validInputs) ? "server error" : "bad input value");
+              (validInputs) ? "server error" : "bad input value");
     } else {
       LOG.info("New message:, Author= %s UUID= %s", author, message.id);
       current = message;
     }
-    updateMessages(false);
   }
 
   // For m-list-all command.
