@@ -121,24 +121,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     @Override
     public void onClick(View view) {
 
-        String email;
-        String password;
+        String  email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
 
         switch (view.getId()) {
 
-
-
             // login button clicked
             case R.id.btnLogin:
-                email = etEmail.getText().toString();
-                password = etPassword.getText().toString();
                 presenter.signIn(email, password);
                 break;
 
             // create account button clicked
             case R.id.btnCreateAcnt:
-                email = etEmail.getText().toString();
-                password = etPassword.getText().toString();
                 presenter.signUp(email,password);
                 break;
         }
