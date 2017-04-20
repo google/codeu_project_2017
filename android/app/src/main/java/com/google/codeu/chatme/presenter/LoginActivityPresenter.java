@@ -72,7 +72,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
         if (!isValid) {
             return;
         }
-
+            // Create username from email address
         int index = email.indexOf('@');
         final String username = email.substring(0,index);
 

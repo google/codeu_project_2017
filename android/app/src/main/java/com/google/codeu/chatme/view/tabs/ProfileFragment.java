@@ -26,6 +26,7 @@ public class ProfileFragment extends Fragment implements ProfileView{
 
     private OnFragmentInteractionListener mListener;
 
+        // fragment edit texts and buttons
     private EditText etPassword;
     private EditText etUsername;
     private EditText etFullName;
