@@ -216,13 +216,13 @@ public final class Server {
       Collection<Uuid> uuids;
       String value;
       Gson g = new Gson();
-      Type listType = new TypeToken<ArrayList<String>>(){}.getType();
+      Type listType = new TypeToken<Collection<String>>(){}.getType();
 
       switch (r.getHeader("type")) {
 
         // Returns a list of all users
         case ("ALL_USERS"):
-          users = view.getUsersExcluding(new ArrayList<>());
+          users = view.getUsersExcluding(new ArrayList<Uuid>());
           return RequestHandler.successResponse(out, users.toString());
 
         // Return list of all users in the provided list of UUIDs
