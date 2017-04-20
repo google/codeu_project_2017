@@ -14,23 +14,25 @@
 
 package codeu.chat.common;
 
-public interface Uuid {
+import java.util.Random;
 
-  // GENERATOR
-  //
-  // This interface defines the inteface used for any class that will
-  // create Uuids. It is nested in here as for naming reasons. The two
-  // options was to have it sit along side Uuid can be called UuidGenerator
-  // or to scope it inside of Uuid so that it would be called Uuid.Generator.
-  //
-  // As the generator is in a way a replacement for a constructor, it felt
-  // better to place it inside the Uuid rather than have it side equal to
-  // Uuid.
-  interface Generator {
-    Uuid make();
+import codeu.chat.util.Uuid;
+
+// Create a new random uuid. Uuids from this generator are random
+// but are not guaranteed to be unique. Checking uniqueness is left
+// to the caller.
+public final class RandomUuidGenerator implements Uuid.Generator {
+
+  private final Uuid commonRoot;
+  private final Random random;
+
+  public RandomUuidGenerator(Uuid root, long seed) {
+    this.commonRoot = root;
+    this.random = new Random(seed);
   }
 
-  Uuid root();
-  int id();
-
+  @Override
+  public Uuid make() {
+    return new Uuid(commonRoot, random.nextInt());
+  }
 }
