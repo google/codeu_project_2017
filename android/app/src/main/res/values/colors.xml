@@ -6,4 +6,10 @@
     <color name="ChatMe_Blue">#14333d</color>
     <color name="ChatMe_Red">#6c2324</color>
     <color name="chatMe_Lighter_Red">#992e31</color>
+
+    <color name="messages">#cc111111</color>
+    <color name="ic_send_disabled">#ddd7ccc8</color>
+    <color name="ic_send_enabled">#b09e9e9e</color>
+    <color name="msgIncoming">#70bcaaa4</color>
+    <color name="msgOutgoing">#709e9e9e</color>
 </resources>

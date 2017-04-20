@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
-import com.google.codeu.chatme.view.MessagesActivity;
+import com.google.codeu.chatme.view.message.MessagesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
