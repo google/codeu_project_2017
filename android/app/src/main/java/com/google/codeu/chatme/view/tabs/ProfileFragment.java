@@ -6,8 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.content.Intent;
+import android.widget.EditText;
+import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.R;
+import com.google.codeu.chatme.view.login.LoginActivity;
 
 
 /**
@@ -18,9 +22,17 @@ import com.google.codeu.chatme.R;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements ProfileView{
 
     private OnFragmentInteractionListener mListener;
+
+    private EditText etPassword;
+    private EditText etUsername;
+    private EditText etFullName;
+    private Button btnSaveChanges;
+    private Button btnLogOut;
+
+    private ProfilePresenter presenter;
 
     /**
      * Required empty public constructor
@@ -40,8 +52,36 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        etFullName = (EditText) view.findViewById(R.id.etFullName);
+        etUsername = (EditText) view.findViewById(R.id.etUsername);
+        etPassword = (EditText) view.findViewById(R.id.etPassword);
+
+        btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
+        btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
+        presenter = new ProfilePresenter(this);
+        presenter.postConstruct();
+
+        btnSaveChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fullName = etFullName.getText().toString();
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+
+                presenter.updateUser(fullName,username,password);
+            }
+        });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.signOut();
+            }
+        });
+
     }
 
     @Override
@@ -66,6 +106,38 @@ public class ProfileFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void openLoginActivity() {
+        Intent mIntent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(mIntent);
+    }
+
+    @Override
+    public void showProgressDialog(int messsage) {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
+
+    @Override
+    public void makeToast(String message) {
+
+    }
+
+
+    public void setPasswordFieldError(int err_et_password) {
+        etPassword.setError(getString(err_et_password));
+    }
+    public void setUsernameFieldError(int err_et_username) {
+        etUsername.setError(getString(err_et_username));
+    }
+    public void setFullNameFieldError(int err_et_fullname) {
+        etFullName.setError(getString(err_et_fullname));
     }
 
     /**

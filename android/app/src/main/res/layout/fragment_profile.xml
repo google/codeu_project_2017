@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/btnSaveChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
@@ -15,17 +15,17 @@
         android:text="Save Changes"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
-        android:layout_below="@+id/passwrord_text"
-        android:layout_alignEnd="@+id/passwrord_text"
-        android:layout_alignStart="@+id/passwrord_text" />
+        android:layout_below="@+id/etPassword"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword" />
 
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/save_button"
-        android:layout_alignStart="@+id/save_button"
-        android:layout_below="@+id/save_button"
+        android:layout_alignEnd="@+id/btnSaveChanges"
+        android:layout_alignStart="@+id/btnSaveChanges"
+        android:layout_below="@+id/btnSaveChanges"
         android:layout_marginTop="26dp"
         android:background="@android:color/holo_red_dark"
         android:elevation="0dp"
@@ -34,7 +34,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/username_text"
+        android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="173dp"
@@ -45,22 +45,22 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/name_text"
+        android:id="@+id/etFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/passwrord_text"
-        android:layout_alignStart="@+id/username_text"
+        android:layout_above="@+id/etPassword"
+        android:layout_alignStart="@+id/etUsername"
         android:layout_marginBottom="41dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Full Name" />
 
     <EditText
-        android:id="@+id/passwrord_text"
+        android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/username_text"
-        android:layout_below="@+id/username_text"
+        android:layout_alignStart="@+id/etUsername"
+        android:layout_below="@+id/etUsername"
         android:ems="10"
         android:inputType="textPassword"
         android:text="Password" />
