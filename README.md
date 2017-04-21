@@ -98,3 +98,13 @@ Classes that are shared by the clients and servers.
 ### codeu.chat.util
 
 Some basic infrastructure classes used throughout the project.
+
+## CURRENT CHANGES
+
+- Swapped out the Java Swing client GUI with a JavaFX version
+- Integrated a DERBY local database to save user's database
+
+## PLANNED CHANGES
+
+- Gamification
+

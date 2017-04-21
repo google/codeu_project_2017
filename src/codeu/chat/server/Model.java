@@ -54,7 +54,7 @@ public final class Model {
 
   private static final Comparator<String> STRING_COMPARE = String.CASE_INSENSITIVE_ORDER;
   
-  DerbyStore ds = new DerbyStore();
+  private final DerbyStore ds = new DerbyStore();
 
   //private final Store<Uuid, User> userById = new Store<>(UUID_COMPARE);
   
@@ -165,5 +165,27 @@ public final class Model {
 
   public StoreAccessor<String, Message> messageByText() {
     return messageByText;
+  }
+  
+  public void updateConversation(Conversation conversation) {
+	  	// EDIT - Malik Graham
+	    // Update the conversations first and last message
+	    try {
+	    	ds.updateConversation(conversation);
+	    }
+	    catch (Exception ex) {
+	    	ex.printStackTrace();
+	    }
+  }
+  
+  public void updateMessageLink(Message message) {
+	  // EDIT - Malik Graham
+	  // Updating the next message for the last message
+      try {
+    	  ds.updateLastMessage(message);
+      }
+      catch (Exception ex) {
+      	ex.printStackTrace();
+      }
   }
 }
