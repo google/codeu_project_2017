@@ -2,20 +2,21 @@ package com.google.codeu.chatme.presenter;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
+import com.google.codeu.chatme.view.login.LoginActivity;
 import com.google.codeu.chatme.view.tabs.ProfileFragment;
 import com.google.codeu.chatme.view.tabs.ProfileView;
-import com.google.codeu.chatme.view.login.LoginActivity;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -71,6 +72,28 @@ public class ProfilePresenter implements ProfileInteractor {
     }
 
     /**
+     * get current user's profile information and store in User object
+     */
+    public void getUserProfile() {
+        final User[] userData = new User[1];
+        final FirebaseUser user = mAuth.getCurrentUser();
+
+        mRootRef.child("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userData[0] = dataSnapshot.getValue(User.class);
+                view.setUserProfile(userData[0]);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    /**
      * Signs out current user
      */
     public void signOut() {
@@ -78,24 +101,58 @@ public class ProfilePresenter implements ProfileInteractor {
         view.openLoginActivity();
     }
 
+    // TODO: allow current user to update profile picture
+
     /**
-     * Updates current user's profile based on provided paramaters
+     * Updates current user's profile based on provided parameters
      *
      * @param fullName user's full name
      * @param username user's username
      * @param password user's password
      */
     public void updateUser(String fullName, String username, String password) {
-        boolean isValid = validateInput(fullName, username, password);
-        if (!isValid) {
-            return;
+
+        final FirebaseUser user = mAuth.getCurrentUser();
+        final DatabaseReference userDbRef = mRootRef.child("users").child(user.getUid());
+
+        if (!fullName.isEmpty()) {
+            userDbRef.child("fullName").setValue(fullName);
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(fullName)
+                    //  .setPhotoUri(Uri.parse(photoUrl))
+                    .build();
+
+            user.updateProfile(profileUpdates)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "User profile updated.");
+                            }
+                        }
+                    });
+        }
+        if (!username.isEmpty())
+            userDbRef.child("username").setValue(username);
+        if (!password.isEmpty())
+
+        {
+            user.updatePassword(password)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "User password updated.");
+                            }
+                        }
+                    });
         }
     }
 
     /**
      * Validates user email and password for login form
      *
-     * @param fullName    email the user entered
+     * @param fullName email the user entered
      * @param password password the user enterd
      * @return true if the inputs are valid
      */
@@ -114,7 +171,6 @@ public class ProfilePresenter implements ProfileInteractor {
         }
         return true;
     }
-
 
     public void setAuthStateListener() {
         mAuth.addAuthStateListener(mAuthListener);

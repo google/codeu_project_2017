@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.view.login.LoginActivity;
+import com.google.codeu.chatme.model.User;
 
 
 /**
@@ -34,6 +35,7 @@ public class ProfileFragment extends Fragment implements ProfileView{
     private Button btnLogOut;
 
     private ProfilePresenter presenter;
+    private User user;
 
     /**
      * Required empty public constructor
@@ -64,6 +66,8 @@ public class ProfileFragment extends Fragment implements ProfileView{
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
+
+        presenter.getUserProfile();
 
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +133,12 @@ public class ProfileFragment extends Fragment implements ProfileView{
     public void makeToast(String message) {
 
     }
-
+    // TODO: implement profile picture
+    public void setUserProfile(User userData) {
+        this.user = userData;
+        etUsername.setText(user.getUsername());
+        etFullName.setText(user.getFullName());
+    }
 
     public void setPasswordFieldError(int err_et_password) {
         etPassword.setError(getString(err_et_password));

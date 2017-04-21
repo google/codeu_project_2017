@@ -37,12 +37,12 @@
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="173dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Username"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:hint="Username"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etFullName"
@@ -52,8 +52,8 @@
         android:layout_alignStart="@+id/etUsername"
         android:layout_marginBottom="41dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Full Name" />
+        android:hint="Full Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -62,6 +62,6 @@
         android:layout_alignStart="@+id/etUsername"
         android:layout_below="@+id/etUsername"
         android:ems="10"
-        android:inputType="textPassword"
-        android:text="Password" />
+        android:hint="Change Password"
+        android:inputType="textPassword" />
 </RelativeLayout>

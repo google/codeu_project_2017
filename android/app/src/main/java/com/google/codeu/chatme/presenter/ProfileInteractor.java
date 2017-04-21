@@ -18,10 +18,14 @@ public interface ProfileInteractor {
     public void updateUser(String fullName, String username, String password);
 
     /**
-     * Attempts to log user out
-     *
+     * Logs out curent user
      */
     public void signOut();
+
+    /**
+     * Gets current users profile
+     */
+    public void getUserProfile();
 
     /**
      * Adds {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to

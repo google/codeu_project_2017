@@ -1,5 +1,6 @@
 package com.google.codeu.chatme.view.tabs;
 
+import com.google.codeu.chatme.model.User;
 import com.google.codeu.chatme.view.login.LoginActivity;
 
 /**
@@ -52,4 +53,7 @@ public interface ProfileView {
      * @param err_et_password resource id of password field error message
      */
     void setPasswordFieldError(int err_et_password);
+
+
+    void setUserProfile(User userData);
 }
