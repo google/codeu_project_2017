@@ -19,4 +19,6 @@
     <string name="err_et_password">Enter password</string>
     <string name="err_et_username">Invalid Username</string>
     <string name="err_et_fullname">Invalid Full Name</string>
+    <string name="toast_update_name">Name has been updated</string>
+    <string name="toast_pwd_name">Password has been updated</string>
 </resources>

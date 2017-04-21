@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
@@ -24,7 +25,7 @@ import com.google.codeu.chatme.view.login.LoginActivity;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment implements ProfileView {
+public class ProfileFragment extends Fragment implements ProfileView, View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,6 +58,12 @@ public class ProfileFragment extends Fragment implements ProfileView {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -66,50 +73,17 @@ public class ProfileFragment extends Fragment implements ProfileView {
 
         btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
+        btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
 
-        // TODO: implement delete account
-        // btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
+        btnSaveChanges.setOnClickListener(this);
+        btnLogOut.setOnClickListener(this);
+        btnDeleteAcnt.setOnClickListener(this);
 
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
+
         presenter.getUserProfile();
-
-        // Save user's profile changes
-        btnSaveChanges.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: get user's profile picture
-                String fullName = etFullName.getText().toString();
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-
-                presenter.updateUser(fullName, username, password);
-            }
-        });
-
-        // Log out of current account
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.signOut();
-            }
-        });
-
-            /* Delete current account
-        btnDeleteAcnt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.deleteAccount();
-            }
-        });*/
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
-    }
-
 
     @Override
     public void onAttach(Context context) {
@@ -135,37 +109,44 @@ public class ProfileFragment extends Fragment implements ProfileView {
     }
 
     @Override
-    public void showProgressDialog(int messsage) {
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-
+    public void makeToast(int messageId) {
+        Toast.makeText(getActivity(), getString(messageId), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void makeToast(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-    // TODO: implement profile picture
+    @Override
     public void setUserProfile(User userData) {
         this.user = userData;
         etUsername.setText(user.getUsername());
         etFullName.setText(user.getFullName());
     }
 
-    public void setPasswordFieldError(int err_et_password) {
-        etPassword.setError(getString(err_et_password));
-    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
 
-    public void setUsernameFieldError(int err_et_username) {
-        etUsername.setError(getString(err_et_username));
-    }
+            case R.id.btnSaveChanges:
+                // TODO: get user's profile picture
+                String fullName = etFullName.getText().toString();
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
 
-    public void setFullNameFieldError(int err_et_fullname) {
-        etFullName.setError(getString(err_et_fullname));
+                presenter.updateUser(fullName, username, password);
+                break;
+
+            case R.id.btnLogOut:
+                presenter.signOut();
+                break;
+
+            case R.id.btnDeleteAcnt:
+                // TODO: delete all references of this user in Json tree?
+                // presenter.deleteAccount();
+                break;
+        }
     }
 
     /**

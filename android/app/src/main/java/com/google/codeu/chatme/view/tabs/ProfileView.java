@@ -10,22 +10,16 @@ import com.google.codeu.chatme.view.login.LoginActivity;
 public interface ProfileView {
 
     /**
-     * Launches {@link LoginActivity}
-     * usually on successful sign up or sign in
+     * Launches {@link LoginActivity} usually on successful sign out
      */
     void openLoginActivity();
 
     /**
-     * Shows progress loader with the given message
+     * Creates a long toast message on the {@link ProfileFragment} frame
      *
-     * @param messsage resource Id of string message to display
+     * @param messageId id of message to be toasted
      */
-    void showProgressDialog(int messsage);
-
-    /**
-     * Hides progress loader
-     */
-    void hideProgressDialog();
+    void makeToast(int messageId);
 
     /**
      * Creates a long toast message on the {@link ProfileFragment} frame
@@ -35,26 +29,9 @@ public interface ProfileView {
     void makeToast(String message);
 
     /**
-     * Displays an error for {@link ProfileFragment#etFullName} field
+     * Sets user profile data, including full name and username
      *
-     * @param err_et_fullname resource id of email field error message
+     * @param userData user object containing data retrieved from Firebase
      */
-    void setFullNameFieldError(int err_et_fullname);
-
-    /**
-     * Displays an error for {@link ProfileFragment#etUsername} field
-     *
-     * @param err_et_username resource id of email field error message
-     */
-    void setUsernameFieldError(int err_et_username);
-
-    /**
-     * Displays an error for {@link ProfileFragment#etPassword} field
-     *
-     * @param err_et_password resource id of password field error message
-     */
-    void setPasswordFieldError(int err_et_password);
-
-
     void setUserProfile(User userData);
 }
