@@ -1,18 +1,19 @@
 package com.google.codeu.chatme.view.tabs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.content.Intent;
 import android.widget.EditText;
-import com.google.codeu.chatme.presenter.ProfilePresenter;
+
 import com.google.codeu.chatme.R;
-import com.google.codeu.chatme.view.login.LoginActivity;
 import com.google.codeu.chatme.model.User;
+import com.google.codeu.chatme.presenter.ProfilePresenter;
+import com.google.codeu.chatme.view.login.LoginActivity;
 
 
 /**
@@ -23,11 +24,11 @@ import com.google.codeu.chatme.model.User;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment implements ProfileView{
+public class ProfileFragment extends Fragment implements ProfileView {
 
     private OnFragmentInteractionListener mListener;
 
-        // fragment edit texts and buttons
+    // fragment edit texts and buttons
     private EditText etPassword;
     private EditText etUsername;
     private EditText etFullName;
@@ -73,20 +74,20 @@ public class ProfileFragment extends Fragment implements ProfileView{
         presenter.postConstruct();
         presenter.getUserProfile();
 
-            // Save user's profile changes
+        // Save user's profile changes
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    // TODO: get user's profile picture
+                // TODO: get user's profile picture
                 String fullName = etFullName.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                presenter.updateUser(fullName,username,password);
+                presenter.updateUser(fullName, username, password);
             }
         });
 
-            // Log out of current account
+        // Log out of current account
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +148,7 @@ public class ProfileFragment extends Fragment implements ProfileView{
     public void makeToast(String message) {
 
     }
+
     // TODO: implement profile picture
     public void setUserProfile(User userData) {
         this.user = userData;
@@ -157,9 +159,11 @@ public class ProfileFragment extends Fragment implements ProfileView{
     public void setPasswordFieldError(int err_et_password) {
         etPassword.setError(getString(err_et_password));
     }
+
     public void setUsernameFieldError(int err_et_username) {
         etUsername.setError(getString(err_et_username));
     }
+
     public void setFullNameFieldError(int err_et_fullname) {
         etFullName.setError(getString(err_et_fullname));
     }

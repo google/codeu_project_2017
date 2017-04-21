@@ -40,6 +40,7 @@ public interface ProfileView {
      * @param err_et_fullname resource id of email field error message
      */
     void setFullNameFieldError(int err_et_fullname);
+
     /**
      * Displays an error for {@link ProfileFragment#etUsername} field
      *
