@@ -111,7 +111,7 @@ public class DerbyStore {
 		checkValidUserTest.setString(2, password);
 		ResultSet user = checkValidUserTest.executeQuery();
 		
-		
+		// TEST
 		return (user != null) ? user.getString(1) : null;
 	}
 	
