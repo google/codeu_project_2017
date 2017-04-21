@@ -51,11 +51,13 @@
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etFullName"
+        android:layout_centerHorizontal="true"
         android:ems="10"
+        android:focusable="false"
         android:hint="Username"
         android:inputType="textPersonName"
-        android:layout_below="@+id/etFullName"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@color/common_google_signin_btn_text_light_focused" />
 
     <EditText
         android:id="@+id/etFullName"
