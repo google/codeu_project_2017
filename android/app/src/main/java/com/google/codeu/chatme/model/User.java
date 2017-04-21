@@ -10,7 +10,6 @@ public final class User {
     private String username;
     private long timeCreated;
     private String photoUrl;
-    private String password;
 
     public User() {
     }
@@ -56,14 +55,6 @@ public final class User {
 
     public long getTimeCreated() {
         return timeCreated;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
 }
