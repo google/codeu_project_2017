@@ -26,9 +26,8 @@ import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
-import java.io.Serializable;
 
-public final class ClientMessage implements Serializable{
+public final class ClientMessage {
 
   private final static Logger.Log LOG = Logger.newLog(ClientMessage.class);
 

@@ -23,11 +23,13 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
 import codeu.chat.util.store.Store;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
-public final class ClientUser implements Serializable{
+public final class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 
@@ -126,7 +128,12 @@ public final class ClientUser implements Serializable{
     }
   }
 
-  public Iterable<User> getUsers() {
+  public Iterable<User> getUsers(){
+    try{  
+        DeserializeUsers();
+    }catch(Exception e){
+        System.out.println("Error in getting all users.");
+    }
     return usersByName.all();
   }
 
@@ -138,18 +145,27 @@ public final class ClientUser implements Serializable{
       usersById.put(user.id, user);
       usersByName.insert(user.name, user);
     }
-    try{
-              FileOutputStream file = new FileOutputStream("users.ser");
-              ObjectOutputStream outStream = null;
-              outStream = new ObjectOutputStream(file);
-              outStream.writeObject(usersByName);
-              outStream.close();
-            }catch(Exception ex){
-                System.out.println("Error in writing to file in ClientUser");
-            }
-    
   }
 
+  public void SerializeUsers() throws Exception{
+     FileOutputStream IDfile = new FileOutputStream("usersid.log");
+     ObjectOutputStream IDoutStream = new ObjectOutputStream(IDfile);
+     IDoutStream.writeObject(usersById);
+     IDoutStream.close();
+     
+     FileOutputStream Namefile = new FileOutputStream("usersid.log");
+     ObjectOutputStream NameoutStream = new ObjectOutputStream(Namefile);
+     NameoutStream.writeObject(usersByName);
+     NameoutStream.close();
+  }
+  
+  public void DeserializeUsers() throws Exception{
+      FileInputStream IDfile = new FileInputStream("usersid.log");
+      ObjectInputStream IDinStream = new ObjectInputStream(IDfile);
+      usersByName = (Store<String, User>) IDinStream.readObject();
+      
+  }
+  
   public static String getUserInfoString(User user) {
     return (user == null) ? "Null user" :
         String.format(" User: %s\n   Id: %s\n   created: %s\n", user.name, user.id, user.creation);
@@ -164,4 +180,3 @@ public final class ClientUser implements Serializable{
     System.out.println(getUserInfoString(user));
   }
 }
-

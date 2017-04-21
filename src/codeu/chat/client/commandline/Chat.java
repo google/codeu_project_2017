@@ -21,6 +21,12 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -32,12 +38,22 @@ public final class Chat {
   private final static int PAGE_SIZE = 10;
 
   private boolean alive = true;
-
-  private final ClientContext clientContext;
+  private boolean hasInputFile = true;
+  private ClientContext clientContext;
 
   // Constructor - sets up the Chat Application
-  public Chat(Controller controller, View view) {
-    clientContext = new ClientContext(controller, view);
+  public Chat(Controller controller, View view) throws FileNotFoundException, IOException {
+    try{
+        FileInputStream file = new FileInputStream("clientcontext.log");
+        ObjectInputStream inStream = new ObjectInputStream(file);
+        clientContext = (ClientContext) inStream.readObject();
+        inStream.close();
+    }catch(Exception e){
+         hasInputFile = false;
+    }
+    if(hasInputFile = false){
+        clientContext = new ClientContext(controller, view);
+    }
   }
 
   // Print help message.
@@ -68,7 +84,7 @@ public final class Chat {
   }
 
   // Parse and execute a single command.
-  private void doOneCommand(Scanner lineScanner) {
+  private void doOneCommand(Scanner lineScanner){
 
     final Scanner tokenScanner = new Scanner(lineScanner.nextLine());
     if (!tokenScanner.hasNext()) {
@@ -77,9 +93,18 @@ public final class Chat {
     final String token = tokenScanner.next();
 
     if (token.equals("exit")) {
-
+     try{
+      FileOutputStream outputfile = new FileOutputStream("clientcontext.log");
+      ObjectOutputStream outStream = new ObjectOutputStream(outputfile);
+      //save the object into the file
+      outStream.writeObject(clientContext);
+      outStream.close();
+     }catch(Exception e){
+         System.out.println("Fail to save data.");
+     }
+      
       alive = false;
-
+      
     } else if (token.equals("help")) {
 
       help();

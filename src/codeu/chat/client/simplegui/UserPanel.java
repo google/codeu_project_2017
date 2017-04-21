@@ -25,20 +25,15 @@ import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
 public final class UserPanel extends JPanel {
+
   private final long POLLING_PERIOD_MS = 1000;
   private final long POLLING_DELAY_MS = 0;
-  private static ClientContext clientContext;
+  private final ClientContext clientContext;
   private User lastUser;
 
   public UserPanel(ClientContext clientContext) {
@@ -47,13 +42,8 @@ public final class UserPanel extends JPanel {
     initialize();
   }
 
-  private void initialize(){
-      try{
-          retriveData();
-      }catch(Exception ex){
-          
-      }
-    
+  private void initialize() {
+
     // This panel contains from top to bottom; a title bar, a list of users,
     // information about the current (selected) user, and a button bar.
 
@@ -210,7 +200,7 @@ public final class UserPanel extends JPanel {
 
         // Update the user display panel
         UserPanel.this.getAllUsers(listModel, false);
-
+        
         // Reselect the user
         userList.setSelectedValue(selected, false);
       }
@@ -222,7 +212,11 @@ public final class UserPanel extends JPanel {
 
     // Get all of the users
     clientContext.user.updateUsers();
-
+    try{
+         clientContext.user.SerializeUsers();
+    }catch(Exception ex){
+        
+    }
     // If reloading all users, the panel should be empty and there is no last user displayed
     if (replaceAll) {
       usersList.clear();
@@ -230,11 +224,10 @@ public final class UserPanel extends JPanel {
     }
 
     // The most recent user that has been displayed
-    
     User newLast = lastUser;
-    
 
     for (final User u : clientContext.user.getUsers()) {
+
       // Display the user's name if it is not in the panel yet
       if (replaceAll
               || lastUser == null
@@ -251,22 +244,5 @@ public final class UserPanel extends JPanel {
     }
     // Store the last user to be displayed
     lastUser = newLast;
-    
-  }
-  
-  public User retriveData() throws FileNotFoundException, IOException, 
-          ClassNotFoundException{
-    FileInputStream file = new FileInputStream("users.ser");
-    ObjectInputStream inStream = new ObjectInputStream(file);
-    lastUser = (User) inStream.readObject();
-    inStream.close();
-    
-     FileInputStream file2 = new FileInputStream("clientContext.ser");
-    ObjectInputStream inStream2 = new ObjectInputStream(file);
-    clientContext = (ClientContext) inStream.readObject();
-    inStream.close();
-    
-    return lastUser;
   }
 }
-

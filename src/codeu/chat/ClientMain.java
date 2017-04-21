@@ -29,7 +29,7 @@ final class ClientMain {
 
   private static final Logger.Log LOG = Logger.newLog(ClientMain.class);
 
-  public static void main(String [] args) {
+  public static void main(String [] args) throws IOException {
 
     try {
       Logger.enableFileOutput("chat_client_log.log");

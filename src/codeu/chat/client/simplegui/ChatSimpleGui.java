@@ -24,32 +24,30 @@ import javax.swing.border.Border;
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
-import codeu.chat.common.User;
 import codeu.chat.util.Logger;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.logging.Level;
 
+import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
 public final class ChatSimpleGui {
 
   private final static Logger.Log LOG = Logger.newLog(ChatSimpleGui.class);
-  private static User PreviousUsers;
   private JFrame mainFrame;
   private final ClientContext clientContext;
 
+
   // Constructor - sets up the Chat Application
-  public ChatSimpleGui(Controller controller, View view) {
+  public ChatSimpleGui(Controller controller, View view) throws NoSuchFieldException {
     clientContext = new ClientContext(controller, view);
   }
 
+  
   // Run the GUI client
   public void run() {
 
     try {
+
       initialize();
       mainFrame.setVisible(true);
 
@@ -78,7 +76,8 @@ public final class ChatSimpleGui {
       System.out.println("Problems editing the look and feel");
       System.exit(-1);
     }
-    
+
+
     // Outermost frame.
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
@@ -125,15 +124,6 @@ public final class ChatSimpleGui {
     jmiExit.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Exit"))
-             try{
-              FileOutputStream file = new FileOutputStream("clientContext.ser");
-              ObjectOutputStream outStream = null;
-              outStream = new ObjectOutputStream(file);
-              outStream.writeObject(clientContext);
-              outStream.close();
-            }catch(Exception ex){
-                System.out.println("Error in writing to file for ClientContext");
-            }
           System.exit(0);
       }
     });
@@ -176,4 +166,3 @@ public final class ChatSimpleGui {
   }
 
 }
-

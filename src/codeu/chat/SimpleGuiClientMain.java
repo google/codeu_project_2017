@@ -60,7 +60,7 @@ final class SimpleGuiClientMain {
     }
   }
 
-  private static void runClient(Controller controller, View view) {
+  private static void runClient(Controller controller, View view) throws NoSuchFieldException {
 
     final ChatSimpleGui chatSimpleGui = new ChatSimpleGui(controller, view);
 
