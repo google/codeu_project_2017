@@ -61,6 +61,15 @@ public abstract class Table<S extends Schema> {
   }
 
   /**
+   * Get the name of the table.
+   *
+   * @return The name of the table.
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
    * Find objects with a given query.
    *
    * @param query The query.

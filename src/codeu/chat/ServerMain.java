@@ -52,7 +52,6 @@ final class ServerMain {
 
     final int myPort = Integer.parseInt(args[2]);
 
-    final String dbPath = args[3];
     // This is the directory where it is safe to store data accross runs
     // of the server.
     final String persistentPath = args[3];
@@ -67,7 +66,7 @@ final class ServerMain {
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, relaySource, dbPath);
+      runServer(id, secret, serverSource, relaySource, persistentPath + "/server.db");
 
     } catch (IOException ex) {
 

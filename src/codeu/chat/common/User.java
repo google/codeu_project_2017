@@ -51,12 +51,15 @@ public final class User {
   public final Uuid id;
   public final String name;
   public final Time creation;
+  public Uuid token;
 
   public User(Uuid id, String name, Time creation) {
 
     this.id = id;
     this.name = name;
     this.creation = creation;
+    this.token = null; // This will be null unless explicitly set.
+                       // Is not transferred in the serializer for security.
 
   }
 }

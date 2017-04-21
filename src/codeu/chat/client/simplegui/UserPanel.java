@@ -149,10 +149,19 @@ public final class UserPanel extends JPanel {
     userSignInButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
-          final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+        final String username = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Enter user name:", "Login", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+        final String password = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Enter password:", "Login", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+
+        boolean success = clientContext.user.signInUser(username.trim(), password);
+        if (success) {
+          JOptionPane.showMessageDialog(UserPanel.this, "Successfully logged in!");
+          userSignedInLabel.setText("Hello " + username);
+        } else {
+          JOptionPane.showMessageDialog(UserPanel.this, "Invalid login.");
         }
       }
     });
@@ -160,12 +169,18 @@ public final class UserPanel extends JPanel {
     userAddButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        final String s = (String) JOptionPane.showInputDialog(
+        final String username = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
-        if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
-          UserPanel.this.getAllUsers(listModel);
+        final String password = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Enter password:", "Add User", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+
+        boolean success = clientContext.user.addUser(username.trim(), password);
+        if (success) {
+          JOptionPane.showMessageDialog(UserPanel.this, "Successfully registered!");
+        } else {
+          JOptionPane.showMessageDialog(UserPanel.this, "Could not register.");
         }
       }
     });

@@ -56,6 +56,7 @@ public final class Model {
   private final Store<Uuid, User> userById = new Store<>(UUID_COMPARE);
   private final Store<Time, User> userByTime = new Store<>(TIME_COMPARE);
   private final Store<String, User> userByText = new Store<>(STRING_COMPARE);
+  private final Store<Uuid, User> userByToken = new Store<>(UUID_COMPARE);
 
   private final Store<Uuid, Conversation> conversationById = new Store<>(UUID_COMPARE);
   private final Store<Time, Conversation> conversationByTime = new Store<>(TIME_COMPARE);
@@ -74,6 +75,7 @@ public final class Model {
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
+    userByToken.insert(user.token, user);
   }
 
   public StoreAccessor<Uuid, User> userById() {
@@ -86,6 +88,10 @@ public final class Model {
 
   public StoreAccessor<String, User> userByText() {
     return userByText;
+  }
+
+  public StoreAccessor<Uuid, User> userByToken() {
+    return userByToken;
   }
 
   public Uuid userGeneration() {

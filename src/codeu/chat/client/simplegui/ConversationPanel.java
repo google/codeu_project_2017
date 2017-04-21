@@ -125,7 +125,7 @@ public final class ConversationPanel extends JPanel {
               ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,
               null, null, "");
           if (s != null && s.length() > 0) {
-            clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
+            clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id, clientContext.user.getCurrent().token);
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {

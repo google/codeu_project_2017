@@ -45,11 +45,11 @@ public final class Chat {
     System.out.println("Chat commands:");
     System.out.println("   exit      - exit the program.");
     System.out.println("   help      - this help message.");
-    System.out.println("   sign-in <username>  - sign in as user <username>.");
+    System.out.println("   sign-in <username> <password>  - sign in as user <username> with password <password>.");
     System.out.println("   sign-out  - sign out current user.");
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
+    System.out.println("   u-add <username> <password>  - add a new user.");
     System.out.println("   u-list-all    - list all users known to system.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
@@ -89,7 +89,7 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        signInUser(tokenScanner.nextLine().trim(), tokenScanner.nextLine().trim());
       }
 
     } else if (token.equals("sign-out")) {
@@ -109,7 +109,7 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        addUser(tokenScanner.nextLine().trim(), tokenScanner.nextLine().trim());
       }
 
     } else if (token.equals("u-list-all")) {
@@ -125,7 +125,7 @@ public final class Chat {
           System.out.println("ERROR: Conversation title not supplied.");
         } else {
           final String title = tokenScanner.nextLine().trim();
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
+          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id, clientContext.user.getCurrent().token);
         }
       }
 
@@ -148,6 +148,7 @@ public final class Chat {
           System.out.println("ERROR: Message body not supplied.");
         } else {
           clientContext.message.addMessage(clientContext.user.getCurrent().id,
+              clientContext.user.getCurrent().token,
               clientContext.conversation.getCurrentId(),
               tokenScanner.nextLine().trim());
         }
@@ -193,9 +194,9 @@ public final class Chat {
   }
 
   // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
+  private void signInUser(String username, String password) {
+    if (!clientContext.user.signInUser(username, password)) {
+      System.out.println("Error: sign in failed");
     }
   }
 
@@ -266,8 +267,10 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String username, String password) {
+    if (!clientContext.user.addUser(username, password)) {
+      System.out.println("ERROR: failed to add user.");
+    }
   }
 
   // Display all users known to server.
