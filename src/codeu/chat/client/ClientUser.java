@@ -23,8 +23,11 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
 import codeu.chat.util.store.Store;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public final class ClientUser {
+public final class ClientUser implements Serializable{
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 
@@ -135,6 +138,16 @@ public final class ClientUser {
       usersById.put(user.id, user);
       usersByName.insert(user.name, user);
     }
+    try{
+              FileOutputStream file = new FileOutputStream("users.ser");
+              ObjectOutputStream outStream = null;
+              outStream = new ObjectOutputStream(file);
+              outStream.writeObject(usersByName);
+              outStream.close();
+            }catch(Exception ex){
+                System.out.println("Error in writing to file in ClientUser");
+            }
+    
   }
 
   public static String getUserInfoString(User user) {
@@ -151,3 +164,4 @@ public final class ClientUser {
     System.out.println(getUserInfoString(user));
   }
 }
+

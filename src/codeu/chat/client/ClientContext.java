@@ -19,10 +19,12 @@ import codeu.chat.client.ClientMessage;
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
+import java.io.Serializable;
 
-public final class ClientContext {
+public final class ClientContext implements Serializable{
 
   public final ClientUser user;
+
   public final ClientConversation conversation;
   public final ClientMessage message;
 
