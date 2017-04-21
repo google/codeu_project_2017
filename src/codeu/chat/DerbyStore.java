@@ -1,6 +1,7 @@
 package codeu.chat;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,6 +33,20 @@ public class DerbyStore {
 	private final String conversationTableName = "conversation";
 	private final String messageTableName = "message";
 	private final String chatParticipantsTableName = "chatParticipants";
+	
+	private final String checkUsername = "SELECT * FROM " + userTableName + " WHERE name = ?";
+	private final String checkValidUser = "SELECT * FROM " + userTableName + " WHERE name = ? AND password = ?";
+	
+	private final String addUserInfo = "INSERT INTO " + userTableName + " (id, name, password, creation) values (?, ?, ?, ?)";
+	private final String addConversationInfo = "INSERT INTO " + conversationTableName + " (id, owner, creation, title, firstMessage, lastMessage) " + 
+			"values (?, ?, ?, ?, ?, ?)";
+	private final String addMessageInfo = "INSERT INTO " + messageTableName + " (id, previous, creation, author, content, nextMessage) " + 
+	"values (?, ?, ?, ?, ?, ?)";
+	private final String addChatParticipantsInfo = "INSERT INTO " + chatParticipantsTableName + " (conversationid, userid) values (?, ?)";
+
+	
+	private final String updateLastMessageById = "UPDATE " + messageTableName + " SET nextMessage = ? WHERE id = ?";
+	private final String updateConversationById = "UPDATE " + conversationTableName + " SET firstMessage = ?, lastMessage = ? WHERE id = ?";
 	
 	private static final Logger.Log LOG = Logger.newLog(ServerMain.class);
 	
@@ -72,34 +87,62 @@ public class DerbyStore {
 			stmt.execute("CREATE TABLE " + messageTableName + "(id varchar(255),"
 					 + "previous varchar(255), creation BIGINT, author varchar(255), content varchar(255), nextMessage varchar(255))");
 			
-			stmt.execute("CREATE TABLE " + chatParticipantsTableName + "conversationid varchar(255), userid varchar(255)");
+			stmt.execute("CREATE TABLE " + chatParticipantsTableName + "(conversationid varchar(255), userid varchar(255))");
 			
 			// Give confirmation of execution.
 			LOG.info("Tables do not exist. Table creation executed.");
-			
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	public boolean checkUsernameExists(String username) throws SQLException {
-		return stmt.execute("SELECT * FROM " + userTableName + " WHERE password = '" + username + "'" );
+	public boolean checkUsernameExists(String name) throws SQLException {
+		PreparedStatement checkUserTest = conn.prepareStatement(checkUsername);
+		checkUserTest.setString(1, name);
+		ResultSet user = checkUserTest.executeQuery();
+		
+		return user == null;
 	}
 	
-	public boolean userLogin(String password, String username) throws SQLException {
-		return stmt.execute("SELECT * FROM " + userTableName + " WHERE username = '" + username + "' AND password = '" + password + "'");
+	public String userLoginCheck(String name, String password) throws SQLException {
+		PreparedStatement checkValidUserTest = conn.prepareStatement(checkValidUser);
+		checkValidUserTest.setString(1, name);
+		checkValidUserTest.setString(2, password);
+		ResultSet user = checkValidUserTest.executeQuery();
+		
+		
+		return (user != null) ? user.getString(1) : null;
 	}
 	
 	public void addUser(User u) throws SQLException {
-		stmt.execute("INSERT INTO " + userTableName + " VALUES(" + "\'" + removeCharsInUuid(u.id.toString()) + "\'" +
-				"," + "\'" + u.name + "\'" + ", 'test', " + u.creation.inMs() + ")");
+		PreparedStatement addUser = conn.prepareStatement(addUserInfo);
+		addUser.setString(1, removeCharsInUuid(u.id.toString()));
+		addUser.setString(2, u.name);
+		addUser.setString(3, "test");
+		addUser.setLong(4, u.creation.inMs());
+		
+		addUser.executeUpdate();
+		
+		/*stmt.execute("INSERT INTO " + userTableName + " VALUES(" + "\'" + removeCharsInUuid(u.id.toString()) + "\'" +
+				"," + "\'" + u.name + "\'" + ", 'test', " + u.creation.inMs() + ")");*/
 	}
 	
 	public void addMessage(Message m) throws SQLException {
-		stmt.execute("INSERT INTO " + messageTableName + " VALUES(" + "\'" +  removeCharsInUuid(m.id.toString()) +  "\'" +
+		PreparedStatement addMessage = conn.prepareStatement(addMessageInfo);
+		addMessage.setString(1, removeCharsInUuid(m.id.toString()));
+		addMessage.setString(2, removeCharsInUuid(m.previous.toString()));
+		addMessage.setLong(3, m.creation.inMs());
+		addMessage.setString(4, removeCharsInUuid(m.author.toString()));
+		addMessage.setString(5, m.content);
+		addMessage.setString(6, removeCharsInUuid(m.next.toString()));
+		
+		addMessage.executeUpdate();
+		
+		
+		/*stmt.execute("INSERT INTO " + messageTableName + " VALUES(" + "\'" +  removeCharsInUuid(m.id.toString()) +  "\'" +
 				","  +  "\'" + removeCharsInUuid(m.previous.toString()) +  "\'" + "," +  m.creation.inMs() + "," 
-				+  "\'" + removeCharsInUuid(m.author.toString()) +  "\'" + "," +  "\'" + m.content +  "\'" + "," +  "\'" + removeCharsInUuid(m.next.toString()) +  "\'" + ")");
+				+  "\'" + removeCharsInUuid(m.author.toString()) +  "\'" + "," +  "\'" + m.content +  "\'" + "," +  "\'" + removeCharsInUuid(m.next.toString()) +  "\'" + ")");*/
 	}
 	
 	
@@ -107,30 +150,55 @@ public class DerbyStore {
 		StringBuilder usersInvolved = new StringBuilder();
 		
 		for (Uuid s : c.users) {
-			//usersInvolved.append(removeCharsInUuid(s.toString()));
-			//usersInvolved.append(" ");
-			
 			// Adding chat participants for a specific conversation to a table specifically for it.
-			stmt.execute("INSERT INTO " + chatParticipantsTableName + " VALUES('" + c.id + "','" + removeCharsInUuid(s.toString()) + "')");
-			System.out.println("INSERT INTO " + chatParticipantsTableName + " VALUES('" + c.id + "','" + removeCharsInUuid(s.toString()) + "')");
+			PreparedStatement addChatParticipants = conn.prepareStatement(addChatParticipantsInfo);
+			addChatParticipants.setString(1, removeCharsInUuid(c.id.toString()));
+			addChatParticipants.setString(2, removeCharsInUuid(s.toString()));
+			addChatParticipants.executeUpdate();
+			
+			//stmt.execute("INSERT INTO " + chatParticipantsTableName + " VALUES('" + removeCharsInUuid(c.id.toString()) + "','" + removeCharsInUuid(s.toString()) + "')");
+			System.out.println("INSERT INTO " + chatParticipantsTableName + " VALUES('" + removeCharsInUuid(c.id.toString()) + "','" + removeCharsInUuid(s.toString()) + "')");
 		}
+
+		PreparedStatement addConversation = conn.prepareStatement(addConversationInfo);
+		addConversation.setString(1, removeCharsInUuid(c.id.toString()));
+		addConversation.setString(2, removeCharsInUuid(c.owner.toString()));
+		addConversation.setLong(3, c.creation.inMs());
+		addConversation.setString(4, c.title);
+		addConversation.setString(5, removeCharsInUuid(c.firstMessage.toString()));
+		addConversation.setString(6, removeCharsInUuid(c.lastMessage.toString()));
+		addConversation.executeUpdate();
 		
-		// TO DO: Remove participants field from conversations table
 		
-		
-		stmt.execute("INSERT INTO " + conversationTableName + " VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
+		/*stmt.execute("INSERT INTO " + conversationTableName + " VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
 				"," +  "\'" + removeCharsInUuid(c.owner.toString()) +  "\'" + "," + c.creation.inMs() + "," + "\'" + c.title + "\'" + "," +  "\'" + usersInvolved.toString() +  "\'" + 
-				"," +  "\'" + removeCharsInUuid(c.firstMessage.toString()) +  "\'" +  "," + "\'" + removeCharsInUuid(c.lastMessage.toString()) +  "\'" + ")");
+				"," +  "\'" + removeCharsInUuid(c.firstMessage.toString()) +  "\'" +  "," + "\'" + removeCharsInUuid(c.lastMessage.toString()) +  "\'" + ")");*/
 	}
 	
 	public void updateConversation(Conversation c) throws SQLException {
-		stmt.execute("UPDATE " + conversationTableName + " SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
-			+ "\'" + ", lastMessage = " + "\'" + removeCharsInUuid(c.lastMessage.toString()) + "\'" + " WHERE id = " + "\'" + removeCharsInUuid(c.id.toString()) + "\'");
+		
+		PreparedStatement updateConversationStatement = conn.prepareStatement(updateConversationById);
+		
+		updateConversationStatement.setString(1, removeCharsInUuid(c.firstMessage.toString()));
+		updateConversationStatement.setString(2, removeCharsInUuid(c.lastMessage.toString()));
+		updateConversationStatement.setString(3, removeCharsInUuid(c.id.toString()));
+		
+		updateConversationStatement.executeUpdate();
+		
+		/*stmt.execute("UPDATE " + conversationTableName + " SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
+			+ "\'" + ", lastMessage = " + "\'" + removeCharsInUuid(c.lastMessage.toString()) + "\'" + " WHERE id = " + "\'" + removeCharsInUuid(c.id.toString()) + "\'");*/
 	}
 	
 	public void updateLastMessage(Message m) throws SQLException {
-		stmt.execute("UPDATE message SET nextMessage = " + "\'" + removeCharsInUuid(m.next.toString()) + "\'" + 
-				" WHERE id = " + "\'" + removeCharsInUuid(m.id.toString()) + "\'");
+		PreparedStatement updateMessageStatement = conn.prepareStatement(updateLastMessageById);
+		
+		updateMessageStatement.setString(1, removeCharsInUuid(m.next.toString()));
+		updateMessageStatement.setString(2, removeCharsInUuid(m.id.toString()));
+		
+		updateMessageStatement.executeUpdate();
+		
+		/*stmt.execute("UPDATE message SET nextMessage = " + "\'" + removeCharsInUuid(m.next.toString()) + "\'" + 
+				" WHERE id = " + "\'" + removeCharsInUuid(m.id.toString()) + "\'");*/
 	}
 	
 	public Store<Uuid, User> getAllUsers() {
@@ -170,6 +238,8 @@ public class DerbyStore {
 		Store<Uuid, Conversation> allConversations = new Store<>(UUID_COMPARE);
 		
 		try {
+			final Statement partipantsStatement = conn.createStatement();
+			
 			ResultSet allConversationsResponse = stmt.executeQuery("SELECT * FROM " + conversationTableName);
 			
 			HashSet<Uuid> ownersUuid = new HashSet<>();
@@ -179,7 +249,7 @@ public class DerbyStore {
 				Uuid conversationid = Uuid.fromString(removeCharsInUuid(allConversationsResponse.getString(1)));
 				
 				// Retrieve the users that are a part of the conversation
-				ResultSet chatParticipants = stmt.executeQuery("SELECT userid FROM " + chatParticipantsTableName + " WHERE conversationid = " + allConversationsResponse.getString(1));
+				ResultSet chatParticipants = partipantsStatement.executeQuery("SELECT userid FROM " + chatParticipantsTableName + " WHERE conversationid = '" + allConversationsResponse.getString(1) + "'");
 				
 				// Iterate over the participants and them to the hashset
 				while (chatParticipants.next()) {
