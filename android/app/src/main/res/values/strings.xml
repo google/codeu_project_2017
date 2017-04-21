@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">ChatMe</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to login & profile changes  -->
     <string name="progress_sign_in">Fetching your data...</string>
     <string name="progress_sign_up">Creating your recipe...</string>
+    <string name="saving_changes">Saving your changes...</string>
 
     <string name="title_activity_users">UsersActivity</string>
     <string name="title_chats">Chats</string>
@@ -16,4 +17,8 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="err_et_email">Invalid email</string>
     <string name="err_et_password">Enter password</string>
+    <string name="err_et_username">Invalid Username</string>
+    <string name="err_et_fullname">Invalid Full Name</string>
+    <string name="toast_update_name">Name has been updated</string>
+    <string name="toast_pwd_name">Password has been updated</string>
 </resources>

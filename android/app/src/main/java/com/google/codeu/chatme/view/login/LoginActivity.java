@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     private Button btnLogin;
     private EditText etPassword;
     private EditText etEmail;
+    private Button btnCreateAcnt;
 
     /**
      * Sets up {@link com.google.firebase.auth.FirebaseAuth.AuthStateListener} to
@@ -49,8 +50,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-
+        btnCreateAcnt = (Button) findViewById(R.id.btnCreateAcnt);
         btnLogin.setOnClickListener(this);
+        btnCreateAcnt.setOnClickListener(this);
     }
 
     /**
@@ -118,13 +120,20 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
      */
     @Override
     public void onClick(View view) {
+
+        String  email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
+
         switch (view.getId()) {
 
             // login button clicked
             case R.id.btnLogin:
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
                 presenter.signIn(email, password);
+                break;
+
+            // create account button clicked
+            case R.id.btnCreateAcnt:
+                presenter.signUp(email,password);
                 break;
         }
     }
