@@ -106,6 +106,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     public void openLoginActivity() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     public void openChatActivity() {
         Intent mIntent = new Intent(LoginActivity.this, TabsActivity.class);
         startActivity(mIntent);
+        finish();
     }
 
     public void showProgressDialog(int messsage) {
