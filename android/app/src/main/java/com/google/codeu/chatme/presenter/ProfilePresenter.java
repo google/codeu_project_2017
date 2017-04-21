@@ -150,6 +150,27 @@ public class ProfilePresenter implements ProfileInteractor {
     }
 
     /**
+     * Delete current user's account from firebase auth and database
+     */
+    public void deleteAccount() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mRootRef.child("users").child(user.getUid()).removeValue();
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                        }
+                    }
+                });
+
+
+        view.openLoginActivity();
+    }
+
+    /**
      * Validates user email and password for login form
      *
      * @param fullName email the user entered

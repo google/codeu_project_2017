@@ -33,6 +33,7 @@ public class ProfileFragment extends Fragment implements ProfileView{
     private EditText etFullName;
     private Button btnSaveChanges;
     private Button btnLogOut;
+    private Button btnDeleteAcnt;
 
     private ProfilePresenter presenter;
     private User user;
@@ -64,14 +65,19 @@ public class ProfileFragment extends Fragment implements ProfileView{
 
         btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
+
+        // TODO: implement delete account
+        // btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
+
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
-
         presenter.getUserProfile();
 
+            // Save user's profile changes
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    // TODO: get user's profile picture
                 String fullName = etFullName.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
@@ -80,6 +86,7 @@ public class ProfileFragment extends Fragment implements ProfileView{
             }
         });
 
+            // Log out of current account
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +94,13 @@ public class ProfileFragment extends Fragment implements ProfileView{
             }
         });
 
+            /* Delete current account
+        btnDeleteAcnt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.deleteAccount();
+            }
+        });*/
     }
 
     @Override
@@ -115,8 +129,8 @@ public class ProfileFragment extends Fragment implements ProfileView{
 
     @Override
     public void openLoginActivity() {
-        Intent mIntent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(mIntent);
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -8,21 +8,21 @@
     <Button
         android:id="@+id/btnSaveChanges"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword"
+        android:layout_below="@+id/etPassword"
         android:layout_marginTop="27dp"
         android:background="@color/ChatMe_Blue"
         android:elevation="0dp"
         android:text="Save Changes"
         android:textColor="@android:color/background_light"
-        android:textStyle="bold"
-        android:layout_below="@+id/etPassword"
-        android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignEnd="@+id/btnSaveChanges"
         android:layout_alignStart="@+id/btnSaveChanges"
         android:layout_below="@+id/btnSaveChanges"
@@ -33,27 +33,40 @@
         android:textColor="@android:color/background_light"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/btnDeleteAcnt"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/btnLogOut"
+        android:layout_alignStart="@+id/btnLogOut"
+        android:layout_below="@+id/btnLogOut"
+        android:layout_marginTop="25dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:elevation="0dp"
+        android:text="Delete Account"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="173dp"
         android:ems="10"
         android:hint="Username"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_below="@+id/etFullName"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/etFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etPassword"
-        android:layout_alignStart="@+id/etUsername"
-        android:layout_marginBottom="41dp"
         android:ems="10"
         android:hint="Full Name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/etUsername"
+        android:layout_marginTop="57dp" />
 
     <EditText
         android:id="@+id/etPassword"

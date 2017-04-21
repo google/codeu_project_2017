@@ -18,9 +18,14 @@ public interface ProfileInteractor {
     public void updateUser(String fullName, String username, String password);
 
     /**
-     * Logs out curent user
+     * Logs out current user
      */
     public void signOut();
+
+    /**
+     * Delete current user's account
+     */
+    public void deleteAccount();
 
     /**
      * Gets current users profile
