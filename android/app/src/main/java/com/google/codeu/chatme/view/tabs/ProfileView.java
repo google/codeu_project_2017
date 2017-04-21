@@ -28,5 +28,10 @@ public interface ProfileView {
      */
     void makeToast(String message);
 
+    /**
+     * Sets user profile data, including full name and username
+     *
+     * @param userData user object containing data retrieved from Firebase
+     */
     void setUserProfile(User userData);
 }

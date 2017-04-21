@@ -81,6 +81,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
 
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
+
         presenter.getUserProfile();
     }
 
@@ -124,18 +125,6 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         etFullName.setText(user.getFullName());
     }
 
-    public void setPasswordFieldError(int err_et_password) {
-        etPassword.setError(getString(err_et_password));
-    }
-
-    public void setUsernameFieldError(int err_et_username) {
-        etUsername.setError(getString(err_et_username));
-    }
-
-    public void setFullNameFieldError(int err_et_fullname) {
-        etFullName.setError(getString(err_et_fullname));
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -155,7 +144,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
 
             case R.id.btnDeleteAcnt:
                 // TODO: delete all references of this user in Json tree?
-//                presenter.deleteAccount();
+                // presenter.deleteAccount();
                 break;
         }
     }

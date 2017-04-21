@@ -72,9 +72,9 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
         if (!isValid) {
             return;
         }
-            // Create username from email address
+        // Create username from email address
         int index = email.indexOf('@');
-        final String username = email.substring(0,index);
+        final String username = email.substring(0, index);
 
         view.showProgressDialog(R.string.progress_sign_up);
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -94,7 +94,6 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
 
                             // saves new user to real-time database
                             addUser(currentUser.getUid(), username);
-
                         }
                     }
                 });

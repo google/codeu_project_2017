@@ -181,6 +181,7 @@ public class ProfilePresenter implements ProfileInteractor {
                     view.openLoginActivity();
                 } else {
                     Log.e(TAG, "deleteAccount:failure account could not be deleted");
+                    view.makeToast(task.getException().getMessage());
                 }
             }
         });
