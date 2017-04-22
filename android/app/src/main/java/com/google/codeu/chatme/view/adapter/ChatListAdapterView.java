@@ -1,9 +1,10 @@
 package com.google.codeu.chatme.view.adapter;
 
 import com.google.codeu.chatme.model.Conversation;
+import com.google.codeu.chatme.model.ConversationParticipantDetails;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * An interface to handle presenter-delegated actions in order to
@@ -19,9 +20,9 @@ public interface ChatListAdapterView {
     void setChatList(List<Conversation> conversations);
 
     /**
-     * Resets the map from participant Ids to their display names in {@link ChatListAdapter}
+     * Resets the map from participant ids to their details {@link ChatListAdapter}
      *
-     * @param map map from participant Ids to names
+     * @param map map from participant ids to details
      */
-    void setIdsToNamesMap(Map<String, String> map);
+    void setParticipantDetailsMap(HashMap<String, ConversationParticipantDetails> map);
 }

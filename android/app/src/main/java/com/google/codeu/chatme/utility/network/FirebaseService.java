@@ -1,5 +1,7 @@
 package com.google.codeu.chatme.utility.network;
 
+import com.google.codeu.chatme.model.ConversationParticipantDetails;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,5 +19,10 @@ public interface FirebaseService {
     @FormUrlEncoded
     @POST("/getUserNames")
     Call<HashMap<String, String>> getNamesFromIds(@Field("ids") List<String> participants);
+
+    @FormUrlEncoded
+    @POST("/getUserDetails")
+    Call<HashMap<String, ConversationParticipantDetails>> getDetailsFromIds(
+            @Field("ids") List<String> participants);
 
 }

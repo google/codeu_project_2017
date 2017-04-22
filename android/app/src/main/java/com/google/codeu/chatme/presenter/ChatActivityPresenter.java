@@ -3,6 +3,7 @@ package com.google.codeu.chatme.presenter;
 import android.util.Log;
 
 import com.google.codeu.chatme.model.Conversation;
+import com.google.codeu.chatme.model.ConversationParticipantDetails;
 import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.utility.network.RetrofitBuilder;
 import com.google.codeu.chatme.view.adapter.ChatListAdapter;
@@ -73,7 +74,7 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
                 // updates list of conversations (and the corresponding views) in adapter
                 view.setChatList(conversations);
 
-                setConversationNames(conversations);
+                setConversationParticipantDetails(conversations);
             }
 
             @Override
@@ -100,37 +101,37 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
     }
 
     /**
-     * Retrieves a hash map which maps user ids to their display names. Uses Retrofit
-     * to make an API call to Firebase Functions (backend) by "posting" a list of user
-     * ids. Then, updates view by resetting {@link ChatListAdapter#participantsIdsToNames}
+     * Retrieves a hash map which maps user ids to their details such as full name and pic urls.
+     * Uses Retrofit to make an API call to Firebase Functions (backend) by "posting" a list of user
+     * ids. Then, updates view by resetting {@link ChatListAdapter#setParticipantDetailsMap(HashMap)}
      * <p>
      * Note: This function would need to altered if and when "groups" feature is introduced
      *
      * @param conversations list of conversations
      */
-    private void setConversationNames(ArrayList<Conversation> conversations) {
+    private void setConversationParticipantDetails(ArrayList<Conversation> conversations) {
         List<String> participants = getParticipantsFromConversations(conversations);
         if (participants.size() == 0) {
-            Log.d(TAG, "setConversationNames: 0 conversations");
-            return;
+            Log.i(TAG, "setConversationParticipantDetails: 0 conversations");
         }
 
-        RetrofitBuilder.getService().getNamesFromIds(participants)
-                .enqueue(new Callback<HashMap<String, String>>() {
+        RetrofitBuilder.getService().getDetailsFromIds(participants)
+                .enqueue(new Callback<HashMap<String, ConversationParticipantDetails>>() {
                     @Override
-                    public void onResponse(Call<HashMap<String, String>> call,
-                                           Response<HashMap<String, String>> response) {
-                        Log.i(TAG, "setConversationNames:retrieved "
+                    public void onResponse(Call<HashMap<String, ConversationParticipantDetails>> call,
+                                           Response<HashMap<String, ConversationParticipantDetails>> response) {
+                        Log.i(TAG, "setConversationParticipantDetails:retrieved "
                                 + String.valueOf(response.body().size()));
 
-                        // updates conversation names
-                        view.setIdsToNamesMap(response.body());
+                        view.setParticipantDetailsMap(response.body());
                     }
 
                     @Override
-                    public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
-                        Log.e(TAG, "setConversationNames:failure " + t.getMessage());
+                    public void onFailure(Call<HashMap<String,
+                            ConversationParticipantDetails>> call, Throwable t) {
+                        Log.e(TAG, "setConversationParticipantDetails " + t.getMessage());
                     }
                 });
     }
+
 }

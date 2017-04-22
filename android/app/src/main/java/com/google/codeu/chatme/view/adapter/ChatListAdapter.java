@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
+import com.google.codeu.chatme.model.ConversationParticipantDetails;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
 import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.message.MessagesActivity;
@@ -17,7 +18,6 @@ import com.google.codeu.chatme.view.message.MessagesActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
@@ -35,12 +35,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
      */
     private List<Conversation> conversations = new ArrayList<>();
 
-    /**
-     * A map from different conversation participants to their display names
-     */
-    private Map<String, String> participantsIdsToNames = new HashMap<>();
-
     private ChatActivityPresenter presenter;
+
+    /**
+     * A map from different conversation participants to their details such as full names and
+     * profile picture download urls
+     */
+    private HashMap<String, ConversationParticipantDetails> participantDetailsMap = new HashMap<>();
 
     public ChatListAdapter() {
         this.presenter = new ChatActivityPresenter(this);
@@ -55,9 +56,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Conversation conversation = conversations.get(position);
-
         String participantId = getRecipientId(conversation.getParticipants());
-        holder.tvSender.setText(participantsIdsToNames.get(participantId));
+
+        if (participantDetailsMap.get(participantId) != null) {
+            holder.tvSender.setText(participantDetailsMap.get(participantId).getFullName());
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +118,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     }
 
     @Override
-    public void setIdsToNamesMap(Map<String, String> map) {
-        this.participantsIdsToNames = map;
+    public void setParticipantDetailsMap(HashMap<String, ConversationParticipantDetails>
+                                                 participantDetailsMap) {
+        this.participantDetailsMap = participantDetailsMap;
         notifyDataSetChanged();
     }
 

@@ -5,16 +5,12 @@ const async = require('async');
 
 admin.initializeApp(functions.config().firebase);
 
-exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
-});
-
 /**
  * @POST
- * Generates a map from user ids to their display names. Accepts a list of
- * user ids in the post request body
+ * Generates a map from user ids to their details such as full name and profile pic
+ * urls. Accepts a list of user ids in the post request body
  */
-exports.getUserNames = functions.https.onRequest((request, response) => {
+exports.getUserDetails = functions.https.onRequest((request, response) => {
 	var ref = admin.database().ref("users");
 	var result = {};
 
@@ -26,8 +22,13 @@ exports.getUserNames = functions.https.onRequest((request, response) => {
 
 	async.map(ids, function(id, callback) {
 		ref.orderByKey().equalTo(id).on("child_added", function(snapshot) {
-			result[id] = snapshot.val().name;
-			return callback(null, snapshot.val().name);
+			var data = snapshot.val();
+			result[id] = {
+				"fullName": data.fullName,
+				"photoUrl": data.photoUrl
+			}
+
+			return callback(null, result[id]);
 		});
 
 	}, function(err, contents) {
@@ -36,3 +37,4 @@ exports.getUserNames = functions.https.onRequest((request, response) => {
 		response.send(result);
 	});
 });
+
