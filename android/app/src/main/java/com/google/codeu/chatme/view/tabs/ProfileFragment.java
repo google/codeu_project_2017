@@ -89,6 +89,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         presenter.postConstruct();
 
         presenter.getUserProfile();
+        setProfilePicture(null);
     }
 
     @Override
@@ -143,6 +144,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         } else {
             Picasso.with(getContext())
                     .load(R.drawable.placeholder_person)
+                    .placeholder(R.drawable.placeholder_person)
                     .into(ivProfilePic);
         }
     }
