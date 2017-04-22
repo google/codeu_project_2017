@@ -34,4 +34,6 @@ public interface ProfileView {
      * @param userData user object containing data retrieved from Firebase
      */
     void setUserProfile(User userData);
+
+    void setProfilePicture(String downloadUrl);
 }

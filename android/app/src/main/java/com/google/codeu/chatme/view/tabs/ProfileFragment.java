@@ -1,5 +1,6 @@
 package com.google.codeu.chatme.view.tabs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
 import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.view.login.LoginActivity;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -27,6 +30,8 @@ import com.google.codeu.chatme.view.login.LoginActivity;
  */
 public class ProfileFragment extends Fragment implements ProfileView, View.OnClickListener {
 
+    private static final int GALLERY_INTENT = 42;
+
     private OnFragmentInteractionListener mListener;
 
     // fragment edit texts and buttons
@@ -36,9 +41,9 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     private Button btnSaveChanges;
     private Button btnLogOut;
     private Button btnDeleteAcnt;
+    private ImageView ivProfilePic;
 
     private ProfilePresenter presenter;
-    private User user;
 
     /**
      * Required empty public constructor
@@ -70,14 +75,15 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         etFullName = (EditText) view.findViewById(R.id.etFullName);
         etUsername = (EditText) view.findViewById(R.id.etUsername);
         etPassword = (EditText) view.findViewById(R.id.etPassword);
-
         btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
         btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
+        ivProfilePic = (ImageView) view.findViewById(R.id.ivProfilePic);
 
         btnSaveChanges.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
         btnDeleteAcnt.setOnClickListener(this);
+        ivProfilePic.setOnClickListener(this);
 
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
@@ -121,9 +127,28 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
 
     @Override
     public void setUserProfile(User userData) {
-        this.user = userData;
-        etUsername.setText(user.getUsername());
-        etFullName.setText(user.getFullName());
+        etUsername.setText(userData.getUsername());
+        etFullName.setText(userData.getFullName());
+        setProfilePicture(userData.getPhotoUrl());
+    }
+
+    @Override
+    public void setProfilePicture(String downloadUrl) {
+        if (downloadUrl != null) {
+            Picasso.with(getContext())
+                    .load(downloadUrl)
+                    .resize(50, 50)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .into(ivProfilePic);
+        } else {
+            Picasso.with(getContext())
+                    .load(R.mipmap.ic_launcher)
+                    .resize(50, 50)
+                    .centerCrop()
+                    .into(ivProfilePic);
+        }
     }
 
     @Override
@@ -147,6 +172,21 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
                 // TODO: delete all references of this user in Json tree?
                 // presenter.deleteAccount();
                 break;
+
+            case R.id.ivProfilePic:
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALLERY_INTENT);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_INTENT && resultCode == Activity.RESULT_OK) {
+            presenter.uploadProfilePictureToStorage(data.getData());
         }
     }
 

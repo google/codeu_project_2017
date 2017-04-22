@@ -1,9 +1,12 @@
 package com.google.codeu.chatme.presenter;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
@@ -19,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 /**
@@ -93,6 +99,52 @@ public class ProfilePresenter implements ProfileInteractor {
                 });
     }
 
+    @SuppressWarnings("VisibleForTests")
+    @Override
+    public void uploadProfilePictureToStorage(final Uri data) {
+        StorageReference filepath = FirebaseStorage.getInstance().getReference()
+                .child("profile-pics").child(FirebaseUtil.getCurrentUserUid());
+
+        filepath.putFile(data)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        String downloadUrl = taskSnapshot.getDownloadUrl().toString();
+                        Log.i(TAG, "updateProfilePicture:success:downloadUrl " + downloadUrl);
+
+                        updateUserPhotoUrl(downloadUrl);
+                        view.setProfilePicture(downloadUrl);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "updateProfilePicture:failure");
+                    }
+                });
+    }
+
+    private void updateUserPhotoUrl(String downloadUri) {
+        mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
+                .child("photoUrl").setValue(downloadUri.toString());
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(Uri.parse(downloadUri))
+                .build();
+
+        FirebaseUtil.getCurrentUser().updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i(TAG, "updateUserPhotoUrl:success");
+                        } else {
+                            Log.e(TAG, "updateUserPhotoUrl:failure");
+                        }
+                    }
+                });
+    }
+
     /**
      * Signs out current user
      */
@@ -121,70 +173,70 @@ public class ProfilePresenter implements ProfileInteractor {
     }
 
     private void updateFullName(final String fullName) {
-        FirebaseUser user = mAuth.getCurrentUser();
-        DatabaseReference userDbRef = mRootRef.child("users").child(user.getUid());
-
-        userDbRef.child("fullName").setValue(fullName);
+        mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
+                .child("fullName").setValue(fullName);
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(fullName)
                 .build();
 
-        user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "updateFullName:success " + fullName);
-                    view.makeToast(R.string.toast_update_name);
-                } else {
-                    Log.e(TAG, "updateFullName:failure");
-                    view.makeToast(task.getException().getMessage());
-                }
-            }
-        });
+        FirebaseUtil.getCurrentUser().updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "updateFullName:success " + fullName);
+                            view.makeToast(R.string.toast_update_name);
+                        } else {
+                            Log.e(TAG, "updateFullName:failure");
+                            view.makeToast(task.getException().getMessage());
+                        }
+                    }
+                });
     }
 
     private void updateUserName(String username) {
-        FirebaseUser user = mAuth.getCurrentUser();
-        DatabaseReference userDbRef = mRootRef.child("users").child(user.getUid());
-        userDbRef.child("username").setValue(username);
+        mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
+                .child("username").setValue(username);
+        Log.i(TAG, "updateUsername:success " + FirebaseUtil.getCurrentUserUid());
     }
 
     private void updatePassword(String password) {
-        FirebaseUser user = mAuth.getCurrentUser();
-        user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Log.i(TAG, "updatePassword:success");
-                    view.makeToast(R.string.toast_pwd_name);
-                } else {
-                    Log.e(TAG, "updatePassword:failure");
-                    view.makeToast(task.getException().getMessage());
-                }
-            }
-        });
+        FirebaseUtil.getCurrentUser().updatePassword(password)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i(TAG, "updatePassword:success");
+                            view.makeToast(R.string.toast_pwd_name);
+                        } else {
+                            Log.e(TAG, "updatePassword:failure");
+                            view.makeToast(task.getException().getMessage());
+                        }
+                    }
+                });
     }
 
     /**
      * Delete current user's account from firebase auth and database
      */
     public void deleteAccount() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        mRootRef.child("users").child(user.getUid()).removeValue();
+        mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
+                .removeValue();
 
-        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "deleteAccount:success account deleted");
-                    view.openLoginActivity();
-                } else {
-                    Log.e(TAG, "deleteAccount:failure account could not be deleted");
-                    view.makeToast(task.getException().getMessage());
-                }
-            }
-        });
+        FirebaseUtil.getCurrentUser().delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i(TAG, "deleteAccount:success account deleted");
+                            view.openLoginActivity();
+                        } else {
+                            Log.e(TAG, "deleteAccount:failure account could not be deleted");
+                            view.makeToast(task.getException().getMessage());
+                        }
+                    }
+                });
     }
 
     public void setAuthStateListener() {
