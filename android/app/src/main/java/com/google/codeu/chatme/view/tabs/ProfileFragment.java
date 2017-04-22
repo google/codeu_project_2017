@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
 import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.view.login.LoginActivity;
 import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -134,18 +134,15 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
 
     @Override
     public void setProfilePicture(String downloadUrl) {
-        if (downloadUrl != null) {
-            Glide.with(this)
+        if (downloadUrl != null && !downloadUrl.isEmpty()) {
+            Picasso.with(getContext())
                     .load(downloadUrl)
                     .placeholder(R.drawable.placeholder_person)
                     .error(R.drawable.placeholder_person)
-                    .centerCrop()
-                    .dontAnimate()
                     .into(ivProfilePic);
         } else {
-            Glide.with(this)
+            Picasso.with(getContext())
                     .load(R.drawable.placeholder_person)
-                    .centerCrop()
                     .into(ivProfilePic);
         }
     }

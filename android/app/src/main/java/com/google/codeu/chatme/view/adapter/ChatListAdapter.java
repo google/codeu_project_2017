@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
+import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.message.MessagesActivity;
+import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         implements ChatListAdapterView {
 
     public static final String CONV_ID_EXTRA = "CONV_ID_EXTRA";
+    private final Context context;
 
     /**
      * List of conversations
@@ -34,8 +38,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
     private ChatActivityPresenter presenter;
 
-    public ChatListAdapter() {
+    public ChatListAdapter(Context context) {
         this.presenter = new ChatActivityPresenter(this);
+        this.context = context;
     }
 
     @Override
@@ -48,6 +53,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Conversation conversation = conversations.get(position);
         holder.tvSender.setText(conversation.getOwner());
+
+        // TODO: fix to get url of participant
+        holder.setHolderPicture(FirebaseUtil.getCurrentUser().getPhotoUrl().toString());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,10 +104,26 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvSender;
+        private CircularImageView civPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvSender = (TextView) itemView.findViewById(R.id.tvSender);
+            civPic = (CircularImageView) itemView.findViewById(R.id.civPic);
+        }
+
+        private void setHolderPicture(String picUrl) {
+            if (picUrl != null && !picUrl.isEmpty()) {
+                Picasso.with(context)
+                        .load(picUrl)
+                        .placeholder(R.drawable.placeholder_person)
+                        .error(R.drawable.placeholder_person)
+                        .into(this.civPic);
+            } else {
+                Picasso.with(context)
+                        .load(R.drawable.placeholder_person)
+                        .into(this.civPic);
+            }
         }
     }
 }

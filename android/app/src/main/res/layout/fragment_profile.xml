@@ -14,50 +14,18 @@
         android:layout_centerHorizontal="true"
         app:border="true"
         app:border_color="#aacccccc"
-        app:border_width="1sp"
+        app:border_width="1dp"
         app:srcCompat="@drawable/placeholder_person" />
 
-    <Button
-        android:id="@+id/btnSaveChanges"
+    <EditText
+        android:id="@+id/etFullName"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword"
-        android:layout_below="@+id/etPassword"
-        android:layout_marginTop="27dp"
-        android:background="@color/ChatMe_Blue"
-        android:elevation="0dp"
-        android:text="Save Changes"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignEnd="@+id/btnSaveChanges"
-        android:layout_alignStart="@+id/btnSaveChanges"
-        android:layout_below="@+id/btnSaveChanges"
-        android:layout_marginTop="26dp"
-        android:background="@android:color/holo_red_dark"
-        android:elevation="0dp"
-        android:text="Log Out"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnDeleteAcnt"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignEnd="@+id/btnLogOut"
-        android:layout_alignStart="@+id/btnLogOut"
-        android:layout_below="@+id/btnLogOut"
-        android:layout_marginTop="25dp"
-        android:background="@color/common_google_signin_btn_text_dark_focused"
-        android:elevation="0dp"
-        android:text="Delete Account"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="textPersonName|textCapWords" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -72,22 +40,55 @@
         android:textColor="@color/common_google_signin_btn_text_light_focused" />
 
     <EditText
-        android:id="@+id/etFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etUsername"
-        android:layout_below="@+id/ivProfilePic"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="textPersonName" />
-
-    <EditText
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etUsername"
         android:layout_below="@+id/etUsername"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="Change Password"
         android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword"
+        android:layout_below="@+id/etPassword"
+        android:layout_marginTop="24dp"
+        android:background="@color/ChatMe_Blue"
+        android:elevation="0dp"
+        android:text="Save Changes"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnSaveChanges"
+        android:layout_alignStart="@+id/btnSaveChanges"
+        android:layout_below="@+id/btnSaveChanges"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/holo_red_dark"
+        android:elevation="0dp"
+        android:text="Log Out"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnDeleteAcnt"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnLogOut"
+        android:layout_alignStart="@+id/btnLogOut"
+        android:layout_below="@+id/btnLogOut"
+        android:layout_marginTop="18dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:elevation="0dp"
+        android:text="Delete Account"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
 </RelativeLayout>

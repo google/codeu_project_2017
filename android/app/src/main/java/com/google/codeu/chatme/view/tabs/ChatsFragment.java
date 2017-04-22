@@ -71,7 +71,7 @@ public class ChatsFragment extends Fragment {
         rvChatList = (RecyclerView) view.findViewById(R.id.rvChatList);
         rvChatList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        chatListAdapter = new ChatListAdapter();
+        chatListAdapter = new ChatListAdapter(getContext());
         rvChatList.setAdapter(chatListAdapter);
 
         chatListAdapter.loadConversations();
