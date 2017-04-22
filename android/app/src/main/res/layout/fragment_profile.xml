@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ChatMe_Red"
     android:orientation="vertical">
 
-    <ImageView
+    <com.pkmmte.view.CircularImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher" />
+        app:border="true"
+        app:border_color="#aacccccc"
+        app:border_width="1sp"
+        app:srcCompat="@drawable/placeholder_person" />
 
     <Button
         android:id="@+id/btnSaveChanges"
@@ -73,7 +77,6 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/etUsername"
         android:layout_below="@+id/ivProfilePic"
-        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Full Name"
         android:inputType="textPersonName" />

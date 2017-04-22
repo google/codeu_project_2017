@@ -10,14 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
 import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.view.login.LoginActivity;
-import com.squareup.picasso.Picasso;
+import com.pkmmte.view.CircularImageView;
 
 
 /**
@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     private Button btnSaveChanges;
     private Button btnLogOut;
     private Button btnDeleteAcnt;
-    private ImageView ivProfilePic;
+    private CircularImageView ivProfilePic;
 
     private ProfilePresenter presenter;
 
@@ -78,7 +78,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
         btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
-        ivProfilePic = (ImageView) view.findViewById(R.id.ivProfilePic);
+        ivProfilePic = (CircularImageView) view.findViewById(R.id.ivProfilePic);
 
         btnSaveChanges.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
@@ -135,17 +135,16 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     @Override
     public void setProfilePicture(String downloadUrl) {
         if (downloadUrl != null) {
-            Picasso.with(getContext())
+            Glide.with(this)
                     .load(downloadUrl)
-                    .resize(50, 50)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.drawable.placeholder_person)
+                    .error(R.drawable.placeholder_person)
                     .centerCrop()
+                    .dontAnimate()
                     .into(ivProfilePic);
         } else {
-            Picasso.with(getContext())
-                    .load(R.mipmap.ic_launcher)
-                    .resize(50, 50)
+            Glide.with(this)
+                    .load(R.drawable.placeholder_person)
                     .centerCrop()
                     .into(ivProfilePic);
         }
