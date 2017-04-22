@@ -86,7 +86,7 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
 
     /**
      * @param conversations list of conversations
-     * @return list of conversation participants ids for current user
+     * @return list of unique conversation participants ids for current user
      */
     private List<String> getParticipantsFromConversations(ArrayList<Conversation> conversations) {
         Set participants = new HashSet();
@@ -113,6 +113,7 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
         List<String> participants = getParticipantsFromConversations(conversations);
         if (participants.size() == 0) {
             Log.i(TAG, "setConversationParticipantDetails: 0 conversations");
+            return;
         }
 
         RetrofitBuilder.getService().getDetailsFromIds(participants)
@@ -127,8 +128,8 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
                     }
 
                     @Override
-                    public void onFailure(Call<HashMap<String,
-                            ConversationParticipantDetails>> call, Throwable t) {
+                    public void onFailure(Call<HashMap<String, ConversationParticipantDetails>> call,
+                                          Throwable t) {
                         Log.e(TAG, "setConversationParticipantDetails " + t.getMessage());
                     }
                 });
