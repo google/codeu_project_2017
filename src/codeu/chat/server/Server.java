@@ -126,6 +126,8 @@ public final class Server {
 
       final Message message = controller.newMessage(author, conversation, content);
 
+      //Should encryption/compression occur here? When writing after creation of message?
+
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 

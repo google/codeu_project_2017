@@ -27,6 +27,9 @@ public final class Message {
 
   public static final Serializer<Message> SERIALIZER = new Serializer<Message>() {
 
+
+    //TODO: Will changing write/read to first compress the message insert into the pipeline?
+
     @Override
     public void write(OutputStream out, Message value) throws IOException {
 

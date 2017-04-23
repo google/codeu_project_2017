@@ -46,6 +46,9 @@ public final class ClientMessage {
   private final ClientUser userContext;
   private final ClientConversation conversationContext;
 
+  //TODO: How will compressing/encrypting messages affect the messages/conversations from
+  //the client side? (Ex: show messages)
+
   public ClientMessage(Controller controller, View view, ClientUser userContext,
                        ClientConversation conversationContext) {
     this.controller = controller;
