@@ -139,6 +139,7 @@ public final class Controller implements RawController, BasicController {
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
+      foundOwner.groups.add(conversation.id);
 
       LOG.info("Conversation added: " + conversation.id);
     }
