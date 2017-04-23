@@ -117,6 +117,12 @@ public final class View implements BasicView, LogicalView{
   }
 
   @Override
+  public Collection<Conversation> getUserConversations(Uuid user_id) {
+      // TODO implement call to server for getUserConversations
+      return null;
+  }
+
+  @Override
   public Collection<Message> getMessages(Collection<Uuid> ids) {
 
     final Collection<Message> messages = new ArrayList<>();
