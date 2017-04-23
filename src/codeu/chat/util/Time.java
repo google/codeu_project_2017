@@ -27,8 +27,7 @@ public final class Time implements Comparable<Time> {
     @Override
     public void write(OutputStream out, Time value) throws IOException {
 
-      Serializers.LONG.write(out, value.inMs());
-
+        Serializers.LONG.write(out, value.inMs());
     }
 
     @Override
