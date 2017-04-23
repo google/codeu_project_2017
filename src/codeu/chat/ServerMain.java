@@ -47,6 +47,7 @@ final class ServerMain {
     LOG.info("============================= START OF LOG =============================");
 
     final Uuid id = Uuid.fromString(args[0]);
+
     final byte[] secret = Secret.parse(args[1]);
 
     final int myPort = Integer.parseInt(args[2]);

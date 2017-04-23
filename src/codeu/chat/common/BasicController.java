@@ -40,7 +40,14 @@ public interface BasicController {
   //   successful, a User object will be returned representing the full
   //   state of the user on the server. Whether user names can be shared
   //   is undefined.
+  User newUser(String name);
+
+
+  // New USER with password
   User newUser(String name, String password);
+
+  // Sign In
+  boolean signInUser(String name, String password);
 
   // NEW CONVERSATION
   //

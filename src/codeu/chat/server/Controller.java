@@ -44,8 +44,24 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
+  public User newUser(String name) {
+    return newUser(createId(), name, Time.now());
+  }
+
+  @Override
   public User newUser(String name, String password) {
-    return newUser(createId(), name, Time.now(), password);
+    User user = newUser(createId(), name, Time.now());
+    return addPassword(user, password);
+  }
+
+  @Override
+  public boolean signInUser(String name, String password) {
+    boolean response = false;
+    User user = model.userByText().first(name);
+    if(user != null) {
+      response = model.passwordById().first(user.id).equals(password);
+    }
+    return response;
   }
 
   @Override
@@ -103,35 +119,45 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime, String password) {
+  public User newUser(Uuid id, String name, Time creationTime) {
 
     User user = null;
-    String passwordToShow = password.substring(0, 2) + "******" + password.substring(password.length() - 2);
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime, password);
+      user = new User(id, name, creationTime);
       model.add(user);
 
       LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s user.password=%s)",
+          "newUser success (user.id=%s user.name=%s user.time=%s)",
           id,
           name,
-          creationTime,
-          passwordToShow);
+          creationTime);
 
     } else {
 
       LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s user.password=%s)",
+          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
           id,
           name,
-          creationTime,
-          passwordToShow);
+          creationTime);
     }
 
     return user;
   }
+
+  public User addPassword(User user, String password) {
+
+    model.addPassword(user, password);
+    LOG.info("newUserPassword success (user.id=%s user.name=%s user.time=%s user's password is %s)",
+            user.id,
+            user.name,
+            user.creation,
+            password);
+    return user;
+  }
+
+
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {

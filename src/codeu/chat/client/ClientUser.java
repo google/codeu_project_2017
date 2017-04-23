@@ -39,8 +39,6 @@ public final class ClientUser {
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
-  private static final int MIN_PASSWORD_LENGTH = 8;
-
   public ClientUser(Controller controller, View view) {
     this.controller = controller;
     this.view = view;
@@ -55,22 +53,6 @@ public final class ClientUser {
 
       // TODO: check for invalid characters
 
-    }
-    return clean;
-  }
-
-
-  /**
-   * Check the validity of password
-   * @param userPassword the password need to be check
-   * @return true if the password is valid
-   */
-  static public boolean isValidPassword(String userPassword) {
-    boolean clean = true;
-    if (userPassword.length() < MIN_PASSWORD_LENGTH) {
-      clean = false;
-    } else {
-      // TODO: Need to do more
     }
     return clean;
   }
@@ -96,6 +78,18 @@ public final class ClientUser {
     return (prev != current);
   }
 
+  public boolean signInUser(String name, String password) {
+
+    final User prev = current;
+    if (name != null && controller.signInUser(name, password)) {
+      final User newCurrent = usersByName.first(name);
+      if (newCurrent != null) {
+        current = newCurrent;
+      }
+    }
+    return (prev != current);
+  }
+
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -106,14 +100,28 @@ public final class ClientUser {
     printUser(current);
   }
 
+  public void addUser(String name) {
+    final boolean validInputs = isValidName(name);
+
+    final User user = (validInputs) ? controller.newUser(name) : null;
+
+    if (user == null) {
+      System.out.format("Error: user not created - %s.\n",
+          (validInputs) ? "server failure" : "bad input value");
+    } else {
+      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      updateUsers();
+    }
+  }
+
   public void addUser(String name, String password) {
-    final boolean validInputs = isValidName(name) && isValidPassword(password);
+    final boolean validInputs = isValidName(name);
 
     final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+              (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();

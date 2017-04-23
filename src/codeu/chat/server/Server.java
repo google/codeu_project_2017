@@ -93,6 +93,7 @@ public final class Server {
         try {
 
           LOG.info("Handling connection...");
+<<<<<<< 9c2508c8427b839d563d6eba47bc486b423135af
 
           final boolean success = onMessage(
               connection.in(),
@@ -102,6 +103,17 @@ public final class Server {
         } catch (Exception ex) {
 
           LOG.error(ex, "Exception while handling connection.");
+
+
+          final boolean success = onMessage(
+              connection.in(),
+              connection.out());
+
+          LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
+        } catch (Exception ex) {
+
+          LOG.error(ex, "Exception while handling connection.");
+
 
         }
 
@@ -139,7 +151,7 @@ public final class Server {
       final String name = Serializers.STRING.read(in);
       final String password = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name, password);
+      final User user = controller.newUser(name,password);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -242,6 +254,15 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
+    } else if (type == NetworkCode.SIGN_IN_REQUEST) {
+      final String name = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
+
+      final boolean response = controller.signInUser(name,password);
+
+      Serializers.INTEGER.write(out, NetworkCode.SIGN_IN_RESPONSE);
+      Serializers.BOOLEAN.write(out, response);
+
     } else {
 
       // In the case that the message was not handled make a dummy message with
@@ -258,12 +279,12 @@ public final class Server {
 
     final Relay.Bundle.Component relayUser = bundle.user();
     final Relay.Bundle.Component relayConversation = bundle.conversation();
-    final Relay.Bundle.Component relayMessage = bundle.user();
+    final Relay.Bundle.Component relayMessage = bundle.message();
 
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time(), relayUser.);
+      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
