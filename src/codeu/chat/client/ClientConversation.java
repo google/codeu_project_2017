@@ -86,6 +86,7 @@ public final class ClientConversation {
     printConversation(currentSummary, userContext);
   }
 
+  // essentially add conversation
   public void startConversation(String title, Uuid owner) {
     final boolean validInputs = isValidTitle(title);
 
@@ -100,6 +101,24 @@ public final class ClientConversation {
       currentSummary = conv.summary;
 
       updateAllConversations(currentSummary != null);
+    }
+  }
+
+  // For c-remove command.
+  public void removeConversation(String title) {
+
+    ConversationSummary cs = summariesSortedByTitle.first(title);
+    if (cs == null) { // conversation does not exist for user
+      System.out.format("Error: conversation \"%s\" does not exist\n", title);
+      return;
+    }
+    summariesByUuid.remove(cs.id);
+    //summariesSortedByTitle.remove(cs.title); // Need to update with BTree store
+
+    if (!summariesByUuid.containsKey(cs.id)) {
+      LOG.info("Conversation removed: Title= \"%s\"\n", title);
+      System.out.format("Conversation removed: Title= \"%s\"\n", title);
+
     }
   }
 
