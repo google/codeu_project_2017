@@ -42,10 +42,11 @@ final class SimpleGuiClientMain {
 
     // Start up server connection/interface.
 
-    final RemoteAddress address = RemoteAddress.parse(args[0]);
+    //final RemoteAddress address = RemoteAddress.parse(args[0]);
+
 
     try (
-      final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
+      final ConnectionSource source = new ClientConnectionSource("127.0.0.1", 8888);
     ) {
       final Controller controller = new Controller(source);
       final View view = new View(source);

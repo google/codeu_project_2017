@@ -164,7 +164,7 @@ public final class UserPanel extends JPanel {
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s, new String("DEFAULT"));
+          clientContext.user.addUser(s);
           UserPanel.this.getAllUsers(listModel);
         }
       }

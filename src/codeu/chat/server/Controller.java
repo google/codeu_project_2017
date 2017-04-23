@@ -19,12 +19,12 @@ import java.util.Collection;
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
+import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
-import codeu.chat.common.Time;
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 
 public final class Controller implements RawController, BasicController {
 
@@ -44,8 +44,24 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
+  public User newUser(String name) {
+    return newUser(createId(), name, Time.now());
+  }
+
+  @Override
   public User newUser(String name, String password) {
-    return newUser(createId(), name, Time.now(), password);
+    User user = newUser(createId(), name, Time.now());
+    return addPassword(user, password);
+  }
+
+  @Override
+  public boolean signInUser(String name, String password) {
+    boolean response = false;
+    User user = model.userByText().first(name);
+    if(user != null) {
+      response = model.passwordById().first(user.id).equals(password);
+    }
+    return response;
   }
 
   @Override
@@ -63,14 +79,14 @@ public final class Controller implements RawController, BasicController {
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
-      message = new Message(id, Uuids.NULL, Uuids.NULL, creationTime, author, body);
+      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
       model.add(message);
       LOG.info("Message added: %s", message.id);
 
       // Find and update the previous "last" message so that it's "next" value
       // will point to the new message.
 
-      if (Uuids.equals(foundConversation.lastMessage, Uuids.NULL)) {
+      if (Uuid.equals(foundConversation.lastMessage, Uuid.NULL)) {
 
         // The conversation has no messages in it, that's why the last message is NULL (the first
         // message should be NULL too. Since there is no last message, then it is not possible
@@ -86,7 +102,7 @@ public final class Controller implements RawController, BasicController {
       // not change.
 
       foundConversation.firstMessage =
-          Uuids.equals(foundConversation.firstMessage, Uuids.NULL) ?
+          Uuid.equals(foundConversation.firstMessage, Uuid.NULL) ?
           message.id :
           foundConversation.firstMessage;
 
@@ -103,35 +119,45 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime, String password) {
+  public User newUser(Uuid id, String name, Time creationTime) {
 
     User user = null;
-    String passwordToShow = password.substring(0, 2) + "******" + password.substring(password.length() - 2);
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime, password);
+      user = new User(id, name, creationTime);
       model.add(user);
 
       LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s user.password=%s)",
+          "newUser success (user.id=%s user.name=%s user.time=%s)",
           id,
           name,
-          creationTime,
-          passwordToShow);
+          creationTime);
 
     } else {
 
       LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s user.password=%s)",
+          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
           id,
           name,
-          creationTime,
-          passwordToShow);
+          creationTime);
     }
 
     return user;
   }
+
+  public User addPassword(User user, String password) {
+
+    model.addPassword(user, password);
+    LOG.info("newUserPassword success (user.id=%s user.name=%s user.time=%s user's password is %s)",
+            user.id,
+            user.name,
+            user.creation,
+            password);
+    return user;
+  }
+
+
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
