@@ -27,8 +27,12 @@ public final class Time implements Comparable<Time> {
     @Override
     public void write(OutputStream out, Time value) throws IOException {
 
+<<<<<<< HEAD:src/codeu/chat/util/Time.java
       Serializers.LONG.write(out, value.inMs());
 
+=======
+        Serializers.LONG.write(out, value.inMs());
+>>>>>>> d31a8ab8660a21ce07bdc6d3dd8be47db6f93e71:src/codeu/chat/util/Time.java
     }
 
     @Override

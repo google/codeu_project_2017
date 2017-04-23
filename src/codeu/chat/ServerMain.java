@@ -47,7 +47,7 @@ final class ServerMain {
     LOG.info("============================= START OF LOG =============================");
 
     final Uuid id = Uuid.fromString(args[0]);
-
+    //final Uuid id = Uuid.fromString("1");
     final byte[] secret = Secret.parse(args[1]);
 
     final int myPort = Integer.parseInt(args[2]);
@@ -57,12 +57,12 @@ final class ServerMain {
     final String persistentPath = args[3];
 
     final RemoteAddress relayAddress = args.length > 4 ?
-                                       RemoteAddress.parse(args[4]) :
-                                       null;
+            RemoteAddress.parse(args[4]) :
+            null;
 
     try (
-        final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
-        final ConnectionSource relaySource = relayAddress == null ? null : new ClientConnectionSource(relayAddress.host, relayAddress.port)
+            final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
+            final ConnectionSource relaySource = relayAddress == null ? null : new ClientConnectionSource(relayAddress.host, relayAddress.port)
     ) {
 
       LOG.info("Starting server...");
@@ -81,8 +81,8 @@ final class ServerMain {
                                 ConnectionSource relaySource) {
 
     final Relay relay = relaySource == null ?
-                        new NoOpRelay() :
-                        new RemoteRelay(relaySource);
+            new NoOpRelay() :
+            new RemoteRelay(relaySource);
 
     final Server server = new Server(id, secret, relay);
 
