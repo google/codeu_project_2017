@@ -85,7 +85,6 @@ public final class Server {
       }
     });
   }
-
   public void handleConnection(final Connection connection) {
     timeline.scheduleNow(new Runnable() {
       @Override
@@ -93,27 +92,15 @@ public final class Server {
         try {
 
           LOG.info("Handling connection...");
-<<<<<<< 9c2508c8427b839d563d6eba47bc486b423135af
 
           final boolean success = onMessage(
-              connection.in(),
-              connection.out());
+                  connection.in(),
+                  connection.out());
 
           LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
         } catch (Exception ex) {
 
           LOG.error(ex, "Exception while handling connection.");
-
-
-          final boolean success = onMessage(
-              connection.in(),
-              connection.out());
-
-          LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
-        } catch (Exception ex) {
-
-          LOG.error(ex, "Exception while handling connection.");
-
 
         }
 
