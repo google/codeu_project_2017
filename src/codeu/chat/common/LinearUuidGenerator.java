@@ -14,26 +14,9 @@
 
 package codeu.chat.common;
 
-import java.lang.IllegalStateException;
+import codeu.chat.util.Uuid;
 
 public final class LinearUuidGenerator implements Uuid.Generator {
-
-  private static final class BasicUuid implements Uuid {
-
-    private final Uuid root;
-    private final int id;
-
-    public BasicUuid(Uuid root, int id) {
-      this.root = root;
-      this.id = id;
-    }
-
-    @Override
-    public Uuid root() { return root; }
-
-    @Override
-    public int id() { return id; }
-  }
 
   private final Uuid commonRoot;
   private final int start;
@@ -50,7 +33,7 @@ public final class LinearUuidGenerator implements Uuid.Generator {
 
   @Override
   public Uuid make() {
-    return Uuids.complete(new BasicUuid(commonRoot, next()));
+    return new Uuid(commonRoot, next());
   }
 
   private int next() {
