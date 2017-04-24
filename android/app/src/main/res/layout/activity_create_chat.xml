@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ChatMe_Red"
+    tools:context=".view.tabs.ChatsFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/cardview_shadow_start_color"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/tvCreateChatTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:text="New Chat"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/btnAddParticipants"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="133dp"
+        android:enabled="false"
+        android:background="@color/ChatMe_Blue"
+        android:text="Add Chat Members"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/etNewChatName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAddParticipants"
+        android:layout_alignEnd="@+id/btnAddParticipants"
+        android:layout_alignStart="@+id/btnAddParticipants"
+        android:layout_marginBottom="29dp"
+        android:ems="10"
+        android:hint="Name Your New Chat"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/imgChatAvatar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/etNewChatName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        app:srcCompat="@drawable/default_group_avatar" />
+
+</RelativeLayout>
