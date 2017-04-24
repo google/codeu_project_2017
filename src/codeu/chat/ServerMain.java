@@ -54,7 +54,7 @@ final class ServerMain {
 
     // This is the directory where it is safe to store data accross runs
     // of the server.
-    final String persistentPath = args[3];
+    //final String persistentPath = args[3];
 
     final RemoteAddress relayAddress = args.length > 4 ?
             RemoteAddress.parse(args[4]) :
