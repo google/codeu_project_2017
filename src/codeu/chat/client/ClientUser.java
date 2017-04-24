@@ -78,6 +78,18 @@ public final class ClientUser {
     return (prev != current);
   }
 
+  public boolean signInUser(String name, String password) {
+
+    final User prev = current;
+    if (name != null && controller.signInUser(name, password)) {
+      final User newCurrent = usersByName.first(name);
+      if (newCurrent != null) {
+        current = newCurrent;
+      }
+    }
+    return (prev != current);
+  }
+
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -96,6 +108,20 @@ public final class ClientUser {
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
           (validInputs) ? "server failure" : "bad input value");
+    } else {
+      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      updateUsers();
+    }
+  }
+
+  public void addUser(String name, String password) {
+    final boolean validInputs = isValidName(name);
+
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
+
+    if (user == null) {
+      System.out.format("Error: user not created - %s.\n",
+              (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();

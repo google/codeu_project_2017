@@ -18,6 +18,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
@@ -27,7 +31,7 @@ import codeu.chat.common.User;
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
-public final class MessagePanel extends JPanel {
+public final class MessagePanel extends JStylePanel {
 
   // These objects are modified by the Conversation Panel.
   private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
@@ -40,6 +44,7 @@ public final class MessagePanel extends JPanel {
     super(new GridBagLayout());
     this.clientContext = clientContext;
     initialize();
+    stylePanel(MessagePanel.this);
   }
 
   // External agent calls this to trigger an update of this panel's contents.
@@ -68,27 +73,32 @@ public final class MessagePanel extends JPanel {
     // Title bar - current conversation and owner
     final JPanel titlePanel = new JPanel(new GridBagLayout());
     final GridBagConstraints titlePanelC = new GridBagConstraints();
+    stylePanel(titlePanel);
 
     final JPanel titleConvPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     final GridBagConstraints titleConvPanelC = new GridBagConstraints();
     titleConvPanelC.gridx = 0;
     titleConvPanelC.gridy = 0;
     titleConvPanelC.anchor = GridBagConstraints.PAGE_START;
+    stylePanel(titleConvPanel);
 
     final JPanel titleOwnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     final GridBagConstraints titleOwnerPanelC = new GridBagConstraints();
     titleOwnerPanelC.gridx = 0;
     titleOwnerPanelC.gridy = 1;
     titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
+    stylePanel(titleOwnerPanel);
 
     // messageConversationLabel is an instance variable of Conversation panel
     // can update it.
     messageConversationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    styleLabel(messageConversationLabel);
     titleConvPanel.add(messageConversationLabel);
 
     // messageOwnerLabel is an instance variable of Conversation panel
     // can update it.
     messageOwnerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    styleLabel(messageOwnerLabel);
     titleOwnerPanel.add(messageOwnerLabel);
 
     titlePanel.add(titleConvPanel, titleConvPanelC);
@@ -98,6 +108,7 @@ public final class MessagePanel extends JPanel {
     // User List panel.
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
+    stylePanel(listShowPanel);
 
     // messageListModel is an instance variable so Conversation panel
     // can update it.
@@ -114,8 +125,16 @@ public final class MessagePanel extends JPanel {
     // Button panel
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
+    stylePanel(buttonPanel);
 
+    final JButton updateButton = new JButton("Update");
     final JButton addButton = new JButton("Add");
+
+    styleButton(updateButton);
+    styleButton(addButton);
+
+    updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+    buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
 
     // Placement of title, list panel, buttons, and current user panel.
@@ -144,6 +163,15 @@ public final class MessagePanel extends JPanel {
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
+
+    // User clicks Messages Update button.
+    updateButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        clientContext.message.updateMessages(false);
+        MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+      }
+    });
 
     // User click Messages Add button - prompt for message body and add new Message to Conversation
     addButton.addActionListener(new ActionListener() {

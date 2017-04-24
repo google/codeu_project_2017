@@ -42,6 +42,13 @@ public interface BasicController {
   //   is undefined.
   User newUser(String name);
 
+
+  // New USER with password
+  User newUser(String name, String password);
+
+  // Sign In
+  boolean signInUser(String name, String password);
+
   // NEW CONVERSATION
   //
   //  Create a new conversation on the server. All parameters must be
