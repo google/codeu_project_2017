@@ -89,6 +89,7 @@ public final class ClientUser {
     printUser(current);
   }
 
+
 	//change the type to a bool, so we can check if the user was created or not in the GUI
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
@@ -98,12 +99,13 @@ public final class ClientUser {
       	Iterator<User> users = usersById.values().iterator(); 
       	while(users.hasNext()){
       		if(users.next().name.toUpperCase().equals(name.toUpperCase())){
-      			System.out.format("Error: user not created due to duplicate name.\n");
+      			System.out.format("Error: user %s not created due to duplicate name.\n", name);
       			return false;           		
       		}
       	 }
       	 //has gone through all names and none matched and check that the name doesn't already exist
       	 final User user = (validInputs) ? controller.newUser(name) : null;
+	
 	
 		//check that the user being created isn't empty
     	if (user == null) {
@@ -117,8 +119,7 @@ public final class ClientUser {
       	return true; 
     	}  	 
       }
-      
-    //the users map is empty, so the user should be added and that the input is valid
+       //the users map is empty, so the user should be added and that the input is valid
 	else{
     	final User user = (validInputs) ? controller.newUser(name) : null;
 	
@@ -135,12 +136,39 @@ public final class ClientUser {
     	}
     } 
   }
-  
+ 
+    
+  /*  
+    public boolean addUser(String name) {
+    final boolean validInputs = isValidName(name);
+
+	if(usersById.containsValue(name)){
+		System.out.format("Error: user not created due to duplicate name.\n");
+      	return false;
+	}
+    
+    final User user = (validInputs) ? controller.newUser(name) : null;
+
+    if (user == null) {
+      System.out.format("Error: user not created - %s.\n",
+          (validInputs) ? "server failure" : "bad input value");
+          return false; 
+    } else {
+      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      updateUsers();
+      return true; 
+    }
+    //return false; 
+  } 
+  */
+      
+   
+  /*
   //work on deleting user from map and store!!
   public boolean deleteUser(String name){
   	
   }
-
+*/
   public void showAllUsers() {
     updateUsers();
     for (final User u : usersByName.all()) {
