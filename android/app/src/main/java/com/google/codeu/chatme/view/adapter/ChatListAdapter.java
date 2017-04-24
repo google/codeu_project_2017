@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
+import com.google.codeu.chatme.model.ConversationParticipantDetails;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
+import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.message.MessagesActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,11 +31,17 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     public static final String CONV_ID_EXTRA = "CONV_ID_EXTRA";
 
     /**
-     * List of conversations
+     * List of conversations to display in the list
      */
     private List<Conversation> conversations = new ArrayList<>();
 
     private ChatActivityPresenter presenter;
+
+    /**
+     * A map from different conversation participants to their details such as full names and
+     * profile picture download urls
+     */
+    private HashMap<String, ConversationParticipantDetails> participantDetailsMap = new HashMap<>();
 
     public ChatListAdapter() {
         this.presenter = new ChatActivityPresenter(this);
@@ -47,7 +56,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Conversation conversation = conversations.get(position);
-        holder.tvSender.setText(conversation.getOwner());
+        String participantId = getRecipientId(conversation.getParticipants());
+
+        if (participantDetailsMap.get(participantId) != null) {
+            holder.tvSender.setText(participantDetailsMap.get(participantId).getFullName());
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +68,23 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 openMessagesActivity(view.getContext(), conversation.getId());
             }
         });
+    }
+
+    /**
+     * Note: This function would need to altered if and when "groups" feature is introduced
+     *
+     * @param participants list of participant Ids for a particular conversation
+     * @return recipient id (in current user's scope)
+     */
+    private String getRecipientId(List<String> participants) {
+        if (participants.size() > 1) {
+            for (String id : participants) {
+                if (!FirebaseUtil.getCurrentUserUid().equals(id)) {
+                    return id;
+                }
+            }
+        }
+        return FirebaseUtil.getCurrentUserUid();    // should not be returned ideally
     }
 
     /**
@@ -69,9 +99,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         context.startActivity(mIntent);
     }
 
-    /**
-     * @return number of conversations
-     */
     @Override
     public int getItemCount() {
         return conversations.size();
@@ -84,8 +111,16 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         this.presenter.loadConversations();
     }
 
+    @Override
     public void setChatList(List<Conversation> conversations) {
         this.conversations = conversations;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void setParticipantDetailsMap(HashMap<String, ConversationParticipantDetails>
+                                                 participantDetailsMap) {
+        this.participantDetailsMap = participantDetailsMap;
         notifyDataSetChanged();
     }
 
