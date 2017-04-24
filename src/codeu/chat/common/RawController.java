@@ -36,6 +36,9 @@ public interface RawController {
   // use, the call will fail and null will be returned.
   User newUser(Uuid id, String name, Time creationTime);
 
+  // ADD PASSWORD
+  User newUser(String name, String password);
+
   // NEW CONVERSATION
   //
   // Add a new conversation to the model with a specific if. If the id is

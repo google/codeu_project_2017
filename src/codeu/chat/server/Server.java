@@ -85,7 +85,6 @@ public final class Server {
       }
     });
   }
-
   public void handleConnection(final Connection connection) {
     timeline.scheduleNow(new Runnable() {
       @Override
@@ -95,8 +94,8 @@ public final class Server {
           LOG.info("Handling connection...");
 
           final boolean success = onMessage(
-              connection.in(),
-              connection.out());
+                  connection.in(),
+                  connection.out());
 
           LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
         } catch (Exception ex) {
@@ -137,8 +136,9 @@ public final class Server {
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
       final String name = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final User user = controller.newUser(name,password);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -241,6 +241,15 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
+    } else if (type == NetworkCode.SIGN_IN_REQUEST) {
+      final String name = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
+
+      final boolean response = controller.signInUser(name,password);
+
+      Serializers.INTEGER.write(out, NetworkCode.SIGN_IN_RESPONSE);
+      Serializers.BOOLEAN.write(out, response);
+
     } else {
 
       // In the case that the message was not handled make a dummy message with
@@ -257,7 +266,7 @@ public final class Server {
 
     final Relay.Bundle.Component relayUser = bundle.user();
     final Relay.Bundle.Component relayConversation = bundle.conversation();
-    final Relay.Bundle.Component relayMessage = bundle.user();
+    final Relay.Bundle.Component relayMessage = bundle.message();
 
     User user = model.userById().first(relayUser.id());
 

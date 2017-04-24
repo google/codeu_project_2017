@@ -49,6 +49,22 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
+  public User newUser(String name, String password) {
+    User user = newUser(createId(), name, Time.now());
+    return addPassword(user, password);
+  }
+
+  @Override
+  public boolean signInUser(String name, String password) {
+    boolean response = false;
+    User user = model.userByText().first(name);
+    if(user != null) {
+      response = model.passwordById().first(user.id).equals(password);
+    }
+    return response;
+  }
+
+  @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
   }
@@ -129,6 +145,19 @@ public final class Controller implements RawController, BasicController {
 
     return user;
   }
+
+  public User addPassword(User user, String password) {
+
+    model.addPassword(user, password);
+    LOG.info("newUserPassword success (user.id=%s user.name=%s user.time=%s user's password is %s)",
+            user.id,
+            user.name,
+            user.creation,
+            password);
+    return user;
+  }
+
+
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {

@@ -27,7 +27,7 @@ import codeu.chat.common.ConversationSummary;
 // NOTE: JPanel is serializable, but there is no need to serialize ConversationPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
 @SuppressWarnings("serial")
-public final class ConversationPanel extends JPanel {
+public final class ConversationPanel extends JStylePanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
@@ -37,6 +37,7 @@ public final class ConversationPanel extends JPanel {
     this.clientContext = clientContext;
     this.messagePanel = messagePanel;
     initialize();
+    stylePanel(ConversationPanel.this);
   }
 
   private void initialize() {
@@ -50,14 +51,17 @@ public final class ConversationPanel extends JPanel {
     titlePanelC.gridx = 0;
     titlePanelC.gridy = 0;
     titlePanelC.anchor = GridBagConstraints.PAGE_START;
+    stylePanel(titlePanel);
 
     final JLabel titleLabel = new JLabel("Conversations", JLabel.LEFT);
     titleLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
     titlePanel.add(titleLabel);
+    styleLabel(titleLabel);
 
     // Conversation list
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
+    stylePanel(listShowPanel);
 
     final DefaultListModel<String> listModel = new DefaultListModel<>();
     final JList<String> objectList = new JList<>(listModel);
@@ -68,13 +72,18 @@ public final class ConversationPanel extends JPanel {
     final JScrollPane listScrollPane = new JScrollPane(objectList);
     listShowPanel.add(listScrollPane);
     listScrollPane.setMinimumSize(new Dimension(250, 200));
+    listScrollPane.setPreferredSize(new Dimension(250, 200));
 
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
+    stylePanel(buttonPanel);
 
     final JButton updateButton = new JButton("Update");
     final JButton addButton = new JButton("Add");
+
+    styleButton(updateButton);
+    styleButton(addButton);
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
     buttonPanel.add(updateButton);
