@@ -19,8 +19,7 @@ import java.util.Collection;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.BasicView;
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.ConversationHeader;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
 
@@ -37,7 +36,7 @@ public final class UserContext {
   }
 
   public ConversationContext start(String name) {
-    final Conversation conversation = controller.newConversation(name, user.id);
+    final ConversationHeader conversation = controller.newConversation(name, user.id);
     return conversation == null ?
         null :
         new ConversationContext(user, conversation, view, controller);
@@ -45,16 +44,10 @@ public final class UserContext {
 
   public Iterable<ConversationContext> conversations() {
 
-    // Extract all the conversation ids from the list of summaries.
-    final Collection<Uuid> ids = new ArrayList<>();
-    for (final ConversationSummary summary : view.getAllConversations()) {
-      ids.add(summary.id);
-    }
-
     // Use all the ids to get all the conversations and convert them to
     // Conversation Contexts.
     final Collection<ConversationContext> all = new ArrayList<>();
-    for (final Conversation conversation : view.getConversations(ids)) {
+    for (final ConversationHeader conversation : view.getConversations()) {
       all.add(new ConversationContext(user, conversation, view, controller));
     }
 

@@ -19,7 +19,7 @@ import java.io.StringWriter;
 import java.lang.Thread;
 
 import codeu.chat.common.BasicController;
-import codeu.chat.common.Conversation;
+import codeu.chat.common.ConversationHeader;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
@@ -90,9 +90,9 @@ final class Controller implements BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner)  {
+  public ConversationHeader newConversation(String title, Uuid owner)  {
 
-    Conversation response = null;
+    ConversationHeader response = null;
 
     try (final Connection connection = source.connect()) {
 
@@ -101,7 +101,7 @@ final class Controller implements BasicController {
       Uuid.SERIALIZER.write(connection.out(), owner);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
-        response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());
+        response = Serializers.nullable(ConversationHeader.SERIALIZER).read(connection.in());
       } else {
         LOG.error("Response from server failed.");
       }

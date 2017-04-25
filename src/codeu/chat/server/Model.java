@@ -16,8 +16,8 @@ package codeu.chat.server;
 
 import java.util.Comparator;
 
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.ConversationHeader;
+import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
@@ -57,20 +57,17 @@ public final class Model {
   private final Store<Time, User> userByTime = new Store<>(TIME_COMPARE);
   private final Store<String, User> userByText = new Store<>(STRING_COMPARE);
 
-  private final Store<Uuid, Conversation> conversationById = new Store<>(UUID_COMPARE);
-  private final Store<Time, Conversation> conversationByTime = new Store<>(TIME_COMPARE);
-  private final Store<String, Conversation> conversationByText = new Store<>(STRING_COMPARE);
+  private final Store<Uuid, ConversationHeader> conversationById = new Store<>(UUID_COMPARE);
+  private final Store<Time, ConversationHeader> conversationByTime = new Store<>(TIME_COMPARE);
+  private final Store<String, ConversationHeader> conversationByText = new Store<>(STRING_COMPARE);
+
+  private final Store<Uuid, ConversationPayload> conversationPayloadById = new Store<>(UUID_COMPARE);
 
   private final Store<Uuid, Message> messageById = new Store<>(UUID_COMPARE);
   private final Store<Time, Message> messageByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Message> messageByText = new Store<>(STRING_COMPARE);
 
-  private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1, Integer.MAX_VALUE);
-  private Uuid currentUserGeneration = userGenerations.make();
-
   public void add(User user) {
-    currentUserGeneration = userGenerations.make();
-
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
@@ -88,26 +85,27 @@ public final class Model {
     return userByText;
   }
 
-  public Uuid userGeneration() {
-    return currentUserGeneration;
-  }
-
-  public void add(Conversation conversation) {
+  public void add(ConversationHeader conversation) {
     conversationById.insert(conversation.id, conversation);
     conversationByTime.insert(conversation.creation, conversation);
     conversationByText.insert(conversation.title, conversation);
+    conversationPayloadById.insert(conversation.id, new ConversationPayload(conversation.id));
   }
 
-  public StoreAccessor<Uuid, Conversation> conversationById() {
+  public StoreAccessor<Uuid, ConversationHeader> conversationById() {
     return conversationById;
   }
 
-  public StoreAccessor<Time, Conversation> conversationByTime() {
+  public StoreAccessor<Time, ConversationHeader> conversationByTime() {
     return conversationByTime;
   }
 
-  public StoreAccessor<String, Conversation> conversationByText() {
+  public StoreAccessor<String, ConversationHeader> conversationByText() {
     return conversationByText;
+  }
+
+  public StoreAccessor<Uuid, ConversationPayload> conversationPayloadById() {
+    return conversationPayloadById;
   }
 
   public void add(Message message) {

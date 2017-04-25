@@ -20,7 +20,8 @@ import java.util.Iterator;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.BasicView;
-import codeu.chat.common.Conversation;
+import codeu.chat.common.ConversationHeader;
+import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
@@ -28,13 +29,13 @@ import codeu.chat.util.Uuid;
 public final class ConversationContext {
 
   public final User user;
-  public final Conversation conversation;
+  public final ConversationHeader conversation;
 
   private final BasicView view;
   private final BasicController controller;
 
   public ConversationContext(User user,
-                             Conversation conversation,
+                             ConversationHeader conversation,
                              BasicView view,
                              BasicController controller) {
 
@@ -59,7 +60,7 @@ public final class ConversationContext {
 
     // As it is possible for the conversation to have been updated, so fetch
     // a new copy.
-    final Conversation updated = getUpdated();
+    final ConversationPayload updated = getUpdated();
 
     return updated == null ?
         null :
@@ -70,17 +71,17 @@ public final class ConversationContext {
 
     // As it is possible for the conversation to have been updated, so fetch
     // a new copy.
-    final Conversation updated = getUpdated();
+    final ConversationPayload updated = getUpdated();
 
     return updated == null ?
         null :
         getMessage(updated.lastMessage);
   }
 
-  private Conversation getUpdated() {
+  private ConversationPayload getUpdated() {
     final Collection<Uuid> ids = Arrays.asList(conversation.id);
-    final Iterator<Conversation> conversations = view.getConversations(ids).iterator();
-    return conversations.hasNext() ? conversations.next() : null;
+    final Iterator<ConversationPayload> payloads = view.getConversationPayloads(ids).iterator();
+    return payloads.hasNext() ? payloads.next() : null;
   }
 
   private MessageContext getMessage(Uuid id) {

@@ -18,15 +18,14 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import codeu.chat.common.BasicView;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.ConnectionSource;
 
 public final class Context {
 
-  private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
-
-  private final View view;
+  private final BasicView view;
   private final Controller controller;
 
   public Context(ConnectionSource source) {
@@ -43,7 +42,7 @@ public final class Context {
 
   public Iterable<UserContext> allUsers() {
     final Collection<UserContext> users = new ArrayList<>();
-    for (final User user : view.getUsersExcluding(EMPTY)) {
+    for (final User user : view.getUsers()) {
       users.add(new UserContext(user, view, controller));
     }
     return users;

@@ -20,53 +20,45 @@ import java.io.OutputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
-public final class ConversationSummary implements ListViewable {
+public final class ConversationPayload {
 
-  public static final Serializer<ConversationSummary> SERIALIZER = new Serializer<ConversationSummary>() {
+  public static final Serializer<ConversationPayload> SERIALIZER = new Serializer<ConversationPayload>() {
 
     @Override
-    public void write(OutputStream out, ConversationSummary value) throws IOException {
+    public void write(OutputStream out, ConversationPayload value) throws IOException {
 
       Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
-      Time.SERIALIZER.write(out, value.creation);
-      Serializers.STRING.write(out, value.title);
+      Uuid.SERIALIZER.write(out, value.firstMessage);
+      Uuid.SERIALIZER.write(out, value.lastMessage);
 
     }
 
     @Override
-    public ConversationSummary read(InputStream in) throws IOException {
+    public ConversationPayload read(InputStream in) throws IOException {
 
-      return new ConversationSummary(
+      return new ConversationPayload(
           Uuid.SERIALIZER.read(in),
           Uuid.SERIALIZER.read(in),
-          Time.SERIALIZER.read(in),
-          Serializers.STRING.read(in)
-      );
+          Uuid.SERIALIZER.read(in));
 
     }
   };
 
   public final Uuid id;
-  public final Uuid owner;
-  public final Time creation;
-  public final String title;
 
-  public ConversationSummary(Uuid id, Uuid owner, Time creation, String title) {
+  // These are allowed to be updated and therefore are not marked final
+  public Uuid firstMessage = Uuid.NULL;
+  public Uuid lastMessage = Uuid.NULL;
 
+  public ConversationPayload(Uuid id) {
     this.id = id;
-    this.owner = owner;
-    this.creation = creation;
-    this.title = title;
-
   }
 
-  // How this object should appear in a user-viewable list
-  @Override
-  public String listView() {
-    return title;
+  public ConversationPayload(Uuid id, Uuid firstMessage, Uuid lastMessage) {
+    this.id = id;
+    this.firstMessage = firstMessage;
+    this.lastMessage = lastMessage;
   }
 }
