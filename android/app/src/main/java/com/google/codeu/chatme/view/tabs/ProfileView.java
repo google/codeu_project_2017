@@ -41,4 +41,16 @@ public interface ProfileView {
      * @param downloadUrl url of profile picture
      */
     void setProfilePicture(String downloadUrl);
+
+    /**
+     * Shows progress loader with the given message
+     *
+     * @param messsage resource Id of string message to display
+     */
+    void showProgressDialog(int messsage);
+
+    /**
+     * Hides progress loader
+     */
+    void hideProgressDialog();
 }

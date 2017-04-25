@@ -99,15 +99,11 @@ public class ProfilePresenter implements ProfileInteractor {
                 });
     }
 
-    /**
-     * Uploads profile picture to Firebase Storage and then updates Database
-     * with the picture download url
-     *
-     * @param data {@link Uri} containing new profile picture
-     */
     @SuppressWarnings("VisibleForTests")
     @Override
     public void uploadProfilePictureToStorage(final Uri data) {
+        view.showProgressDialog(R.string.progress_upload_pic);
+
         StorageReference filepath = FirebaseStorage.getInstance().getReference()
                 .child("profile-pics").child(FirebaseUtil.getCurrentUserUid());
 
@@ -118,14 +114,16 @@ public class ProfilePresenter implements ProfileInteractor {
                         String downloadUrl = taskSnapshot.getDownloadUrl().toString();
                         Log.i(TAG, "updateProfilePicture:success:downloadUrl " + downloadUrl);
 
-                        updateUserPhotoUrl(downloadUrl);
                         view.setProfilePicture(downloadUrl);
+                        updateUserPhotoUrl(downloadUrl);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e(TAG, "updateProfilePicture:failure");
+                        view.hideProgressDialog();
+                        view.makeToast(e.getMessage());
                     }
                 });
     }
@@ -186,6 +184,7 @@ public class ProfilePresenter implements ProfileInteractor {
         if (fullName.isEmpty()) {
             return;
         }
+        view.showProgressDialog(R.string.progress_update_name);
 
         mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
                 .child("fullName").setValue(fullName);
@@ -198,6 +197,7 @@ public class ProfilePresenter implements ProfileInteractor {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        view.hideProgressDialog();
                         if (task.isSuccessful()) {
                             Log.d(TAG, "updateFullName:success " + fullName);
                             view.makeToast(R.string.toast_update_name);
@@ -233,11 +233,13 @@ public class ProfilePresenter implements ProfileInteractor {
         if (password.isEmpty()) {
             return;
         }
+        view.showProgressDialog(R.string.progress_update_pwd);
 
         FirebaseUtil.getCurrentUser().updatePassword(password)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        view.hideProgressDialog();
                         if (task.isSuccessful()) {
                             Log.i(TAG, "updatePassword:success");
                             view.makeToast(R.string.toast_pwd_name);

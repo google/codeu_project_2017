@@ -21,4 +21,8 @@
     <string name="err_et_fullname">Invalid Full Name</string>
     <string name="toast_update_name">Name has been updated</string>
     <string name="toast_pwd_name">Password has been updated</string>
+    <string name="progress_upload_pic">Uploading picture...</string>
+    <string name="toast_upload_pic_success">Picture successfully uploaded</string>
+    <string name="progress_update_name">Updating full name</string>
+    <string name="progress_update_pwd">Updating password</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.google.codeu.chatme.view.tabs;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.codeu.chatme.model.User;
 import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.view.login.LoginActivity;
 import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment implements ProfileView, View.OnClickListener {
@@ -24,6 +26,8 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     private static final int GALLERY_INTENT = 42;
 
     private OnFragmentInteractionListener mListener;
+
+    private ProgressDialog mProgressDialog;
 
     // fragment edit texts and buttons
     private EditText etPassword;
@@ -129,7 +133,17 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
                     .placeholder(R.drawable.placeholder_person)
                     .error(R.drawable.placeholder_person)
                     .fit()
-                    .into(ivProfilePic);
+                    .into(ivProfilePic, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            hideProgressDialog();
+                        }
+
+                        @Override
+                        public void onError() {
+                            hideProgressDialog();
+                        }
+                    });
         } else {
             Picasso.with(getContext())
                     .load(R.drawable.placeholder_person)
@@ -163,13 +177,28 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GALLERY_INTENT && resultCode == Activity.RESULT_OK) {
             presenter.uploadProfilePictureToStorage(data.getData());
+        }
+    }
+
+    public void showProgressDialog(int messsage) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getContext());
+            mProgressDialog.setMessage(getString(messsage));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 
