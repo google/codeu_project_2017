@@ -79,7 +79,7 @@ public class ProfilePresenter implements ProfileInteractor {
     }
 
     /**
-     * get current user's profile information and store in User object
+     * Get current user's profile information and store in User object
      */
     public void getUserProfile() {
         mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
@@ -99,6 +99,12 @@ public class ProfilePresenter implements ProfileInteractor {
                 });
     }
 
+    /**
+     * Uploads profile picture to Firebase Storage and then updates Database
+     * with the picture download url
+     *
+     * @param data {@link Uri} containing new profile picture
+     */
     @SuppressWarnings("VisibleForTests")
     @Override
     public void uploadProfilePictureToStorage(final Uri data) {
@@ -124,6 +130,11 @@ public class ProfilePresenter implements ProfileInteractor {
                 });
     }
 
+    /**
+     * Updates logged-in user's profile pic storage url
+     *
+     * @param downloadUri new profile pic download url
+     */
     private void updateUserPhotoUrl(String downloadUri) {
         mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
                 .child("photoUrl").setValue(downloadUri.toString());
@@ -161,18 +172,21 @@ public class ProfilePresenter implements ProfileInteractor {
      * @param password user's password
      */
     public void updateUser(String fullName, String username, String password) {
-        if (!fullName.isEmpty()) {
-            updateFullName(fullName);
-        }
-        if (!username.isEmpty()) {
-            updateUserName(username);
-        }
-        if (!password.isEmpty()) {
-            updatePassword(password);
-        }
+        updateFullName(fullName);
+        updateUserName(username);
+        updatePassword(password);
     }
 
+    /**
+     * Updates logged-in user's full name
+     *
+     * @param fullName new full name
+     */
     private void updateFullName(final String fullName) {
+        if (fullName.isEmpty()) {
+            return;
+        }
+
         mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
                 .child("fullName").setValue(fullName);
 
@@ -195,13 +209,31 @@ public class ProfilePresenter implements ProfileInteractor {
                 });
     }
 
+    /**
+     * Updates logged-in user's username
+     *
+     * @param username new username
+     */
     private void updateUserName(String username) {
+        if (username.isEmpty()) {
+            return;
+        }
+
         mRootRef.child("users").child(FirebaseUtil.getCurrentUserUid())
                 .child("username").setValue(username);
         Log.i(TAG, "updateUsername:success " + FirebaseUtil.getCurrentUserUid());
     }
 
+    /**
+     * Updates logged-in user's password
+     *
+     * @param password new password
+     */
     private void updatePassword(String password) {
+        if (password.isEmpty()) {
+            return;
+        }
+
         FirebaseUtil.getCurrentUser().updatePassword(password)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

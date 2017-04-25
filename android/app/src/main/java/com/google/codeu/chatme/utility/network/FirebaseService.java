@@ -13,13 +13,10 @@ import retrofit2.http.POST;
 public interface FirebaseService {
 
     /**
-     * @param participants
-     * @return
+     * @param participants list of ids of participants (users)
+     * @return map from user ids to their public account details (full name,
+     * profile pic url)
      */
-    @FormUrlEncoded
-    @POST("/getUserNames")
-    Call<HashMap<String, String>> getNamesFromIds(@Field("ids") List<String> participants);
-
     @FormUrlEncoded
     @POST("/getUserDetails")
     Call<HashMap<String, ConversationParticipantDetails>> getDetailsFromIds(

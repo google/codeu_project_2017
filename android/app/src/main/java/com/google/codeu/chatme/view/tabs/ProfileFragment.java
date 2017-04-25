@@ -19,15 +19,6 @@ import com.google.codeu.chatme.view.login.LoginActivity;
 import com.pkmmte.view.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment implements ProfileView, View.OnClickListener {
 
     private static final int GALLERY_INTENT = 42;
@@ -40,7 +31,6 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     private EditText etFullName;
     private Button btnSaveChanges;
     private Button btnLogOut;
-    private Button btnDeleteAcnt;
     private CircularImageView ivProfilePic;
 
     private ProfilePresenter presenter;
@@ -77,19 +67,17 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         etPassword = (EditText) view.findViewById(R.id.etPassword);
         btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
-        btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
         ivProfilePic = (CircularImageView) view.findViewById(R.id.ivProfilePic);
 
         btnSaveChanges.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
-        btnDeleteAcnt.setOnClickListener(this);
         ivProfilePic.setOnClickListener(this);
 
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
 
         presenter.getUserProfile();
-        setProfilePicture(null);
+        setProfilePicture(null);    // shows placeholder image
     }
 
     @Override
@@ -155,7 +143,6 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         switch (view.getId()) {
 
             case R.id.btnSaveChanges:
-                // TODO: get user's profile picture
                 String fullName = etFullName.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
@@ -167,11 +154,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
                 presenter.signOut();
                 break;
 
-            case R.id.btnDeleteAcnt:
-                // TODO: delete all references of this user in Json tree?
-                // presenter.deleteAccount();
-                break;
-
+            // opens gallery to pick a new profile picture
             case R.id.ivProfilePic:
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
@@ -179,6 +162,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
                 break;
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

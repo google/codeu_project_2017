@@ -35,5 +35,10 @@ public interface ProfileView {
      */
     void setUserProfile(User userData);
 
+    /**
+     * Sets user's profile picture
+     *
+     * @param downloadUrl url of profile picture
+     */
     void setProfilePicture(String downloadUrl);
 }

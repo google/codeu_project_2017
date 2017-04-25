@@ -12,23 +12,11 @@ import android.view.ViewGroup;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.view.adapter.ChatListAdapter;
 
-
-/**
- *
- */
 public class ChatsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * {@link RecyclerView} to hold the list of conversations for the current user
-     */
     private RecyclerView rvChatList;
-
-    /**
-     * {@link android.support.v7.widget.RecyclerView.Adapter} to bind conversations
-     * data to their corresponding views
-     */
     private ChatListAdapter chatListAdapter;
 
     /**
