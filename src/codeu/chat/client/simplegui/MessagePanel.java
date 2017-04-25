@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
@@ -81,7 +82,16 @@ public final class MessagePanel extends JPanel {
     titleOwnerPanelC.gridy = 1;
     titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
 
-    // messageConversationLabel is an instance variable of Conversation panel
+	// Color selector for the text
+	String[] colors = {"Black", "Red"};
+	final JComboBox colorList = new JComboBox(colors);
+	final GridBagConstraints titleColorsPanelC = new GridBagConstraints();
+	colorList.setSelectedIndex(0);
+	titleColorsPanelC.gridx = 1;
+	titleColorsPanelC.gridy = 0;
+	titleColorsPanelC.anchor = GridBagConstraints.PAGE_START;
+		
+	// messageConversationLabel is an instance variable of Conversation panel
     // can update it.
     messageConversationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
     titleConvPanel.add(messageConversationLabel);
@@ -95,6 +105,7 @@ public final class MessagePanel extends JPanel {
 
     titlePanel.add(titleConvPanel, titleConvPanelC);
     titlePanel.add(titleOwnerPanel, titleOwnerPanelC);
+    titlePanel.add(colorList, titleColorsPanelC);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
     // User List panel.
@@ -118,7 +129,8 @@ public final class MessagePanel extends JPanel {
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
     final JLabel messagePrompt = new JLabel("Send message: ");
-
+	
+	// Message to add area
     final JTextArea messageField = new JTextArea(3, 25);
     final JScrollPane messageScroll = new JScrollPane(messageField);
 
@@ -163,6 +175,7 @@ public final class MessagePanel extends JPanel {
         } else if (!clientContext.conversation.hasCurrent()) {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
+          
           final String messageText = messageField.getText();
           messageField.setText("");
           if (messageText != null && messageText.length() > 0) {
@@ -170,7 +183,10 @@ public final class MessagePanel extends JPanel {
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
                 messageText);
+            //userList.setSelectedIndex(1);
+            //userList.setSelectionForeground(Color.RED);
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+            
           }
         }
       }
