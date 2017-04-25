@@ -46,10 +46,16 @@ final class ServerMain {
 
     LOG.info("============================= START OF LOG =============================");
 
-    final Uuid id = Uuid.fromString(args[0]);
+    final int myPort = Integer.parseInt(args[2]);
     final byte[] secret = Secret.parse(args[1]);
 
-    final int myPort = Integer.parseInt(args[2]);
+    Uuid id = null;
+    try {
+      id = Uuid.parse(args[0]);
+    } catch (IOException ex) {
+      System.out.println("Invalid id - shutting down server");
+      System.exit(1);
+    }
 
     // This is the directory where it is safe to store data accross runs
     // of the server.
