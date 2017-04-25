@@ -1,0 +1,11 @@
+convert message bytes into packets
+Encrypt packets
+send it on
+
+Ruiqi Maomessage type: 0
+message content: "hi"
+byte 1: 0
+bytes 2-5: 2
+bytes 6, 7: 104, 105
+
+for storage, compress then encrypt
