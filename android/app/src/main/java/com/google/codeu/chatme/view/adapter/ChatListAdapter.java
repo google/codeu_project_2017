@@ -3,7 +3,6 @@ package com.google.codeu.chatme.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,6 +157,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                         .load(picUrl)
                         .placeholder(R.drawable.placeholder_person)
                         .error(R.drawable.placeholder_person)
+                        .fit()
                         .into(this.civPic);
             } else {
                 Picasso.with(context)

@@ -33,6 +33,7 @@ public final class User {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -57,10 +58,7 @@ public final class User {
         return timeCreated;
     }
 
-
     public void setId(String id) {
         this.id = id;
     }
-
-
 }

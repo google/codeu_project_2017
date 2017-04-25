@@ -62,7 +62,7 @@ public class UsersFragment extends Fragment {
         rvUserList = (RecyclerView) view.findViewById(R.id.userList);
         rvUserList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        userListAdapter = new UserListAdapter();
+        userListAdapter = new UserListAdapter(getContext());
         rvUserList.setAdapter(userListAdapter);
 
         userListAdapter.loadUsers();

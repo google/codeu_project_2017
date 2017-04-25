@@ -140,6 +140,7 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
                     .load(downloadUrl)
                     .placeholder(R.drawable.placeholder_person)
                     .error(R.drawable.placeholder_person)
+                    .fit()
                     .into(ivProfilePic);
         } else {
             Picasso.with(getContext())

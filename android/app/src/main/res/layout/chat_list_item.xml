@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="CodeU Group 31"
+            android:text="Conversation Name"
             android:textStyle="bold" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvSender"
-            android:text="Just submitted a pull request!" />
+            android:text="Latest Message" />
 
         <TextView
             android:id="@+id/tvTimeSent"
@@ -51,6 +51,5 @@
             android:text="9:03 AM" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>
