@@ -57,4 +57,10 @@ public final class User {
         return timeCreated;
     }
 
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 }
