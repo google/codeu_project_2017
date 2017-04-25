@@ -14,7 +14,6 @@ import codeu.chat.common.Time;
 import codeu.chat.common.User;
 //import codeu.chat.common.Uuid;
 import codeu.chat.util.store.Store;
-import codeu.chat.util.Logger.Log;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
@@ -111,7 +110,6 @@ public class DerbyStore {
 		checkValidUserTest.setString(2, password);
 		ResultSet user = checkValidUserTest.executeQuery();
 		
-		// TEST
 		return (user != null) ? user.getString(1) : null;
 	}
 	
@@ -123,9 +121,6 @@ public class DerbyStore {
 		addUser.setLong(4, u.creation.inMs());
 		
 		addUser.executeUpdate();
-		
-		/*stmt.execute("INSERT INTO " + userTableName + " VALUES(" + "\'" + removeCharsInUuid(u.id.toString()) + "\'" +
-				"," + "\'" + u.name + "\'" + ", 'test', " + u.creation.inMs() + ")");*/
 	}
 	
 	public void addMessage(Message m) throws SQLException {
@@ -138,16 +133,10 @@ public class DerbyStore {
 		addMessage.setString(6, removeCharsInUuid(m.next.toString()));
 		
 		addMessage.executeUpdate();
-		
-		
-		/*stmt.execute("INSERT INTO " + messageTableName + " VALUES(" + "\'" +  removeCharsInUuid(m.id.toString()) +  "\'" +
-				","  +  "\'" + removeCharsInUuid(m.previous.toString()) +  "\'" + "," +  m.creation.inMs() + "," 
-				+  "\'" + removeCharsInUuid(m.author.toString()) +  "\'" + "," +  "\'" + m.content +  "\'" + "," +  "\'" + removeCharsInUuid(m.next.toString()) +  "\'" + ")");*/
 	}
 	
 	
 	public void addConversation(Conversation c) throws SQLException {
-		StringBuilder usersInvolved = new StringBuilder();
 		
 		for (Uuid s : c.users) {
 			// Adding chat participants for a specific conversation to a table specifically for it.
@@ -155,9 +144,8 @@ public class DerbyStore {
 			addChatParticipants.setString(1, removeCharsInUuid(c.id.toString()));
 			addChatParticipants.setString(2, removeCharsInUuid(s.toString()));
 			addChatParticipants.executeUpdate();
-			
-			//stmt.execute("INSERT INTO " + chatParticipantsTableName + " VALUES('" + removeCharsInUuid(c.id.toString()) + "','" + removeCharsInUuid(s.toString()) + "')");
-			System.out.println("INSERT INTO " + chatParticipantsTableName + " VALUES('" + removeCharsInUuid(c.id.toString()) + "','" + removeCharsInUuid(s.toString()) + "')");
+		
+			LOG.info("INSERT INTO " + chatParticipantsTableName + " VALUES('" + removeCharsInUuid(c.id.toString()) + "','" + removeCharsInUuid(s.toString()) + "')");
 		}
 
 		PreparedStatement addConversation = conn.prepareStatement(addConversationInfo);
@@ -169,10 +157,6 @@ public class DerbyStore {
 		addConversation.setString(6, removeCharsInUuid(c.lastMessage.toString()));
 		addConversation.executeUpdate();
 		
-		
-		/*stmt.execute("INSERT INTO " + conversationTableName + " VALUES(" +  "\'" + removeCharsInUuid(c.id.toString()) +  "\'" +
-				"," +  "\'" + removeCharsInUuid(c.owner.toString()) +  "\'" + "," + c.creation.inMs() + "," + "\'" + c.title + "\'" + "," +  "\'" + usersInvolved.toString() +  "\'" + 
-				"," +  "\'" + removeCharsInUuid(c.firstMessage.toString()) +  "\'" +  "," + "\'" + removeCharsInUuid(c.lastMessage.toString()) +  "\'" + ")");*/
 	}
 	
 	public void updateConversation(Conversation c) throws SQLException {
@@ -185,8 +169,6 @@ public class DerbyStore {
 		
 		updateConversationStatement.executeUpdate();
 		
-		/*stmt.execute("UPDATE " + conversationTableName + " SET firstMessage = " + "\'" + removeCharsInUuid(c.firstMessage.toString()) 
-			+ "\'" + ", lastMessage = " + "\'" + removeCharsInUuid(c.lastMessage.toString()) + "\'" + " WHERE id = " + "\'" + removeCharsInUuid(c.id.toString()) + "\'");*/
 	}
 	
 	public void updateLastMessage(Message m) throws SQLException {
@@ -196,9 +178,6 @@ public class DerbyStore {
 		updateMessageStatement.setString(2, removeCharsInUuid(m.id.toString()));
 		
 		updateMessageStatement.executeUpdate();
-		
-		/*stmt.execute("UPDATE message SET nextMessage = " + "\'" + removeCharsInUuid(m.next.toString()) + "\'" + 
-				" WHERE id = " + "\'" + removeCharsInUuid(m.id.toString()) + "\'");*/
 	}
 	
 	public Store<Uuid, User> getAllUsers() {
@@ -262,11 +241,6 @@ public class DerbyStore {
 				String owners = allConversationsResponse.getString(5);
 				Uuid firstMessage = Uuid.fromString(allConversationsResponse.getString(6));
 				Uuid lastMessage = Uuid.fromString(allConversationsResponse.getString(7));
-				
-				/*for (String uuid : owners.split(" ")) {
-					if (!uuid.isEmpty()) ownersUuid.add(Uuid.fromString(uuid));
-				}*/
-				
 				
 				Conversation c = new Conversation(conversationid, ownerUuid, creation, title, ownersUuid, firstMessage, lastMessage);
 				allConversations.insert(conversationid, c);
