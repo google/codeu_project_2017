@@ -167,8 +167,8 @@ public final class Server {
 
         // Creates a new message
         case ("NEW_MESSAGE_REQUEST"):
-          final Uuid author = Uuid.fromString(r.getHeader("author"));
-          final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
+          final Uuid author = Uuid.parse(r.getHeader("author"));
+          final Uuid conversation = Uuid.parse(r.getHeader("conversation"));
           final String content = r.getHeader("content");
           if (author == null || conversation == null || content == null) {
             return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
@@ -194,7 +194,7 @@ public final class Server {
         // Creates a new conversation
         case ("NEW_CONVERSATION"):
           final String title = r.getBody();
-          final Uuid owner = Uuid.fromString(r.getHeader("owner"));
+          final Uuid owner = Uuid.parse(r.getHeader("owner"));
           if (title == null || owner == null) {
             return RequestHandler.failResponse(out, "Missing or invalid title or owner header.");
           }
