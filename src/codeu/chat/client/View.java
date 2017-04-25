@@ -118,8 +118,24 @@ public final class View implements BasicView, LogicalView{
 
   @Override
   public Collection<Conversation> getUserConversations(Uuid user_id) {
-      // TODO implement call to server for getUserConversations
-      return null;
+    final Collection<Conversation> conversations = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USER_CONVERSATIONS_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), user_id);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USER_CONVERSATIONS_RESPONSE) {
+        conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return conversations;
   }
 
   @Override

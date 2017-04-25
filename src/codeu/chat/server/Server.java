@@ -201,6 +201,15 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_RESPONSE);
       Serializers.collection(User.SERIALIZER).write(out, users);
 
+    } else if (type == NetworkCode.GET_USER_CONVERSATIONS_REQUEST) {
+
+      final Uuid user_id = Uuid.SERIALIZER.read(in);
+
+      final Collection<Conversation> conversations = view.getUserConversations(user_id);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_USER_CONVERSATIONS_RESPONSE);
+      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+
     } else if (type == NetworkCode.GET_CONVERSATIONS_BY_TIME_REQUEST) {
 
       final Time startTime = Time.SERIALIZER.read(in);
