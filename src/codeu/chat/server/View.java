@@ -61,7 +61,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
     final Collection<ConversationSummary> summaries = new ArrayList<>();
 
     for (final Conversation conversation : model.conversationById().all()) {
-        summaries.add(conversation.summary);
+        summaries.add(conversation.getConversationSummary());
     }
 
     return summaries;

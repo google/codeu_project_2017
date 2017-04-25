@@ -63,8 +63,6 @@ public final class Conversation {
     }
   };
 
-  public final ConversationSummary summary;
-
   public final Uuid id;
   public final String uuid;
   public final Uuid owner;
@@ -81,8 +79,11 @@ public final class Conversation {
     this.creation = creation;
     this.title = title;
     this.uuid = id.toString();
-    this.summary = new ConversationSummary(id, owner, creation, title);
 
+  }
+
+  public ConversationSummary getConversationSummary() {
+    return new ConversationSummary(id, owner, creation, title);
   }
 
   @Override

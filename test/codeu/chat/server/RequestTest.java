@@ -194,7 +194,7 @@ public final class RequestTest {
             JsonObject jsonObject = (new JsonParser()).parse(sub.getResult()).getAsJsonObject();
             conversations.add(jsonObject.get("uuid").toString());
             assertTrue("Unable to create conversation " + topic + ".",
-                    jsonObject.getAsJsonObject("summary").get("title").toString().equals("\"" + topic + "\""));
+                    jsonObject.get("title").toString().equals("\"" + topic + "\""));
         }
     }
 
