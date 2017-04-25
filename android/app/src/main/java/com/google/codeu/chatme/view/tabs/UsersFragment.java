@@ -3,23 +3,25 @@ package com.google.codeu.chatme.view.tabs;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.google.codeu.chatme.R;
+import com.google.codeu.chatme.view.adapter.UserListAdapter;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UsersFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link UsersFragment#newInstance} factory method to
- * create an instance of this fragment.
+ *
  */
 public class UsersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    private RecyclerView rvUserList;
+    private UserListAdapter userListAdapter;
 
     /**
      * Required empty public constructor
@@ -46,8 +48,26 @@ public class UsersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_users, container, false);
+        View view = inflater.inflate(R.layout.fragment_users, container, false);
+        initializeUI(view);
+        return view;
     }
+
+    /**
+     * Sets up user interface by loading the list of users
+     *
+     * @param view inflated {@link UsersFragment} layout view
+     */
+    private void initializeUI(View view) {
+        rvUserList = (RecyclerView) view.findViewById(R.id.userList);
+        rvUserList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        userListAdapter = new UserListAdapter();
+        rvUserList.setAdapter(userListAdapter);
+
+        userListAdapter.loadUsers();
+    }
+
 
     @Override
     public void onAttach(Context context) {
