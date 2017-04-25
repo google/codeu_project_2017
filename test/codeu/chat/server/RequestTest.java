@@ -37,7 +37,7 @@ public final class RequestTest {
         ConnectionSource serverSource;
 
         public Servlet(int port) throws IOException {
-            servlet = new Server(Uuid.fromString(String.valueOf(teamNumber)), Secret.parse("16"), new NoOpRelay());
+            servlet = new Server(Uuid.parse(String.valueOf(teamNumber)), Secret.parse("16"), new NoOpRelay());
             serverSource = ServerConnectionSource.forPort(port);
         }
 
