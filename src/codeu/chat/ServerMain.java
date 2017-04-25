@@ -18,10 +18,6 @@ package codeu.chat;
 import java.io.IOException;
 import java.io.File;
 
-import codeu.chat.common.Relay;
-import codeu.chat.common.Secret;
-import codeu.chat.server.NoOpRelay;
-import codeu.chat.server.RemoteRelay;
 import codeu.chat.server.Server;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
@@ -47,8 +43,6 @@ final class ServerMain {
 
     LOG.info("============================= START OF LOG =============================");
 
-    Uuid id = null;
-    Secret secret = null;
     int port = -1;
     // This is the directory where it is safe to store data accross runs
     // of the server.
@@ -56,11 +50,8 @@ final class ServerMain {
     RemoteAddress relayAddress = null;
 
     try {
-      id = Uuid.parse(args[0]);
-      secret = Secret.parse(args[1]);
-      port = Integer.parseInt(args[2]);
-      persistentPath = new File(args[3]);
-      relayAddress = args.length > 4 ? RemoteAddress.parse(args[4]) : null;
+      port = Integer.parseInt(args[0]);
+      persistentPath = new File(args[1]);
     } catch (Exception ex) {
       LOG.error(ex, "Failed to read command arguments");
       System.exit(1);
@@ -77,7 +68,7 @@ final class ServerMain {
     ) {
 
       LOG.info("Starting server...");
-      runServer(id, secret, serverSource, relaySource);
+      runServer(serverSource, relaySource);
 
     } catch (IOException ex) {
 
@@ -86,16 +77,10 @@ final class ServerMain {
     }
   }
 
-  private static void runServer(Uuid id,
-                                Secret secret,
-                                ConnectionSource serverSource,
+  private static void runServer(ConnectionSource serverSource,
                                 ConnectionSource relaySource) {
 
-    final Relay relay = relaySource == null ?
-                        new NoOpRelay() :
-                        new RemoteRelay(relaySource);
-
-    final Server server = new Server(id, secret, relay);
+    final Server server = new Server();
 
     LOG.info("Created server.");
 

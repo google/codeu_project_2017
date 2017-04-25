@@ -22,8 +22,6 @@ public final class TestRunner {
   public static void main(String[] args) {
      final Result result =
          JUnitCore.runClasses(
-             codeu.chat.common.SecretTest.class,
-             codeu.chat.relay.ServerTest.class,
              codeu.chat.server.BasicControllerTest.class,
              codeu.chat.server.RawControllerTest.class,
              codeu.chat.util.TimeTest.class,
