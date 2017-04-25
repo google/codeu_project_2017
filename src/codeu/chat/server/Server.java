@@ -163,18 +163,24 @@ public final class Server {
     }
 
     if (r.getVerb().equals("POST")) {
+      String body;
+      User user;
+      Uuid uuid1;
+      Uuid uuid2;
+      String value;
+      Conversation conv;
 
       switch (r.getHeader("type")) {
 
         // Creates a new message
-        case ("NEW_MESSAGE_REQUEST"):
-          final Uuid author = Uuid.parse(r.getHeader("author"));
-          final Uuid conversation = Uuid.parse(r.getHeader("conversation"));
-          final String content = r.getHeader("content");
-          if (author == null || conversation == null || content == null) {
+        case ("NEW_MESSAGE"):
+          uuid1 = Uuid.parse(r.getHeader("author"));
+          uuid2 = Uuid.parse(r.getHeader("conversation"));
+          value = r.getHeader("content");
+          if (uuid1 == null || uuid2 == null || value == null) {
             return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
           }
-          final Message message = controller.newMessage(author, conversation, content);
+          final Message message = controller.newMessage(uuid1, uuid2, value);
           if (message == null) {
             return RequestHandler.failResponse(out, "Invalid message.");
           }
@@ -182,11 +188,11 @@ public final class Server {
 
         // Creates a new user
         case ("NEW_USER"):
-          final String name = r.getBody();
-          if (name == null) {
+          body = r.getBody();
+          if (body == null) {
             return RequestHandler.failResponse(out, "Missing or invalid name header.");
           }
-          final User user = controller.newUser(name);
+          user = controller.newUser(body);
           if (user == null) {
             return RequestHandler.failResponse(out, "Invalid username.");
           }
@@ -194,16 +200,16 @@ public final class Server {
 
         // Creates a new conversation
         case ("NEW_CONVERSATION"):
-          final String title = r.getBody();
-          final Uuid owner = Uuid.parse(r.getHeader("owner"));
-          if (title == null || owner == null) {
+          body = r.getBody();
+          uuid1= Uuid.parse(r.getHeader("owner"));
+          if (body == null || uuid1 == null) {
             return RequestHandler.failResponse(out, "Missing or invalid title or owner header.");
           }
-          final Conversation conv = controller.newConversation(title, owner);
+          conv = controller.newConversation(body, uuid1);
           if (conv == null) {
             return RequestHandler.failResponse(out, "Invalid conversation.");
           }
-          return RequestHandler.successResponse(out, conv.id.toString());
+          return RequestHandler.successResponse(out, conv.toString());
 
         default:
           return RequestHandler.failResponse(out, "Unknown function type.");
