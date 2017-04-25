@@ -235,7 +235,7 @@ public final class Server {
             uuids = new ArrayList<Uuid>();
             for (String item : ids) {
               pos = item;
-              uuids.add(Uuid.fromString(item));
+              uuids.add(Uuid.parse(item));
             }
             users = view.getUsers(uuids);
             return RequestHandler.successResponse(out, users.toString());
