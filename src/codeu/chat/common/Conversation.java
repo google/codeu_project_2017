@@ -64,7 +64,6 @@ public final class Conversation {
   };
 
   public final Uuid id;
-  public final String uuid;
   public final Uuid owner;
   public final Time creation;
   public final String title;
@@ -78,7 +77,6 @@ public final class Conversation {
     this.owner = owner;
     this.creation = creation;
     this.title = title;
-    this.uuid = id.toString();
 
   }
 

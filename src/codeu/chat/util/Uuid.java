@@ -87,15 +87,18 @@ public final class Uuid {
 
   private final Uuid root;
   private final int id;
+  private final String uuid;
 
   public Uuid(Uuid root, int id) {
     this.root = root;
     this.id = id;
+    this.uuid = toString(this);
   }
 
   public Uuid(int id) {
     this.root = null;
     this.id = id;
+    this.uuid = toString(this);
   }
 
   public Uuid root() {

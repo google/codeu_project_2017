@@ -50,7 +50,6 @@ public final class User {
   };
 
   public final Uuid id;
-  public final String uuid;
   public final String name;
   public final Time creation;
 
@@ -59,7 +58,6 @@ public final class User {
     this.id = id;
     this.name = name;
     this.creation = creation;
-    this.uuid = id.toString();
 
   }
 

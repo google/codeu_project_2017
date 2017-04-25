@@ -123,7 +123,7 @@ public final class RequestTest {
             new Thread(sub).start();
             Thread.sleep(200);
             JsonObject jsonObject = (new JsonParser()).parse(sub.getResult()).getAsJsonObject();
-            users.add(jsonObject.get("uuid").toString());
+            users.add(jsonObject.getAsJsonObject("id").get("uuid").toString());
             assertTrue("Unable to create user " + username + ".",
                     jsonObject.get("name").toString().equals("\"" + username + "\""));
         }
@@ -192,7 +192,7 @@ public final class RequestTest {
             new Thread(sub).start();
             Thread.sleep(200);
             JsonObject jsonObject = (new JsonParser()).parse(sub.getResult()).getAsJsonObject();
-            conversations.add(jsonObject.get("uuid").toString());
+            conversations.add(jsonObject.getAsJsonObject("id").get("uuid").toString());
             assertTrue("Unable to create conversation " + topic + ".",
                     jsonObject.get("title").toString().equals("\"" + topic + "\""));
         }
