@@ -17,9 +17,13 @@ package codeu.chat.common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Compression;
+import codeu.chat.util.Compressions;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
@@ -30,20 +34,16 @@ public final class User {
     @Override
     public void write(OutputStream out, User value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Serializers.STRING.write(out, value.name);
-      Time.SERIALIZER.write(out, value.creation);
+      byte[] user = Compressions.USER.compress(value);
+      Serializers.BYTES.write(out, user);
 
     }
 
     @Override
     public User read(InputStream in) throws IOException {
 
-      return new User(
-          Uuid.SERIALIZER.read(in),
-          Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
-      );
+      byte[] user = Serializers.BYTES.read(in);
+      return Compressions.USER.decompress(user);
 
     }
   };
@@ -60,6 +60,38 @@ public final class User {
     this.creation = creation;
     this.token = null; // This will be null unless explicitly set.
                        // Is not transferred in the serializer for security.
+
+  }
+
+  /**
+  * @param a, b The users that are compared to each other
+  * @return true if the fields of the users are identical, otherwise false
+  */
+  public static boolean equals(User a, User b){
+    return a.name.equals(b.name) && a.creation.compareTo(b.creation) == 0 && Uuid.equals(a.id, b.id);
+  }
+
+  /**
+  * @brief Formerly the overridden Serializer write
+  */
+  public static void toStream(OutputStream out, User value) throws IOException{
+
+      Uuid.SERIALIZER.write(out, value.id);
+      Serializers.STRING.write(out, value.name);
+      Time.SERIALIZER.write(out, value.creation);
+
+  }
+
+  /**
+  * @brief Formerly the overridden Serializer read
+  */
+  public static User fromStream(InputStream in) throws IOException {
+
+      return new User(
+          Uuid.SERIALIZER.read(in),
+          Serializers.STRING.read(in),
+          Time.SERIALIZER.read(in)
+      );
 
   }
 }

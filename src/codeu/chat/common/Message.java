@@ -17,43 +17,40 @@ package codeu.chat.common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
+import codeu.chat.util.Compression;
+import codeu.chat.util.Compressions;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.Time;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public final class Message {
 
   public static final Serializer<Message> SERIALIZER = new Serializer<Message>() {
 
-
+    /**
+    * @description Sends to outputstream a message represented as a compressed byte[]
+    */
     @Override
     public void write(OutputStream out, Message value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.next);
-      Uuid.SERIALIZER.write(out, value.previous);
-      Time.SERIALIZER.write(out, value.creation);
-      Uuid.SERIALIZER.write(out, value.author);
-      Serializers.STRING.write(out, value.content);
+      byte[] message = Compressions.MESSAGE.compress(value);
+      Serializers.BYTES.write(out, message);
 
     }
 
+    /**
+    * @description Deserializes compressed byte[] and then decompresses to original message
+    */
     @Override
     public Message read(InputStream in) throws IOException {
 
-      return new Message(
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
-          Time.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
-          Serializers.STRING.read(in)
-      );
+      byte[] message = Serializers.BYTES.read(in);
+      return Compressions.MESSAGE.decompress(message);
 
     }
   };
@@ -64,9 +61,6 @@ public final class Message {
   public final Uuid author;
   public final String content;
   public Uuid next;
-  //Global fields for utilizing gson
-  private static final GsonBuilder builder = new GsonBuilder();
-  private static final Gson gson = builder.create();
 
   public Message(Uuid id, Uuid next, Uuid previous, Time creation, Uuid author, String content) {
 
@@ -79,19 +73,43 @@ public final class Message {
 
   }
 
-    /**
-     * @return String representation of Message, formattted
-     * as a JSON object
-     */
-    public String toString(){
-        return gson.toJson(this);
-    }
+  /**
+  * @param a, b The messages that are compared to each other
+  * @return true if the fields of the messages are identical, otherwise false
+  */
+  public static boolean equals(Message a, Message b){
+    //Only check the next field of Uuids, because this performs a deep check and
+    //we assume cur and prev are linked
+    return a.content.equals(b.content) && a.creation.compareTo(b.creation) == 0
+    && Uuid.equals(a.author, b.author) && Uuid.equals(a.next, b.next);
+  }
 
-    /**
-     * @param str The string that is used to build the message
-     * @return A message built from the passed in JSON string
-     */
-    public static Message fromString(String str){
-        return gson.fromJson(str, Message.class);
-    }
+
+  /**
+  * @brief Formerly the overridden Serializer write
+  */
+  public static void toStream(OutputStream out, Message value) throws IOException {
+
+    Uuid.SERIALIZER.write(out, value.id);
+    Uuid.SERIALIZER.write(out, value.next);
+    Uuid.SERIALIZER.write(out, value.previous);
+    Time.SERIALIZER.write(out, value.creation);
+    Uuid.SERIALIZER.write(out, value.author);
+    Serializers.STRING.write(out, value.content);
+  }
+
+  /**
+  * @brief Formerly the overridden Serializer read
+  */
+  public static Message fromStream(InputStream in) throws IOException {
+
+    return new Message(
+        Uuid.SERIALIZER.read(in),
+        Uuid.SERIALIZER.read(in),
+        Uuid.SERIALIZER.read(in),
+        Time.SERIALIZER.read(in),
+        Uuid.SERIALIZER.read(in),
+        Serializers.STRING.read(in)
+    );
+  }
 }

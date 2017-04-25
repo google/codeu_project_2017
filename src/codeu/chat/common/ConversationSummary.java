@@ -17,9 +17,13 @@ package codeu.chat.common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Compression;
+import codeu.chat.util.Compressions;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
@@ -30,22 +34,16 @@ public final class ConversationSummary implements ListViewable {
     @Override
     public void write(OutputStream out, ConversationSummary value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
-      Time.SERIALIZER.write(out, value.creation);
-      Serializers.STRING.write(out, value.title);
+      byte[] conversationSummary = Compressions.CONVERSATION_SUMMARY.compress(value);
+      Serializers.BYTES.write(out, conversationSummary);
 
     }
 
     @Override
     public ConversationSummary read(InputStream in) throws IOException {
 
-      return new ConversationSummary(
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
-          Time.SERIALIZER.read(in),
-          Serializers.STRING.read(in)
-      );
+      byte[] conversationSummary = Serializers.BYTES.read(in);
+      return Compressions.CONVERSATION_SUMMARY.decompress(conversationSummary);
 
     }
   };
@@ -64,9 +62,44 @@ public final class ConversationSummary implements ListViewable {
 
   }
 
+  /**
+  * @param a, b The summaries that are compared to each other
+  * @return true if the fields of the summaries are identical, otherwise false
+  */
+  public static boolean equals(ConversationSummary a, ConversationSummary b){
+    return a.title.equals(b.title) && a.creation.compareTo(b.creation) == 0 && Uuid.equals(a.id, b.id) 
+    && Uuid.equals(a.owner, b.owner);
+  }
+
   // How this object should appear in a user-viewable list
   @Override
   public String listView() {
     return title;
+  }
+
+  /**
+  * @brief Formerly the overridden Serializer write
+  */
+  public static void toStream(OutputStream out, ConversationSummary value) throws IOException{
+
+      Uuid.SERIALIZER.write(out, value.id);
+      Uuid.SERIALIZER.write(out, value.owner);
+      Time.SERIALIZER.write(out, value.creation);
+      Serializers.STRING.write(out, value.title);
+
+  }
+
+  /**
+  * @brief Formerly the overridden Serializer read
+  */
+  public static ConversationSummary fromStream(InputStream in) throws IOException {
+
+      return new ConversationSummary(
+          Uuid.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
+          Time.SERIALIZER.read(in),
+          Serializers.STRING.read(in)
+      );
+
   }
 }
