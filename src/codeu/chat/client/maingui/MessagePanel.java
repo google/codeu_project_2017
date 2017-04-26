@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.io.File;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
@@ -22,6 +23,9 @@ public final class MessagePanel extends JPanel{
 
   private final ClientContext clientContext;
 
+  private final JFileChooser fileChooser = new JFileChooser();
+  private File file;
+
   public MessagePanel(ClientContext clientContext) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
@@ -31,13 +35,9 @@ public final class MessagePanel extends JPanel{
   // External agent calls this to trigger an update of this panel's contents.
   public void update(ConversationSummary owningConversation) {
 
-    final User u = (owningConversation == null) ?
-        null :
-        clientContext.user.lookup(owningConversation.owner);
-    messageOwnerLabel.setText("Owner: " +
-        ((u==null) ?
-            ((owningConversation==null) ? "" : owningConversation.owner) :
-            u.name));
+    final User u = (owningConversation == null) ? null : clientContext.user.lookup(owningConversation.owner);
+
+    messageOwnerLabel.setText("Owner: " + ((u==null) ? ((owningConversation==null) ? "" : owningConversation.owner) : u.name));
 
     messageConversationLabel.setText("Conversation: " + owningConversation.title);
 
@@ -52,6 +52,10 @@ public final class MessagePanel extends JPanel{
 
     this.setLayout(new BorderLayout());
     this.setPreferredSize(new Dimension(500,500));
+
+    // Initialize File Chooser options
+    this.fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    file = null;
 
     // Title bar - current conversation and owner
     final JPanel titlePanel = new JPanel(new GridBagLayout());
@@ -96,19 +100,36 @@ public final class MessagePanel extends JPanel{
     listShowPanel.add(userListScrollPane, BorderLayout.CENTER);
 
     // Button panel
-    final JPanel buttonPanel = new JPanel(new BorderLayout());
+    final JPanel buttonPanel = new JPanel(new GridBagLayout());
 
     final JButton addButton = new JButton("Add");
+    final JButton addFileButton = new JButton("File");
     final JButton updateButton = new JButton("Update");
     final JTextArea sendMessageTextArea = new JTextArea(3,20);
     final JScrollPane sendMessageScrollPane = new JScrollPane(sendMessageTextArea);
 
 
     buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    GridBagConstraints buttonPanelConstrains = new GridBagConstraints();
+    buttonPanelConstrains.fill = GridBagConstraints.BOTH;
+    buttonPanelConstrains.insets = new Insets(0,2,0,2);
     
-    buttonPanel.add(updateButton, BorderLayout.WEST);
-    buttonPanel.add(addButton, BorderLayout.EAST);
-    buttonPanel.add(sendMessageScrollPane,BorderLayout.CENTER);
+    buttonPanelConstrains.weightx = 0.1;
+    buttonPanelConstrains.gridx = 0;
+    buttonPanelConstrains.gridy = 0;
+    buttonPanel.add(updateButton,buttonPanelConstrains);
+
+    buttonPanelConstrains.weightx = 0.7;
+    buttonPanelConstrains.gridx = 1;
+    buttonPanel.add(sendMessageScrollPane,buttonPanelConstrains);
+
+    buttonPanelConstrains.weightx = 0.1;
+    buttonPanelConstrains.gridx = 2;
+    buttonPanel.add(addFileButton,buttonPanelConstrains);
+
+    buttonPanelConstrains.weightx = 0.1;
+    buttonPanelConstrains.gridx = 3;
+    buttonPanel.add(addButton,buttonPanelConstrains);
 
     this.add(titlePanel, BorderLayout.NORTH);
     this.add(listShowPanel, BorderLayout.CENTER);
@@ -123,36 +144,49 @@ public final class MessagePanel extends JPanel{
         } else {
           final String messageText = sendMessageTextArea.getText();
           if (messageText != null && messageText.length() > 0) {
+            // Implement sending message with file here:
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
                 messageText);
             sendMessageTextArea.setText("");
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+
+            // Set file to null when message is sent
+            file = null;
           }
         }
       }
     });
 
+    // User click Messages Update button - update all messages in conversation (still in develop)
     updateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (!clientContext.conversation.hasCurrent()) {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
-          /*final String messageText = sendMessageTextArea.getText();
-          if (messageText != null && messageText.length() > 0) {
-            clientContext.message.addMessage(
-                clientContext.user.getCurrent().id,
-                clientContext.conversation.getCurrentId(),
-                messageText);
-            sendMessageTextArea.setText("");
-            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
-          }*/
-          /*System.out.println("getAllMessages...");
-          clientContext.message.updateMessages(true);*/
           clientContext.conversation.updateAllConversations(true);
           MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+        }
+      }
+    });
+
+    // User click Messages Add File button - choose a file to send
+    addFileButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
+        } else {
+          int returnVal = fileChooser.showOpenDialog(MessagePanel.this.getParent());
+          if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            System.out.println(file.getName());
+          } else {
+            // File Chooser canceled
+            file = null;
+          }
         }
       }
     });

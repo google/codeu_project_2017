@@ -15,6 +15,9 @@
 package codeu.chat.server;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -40,9 +43,16 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
+  private final String userDatabasePath = "../src/codeu/chat/database/users";
+  private List<DatabaseUser> databaseUsersList;
+  private HashMap<String,DatabaseUser> databaseUsersMap;
+
   public Controller(Uuid serverId, Model model) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
+
+    // Load all database users from the file to the model
+    loadDatabaseUsers();
   }
 
   @Override
@@ -157,27 +167,21 @@ public final class Controller implements RawController, BasicController {
   // Search for a user in the database and create the User object in the return.
   @Override
   public User searchUserInDatabase(String username, String pswd){
-    StringBuilder stringBuilder = new StringBuilder();
-    Gson gson = new Gson();
-
-    // Open the database file.
-    try (BufferedReader br = new BufferedReader(new FileReader("../src/codeu/chat/databases/users"))) {
-
-      // Append the current line into the StringBuilder.
-			String sCurrentLine;
-			while ((sCurrentLine = br.readLine()) != null) {
-				stringBuilder.append(sCurrentLine);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-    // Parse the database json into DatabaseUser array using Gson.
-    DatabaseUser[] databaseUsers = gson.fromJson(stringBuilder.toString(), DatabaseUser[].class); 
-
+    DatabaseUser tempUser = databaseUsersMap.get(username);
+    //return (tempUser != null) ? (tempUser.pswd.equals(pswd)) ? model.userById().first(tempUser.id) : null : null;
+    if(tempUser != null){
+      if(tempUser.pswd.equals(pswd)){
+        final User userFromModel = model.userById().first(Uuids.fromString(tempUser.id));
+        if(userFromModel != null){
+          return userFromModel;
+        }else{
+          System.out.println("User in model but not in database");
+        }
+      }
+    }
+    return null;
     // Iterate in every DatabaseUser
-    for(DatabaseUser databaseUser : databaseUsers){
+    /*for(DatabaseUser databaseUser : databaseUsersList){
 
       // Check if the username and pswd matches with the DatabaseUser.
       if(databaseUser.checkLogin(username,pswd)){
@@ -195,10 +199,32 @@ public final class Controller implements RawController, BasicController {
           return userFromModel;
         }
       }
-    }
-    return null;
+    }*/
   }
+  // Load all database users to List and to the model
+  private void loadDatabaseUsers(){
+    StringBuilder stringBuilder = new StringBuilder();
+    Gson gson = new Gson();
+    try (BufferedReader br = new BufferedReader(new FileReader(userDatabasePath))) {
+      // Append the current line into the StringBuilder.
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				stringBuilder.append(sCurrentLine);
+			}
+      // Parse the database json into DatabaseUser array using Gson.
+      databaseUsersList = Arrays.asList(gson.fromJson(stringBuilder.toString(), DatabaseUser[].class));
+      databaseUsersMap = new HashMap<String,DatabaseUser>(27);
+      
+      // Add all users to the model
+      for(DatabaseUser databaseUser : databaseUsersList){
+        databaseUsersMap.put(databaseUser.name,databaseUser);
+        model.add(new User(databaseUser));
+      }
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+  }
   private Uuid createId() {
 
     Uuid candidate;

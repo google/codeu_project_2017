@@ -78,12 +78,12 @@ public final class ConversationPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (clientContext.user.hasCurrent()) {
-          final String s = (String) JOptionPane.showInputDialog(
-              ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+          final String s = (String) JOptionPane.showInputDialog(ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
             ConversationPanel.this.getAllConversations(listModel);
+            
+            messagePanel.update(clientContext.conversation.getCurrent());
           }
         } else {
           JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
@@ -101,7 +101,6 @@ public final class ConversationPanel extends JPanel {
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
 
           clientContext.conversation.setCurrent(cs);
-
           messagePanel.update(cs);
         }
       }
