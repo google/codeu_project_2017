@@ -90,6 +90,7 @@ public final class RequestTest {
     private static Servlet servlet;
     private static List<String> users;
     private static List<String> conversations;
+    private static List<String> messages;
 
 
     private static boolean setUpIsDone = false;
@@ -101,6 +102,7 @@ public final class RequestTest {
         servlet = new Servlet(8000);
         users = new ArrayList<>();
         conversations = new ArrayList<>();
+        messages = new ArrayList<>();
         setUpIsDone = true;
     }
 
@@ -168,11 +170,7 @@ public final class RequestTest {
     }
 
     @Test
-    public void _3_testAddConversation() throws IOException, InterruptedException {
-
-        while (users.size() == 0) {
-            Thread.sleep(100);
-        }
+    public void _2_testAddConversation() throws IOException, InterruptedException {
 
         String[] topics = {"Georgia Tech", "Microsoft", "Apple"};
         int count = 0;
@@ -196,6 +194,158 @@ public final class RequestTest {
             assertTrue("Unable to create conversation " + topic + ".",
                     jsonObject.get("title").toString().equals("\"" + topic + "\""));
         }
+    }
+
+    @Test
+    public void _3_testGetConversations() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "GET_CONVERSATIONS")
+                .addHeader("uuids", "[" + conversations.get(0) + "]")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        assertTrue("Did not get the requested users.",
+                jsonObject.get("title").toString().equals("\"Georgia Tech\"") && jsonArray.size() == 1);
+    }
+
+    @Test
+    public void _3_testFindConversations() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "FIND_CONVERSATIONS")
+                .addHeader("filter", ".*soft.*")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        assertTrue("Did not find filter properly",
+                jsonObject.get("title").toString().equals("\"Microsoft\"") && jsonArray.size() == 1);
+    }
+
+    @Test
+    public void _3_testTimedConversations() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "TIMED_CONVERSATIONS")
+                .addHeader("from", System.currentTimeMillis() - 3000 + "")
+                .addHeader("to", System.currentTimeMillis() + "")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        assertTrue("Timed conversation request did not return all conversations.",
+                jsonArray.size() == 3);
+    }
+
+    @Test
+    public void _3_testAddMessage() throws IOException, InterruptedException {
+
+        String[] msgs = {"tfw bee", "Why doesn't Steve Ballmer let me ride the elevator with him?", "Sleek and modern."};
+        int count = 0;
+        for (String msg : msgs) {
+            MediaType mediaType = MediaType.parse("application/octet-stream");
+            RequestBody body = RequestBody.create(mediaType, msg);
+            Request request = new Request.Builder()
+                    .url("http://127.0.0.1:8000/")
+                    .post(body)
+                    .addHeader("type", "NEW_MESSAGE")
+                    .addHeader("conversation", conversations.get(1).replace("\"", ""))
+                    .addHeader("author", users.get(count).replace("\"", ""))
+                    .build();
+            count++;
+
+            new Thread(servlet).start();
+            Submit sub = new Submit(request);
+            new Thread(sub).start();
+            Thread.sleep(200);
+            JsonObject jsonObject = (new JsonParser()).parse(sub.getResult()).getAsJsonObject();
+            messages.add(jsonObject.getAsJsonObject("id").get("uuid").toString());
+            assertTrue("Unable to create message " + msg + ".",
+                    jsonObject.get("content").toString().equals("\"" + msg + "\""));
+        }
+    }
+
+    @Test
+    public void _4_testGetMessages() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "GET_MESSAGES")
+                .addHeader("uuids", "[" + messages.get(0) + "]")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        assertTrue("Did not get the requested messages.",
+                jsonObject.get("content").toString().equals("\"tfw bee\"") && jsonArray.size() == 1);
+    }
+
+    @Test
+    public void _4_testTimedMessages() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "TIMED_MESSAGES")
+                .addHeader("from", System.currentTimeMillis() - 3000 + "")
+                .addHeader("to", System.currentTimeMillis() + "")
+                .addHeader("conversation", conversations.get(1).replaceAll("\"", ""))
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        assertTrue("Timed conversation request did not return all conversations.",
+                jsonArray.size() == 3);
+    }
+
+    @Test
+    public void _4_testRangedMessages() throws IOException, InterruptedException {
+
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:8000/")
+                .get()
+                .addHeader("type", "RANGED_MESSAGES")
+                .addHeader("root_message", messages.get(0).replaceAll("\"", ""))
+                .addHeader("range", "1")
+                .build();
+
+        new Thread(servlet).start();
+        Submit sub = new Submit(request);
+        new Thread(sub).start();
+        Thread.sleep(200);
+        JsonArray jsonArray = (new JsonParser()).parse(sub.getResult()).getAsJsonArray();
+        JsonObject jsonObject = jsonArray.get(1).getAsJsonObject();
+        System.out.println(jsonArray.size());
+        assertTrue("Ranged conversation request did not return all conversations.",
+                jsonObject.get("content").toString().contains("elevator") && jsonArray.size() == 2);
     }
 
 
