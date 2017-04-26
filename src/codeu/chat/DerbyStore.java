@@ -22,7 +22,7 @@ import java.sql.Connection;
 public class DerbyStore {
 	
 	private String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-	private String protocol = "jdbc:derby:test";
+	private String protocol = "jdbc:derby:../test";
 	
 	private Connection conn;
 	private Statement stmt;
@@ -56,7 +56,7 @@ public class DerbyStore {
 			Class.forName(driver).newInstance();
 			
 			// Checks to see if the database directory exist
-			File database = new File("testchatapp");
+			File database = new File("../testchatapp");
 					
 			// If it does exist then we connect to it, while
 			// not overwriting data.

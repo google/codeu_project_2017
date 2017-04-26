@@ -41,15 +41,14 @@ fi
 
 
 cd './bin'
-java -cp "third_party/derby.jar:./bin" codeu.chat.ServerMain "100.101" "ABABAB" "2008"
 if [ "$RELAY_ADDRESS" == "" ] ; then
-  java codeu.chat.ServerMain \
+  java -cp "../third_party/derby.jar:." codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
+  java -cp "../third_party/derby.jar:." codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
