@@ -22,6 +22,7 @@ import java.util.HashSet;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
 public final class Conversation {
