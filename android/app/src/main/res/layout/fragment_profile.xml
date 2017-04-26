@@ -78,18 +78,18 @@
         android:textColor="@android:color/background_light"
         android:textStyle="bold" />
 
-    <!--<Button-->
-    <!--android:id="@+id/btnDeleteAcnt"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="48dp"-->
-    <!--android:layout_alignEnd="@+id/btnLogOut"-->
-    <!--android:layout_alignStart="@+id/btnLogOut"-->
-    <!--android:layout_below="@+id/btnLogOut"-->
-    <!--android:layout_marginTop="18dp"-->
-    <!--android:background="@color/common_google_signin_btn_text_dark_focused"-->
-    <!--android:elevation="0dp"-->
-    <!--android:text="Delete Account"-->
-    <!--android:textColor="@android:color/background_light"-->
-    <!--android:textStyle="bold" />-->
+    <!--<Button
+        android:id="@+id/btnDeleteAcnt"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnLogOut"
+        android:layout_alignStart="@+id/btnLogOut"
+        android:layout_below="@+id/btnLogOut"
+        android:layout_marginTop="18dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:elevation="0dp"
+        android:text="Delete Account"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />-->
 
 </RelativeLayout>
