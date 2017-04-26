@@ -224,18 +224,18 @@ public class DerbyStore {
 			
 			while (allConversationsResponse.next()) {
 				
-				Uuid conversationid = Uuid.fromString(removeCharsInUuid(allConversationsResponse.getString(1)));
+				Uuid conversationid = Uuid.parse(removeCharsInUuid(allConversationsResponse.getString(1)));
 				
 				// Retrieve the users that are a part of the conversation
 				ResultSet chatParticipants = partipantsStatement.executeQuery("SELECT userid FROM " + chatParticipantsTableName + " WHERE conversationid = '" + allConversationsResponse.getString(1) + "'");
 				
 				// Iterate over the participants and them to the hashset
 				while (chatParticipants.next()) {
-					ownersUuid.add(Uuid.fromString(chatParticipants.getString(1)));
+					ownersUuid.add(Uuid.parse(chatParticipants.getString(1)));
 				}
 				
-				Uuid ownerUuid = Uuid.fromString(allConversationsResponse.getString(2));
-				Time creation = new Time(allConversationsResponse.getLong(3));
+				Uuid ownerUuid = Uuid.parse(allConversationsResponse.getString(2));
+				Time creation = Time.fromMs(allConversationsResponse.getLong(3));
 
 				String title = allConversationsResponse.getString(4);
 				String owners = allConversationsResponse.getString(5);
