@@ -23,10 +23,10 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LogicalView;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
-import codeu.chat.common.Time;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
@@ -126,7 +126,7 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_MESSAGES_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
 
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_ID_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");

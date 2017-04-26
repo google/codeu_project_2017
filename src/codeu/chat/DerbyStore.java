@@ -10,9 +10,8 @@ import java.util.HashSet;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
-import codeu.chat.common.Time;
+import codeu.chat.util.Time;
 import codeu.chat.common.User;
-//import codeu.chat.common.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -194,10 +193,10 @@ public class DerbyStore {
 				Long creation = allUsersResponse.getLong(4);
 				
 				// Creation of uuid object from database
-				Uuid userid = Uuid.fromString(uuid);
+				Uuid userid = Uuid.parse(uuid);
 				
 				// Creation of time object from database
-				Time time = new Time(creation);
+				Time time = Time.fromMs(creation);
 				
 				User user = new User(userid, name, time);
 				
@@ -237,10 +236,11 @@ public class DerbyStore {
 				
 				Uuid ownerUuid = Uuid.fromString(allConversationsResponse.getString(2));
 				Time creation = new Time(allConversationsResponse.getLong(3));
+
 				String title = allConversationsResponse.getString(4);
 				String owners = allConversationsResponse.getString(5);
-				Uuid firstMessage = Uuid.fromString(allConversationsResponse.getString(6));
-				Uuid lastMessage = Uuid.fromString(allConversationsResponse.getString(7));
+				Uuid firstMessage = Uuid.parse(allConversationsResponse.getString(6));
+				Uuid lastMessage = Uuid.parse(allConversationsResponse.getString(7));
 				
 				Conversation c = new Conversation(conversationid, ownerUuid, creation, title, ownersUuid, firstMessage, lastMessage);
 				allConversations.insert(conversationid, c);
@@ -263,12 +263,12 @@ public class DerbyStore {
 
 			while (allMessagesResponse.next()) {
 				
-				Uuid messageid = Uuid.fromString(allMessagesResponse.getString(1));
-				Uuid previous = Uuid.fromString(allMessagesResponse.getString(2));
-				Time creation = new Time(allMessagesResponse.getLong(3));
-				Uuid author = Uuid.fromString(allMessagesResponse.getString(4));
+				Uuid messageid = Uuid.parse(allMessagesResponse.getString(1));
+				Uuid previous = Uuid.parse(allMessagesResponse.getString(2));
+				Time creation = Time.fromMs(allMessagesResponse.getLong(3));
+				Uuid author = Uuid.parse(allMessagesResponse.getString(4));
 				String content = allMessagesResponse.getString(5);
-				Uuid next = Uuid.fromString(allMessagesResponse.getString(6));
+				Uuid next = Uuid.parse(allMessagesResponse.getString(6));
 				
 				Message m = new Message(messageid, next, previous, creation, author, content);
 				allMessages.insert(messageid, m);
