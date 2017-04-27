@@ -50,6 +50,7 @@ public final class User {
 
   public final Uuid id;
   public final String name;
+  public final String password;
   public final Time creation;
 
   public User(Uuid id, String name, Time creation) {
@@ -57,6 +58,6 @@ public final class User {
     this.id = id;
     this.name = name;
     this.creation = creation;
-
+    this.password = "test";
   }
 }
