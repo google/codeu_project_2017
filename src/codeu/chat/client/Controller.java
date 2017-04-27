@@ -61,8 +61,8 @@ public class Controller implements BasicController {
         Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_MESSAGE_REQUEST);
       }
 
-      Uuids.SERIALIZER.write(connection.out(), author);
-      Uuids.SERIALIZER.write(connection.out(), conversation);
+      Uuid.SERIALIZER.write(connection.out(), author);
+      Uuid.SERIALIZER.write(connection.out(), conversation);
       Serializers.STRING.write(connection.out(), body);
 
       if(file != null){
