@@ -12,16 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.common;
+package codeu.chat.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import codeu.chat.util.Serializer;
-import codeu.chat.util.Serializers;
 
 public final class Time implements Comparable<Time> {
 
@@ -30,7 +27,7 @@ public final class Time implements Comparable<Time> {
     @Override
     public void write(OutputStream out, Time value) throws IOException {
 
-      Serializers.LONG.write(out, value.totalMs);
+      Serializers.LONG.write(out, value.inMs());
 
     }
 
@@ -45,24 +42,24 @@ public final class Time implements Comparable<Time> {
   private static final SimpleDateFormat formatter =
       new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
 
-  private final long totalMs;
+  private final Date date;
 
-  private Time(long totalMs) { this.totalMs = totalMs; }
+  private Time(long totalMs) { this.date = new Date(totalMs); }
 
-  public long inMs() { return totalMs; }
+  public long inMs() { return date.getTime(); }
 
   @Override
   public int compareTo(Time other) {
-    return Long.compare(totalMs, other.totalMs);
+    return date.compareTo(other.date);
   }
 
   public boolean inRange(Time start, Time end) {
-    return totalMs >= start.totalMs && totalMs <= end.totalMs;
+    return this.compareTo(start) >= 0 && this.compareTo(end) <= 0;
   }
 
   @Override
   public String toString() {
-    return formatter.format(new Date(totalMs));
+    return formatter.format(date);
   }
 
   public static Time fromMs(long ms) { return new Time(ms); }
