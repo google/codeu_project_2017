@@ -28,9 +28,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import codeu.chat.common.BasicView;
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LogicalView;
+import codeu.chat.common.ConversationHeader;
+import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.Message;
 import codeu.chat.common.SinglesView;
 import codeu.chat.common.User;
@@ -39,7 +38,7 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.StoreAccessor;
 
-public final class View implements BasicView, LogicalView, SinglesView {
+public final class View implements BasicView, SinglesView {
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -51,26 +50,18 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
 
   @Override
-  public Collection<User> getUsers(Collection<Uuid> ids) {
-    return intersect(model.userById(), ids);
+  public Collection<User> getUsers() {
+    return all(model.userById());
   }
 
   @Override
-  public Collection<ConversationSummary> getAllConversations() {
-
-    final Collection<ConversationSummary> summaries = new ArrayList<>();
-
-    for (final Conversation conversation : model.conversationById().all()) {
-        summaries.add(conversation.summary);
-    }
-
-    return summaries;
-
+  public Collection<ConversationHeader> getConversations() {
+    return all(model.conversationById());
   }
 
   @Override
-  public Collection<Conversation> getConversations(Collection<Uuid> ids) {
-    return intersect(model.conversationById(), ids);
+  public Collection<ConversationPayload> getConversationPayloads(Collection<Uuid> ids) {
+    return intersect(model.conversationPayloadById(), ids);
   }
 
   @Override
@@ -79,117 +70,24 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public Uuid getUserGeneration() {
-    return model.userGeneration();
-  }
-
-  @Override
-  public Collection<User> getUsersExcluding(Collection<Uuid> ids) {
-
-    final Set<User> blacklist = new HashSet<>(intersect(model.userById(), ids));
-    final Set<User> users = new HashSet<>();
-
-    for (final User user : model.userById().all()) {
-      if (!blacklist.contains(user)) {
-        users.add(user);
-      }
-    }
-
-    return users;
-  }
-
-  @Override
-  public Collection<Conversation> getConversations(Time start, Time end) {
-
-    final Collection<Conversation> conversations = new ArrayList<>();
-
-    for (final Conversation conversation : model.conversationByTime().range(start, end)) {
-      conversations.add(conversation);
-    }
-
-    return conversations;
-
-  }
-
-  @Override
-  public Collection<Conversation> getConversations(String filter) {
-
-    final Collection<Conversation> found = new ArrayList<>();
-
-    for (final Conversation conversation : model.conversationByText().all()) {
-      if (Pattern.matches(filter, conversation.title)) {
-        found.add(conversation);
-      }
-    }
-
-    return found;
-  }
-
-  @Override
-  public Collection<Message> getMessages(Uuid conversation, Time start, Time end) {
-
-    final Conversation foundConversation = model.conversationById().first(conversation);
-
-    final List<Message> foundMessages = new ArrayList<>();
-
-    Message current = (foundConversation == null) ?
-        null :
-        model.messageById().first(foundConversation.firstMessage);
-
-    while (current != null && current.creation.compareTo(start) < 0) {
-      current = model.messageById().first(current.next);
-    }
-
-    while (current != null && current.creation.compareTo(end) <= 0) {
-      foundMessages.add(current);
-      current = model.messageById().first(current.next);
-    }
-
-    return foundMessages;
-  }
-
-  @Override
-  public Collection<Message> getMessages(Uuid rootMessage, int range) {
-
-    int remaining = Math.abs(range);
-    LOG.info("in getMessage: UUID=%s range=%d", rootMessage, range);
-
-    // We want to return the messages in order. If the range was negative
-    // the messages would be backwards. Use a linked list as it supports
-    // adding at the front and adding at the end.
-
-    final LinkedList<Message> found = new LinkedList<>();
-
-    // i <= remaining : must be "<=" and not just "<" or else "range = 0" would
-    // return nothing and we want it to return just the root because the description
-    // is that the function will return "range" around the root. Zero messages
-    // around the root means that it should just return the root.
-
-    Message current = model.messageById().first(rootMessage);
-
-    if (range > 0) {
-      for (int i = 0; i <= remaining && current != null; i++) {
-        found.addLast(current);
-        current = model.messageById().first(current.next);
-      }
-    } else {
-      for (int i = 0; i <= remaining && current != null; i++) {
-        found.addFirst(current);
-        current = model.messageById().first(current.previous);
-      }
-    }
-
-    return found;
-  }
-
-  @Override
   public User findUser(Uuid id) { return model.userById().first(id); }
 
   @Override
-  public Conversation findConversation(Uuid id) { return model.conversationById().first(id); }
+  public ConversationHeader findConversation(Uuid id) { return model.conversationById().first(id); }
 
   @Override
   public Message findMessage(Uuid id) { return model.messageById().first(id); }
+
+  private static <S,T> Collection<T> all(StoreAccessor<S,T> store) {
+
+    final Collection<T> all = new ArrayList<>();
+
+    for (final T value : store.all()) {
+        all.add(value);
+    }
+
+    return all;
+  }
 
   private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
 
