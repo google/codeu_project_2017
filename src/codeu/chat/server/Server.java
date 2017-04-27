@@ -95,7 +95,8 @@ public final class Server {
 
       final Message message = controller.newMessage(author, conversation, content);
 
-      Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
+      Serializers.INTEGER.write(out, type == NetworkCode.NEW_MESSAGE_REQUEST ?
+              NetworkCode.NEW_MESSAGE_RESPONSE : NetworkCode.NEW_FILE_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 
       // Unlike the other calls - we need to send something the result of this
