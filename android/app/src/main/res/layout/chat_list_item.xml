@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/chat_list_item_vertical_margin"
     android:layout_marginTop="@dimen/chat_list_item_vertical_margin"
-    android:orientation="horizontal"
-    android:weightSum="6">
+    android:paddingLeft="@dimen/chat_list_item_horizontal_padding"
+    android:paddingRight="@dimen/chat_list_item_horizontal_padding">
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_launcher" />
+    <com.pkmmte.view.CircularImageView
+        android:id="@+id/civPic"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:border="true"
+        app:border_color="#66ffffff"
+        app:border_width="1dp"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <RelativeLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_weight="5"
-        android:paddingRight="@dimen/chat_list_item_right_padding">
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/civPic">
 
         <TextView
             android:id="@+id/tvSender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:text="CodeU Group 31"
+            android:layout_alignParentTop="true"
+            android:text="Conversation Name"
             android:textStyle="bold" />
 
         <TextView
@@ -35,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvSender"
-            android:text="Just submitted a pull request!" />
+            android:text="Latest Message" />
 
         <TextView
             android:id="@+id/tvTimeSent"
@@ -45,15 +50,6 @@
             android:layout_alignParentTop="true"
             android:text="9:03 AM" />
 
-        <ImageView
-            android:id="@+id/ivUnreadIcon"
-            android:layout_width="12dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tvTimeSent"
-            app:srcCompat="@android:drawable/ic_notification_overlay" />
-
     </RelativeLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

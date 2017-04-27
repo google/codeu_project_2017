@@ -14,6 +14,8 @@ import com.google.codeu.chatme.model.ConversationParticipantDetails;
 import com.google.codeu.chatme.presenter.ChatActivityPresenter;
 import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.message.MessagesActivity;
+import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         implements ChatListAdapterView {
 
     public static final String CONV_ID_EXTRA = "CONV_ID_EXTRA";
+    private final Context context;
 
     /**
      * List of conversations to display in the list
@@ -43,8 +46,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
      */
     private HashMap<String, ConversationParticipantDetails> participantDetailsMap = new HashMap<>();
 
-    public ChatListAdapter() {
+    public ChatListAdapter(Context context) {
         this.presenter = new ChatActivityPresenter(this);
+        this.context = context;
     }
 
     @Override
@@ -58,8 +62,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         final Conversation conversation = conversations.get(position);
         String participantId = getRecipientId(conversation.getParticipants());
 
-        if (participantDetailsMap.get(participantId) != null) {
-            holder.tvSender.setText(participantDetailsMap.get(participantId).getFullName());
+        ConversationParticipantDetails pDetails = participantDetailsMap.get(participantId);
+        if (pDetails != null) {
+            holder.tvSender.setText(pDetails.getFullName());
+            holder.setHolderPicture(pDetails.getPhotoUrl());
+        } else {
+            holder.setHolderPicture(null);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +107,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         context.startActivity(mIntent);
     }
 
+    /**
+     * @return number of conversations
+     */
     @Override
     public int getItemCount() {
         return conversations.size();
@@ -131,10 +142,29 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvSender;
+        private CircularImageView civPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             tvSender = (TextView) itemView.findViewById(R.id.tvSender);
+            civPic = (CircularImageView) itemView.findViewById(R.id.civPic);
+        }
+
+        private void setHolderPicture(String picUrl) {
+            if (picUrl != null && !picUrl.isEmpty()) {
+                Picasso.with(context)
+                        .load(picUrl)
+                        .placeholder(R.drawable.placeholder_person)
+                        .error(R.drawable.placeholder_person)
+                        .fit()
+                        .into(this.civPic);
+            } else {
+                Picasso.with(context)
+                        .load(R.drawable.placeholder_person)
+                        .placeholder(R.drawable.placeholder_person)
+                        .into(this.civPic);
+            }
         }
     }
 }
