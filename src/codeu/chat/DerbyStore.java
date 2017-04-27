@@ -5,10 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.UUID;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
