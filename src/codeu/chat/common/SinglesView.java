@@ -14,7 +14,7 @@
 
 package codeu.chat.common;
 
-import codeu.chat.common.Conversation;
+import codeu.chat.common.ConversationHeader;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
@@ -35,7 +35,7 @@ public interface SinglesView {
   //
   // Find the conversation whose id matches the given id. If no conversation's
   // matches the given id, null will be returned.
-  Conversation findConversation(Uuid id);
+  ConversationHeader findConversation(Uuid id);
 
   // FIND MESSAGE
   //

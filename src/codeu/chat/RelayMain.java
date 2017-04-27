@@ -138,7 +138,7 @@ final class RelayMain {
             // So instead just try to parse it and catch any exception.
 
             final Uuid id = Uuid.parse(tokens[0].trim());
-            final byte[] secret = Secret.parse(tokens[1].trim());
+            final Secret secret = Secret.parse(tokens[1].trim());
 
             relay.addTeam(id, secret);
           } catch (Exception ex) {

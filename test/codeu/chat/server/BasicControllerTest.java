@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import codeu.chat.common.BasicController;
-import codeu.chat.common.Conversation;
+import codeu.chat.common.ConversationHeader;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
@@ -54,7 +54,7 @@ public final class BasicControllerTest {
         "Check that user has a valid reference",
         user == null);
 
-    final Conversation conversation = controller.newConversation(
+    final ConversationHeader conversation = controller.newConversation(
         "conversation",
         user.id);
 
@@ -72,7 +72,7 @@ public final class BasicControllerTest {
         "Check that user has a valid reference",
         user == null);
 
-    final Conversation conversation = controller.newConversation(
+    final ConversationHeader conversation = controller.newConversation(
         "conversation",
         user.id);
 

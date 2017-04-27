@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import codeu.chat.common.Relay;
+import codeu.chat.common.Secret;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
@@ -47,7 +48,7 @@ public final class NoOpRelay implements Relay {
 
   @Override
   public boolean write(Uuid teamId,
-                       byte[] teamSecret,
+                       Secret teamSecret,
                        Relay.Bundle.Component user,
                        Relay.Bundle.Component conversation,
                        Relay.Bundle.Component message) {
@@ -57,7 +58,7 @@ public final class NoOpRelay implements Relay {
 
   @Override
   public Collection<Relay.Bundle> read(Uuid teamId,
-                                       byte[] teamSecret,
+                                       Secret teamSecret,
                                        Uuid root,
                                        int range) {
 
