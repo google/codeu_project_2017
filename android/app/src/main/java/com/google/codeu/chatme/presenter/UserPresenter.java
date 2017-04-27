@@ -63,6 +63,4 @@ public class UserPresenter implements UserInteractor {
             }
         });
     }
-
-
 }

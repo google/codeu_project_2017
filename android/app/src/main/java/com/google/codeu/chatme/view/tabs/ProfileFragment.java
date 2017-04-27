@@ -1,5 +1,7 @@
 package com.google.codeu.chatme.view.tabs;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,19 +17,17 @@ import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.User;
 import com.google.codeu.chatme.presenter.ProfilePresenter;
 import com.google.codeu.chatme.view.login.LoginActivity;
+import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment implements ProfileView, View.OnClickListener {
 
+    private static final int GALLERY_INTENT = 42;
+
     private OnFragmentInteractionListener mListener;
+
+    private ProgressDialog mProgressDialog;
 
     // fragment edit texts and buttons
     private EditText etPassword;
@@ -35,10 +35,9 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
     private EditText etFullName;
     private Button btnSaveChanges;
     private Button btnLogOut;
-    private Button btnDeleteAcnt;
+    private CircularImageView ivProfilePic;
 
     private ProfilePresenter presenter;
-    private User user;
 
     /**
      * Required empty public constructor
@@ -70,19 +69,19 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         etFullName = (EditText) view.findViewById(R.id.etFullName);
         etUsername = (EditText) view.findViewById(R.id.etUsername);
         etPassword = (EditText) view.findViewById(R.id.etPassword);
-
         btnSaveChanges = (Button) view.findViewById(R.id.btnSaveChanges);
         btnLogOut = (Button) view.findViewById(R.id.btnLogOut);
-        btnDeleteAcnt = (Button) view.findViewById(R.id.btnDeleteAcnt);
+        ivProfilePic = (CircularImageView) view.findViewById(R.id.ivProfilePic);
 
         btnSaveChanges.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
-        btnDeleteAcnt.setOnClickListener(this);
+        ivProfilePic.setOnClickListener(this);
 
         presenter = new ProfilePresenter(this);
         presenter.postConstruct();
 
         presenter.getUserProfile();
+        setProfilePicture(null);    // shows placeholder image
     }
 
     @Override
@@ -121,9 +120,36 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
 
     @Override
     public void setUserProfile(User userData) {
-        this.user = userData;
-        etUsername.setText(user.getUsername());
-        etFullName.setText(user.getFullName());
+        etUsername.setText(userData.getUsername());
+        etFullName.setText(userData.getFullName());
+        setProfilePicture(userData.getPhotoUrl());
+    }
+
+    @Override
+    public void setProfilePicture(String downloadUrl) {
+        if (downloadUrl != null && !downloadUrl.isEmpty()) {
+            Picasso.with(getContext())
+                    .load(downloadUrl)
+                    .placeholder(R.drawable.placeholder_person)
+                    .error(R.drawable.placeholder_person)
+                    .fit()
+                    .into(ivProfilePic, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            hideProgressDialog();
+                        }
+
+                        @Override
+                        public void onError() {
+                            hideProgressDialog();
+                        }
+                    });
+        } else {
+            Picasso.with(getContext())
+                    .load(R.drawable.placeholder_person)
+                    .placeholder(R.drawable.placeholder_person)
+                    .into(ivProfilePic);
+        }
     }
 
     @Override
@@ -131,7 +157,6 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
         switch (view.getId()) {
 
             case R.id.btnSaveChanges:
-                // TODO: get user's profile picture
                 String fullName = etFullName.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
@@ -143,10 +168,37 @@ public class ProfileFragment extends Fragment implements ProfileView, View.OnCli
                 presenter.signOut();
                 break;
 
-            case R.id.btnDeleteAcnt:
-                // TODO: delete all references of this user in Json tree?
-                // presenter.deleteAccount();
+            // opens gallery to pick a new profile picture
+            case R.id.ivProfilePic:
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALLERY_INTENT);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_INTENT && resultCode == Activity.RESULT_OK) {
+            presenter.uploadProfilePictureToStorage(data.getData());
+        }
+    }
+
+    public void showProgressDialog(int messsage) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getContext());
+            mProgressDialog.setMessage(getString(messsage));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 

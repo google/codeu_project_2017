@@ -12,10 +12,6 @@ import android.view.ViewGroup;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.view.adapter.UserListAdapter;
 
-
-/**
- *
- */
 public class UsersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
@@ -62,7 +58,7 @@ public class UsersFragment extends Fragment {
         rvUserList = (RecyclerView) view.findViewById(R.id.userList);
         rvUserList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        userListAdapter = new UserListAdapter();
+        userListAdapter = new UserListAdapter(getContext());
         rvUserList.setAdapter(userListAdapter);
 
         userListAdapter.loadUsers();

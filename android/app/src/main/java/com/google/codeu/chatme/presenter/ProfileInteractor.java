@@ -1,5 +1,7 @@
 package com.google.codeu.chatme.presenter;
 
+import android.net.Uri;
+
 /**
  * This interface provides functions which primarily relate to login
  * and sign up functionality of this Firebase-powered chat application
@@ -30,4 +32,11 @@ public interface ProfileInteractor {
      */
     public void getUserProfile();
 
+    /**
+     * Uploads profile picture to Firebase Storage and then updates Database
+     * with the picture download url
+     *
+     * @param data {@link Uri} containing new profile picture
+     */
+    void uploadProfilePictureToStorage(Uri data);
 }
