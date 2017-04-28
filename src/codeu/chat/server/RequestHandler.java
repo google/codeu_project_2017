@@ -11,7 +11,8 @@ import java.io.*;
 public class RequestHandler {
 
     /**
-     *
+     * Parses the raw string that it is getting from the INPUT string as arg.
+     *  --> client connection to server, looks at data, and interprets what the data means.
      * @param in the remote connection's data stream.
      * @return the constructed Request object.
      */
