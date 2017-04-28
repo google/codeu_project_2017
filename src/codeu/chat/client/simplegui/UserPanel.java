@@ -100,11 +100,15 @@ public final class UserPanel extends JPanel {
 
     //final JButton userUpdateButton = new JButton("Update");
     final JButton userSignInButton = new JButton("Sign In");
+    final JButton userSignOutButton = new JButton("Sign Out");
     final JButton userAddButton = new JButton("Add");
+    final JButton userDeleteButton = new JButton("Delete");
 
     //buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
+    buttonPanel.add(userSignOutButton); 
     buttonPanel.add(userAddButton);
+    buttonPanel.add(userDeleteButton); 
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -163,6 +167,18 @@ public final class UserPanel extends JPanel {
         }
       }
     });
+    
+    //signs out the user so that someone cannot access your account
+    userSignOutButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          clientContext.user.signOutUser();
+          userSignedInLabel.setText("Goodbye " + data);
+        }
+      }
+    });
 
     userAddButton.addActionListener(new ActionListener() {
       @Override
@@ -177,6 +193,33 @@ public final class UserPanel extends JPanel {
           else{
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
           }
+        }
+      }
+    });
+    
+    userDeleteButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          //need to delete user and set it so that they are not logged in...
+          boolean sucessfulSignout = clientContext.user.signOutUser();
+          System.out.println(sucessfulSignout);
+          	if(sucessfulSignout==true){
+          		//remove the user's name from the list
+          		if(clientContext.user.deleteUser(s)==true){
+          			//update the user's list and 
+          			UserPanel.this.getAllUsers(listModel);
+          			userSignedInLabel.setText("Goodbye " + data);
+          		}
+          		else{
+          			JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
+          		}
+          	}
+          	//there was an issue with signing the user out
+          	else{
+          		JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted. Please check that the user to be deleted is signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+          	}
         }
       }
     });

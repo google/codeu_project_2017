@@ -137,38 +137,6 @@ public final class ClientUser {
     } 
   }
  
-    
-  /*  
-    public boolean addUser(String name) {
-    final boolean validInputs = isValidName(name);
-
-	if(usersById.containsValue(name)){
-		System.out.format("Error: user not created due to duplicate name.\n");
-      	return false;
-	}
-    
-    final User user = (validInputs) ? controller.newUser(name) : null;
-
-    if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
-          return false; 
-    } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
-      updateUsers();
-      return true; 
-    }
-    //return false; 
-  } 
-  */
-      
-   
-  /*
-  //work on deleting user from map and store!!
-  public boolean deleteUser(String name){
-  	
-  }
-*/
   public void showAllUsers() {
     updateUsers();
     for (final User u : usersByName.all()) {

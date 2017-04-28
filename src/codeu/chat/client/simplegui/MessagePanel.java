@@ -121,7 +121,6 @@ public final class MessagePanel extends JPanel {
     final JButton addButton = new JButton("Send Message");
     buttonPanel.add(textField); //Adds the message box before the "Send Message" button
     buttonPanel.add(addButton);
-    
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
