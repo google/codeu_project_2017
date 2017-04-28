@@ -167,8 +167,7 @@ public final class ClientMessage {
   /**
    * Method to find messages that contain the desired keyword.
    * 
-   * @param keyword
-   * 				Keyword to find in the messages.
+   * @param keyword word to find in the messages.
    */
   public void findMessages(String keyword){
 	  // Check the first element to determine if it the StoreLink is empty	  
