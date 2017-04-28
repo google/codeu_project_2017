@@ -4,10 +4,32 @@
     android:layout_height="match_parent"
     android:background="@color/ChatMe_Red"
     tools:context=".view.tabs.UsersFragment">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbUsersFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/cardview_shadow_start_color"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
+    <TextView
+        android:id="@+id/tvProfileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tbUsersFragment"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:text="Users"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/userList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tbUsersFragment"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

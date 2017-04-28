@@ -7,7 +7,7 @@
     tools:context=".view.tabs.ChatsFragment">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/tbChatsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -31,7 +31,7 @@
         android:id="@+id/rvChatList"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/toolbar2"
+        android:layout_below="@+id/tbChatsFragment"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true" />
 
