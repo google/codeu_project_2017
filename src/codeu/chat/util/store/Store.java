@@ -66,6 +66,10 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
       index.put(key, newLink);
     }
   }
+  
+  public void delete(KEY key, VALUE value){
+  
+  }
 
   @Override
   public VALUE first(KEY key) {

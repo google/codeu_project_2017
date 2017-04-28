@@ -73,13 +73,11 @@ public final class ConversationPanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    final JButton updateButton = new JButton("Choose");
-    final JButton deleteButton = new JButton("Delete");
+    final JButton updateButton = new JButton("Choose"); 
     final JButton addButton = new JButton("Add");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
     buttonPanel.add(updateButton);
-    buttonPanel.add(deleteButton);
     buttonPanel.add(addButton);
 
     // Put panels together
@@ -138,27 +136,7 @@ public final class ConversationPanel extends JPanel {
         }
       }
     });
-    
-    //Delete conversation button is pressed
-    deleteButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        /*
-        if (clientContext.user.hasCurrent()) {
-          final String s = (String) JOptionPane.showInputDialog(
-              ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
-          if (s != null && s.length() > 0) {
-            clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
-            ConversationPanel.this.getAllConversations(listModel);
-          }
-        } else {
-          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        */
-      }
-    });
-    
+     
     // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
     objectList.addListSelectionListener(new ListSelectionListener() {
       @Override

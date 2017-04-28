@@ -144,6 +144,33 @@ public final class ClientUser {
     }
   }
 
+  //delete user method
+  public boolean deleteUser(String name) {
+  		
+  		
+  		
+  		
+  		//get all users by name
+		Iterable <User> users = getUsers();
+		
+		User target; 
+		Uuid targetId; 
+		
+		//find user and get id
+		for(User currentUser:users){
+			if(currentUser.name.equals(name)){
+				target = currentUser; 
+				targetId = target.id;
+				//delete user from hashmap and from store...
+				usersById.remove(targetId);
+				usersByName.remove(name); 
+				return true; 
+			}
+		}
+		return false; 
+		 
+  }
+  
   public User lookup(Uuid id) {
     return (usersById.containsKey(id)) ? usersById.get(id) : null;
   }

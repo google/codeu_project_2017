@@ -207,7 +207,7 @@ public final class UserPanel extends JPanel {
           System.out.println(sucessfulSignout);
           	if(sucessfulSignout==true){
           		//remove the user's name from the list
-          		if(clientContext.user.deleteUser(s)==true){
+          		if(clientContext.user.deleteUser(data)==true){
           			//update the user's list and 
           			UserPanel.this.getAllUsers(listModel);
           			userSignedInLabel.setText("Goodbye " + data);
@@ -215,6 +215,7 @@ public final class UserPanel extends JPanel {
           		else{
           			JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
           		}
+          	
           	}
           	//there was an issue with signing the user out
           	else{
