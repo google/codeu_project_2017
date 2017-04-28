@@ -214,8 +214,8 @@ public final class ClientMessage {
   // Map keywords in each message to each message that contains it
   // Currently repeats each time updateMessages is called
   public void mapKeywords(Message addMessage){
-	  String[] wordsArray = addMessage.content.split(" ");
-	  
+	  String[] wordsArray = addMessage.content.split("\\p{Punct}*\\s+[\\s\\p{Punct}]*");
+
 	  for(String keyword : wordsArray){
 		  messagesSortedByKeyword.insert(keyword, addMessage);
 	  }

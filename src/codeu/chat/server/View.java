@@ -17,6 +17,7 @@
 package codeu.chat.server;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.LinkedHashMap;
 import codeu.chat.common.BasicView;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;

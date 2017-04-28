@@ -142,7 +142,7 @@ public final class Server {
       Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
-        System.out.println("HERE ID");
+      
       final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
 
       final Collection<Message> messages = view.getMessages(ids);
@@ -185,7 +185,7 @@ public final class Server {
       Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
-    	System.out.println("HERE: TIME");
+      
       final Uuid conversation = Uuids.SERIALIZER.read(in);
       final Time startTime = Time.SERIALIZER.read(in);
       final Time endTime = Time.SERIALIZER.read(in);
@@ -197,7 +197,6 @@ public final class Server {
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
     } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
-    	System.out.println("RANGE: LL");
     	
       final Uuid rootMessage = Uuids.SERIALIZER.read(in);
       final int range = Serializers.INTEGER.read(in);
