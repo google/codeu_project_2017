@@ -8,6 +8,9 @@ package codeu.chat.server.model;
 import java.util.HashMap;
 
 
+/**
+ * A model class which encapsulates data about a received request.
+ */
 public class Request {
 
     private String verb;

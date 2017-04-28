@@ -12,6 +12,15 @@ public class RequestHandler {
 
     /**
      *
+     * Responsible for interpreting request queries. Populates a request object given a remote connection input stream and
+     * then returns it. For reference, here's an example request parseRaw may encounter:
+     *
+     * POST  HTTP/1.1
+     * Host: 127.0.0.1:8000
+     * type: ALL_USERS
+     *
+     * This method simple structures this data.
+     *
      * @param in the remote connection's data stream.
      * @return the constructed Request object.
      */
@@ -49,12 +58,29 @@ public class RequestHandler {
         return r;
     }
 
+
+    /**
+     *
+     * Tells the user the request was successful, and typically includes the JSONified object result(s) as well via string
+     *
+     * @param out the remote connection's data stream.
+     * @param body the response message.
+     * @return success.
+     */
     public static boolean successResponse(OutputStream out, String body) throws IOException {
         out.write(("HTTP/1.1 200 OK\r\n\r\n").getBytes());
         out.write((body).getBytes());
         return true;
     }
 
+    /**
+     *
+     * Tells the user the request was a failure, and
+     *
+     * @param out the remote connection's data stream.
+     * @param message the response message.
+     * @return success.
+     */
     public static boolean failResponse(OutputStream out, String message) throws IOException {
         out.write(("HTTP/1.1 400 Bad Request\r\n\r\n").getBytes());
         out.write((message).getBytes());

@@ -22,6 +22,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tests for the REST API interface. The tests run in order as specified by the first number of their methods.
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public final class RequestTest {
 
@@ -106,6 +109,11 @@ public final class RequestTest {
         setUpIsDone = true;
     }
 
+    /**
+     * Tests whether a list of 3 usernames can successfully be registered and become User objects server side.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _1_testAddUser() throws IOException, InterruptedException {
 
@@ -126,11 +134,17 @@ public final class RequestTest {
             Thread.sleep(200);
             JsonObject jsonObject = (new JsonParser()).parse(sub.getResult()).getAsJsonObject();
             users.add(jsonObject.getAsJsonObject("id").get("uuid").toString());
+            // Make sure that all users were created successfully
             assertTrue("Unable to create user " + username + ".",
                     jsonObject.get("name").toString().equals("\"" + username + "\""));
         }
     }
 
+    /**
+     * Test that all users are returned properly.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _2_testListUsers() throws IOException, InterruptedException {
 
@@ -149,6 +163,11 @@ public final class RequestTest {
                 jsonArray.size() == 3);
     }
 
+    /**
+     * See if you can get George P. Burdell using just his UUID and GET_USERS
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _2_testGetUsers() throws IOException, InterruptedException {
 
@@ -169,6 +188,11 @@ public final class RequestTest {
                 jsonObject.get("name").toString().equals("\"George P. Burdell\"") && jsonArray.size() == 1);
     }
 
+    /**
+     * Test whether 3 new conversations can successfully be created.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _2_testAddConversation() throws IOException, InterruptedException {
 
@@ -196,6 +220,11 @@ public final class RequestTest {
         }
     }
 
+    /**
+     * See whether we can access the Georgia Tech conversation using just its UUID and GET_CONVERSATIONS
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _3_testGetConversations() throws IOException, InterruptedException {
 
@@ -216,6 +245,12 @@ public final class RequestTest {
                 jsonObject.get("title").toString().equals("\"Georgia Tech\"") && jsonArray.size() == 1);
     }
 
+    /**
+     * Return all conversations with titles that match a regex string. This test in particular wants to access the
+     * Microsoft conversation.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _3_testFindConversations() throws IOException, InterruptedException {
 
@@ -236,6 +271,12 @@ public final class RequestTest {
                 jsonObject.get("title").toString().equals("\"Microsoft\"") && jsonArray.size() == 1);
     }
 
+
+    /**
+     * Access conversations between certain dates. In this case, in the last 3 seconds, which should return all conversations.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _3_testTimedConversations() throws IOException, InterruptedException {
 
@@ -257,6 +298,12 @@ public final class RequestTest {
                 jsonArray.size() == 3);
     }
 
+
+    /**
+     * Create a message and see if it was successfully added
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _3_testAddMessage() throws IOException, InterruptedException {
 
@@ -285,6 +332,12 @@ public final class RequestTest {
         }
     }
 
+
+    /**
+     * Get the 'tfw bee' message from just its UUID and GET_MESSAGES.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _4_testGetMessages() throws IOException, InterruptedException {
 
@@ -305,6 +358,12 @@ public final class RequestTest {
                 jsonObject.get("content").toString().equals("\"tfw bee\"") && jsonArray.size() == 1);
     }
 
+
+    /**
+     * Access messages created within a certain time span. In this case, the last 3 seconds, so it accesses all 3 messages.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _4_testTimedMessages() throws IOException, InterruptedException {
 
@@ -326,6 +385,12 @@ public final class RequestTest {
                 jsonArray.size() == 3);
     }
 
+
+    /**
+     * Traverse message chains, in this case only moving one up the chain to get 2 messages total.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Test
     public void _4_testRangedMessages() throws IOException, InterruptedException {
 
