@@ -210,7 +210,6 @@ public final class Controller implements RawController, BasicController {
     // ---------------------------------------------------------------------
     // PREVIOUS MODEL
     /*if (isIdFree(id)) {
-
       user = new User(id, name, creationTime, password);
       model.add(user);
 
