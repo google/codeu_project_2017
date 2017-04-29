@@ -38,8 +38,8 @@ public class SQLFormatter {
     }
 
     public static String sqlCreationTime(Time userTime){
-        SimpleDateFormat sqlFormatter = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
-        String sqlCreationTime = sqlFormatter.format(new Date(userTime.inMs())).toString();
+        Long inMs = userTime.inMs();
+        String sqlCreationTime = Long.toString(inMs);
         sqlCreationTime = "'" + sqlCreationTime + "'";
         return sqlCreationTime;
     }

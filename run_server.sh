@@ -40,7 +40,7 @@ if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_
 fi
 
 
-cd './bin'
+
 if [ "$RELAY_ADDRESS" == "" ] ; then
   java -cp ./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \

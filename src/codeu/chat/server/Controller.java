@@ -127,9 +127,9 @@ public final class Controller implements RawController, BasicController {
       }
     }
 
-    // Previous Model
-
-    if (foundUser != null && foundConversation != null && isIdFree(id)) {
+    // ---------------------------------------------------------------------
+    // PREVIOUS MODEL
+    /*if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
       message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
       model.add(message);
@@ -165,7 +165,8 @@ public final class Controller implements RawController, BasicController {
       if (!foundConversation.users.contains(foundUser)) {
         foundConversation.users.add(foundUser.id);
       }
-    }
+    }*/
+    // ---------------------------------------------------------------------
 
     return message;
   }
@@ -205,9 +206,9 @@ public final class Controller implements RawController, BasicController {
       System.exit(0);
     }
 
-    // Previous Model
-
-    if (isIdFree(id)) {
+    // ---------------------------------------------------------------------
+    // PREVIOUS MODEL
+    /*if (isIdFree(id)) {
 
       user = new User(id, name, creationTime, password);
       model.add(user);
@@ -225,7 +226,8 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
-    }
+    }*/
+    // ---------------------------------------------------------------------
 
     return user;
   }
@@ -265,7 +267,7 @@ public final class Controller implements RawController, BasicController {
 
 
       String sql = "INSERT INTO USER_CONVERSATION (ID,USERID,CONVERSATIONID) " +
-              "VALUES ("+SQLFormatter.sqlID(id, owner)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlID(id)+";";
+              "VALUES ("+SQLFormatter.sqlID(id, owner)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlID(id)+");";
       stmt.executeUpdate(sql);
 
       LOG.info("User "+ conversation.owner +" added to: " + conversation.id);
@@ -280,14 +282,15 @@ public final class Controller implements RawController, BasicController {
       System.exit(0);
     }
 
-    // Previous Model
-
-    if (foundOwner != null && isIdFree(id)) {
+    // ---------------------------------------------------------------------
+    // PREVIOUS MODEL
+    /*if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
 
       LOG.info("Conversation added: " + conversation.id);
-    }
+    }*/
+    // ---------------------------------------------------------------------
 
     return conversation;
   }
