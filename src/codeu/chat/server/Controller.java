@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -46,7 +47,10 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
-  private final String userDatabasePath = "../persistance/database/users";
+  // Get the base dir for the database
+  private final String userDatabasePath = (new File(System.getProperty("user.dir")))
+  .getParent() + "/persistance/database/users";
+
   private List<DatabaseUser> databaseUsersList;
   private HashMap<String,DatabaseUser> databaseUsersMap;
 
@@ -161,7 +165,8 @@ public final class Controller implements RawController, BasicController {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
 
-      LOG.info("Conversation added: " + conversation.id);
+      LOG.info("Conversation added: conversation.id=%s",
+      conversation.id);
     }
 
     return conversation;
@@ -215,6 +220,10 @@ public final class Controller implements RawController, BasicController {
         databaseUsersMap.put(databaseUser.name,databaseUser);
         model.add(new User(databaseUser));
       }
+
+      LOG.info(
+          "loadDatabaseUsers success (%s)",
+          userDatabasePath);
 
     } catch (IOException e){
       e.printStackTrace();
