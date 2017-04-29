@@ -23,13 +23,14 @@ import codeu.chat.common.Message;
 import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.ChatLog;
+import codeu.logging.Logger;
 
 public final class Controller implements RawController, BasicController {
 
-  private final static Logger.Log LOG = Logger.newLog(Controller.class);
+  private static final Logger LOG = ChatLog.logger(Controller.class);
 
   private final Model model;
   private final Uuid.Generator uuidGenerator;
@@ -57,16 +58,31 @@ public final class Controller implements RawController, BasicController {
   @Override
   public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
 
+    LOG.verbose("Making new message with id=%s, author=%s, and conversation=%s.", id, author, conversation);
+
     final User foundUser = model.users.get(author);
     final ConversationPayload foundConversation = model.payloads.get(conversation);
 
     Message message = null;
 
-    if (foundUser != null && foundConversation != null && isIdFree(id)) {
+    if (foundUser == null) {
+
+      LOG.error("Failed to make new message as no user with id %s was found", author);
+
+    } else if (foundConversation == null) {
+
+      LOG.error("Failed to make new message as no conversation with id %s was found", conversation);
+
+    } else if (isIdInUse(id)) {
+
+      LOG.error("Failed to make new message as id %s is already in use", id);
+
+    } else {
 
       message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
-      model.messages.put(id, message);
+
       LOG.info("Message added: %s", message.id);
+      model.messages.put(id, message);
 
       // Find and update the previous "last" message so that it's "next" value
       // will point to the new message.
@@ -94,6 +110,8 @@ public final class Controller implements RawController, BasicController {
       // Update the conversation to point to the new last message as it has changed.
 
       foundConversation.lastMessage = message.id;
+
+      LOG.info("Created new message with id=%s, author=%s, and conversation=%s.", id, author, conversation);
     }
 
     return message;
@@ -102,26 +120,21 @@ public final class Controller implements RawController, BasicController {
   @Override
   public User newUser(Uuid id, String name, Time creationTime) {
 
+    LOG.verbose("Making new user with id=%s and name='%s'.", id, name);
+
     User user = null;
 
-    if (isIdFree(id)) {
+    if (isIdInUse(id)) {
+
+      LOG.error("Cannot create user with id %s as it is already in use.", id);
+
+    } else {
 
       user = new User(id, name, creationTime);
       model.users.put(id, user);
 
-      LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
+      LOG.info("Created user with id=%s and name='%s'.", id, name);
 
-    } else {
-
-      LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
-          id,
-          name,
-          creationTime);
     }
 
     return user;
@@ -130,19 +143,30 @@ public final class Controller implements RawController, BasicController {
   @Override
   public ConversationHeader newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
 
+    LOG.verbose("Making new conversation with id=%s and title='%s'.", id, title);
+
     final User foundOwner = model.users.get(owner);
 
     ConversationHeader header = null;
     ConversationPayload payload = null;
 
-    if (foundOwner != null && isIdFree(id)) {
+    if (foundOwner == null) {
+
+      LOG.error("Failed to find user with id %s to own conversation", owner);
+
+    } else if (isIdInUse(id)) {
+
+      LOG.error("Cannot create conversation with id %s as it is already in use", id);
+
+    } else {
+
       header = new ConversationHeader(id, owner, creationTime, title);
       payload = new ConversationPayload(id);
 
       model.headers.put(id, header);
       model.payloads.put(id, payload);
 
-      LOG.info("Conversation added: " + id);
+      LOG.info("Created conversation with id=%s, title='%s', and owner=%s.", id, title, owner);
     }
 
     return header;
@@ -156,9 +180,9 @@ public final class Controller implements RawController, BasicController {
          isIdInUse(candidate);
          candidate = uuidGenerator.make()) {
 
-     // Assuming that "randomUuid" is actually well implemented, this
-     // loop should never be needed, but just incase make sure that the
-     // Uuid is not actually in use before returning it.
+      // Assuming that "randomUuid" is actually well implemented, this
+      // loop should never be needed, but just incase make sure that the
+      // Uuid is not actually in use before returning it.
 
     }
 

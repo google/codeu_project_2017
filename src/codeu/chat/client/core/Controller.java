@@ -23,15 +23,16 @@ import codeu.chat.common.ConversationHeader;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
+import codeu.chat.util.logging.ChatLog;
+import codeu.logging.Logger;
 
 final class Controller implements BasicController {
 
-  private final static Logger.Log LOG = Logger.newLog(Controller.class);
+  private static final Logger LOG = ChatLog.logger(Controller.class);
 
   private final ConnectionSource source;
 
@@ -54,11 +55,10 @@ final class Controller implements BasicController {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_MESSAGE_RESPONSE) {
         response = Serializers.nullable(Message.SERIALIZER).read(connection.in());
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with NEW_MESSAGE_RESPONSE");
       }
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return response;
@@ -73,17 +73,14 @@ final class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(connection.out(), name);
-      LOG.info("newUser: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {
         response = Serializers.nullable(User.SERIALIZER).read(connection.in());
-        LOG.info("newUser: Response completed.");
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with NEW_USER_RESPONSE");
       }
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return response;
@@ -103,11 +100,10 @@ final class Controller implements BasicController {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(ConversationHeader.SERIALIZER).read(connection.in());
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with NEW_CONVERSATION_RESPONSE");
       }
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return response;

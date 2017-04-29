@@ -15,52 +15,54 @@
 package codeu.chat;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import codeu.chat.client.commandline.Chat;
 import codeu.chat.client.core.Context;
-import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.ConnectionSource;
 
+import codeu.chat.util.logging.ChatLog;
+import codeu.logging.Logger;
+
 final class ClientMain {
 
-  private static final Logger.Log LOG = Logger.newLog(ClientMain.class);
+  private static final Logger LOG = ChatLog.logger(ClientMain.class);
+
+  static {
+    try {
+      // Have the client write its log to a file. The log is set to always
+      // append so that old runs do not get overwritten.
+      ChatLog.register(new FileOutputStream("client.log", true));
+    } catch (IOException ex) {
+      // Cannot add the file writter as the file location is not availble.
+    }
+  }
 
   public static void main(String [] args) {
 
-    try {
-      Logger.enableFileOutput("chat_client_log.log");
-    } catch (IOException ex) {
-      LOG.error(ex, "Failed to set logger to write to file");
-    }
-
-    LOG.info("============================= START OF LOG =============================");
-
-    LOG.info("Starting chat client...");
-
     final RemoteAddress address = RemoteAddress.parse(args[0]);
-
     final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
 
-    LOG.info("Creating client...");
     final Chat chat = new Chat(new Context(source));
-
-    LOG.info("Created client");
+    LOG.verbose("Created chat instance");
 
     boolean keepRunning = true;
 
     try (final BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
       while (keepRunning) {
+
         System.out.print(">>> ");
-        keepRunning = chat.handleCommand(input.readLine().trim());
+        final String command = input.readLine().trim();
+
+        LOG.verbose("Running command %s", command);
+        keepRunning = chat.handleCommand(command);
       }
     } catch (IOException ex) {
-      LOG.error("Failed to read from input");
+      LOG.error(ex, "Unhandled exception during while executing command");
     }
-
-    LOG.info("chat client has exited.");
   }
 }

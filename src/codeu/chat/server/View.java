@@ -33,13 +33,14 @@ import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.Message;
 import codeu.chat.common.SinglesView;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.ChatLog;
+import codeu.logging.Logger;
 
 public final class View implements BasicView, SinglesView {
 
-  private final static Logger.Log LOG = Logger.newLog(View.class);
+  private static final Logger LOG = ChatLog.logger(View.class);
 
   private final Model model;
 
@@ -89,11 +90,11 @@ public final class View implements BasicView, SinglesView {
       final T t = map.get(id);
 
       if (t == null) {
-        LOG.warning("Unmapped id %s", id);
+        LOG.warning("No value found for id=%s", id);
       } else if (found.add(t)) {
         // do nothing
       } else {
-        LOG.warning("Duplicate id %s", id);
+        LOG.warning("Duplicate value. The id %s was requested twice or two ids map to the same value.", id);
       }
     }
 

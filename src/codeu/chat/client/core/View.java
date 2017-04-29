@@ -23,12 +23,13 @@ import codeu.chat.common.ConversationPayload;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
+import codeu.chat.util.logging.ChatLog;
+import codeu.logging.Logger;
 
 // VIEW
 //
@@ -37,7 +38,7 @@ import codeu.chat.util.connections.ConnectionSource;
 // calls.
 final class View implements BasicView {
 
-  private final static Logger.Log LOG = Logger.newLog(View.class);
+  private static final Logger LOG = ChatLog.logger(View.class);
 
   private final ConnectionSource source;
 
@@ -57,12 +58,10 @@ final class View implements BasicView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with GET_USERS_RESPONSE");
       }
-
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return users;
@@ -80,12 +79,10 @@ final class View implements BasicView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE) {
         summaries.addAll(Serializers.collection(ConversationHeader.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with GET_ALL_CONVERSATIONS_RESPONSE");
       }
-
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return summaries;
@@ -104,11 +101,10 @@ final class View implements BasicView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         conversations.addAll(Serializers.collection(ConversationPayload.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with GET_CONVERSATIONS_BY_ID_RESPONSE");
       }
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return conversations;
@@ -127,11 +123,10 @@ final class View implements BasicView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_ID_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        LOG.error("Server did not reply with GET_MESSAGES_BY_ID_RESPONSE");
       }
     } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      LOG.error(ex, "Unhandled exception during server call");
     }
 
     return messages;
