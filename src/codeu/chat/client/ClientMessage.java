@@ -129,24 +129,39 @@ public final class ClientMessage {
   // Message 1 is the head of the Conversation's message chain.
   // Message -1 is the tail of the Conversation's message chain.
   public void selectMessage(int index) {
-    Method.notImplemented();
+
+    printMessage(conversationContents.get(index));
   }
 
   // Processing for m-show command.
   // Accept an int for number of messages to attempt to show (1 by default).
   // Negative values go from newest to oldest.
   public void showMessages(int count) {
-    for (final Message m : conversationContents) {
-      printMessage(m, userContext);
+    if(count >= 0) {
+      showNextMessages(count);
     }
+    else {
+      showPreviousMessages(Math.abs(count));
+    }
+
   }
 
   private void showNextMessages(int count) {
-    Method.notImplemented();
+    if(count > conversationContents.size()) {
+      count = conversationContents.size();
+    }
+    for(int i = 0; i < count; i++) {
+      printMessage(conversationContents.get(i), userContext);
+    }
   }
 
   private void showPreviousMessages(int count) {
-    Method.notImplemented();
+    if(count > conversationContents.size()) {
+      count = conversationContents.size();
+    }
+    for(int i = 0; i < count; i++) {
+      printMessage(conversationContents.get(conversationContents.size() - 1 - i), userContext);
+    }
   }
 
   // Determine the next message ID of the current conversation to start pulling.
