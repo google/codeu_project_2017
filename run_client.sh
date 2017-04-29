@@ -22,5 +22,4 @@ if [[ "$HOST" == "" || "$PORT" == "" ]] ; then
   exit 1
 fi
 
-cd './bin'
 java -cp ./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.ClientMain "$HOST@$PORT"
