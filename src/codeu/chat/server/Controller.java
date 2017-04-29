@@ -19,22 +19,25 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import codeu.chat.common.BasicController;
-import codeu.chat.common.Conversation;
-import codeu.chat.common.Message;
-import codeu.chat.common.RawController;
-import codeu.chat.common.Time;
-import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
-import codeu.chat.util.Logger;
-import codeu.chat.common.DatabaseUser;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import codeu.chat.common.BasicController;
+import codeu.chat.common.Conversation;
+import codeu.chat.common.Message;
+import codeu.chat.common.RandomUuidGenerator;
+import codeu.chat.common.RawController;
+import codeu.chat.common.User;
+import codeu.chat.util.Logger;
+import codeu.chat.common.DatabaseUser;
 import com.google.gson.*;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
+
 
 public final class Controller implements RawController, BasicController {
 
@@ -43,7 +46,7 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
-  private final String userDatabasePath = "../src/codeu/chat/database/users";
+  private final String userDatabasePath = "../persistance/database/users";
   private List<DatabaseUser> databaseUsersList;
   private HashMap<String,DatabaseUser> databaseUsersMap;
 
@@ -80,14 +83,14 @@ public final class Controller implements RawController, BasicController {
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
-      message = new Message(id, Uuids.NULL, Uuids.NULL, creationTime, author, body);
+      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
       model.add(message);
       LOG.info("Message added: %s", message.id);
 
       // Find and update the previous "last" message so that it's "next" value
       // will point to the new message.
 
-      if (Uuids.equals(foundConversation.lastMessage, Uuids.NULL)) {
+      if (Uuid.equals(foundConversation.lastMessage, Uuid.NULL)) {
 
         // The conversation has no messages in it, that's why the last message is NULL (the first
         // message should be NULL too. Since there is no last message, then it is not possible
@@ -103,7 +106,7 @@ public final class Controller implements RawController, BasicController {
       // not change.
 
       foundConversation.firstMessage =
-          Uuids.equals(foundConversation.firstMessage, Uuids.NULL) ?
+          Uuid.equals(foundConversation.firstMessage, Uuid.NULL) ?
           message.id :
           foundConversation.firstMessage;
 
@@ -167,63 +170,55 @@ public final class Controller implements RawController, BasicController {
   // Search for a user in the database and create the User object in the return.
   @Override
   public User searchUserInDatabase(String username, String pswd){
-    DatabaseUser tempUser = databaseUsersMap.get(username);
-    //return (tempUser != null) ? (tempUser.pswd.equals(pswd)) ? model.userById().first(tempUser.id) : null : null;
+
+    // Check if user exists in the hashmap
+    final DatabaseUser tempUser = databaseUsersMap.get(username);
     if(tempUser != null){
+      
+      // Check if input password matches with the user in the database
       if(tempUser.pswd.equals(pswd)){
-        final User userFromModel = model.userById().first(Uuids.fromString(tempUser.id));
-        if(userFromModel != null){
-          return userFromModel;
-        }else{
-          System.out.println("User in model but not in database");
+
+
+        try {
+          final User userFromModel = model.userById().first(Uuid.parse(tempUser.id));
+          if(userFromModel != null){
+            return userFromModel;
+          }else{
+            System.out.println("User in model but not in database");
+          }
+        } catch(IOException e) {
+          e.printStackTrace();
         }
       }
     }
     return null;
-    // Iterate in every DatabaseUser
-    /*for(DatabaseUser databaseUser : databaseUsersList){
-
-      // Check if the username and pswd matches with the DatabaseUser.
-      if(databaseUser.checkLogin(username,pswd)){
-
-        final User user = new User(databaseUser);
-
-        // Check if the user is already in the server model and return it.
-        if(model.userById().first(user.id) == null){
-          model.add(user);
-          LOG.info("User created and logged in (user.id=%s user.name=%s user.display_name=%s user.time=%s)",user.id,user.name,user.display_name,user.creation);
-          return user;
-        }else{
-          final User userFromModel = model.userById().first(user.id);
-          LOG.info("User logged in (user.id=%s user.name=%s user.display_name=%s user.time=%s)",userFromModel.id,userFromModel.name,userFromModel.display_name,userFromModel.creation);
-          return userFromModel;
-        }
-      }
-    }*/
   }
+
   // Load all database users to List and to the model
   private void loadDatabaseUsers(){
+
+    String fileContent = null;
     StringBuilder stringBuilder = new StringBuilder();
     Gson gson = new Gson();
-    try (BufferedReader br = new BufferedReader(new FileReader(userDatabasePath))) {
-      // Append the current line into the StringBuilder.
-			String sCurrentLine;
-			while ((sCurrentLine = br.readLine()) != null) {
-				stringBuilder.append(sCurrentLine);
-			}
-      // Parse the database json into DatabaseUser array using Gson.
-      databaseUsersList = Arrays.asList(gson.fromJson(stringBuilder.toString(), DatabaseUser[].class));
+
+    try {
+
+      // Get database user content
+      fileContent = new String(Files.readAllBytes(Paths.get(userDatabasePath)));
+
+      // Parse the database json into DatabaseUser array and hashmap using Gson.
+      databaseUsersList = Arrays.asList(gson.fromJson(fileContent, DatabaseUser[].class));
       databaseUsersMap = new HashMap<String,DatabaseUser>(27);
-      
+
       // Add all users to the model
       for(DatabaseUser databaseUser : databaseUsersList){
         databaseUsersMap.put(databaseUser.name,databaseUser);
         model.add(new User(databaseUser));
       }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    } catch (IOException e){
+      e.printStackTrace();
+    }
   }
   private Uuid createId() {
 

@@ -20,8 +20,8 @@ import java.io.OutputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.common.Uuid;
-import codeu.chat.common.Uuids;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 
 public final class User {
 
@@ -30,9 +30,9 @@ public final class User {
     @Override
     public void write(OutputStream out, User value) throws IOException {
 
-      Uuids.SERIALIZER.write(out, value.id);
+      Uuid.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
-      Serializers.STRING.write(out, value.display_name);
+      Serializers.STRING.write(out, value.displayName);
       Time.SERIALIZER.write(out, value.creation);
 
     }
@@ -41,7 +41,7 @@ public final class User {
     public User read(InputStream in) throws IOException {
 
       return new User(
-          Uuids.SERIALIZER.read(in),
+          Uuid.SERIALIZER.read(in),
           Serializers.STRING.read(in),
           Serializers.STRING.read(in),
           Time.SERIALIZER.read(in)
@@ -52,23 +52,23 @@ public final class User {
 
   public final Uuid id;
   public final String name;
-  public String display_name;
+  public String displayName;
   public final Time creation;
 
   public User(Uuid id, String name, Time creation) {
 
     this.id = id;
     this.name = name;
-    this.display_name = name;
+    this.displayName = name;
     this.creation = creation;
 
   }
-  public User(Uuid id, String name, String display_name, Time creation){
+  public User(Uuid id, String name, String displayName, Time creation){
     this(id,name,creation);
-    this.display_name = display_name;
+    this.displayName = displayName;
   }
-  public User(DatabaseUser databaseUser){
-    this(Uuids.fromString(databaseUser.id),databaseUser.name,Time.now());
-    this.display_name = databaseUser.display_name;
+  public User(DatabaseUser databaseUser) throws IOException {
+    this(Uuid.parse(databaseUser.id),databaseUser.name,Time.now());
+    this.displayName = databaseUser.displayName;
   }
 }

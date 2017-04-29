@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 
 
@@ -154,6 +154,7 @@ public final class ClientUser {
 
   // Check for user in database
   public User checkUserInDatabase(String username, String pswd){
+    // If user matches with the username and password retreive the User from the server model if don't return null
     return controller.searchUserInDatabase(username, pswd);
   } 
 

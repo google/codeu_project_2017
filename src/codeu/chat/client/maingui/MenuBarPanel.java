@@ -35,16 +35,25 @@ public final class MenuBarPanel extends JPanel {
 
     final JPanel userInfoPanel = new JPanel(new GridBagLayout());
     GridBagConstraints userInfoConstrains = new GridBagConstraints();
+    JLabel userDisplayNameLabel;
+    JLabel userNameLabel;
+    
+    if (clientContext.user.hasCurrent()) {
 
-    JLabel userDisplayNameLabel,userNameLabel;
-    if(clientContext.user.hasCurrent()){
-      userDisplayNameLabel = new JLabel(clientContext.user.getCurrent().display_name);
+      userDisplayNameLabel = new JLabel(clientContext.user.getCurrent().displayName);
       userNameLabel = new JLabel("@" + clientContext.user.getCurrent().name);
-      userDisplayNameLabel.setFont(new Font(userDisplayNameLabel.getFont().getName(),Font.BOLD,userDisplayNameLabel.getFont().getSize()));
-      userNameLabel.setFont(new Font(userNameLabel.getFont().getName(),Font.ITALIC,userDisplayNameLabel.getFont().getSize() - 1));
+
+      userDisplayNameLabel.setFont(new Font(userDisplayNameLabel.getFont().getName(),
+      Font.BOLD,userDisplayNameLabel.getFont().getSize()));
+
+      userNameLabel.setFont(new Font(userNameLabel.getFont().getName(),
+      Font.ITALIC,userDisplayNameLabel.getFont().getSize() - 1));
+
     }else{
+
       userDisplayNameLabel = new JLabel("User diplay name",SwingConstants.LEFT);
       userNameLabel = new JLabel("@name",SwingConstants.LEFT);
+
     }
 
     userInfoConstrains.insets = new Insets(0,5,0,5);
@@ -63,27 +72,36 @@ public final class MenuBarPanel extends JPanel {
 
     final JToolBar toolBar = new JToolBar();
     toolBar.setFloatable(false);
+
     final JPopupMenu popup = new JPopupMenu();
+    
     final JMenuItem logoutLabel = new JMenuItem(new AbstractAction("Logout") {
       public void actionPerformed(ActionEvent e) {
-        int result = JOptionPane.showConfirmDialog(null, "Are you sure you wish to logout?",null, JOptionPane.YES_NO_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, 
+        "Are you sure you wish to logout?",null, JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION) {
           logoutCallback.onLogoutRequest();
         } 
       }
     });
+
     popup.add(logoutLabel);
 
     final JLabel settingsButton = new JLabel("Settings");
     toolBar.add(settingsButton);
 
-
     this.add(toolBar, BorderLayout.EAST);
     this.add(userInfoPanel, BorderLayout.CENTER);
+
+
     settingsButton.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                popup.show(e.getComponent(), e.getX(), e.getY());
-            }
-        });
+
+      public void mousePressed(MouseEvent e) {
+
+        popup.show(e.getComponent(), e.getX(), e.getY());
+
+      }
+
+    });
   }
 }

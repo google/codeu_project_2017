@@ -18,9 +18,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import codeu.chat.common.Relay;
-import codeu.chat.common.Time;
-import codeu.chat.common.Uuid;
-
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
 
 // NO OP RELAY
 //

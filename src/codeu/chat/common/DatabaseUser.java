@@ -10,14 +10,14 @@ import codeu.chat.util.Serializers;
 // DatabaseUser is used to parse the json object from the database with Gson.
 public class DatabaseUser{
     public final String id;
-    public final String display_name;
+    public final String displayName;
     public final String pswd;
     public final String name;
 
-    public DatabaseUser(String id, String display_name, String pswd, String name){
+    public DatabaseUser(String id, String displayName, String pswd, String name){
         this.id = id;
         this.name = name;
-        this.display_name = display_name;
+        this.displayName = displayName;
         this.pswd = pswd;
     }
 
@@ -25,6 +25,6 @@ public class DatabaseUser{
         return this.name.equals(loginUsername) && this.pswd.equals(loginPswd);
     }
     public String toString(){
-        return "Username: " + this.name + "\nDisplay name: " + this.display_name;
+        return "Username: " + this.name + "\nDisplay name: " + this.displayName;
     }
 }

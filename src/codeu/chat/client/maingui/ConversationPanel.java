@@ -78,7 +78,8 @@ public final class ConversationPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (clientContext.user.hasCurrent()) {
-          final String s = (String) JOptionPane.showInputDialog(ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,null, null, "");
+          final String s = (String) JOptionPane.showInputDialog(ConversationPanel.this, 
+          "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
             ConversationPanel.this.getAllConversations(listModel);

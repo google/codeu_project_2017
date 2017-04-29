@@ -96,34 +96,32 @@ public final class MainGui implements LoginInputCallback, LogoutCallback{
     // Search for user in the server's database
     final User loginUser = clientContext.user.checkUserInDatabase(username, pswd);
 
-    if(loginUser != null){
+    if (loginUser != null) {
 
       // Check if user is already logged
-      if(!clientContext.user.hasCurrent()){
+      if (!clientContext.user.hasCurrent()) {
 
         // Sign in with the returned user from the database
-        if(clientContext.user.signInUser(loginUser)){
+        if (clientContext.user.signInUser(loginUser)) {
 
           // User successfully signed in
-          JOptionPane.showMessageDialog(mainFrame,"Hello " + clientContext.user.getCurrent().display_name);
+          JOptionPane.showMessageDialog(mainFrame,"Hello " + clientContext.user.getCurrent().displayName);
           mainViewPanel.removeAll();
           loadChatPanels();
         }
       }else{
 
-        // User is already logged
-        JOptionPane.showMessageDialog(mainFrame, "User is already logged");
+        JOptionPane.showMessageDialog(mainFrame, "User is already logged in");
       }
     }else{
 
-      // User not found in database or incorrect password
       System.out.println("User not found or incorrect password");
     }
   }
 
   @Override
   public void onLogoutRequest(){
-    if(clientContext.user.signOutUser()){
+    if (clientContext.user.signOutUser()) {
       clientContext.conversation.setCurrent(null);
       mainViewPanel.removeAll();
       loadLoginPanel();
