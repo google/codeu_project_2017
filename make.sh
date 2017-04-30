@@ -18,5 +18,10 @@ set -e
 
 mkdir -p bin
 
+# Compile GSON package if it hasn't been compiled
+if [ ! -d "./bin/com/" ]; then
+  unzip -d ./bin ./third_party/gson-2.8.0.jar
+fi
+
 javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin
 javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./bin

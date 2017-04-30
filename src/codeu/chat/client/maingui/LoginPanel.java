@@ -21,7 +21,7 @@ public final class LoginPanel extends JPanel{
     }
     private void initialize() {
 
-        // This panel contains the login form for get access to the chat.
+        // This panel contains the login form to access the chat.
 
         // Configure the size of the panel and the main structure.
         this.setLayout(new GridBagLayout());
