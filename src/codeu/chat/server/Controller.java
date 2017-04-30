@@ -15,6 +15,17 @@
 package codeu.chat.server;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -23,8 +34,11 @@ import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
+import codeu.chat.common.DatabaseUser;
+import com.google.gson.*;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+
 
 public final class Controller implements RawController, BasicController {
 
@@ -33,9 +47,19 @@ public final class Controller implements RawController, BasicController {
   private final Model model;
   private final Uuid.Generator uuidGenerator;
 
+  // Get the base dir for the database
+  private final String userDatabasePath = (new File(System.getProperty("user.dir")))
+  .getParent() + "/persistance/database/users";
+
+  private List<DatabaseUser> databaseUsersList;
+  private HashMap<String,DatabaseUser> databaseUsersMap;
+
   public Controller(Uuid serverId, Model model) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
+
+    // Load all database users from the file to the model
+    loadDatabaseUsers();
   }
 
   @Override
@@ -141,12 +165,70 @@ public final class Controller implements RawController, BasicController {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
 
-      LOG.info("Conversation added: " + conversation.id);
+      LOG.info("Conversation added: conversation.id=%s",
+      conversation.id);
     }
 
     return conversation;
   }
 
+  // Search for a user in the database and create the User object in the return.
+  @Override
+  public User searchUserInDatabase(String username, String pswd){
+
+    // Check if user exists in the hashmap
+    final DatabaseUser tempUser = databaseUsersMap.get(username);
+    if(tempUser != null){
+      
+      // Check if input password matches with the user in the database
+      if(tempUser.pswd.equals(pswd)){
+
+
+        try {
+          final User userFromModel = model.userById().first(Uuid.parse(tempUser.id));
+          if(userFromModel != null){
+            return userFromModel;
+          }else{
+            System.out.println("User in model but not in database");
+          }
+        } catch(IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return null;
+  }
+
+  // Load all database users to List and to the model
+  private void loadDatabaseUsers(){
+
+    String fileContent = null;
+    StringBuilder stringBuilder = new StringBuilder();
+    Gson gson = new Gson();
+
+    try {
+
+      // Get database user content
+      fileContent = new String(Files.readAllBytes(Paths.get(userDatabasePath)));
+
+      // Parse the database json into DatabaseUser array and hashmap using Gson.
+      databaseUsersList = Arrays.asList(gson.fromJson(fileContent, DatabaseUser[].class));
+      databaseUsersMap = new HashMap<String,DatabaseUser>(27);
+
+      // Add all users to the model
+      for(DatabaseUser databaseUser : databaseUsersList){
+        databaseUsersMap.put(databaseUser.name,databaseUser);
+        model.add(new User(databaseUser));
+      }
+
+      LOG.info(
+          "loadDatabaseUsers success (%s)",
+          userDatabasePath);
+
+    } catch (IOException e){
+      e.printStackTrace();
+    }
+  }
   private Uuid createId() {
 
     Uuid candidate;

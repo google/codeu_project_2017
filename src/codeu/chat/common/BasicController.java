@@ -51,4 +51,9 @@ public interface BasicController {
   //  Whether conversations can have the same title is undefined.
   Conversation newConversation(String title, Uuid owner);
 
+  // SEARCH FOR USER IN DATABASE
+  //
+  //  Create a search request in the database to find the user and
+  //  return the User object. 
+  User searchUserInDatabase(String username, String pswd);
 }

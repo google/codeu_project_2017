@@ -131,4 +131,28 @@ public class Controller implements BasicController {
 
     return response;
   }
+
+  // Serialize the request for searchUserInDatabase with username and pswd parameters
+  @Override
+  public User searchUserInDatabase(String username, String pswd){
+    User response = null;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_USER_IN_DATABASE_REQUEST);
+      Serializers.STRING.write(connection.out(), username);
+      Serializers.STRING.write(connection.out(), pswd);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE) {
+        response = Serializers.nullable(User.SERIALIZER).read(connection.in());
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return response;
+  }
 }
