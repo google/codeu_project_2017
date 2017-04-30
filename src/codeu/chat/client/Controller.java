@@ -55,7 +55,7 @@ public class Controller implements BasicController {
 
     try (final Connection connection = source.connect()) {
 
-      if(file != null){
+      if (file != null){
         Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_FILE_MESSAGE_REQUEST);
       } else {
         Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_MESSAGE_REQUEST);

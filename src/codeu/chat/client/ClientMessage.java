@@ -111,9 +111,11 @@ public final class ClientMessage {
 
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
-    final Message message = (validInputs) ? ((file != null) ?
-            controller.newFileMessage(author, conversation, body, file) :
-            controller.newMessage(author, conversation, body)) : null;
+    final Message message = (validInputs) ?
+            ((file != null) ?
+                    controller.newFileMessage(author, conversation, body, file) :
+                    controller.newMessage(author, conversation, body))
+            : null;
 
     if (message == null) {
       System.out.format("Error: message not created - %s.\n",
