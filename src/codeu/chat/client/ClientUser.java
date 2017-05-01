@@ -23,12 +23,7 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
-
-import javax.crypto.SecretKeyFactory;
-import java.security.spec.InvalidKeySpecException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import javax.crypto.spec.PBEKeySpec;
+import codeu.chat.util.PasswordGenerator;
 
 public final class ClientUser {
 
@@ -86,42 +81,13 @@ public final class ClientUser {
     final User prev = current;
     if (parsedInput[0] != null) {
       final User newCurrent = usersByName.first(parsedInput[0]);
-      boolean validPassword = validatePassword(parsedInput[1], newCurrent.salt, newCurrent.password);
+      boolean validPassword = PasswordGenerator.validatePassword(parsedInput[1], newCurrent.salt,
+      newCurrent.password);
       if (validPassword && newCurrent != null) {
         current = newCurrent;
       }
     }
     return (prev != current);
-  }
-
-  private boolean validatePassword(String password, byte[] salt, byte[] expectedPassword){
-    char[] bytePassword = password.toCharArray();
-    byte[] hashedPassword = hash(bytePassword, salt);
-    password = null;
-    Arrays.fill(bytePassword, Character.MIN_VALUE);
-    if(hashedPassword.length != expectedPassword.length){
-      return false;
-    }
-    for(int i=0; i< expectedPassword.length; i++){
-      if(hashedPassword[i] != expectedPassword[i]){
-        return false;
-      }
-    }
-    return true;
-  }
-
-  //hash the password
-  private byte[] hash(char[] password, byte[] salt){
-    PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
-    Arrays.fill(password, Character.MIN_VALUE);
-    try {
-      SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-      return skf.generateSecret(spec).getEncoded();
-    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-      throw new AssertionError("Error while hashing a password ");
-    } finally {
-      spec.clearPassword();
-    }
   }
 
   public boolean signOutUser() {
@@ -134,11 +100,11 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name, byte[] salt, byte[] password) {
+  public void addUser(String name, String password) {
 
     final boolean validInputs = isValidName(name);
 
-    final User user = (validInputs) ? controller.newUser(name, salt, password) : null;
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",

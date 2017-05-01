@@ -124,14 +124,8 @@ public final class Chat {
         if(input.length != 2){
           System.out.println("ERROR: <username>, <password> not supplied.");
         }
-        char[] password = input[1].toCharArray();
-
-        //generate the salt
-        byte[] salt = getSalt();
-        //create the hash
-        byte[] hashedPassword = hash(password, salt);
         
-        addUser(input[0], salt, hashedPassword);
+        addUser(input[0], input[1]);
       }
 
     } else if (token.equals("u-list-all")) {
@@ -288,30 +282,10 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name, byte[] salt, byte[] password) {
-    clientContext.user.addUser(name, salt, password);
+  private void addUser(String name, String password) {
+    clientContext.user.addUser(name, password);
   }
 
-  //generate some salt for pasword security
-  private byte[] getSalt(){
-    byte[] salt = new byte[64];
-    random.nextBytes(salt);
-    return salt;
-  }
-
-  //create the hashed password
-  private byte[] hash(char[] password, byte[] salt){
-    PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
-    Arrays.fill(password, Character.MIN_VALUE);
-    try {
-      SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-      return skf.generateSecret(spec).getEncoded();
-    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-      throw new AssertionError("Error while hashing a password ");
-    } finally {
-      spec.clearPassword();
-    }
-  }
 
   // Display all users known to server.
   private void showAllUsers() {
