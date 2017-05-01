@@ -179,8 +179,10 @@ public final class MessagePanel extends JPanel {
           
           String messageText = messageField.getText();
           int indx = colorList.getSelectedIndex();
-          if(indx == 0)	messageText = "\b" + messageText; // Black text
-          else if (indx == 1) messageText = "\b\b" + messageText;
+          
+          // May want to change to something else in front of string
+          if(indx == 0)	messageText = "\u0001" + messageText; // Black text
+          else if (indx == 1) messageText = "\u0002" + messageText; // Red text
           
           System.out.println(messageText);
           messageField.setText("");
@@ -209,18 +211,17 @@ public final class MessagePanel extends JPanel {
     
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        // Assumes the stuff in the list has a pretty toString
         String str = value.toString();
         setText(value.toString());
 		
-		
+		// These might change
         System.out.println(str);
-        if (str.contains("\b\b")) {
+        if (str.contains("\u0002")) {
         	setBackground(Color.RED);
         	System.out.println("hello");
         }
-        else if(str.contains("\b")) {
-        	setBackgroundColor(Color.WHITE);
+        else if(str.contains("\u0001")) {
+        	setBackground(Color.BLACK);
         	System.out.println("test");
         }
 
