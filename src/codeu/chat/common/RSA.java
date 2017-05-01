@@ -1,3 +1,5 @@
+package codeu.chat.common;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.nio.charset.Charset;

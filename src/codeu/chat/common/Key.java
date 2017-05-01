@@ -1,3 +1,5 @@
+package codeu.chat.common;
+
 import java.math.BigInteger;
 
 public class Key{
