@@ -45,6 +45,7 @@ public final class ClientUser {
     this.view = view;
   }
 
+/*
   // Validate the username string
   static public boolean isValidName(String userName) {
     boolean clean = true;
@@ -57,7 +58,26 @@ public final class ClientUser {
     }
     return clean;
   }
+*/
 
+// Validate the username string
+public boolean isValidName(String userName) {
+
+    if (userName.length() == 0) {
+      return false;
+    } else{
+
+      for (User u : getUsers()) {
+
+        if(u.name.toUpperCase().equals(userName.toUpperCase())){
+          System.out.format("Error: user not created - Name already exists.");
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  
   public boolean hasCurrent() {
     return (current != null);
   }
@@ -89,8 +109,8 @@ public final class ClientUser {
     printUser(current);
   }
 
-
-	//change the type to a bool, so we can check if the user was created or not in the GUI
+  /*
+  //change the type to a bool, so we can check if the user was created or not in the GUI
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
     
@@ -136,9 +156,8 @@ public final class ClientUser {
     	}
     } 
   }
+  
  
-    
-  /*  
     public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
 
@@ -161,14 +180,45 @@ public final class ClientUser {
     //return false; 
   } 
   */
-      
-   
   /*
-  //work on deleting user from map and store!!
-  public boolean deleteUser(String name){
-  	
+  public boolean addUser(String name) {
+    final boolean validInputs = isValidName(name);
+    
+    if(validInputs){
+    	final User user = controller.newUser(name);
+    	
+      	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      	updateUsers();
+        	
+    } else{
+      	System.out.format("Error: user not created - %s.\n",
+        (validInputs) ? "server failure" : "bad input value");
+    }
+    
+    return validInputs;
   }
-*/
+  */
+  
+  public boolean addUser(String name) {
+    final boolean validInputs = isValidName(name);
+
+    final User user = (validInputs) ? controller.newUser(name) : null;
+
+    if (user == null) {
+      System.out.format("Error: user not created - %s.\n",
+          (validInputs) ? "server failure" : "bad input value"); 
+    } else {
+      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      updateUsers();
+      
+      return true; 
+    }
+    return false;
+  }
+  
+  
+  
+  
   public void showAllUsers() {
     updateUsers();
     for (final User u : usersByName.all()) {
