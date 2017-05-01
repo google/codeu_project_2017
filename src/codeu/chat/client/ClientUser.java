@@ -44,21 +44,6 @@ public final class ClientUser {
     this.controller = controller;
     this.view = view;
   }
-
-/*
-  // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
-
-      // TODO: check for invalid characters and that the user's name is not a duplicate
-
-    }
-    return clean;
-  }
-*/
     
 // Validate the username string
 public boolean isValidName(String userName) {
