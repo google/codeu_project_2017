@@ -61,7 +61,7 @@ public final class ClientUser {
       for (User i : getUsers()){
     	  if(i.name.toUpperCase().equals(userName.toUpperCase()))
     	  {
-    		  Sysem.out.format("Error: User not created | User Name already exists");
+    		  System.out.format("Error: User not created | User Name already exists");
     		  return false;
     	  }
       }
