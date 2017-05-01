@@ -161,11 +161,13 @@ public final class ClientConversation {
     summariesByUuid.clear();
     summariesSortedByTitle = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
-    for (final ConversationSummary cs : view.getAllConversations()) {
-      summariesByUuid.put(cs.id, cs);
-      summariesSortedByTitle.insert(cs.title, cs);
+    if (userContext.getCurrent() != null) {
+        for (final Conversation c : view.getUserConversations(userContext.getCurrent().id)) {
+          ConversationSummary cs = c.summary;
+          summariesByUuid.put(cs.id, cs);
+          summariesSortedByTitle.insert(cs.title, cs);
+        }
     }
-
     if (currentChanged) {
       updateCurrentConversation();
       messageContext.resetCurrent(true);
