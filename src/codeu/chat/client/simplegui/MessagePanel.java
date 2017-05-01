@@ -114,7 +114,8 @@ public final class MessagePanel extends JPanel {
 
     // messageListModel is an instance variable so Conversation panel
     // can update it.
-    final JList<String> userList = new JList<>(messageListModel);
+    JList<String> userList = new JList<>(messageListModel);
+    userList.setCellRenderer(new MyCellRenderer());
     userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
@@ -176,7 +177,12 @@ public final class MessagePanel extends JPanel {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
           
-          final String messageText = messageField.getText();
+          String messageText = messageField.getText();
+          int indx = colorList.getSelectedIndex();
+          if(indx == 0)	messageText = "\b" + messageText; // Black text
+          else if (indx == 1) messageText = "\b\b" + messageText;
+          
+          System.out.println(messageText);
           messageField.setText("");
           if (messageText != null && messageText.length() > 0) {
             clientContext.message.addMessage(
@@ -195,7 +201,35 @@ public final class MessagePanel extends JPanel {
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
   }
+  
+  public class MyCellRenderer extends JLabel implements ListCellRenderer {
+  	public MyCellRenderer() {
+        setOpaque(false);
+    }
+    
+    @Override
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        // Assumes the stuff in the list has a pretty toString
+        String str = value.toString();
+        setText(value.toString());
+		
+		
+        System.out.println(str);
+        if (str.contains("\b\b")) {
+        	setBackground(Color.RED);
+        	System.out.println("hello");
+        }
+        else if(str.contains("\b")) {
+        	setBackgroundColor(Color.WHITE);
+        	System.out.println("test");
+        }
 
+
+
+
+        return this;
+    }
+  }
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
