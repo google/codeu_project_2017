@@ -97,7 +97,7 @@ public final class Controller implements RawController, BasicController {
       try{
         stmt = connection.createStatement();
 
-        message = new Message(id, Uuid.NULL, Uuid.fromString(prevID), creationTime, author, body);
+        message = new Message(id, Uuid.NULL, Uuid.parse(prevID), creationTime, author, body);
         String sql = "INSERT INTO MESSAGES(ID, USERID, CONVERSATIONID, TimeCreated, MESSAGE)" +
                 "VALUES("+SQLFormatter.sqlID(id)+","+SQLFormatter.sqlID(author)+","+SQLFormatter.sqlID(conversation)+","+SQLFormatter.sqlBody(body)+","+SQLFormatter.sqlCreationTime(creationTime)+");";
         stmt.executeUpdate(sql);
