@@ -41,7 +41,7 @@ public final class ViewDatabase {
                         "FROM USERS " +
                         "WHERE  ID = "+SQLFormatter.sqlID(id)+";" );
                 while (rs.next()){
-                    Uuid userID = Uuid.fromString(rs.getString("ID"));
+                    Uuid userID = Uuid.parse(rs.getString("ID"));
                     String userName = rs.getString("UNAME");
                     Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
                     String userPassword = rs.getString("PASSWORD");
@@ -82,10 +82,10 @@ public final class ViewDatabase {
                         "FROM CONVERSATIONS " +
                         "WHERE  ID = "+SQLFormatter.sqlID(id)+";" );
                 while (rs.next()){
-                    Uuid conversationID = Uuid.fromString(rs.getString("ID"));
+                    Uuid conversationID = Uuid.parse(rs.getString("ID"));
                     String conversationName = rs.getString("CNAME");
                     Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
-                    Uuid ownerID = Uuid.fromString(rs.getString("OWNERID"));
+                    Uuid ownerID = Uuid.parse(rs.getString("OWNERID"));
 
 
                     Conversation conversation = new Conversation(conversationID, ownerID, creationTime, conversationName);
@@ -123,11 +123,11 @@ public final class ViewDatabase {
                         "FROM MESSAGES " +
                         "WHERE ID = "+SQLFormatter.sqlID(id)+";" );
                 while (rs.next()){
-                    Uuid messageID = Uuid.fromString(rs.getString("ID"));
-                    Uuid nextMessageID = Uuid.fromString(rs.getString("MNEXTID"));
-                    Uuid prevMessageID = Uuid.fromString(rs.getString("PNEXTID"));
+                    Uuid messageID = Uuid.parse(rs.getString("ID"));
+                    Uuid nextMessageID = Uuid.parse(rs.getString("MNEXTID"));
+                    Uuid prevMessageID = Uuid.parse(rs.getString("PNEXTID"));
                     Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
-                    Uuid authorID = Uuid.fromString(rs.getString("USERID"));
+                    Uuid authorID = Uuid.parse(rs.getString("USERID"));
                     String content = rs.getString("MESSAGE");
 
                     Message message = new Message(messageID, nextMessageID, prevMessageID, creationTime, authorID, content);
@@ -162,8 +162,8 @@ public final class ViewDatabase {
             ResultSet rs = stmt.executeQuery( "SELECT * " +
                     "FROM CONVERSATIONS;" );
             while (rs.next()){
-                Uuid conversationID = Uuid.fromString(rs.getString("ID"));
-                Uuid userID = Uuid.fromString(rs.getString("OWNERID"));
+                Uuid conversationID = Uuid.parse(rs.getString("ID"));
+                Uuid userID = Uuid.parse(rs.getString("OWNERID"));
                 String conversationName = rs.getString("CNAME");
                 Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
 
@@ -223,7 +223,7 @@ public final class ViewDatabase {
                     "FROM USERS "+
                     parameters + ";" );
             while (rs.next()){
-                Uuid userID = Uuid.fromString(rs.getString("ID"));
+                Uuid userID = Uuid.parse(rs.getString("ID"));
                 String userName = rs.getString("UNAME");
                 Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
                 String userPassword = rs.getString("PASSWORD");
@@ -264,8 +264,8 @@ public final class ViewDatabase {
                     " AND TimeCreated < " + SQLFormatter.sqlCreationTime(end) +
                     " ORDER BY TimeCreated ASC;" );
             while (rs.next()){
-                Uuid conversationID = Uuid.fromString(rs.getString("ID"));
-                Uuid userID = Uuid.fromString(rs.getString("OWNERID"));
+                Uuid conversationID = Uuid.parse(rs.getString("ID"));
+                Uuid userID = Uuid.parse(rs.getString("OWNERID"));
                 String conversationName = rs.getString("CNAME");
                 Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
 
@@ -304,8 +304,8 @@ public final class ViewDatabase {
                     "WHERE CNAME LIKE '%" + filter + "%';" );
 
             while (rs.next()){
-                Uuid conversationID = Uuid.fromString(rs.getString("ID"));
-                Uuid userID = Uuid.fromString(rs.getString("OWNERID"));
+                Uuid conversationID = Uuid.parse(rs.getString("ID"));
+                Uuid userID = Uuid.parse(rs.getString("OWNERID"));
                 String conversationName = rs.getString("CNAME");
                 Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
 
@@ -347,11 +347,11 @@ public final class ViewDatabase {
                     " ORDER BY TimeCreated ASC;" );
 
             while (rs.next()){
-                Uuid messageID = Uuid.fromString(rs.getString("ID"));
-                Uuid nextMessageID = Uuid.fromString(rs.getString("MNEXTID"));
-                Uuid prevMessageID = Uuid.fromString(rs.getString("PNEXTID"));
+                Uuid messageID = Uuid.parse(rs.getString("ID"));
+                Uuid nextMessageID = Uuid.parse(rs.getString("MNEXTID"));
+                Uuid prevMessageID = Uuid.parse(rs.getString("PNEXTID"));
                 Time creationTime = Time.fromMs(rs.getLong("TimeCreated"));
-                Uuid authorID = Uuid.fromString(rs.getString("USERID"));
+                Uuid authorID = Uuid.parse(rs.getString("USERID"));
                 String content = rs.getString("MESSAGE");
 
                 Message message = new Message(messageID, nextMessageID, prevMessageID, creationTime, authorID, content);
