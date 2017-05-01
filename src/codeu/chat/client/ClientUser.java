@@ -53,12 +53,13 @@ public boolean isValidName(String userName) {
     } else {
 
       for (User currentUser : getUsers()) {
-
+		
         if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
           System.out.format("Error: user not created - %s already exists.", userName);
           clean = false;
         }
       }
+      clean = true; 
     }
     return clean;
   }
