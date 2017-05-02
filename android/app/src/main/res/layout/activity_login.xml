@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ChatMe_Red"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".view.login.LoginActivity">
+
+    <TextView
+        android:id="@+id/tvChatMeLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp"
+        android:text="ChatMe"
+        android:textColor="@color/ChatMe_Blue"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/etEmail"
+        android:layout_below="@+id/etEmail"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/ChatMe_Blue"
+        android:text="Log In"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/etPassword"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword" />
+
+    <Button
+        android:id="@+id/btnCreateAcnt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnLogin"
+        android:layout_alignStart="@+id/btnLogin"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginTop="17dp"
+        android:background="@color/ChatMe_Blue"
+        android:text="Create Account"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+</RelativeLayout>
