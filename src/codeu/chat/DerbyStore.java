@@ -16,10 +16,13 @@ import codeu.chat.util.store.Store;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
+import codeu.chat.common.DerbyDatabaseInteractions;
+
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 
-public class DerbyStore {
+public class DerbyStore implements DerbyDatabaseInteractions {
 	
 	private String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 	private String protocol = "jdbc:derby:../test";
@@ -31,6 +34,10 @@ public class DerbyStore {
 	private final String conversationTableName = "conversation";
 	private final String messageTableName = "message";
 	private final String chatParticipantsTableName = "chatParticipants";
+	
+	private final String getUserInfo = "SELECT * FROM " + userTableName +  " WHERE id = ?";
+	private final String getConversationInfo = "SELECT * FROM " + userTableName +  " WHERE id = ?";
+	private final String getUsersInvolved = "SELCT * FROM " + chatParticipantsTableName + " WHERE id = ?" ;
 	
 	private final String checkUsername = "SELECT * FROM " + userTableName + " WHERE name = ?";
 	private final String checkValidUser = "SELECT * FROM " + userTableName + " WHERE name = ? AND password = ?";
@@ -95,6 +102,43 @@ public class DerbyStore {
 		}
 	}
 	
+	@Override
+	public User getUser(Uuid userid) throws SQLException, IOException {
+		PreparedStatement getUser = conn.prepareStatement(getUserInfo);
+		getUser.setString(1, userid.toString());
+		ResultSet user = getUser.executeQuery();
+		
+		return new User(Uuid.parse(user.getString(1)), user.getString(2), Time.fromMs(user.getLong(2)));
+	}
+	
+	@Override
+	public Conversation getConversation(Uuid conversationid) throws SQLException, IOException {
+		PreparedStatement getConversation = conn.prepareStatement(getConversationInfo);
+		getConversation.setString(1, conversationid.toString());
+		ResultSet conversation = getConversation.executeQuery();
+		
+		PreparedStatement getUsersForConversation = conn.prepareStatement(getUsersInvolved);
+		getUsersForConversation.setString(1, conversationid.toString());
+		ResultSet users = getUsersForConversation.executeQuery();
+		
+		HashSet<Uuid> usersInvolved = new HashSet<Uuid>();
+		
+		while (users.next()) {
+			usersInvolved.add(Uuid.parse(users.getString(1)));
+		}
+		
+		Uuid id = Uuid.parse(conversation.getString(1));
+		Uuid owner = Uuid.parse(conversation.getString(2));
+		Time creation = Time.fromMs(conversation.getLong(3));
+		String title = conversation.getString(4);
+		Uuid firstMessage = Uuid.parse(conversation.getString(5));
+		Uuid lastMessage = Uuid.parse(conversation.getString(6));
+				
+		return new Conversation(id, owner, creation, title, usersInvolved, firstMessage, lastMessage);
+	}
+	
+	
+	@Override
 	public boolean checkUsernameExists(String name) throws SQLException {
 		PreparedStatement checkUserTest = conn.prepareStatement(checkUsername);
 		checkUserTest.setString(1, name);
@@ -103,15 +147,17 @@ public class DerbyStore {
 		return user == null;
 	}
 	
-	public String userLoginCheck(String name, String password) throws SQLException {
+	@Override
+	public User userLogin(String name, String password) throws SQLException, IOException {
 		PreparedStatement checkValidUserTest = conn.prepareStatement(checkValidUser);
 		checkValidUserTest.setString(1, name);
 		checkValidUserTest.setString(2, password);
 		ResultSet user = checkValidUserTest.executeQuery();
 		
-		return (user != null) ? user.getString(1) : null;
+		return (user != null) ? new User(Uuid.parse(user.getString(1)), user.getString(2), Time.fromMs(user.getLong(3))) : null;
 	}
 	
+	@Override
 	public void addUser(User u) throws SQLException {
 		PreparedStatement addUser = conn.prepareStatement(addUserInfo);
 		addUser.setString(1, removeCharsInUuid(u.id.toString()));
@@ -122,6 +168,7 @@ public class DerbyStore {
 		addUser.executeUpdate();
 	}
 	
+	@Override
 	public void addMessage(Message m) throws SQLException {
 		PreparedStatement addMessage = conn.prepareStatement(addMessageInfo);
 		addMessage.setString(1, removeCharsInUuid(m.id.toString()));
@@ -134,7 +181,7 @@ public class DerbyStore {
 		addMessage.executeUpdate();
 	}
 	
-	
+	@Override
 	public void addConversation(Conversation c) throws SQLException {
 		
 		for (Uuid s : c.users) {
@@ -158,6 +205,7 @@ public class DerbyStore {
 		
 	}
 	
+	@Override
 	public void updateConversation(Conversation c) throws SQLException {
 		
 		PreparedStatement updateConversationStatement = conn.prepareStatement(updateConversationById);
@@ -170,6 +218,7 @@ public class DerbyStore {
 		
 	}
 	
+	@Override
 	public void updateLastMessage(Message m) throws SQLException {
 		PreparedStatement updateMessageStatement = conn.prepareStatement(updateLastMessageById);
 		
@@ -179,6 +228,7 @@ public class DerbyStore {
 		updateMessageStatement.executeUpdate();
 	}
 	
+	@Override
 	public Store<Uuid, User> getAllUsers() {
 		Store<Uuid, User> allUsers = new Store<>(UUID_COMPARE);
 		try {
@@ -212,6 +262,7 @@ public class DerbyStore {
 		return allUsers;
 	}
 	
+	@Override
 	public Store<Uuid, Conversation> getAllConversations() {
 		Store<Uuid, Conversation> allConversations = new Store<>(UUID_COMPARE);
 		
@@ -255,6 +306,7 @@ public class DerbyStore {
 		return allConversations;
 	}
 	
+	@Override
 	public Store<Uuid, Message> getAllMessages() {
 		Store<Uuid, Message> allMessages = new Store<>(UUID_COMPARE);
 		
