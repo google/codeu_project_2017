@@ -25,7 +25,6 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;

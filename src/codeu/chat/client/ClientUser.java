@@ -56,6 +56,9 @@ public final class ClientUser {
     }
     return clean;
   }
+  static public boolean isValidPassword(String passWord) {
+    return passWord != "";
+  }
 
   public boolean hasCurrent() {
     return (current != null);
@@ -73,8 +76,7 @@ public final class ClientUser {
       if (newCurrent != null) {
         if(newCurrent.password.equals(password)){
           current = newCurrent;
-        }
-        else {
+        } else {
           System.out.println("Wrong Password");
         }
       }
@@ -93,7 +95,7 @@ public final class ClientUser {
   }
 
   public void addUser(String name, String password) {
-    final boolean validInputs = isValidName(name);
+    final boolean validInputs = isValidName(name)&&isValidPassword(password);
 
     final User user = (validInputs) ? controller.newUser(name, password) : null;
 

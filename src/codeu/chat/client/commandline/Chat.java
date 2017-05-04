@@ -118,7 +118,6 @@ public final class Chat {
         String user = tokenScanner.next().trim();
         char passwordArray[] = console.readPassword("Enter password for new user: ");
         String password = new String(passwordArray);
-        password = password.trim();
         addUser(user, password);
       }
 
