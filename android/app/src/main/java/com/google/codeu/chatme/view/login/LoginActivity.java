@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     @Override
     public void onClick(View view) {
 
-        String  email = etEmail.getText().toString();
+        String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
         switch (view.getId()) {
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
             // create account button clicked
             case R.id.btnCreateAcnt:
-                presenter.signUp(email,password);
+                presenter.signUp(email, password);
                 break;
         }
     }
