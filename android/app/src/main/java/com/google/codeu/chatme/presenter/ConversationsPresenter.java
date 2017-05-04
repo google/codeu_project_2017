@@ -6,7 +6,7 @@ import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.model.ConversationParticipantDetails;
 import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.utility.network.RetrofitBuilder;
-import com.google.codeu.chatme.view.adapter.ChatListAdapter;
+import com.google.codeu.chatme.view.adapter.ConversationListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,26 +30,26 @@ import retrofit2.Response;
  * store and retrieve data related to current user's conversations from Firebase
  * database
  *
- * @see ChatActivityInteractor for documentation of interface methods
+ * @see ConversationsInteractor for documentation of interface methods
  */
-public class ChatActivityPresenter implements ChatActivityInteractor {
+public class ConversationsPresenter implements ConversationsInteractor {
 
-    private static final String TAG = ChatActivityPresenter.class.getName();
+    private static final String TAG = ConversationsPresenter.class.getName();
 
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     /**
-     * {@link ChatListAdapter} reference to update list of conversations
+     * {@link ConversationListAdapter} reference to update list of conversations
      */
-    private final ChatListAdapter view;
+    private final ConversationListAdapter view;
 
     /**
      * Constructor to accept a reference to a recycler view adapter to bind
      * conversation data to views
      *
-     * @param view {@link ChatListAdapter} reference
+     * @param view {@link ConversationListAdapter} reference
      */
-    public ChatActivityPresenter(ChatListAdapter view) {
+    public ConversationsPresenter(ConversationListAdapter view) {
         this.view = view;
     }
 
@@ -103,7 +103,7 @@ public class ChatActivityPresenter implements ChatActivityInteractor {
     /**
      * Retrieves a hash map which maps user ids to their details such as full name and pic urls.
      * Uses Retrofit to make an API call to Firebase Functions (backend) by "posting" a list of user
-     * ids. Then, updates view by resetting {@link ChatListAdapter#setParticipantDetailsMap(HashMap)}
+     * ids. Then, updates view by resetting {@link ConversationListAdapter#setParticipantDetailsMap(HashMap)}
      * <p>
      * Note: This function would need to altered if and when "groups" feature is introduced
      *
