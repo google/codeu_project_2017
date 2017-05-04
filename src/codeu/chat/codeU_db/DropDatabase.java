@@ -6,6 +6,6 @@ public class DropDatabase
     {
         DataBaseConnection.open();
         DataBaseConnection.dropTables();
-        System.out.println("Finished Creating Database Successfully!!!");
+        System.out.println("Finished Droping Database Successfully!!!");
     }
 }
