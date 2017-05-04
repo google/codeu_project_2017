@@ -1,0 +1,10 @@
+# IDE related files  #
+######################
+*.iml
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
