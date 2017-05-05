@@ -75,7 +75,7 @@ public final class ChatSimpleGui {
             if (JOptionPane.showConfirmDialog(mainFrame, "Are you sure you want to quit?", "Confirm exit.", JOptionPane.OK_OPTION, 0, new ImageIcon("")) != 0) {
                 return;
             }
-            System.exit(-1);
+            System.exit(-1);  
          }  
      });
     mainFrame.setSize(790, 450);
