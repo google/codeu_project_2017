@@ -50,10 +50,10 @@ public final class ConversationSummary implements ListViewable {
     }
   };
 
-  public final Uuid id;
-  public final Uuid owner;
-  public final Time creation;
-  public final String title;
+  public Uuid id;
+  public Uuid owner;
+  public Time creation;
+  public String title;
 
   public ConversationSummary(Uuid id, Uuid owner, Time creation, String title) {
 
@@ -68,5 +68,10 @@ public final class ConversationSummary implements ListViewable {
   @Override
   public String listView() {
     return title;
+  }
+  
+  // Constructor with no agruments (needed for Firebase)
+  public ConversationSummary(){
+    
   }
 }

@@ -18,11 +18,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
+import codeu.chat.util.Time;
+import codeu.chat.util.Uuid;
+import jdk.nashorn.internal.ir.ReturnNode;
+import codeu.chat.util.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,12 +38,7 @@ import codeu.chat.common.Message;
 import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
-import codeu.chat.common.DatabaseUser;
-import com.google.gson.*;
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
-
+import codeu.chat.common.PersistanceController;
 
 public final class Controller implements RawController, BasicController {
 
@@ -48,11 +48,11 @@ public final class Controller implements RawController, BasicController {
   private final Uuid.Generator uuidGenerator;
 
   // Get the base dir for the database
-  private final String userDatabasePath = (new File(System.getProperty("user.dir")))
-  .getParent() + "/persistance/database/users";
+  private final String persistancePath = (new File(System.getProperty("user.dir")))
+  .getParent() + "/persistance/";
 
-  private List<DatabaseUser> databaseUsersList;
-  private HashMap<String,DatabaseUser> databaseUsersMap;
+  private final PersistanceController persistanceController = new PersistanceController(persistancePath,
+  "/keys/codeu-firebase-key.json");
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
@@ -60,6 +60,10 @@ public final class Controller implements RawController, BasicController {
 
     // Load all database users from the file to the model
     loadDatabaseUsers();
+    // Load all database conversations from firebase to the model
+    loadDatabaseConversations();
+    // Load all database messages from firebase to the model
+    loadDatabaseMessages();
   }
 
   @Override
@@ -121,6 +125,9 @@ public final class Controller implements RawController, BasicController {
       if (!foundConversation.users.contains(foundUser)) {
         foundConversation.users.add(foundUser.id);
       }
+
+      persistanceController.addMessage(message,foundConversation);
+
     }
 
     return message;
@@ -141,6 +148,8 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
+
+      persistanceController.addUser(user);
 
     } else {
 
@@ -167,6 +176,7 @@ public final class Controller implements RawController, BasicController {
 
       LOG.info("Conversation added: conversation.id=%s",
       conversation.id);
+      persistanceController.addConversation(conversation);
     }
 
     return conversation;
@@ -174,61 +184,43 @@ public final class Controller implements RawController, BasicController {
 
   // Search for a user in the database and create the User object in the return.
   @Override
-  public User searchUserInDatabase(String username, String pswd){
-
-    // Check if user exists in the hashmap
-    final DatabaseUser tempUser = databaseUsersMap.get(username);
-    if(tempUser != null){
-      
-      // Check if input password matches with the user in the database
-      if(tempUser.pswd.equals(pswd)){
-
-
-        try {
-          final User userFromModel = model.userById().first(Uuid.parse(tempUser.id));
-          if(userFromModel != null){
-            return userFromModel;
-          }else{
-            System.out.println("User in model but not in database");
-          }
-        } catch(IOException e) {
-          e.printStackTrace();
-        }
+  public User searchUserInDatabase(String username, String password){
+    
+    User searchUser = model.userByText().first(username);
+    if(searchUser != null){
+      if(searchUser.password.equals(password)){
+        LOG.info("(LOGIN): Login successfull for %s", username);
+        return searchUser;
+      }else{
+        LOG.info("(LOGIN): Incorrect password for %s", username);
       }
+    }else{
+      LOG.info("LOGIN: User %s doesn't exist", username);
     }
     return null;
   }
 
-  // Load all database users to List and to the model
+  // Load all users from Firebase
   private void loadDatabaseUsers(){
-
-    String fileContent = null;
-    StringBuilder stringBuilder = new StringBuilder();
-    Gson gson = new Gson();
-
-    try {
-
-      // Get database user content
-      fileContent = new String(Files.readAllBytes(Paths.get(userDatabasePath)));
-
-      // Parse the database json into DatabaseUser array and hashmap using Gson.
-      databaseUsersList = Arrays.asList(gson.fromJson(fileContent, DatabaseUser[].class));
-      databaseUsersMap = new HashMap<String,DatabaseUser>(27);
-
-      // Add all users to the model
-      for(DatabaseUser databaseUser : databaseUsersList){
-        databaseUsersMap.put(databaseUser.name,databaseUser);
-        model.add(new User(databaseUser));
-      }
-
-      LOG.info(
-          "loadDatabaseUsers success (%s)",
-          userDatabasePath);
-
-    } catch (IOException e){
-      e.printStackTrace();
+    for(User user : persistanceController.getAllUsers()){
+      model.add(user);
     }
   }
+
+  // Load all conversations from Firebase
+  private void loadDatabaseConversations(){
+    for(Conversation conversation : persistanceController.getAllConversations()){
+      model.add(conversation);
+    }
+  }
+
+  // Load all messages from Firebase
+  private void loadDatabaseMessages(){
+    for(Message message : persistanceController.getAllMessages()){
+      model.add(message);
+    }
+  }
+
   private Uuid createId() {
 
     Uuid candidate;

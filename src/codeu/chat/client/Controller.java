@@ -132,16 +132,16 @@ public class Controller implements BasicController {
     return response;
   }
 
-  // Serialize the request for searchUserInDatabase with username and pswd parameters
+  // Serialize the request for searchUserInDatabase with username and password parameters
   @Override
-  public User searchUserInDatabase(String username, String pswd){
+  public User searchUserInDatabase(String username, String password){
     User response = null;
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_USER_IN_DATABASE_REQUEST);
       Serializers.STRING.write(connection.out(), username);
-      Serializers.STRING.write(connection.out(), pswd);
+      Serializers.STRING.write(connection.out(), password);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE) {
         response = Serializers.nullable(User.SERIALIZER).read(connection.in());

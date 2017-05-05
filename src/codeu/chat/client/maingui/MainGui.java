@@ -91,10 +91,10 @@ public final class MainGui implements LoginInputCallback, LogoutCallback{
   }
   // Login request callback function 
   @Override
-  public void onLoginRequest(String username, String pswd){
+  public void onLoginRequest(String username, String password){
     
     // Search for user in the server's database
-    final User loginUser = clientContext.user.checkUserInDatabase(username, pswd);
+    final User loginUser = clientContext.user.checkUserInDatabase(username, password);
 
     if (loginUser != null) {
 

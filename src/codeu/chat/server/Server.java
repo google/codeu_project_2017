@@ -254,9 +254,9 @@ public final class Server {
     } else if (type == NetworkCode.SEARCH_USER_IN_DATABASE_REQUEST){
 
       final String username = Serializers.STRING.read(in);
-      final String pswd = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
 
-      final User user = controller.searchUserInDatabase(username, pswd);
+      final User user = controller.searchUserInDatabase(username, password);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);

@@ -18,9 +18,8 @@ set -e
 
 mkdir -p bin
 
-# Compile GSON package if it hasn't been compiled
-if [ ! -d "./bin/com/" ]; then
-  unzip -d ./bin ./third_party/gson-2.8.0.jar
+if [ ! -d bin/com/ ] || [ ! -d bin/javax/ ] || [ ! -d bin/org/ ]; then
+  unzip ./third_party/database-api/'*.jar' -d ./bin -x "META-INF/*"
 fi
 
 javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin

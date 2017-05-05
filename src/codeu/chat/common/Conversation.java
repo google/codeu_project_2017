@@ -25,6 +25,8 @@ import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
+import com.google.firebase.database.Exclude;
+
 public final class Conversation {
 
   public static final Serializer<Conversation> SERIALIZER = new Serializer<Conversation>() {
@@ -62,12 +64,13 @@ public final class Conversation {
     }
   };
 
-  public final ConversationSummary summary;
+  public ConversationSummary summary;
 
-  public final Uuid id;
-  public final Uuid owner;
-  public final Time creation;
-  public final String title;
+  public Uuid id;
+  public Uuid owner;
+  public Time creation;
+  public String title;
+  @Exclude
   public final Collection<Uuid> users = new HashSet<>();
   public Uuid firstMessage = Uuid.NULL;
   public Uuid lastMessage = Uuid.NULL;
@@ -80,6 +83,11 @@ public final class Conversation {
     this.title = title;
 
     this.summary = new ConversationSummary(id, owner, creation, title);
+
+  }
+
+  // Constructor with no agruments (needed for Firebase)
+  public Conversation(){
 
   }
 }

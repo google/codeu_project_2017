@@ -55,5 +55,5 @@ public interface BasicController {
   //
   //  Create a search request in the database to find the user and
   //  return the User object. 
-  User searchUserInDatabase(String username, String pswd);
+  User searchUserInDatabase(String username, String password);
 }

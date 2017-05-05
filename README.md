@@ -6,7 +6,7 @@
 1. To build the project:
     ```
     $ sh clean.sh
-    $ sh make.sh // Already compiles Gson
+    $ sh make.sh // Already unzip all .jar needed to compile Firebase
     ```
 2. To run the server just run the same configurations as the [GETTING STARTED](#getting-started) but instead of using `sh` use `bash`
     ```
@@ -24,7 +24,6 @@
     ```
     $ bash run_main_gui_client.sh 192.168.0.1 2007
     ```
-4.  You need to have the file `users` in the directory `./persistance/database/`
 
 ## DISCLAIMER
 

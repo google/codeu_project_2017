@@ -33,6 +33,7 @@ public final class User {
       Uuid.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Serializers.STRING.write(out, value.displayName);
+      Serializers.STRING.write(out, value.password);
       Time.SERIALIZER.write(out, value.creation);
 
     }
@@ -44,22 +45,25 @@ public final class User {
           Uuid.SERIALIZER.read(in),
           Serializers.STRING.read(in),
           Serializers.STRING.read(in),
+          Serializers.STRING.read(in),
           Time.SERIALIZER.read(in)
       );
 
     }
   };
 
-  public final Uuid id;
-  public final String name;
+  public Uuid id;
+  public String name;
   public String displayName;
-  public final Time creation;
+  public String password;
+  public Time creation;
 
   public User(Uuid id, String name, Time creation) {
 
     this.id = id;
     this.name = name;
     this.displayName = name;
+    this.password = name;
     this.creation = creation;
 
   }
@@ -67,8 +71,13 @@ public final class User {
     this(id,name,creation);
     this.displayName = displayName;
   }
-  public User(DatabaseUser databaseUser) throws IOException {
-    this(Uuid.parse(databaseUser.id),databaseUser.name,Time.now());
-    this.displayName = databaseUser.displayName;
+  public User(Uuid id, String name, String displayName, String password, Time creation){
+    this(id,name,displayName,creation);
+    this.password = password;
+  }
+
+  // Constructor with no agruments (needed for Firebase)
+  public User(){
+    
   }
 }
