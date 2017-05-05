@@ -1,0 +1,58 @@
+May 05, 2017 2:23:30 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 05, 2017 2:23:30 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 05, 2017 2:23:30 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 05, 2017 2:23:30 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 05, 2017 2:23:31 AM codeu.chat.client.View getUsersExcluding
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getUsersExcluding(View.java:169)
+	at codeu.chat.client.ClientUser.updateUsers(ClientUser.java:134)
+	at codeu.chat.client.simplegui.UserPanel.getAllUsers(UserPanel.java:188)
+	at codeu.chat.client.simplegui.UserPanel.initialize(UserPanel.java:183)
+	at codeu.chat.client.simplegui.UserPanel.<init>(UserPanel.java:37)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:87)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 05, 2017 2:23:31 AM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 05, 2017 2:23:31 AM codeu.chat.client.View getAllConversations
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getAllConversations(View.java:78)
+	at codeu.chat.client.ClientConversation.updateAllConversations(ClientConversation.java:164)
+	at codeu.chat.client.simplegui.ConversationPanel.getAllConversations(ConversationPanel.java:159)
+	at codeu.chat.client.simplegui.ConversationPanel.initialize(ConversationPanel.java:153)
+	at codeu.chat.client.simplegui.ConversationPanel.<init>(ConversationPanel.java:39)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:96)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 05, 2017 2:23:31 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
