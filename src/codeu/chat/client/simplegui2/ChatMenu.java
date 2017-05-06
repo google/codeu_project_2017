@@ -65,16 +65,59 @@ private final ClientContext clientContext;
         topbar.setPadding(new Insets(15, 12, 15, 12));
         topbar.setStyle("-fx-background-color: #336699;");
 
-
         //add buttons for different options
-        Button signOut = new Button("Sign Out");
+        final Button signOut = new Button("Sign Out");
         signOut.setPrefSize(100, 20);
 
-        Button addUser = new Button("Add User");
-        signOut.setPrefSize(100, 20);
+        final Button addUser = new Button("Add User");
+        addUser.setPrefSize(100, 20);
 
-        Button newConvo = new Button("New Conversation");
-        signOut.setPrefSize(100, 20);
+        final Button newConvo = new Button("New Conversation");
+        newConvo.setPrefSize(100, 20);
+
+        signOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                if (clientContext.user.hasCurrent()) {
+
+                    boolean successfulSignOut= clientContext.user.signOutUser();
+
+                } else {
+                    AlertBox alertNoUser = new AlertBox("You are not signed in.", "You cannot sign out without being logged in.");
+                    alertNoUser.display();
+                }
+            }
+        });
+
+        addUser.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                NewUser user1=new NewUser(clientContext);
+            }
+        });
+
+        newConvo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                if (clientContext.user.hasCurrent()) {
+
+                    NewConversation addConversationBox = new NewConversation(clientContext, "Add Conversation", "Enter new conversation name:" );
+                    addConversationBox.enterNewConversation();
+                    String s = addConversationBox.conversationInput();
+
+                    if (s != null && s.length() > 0) {
+                        clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
+                        //ConversationPanel.this.getAllConversations(listModel);
+                    }
+                } else {
+                    AlertBox alertNoUser = new AlertBox("You are not signed in.", "Please sign in before joining a conversation.");
+                    alertNoUser.display();
+                }
+            }
+        });
+
 
         //add buttons to menu
         topbar.getChildren().addAll(signOut, addUser, newConvo);

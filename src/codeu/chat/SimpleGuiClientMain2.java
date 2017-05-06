@@ -16,21 +16,39 @@ package codeu.chat;
 
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
-import codeu.chat.client.simplegui.ChatSimpleGui;
 import codeu.chat.client.simplegui2.MainGui;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.ConnectionSource;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-final class SimpleGuiClientMain2 {
+public class SimpleGuiClientMain2 extends Application{
 
   private static final Logger.Log LOG = Logger.newLog(SimpleGuiClientMain2.class);
+  private static Stage windowPrime;
+  private static String[] arguments;
 
   public static void main(String [] args) {
+
+      arguments=args;
+      launch(args);
+  }
+
+  @Override
+  public void start(Stage primaryStage) throws Exception{
+
+      windowPrime= primaryStage;
 
     try {
       Logger.enableFileOutput("chat_simple_gui_client_log.log");
@@ -44,22 +62,29 @@ final class SimpleGuiClientMain2 {
 
     // Start up server connection/interface.
 
-    final RemoteAddress address = RemoteAddress.parse(args[0]);
+    final RemoteAddress address = RemoteAddress.parse(arguments[0]);
 
     try (
-      final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
+            final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
     ) {
       final Controller controller = new Controller(source);
       final View view = new View(source);
 
       LOG.info("Creating client...");
 
-      runClient(controller, view);
+      final MainGui chatGui = new MainGui(controller, view);
+
+      LOG.info("Created client");
+
+      chatGui.start();
+
+      LOG.info("chat client is running.");
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception setting up client. Check log for details.");
       LOG.error(ex, "Exception setting up client.");
     }
+
   }
 
   private static void runClient(Controller controller, View view) {

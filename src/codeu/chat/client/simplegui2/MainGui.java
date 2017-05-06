@@ -11,7 +11,7 @@ import codeu.chat.client.View;
 import codeu.chat.util.Logger;
 import codeu.chat.client.ClientContext;
 
-public class MainGui{
+public class MainGui {
 
     private final static Logger.Log LOG = Logger.newLog(MainGui.class);
 
@@ -28,7 +28,7 @@ public class MainGui{
 
     public void start() {
           try{
-              Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+              Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("./codeu/chat/client/simplegui2/sample.fxml"));
               initialize();
 
 

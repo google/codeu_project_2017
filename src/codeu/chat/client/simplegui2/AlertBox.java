@@ -18,33 +18,31 @@ public final class AlertBox {
     private Label label1;
     private Button closeButton;
 
-    public AlertBox(){
+    public AlertBox(String title, String message){
 
-        initialize();
+        this.window = new Stage();
+        initialize(title, message);
     }
-    public void display(String title, String message) {
-
-        //Initialize title
-        window.setTitle(title);
-
-        //set Label message
-        label1.setText(message);
+    public void display() {
 
         //shows window and waits to be closed before returning to main
         window.showAndWait();
     }
-    private void initialize(){
+    private void initialize(String title, String message){
 
         //creates window and sizing
-        window = new Stage();
         window.setMinWidth(500);
         window.setMaxHeight(200);
 
         //Initialize label
-        label1 = new Label();
+        label1 = new Label(message);
 
         //inhibits user functions while window is open
         window.initModality(Modality.APPLICATION_MODAL);
+
+        //Button 1
+        closeButton = new Button("Okay.");
+        closeButton.setOnAction(e -> window.close());
 
 
         //create Layout
@@ -53,6 +51,10 @@ public final class AlertBox {
 
         //set Window
         Scene mainScene = new Scene(layout);
+
+        //Initialize title
+        window.setTitle(title);
+
         window.setScene(mainScene);
 
 
