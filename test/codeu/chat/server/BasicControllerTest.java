@@ -43,6 +43,7 @@ public final class BasicControllerTest {
     assertFalse(
         "Check that user has a valid reference",
         user == null);
+
   }
 
   @Test

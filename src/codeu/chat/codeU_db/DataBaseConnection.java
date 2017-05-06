@@ -4,11 +4,13 @@ import java.sql.*;
 
 public class DataBaseConnection{
     private static Connection c = null;
+
     public static Connection open(){
 
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+            c.setAutoCommit(false);
             System.out.println("Opened database successfully");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -116,6 +118,18 @@ public class DataBaseConnection{
             stmt.executeUpdate(sql);
             stmt.close();
 
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+
+    public static Connection getConnection(){
+        return c;
+    }
+    public static void close(){
+        try {
+            c.close();
         }catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);

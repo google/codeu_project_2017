@@ -16,6 +16,7 @@ package codeu.chat.server;
 
 import java.util.Collection;
 
+import codeu.chat.codeU_db.DataBaseConnection;
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
@@ -42,6 +43,8 @@ public final class Controller implements RawController, BasicController {
   public Controller(Uuid serverId, Model model) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
+    if(this.model.userByText().at("Admin")==null)
+        this.model.add(newUser(createId(), "Admin", Time.now(), "admin"));
   }
 
   @Override
@@ -72,9 +75,7 @@ public final class Controller implements RawController, BasicController {
     String prevID = "";
 
     try{
-      Class.forName("org.sqlite.JDBC");
-      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
-      connection.setAutoCommit(false);
+      connection= DataBaseConnection.open();
 
       stmt = connection.createStatement();
 
@@ -180,9 +181,8 @@ public final class Controller implements RawController, BasicController {
 
 
     try {
-      Class.forName("org.sqlite.JDBC");
-      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
-      connection.setAutoCommit(false);
+
+      connection= DataBaseConnection.open();
       user = new User(id, name, creationTime, password);
       stmt = connection.createStatement();
       String sql = "INSERT INTO USERS (ID,UNAME,TIMECREATED,PASSWORD) " +
@@ -240,9 +240,7 @@ public final class Controller implements RawController, BasicController {
     Statement stmt = null;
 
     try {
-      Class.forName("org.sqlite.JDBC");
-      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
-      connection.setAutoCommit(false);
+      connection= DataBaseConnection.open();
       stmt = connection.createStatement();
       String sql = "INSERT INTO CONVERSATIONS (ID,CNAME,OWNERID,TimeCreated) " +
               "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(title)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlCreationTime(creationTime)+");";

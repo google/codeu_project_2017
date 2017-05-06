@@ -1,10 +1,17 @@
 # IDE related files  #
 ######################
 *.iml
+*.idea*
+
+# Binaries           #
+######################
+*bin*
+*.class
+*.o
 
 # Logs and databases #
 ######################
-*.log
+*.log*
 *.sql
 *.sqlite
 
