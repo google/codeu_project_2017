@@ -44,7 +44,7 @@ public final class Controller implements RawController, BasicController {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
     if(this.model.userByText().at("Admin")==null)
-        this.model.add(newUser(createId(), "Admin", Time.now(), "admin"));
+      this.model.add(newUser(createId(), "Admin", Time.now(), "admin"));
   }
 
   @Override
@@ -72,10 +72,19 @@ public final class Controller implements RawController, BasicController {
     Connection connection = null;
     Statement stmt = null;
 
+    // Fix the issue with DataBaseConnection.open();
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      System.out.println("Opened database successfully");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
     String prevID = "";
 
     try{
-      connection= DataBaseConnection.open();
 
       stmt = connection.createStatement();
 
@@ -179,10 +188,19 @@ public final class Controller implements RawController, BasicController {
     Statement stmt = null;
     User user = null;
 
+    // Fix the issue with DataBaseConnection.open();
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      System.out.println("Opened database successfully");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
 
     try {
 
-      connection= DataBaseConnection.open();
       user = new User(id, name, creationTime, password);
       stmt = connection.createStatement();
       String sql = "INSERT INTO USERS (ID,UNAME,TIMECREATED,PASSWORD) " +
@@ -239,8 +257,17 @@ public final class Controller implements RawController, BasicController {
     Connection connection = null;
     Statement stmt = null;
 
+    // Fix the issue with DataBaseConnection.open();
     try {
-      connection= DataBaseConnection.open();
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      System.out.println("Opened database successfully");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    try {
       stmt = connection.createStatement();
       String sql = "INSERT INTO CONVERSATIONS (ID,CNAME,OWNERID,TimeCreated) " +
               "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(title)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlCreationTime(creationTime)+");";
@@ -300,9 +327,9 @@ public final class Controller implements RawController, BasicController {
          isIdInUse(candidate);
          candidate = uuidGenerator.make()) {
 
-     // Assuming that "randomUuid" is actually well implemented, this
-     // loop should never be needed, but just incase make sure that the
-     // Uuid is not actually in use before returning it.
+      // Assuming that "randomUuid" is actually well implemented, this
+      // loop should never be needed, but just incase make sure that the
+      // Uuid is not actually in use before returning it.
 
     }
 
@@ -311,8 +338,8 @@ public final class Controller implements RawController, BasicController {
 
   private boolean isIdInUse(Uuid id) {
     return model.messageById().first(id) != null ||
-           model.conversationById().first(id) != null ||
-           model.userById().first(id) != null;
+            model.conversationById().first(id) != null ||
+            model.userById().first(id) != null;
   }
 
   private boolean isIdFree(Uuid id) { return !isIdInUse(id); }
