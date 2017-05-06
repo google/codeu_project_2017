@@ -16,6 +16,7 @@ package codeu.chat.server;
 
 import java.util.Collection;
 
+import codeu.chat.codeU_db.DataBaseConnection;
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
@@ -25,6 +26,12 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import codeu.chat.common.SQLFormatter;
 
 public final class Controller implements RawController, BasicController {
 
@@ -36,6 +43,8 @@ public final class Controller implements RawController, BasicController {
   public Controller(Uuid serverId, Model model) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
+    if(this.model.userByText().at("Admin")==null)
+      this.model.add(newUser(createId(), "Admin", Time.now(), "admin"));
   }
 
   @Override
@@ -44,8 +53,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(String name) {
-    return newUser(createId(), name, Time.now());
+  public User newUser(String name, String password) {
+    return newUser(createId(), name, Time.now(), password);
   }
 
   @Override
@@ -60,8 +69,77 @@ public final class Controller implements RawController, BasicController {
     final Conversation foundConversation = model.conversationById().first(conversation);
 
     Message message = null;
+    Connection connection = null;
+    Statement stmt = null;
 
-    if (foundUser != null && foundConversation != null && isIdFree(id)) {
+    // Fix the issue with DataBaseConnection.open();
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      System.out.println("Opened database successfully");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    String prevID = "";
+
+    try{
+
+      stmt = connection.createStatement();
+
+      ResultSet rs = stmt.executeQuery( "SELECT * FROM MESSAGES" +
+              "where CONVERSATIONID = "+SQLFormatter.sqlID(conversation)+" " +
+              "AND   MNEXTID = 'NULL';" );
+      if ( rs.next() ) {
+        prevID = rs.getString("ID");
+      }
+      rs.close();
+      stmt.close();
+    }catch (Exception e) {
+      System.out.println("Error adding message to conversation");
+      System.err.println(e.getClass().getName() +": " + e.getMessage());
+      System.exit(0);
+    }
+
+    if(SQLFormatter.sqlValidConversation(author, conversation)){
+      try{
+        stmt = connection.createStatement();
+
+        message = new Message(id, Uuid.NULL, Uuid.parse(prevID), creationTime, author, body);
+        String sql = "INSERT INTO MESSAGES(ID, USERID, CONVERSATIONID, TimeCreated, MESSAGE)" +
+                "VALUES("+SQLFormatter.sqlID(id)+","+SQLFormatter.sqlID(author)+","+SQLFormatter.sqlID(conversation)+","+SQLFormatter.sqlBody(body)+","+SQLFormatter.sqlCreationTime(creationTime)+");";
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+        connection.commit();
+      }catch (Exception e) {
+        System.out.println("Error adding message to conversation");
+        System.err.println(e.getClass().getName() +": " + e.getMessage());
+        System.exit(0);
+      }
+    }
+
+    if(!prevID.equals("")){
+      try {
+
+        stmt = connection.createStatement();
+
+        String sql = "UPDATE MESSAGES set MNEXTID = "+ SQLFormatter.sqlID(id)+"where CONVERSATIONID = "+SQLFormatter.sqlID(conversation)+" AND   MNEXTID = 'NULL';";
+        stmt.executeUpdate(sql);
+
+        connection.commit();
+        stmt.close();
+        connection.close();
+      } catch ( Exception e ) {
+        System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        System.exit(0);
+      }
+    }
+
+    // ---------------------------------------------------------------------
+    // PREVIOUS MODEL
+    /*if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
       message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
       model.add(message);
@@ -97,19 +175,59 @@ public final class Controller implements RawController, BasicController {
       if (!foundConversation.users.contains(foundUser)) {
         foundConversation.users.add(foundUser.id);
       }
-    }
+    }*/
+    // ---------------------------------------------------------------------
 
     return message;
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(Uuid id, String name, Time creationTime, String password) {
 
+    Connection connection = null;
+    Statement stmt = null;
     User user = null;
 
-    if (isIdFree(id)) {
+    // Fix the issue with DataBaseConnection.open();
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      System.out.println("Opened database successfully");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
 
-      user = new User(id, name, creationTime);
+
+    try {
+
+      user = new User(id, name, creationTime, password);
+      stmt = connection.createStatement();
+      String sql = "INSERT INTO USERS (ID,UNAME,TIMECREATED,PASSWORD) " +
+              "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(name)+", "+SQLFormatter.sqlCreationTime(creationTime)+", "+SQLFormatter.sqlPassword(password)+");";
+      stmt.executeUpdate(sql);
+      LOG.info(
+              "newUser success (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+      stmt.close();
+      connection.commit();
+      connection.close();
+    } catch ( Exception e ) {
+      LOG.info(
+              "newUser fail - Database insertion error (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    // ---------------------------------------------------------------------
+    // PREVIOUS MODEL
+    /*if (isIdFree(id)) {
+      user = new User(id, name, creationTime, password);
       model.add(user);
 
       LOG.info(
@@ -125,7 +243,8 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
-    }
+    }*/
+    // ---------------------------------------------------------------------
 
     return user;
   }
@@ -134,15 +253,68 @@ public final class Controller implements RawController, BasicController {
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
 
     final User foundOwner = model.userById().first(owner);
-
     Conversation conversation = null;
+    Connection connection = null;
+    Statement stmt = null;
 
-    if (foundOwner != null && isIdFree(id)) {
+    // Fix the issue with DataBaseConnection.open();
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:./bin/codeu/chat/codeU_db/ChatDatabase.db");
+      System.out.println("Opened database successfully");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    try {
+      stmt = connection.createStatement();
+      String sql = "INSERT INTO CONVERSATIONS (ID,CNAME,OWNERID,TimeCreated) " +
+              "VALUES ("+SQLFormatter.sqlID(id)+", "+SQLFormatter.sqlName(title)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlCreationTime(creationTime)+");";
+      stmt.executeUpdate(sql);
+
+      conversation = new Conversation(id, owner, creationTime, title);
+
+      LOG.info("Conversation added: " + conversation.id);
+
+      stmt.close();
+      connection.commit();
+    } catch ( Exception e ) {
+      LOG.info(
+              "newConversation fail - Verify connection and try again shortly");
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    try {
+      stmt = connection.createStatement();
+
+
+      String sql = "INSERT INTO USER_CONVERSATION (ID,USERID,CONVERSATIONID) " +
+              "VALUES ("+SQLFormatter.sqlID(id, owner)+", "+SQLFormatter.sqlID(owner)+", "+SQLFormatter.sqlID(id)+");";
+      stmt.executeUpdate(sql);
+
+      LOG.info("User "+ conversation.owner +" added to: " + conversation.id);
+
+      stmt.close();
+      connection.commit();
+      connection.close();
+    } catch ( Exception e ) {
+      LOG.info(
+              "newConversation fail - Verify connection and try again shortly");
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+
+    // ---------------------------------------------------------------------
+    // PREVIOUS MODEL
+    /*if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
 
       LOG.info("Conversation added: " + conversation.id);
-    }
+    }*/
+    // ---------------------------------------------------------------------
 
     return conversation;
   }
@@ -155,9 +327,9 @@ public final class Controller implements RawController, BasicController {
          isIdInUse(candidate);
          candidate = uuidGenerator.make()) {
 
-     // Assuming that "randomUuid" is actually well implemented, this
-     // loop should never be needed, but just incase make sure that the
-     // Uuid is not actually in use before returning it.
+      // Assuming that "randomUuid" is actually well implemented, this
+      // loop should never be needed, but just incase make sure that the
+      // Uuid is not actually in use before returning it.
 
     }
 
@@ -166,8 +338,8 @@ public final class Controller implements RawController, BasicController {
 
   private boolean isIdInUse(Uuid id) {
     return model.messageById().first(id) != null ||
-           model.conversationById().first(id) != null ||
-           model.userById().first(id) != null;
+            model.conversationById().first(id) != null ||
+            model.userById().first(id) != null;
   }
 
   private boolean isIdFree(Uuid id) { return !isIdInUse(id); }

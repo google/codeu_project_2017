@@ -16,4 +16,4 @@
 
 set -e
 
-java -cp ./third_party/junit4.jar:./bin codeu.chat.TestRunner
+java -cp ./third_party/junit4.jar:./third_party/sqlite-jdbc-3.16.1.jar:./bin codeu.chat.TestRunner

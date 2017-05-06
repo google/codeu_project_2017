@@ -38,17 +38,18 @@ public final class BasicControllerTest {
   @Test
   public void testAddUser() {
 
-    final User user = controller.newUser("user");
+    final User user = controller.newUser("user", "password");
 
     assertFalse(
         "Check that user has a valid reference",
         user == null);
+
   }
 
   @Test
   public void testAddConversation() {
 
-    final User user = controller.newUser("user");
+    final User user = controller.newUser("user", "password");
 
     assertFalse(
         "Check that user has a valid reference",
@@ -66,7 +67,7 @@ public final class BasicControllerTest {
   @Test
   public void testAddMessage() {
 
-    final User user = controller.newUser("user");
+    final User user = controller.newUser("user", "password");
 
     assertFalse(
         "Check that user has a valid reference",
