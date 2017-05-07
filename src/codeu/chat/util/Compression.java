@@ -5,7 +5,6 @@
 
 package codeu.chat.util;
 
-//Question: Do I need to throw IO exceptions like in the Serializer??
 public interface Compression<T>{
 
     /**

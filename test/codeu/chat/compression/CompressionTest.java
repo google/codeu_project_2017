@@ -64,74 +64,58 @@ public final class CompressionTest{
 
 	@Test
 	public void testMessageCompression(){
-		Message copy = Compressions.MESSAGE.decompress(Compressions.MESSAGE.compress(testMsg));
+		Message copy = Message.MESSAGE.decompress(Message.MESSAGE.compress(testMsg));
 		assertTrue(Message.equals(testMsg, copy));
 	}
 
 	@Test
-	public void testMessageReadWrite(){
-		try{
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-			Message.SERIALIZER.write(output, testMsg);
-			ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
-			assertTrue(Message.equals(testMsg, Message.SERIALIZER.read(input)));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+	public void testMessageReadWrite() throws IOException{
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+		Message.SERIALIZER.write(output, testMsg);
+		ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
+		assertTrue(Message.equals(testMsg, Message.SERIALIZER.read(input)));
 	}
 
 	@Test
 	public void testConvoSummaryCompression(){
-		ConversationSummary copy = Compressions.CONVERSATION_SUMMARY.decompress(Compressions.CONVERSATION_SUMMARY.compress(testConvoSummary));
+		ConversationSummary copy = ConversationSummary.CONVERSATION_SUMMARY.decompress(ConversationSummary.CONVERSATION_SUMMARY.compress(testConvoSummary));
 		assertTrue(ConversationSummary.equals(testConvoSummary, copy));
 	}
 
 	@Test
-	public void testConvoSummaryReadWrite(){
-		try{
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-			ConversationSummary.SERIALIZER.write(output, testConvoSummary);
-			ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
-			assertTrue(ConversationSummary.equals(testConvoSummary, ConversationSummary.SERIALIZER.read(input)));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+	public void testConvoSummaryReadWrite() throws IOException{
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+		ConversationSummary.SERIALIZER.write(output, testConvoSummary);
+		ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
+		assertTrue(ConversationSummary.equals(testConvoSummary, ConversationSummary.SERIALIZER.read(input)));
 	}
 
 	@Test
 	public void testConvoCompression(){
-		Conversation copy = Compressions.CONVERSATION.decompress(Compressions.CONVERSATION.compress(testConvo));
+		Conversation copy = Conversation.CONVERSATION.decompress(Conversation.CONVERSATION.compress(testConvo));
 		assertTrue(Conversation.equals(testConvo, copy));
 	}
 
 	@Test
-	public void testConvoReadWrite(){
-		try{
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-			Conversation.SERIALIZER.write(output, testConvo);
-			ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
-			assertTrue(Conversation.equals(testConvo, Conversation.SERIALIZER.read(input)));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+	public void testConvoReadWrite() throws IOException{
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+		Conversation.SERIALIZER.write(output, testConvo);
+		ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
+		assertTrue(Conversation.equals(testConvo, Conversation.SERIALIZER.read(input)));
 	}
 
 	@Test
 	public void testUserCompression(){
-		User copy = Compressions.USER.decompress(Compressions.USER.compress(testUser));
+		User copy = User.USER.decompress(User.USER.compress(testUser));
 		assertTrue(User.equals(testUser, copy));
 	}
 
 	@Test
-	public void testUserReadWrite(){
-		try{
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-			User.SERIALIZER.write(output, testUser);
-			ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
-			assertTrue(User.equals(testUser, User.SERIALIZER.read(input)));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+	public void testUserReadWrite() throws IOException{
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+		User.SERIALIZER.write(output, testUser);
+		ByteArrayInputStream input = new ByteArrayInputStream(output.toByteArray());
+		assertTrue(User.equals(testUser, User.SERIALIZER.read(input)));
 	}
 	
 }

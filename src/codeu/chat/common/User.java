@@ -29,12 +29,46 @@ import codeu.chat.util.Uuid;
 
 public final class User {
 
+  public static final Compression<User> USER = new Compression<User>(){
+
+    @Override
+    public byte[] compress(User data){
+
+        ByteArrayOutputStream userStream = new ByteArrayOutputStream();
+        try{
+          toStream(userStream, data);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        byte[] byteUser = userStream.toByteArray();
+
+        return Compressions.BYTES.compress(byteUser);
+
+    }
+
+    @Override
+    public User decompress(byte[] data){
+
+      data = Compressions.BYTES.decompress(data);
+
+      ByteArrayInputStream byteUser = new ByteArrayInputStream(data);
+
+      User userSummary = new User(Uuid.NULL, "", Time.now());
+      try {
+        userSummary = fromStream(byteUser);
+      }catch (IOException e){
+          e.printStackTrace();
+      }
+      return userSummary;
+    }
+  };
+
   public static final Serializer<User> SERIALIZER = new Serializer<User>() {
 
     @Override
     public void write(OutputStream out, User value) throws IOException {
 
-      byte[] user = Compressions.USER.compress(value);
+      byte[] user = USER.compress(value);
       Serializers.BYTES.write(out, user);
 
     }
@@ -43,7 +77,7 @@ public final class User {
     public User read(InputStream in) throws IOException {
 
       byte[] user = Serializers.BYTES.read(in);
-      return Compressions.USER.decompress(user);
+      return USER.decompress(user);
 
     }
   };

@@ -31,12 +31,45 @@ import codeu.chat.util.Uuid;
 
 public final class Conversation {
 
+  public static final Compression<Conversation> CONVERSATION = new Compression<Conversation>(){
+
+    @Override
+    public byte[] compress(Conversation data){
+        ByteArrayOutputStream convoStream = new ByteArrayOutputStream();
+        try{
+            toStream(convoStream, data);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        byte[] byteConvo = convoStream.toByteArray();
+
+        return Compressions.BYTES.compress(byteConvo);
+    }
+
+    @Override
+    public Conversation decompress(byte[] data){
+
+      data = Compressions.BYTES.decompress(data);
+
+      ByteArrayInputStream byteConvo = new ByteArrayInputStream(data);
+
+      Conversation convo = new Conversation(Uuid.NULL, Uuid.NULL, Time.now(), "");
+      try {
+        convo = fromStream(byteConvo);
+      }catch (IOException e){
+          e.printStackTrace();
+      }
+      return convo;
+    }
+
+  };
+
   public static final Serializer<Conversation> SERIALIZER = new Serializer<Conversation>() {
 
     @Override
     public void write(OutputStream out, Conversation value) throws IOException {
 
-      byte[] conversation = Compressions.CONVERSATION.compress(value);
+      byte[] conversation = CONVERSATION.compress(value);
       Serializers.BYTES.write(out, conversation);
 
     }
@@ -45,7 +78,7 @@ public final class Conversation {
     public Conversation read(InputStream in) throws IOException {
 
       byte[] conversation = Serializers.BYTES.read(in);
-      return Compressions.CONVERSATION.decompress(conversation);
+      return CONVERSATION.decompress(conversation);
 
     }
   };

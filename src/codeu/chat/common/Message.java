@@ -30,6 +30,37 @@ import codeu.chat.util.Time;
 
 public final class Message {
 
+  public static final Compression<Message> MESSAGE = new Compression<Message>(){
+
+      @Override
+      public byte[] compress(Message data){
+          ByteArrayOutputStream msgStream = new ByteArrayOutputStream();
+          try{
+              toStream(msgStream, data);
+          }catch (IOException e){
+              e.printStackTrace();
+          }
+          byte[] byteMsg = msgStream.toByteArray();
+          return Compressions.BYTES.compress(byteMsg);
+      }
+
+      @Override
+      public Message decompress(byte[] data) {
+
+          data = Compressions.BYTES.decompress(data);
+
+          ByteArrayInputStream byteMsg = new ByteArrayInputStream(data);
+          //Must create a filler message in order to satisfy compiler
+          Message msg = new Message(Uuid.NULL, Uuid.NULL, Uuid.NULL, Time.now(), Uuid.NULL, "");
+          try {
+              msg = fromStream(byteMsg);
+          }catch (IOException e){
+              e.printStackTrace();
+          }
+          return msg;
+      }
+  };
+
   public static final Serializer<Message> SERIALIZER = new Serializer<Message>() {
 
     /**
@@ -38,7 +69,7 @@ public final class Message {
     @Override
     public void write(OutputStream out, Message value) throws IOException {
 
-      byte[] message = Compressions.MESSAGE.compress(value);
+      byte[] message = MESSAGE.compress(value);
       Serializers.BYTES.write(out, message);
 
     }
@@ -50,7 +81,7 @@ public final class Message {
     public Message read(InputStream in) throws IOException {
 
       byte[] message = Serializers.BYTES.read(in);
-      return Compressions.MESSAGE.decompress(message);
+      return MESSAGE.decompress(message);
 
     }
   };

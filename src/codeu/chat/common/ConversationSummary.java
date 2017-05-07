@@ -29,12 +29,46 @@ import codeu.chat.util.Uuid;
 
 public final class ConversationSummary implements ListViewable {
 
+  public static final Compression<ConversationSummary> CONVERSATION_SUMMARY = new Compression<ConversationSummary>(){
+
+    @Override
+    public byte[] compress(ConversationSummary data){
+
+        ByteArrayOutputStream convoSummaryStream = new ByteArrayOutputStream();
+        try{
+          toStream(convoSummaryStream, data);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        byte[] byteConvoSummary = convoSummaryStream.toByteArray();
+
+        return Compressions.BYTES.compress(byteConvoSummary);
+
+    }
+
+    @Override
+    public ConversationSummary decompress(byte[] data){
+
+      data = Compressions.BYTES.decompress(data);
+
+      ByteArrayInputStream byteConvoSummary = new ByteArrayInputStream(data);
+
+      ConversationSummary convoSummary = new ConversationSummary(Uuid.NULL, Uuid.NULL, Time.now(), "");
+      try {
+        convoSummary = fromStream(byteConvoSummary);
+      }catch (IOException e){
+          e.printStackTrace();
+      }
+      return convoSummary;
+    }
+  };
+
   public static final Serializer<ConversationSummary> SERIALIZER = new Serializer<ConversationSummary>() {
 
     @Override
     public void write(OutputStream out, ConversationSummary value) throws IOException {
 
-      byte[] conversationSummary = Compressions.CONVERSATION_SUMMARY.compress(value);
+      byte[] conversationSummary = CONVERSATION_SUMMARY.compress(value);
       Serializers.BYTES.write(out, conversationSummary);
 
     }
@@ -43,7 +77,7 @@ public final class ConversationSummary implements ListViewable {
     public ConversationSummary read(InputStream in) throws IOException {
 
       byte[] conversationSummary = Serializers.BYTES.read(in);
-      return Compressions.CONVERSATION_SUMMARY.decompress(conversationSummary);
+      return CONVERSATION_SUMMARY.decompress(conversationSummary);
 
     }
   };
