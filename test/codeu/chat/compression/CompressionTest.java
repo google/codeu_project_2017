@@ -30,7 +30,7 @@ public final class CompressionTest{
 
 	//Note: since we are likely doing away with Uuids, many of these tests will need to be changed
 	@Before
-	public void setUpUuids(){
+	public void setup(){
 		final String authString = "50";
 		final String ids = "100.200.300.400.500.600.700.800";
 		author = Uuid.fromString(authString);
