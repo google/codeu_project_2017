@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+source ./classpath.sh
+
 TEAM_ID="$1"
 TEAM_SECRET="$2"
 PORT="$3"
@@ -21,11 +23,11 @@ PERSISTENT_DIR="$4"
 RELAY_ADDRESS="$5"
 
 if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_DIR" == "" ]] ; then
-  echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> <PERSISTENT> [RELAY ADDRESS]'
+  echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> <PERSISTENT> <DATABASE> [RELAY ADDRESS]'
   echo ''
   echo 'TEAM ID :        The id registered with the relay server. If you are'
   echo '                 not connecting to a relay server, use "100".'
-  echo 'TEAM SECRET :    The secret registerd with the relay server. If you are'
+  echo 'TEAM SECRET :    The secret registered with the relay server. If you are'
   echo '                 not connecting to a relay server, use "ABABAB".'
   echo 'PORT :           The port that the server will listen to for incoming '
   echo '                 connections. This can be anything from 1024 to 65535.'
@@ -40,15 +42,14 @@ if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_
 fi
 
 
-cd './bin'
 if [ "$RELAY_ADDRESS" == "" ] ; then
-  java codeu.chat.ServerMain \
+  java -cp $cp codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
+  java -cp $cp codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \

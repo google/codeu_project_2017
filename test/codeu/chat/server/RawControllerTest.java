@@ -14,6 +14,8 @@
 
 package codeu.chat.server;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
@@ -25,6 +27,11 @@ import codeu.chat.common.User;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 
+import codeu.chat.database.Database;
+import codeu.chat.server.database.UserSchema;
+import codeu.chat.server.authentication.Authentication;
+import codeu.chat.authentication.AuthenticationCode;
+
 public final class RawControllerTest {
 
   private Model model;
@@ -34,10 +41,22 @@ public final class RawControllerTest {
   private Uuid conversationId;
   private Uuid messageId;
 
+  private Database database;
+  private UserSchema userSchema;
+  private Authentication authentication;
+
+  private User user;
+
   @Before
-  public void doBefore() {
+  public void doBefore() throws SQLException {
+    // Setup the database.
+    database = new Database("test.db");
+    userSchema = new UserSchema();
+    userSchema.dropTable("users", database);
+    authentication = new Authentication(database);
+
     model = new Model();
-    controller = new Controller(Uuid.NULL, model);
+    controller = new Controller(Uuid.NULL, model, authentication);
 
     userId = new Uuid(1);
     conversationId = new Uuid(2);
@@ -45,22 +64,26 @@ public final class RawControllerTest {
   }
 
   @Test
-  public void testAddUser() {
+  public void testRegister() {
 
-    final User user = controller.newUser(userId, "user", Time.now());
+    final int result = controller.newUser("username", "password", Time.now());
+    assertEquals(result, AuthenticationCode.SUCCESS);
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuid.equals(user.id, userId));
+  }
+
+  @Test
+  public void testLogin() {
+
+    testRegister();
+    user = controller.login(userId, "username", "password", Time.now());
+    assertNotNull(user);
+
   }
 
   @Test
   public void testAddConversation() {
 
-    final User user = controller.newUser(userId, "user", Time.now());
+    testLogin();
 
     assertFalse(
         "Check that user has a valid reference",
@@ -86,7 +109,7 @@ public final class RawControllerTest {
   @Test
   public void testAddMessage() {
 
-    final User user = controller.newUser(userId, "user", Time.now());
+    testLogin();
 
     assertFalse(
         "Check that user has a valid reference",

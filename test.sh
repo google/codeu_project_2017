@@ -15,5 +15,6 @@
 # limitations under the License.
 
 set -e
+source ./classpath.sh
 
-java -cp ./third_party/junit4.jar:./bin codeu.chat.TestRunner
+java -cp $cp codeu.chat.TestRunner

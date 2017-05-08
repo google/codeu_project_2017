@@ -160,6 +160,7 @@ public final class MessagePanel extends JPanel {
           if (messageText != null && messageText.length() > 0) {
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,
+                clientContext.user.getCurrent().token,
                 clientContext.conversation.getCurrentId(),
                 messageText);
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());

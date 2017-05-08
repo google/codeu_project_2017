@@ -22,6 +22,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
+
+import java.sql.SQLException;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -30,12 +33,15 @@ import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.User;
+import codeu.chat.database.Database;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+
+import codeu.chat.server.authentication.Authentication;
 
 public final class Server {
 
@@ -55,13 +61,24 @@ public final class Server {
   private final Relay relay;
   private Uuid lastSeen = Uuid.NULL;
 
-  public Server(final Uuid id, final byte[] secret, final Relay relay) {
+  private final Database database;
+
+  private final Authentication authentication;
+
+  public Server(final Uuid id, final byte[] secret, final Relay relay, final Database database) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
-    this.controller = new Controller(id, model);
+    // Set up the authentication manager.
+    this.database = database;
+    this.authentication = new Authentication(database);
+
+    this.controller = new Controller(id, model, authentication);
     this.relay = relay;
+
+    // Server initialization finished.
+    LOG.info("Server initialized.");
 
     timeline.scheduleNow(new Runnable() {
       @Override
@@ -121,10 +138,13 @@ public final class Server {
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
       final Uuid author = Uuid.SERIALIZER.read(in);
+	  final Uuid token = Uuid.SERIALIZER.read(in);
       final Uuid conversation = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
-      final Message message = controller.newMessage(author, conversation, content);
+      final Message message = controller.newMessage(author, token, conversation, content);
+
+      //Should encryption/compression occur here? When writing after creation of message?
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
@@ -136,19 +156,36 @@ public final class Server {
 
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
-      final String name = Serializers.STRING.read(in);
+      final String username = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final int result = controller.newUser(username, password);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
+      Serializers.INTEGER.write(out, result);
+
+    } else if (type == NetworkCode.LOGIN_REQUEST) {
+
+      final String username = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
+
+      final User user = controller.login(username, password);
+
+      Serializers.INTEGER.write(out, NetworkCode.LOGIN_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
+      if (user == null) {
+        Serializers.nullable(Uuid.SERIALIZER).write(out, null);
+      } else {
+        Serializers.nullable(Uuid.SERIALIZER).write(out, user.token);
+      }
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuid.SERIALIZER.read(in);
+	  final Uuid token = Uuid.SERIALIZER.read(in);
 
-      final Conversation conversation = controller.newConversation(title, owner);
+      final Conversation conversation = controller.newConversation(title, owner, token);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
@@ -262,7 +299,9 @@ public final class Server {
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+      // Invalid user.
+      LOG.error("Invalid user received from relay.");
+      return;
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());
@@ -306,4 +345,5 @@ public final class Server {
       }
     };
   }
+
 }

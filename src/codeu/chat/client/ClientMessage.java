@@ -46,6 +46,9 @@ public final class ClientMessage {
   private final ClientUser userContext;
   private final ClientConversation conversationContext;
 
+  //TODO: How will compressing/encrypting messages affect the messages/conversations from
+  //the client side? (Ex: show messages)
+
   public ClientMessage(Controller controller, View view, ClientUser userContext,
                        ClientConversation conversationContext) {
     this.controller = controller;
@@ -96,10 +99,10 @@ public final class ClientMessage {
   }
 
   // For m-add command.
-  public void addMessage(Uuid author, Uuid conversation, String body) {
+  public void addMessage(Uuid author, Uuid token, Uuid conversation, String body) {
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
-    final Message message = (validInputs) ? controller.newMessage(author, conversation, body) : null;
+    final Message message = (validInputs) ? controller.newMessage(author, token, conversation, body) : null;
 
     if (message == null) {
       System.out.format("Error: message not created - %s.\n",

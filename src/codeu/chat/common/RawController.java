@@ -32,9 +32,17 @@ public interface RawController {
 
   // NEW USER
   //
-  // Add a new user to the model with a specific id. If the id is already in
-  // use, the call will fail and null will be returned.
-  User newUser(Uuid id, String name, Time creationTime);
+  // Add a new user to the server with a given username and password. If the input is
+  // invalid or the username is already taken, the call will fail and an error code
+  // will be returned.
+  int newUser(String username, String password, Time creationTime);
+
+  // LOGIN
+  //
+  // Login with a given id, username, and password. If the id is already in use, the
+  // call will fail and null will be returned. If the username and password are invalid,
+  // the call will fail and null will be returned.
+  User login(Uuid id, String username, String password, Time creationTime);
 
   // NEW CONVERSATION
   //

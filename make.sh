@@ -15,8 +15,9 @@
 # limitations under the License.
 
 set -e
+source ./classpath.sh
 
 mkdir -p bin
 
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./bin
+javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp $cp
+javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp $cp
