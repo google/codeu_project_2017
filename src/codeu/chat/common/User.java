@@ -38,7 +38,7 @@ public final class User {
         try{
           toStream(userStream, data);
         }catch (IOException e){
-            e.printStackTrace();
+          e.printStackTrace();
         }
         byte[] byteUser = userStream.toByteArray();
 
@@ -57,7 +57,7 @@ public final class User {
       try {
         userSummary = fromStream(byteUser);
       }catch (IOException e){
-          e.printStackTrace();
+        e.printStackTrace();
       }
       return userSummary;
     }

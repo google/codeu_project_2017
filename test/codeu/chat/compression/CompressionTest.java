@@ -30,35 +30,18 @@ public final class CompressionTest{
 
 	//Note: since we are likely doing away with Uuids, many of these tests will need to be changed
 	@Before
-	public void setupUuids(){
+	public void setUpUuids(){
 		final String authString = "50";
 		final String ids = "100.200.300.400.500.600.700.800";
 		author = Uuid.fromString(authString);
 		next = Uuid.fromString(ids);
 		id = next.root();
 		prev = id.root();
-	}
-
-	@Before
-	public void setupTestMessage(){
 		testMsg = new Message(id, next, prev, time, author, "I am a test message!\nPlease compress me!!!");
-	}
-
-	@Before
-	public void setupTestConvoSummary(){
 		testConvoSummary = new ConversationSummary(id, author, time, "This is the summary of a conversation between users foo and bar");
-	}
-
-	@Before
-	public void setupTestConvo(){
 		testConvo = new Conversation(id, author, time, "This is another conversation between users foo and bar. Additionally, users have been added to the hash map.");
 		testConvo.users.add(author);
 		testConvo.users.add(next);
-	}
-
-	//Question for ruiqi: what to do with tokens?
-	@Before
-	public void setupUser(){
 		testUser = new User(author, "Mr. Foooooo", time);
 	}
 

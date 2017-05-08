@@ -5,14 +5,7 @@
 
 package codeu.chat.util;
 
-import codeu.chat.common.Message;
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.User;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.util.zip.DataFormatException;  
