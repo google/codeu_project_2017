@@ -11,9 +11,10 @@ import android.widget.TextView;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Conversation;
 import com.google.codeu.chatme.model.ConversationParticipantDetails;
-import com.google.codeu.chatme.presenter.ChatActivityPresenter;
+import com.google.codeu.chatme.presenter.ConversationsPresenter;
 import com.google.codeu.chatme.utility.FirebaseUtil;
 import com.google.codeu.chatme.view.message.MessagesActivity;
+import com.google.codeu.chatme.view.tabs.ConversationsFragment;
 import com.pkmmte.view.CircularImageView;
 import com.squareup.picasso.Picasso;
 
@@ -23,12 +24,12 @@ import java.util.List;
 
 /**
  * A {@link android.support.v7.widget.RecyclerView.Adapter} to bind the list of conversations
- * data to the recyclerview in {@link com.google.codeu.chatme.view.tabs.ChatsFragment}
+ * data to the recyclerview in {@link ConversationsFragment}
  *
- * @see ChatListAdapterView for documentation on interface methods
+ * @see ConversationListAdapterView for documentation on interface methods
  */
-public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>
-        implements ChatListAdapterView {
+public class ConversationListAdapter extends RecyclerView.Adapter<ConversationListAdapter.ViewHolder>
+        implements ConversationListAdapterView {
 
     public static final String CONV_ID_EXTRA = "CONV_ID_EXTRA";
     private final Context context;
@@ -38,7 +39,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
      */
     private List<Conversation> conversations = new ArrayList<>();
 
-    private ChatActivityPresenter presenter;
+    private ConversationsPresenter presenter;
 
     /**
      * A map from different conversation participants to their details such as full names and
@@ -46,14 +47,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
      */
     private HashMap<String, ConversationParticipantDetails> participantDetailsMap = new HashMap<>();
 
-    public ChatListAdapter(Context context) {
-        this.presenter = new ChatActivityPresenter(this);
+    public ConversationListAdapter(Context context) {
+        this.presenter = new ConversationsPresenter(this);
         this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversation_list_item, parent, false);
         return new ViewHolder(v);
     }
 

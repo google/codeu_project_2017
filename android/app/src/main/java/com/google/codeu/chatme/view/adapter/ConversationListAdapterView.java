@@ -8,19 +8,19 @@ import java.util.List;
 
 /**
  * An interface to handle presenter-delegated actions in order to
- * update list of conversations in {@link ChatListAdapter}
+ * update list of conversations in {@link ConversationListAdapter}
  */
-public interface ChatListAdapterView {
+public interface ConversationListAdapterView {
 
     /**
-     * Resets the list of conversations in {@link ChatListAdapter}
+     * Resets the list of conversations in {@link ConversationListAdapter}
      *
      * @param conversations new list of conversations
      */
     void setChatList(List<Conversation> conversations);
 
     /**
-     * Resets the map from participant ids to their details {@link ChatListAdapter}
+     * Resets the map from participant ids to their details {@link ConversationListAdapter}
      *
      * @param map map from participant ids to details
      */
