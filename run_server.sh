@@ -20,7 +20,7 @@ PORT="$3"
 PERSISTENT_DIR="$4"
 RELAY_ADDRESS="$5"
 
-if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_DIR" == "" ]] ; then
+if [[ "${TEAM_ID}" == "" || "${TEAM_SECRET}" == "" || "${PORT}" == "" || "${PERSISTENT_DIR}" == "" ]] ; then
   echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> <PERSISTENT> [RELAY ADDRESS]'
   echo ''
   echo 'TEAM ID :        The id registered with the relay server. If you are'
@@ -41,17 +41,17 @@ fi
 
 
 cd './bin'
-if [ "$RELAY_ADDRESS" == "" ] ; then
+if [ "${RELAY_ADDRESS}" == "" ] ; then
   java codeu.chat.ServerMain \
-      "$TEAM_ID" \
-      "$TEAM_SECRET" \
-      "$PORT" \
-      "$PERSISTENT_DIR"
+      "${TEAM_ID}" \
+      "${TEAM_SECRET}" \
+      "${PORT}" \
+      "${PERSISTENT_DIR}"
 else
   java codeu.chat.ServerMain \
-      "$TEAM_ID" \
-      "$TEAM_SECRET" \
-      "$PORT" \
-      "$PERSISTENT_DIR" \
-      "$RELAY_ADDRESS"
+      "${TEAM_ID}" \
+      "${TEAM_SECRET}" \
+      "${PORT}" \
+      "${PERSISTENT_DIR}" \
+      "${RELAY_ADDRESS}"
 fi
