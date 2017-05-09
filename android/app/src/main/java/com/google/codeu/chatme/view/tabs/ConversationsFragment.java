@@ -10,29 +10,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.codeu.chatme.R;
-import com.google.codeu.chatme.view.adapter.ChatListAdapter;
+import com.google.codeu.chatme.view.adapter.ConversationListAdapter;
 
-public class ChatsFragment extends Fragment {
+public class ConversationsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView rvChatList;
-    private ChatListAdapter chatListAdapter;
+    private ConversationListAdapter conversationListAdapter;
 
     /**
      * Required empty public constructor
      */
-    public ChatsFragment() {
+    public ConversationsFragment() {
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment ChatsFragment.
+     * @return A new instance of fragment ConversationsFragment.
      */
-    public static ChatsFragment newInstance() {
-        ChatsFragment fragment = new ChatsFragment();
+    public static ConversationsFragment newInstance() {
+        ConversationsFragment fragment = new ConversationsFragment();
         return fragment;
     }
 
@@ -44,7 +44,7 @@ public class ChatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chats, container, false);
+        View view = inflater.inflate(R.layout.fragment_conversations, container, false);
         initializeUI(view);
         return view;
     }
@@ -53,16 +53,16 @@ public class ChatsFragment extends Fragment {
      * Sets up user interface by loading the list of conversations for the current
      * user in the recyclerview
      *
-     * @param view inflated {@link ChatsFragment} layout view
+     * @param view inflated {@link ConversationsFragment} layout view
      */
     private void initializeUI(View view) {
         rvChatList = (RecyclerView) view.findViewById(R.id.rvChatList);
         rvChatList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        chatListAdapter = new ChatListAdapter(getContext());
-        rvChatList.setAdapter(chatListAdapter);
+        conversationListAdapter = new ConversationListAdapter(getContext());
+        rvChatList.setAdapter(conversationListAdapter);
 
-        chatListAdapter.loadConversations();
+        conversationListAdapter.loadConversations();
     }
 
 

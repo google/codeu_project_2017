@@ -1,28 +1,24 @@
 package com.google.codeu.chatme.view.tabs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.google.codeu.chatme.R;
-import com.google.codeu.chatme.view.tabs.ChatsFragment;
-import com.google.codeu.chatme.view.tabs.ProfileFragment;
-import com.google.codeu.chatme.view.tabs.UsersFragment;
 
 /**
  * This activity controls the tab panel for switching between the following three fragments
- * - {@link ChatsFragment}
+ * - {@link ConversationsFragment}
  * - {@link ProfileFragment}
  * - {@link UsersFragment}
  */
 public class TabsActivity extends AppCompatActivity
-        implements BottomNavigationView.OnNavigationItemSelectedListener,
-        ChatsFragment.OnFragmentInteractionListener,
+        implements ConversationsFragment.OnFragmentInteractionListener,
         UsersFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener {
 
@@ -34,57 +30,53 @@ public class TabsActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
+        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new MyViewPagerAdaper(getSupportFragmentManager()));
+        mPager.setOffscreenPageLimit(MyViewPagerAdaper.NUM_TABS);
 
-        initFragment(new ChatsFragment());
+        PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabsStrip.setViewPager(mPager);
     }
 
-    /**
-     * Handles event of selecting a {@link BottomNavigationView} item
-     *
-     * @param item {@link BottomNavigationView} menu item selected
-     * @return true if the event was handles, false otherwise
-     */
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass;
+    public class MyViewPagerAdaper extends FragmentPagerAdapter {
 
-        // determines appropriate fragment using item Id
-        switch (item.getItemId()) {
-            case R.id.navigation_chats:
-                fragmentClass = ChatsFragment.class;
-                break;
-            case R.id.navigation_profile:
-                fragmentClass = ProfileFragment.class;
-                break;
-            case R.id.navigation_users:
-                fragmentClass = UsersFragment.class;
-                break;
-            default:
-                fragmentClass = ChatsFragment.class;
+        private static final int NUM_TABS = 3;
+
+        public MyViewPagerAdaper(FragmentManager supportFragmentManager) {
+            super(supportFragmentManager);
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new ConversationsFragment();
+                case 1:
+                    return new ProfileFragment();
+                case 2:
+                    return new UsersFragment();
+                default:
+                    return new ConversationsFragment();
+            }
         }
 
-        initFragment(fragment);
-        return true;
-    }
+        @Override
+        public int getCount() {
+            return NUM_TABS;
+        }
 
-    /**
-     * Initializes fragment by changing container view content
-     *
-     * @param newFragment new {@link Fragment} object
-     */
-    private void initFragment(Fragment newFragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_nav, newFragment);
-        transaction.commit();
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return getString(R.string.tab_title_chats);
+                case 1:
+                    return getString(R.string.tab_title_profile);
+                case 2:
+                    return getString(R.string.tab_title_users);
+                default:
+                    return getString(R.string.tab_title_chats);
+            }
+        }
     }
 }

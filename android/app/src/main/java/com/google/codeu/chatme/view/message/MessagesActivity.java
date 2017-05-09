@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.model.Message;
 import com.google.codeu.chatme.utility.FirebaseUtil;
-import com.google.codeu.chatme.view.adapter.ChatListAdapter;
+import com.google.codeu.chatme.view.adapter.ConversationListAdapter;
 import com.google.codeu.chatme.view.adapter.MessagesAdapter;
 
 /**
@@ -38,7 +38,7 @@ public class MessagesActivity extends AppCompatActivity
         // sets activity background (does not resize when keyboard opens)
         getWindow().setBackgroundDrawableResource(R.drawable.messages_bg);
 
-        conversationId = getIntent().getStringExtra(ChatListAdapter.CONV_ID_EXTRA);
+        conversationId = getIntent().getStringExtra(ConversationListAdapter.CONV_ID_EXTRA);
 
         setupUI();
     }
