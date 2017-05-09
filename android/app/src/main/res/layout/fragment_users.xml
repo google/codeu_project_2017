@@ -15,13 +15,13 @@
         android:theme="?attr/actionBarTheme" />
 
     <TextView
-        android:id="@+id/tvProfileTitle"
+        android:id="@+id/tvUsersTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tbUsersFragment"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
-        android:text="Users"
+        android:text="@string/title_users"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />

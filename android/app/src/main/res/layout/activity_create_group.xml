@@ -17,13 +17,13 @@
         android:theme="?attr/actionBarTheme" />
 
     <TextView
-        android:id="@+id/tvCreateChatTitle"
+        android:id="@+id/tvCreateGroupTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:text="New Chat"
+        android:text="@string/title_activity_new_group"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -36,7 +36,7 @@
         android:layout_marginBottom="133dp"
         android:enabled="false"
         android:background="@color/ChatMe_Blue"
-        android:text="Add Chat Members"
+        android:text="@string/btn_add_group_participants"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         android:layout_alignParentBottom="true"
@@ -51,7 +51,7 @@
         android:layout_alignStart="@+id/btnAddParticipants"
         android:layout_marginBottom="29dp"
         android:ems="10"
-        android:hint="Name Your New Chat"
+        android:hint="@string/et_name_your_new_group"
         android:inputType="textPersonName"
         android:textAlignment="center" />
 

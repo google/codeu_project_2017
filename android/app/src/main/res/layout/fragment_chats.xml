@@ -17,13 +17,13 @@
         android:theme="?attr/actionBarTheme" />
 
     <TextView
-        android:id="@+id/tvChatsTitle"
+        android:id="@+id/tvConversationsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:text="ChatMe"
+        android:text="@string/title_chats"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
         android:layout_marginEnd="12dp"
         android:background="@color/cardview_shadow_end_color"
         app:srcCompat="@android:drawable/ic_menu_search"
-        android:layout_alignTop="@+id/tvChatsTitle"
+        android:layout_alignTop="@+id/tvConversationsTitle"
         android:layout_toStartOf="@+id/btnCreateChat" />
 
     <ImageButton
