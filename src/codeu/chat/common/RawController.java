@@ -34,7 +34,7 @@ public interface RawController {
   //
   // Add a new user to the model with a specific id. If the id is already in
   // use, the call will fail and null will be returned.
-  User newUser(Uuid id, String name, Time creationTime);
+  User newUser(Uuid id, String name, String password, Time creationTime);
 
   // NEW CONVERSATION
   //

@@ -22,6 +22,13 @@ import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
 
+import java.security.SecureRandom;
+import javax.crypto.SecretKeyFactory;
+import java.security.spec.InvalidKeySpecException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import javax.crypto.spec.PBEKeySpec;
+
 // Chat - top-level client application.
 public final class Chat {
 
@@ -35,6 +42,10 @@ public final class Chat {
 
   private final ClientContext clientContext;
 
+  private final SecureRandom random = new SecureRandom();
+  private static final int ITERATIONS = 10000;
+  private static final int KEY_LENGTH = 256;
+
   // Constructor - sets up the Chat Application
   public Chat(Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
@@ -45,11 +56,11 @@ public final class Chat {
     System.out.println("Chat commands:");
     System.out.println("   exit      - exit the program.");
     System.out.println("   help      - this help message.");
-    System.out.println("   sign-in <username>  - sign in as user <username>.");
+    System.out.println("   sign-in <username>,<password>  - sign in as user <username>.");
     System.out.println("   sign-out  - sign out current user.");
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
+    System.out.println("   u-add <name>,<password>  - add a new user.");
     System.out.println("   u-list-all    - list all users known to system.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
@@ -107,9 +118,14 @@ public final class Chat {
     } else if (token.equals("u-add")) {
 
       if (!tokenScanner.hasNext()) {
-        System.out.println("ERROR: Username not supplied.");
+        System.out.println("ERROR: <username>, <password> not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        String[] input = tokenScanner.nextLine().trim().split(",");
+        if(input.length != 2){
+          System.out.println("ERROR: <username>, <password> not supplied.");
+        }
+        
+        addUser(input[0], input[1]);
       }
 
     } else if (token.equals("u-list-all")) {
@@ -195,7 +211,7 @@ public final class Chat {
   // Sign in a user.
   private void signInUser(String name) {
     if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
+      System.out.println("Error: sign in failed (invalid name or password?)");
     }
   }
 
@@ -266,9 +282,10 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String name, String password) {
+    clientContext.user.addUser(name, password);
   }
+
 
   // Display all users known to server.
   private void showAllUsers() {
@@ -282,6 +299,7 @@ public final class Chat {
       doOneCommand(lineScanner);
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during command processing. Check log for details.");
+      ex.printStackTrace();
       LOG.error(ex, "Exception during command processing");
     }
 

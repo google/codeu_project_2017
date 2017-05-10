@@ -25,13 +25,16 @@ import codeu.chat.util.Uuid;
 
 public final class User {
 
+
   public static final Serializer<User> SERIALIZER = new Serializer<User>() {
 
     @Override
     public void write(OutputStream out, User value) throws IOException {
-
       Uuid.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
+      //TODO: fix this portion. necessary for the password to be saved.
+      Serializers.BYTES.write(out, value.salt);
+      Serializers.BYTES.write(out, value.password);
       Time.SERIALIZER.write(out, value.creation);
 
     }
@@ -39,9 +42,13 @@ public final class User {
     @Override
     public User read(InputStream in) throws IOException {
 
+      //TODO: fix so it is Serializers.___.read(in), Serializers.___.read(in)
+
       return new User(
           Uuid.SERIALIZER.read(in),
           Serializers.STRING.read(in),
+          Serializers.BYTES.read(in),
+          Serializers.BYTES.read(in),
           Time.SERIALIZER.read(in)
       );
 
@@ -51,12 +58,17 @@ public final class User {
   public final Uuid id;
   public final String name;
   public final Time creation;
+  public final byte[] salt;
+  public final byte[] password;
 
-  public User(Uuid id, String name, Time creation) {
-
+  public User(Uuid id, String name, byte[] salt, byte[] password, Time creation) {
     this.id = id;
     this.name = name;
     this.creation = creation;
+    this.salt = salt;
+    this.password = password;
+
+    
 
   }
 }

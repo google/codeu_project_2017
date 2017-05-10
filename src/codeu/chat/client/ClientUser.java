@@ -23,6 +23,7 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
+import codeu.chat.util.PasswordGenerator;
 
 public final class ClientUser {
 
@@ -35,6 +36,10 @@ public final class ClientUser {
   private User current = null;
 
   private final Map<Uuid, User> usersById = new HashMap<>();
+
+  //for password security
+  private static final int ITERATIONS = 10000;
+  private static final int KEY_LENGTH = 256;
 
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
@@ -65,13 +70,20 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String input) {
     updateUsers();
 
+    String[] parsedInput = input.trim().split(",");
+    if(parsedInput.length != 2){
+      System.out.println("ERROR: <username>, <password> not supplied.");
+    }
+
     final User prev = current;
-    if (name != null) {
-      final User newCurrent = usersByName.first(name);
-      if (newCurrent != null) {
+    if (parsedInput[0] != null) {
+      final User newCurrent = usersByName.first(parsedInput[0]);
+      boolean validPassword = PasswordGenerator.validatePassword(parsedInput[1], newCurrent.salt,
+      newCurrent.password);
+      if (validPassword && newCurrent != null) {
         current = newCurrent;
       }
     }
@@ -88,10 +100,11 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  public void addUser(String name, String password) {
+
     final boolean validInputs = isValidName(name);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
