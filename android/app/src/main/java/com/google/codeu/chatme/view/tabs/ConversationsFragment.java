@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.codeu.chatme.presenter.ConversationsPresenter;
 import com.google.codeu.chatme.view.create.CreateConversationActivity;
@@ -20,8 +22,7 @@ import com.google.codeu.chatme.view.adapter.ConversationListAdapter;
 public class ConversationsFragment extends Fragment implements ConversationsView, View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
-    private ConversationsPresenter presenter;
-
+    private AppCompatImageButton btnCreateConversation;
     private RecyclerView rvChatList;
     private ConversationListAdapter conversationListAdapter;
 
@@ -45,7 +46,6 @@ public class ConversationsFragment extends Fragment implements ConversationsView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -66,6 +66,8 @@ public class ConversationsFragment extends Fragment implements ConversationsView
         rvChatList = (RecyclerView) view.findViewById(R.id.rvChatList);
         rvChatList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        btnCreateConversation = (AppCompatImageButton) view.findViewById(R.id.btnCreateChat);
+        btnCreateConversation.setOnClickListener(this);
         conversationListAdapter = new ConversationListAdapter(getContext());
         rvChatList.setAdapter(conversationListAdapter);
 
@@ -90,8 +92,6 @@ public class ConversationsFragment extends Fragment implements ConversationsView
         mListener = null;
     }
 
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -112,8 +112,8 @@ public class ConversationsFragment extends Fragment implements ConversationsView
      */
     public void openCreateConversationActivity() {
         Intent mIntent = new Intent(getActivity(), CreateConversationActivity.class);
-        startActivity(mIntent);
-        //getActivity().finish();
+        getActivity().startActivity(mIntent);
+        getActivity().finish();
     }
 
 
