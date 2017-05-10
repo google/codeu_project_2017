@@ -19,6 +19,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.Iterator;
+
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -40,21 +42,32 @@ public final class ClientUser {
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
   public ClientUser(Controller controller, View view) {
+	  
     this.controller = controller;
     this.view = view;
+    
   }
 
   // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
+  public boolean isValidName(String userName){
+	  
+    if (userName.length() == 0) 
+    {
+      return false;
+    } 
+    
+    else {
 
-      // TODO: check for invalid characters
+      for (User i : getUsers()){
+    	  if(i.name.toUpperCase().equals(userName.toUpperCase()))
+    	  {
+    		  System.out.format("Error: User not created | User Name already exists");
+    		  return false;
+    	  }
+      }
 
     }
-    return clean;
+    return true;
   }
 
   public boolean hasCurrent() {
@@ -70,16 +83,19 @@ public final class ClientUser {
 
     final User prev = current;
     if (name != null) {
-      final User newCurrent = usersByName.first(name);
+      
+    	final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
         current = newCurrent;
       }
     }
+    
     return (prev != current);
   }
 
   public boolean signOutUser() {
-    boolean hadCurrent = hasCurrent();
+    
+	  boolean hadCurrent = hasCurrent();
     current = null;
     return hadCurrent;
   }
@@ -89,15 +105,18 @@ public final class ClientUser {
   }
 
   public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
+    
+	  final boolean validInputs = isValidName(name);
 
     final User user = (validInputs) ? controller.newUser(name) : null;
 
     if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
+      
+    	System.out.format("Error: user not created - %s.\n",
           (validInputs) ? "server failure" : "bad input value");
     } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      
+    	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }
   }
