@@ -15,6 +15,7 @@
 package codeu.chat.client.simplegui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -58,15 +59,26 @@ public final class ChatSimpleGui {
     return BorderFactory.createCompoundBorder(outside, inside);
   }
 
+  private void testFunc(WindowEvent windowEvent) {
+  	System.out.println(windowEvent.getNewState());
+  }
+
   // Initialize the GUI
   private void initialize() {
 
     // Outermost frame.
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
-    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    mainFrame.addWindowListener(new WindowAdapter() {
+    	public void windowClosing(WindowEvent windowEvent){
+            if (JOptionPane.showConfirmDialog(mainFrame, "Are you sure you want to quit?", "Confirm exit.", JOptionPane.OK_OPTION, 0, new ImageIcon("")) != 0) {
+                return;
+            }
+            System.exit(-1);  
+         }  
+     });
     mainFrame.setSize(790, 450);
-
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
@@ -117,3 +129,5 @@ public final class ChatSimpleGui {
     mainFrame.pack();
   }
 }
+
+
