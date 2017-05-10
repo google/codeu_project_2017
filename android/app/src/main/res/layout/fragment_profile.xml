@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ChatMe_Red"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbProfileFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/cardview_shadow_start_color"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/tvProfileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tbProfileFragment"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:text="@string/title_profile"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <com.pkmmte.view.CircularImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        app:border="true"
+        app:border_color="#aacccccc"
+        app:border_width="1dp"
+        app:srcCompat="@drawable/placeholder_person"
+        android:layout_below="@+id/tbProfileFragment"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp" />
+
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/et_full_name"
+        android:inputType="textPersonName|textCapWords" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etFullName"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/et_username"
+        android:inputType="textPersonName"
+        android:textColor="@color/common_google_signin_btn_text_light_focused" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUsername"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/et_change_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword"
+        android:layout_below="@+id/etPassword"
+        android:layout_marginTop="24dp"
+        android:background="@color/ChatMe_Blue"
+        android:elevation="0dp"
+        android:text="@string/btn_save_changes"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnSaveChanges"
+        android:layout_alignStart="@+id/btnSaveChanges"
+        android:layout_below="@+id/btnSaveChanges"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/holo_red_dark"
+        android:elevation="0dp"
+        android:text="@string/btn_log_out"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <!--<Button
+        android:id="@+id/btnDeleteAcnt"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnLogOut"
+        android:layout_alignStart="@+id/btnLogOut"
+        android:layout_below="@+id/btnLogOut"
+        android:layout_marginTop="18dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:elevation="0dp"
+        android:text="Delete Account"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />-->
+
+</RelativeLayout>

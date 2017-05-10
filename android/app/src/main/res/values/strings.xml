@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">ChatMe</string>
+
+    <!-- Strings related to login & profile changes  -->
+    <string name="progress_sign_in">Fetching your data...</string>
+    <string name="progress_sign_up">Creating your recipe...</string>
+    <string name="saving_changes">Saving your changes...</string>
+
+    <string name="title_activity_create_conversation">New Chat</string>
+    <string name="title_activity_add_users">AddUsersActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_new_group">New Group</string>
+    <string name="title_activity_add_participants">Add Participants</string>
+    <string name="title_chats">Chats</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_users">Users</string>
+    <string name="title_activity_users">Chat Me</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="err_et_email">Invalid email</string>
+    <string name="err_et_password">Enter password</string>
+    <string name="toast_update_name">Name has been updated</string>
+    <string name="toast_pwd_name">Password has been updated</string>
+    <string name="progress_upload_pic">Uploading picture...</string>
+    <string name="progress_update_name">Updating full name</string>
+    <string name="progress_update_pwd">Updating password</string>
+    <string name="btn_add_group_participants">Add Group Participants</string>
+    <string name="et_name_your_new_group">Name Your New Group</string>
+    <string name="et_full_name">Full Name</string>
+    <string name="et_username">Username</string>
+    <string name="et_change_password">Change Password</string>
+    <string name="btn_save_changes">Save Changes</string>
+    <string name="btn_log_out">Log Out</string>
+    <string name="tab_title_chats">Chats</string>
+    <string name="tab_title_profile">Profile</string>
+    <string name="tab_title_users">Users</string>
+</resources>

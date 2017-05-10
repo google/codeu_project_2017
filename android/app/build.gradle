@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.google.codeu.chatme"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        disable 'RestrictedApi'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile 'javax.annotation:javax.annotation-api:1.2'
+
+    // Networking related
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    // Design related
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.pkmmte.view:circularimageview:1.1'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+
+    // Firebase libraries
+    compile 'com.google.firebase:firebase-auth:10.2.0'
+    compile 'com.google.firebase:firebase-database:10.2.0'
+    compile 'com.firebaseui:firebase-ui-database:1.2.0'
+    compile 'com.google.firebase:firebase-storage:10.2.0'
+
+    // Testing frameworks
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.3'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+}
+
+apply plugin: 'com.google.gms.google-services'
