@@ -1,7 +1,9 @@
 package com.google.codeu.chatme.view.tabs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.codeu.chatme.presenter.ConversationsPresenter;
+import com.google.codeu.chatme.view.create.CreateConversationActivity;
+
 import com.google.codeu.chatme.R;
 import com.google.codeu.chatme.view.adapter.ConversationListAdapter;
 
-public class ConversationsFragment extends Fragment {
+public class ConversationsFragment extends Fragment implements ConversationsView, View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
+    private ConversationsPresenter presenter;
 
     private RecyclerView rvChatList;
     private ConversationListAdapter conversationListAdapter;
@@ -39,6 +45,7 @@ public class ConversationsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -82,6 +89,33 @@ public class ConversationsFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            // create conversation button clicked
+            case R.id.btnCreateChat:
+                openCreateConversationActivity();
+                break;
+
+            // search button clicked
+            case R.id.btnSearchChats:
+                break;
+        }
+    }
+
+    /**
+     * Launches {@link CreateConversationActivity}
+     */
+    public void openCreateConversationActivity() {
+        Intent mIntent = new Intent(getActivity(), CreateConversationActivity.class);
+        startActivity(mIntent);
+        //getActivity().finish();
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

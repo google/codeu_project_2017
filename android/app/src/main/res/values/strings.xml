@@ -6,7 +6,7 @@
     <string name="progress_sign_up">Creating your recipe...</string>
     <string name="saving_changes">Saving your changes...</string>
 
-    <string name="title_activity_create_chat">CreateChatActivity</string>
+    <string name="title_activity_create_conversation">New Chat</string>
     <string name="title_activity_add_users">AddUsersActivity</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_new_group">New Group</string>

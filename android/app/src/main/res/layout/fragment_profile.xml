@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tvProfileFragment"
+        android:id="@+id/tbProfileFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -20,7 +20,7 @@
         android:id="@+id/tvProfileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvProfileFragment"
+        android:layout_alignBottom="@+id/tbProfileFragment"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
         android:text="@string/title_profile"
@@ -35,7 +35,7 @@
         app:border_color="#aacccccc"
         app:border_width="1dp"
         app:srcCompat="@drawable/placeholder_person"
-        android:layout_below="@+id/tvProfileFragment"
+        android:layout_below="@+id/tbProfileFragment"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp" />
 

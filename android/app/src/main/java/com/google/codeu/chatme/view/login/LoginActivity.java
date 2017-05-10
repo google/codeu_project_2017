@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     /**
      * Launches {@link TabsActivity}, usually on successful sign up or sign in
      */
-    public void openChatActivity() {
+    public void openTabsActivity() {
         Intent mIntent = new Intent(LoginActivity.this, TabsActivity.class);
         startActivity(mIntent);
         finish();

@@ -58,7 +58,7 @@ public class LoginActivityPresenter implements LoginActivityInteractor {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    view.openChatActivity();
+                    view.openTabsActivity();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }

@@ -12,7 +12,7 @@ public interface LoginView {
      * Launches {@link TabsActivity}
      * usually on successful sign up or sign in
      */
-    void openChatActivity();
+    void openTabsActivity();
 
     /**
      * Shows progress loader with the given message
