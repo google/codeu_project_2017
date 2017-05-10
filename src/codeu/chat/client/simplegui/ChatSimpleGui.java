@@ -15,6 +15,9 @@
 package codeu.chat.client.simplegui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -61,20 +64,69 @@ public final class ChatSimpleGui {
   // Initialize the GUI
   private void initialize() {
 
+    /* modifies look and feel of GUI */
+    try{
+      UIManager.LookAndFeelInfo[] laf=UIManager.getInstalledLookAndFeels();
+
+      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+    }catch(Exception e){
+      System.out.println("Problems editing the look and feel");
+      System.exit(-1);
+    }
+
     // Outermost frame.
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mainFrame.setSize(790, 450);
+    mainFrame.setSize(790, 500);
+    mainFrame.setLocation(300, 300);
+
+    /* Adds a menu bar with exit and sign-in options */ 
+    JMenuBar menuBar = new JMenuBar();
+
+    JMenu userMenu = new JMenu("Options");
+    JMenuItem jmiSwitchUser = new JMenuItem("Manage Users");
+    userMenu.add(jmiSwitchUser);
+    JMenuItem jmiExit = new JMenuItem("Exit");
+    userMenu.add(jmiExit);
+
+    menuBar.add(userMenu);
+    mainFrame.setJMenuBar(menuBar);
+
+    /* Creates "manage users" window in advance to maintain current user sign-in */
+    JFrame popUpFrame = new JFrame("Manage Users");
+    popUpFrame.setSize(400, 400);
+    popUpFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    popUpFrame.setLocation(360, 360);
+
+    /* if "manage users" option is clicked, opens up sign-in window */
+    jmiSwitchUser.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        if(e.getActionCommand().equals("Manage Users")) {
+
+          popUpFrame.setVisible(true);
+
+          // Build main panels - Users, Conversations, Messages.
+          final JPanel usersViewPanel = new UserPanel(clientContext);
+          usersViewPanel.setBorder(paneBorder());
+          final GridBagConstraints usersViewC = new GridBagConstraints();
+
+          popUpFrame.getContentPane().add(usersViewPanel);
+        }
+      }
+    });
+
+    /* allows user to close out of chat app */
+    jmiExit.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        if(e.getActionCommand().equals("Exit"))
+          System.exit(0);
+      }
+    });
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
-
-    // Build main panels - Users, Conversations, Messages.
-    final JPanel usersViewPanel = new UserPanel(clientContext);
-    usersViewPanel.setBorder(paneBorder());
-    final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
     messagesViewPanel.setBorder(paneBorder());
@@ -86,34 +138,27 @@ public final class ChatSimpleGui {
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels.
-    usersViewC.gridx = 0;
-    usersViewC.gridy = 0;
-    usersViewC.gridwidth = 1;
-    usersViewC.gridheight = 1;
-    usersViewC.fill = GridBagConstraints.BOTH;
-    usersViewC.weightx = 0.3;
-    usersViewC.weighty = 0.3;
-
-    conversationViewC.gridx = 1;
+    conversationViewC.gridx = 0;
     conversationViewC.gridy = 0;
     conversationViewC.gridwidth = 1;
     conversationViewC.gridheight = 1;
     conversationViewC.fill = GridBagConstraints.BOTH;
-    conversationViewC.weightx = 0.7;
-    conversationViewC.weighty = 0.3;
+    conversationViewC.weightx = 0.4;
+    conversationViewC.weighty = 0.5;
 
-    messagesViewC.gridx = 0;
-    messagesViewC.gridy = 1;
-    messagesViewC.gridwidth = 2;
+    messagesViewC.gridx = 1;
+    messagesViewC.gridy = 0;
+    messagesViewC.gridwidth = 1;
     messagesViewC.gridheight = 1;
     messagesViewC.fill = GridBagConstraints.BOTH;
-    messagesViewC.weighty = 0.7;
+    messagesViewC.weightx = 0.6;
+    messagesViewC.weighty = 0.5;
 
-    mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
+
 }
