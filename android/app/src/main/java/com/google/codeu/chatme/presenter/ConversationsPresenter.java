@@ -136,7 +136,4 @@ public class ConversationsPresenter implements ConversationsInteractor {
                 });
     }
 
-    public void createConversation( User selectedUser) {
-
-    }
 }
