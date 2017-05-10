@@ -58,7 +58,8 @@ public final class UserPanel extends JPanel {
     titleGapC.fill = GridBagConstraints.HORIZONTAL;
     titleGapC.weightx = 0.9;
 
-    final JLabel userSignedInLabel = new JLabel("not signed in", JLabel.RIGHT);
+    final JLabel userSignedInLabel = new JLabel("Sign in to get started!", JLabel.RIGHT);
+    userSignedInLabel.setPreferredSize(new Dimension(130, 15));
     final GridBagConstraints titleUserC = new GridBagConstraints();
     titleUserC.gridx = 2;
     titleUserC.gridy = 0;
@@ -81,16 +82,17 @@ public final class UserPanel extends JPanel {
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
-    userListScrollPane.setPreferredSize(new Dimension(150, 150));
+    userListScrollPane.setPreferredSize(new Dimension(250, 150));
 
     // Current User panel
     final JPanel currentPanel = new JPanel();
     final GridBagConstraints currentPanelC = new GridBagConstraints();
 
     final JTextArea userInfoPanel = new JTextArea();
+    userInfoPanel.setEditable(false);
     final JScrollPane userInfoScrollPane = new JScrollPane(userInfoPanel);
     currentPanel.add(userInfoScrollPane);
-    userInfoScrollPane.setPreferredSize(new Dimension(245, 85));
+    userInfoScrollPane.setPreferredSize(new Dimension(250, 85));
 
     // Button bar
     final JPanel buttonPanel = new JPanel();

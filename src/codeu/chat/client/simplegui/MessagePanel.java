@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
@@ -30,8 +31,8 @@ import codeu.chat.common.User;
 public final class MessagePanel extends JPanel {
 
   // These objects are modified by the Conversation Panel.
-  private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.RIGHT);
-  private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.LEFT);
+  private final JLabel messageOwnerLabel = new JLabel("Owner:", JLabel.CENTER);
+  private final JLabel messageConversationLabel = new JLabel("Conversation:", JLabel.CENTER);
   private final DefaultListModel<String> messageListModel = new DefaultListModel<>();
 
   private final ClientContext clientContext;
@@ -81,7 +82,16 @@ public final class MessagePanel extends JPanel {
     titleOwnerPanelC.gridy = 1;
     titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
 
-    // messageConversationLabel is an instance variable of Conversation panel
+	// Color selector for the text
+	String[] colors = {"Black", "Red"};
+	final JComboBox colorList = new JComboBox(colors);
+	final GridBagConstraints titleColorsPanelC = new GridBagConstraints();
+	colorList.setSelectedIndex(0);
+	titleColorsPanelC.gridx = 1;
+	titleColorsPanelC.gridy = 0;
+	titleColorsPanelC.anchor = GridBagConstraints.PAGE_START;
+		
+	// messageConversationLabel is an instance variable of Conversation panel
     // can update it.
     messageConversationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
     titleConvPanel.add(messageConversationLabel);
@@ -89,10 +99,13 @@ public final class MessagePanel extends JPanel {
     // messageOwnerLabel is an instance variable of Conversation panel
     // can update it.
     messageOwnerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    messageOwnerLabel.setPreferredSize(new Dimension(245, 15));
+
     titleOwnerPanel.add(messageOwnerLabel);
 
     titlePanel.add(titleConvPanel, titleConvPanelC);
     titlePanel.add(titleOwnerPanel, titleOwnerPanelC);
+    titlePanel.add(colorList, titleColorsPanelC);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
     // User List panel.
@@ -101,21 +114,30 @@ public final class MessagePanel extends JPanel {
 
     // messageListModel is an instance variable so Conversation panel
     // can update it.
-    final JList<String> userList = new JList<>(messageListModel);
+    JList<String> userList = new JList<>(messageListModel);
+    userList.setCellRenderer(new MyCellRenderer());
     userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
-    userListScrollPane.setMinimumSize(new Dimension(500, 200));
-    userListScrollPane.setPreferredSize(new Dimension(500, 200));
+    userListScrollPane.setMinimumSize(new Dimension(350, 200));
+    userListScrollPane.setPreferredSize(new Dimension(350, 200));
 
     // Button panel
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
+    final JLabel messagePrompt = new JLabel("Send message: ");
+	
+	// Message to add area
+    final JTextArea messageField = new JTextArea(3, 25);
+    final JScrollPane messageScroll = new JScrollPane(messageField);
+
     final JButton addButton = new JButton("Add");
+    buttonPanel.add(messagePrompt);
+    buttonPanel.add(messageScroll);
     buttonPanel.add(addButton);
 
     // Placement of title, list panel, buttons, and current user panel.
@@ -135,7 +157,7 @@ public final class MessagePanel extends JPanel {
     listPanelC.weighty = 0.8;
 
     buttonPanelC.gridx = 0;
-    buttonPanelC.gridy = 11;
+    buttonPanelC.gridy = 10;
     buttonPanelC.gridwidth = 10;
     buttonPanelC.gridheight = 1;
     buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
@@ -154,15 +176,25 @@ public final class MessagePanel extends JPanel {
         } else if (!clientContext.conversation.hasCurrent()) {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.");
         } else {
-          final String messageText = (String) JOptionPane.showInputDialog(
-              MessagePanel.this, "Enter message:", "Add Message", JOptionPane.PLAIN_MESSAGE,
-              null, null, "");
+          
+          String messageText = messageField.getText();
+          int indx = colorList.getSelectedIndex();
+          
+          // May want to change to something else in front of string
+          if(indx == 0)	messageText = "\u0001" + messageText; // Black text
+          else if (indx == 1) messageText = "\u0002" + messageText; // Red text
+          
+          System.out.println(messageText);
+          messageField.setText("");
           if (messageText != null && messageText.length() > 0) {
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
                 messageText);
+            //userList.setSelectedIndex(1);
+            //userList.setSelectionForeground(Color.RED);
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+            
           }
         }
       }
@@ -171,7 +203,34 @@ public final class MessagePanel extends JPanel {
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
   }
+  
+  public class MyCellRenderer extends JLabel implements ListCellRenderer {
+  	public MyCellRenderer() {
+        setOpaque(false);
+    }
+    
+    @Override
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        String str = value.toString();
+        setText(value.toString());
+		
+		// These might change
+        System.out.println(str);
+        if (str.contains("\u0002")) {
+        	setBackground(Color.RED);
+        	System.out.println("hello");
+        }
+        else if(str.contains("\u0001")) {
+        	setBackground(Color.BLACK);
+        	System.out.println("test");
+        }
 
+
+
+
+        return this;
+    }
+  }
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
