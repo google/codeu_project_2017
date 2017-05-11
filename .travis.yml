@@ -11,6 +11,7 @@ os:
 
 
 script:
-  - ./clean.sh
-  - ./make.sh
-  - ./test.sh
+  - mkdir -p bin
+  - python build.py clean
+  - python build.py build
+  - python build.py run codeu.chat.TestRunner
