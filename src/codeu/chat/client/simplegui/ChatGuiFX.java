@@ -23,12 +23,31 @@ public final class ChatGuiFX extends Application {
     private static final double WINDOW_WIDTH = 1000;
     private static final double WINDOW_HEIGHT = 500;
 
+    // login page vars
     private Stage thestage;                         // Holds the scene that user is currently viewing
     private Scene signInScene, mainScene;           // Scenes to hold all the elements for each page
     private Button signInButton;
     private TextField userInput;
     private PasswordField passInput;                // Takes input for username and password
     private ClientContext clientContext;            //
+
+    // main page vars
+    private HBox hboxClient;
+    private HBox hboxInput;
+    private VBox userVBox;
+    private VBox chatVBox;
+    private VBox convosVBox;
+    private BorderPane container;
+    private Button sendButton;
+    private Button updateButton;
+    private Button addConvoButton;
+    private Text userTitle;
+    private Text chatTitle;
+    private Text convosTitle;
+    private TextFlow userTf;
+    private TextFlow chatTf;
+    private TextFlow convosTf;
+    private TextField input;
 
     public void run(String [] args) {
         try {
@@ -112,37 +131,39 @@ public final class ChatGuiFX extends Application {
 
         // Main Page
 
-        HBox hboxClient = new HBox();
-        HBox hboxInput = new HBox();
-        VBox userVBox = new VBox();
-        VBox chatVBox = new VBox();
-        VBox convosVBox = new VBox();
-        BorderPane container = new BorderPane();
-        Button send = new Button("Send");
-        Button update = new Button("Update");
-        Button addConvo = new Button("Add Conversation");
-        Text userTitle = new Text("Users");
-        Text chatTitle = new Text("Conversation"); // changed based on name?
-        Text convosTitle = new Text("Conversations");
-        TextFlow userTf = new TextFlow(userTitle);
-        TextFlow chatTf = new TextFlow(chatTitle);
-        TextFlow convosTf = new TextFlow(convosTitle);
-        TextField input = new TextField();
-        // MenuBar menuBar = new MenuBar();
-        // Menu menuAdd = new Menu("Add Conversation");
-        // menuBar.getMenus().addAll(menuConvo);
+        hboxClient = new HBox();
+        hboxInput = new HBox();
+        userVBox = new VBox();
+        chatVBox = new VBox();
+        convosVBox = new VBox();
+        container = new BorderPane();
+        sendButton = new Button("Send");
+        updateButton = new Button("Update");
+        addConvoButton = new Button("Add Conversation");
+        userTitle = new Text("Users");
+        chatTitle = new Text("Conversation"); // changed based on name?
+        convosTitle = new Text("Conversations");
+        userTf = new TextFlow(userTitle);
+        chatTf = new TextFlow(chatTitle);
+        convosTf = new TextFlow(convosTitle);
+        input = new TextField();
 
-        ObservableList<String> usersList = FXCollections.observableArrayList(
-                 "Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
+        // list of users
+        ObservableList<String> usersList = FXCollections.observableArrayList();
         ListView<String> users = new ListView<String>(usersList);
-        ObservableList<String> convoList = FXCollections.observableArrayList(
-                 "Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
+
+        // list of conversations
+        ObservableList<String> convoList = FXCollections.observableArrayList();
         ListView<String> conversations = new ListView<String>(convoList);
-        ObservableList<String> messageList = FXCollections.observableArrayList(
-                 "Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
+
+        // list of messages
+        ObservableList<String> messageList = FXCollections.observableArrayList();
         ListView<String> messages = new ListView<String>(messageList);
 
-        // userTf.setStyle("-fx-base: #b6e7c9;");
+        // add listener for when user presses send and add text to the messageList
+        sendButton.setOnAction(e -> messageList.addAll(input.getText()));
+
+        // set dimensions and add components
         VBox.setVgrow(users, Priority.ALWAYS);
         VBox.setVgrow(conversations, Priority.ALWAYS);
         VBox.setVgrow(messages, Priority.ALWAYS);
@@ -151,11 +172,11 @@ public final class ChatGuiFX extends Application {
         HBox.setHgrow(chatVBox, Priority.ALWAYS);
         HBox.setHgrow(convosVBox, Priority.ALWAYS);
 
-        send.setMinHeight(40);
-        update.setMinHeight(40);
+        sendButton.setMinHeight(40);
+        updateButton.setMinHeight(40);
         input.setMinHeight(40);
-        addConvo.setMinHeight(40);
-        addConvo.setMaxWidth(Double.MAX_VALUE);
+        addConvoButton.setMinHeight(40);
+        addConvoButton.setMaxWidth(Double.MAX_VALUE);
         userTf.setMaxWidth(Double.MAX_VALUE);
         userTf.setMinHeight(30);
         chatTf.setMaxWidth(Double.MAX_VALUE);
@@ -166,13 +187,12 @@ public final class ChatGuiFX extends Application {
         chatVBox.setMaxWidth(Double.MAX_VALUE);
         convosVBox.setMaxWidth(150);
 
-        hboxInput.getChildren().addAll(input, send, update);
+        hboxInput.getChildren().addAll(input, sendButton, updateButton);
         userVBox.getChildren().addAll(userTf, users);
         chatVBox.getChildren().addAll(chatTf, messages, hboxInput);
-        convosVBox.getChildren().addAll(convosTf, conversations, addConvo);
+        convosVBox.getChildren().addAll(convosTf, conversations, addConvoButton);
         hboxClient.getChildren().addAll(userVBox, chatVBox, convosVBox);
         container.setCenter(hboxClient);
-        // container.setTop(menuBar);
 
         mainScene = new Scene(container, WINDOW_WIDTH, WINDOW_HEIGHT);
         thestage.setScene(signInScene);
