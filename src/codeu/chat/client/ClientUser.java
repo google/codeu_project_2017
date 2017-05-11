@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
@@ -44,17 +45,17 @@ public final class ClientUser {
     this.view = view;
   }
 
-  // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
+  /**
+   * Takes in a username or password entry and checks to make sure it's only made
+   * up of alphanumeric characters.
+   * @param userInput
+   * @return
+   */
+  public static boolean isValidInput(String userInput) {
 
-      // TODO: check for invalid characters
+    boolean validInput = Pattern.matches("[a-zA-Z0-9]", userInput);
 
-    }
-    return clean;
+    return validInput;
   }
 
   public boolean hasCurrent() {
@@ -65,7 +66,7 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, String password) {
     updateUsers();
 
     final User prev = current;
@@ -88,10 +89,10 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
+  public void addUser(String name, String password) {
+    final boolean validInputs = isValidInput(name);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name) : null;    // TODO: check if user already exists
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",

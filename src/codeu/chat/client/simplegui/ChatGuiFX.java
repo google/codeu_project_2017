@@ -1,5 +1,6 @@
 package codeu.chat.client.simplegui;
 
+import codeu.chat.client.ClientUser;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -78,7 +79,7 @@ public final class ChatGuiFX extends Application {
         passLabel.setFont(Font.font(15));
 
         signInButton = new Button("Sign in");                      // Initialize sign in button
-        signInButton.setOnAction((event)-> buttonClicked(event));       // Initialize its event handler
+        signInButton.setOnAction((event)-> signInButtonClicked(event));       // Initialize its event handler
 
 
         userInput = new TextField();
@@ -179,8 +180,19 @@ public final class ChatGuiFX extends Application {
         thestage.show();
     }
 
-    private void buttonClicked(ActionEvent e)
+    private void signInButtonClicked(ActionEvent e)
     {
-        thestage.setScene(mainScene);           // TODO: Call a controller function here instead
+        String username = userInput.getText();
+        String password = passInput.getText();
+
+        if (ClientUser.isValidInput(username)) {
+
+            clientContext.user.signInUser(username, password);
+            thestage.setScene(mainScene);
+        }
+        else {
+
+            //TODO: show something on the screen that tells user to user different characters
+        }
     }
 }

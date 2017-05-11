@@ -151,7 +151,7 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
+          clientContext.user.signInUser(data, "");  // Putting in empty string because we don't use the swing gui
           userSignedInLabel.setText("Hello " + data);
         }
       }
@@ -164,7 +164,7 @@ public final class UserPanel extends JPanel {
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
+          clientContext.user.addUser(s, "");  // Putting in empty string because we don't use the swing gui
           UserPanel.this.getAllUsers(listModel);
         }
       }
