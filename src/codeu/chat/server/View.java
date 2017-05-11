@@ -36,7 +36,6 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import codeu.chat.util.store.StoreAccessor;
 
 public final class View implements BasicView, SinglesView {
 
@@ -51,45 +50,34 @@ public final class View implements BasicView, SinglesView {
 
   @Override
   public Collection<User> getUsers() {
-    return all(model.userById());
+    return new HashSet<User>(model.users.values());
   }
 
   @Override
   public Collection<ConversationHeader> getConversations() {
-    return all(model.conversationById());
+    return new HashSet<ConversationHeader>(model.headers.values());
   }
 
   @Override
   public Collection<ConversationPayload> getConversationPayloads(Collection<Uuid> ids) {
-    return intersect(model.conversationPayloadById(), ids);
+    return intersect(model.payloads, ids);
   }
 
   @Override
   public Collection<Message> getMessages(Collection<Uuid> ids) {
-    return intersect(model.messageById(), ids);
+    return intersect(model.messages, ids);
   }
 
   @Override
-  public User findUser(Uuid id) { return model.userById().first(id); }
+  public User findUser(Uuid id) { return model.users.get(id); }
 
   @Override
-  public ConversationHeader findConversation(Uuid id) { return model.conversationById().first(id); }
+  public ConversationHeader findConversation(Uuid id) { return model.headers.get(id); }
 
   @Override
-  public Message findMessage(Uuid id) { return model.messageById().first(id); }
+  public Message findMessage(Uuid id) { return model.messages.get(id); }
 
-  private static <S,T> Collection<T> all(StoreAccessor<S,T> store) {
-
-    final Collection<T> all = new ArrayList<>();
-
-    for (final T value : store.all()) {
-        all.add(value);
-    }
-
-    return all;
-  }
-
-  private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
+  private static <T> Collection<T> intersect(Map<Uuid, T> map, Collection<Uuid> ids) {
 
     // Use a set to hold the found users as this will prevent duplicate ids from
     // yielding duplicates in the result.
@@ -98,7 +86,7 @@ public final class View implements BasicView, SinglesView {
 
     for (final Uuid id : ids) {
 
-      final T t = store.first(id);
+      final T t = map.get(id);
 
       if (t == null) {
         LOG.warning("Unmapped id %s", id);

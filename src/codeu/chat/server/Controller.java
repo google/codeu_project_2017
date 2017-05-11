@@ -57,15 +57,15 @@ public final class Controller implements RawController, BasicController {
   @Override
   public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
 
-    final User foundUser = model.userById().first(author);
-    final ConversationPayload foundConversation = model.conversationPayloadById().first(conversation);
+    final User foundUser = model.users.get(author);
+    final ConversationPayload foundConversation = model.payloads.get(conversation);
 
     Message message = null;
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
       message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
-      model.add(message);
+      model.messages.put(id, message);
       LOG.info("Message added: %s", message.id);
 
       // Find and update the previous "last" message so that it's "next" value
@@ -78,7 +78,7 @@ public final class Controller implements RawController, BasicController {
         // to update the last message's "next" value.
 
       } else {
-        final Message lastMessage = model.messageById().first(foundConversation.lastMessage);
+        final Message lastMessage = model.messages.get(foundConversation.lastMessage);
         lastMessage.next = message.id;
       }
 
@@ -107,7 +107,7 @@ public final class Controller implements RawController, BasicController {
     if (isIdFree(id)) {
 
       user = new User(id, name, creationTime);
-      model.add(user);
+      model.users.put(id, user);
 
       LOG.info(
           "newUser success (user.id=%s user.name=%s user.time=%s)",
@@ -130,17 +130,22 @@ public final class Controller implements RawController, BasicController {
   @Override
   public ConversationHeader newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
 
-    final User foundOwner = model.userById().first(owner);
+    final User foundOwner = model.users.get(owner);
 
-    ConversationHeader conversation = null;
+    ConversationHeader header = null;
+    ConversationPayload payload = null;
 
     if (foundOwner != null && isIdFree(id)) {
-      conversation = new ConversationHeader(id, owner, creationTime, title);
-      model.add(conversation);
+      header = new ConversationHeader(id, owner, creationTime, title);
+      payload = new ConversationPayload(id);
+
+      model.headers.put(id, header);
+      model.payloads.put(id, payload);
+
       LOG.info("Conversation added: " + id);
     }
 
-    return conversation;
+    return header;
   }
 
   private Uuid createId() {
@@ -161,9 +166,9 @@ public final class Controller implements RawController, BasicController {
   }
 
   private boolean isIdInUse(Uuid id) {
-    return model.messageById().first(id) != null ||
-           model.conversationById().first(id) != null ||
-           model.userById().first(id) != null;
+    return model.messages.get(id) != null ||
+           model.payloads.get(id) != null ||
+           model.users.get(id) != null;
   }
 
   private boolean isIdFree(Uuid id) { return !isIdInUse(id); }
