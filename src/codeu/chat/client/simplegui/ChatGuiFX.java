@@ -48,6 +48,8 @@ public final class ChatGuiFX extends Application {
         Application.launch(ChatGuiFX.class);
     }
 
+    // test commit number 2
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
