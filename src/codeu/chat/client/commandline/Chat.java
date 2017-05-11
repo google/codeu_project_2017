@@ -122,7 +122,7 @@ public final class Chat {
       public void invoke(Scanner args) {
         for (final UserContext user : context.allUsers()) {
           System.out.format(
-              "USER %s (%s)\n",
+              "USER %s (UUID:%s)\n",
               user.user.name,
               user.user.id);
         }
@@ -224,7 +224,7 @@ public final class Chat {
       public void invoke(Scanner args) {
         for (final ConversationContext conversation : user.conversations()) {
           System.out.format(
-              "CONVERSATION %s (%s)\n",
+              "CONVERSATION %s (UUID:%s)\n",
               conversation.conversation.title,
               conversation.conversation.id);
         }
@@ -296,7 +296,7 @@ public final class Chat {
       public void invoke(Scanner args) {
         System.out.println("User Info:");
         System.out.format("  Name : %s\n", user.user.name);
-        System.out.format("  Id   : %s\n", user.user.id);
+        System.out.format("  Id   : UUID:%s\n", user.user.id);
       }
     });
 
@@ -381,7 +381,7 @@ public final class Chat {
       public void invoke(Scanner args) {
         System.out.println("Conversation Info:");
         System.out.format("  Title : %s\n", conversation.conversation.title);
-        System.out.format("  Id    : %s\n", conversation.conversation.id);
+        System.out.format("  Id    : UUID:%s\n", conversation.conversation.id);
         System.out.format("  Owner : %s\n", conversation.conversation.owner);
       }
     });
