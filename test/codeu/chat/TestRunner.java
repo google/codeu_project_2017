@@ -25,8 +25,7 @@ public final class TestRunner {
              codeu.chat.server.BasicControllerTest.class,
              codeu.chat.server.RawControllerTest.class,
              codeu.chat.util.TimeTest.class,
-             codeu.chat.util.UuidTest.class,
-             codeu.chat.util.store.StoreTest.class
+             codeu.chat.util.UuidTest.class
          );
       for (final Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
