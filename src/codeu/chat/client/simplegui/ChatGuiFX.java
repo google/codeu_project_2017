@@ -48,7 +48,7 @@ public final class ChatGuiFX extends Application {
         Application.launch(ChatGuiFX.class);
     }
 
-    // test commit number 2
+    // Test commit- commit only, no pull request yet
 
     @Override
     public void start(Stage primaryStage) throws Exception {
