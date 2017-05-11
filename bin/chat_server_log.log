@@ -1,0 +1,26 @@
+Mar 30, 2017 5:43:45 PM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Mar 30, 2017 5:43:45 PM codeu.chat.ServerMain main
+INFO: Starting server...
+Mar 30, 2017 5:43:45 PM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Mar 30, 2017 5:43:45 PM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 07, 2017 11:40:53 AM codeu.chat.ServerMain main
+INFO: ============================= START OF LOG =============================
+Apr 07, 2017 11:40:53 AM codeu.chat.ServerMain main
+INFO: Starting server...
+Apr 07, 2017 11:40:53 AM codeu.chat.ServerMain runServer
+INFO: Server object created.
+Apr 07, 2017 11:40:53 AM codeu.chat.ServerMain runServer
+INFO: Starting hub...
+Apr 07, 2017 11:41:51 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 07, 2017 11:41:51 AM codeu.chat.server.Controller newUser
+INFO: newUser success (user.id=[UUID:100.101.1772769068] user.name=preska user.time=07-Apr-2017 11:41:51.072)
+Apr 07, 2017 11:41:51 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 07, 2017 11:41:57 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
+Apr 07, 2017 11:42:46 AM codeu.chat.server.Server handleConnection
+INFO: Handling new connection...
