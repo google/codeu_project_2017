@@ -139,4 +139,14 @@ public final class UuidTest {
     assertNotNull(id);
     assertEquals(id.id(), 0xFFFFFFFF);
   }
+
+  @Test
+  public void testParsingToString() throws IOException {
+
+    final Uuid start = new Uuid(new Uuid(1), 2);
+    final String string = start.toString();
+    final Uuid end = Uuid.parse(string);
+
+    assertEquals(start, end);
+  }
 }
