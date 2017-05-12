@@ -14,10 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+LOCAL_MACHINE="localhost@2007"
 
-mkdir -p bin
+cd './bin'
 
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./bin
-cp -f ./src/codeu/chat/client/simplegui2/*.fxml ./bin/codeu/chat/client/simplegui2
+java codeu.chat.SimpleGuiClientMain2 "$LOCAL_MACHINE"
