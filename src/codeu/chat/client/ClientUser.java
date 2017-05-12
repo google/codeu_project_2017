@@ -15,6 +15,7 @@
 package codeu.chat.client;
 
 import java.util.Arrays;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -149,5 +150,18 @@ public final class ClientUser {
   // Move to User's toString()
   public static void printUser(User user) {
     System.out.println(getUserInfoString(user));
+  }
+  
+  public void deleteUser(String name){
+	  if(usersByName.first(name) != null){
+		  controller.deleteUser(name);
+		  if(usersByName.first(name).equals(current)){
+			  current = null;
+		  }
+	  }else{
+		  System.out.format("Error: user '%s' does not exist. \n", name);
+	  }
+	  
+	  updateUsers();
   }
 }

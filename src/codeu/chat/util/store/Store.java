@@ -15,6 +15,7 @@
 package codeu.chat.util.store;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
@@ -65,6 +66,26 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     if (closestLink == null || comparator.compare(newLink.key, closestLink.key) != 0) {
       index.put(key, newLink);
     }
+  }
+  
+  @Override
+  public void removeByKey(KEY key) {
+	  if(index.containsKey(key)){
+		  index.remove(key);
+	  }
+  }
+  
+  @Override 
+  public void removeByValue(VALUE value) {
+	  Iterator<StoreLink<KEY, VALUE>> it = index.values().iterator();
+	  
+	  while(it.hasNext()){
+		  StoreLink<KEY,VALUE> link = it.next();
+		  
+		  if(link.value.equals(value)){
+			  it.remove();
+		  }
+	  }
   }
 
   @Override

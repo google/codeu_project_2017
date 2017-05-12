@@ -16,6 +16,10 @@ package codeu.chat.util.store;
 
 public interface StoreAccessor<KEY, VALUE> {
 
+  void removeByKey(KEY key);
+  
+  void removeByValue(VALUE value);
+  
   VALUE first(KEY key);
 
   Iterable<VALUE> all();

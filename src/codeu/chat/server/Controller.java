@@ -16,6 +16,8 @@ package codeu.chat.server;
 
 import java.util.Collection;
 
+import codeu.chat.util.store.Store;
+import codeu.chat.util.store.StoreAccessor;
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
@@ -159,6 +161,29 @@ public final class Controller implements RawController, BasicController {
     }
 
     return conversation;
+  }
+  
+  @Override
+  public void deleteUser(String name){
+	 final User removeUser = model.userByText().first(name);
+
+	  model.userByText().removeByValue(removeUser);
+	  model.userById().removeByValue(removeUser);
+	  model.userByTime().removeByValue(removeUser);
+	  
+	  if(isUserFree(name) && isIdFree(removeUser.id)){
+	      LOG.info(
+		          "deleteUser success (user.id=%s user.name=%s user.time=%s)",
+		          removeUser.id,
+		          removeUser.name,
+		          removeUser.creation);
+	  }else{
+	      LOG.info(
+		          "deleteUser fail (user.id=%s user.name=%s user.time=%s)",
+		          removeUser.id,
+		          removeUser.name,
+		          removeUser.creation);		  
+	  }
   }
 
   private Uuid createId() {

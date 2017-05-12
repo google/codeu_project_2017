@@ -49,8 +49,9 @@ public final class Chat {
     System.out.println("   sign-out  - sign out current user.");
     System.out.println("   current   - show current user, conversation, message.");
     System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
-    System.out.println("   u-list-all    - list all users known to system.");
+    System.out.println("   u-add <name>     - add a new user.");
+    System.out.println("   u-list-all       - list all users known to system.");
+    System.out.println("   u-delete <name>  - delete a user.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
     System.out.println("   c-list-all       - list all conversations known to system.");
@@ -60,6 +61,7 @@ public final class Chat {
     System.out.println("   m-list-all       - list all messages in the current conversation.");
     System.out.println("   m-next <index>   - index of next message to view.");
     System.out.println("   m-show <count>   - show next <count> messages.");
+    System.out.println("   m-find <keyword> - find all messages that contain keyword.");
   }
 
   // Prompt for new command.
@@ -128,7 +130,14 @@ public final class Chat {
           clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
         }
       }
-
+    } else if (token.equals("u-delete")){
+    	
+      if (!tokenScanner.hasNext()) {
+        System.out.println("ERROR: Username not supplied.");
+      } else {
+        deleteUser(tokenScanner.nextLine().trim());
+      }      
+    	
     } else if (token.equals("c-list-all")) {
 
       clientContext.conversation.showAllConversations();
@@ -280,6 +289,11 @@ public final class Chat {
   // Add a new user.
   private void addUser(String name) {
     clientContext.user.addUser(name);
+  }
+  
+  // Add a new user.
+  private void deleteUser(String name) {
+    clientContext.user.deleteUser(name);
   }
 
   // Display all users known to server.

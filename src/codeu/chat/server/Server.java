@@ -207,6 +207,24 @@ public final class Server {
       Serializers.collection(Message.SERIALIZER).write(out, messages);
       
 
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
+	
+      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
+
+    
+    } else if (type == NetworkCode.DELETE_USER_REQUEST) {
+
+    	final String name = Serializers.STRING.read(in);
+
+        controller.deleteUser(name);
+        
+        Serializers.INTEGER.write(out, NetworkCode.DELETE_USER_RESPONSE);
+
     } else {
 
       // In the case that the message was not handled make a dummy message with
