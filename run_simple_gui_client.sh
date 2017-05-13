@@ -18,4 +18,4 @@ LOCAL_MACHINE="130.211.140.178@10006"
 
 cd './bin'
 
-java codeu.chat.SimpleGuiClientMain "$LOCAL_MACHINE"
+java codeu.chat.SimpleGuiClientMain "${LOCAL_MACHINE}"
