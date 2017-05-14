@@ -44,20 +44,25 @@ public final class ClientUser {
     this.controller = controller;
     this.view = view;
   }
-
-  // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
+    
+// Validate the username string
+public boolean isValidName(String userName) {
+	boolean clean = true; 
+    if (userName.trim().length() == 0) {
       clean = false;
     } else {
 
-      // TODO: check for invalid characters and that the user's name is not a duplicate
-
+      for (User currentUser : getUsers()) {
+		
+        if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
+          System.out.format("Error: user not created - %s already exists.\n", userName);
+          clean = false;
+        }
+      } 
     }
     return clean;
   }
-
+  
   public boolean hasCurrent() {
     return (current != null);
   }
@@ -89,67 +94,27 @@ public final class ClientUser {
     printUser(current);
   }
 
-
-	//change the type to a bool, so we can check if the user was created or not in the GUI
+  //change the type to a boolean, so we can check if the user was created or not in the GUI
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
-    
-    //Check there are users and if there are, get the users in a list
-      if(!usersById.isEmpty()){
-      	Iterator<User> users = usersById.values().iterator(); 
-      	while(users.hasNext()){
-      		if(users.next().name.toUpperCase().equals(name.toUpperCase())){
-      			System.out.format("Error: user %s not created due to duplicate name.\n", name);
-      			return false;           		
-      		}
-      	 }
-      	 //has gone through all names and none matched and check that the name doesn't already exist
-      	 final User user = (validInputs) ? controller.newUser(name) : null;
-	
-	
-		//check that the user being created isn't empty
-    	if (user == null) {
-     	 System.out.format("Error: user not created - %s.\n",
-          	(validInputs) ? "server failure" : "bad input value");
-        	return false; 
-        
-   	 	} else {
-      	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
-      	updateUsers();
-      	return true; 
-    	}  	 
-      }
-       //the users map is empty, so the user should be added and that the input is valid
-	else{
-    	final User user = (validInputs) ? controller.newUser(name) : null;
-	
-		//check that the user being created isn't empty
-    	if (user == null) {
-     	 System.out.format("Error: user not created - %s.\n",
-          	(validInputs) ? "server failure" : "bad input value");
-        return false; 
-        
-   	 	} else {
-      	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
-      	updateUsers();
-      	return true; 
-    	}
-    } 
-  }
- 
-  public void showAllUsers() {
-    updateUsers();
-    for (final User u : usersByName.all()) {
-      printUser(u);
+
+    final User user = (validInputs) ? controller.newUser(name) : null;
+
+    if (user == null) {
+      System.out.format("Error: user not created - %s.\n",
+          (validInputs) ? "server failure" : "bad input value"); 
+    } else {
+      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      updateUsers();
+      
+      return true; 
     }
+    return false;
   }
 
   //delete user method
   public boolean deleteUser(String name) {
-  		
-  		
-  		
-  		
+  
   		//get all users by name
 		Iterable <User> users = getUsers();
 		
@@ -163,12 +128,26 @@ public final class ClientUser {
 				targetId = target.id;
 				//delete user from hashmap and from store...
 				usersById.remove(targetId);
+				//System.out.println(usersById.get(targetId)); 
+				//updateUsers();
 				usersByName.remove(name); 
+				
+				LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
+				System.out.println("User deleted, Name = " + name); 
+				
+				//need to pull from the server to ensure the user doesn't show up because they are deleted
+				updateUsers();
 				return true; 
 			}
 		}
 		return false; 
-		 
+  }
+  
+  public void showAllUsers() {
+    updateUsers();
+    for (final User u : usersByName.all()) {
+      printUser(u);
+    }
   }
   
   public User lookup(Uuid id) {

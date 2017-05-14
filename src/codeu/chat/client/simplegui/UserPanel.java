@@ -204,7 +204,7 @@ public final class UserPanel extends JPanel {
           final String data = userList.getSelectedValue();
           //need to delete user and set it so that they are not logged in...
           boolean sucessfulSignout = clientContext.user.signOutUser();
-          System.out.println(sucessfulSignout);
+          //System.out.println(sucessfulSignout);
           	if(sucessfulSignout==true){
           		//remove the user's name from the list
           		if(clientContext.user.deleteUser(data)==true){
