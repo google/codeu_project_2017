@@ -102,6 +102,10 @@ public final class MessagePanel extends JPanel {
     // User List panel.
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
+    
+    // Panel for JScrollPane.
+    final JPanel scrollPanel = new JPanel();
+    final GridBagConstraints scrollPanelC = new GridBagConstraints();
 	
 	// Search panel and text field
     final JPanel searchPanel = new JPanel();
@@ -120,7 +124,9 @@ public final class MessagePanel extends JPanel {
     userList.setSelectedIndex(-1);
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
-    listShowPanel.add(userListScrollPane);
+    //listShowPanel.add(userListScrollPane);
+    //searchPanel.add(userListScrollPane);
+    scrollPanel.add(userListScrollPane);
     userListScrollPane.setMinimumSize(new Dimension(500, 200));
     userListScrollPane.setPreferredSize(new Dimension(500, 200));
 
@@ -156,6 +162,14 @@ public final class MessagePanel extends JPanel {
     searchPanelC.fill = GridBagConstraints.BOTH;
     searchPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
     searchPanelC.weighty = 0.8;
+    
+    scrollPanelC.gridx = 0;
+    scrollPanelC.gridy = 3;
+    scrollPanelC.gridwidth = 10;
+    scrollPanelC.gridheight = 8;
+    scrollPanelC.fill = GridBagConstraints.BOTH;
+    scrollPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+    scrollPanelC.weighty = 0.8;
 
     buttonPanelC.gridx = 0;
     buttonPanelC.gridy = 11;
@@ -167,19 +181,16 @@ public final class MessagePanel extends JPanel {
     this.add(titlePanel, titlePanelC);
     this.add(searchPanel, searchPanelC); 
     this.add(listShowPanel, listPanelC);
-   
+    this.add(scrollPanel, scrollPanelC);
     this.add(buttonPanel, buttonPanelC);
     
     titlePanel.setBackground(new Color(102, 162, 237));
-    //listShowPanel.setBackground(new Color(102, 162, 237));
-    
+    listShowPanel.setBackground(new Color(102, 162, 237));
+    //scrollPanel.setBackground(new Color(0,0,0)); 
+    scrollPanel.setBackground(new Color(102, 162, 237));
     buttonPanel.setBackground(new Color(102, 162, 237));
-    
-    
-    //titlePanel.setBackground(new Color(0,0,0));
-    listShowPanel.setBackground(new Color(0,0,0));
-    //buttonPanel.setBackground(new Color(0,0,0));
 	searchPanel.setBackground(new Color(102, 162, 237));
+	
     // User click Messages Add button - prompt for message body and add new Message to Conversation
     
     //Add button is pressed
