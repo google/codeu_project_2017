@@ -14,6 +14,7 @@
 
 package codeu.chat.common;
 
+import codeu.chat.common.SemanticScore;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,7 +34,7 @@ public final class User {
       Uuid.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
-
+      SemanticScore.SERIALIZER.write(out, value.semanticScore);
     }
 
     @Override
@@ -42,7 +43,8 @@ public final class User {
       return new User(
           Uuid.SERIALIZER.read(in),
           Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
+          Time.SERIALIZER.read(in),
+          SemanticScore.SERIALIZER.read(in)
       );
 
     }
@@ -52,11 +54,18 @@ public final class User {
   public final String name;
   public final Time creation;
 
-  public User(Uuid id, String name, Time creation) {
+  /*
+    The semantic score is public and since the only way to update it is by connecting to the natural
+    language API, and so the client must request an updated score from the server
+   */
+  public SemanticScore semanticScore;
+
+  public User(Uuid id, String name, Time creation, SemanticScore score) {
 
     this.id = id;
     this.name = name;
     this.creation = creation;
+    this.semanticScore = score;
 
   }
 }

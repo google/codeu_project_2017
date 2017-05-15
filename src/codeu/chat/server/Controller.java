@@ -14,6 +14,7 @@
 
 package codeu.chat.server;
 
+import codeu.chat.common.SemanticScore;
 import java.util.Collection;
 
 import codeu.chat.common.BasicController;
@@ -108,7 +109,7 @@ public final class Controller implements RawController, BasicController {
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime);
+      user = new User(id, name, creationTime, new SemanticScore());
       model.add(user);
 
       LOG.info(
