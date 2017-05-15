@@ -72,10 +72,10 @@ public class SentimentScore {
       sentiment = calculateSentiment(m);
       updateScore(sentiment);
     } catch (IOException exc) {
-
-    } finally {
-      return score;
+      System.out.println("Error with sentiment analysis");
     }
+
+    return score;
 
   }
 
