@@ -39,16 +39,16 @@ if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_
   exit 1
 fi
 
+export GOOGLE_APPLICATION_CREDENTIALS=./TestingNLAPI-03ba34a1872e.json
 
-cd './bin'
 if [ "$RELAY_ADDRESS" == "" ] ; then
-  java codeu.chat.ServerMain \
+  java -cp ./third_party/*:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
+  java -cp ./third_party/*:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
