@@ -130,8 +130,8 @@ public final class Server {
 
       /* todo (raami): Update the sentiment score for the user in order to reflect the new message
 
-        Use the view.findUser(author) to get the user with the uuid of the author
-        Call user.sentimentscore.addmessage(message) to add the message to the semantic score
+       * Use the view.findUser(author) to get the user with the uuid of the author
+       * Call user.sentimentscore.addmessage(message) to add the message to the semantic score
 
       */
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);

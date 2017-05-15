@@ -23,8 +23,8 @@ public class SentimentScore {
   // The language client is used to connect to the natural language API.
   // todo: requires environment variable GOOGLE_APPLICATION_CREDENTIALS=<PATH/TO/SERVICE-ACCOUNT/JSON>
   /*
-      Issue - How will this work with the google hosting. How will we make the environment variable
-      and point to the json file. Will this be feasible?
+   * Issue - How will this work with the google hosting. How will we make the environment variable
+   * and point to the json file. Will this be feasible?
    */
 
   private static LanguageServiceClient languageClient;
@@ -59,8 +59,8 @@ public class SentimentScore {
   }
 
   /*
-  When a new message is sent to the server, the server will add the message to the authors semantic score
-  using this method
+   * When a new message is sent to the server, the server will add the message to the authors semantic score
+   * using this method
    */
   public int addMessage(Message m) {
 
@@ -83,9 +83,9 @@ public class SentimentScore {
 
     // todo: based on the given sentiment, update the sentiment score.
     /*
-       How will a specific score impact the users current score.
-       the sentiment has both a score and a magnitude. How will they both be used in the
-       calculation?
+     * How will a specific score impact the users current score.
+     * the sentiment has both a score and a magnitude. How will they both be used in the
+     * calculation?
     */
   }
 
