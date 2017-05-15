@@ -54,8 +54,9 @@ public final class User {
   public final Time creation;
 
   /*
-    The sentiment score is public and since the only way to update it is by connecting to the natural
-    language API, and so the client must request an updated score from the server
+   * The sentiment score is public since the only way to update it is by connecting to the natural
+   * language API, which only the server can do. As such, the client must request a new sentiment
+   * score from the server
    */
   public SentimentScore sentimentScore;
 

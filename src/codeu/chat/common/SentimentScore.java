@@ -59,7 +59,7 @@ public class SentimentScore {
   }
 
   /*
-   * When a new message is sent to the server, the server will add the message to the authors semantic score
+   * When a new message is sent to the server, the server will add the message to the authors sentiment score
    * using this method
    */
   public int addMessage(Message m) {
