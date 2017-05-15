@@ -14,7 +14,7 @@
 
 package codeu.chat.client;
 
-import codeu.chat.common.SemanticScore;
+import codeu.chat.common.SentimentScore;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -282,9 +282,9 @@ public final class View implements BasicView, LogicalView{
     return messages;
   }
 
-  public SemanticScore getSemanticScore(Uuid useruid) {
+  public SentimentScore getSentimentScore(Uuid useruid) {
 
-    // todo (raami): request the semantic score for the user with the specified uid, from the server
+    // todo (raami): request the sentiment score for the user with the specified uid, from the server
 
     return null;
   }

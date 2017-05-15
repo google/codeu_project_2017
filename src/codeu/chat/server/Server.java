@@ -116,7 +116,7 @@ public final class Server {
 
   private boolean onMessage(InputStream in, OutputStream out) throws IOException {
 
-    // todo (raami) : add a new if for networkcode getsemanticscore(uuid)
+    // todo (raami) : add a new if for networkcode getuserscore(uuid)
 
     final int type = Serializers.INTEGER.read(in);
 
@@ -128,10 +128,10 @@ public final class Server {
 
       final Message message = controller.newMessage(author, conversation, content);
 
-      /* todo (raami): Update the semantic score for the user in order to reflect the new message
+      /* todo (raami): Update the sentiment score for the user in order to reflect the new message
 
         Use the view.findUser(author) to get the user with the uuid of the author
-        Call user.semanticscore.addmessage(message) to add the message to the semantic score
+        Call user.sentimentscore.addmessage(message) to add the message to the semantic score
 
       */
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
