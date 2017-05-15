@@ -173,8 +173,7 @@ public final class UserPanel extends JPanel {
         if (s != null && s.length() > 0) {
           if(clientContext.user.addUser(s)==true){
           	UserPanel.this.getAllUsers(listModel);
-          	}
-          else{
+          } else{
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
           }
         }
