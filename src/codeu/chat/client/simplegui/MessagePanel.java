@@ -127,8 +127,8 @@ public final class MessagePanel extends JPanel {
     //listShowPanel.add(userListScrollPane);
     //searchPanel.add(userListScrollPane);
     scrollPanel.add(userListScrollPane);
-    userListScrollPane.setMinimumSize(new Dimension(500, 200));
-    userListScrollPane.setPreferredSize(new Dimension(500, 200));
+    userListScrollPane.setMinimumSize(new Dimension(500, 400));
+    userListScrollPane.setPreferredSize(new Dimension(500, 400));
 
     // Button panel and text field
     final JPanel buttonPanel = new JPanel();

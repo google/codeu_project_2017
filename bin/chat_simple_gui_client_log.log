@@ -338,3 +338,39 @@ May 14, 2017 4:58:40 PM codeu.chat.client.ClientMessage updateMessages
 SEVERE: conversation argument is null - do nothing.
 May 14, 2017 4:58:42 PM codeu.chat.SimpleGuiClientMain runClient
 INFO: chat client is running.
+May 15, 2017 2:56:17 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 15, 2017 2:56:17 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 15, 2017 2:56:17 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 15, 2017 2:56:17 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 15, 2017 2:56:19 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 15, 2017 2:56:24 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 15, 2017 3:04:35 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 15, 2017 3:04:36 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 15, 2017 3:04:36 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 15, 2017 3:04:36 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 15, 2017 3:04:38 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 15, 2017 3:04:44 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 15, 2017 3:05:23 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 15, 2017 3:05:23 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 15, 2017 3:05:23 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 15, 2017 3:05:23 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 15, 2017 3:05:25 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 15, 2017 3:05:28 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
