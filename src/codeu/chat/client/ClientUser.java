@@ -59,8 +59,8 @@ public boolean isValidName(String userName) {
           clean = false;
         }
       }
-      clean = true; 
     }
+    System.out.println("Clean Value: " + clean);
     return clean;
   }
   

@@ -3,12 +3,18 @@
 package codeu.chat.client;
 
 import static org.junit.Assert.*;
+//import static org.mockito.Mockito.*;
+
 import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import org.junit.Before;
 import java.util.Map;
 
+import codeu.chat.common.BasicController;
+import codeu.chat.common.Conversation;
+import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -18,18 +24,43 @@ import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.client.Controller; 
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
+import codeu.chat.server.Model;
+
+
+/*
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.Before;
+
+import codeu.chat.common.BasicController;
+import codeu.chat.common.Conversation;
+import codeu.chat.common.Message;
+import codeu.chat.common.User;
+import codeu.chat.util.Uuid;
+*/
 
 public final class ClientUserTest {
-  
+  /*
+  private Model model;
+  private BasicController controllerTest;
+
+  @Before
+  public void doBefore() {
+    model = new Model();
+    //Create a Controller
+    controllerTest = new Controller(Uuid.NULL, model);
+  }
+  */
   @Test
   public void testClientUserTest() {
   	
   	//Create a Connection Source
   	String host = "localhost@2007"; 
-  	int port = 1234; 
+  	int port = 2007; 
   	
   	ConnectionSource connectionSourceTest = new ClientConnectionSource(host, port); 
   	
+  
   	//Create a Controller
   	Controller controllerTest = new Controller(connectionSourceTest); 
   	
@@ -79,12 +110,13 @@ public final class ClientUserTest {
   	clientUserTest.addUser(name10);
   	
   	//assertFalse(clientUserTest.getUsers().contains(name1)); 
-  	System.out.println("Hi"); 
+  	
   	Iterable<User> users = clientUserTest.getUsers(); 
   	
   	for(User u: users){
   		System.out.println(u); 
   	}
+  	System.out.println("Hi"); 
   	
   	/* 
   	assertFalse(clientUserTest.addUser(name2)); 
