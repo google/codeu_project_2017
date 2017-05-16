@@ -27,6 +27,7 @@
 *.sqlite
 bin/chat_client_log.log
 bin/chat_server_log.log
+chat_server_log.log.lck
 
 # OS generated files #
 ######################
