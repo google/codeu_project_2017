@@ -165,7 +165,7 @@ public final class UserPanel extends JPanel {
             null, null, "");
         if (s != null && s.length() > 0) {
           //TODO: add a password input for gui
-          clientContext.user.addUser(s, null, null);
+          clientContext.user.addUser(s, s);
           UserPanel.this.getAllUsers(listModel);
         }
       }
