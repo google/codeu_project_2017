@@ -23,13 +23,14 @@ To build the project, run the following in the terminal:
   mvn clean
   mvn package
   ```
-To run the project, run the following in the terminal:
+To run the project, run the following in the terminal (you can change the arguments (<Team Id> <Team Secret> <Port> <Relay Address (optional)>) as you see fit):
   ```
-  mvn exec:java
+  mvn exec:java -Dexec.args="1 1 2000"
   ```
 It should then start running on port 8080
 
-Quit with an enter in the terminal
+Quit with 'control - C' in the terminal
+
 
 # To Build/Run Angular2 Code
 Download Node.js 6.9.x and npm 3.x.x or newer (https://nodejs.org/en/download/)
