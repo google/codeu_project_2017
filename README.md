@@ -24,26 +24,25 @@ JAVA&nbsp;7 when working with this project.
 
   There is a single python script build.py that is used to build and run
   the project. There are many ways to run a python script. The syntax
-  below works on linux if the script is in your current directory and set
-  to executable (e.g., cd codeu_project_2017; chmod +x build.py)
+  below should work almost anywhere if the script is in your current directory.
 
   1. To build the project:
        ```
-       $ ./build.py clean
-       $ ./build.py build
+       $ python build.py clean
+       $ python build.py build
        ```
 
   1. To test the project:
        ```
-       $ ./build.py codeu.chat.TestRunner
+       $ python build.py codeu.chat.TestRunner
        ```
 
   1. To run the project you will need to run both the client and the server. Run
      the following two commands in separate shells:
 
        ```
-       $ ./build.py run codeu.chat.ServerMain <team_id> <team_secret> <port> <persistent-dir>
-       $ ./build.py run codeu.chat.Clientmain "<host>@<port>"
+       $ python build.py run codeu.chat.ServerMain <team_id> <team_secret> <port> <persistent-dir>
+       $ python build.py run codeu.chat.Clientmain "<host>@<port>"
        ```
 
      You must provide the following startup arguments to `ServerMain`:
@@ -83,7 +82,7 @@ for more information.
 
 In addition to your team's client and server, the project also includes a
 Relay Server. This is not needed to get your project started. You can start
-it locally using `./build.py run codeu.chat.RelayMain <args>`. Look in
+it locally using `python build.py run codeu.chat.RelayMain <args>`. Look in
 `RelayMain.Java` for information about arguments.
 
 
