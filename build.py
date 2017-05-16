@@ -124,9 +124,30 @@ def run(config, start_class_path, arguments):
 ### def run ###
 
 
+# USAGE
+#
+# Print basic usage info.
+#
+def usage(args) :
+  print('Unknown command "%s"' % args)
+  print('Usage: ./build.py clean | build | rebuild | run')
+  print('  clean   : Remove all files in the output directory.')
+  print('            This does not remove the root of the output tree.')
+  print('  build   : Build the full project. This will build all java files')
+  print('            found in all of the src directories.')
+  print('  rebuild : perform clean followed by build.')
+  print('  run <class path> [ arguments ... ] : Run the specified class.')
+  print('            All arguments after the class path will be passed to')
+  print('            the java class when it runs.')
+
+
 # MAIN
 def main(args) :
-  if 'clean' == args[0] :
+  if len(args) == 0 :
+    usage(args)
+  elif 'help' == args[0] :
+    usage(args)
+  elif 'clean' == args[0] :
     clean(CONFIG)
   elif 'build' == args[0] :
     build(CONFIG)
@@ -136,8 +157,7 @@ def main(args) :
   elif 'run' == args[0] :
     run(CONFIG, args[1], args[2:])
   else :
-    print('Unknown command "%s"' % args)
-
+    usage(args);
 
 if __name__ == '__main__':
   # Remove the first argument as that will be the name of this file
