@@ -16,6 +16,7 @@ import codeu.chat.util.store.Store;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.client.Controller; 
+import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
 
 public final class ClientUserTest {
@@ -50,11 +51,12 @@ public final class ClientUserTest {
   	String name9 = "**#*@(!*#*$*@"; 
   	String name10 = "Mathangi97";
   	
+  	/*
   	//test isValidName
   	assertFalse(clientUserTest.isValidName(name1)); 
   	assertFalse(clientUserTest.isValidName(name2)); 
   	assertTrue(clientUserTest.isValidName(name3));   	
-  	//assertFalse(clientUserTest.isValidName(name4)); //returning null, rather than false like it should...
+  	`//assertFalse(clientUserTest.isValidName(name4)); //returning null, rather than false like it should...
   	System.out.println(clientUserTest.isValidName(name4)); 
   	assertTrue(clientUserTest.isValidName(name5)); 
   	//assertFalse(clientUserTest.isValidName(name6)); 
@@ -62,10 +64,29 @@ public final class ClientUserTest {
   	assertTrue(clientUserTest.isValidName(name8));
   	assertTrue(clientUserTest.isValidName(name9)); 
   	assertTrue(clientUserTest.isValidName(name10));  
+  	*/
   	
-  	/*
   	//test Add User
-  	assertFalse(clientUserTest.addUser(name1)); 
+  	clientUserTest.addUser(name1);
+  	clientUserTest.addUser(name2);
+  	clientUserTest.addUser(name3);
+  	clientUserTest.addUser(name4);
+  	clientUserTest.addUser(name5);
+  	clientUserTest.addUser(name6);
+  	clientUserTest.addUser(name7);
+  	clientUserTest.addUser(name8);
+  	clientUserTest.addUser(name9);
+  	clientUserTest.addUser(name10);
+  	
+  	//assertFalse(clientUserTest.getUsers().contains(name1)); 
+  	System.out.println("Hi"); 
+  	Iterable<User> users = clientUserTest.getUsers(); 
+  	
+  	for(User u: users){
+  		System.out.println(u); 
+  	}
+  	
+  	/* 
   	assertFalse(clientUserTest.addUser(name2)); 
   	assertTrue(clientUserTest.addUser(name3));   	
   	assertFalse(clientUserTest.addUser(name4)); 
@@ -75,8 +96,18 @@ public final class ClientUserTest {
   	assertTrue(clientUserTest.addUser(name8));
   	assertTrue(clientUserTest.addUser(name9)); 
   	assertTrue(clientUserTest.addUser(name10));  
-  	*/
   	
+  	/*
+  	
+  	ClientUser clientUser = new ClientUser(someController, someView);
+clientUser.addUser(someName);
+assertTrue(getUsers().contains(someName));
+
+clientUser.addUser(someName);
+assertThat the server error was logged
+assertTrue(getUsers().contains(one(someName)));
+*/
+  
   	
   }
 
