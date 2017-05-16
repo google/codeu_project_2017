@@ -82,6 +82,7 @@ public final class UserPanel extends JPanel {
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
+    userListScrollPane.setMinimumSize(new Dimension(245, 150));
     userListScrollPane.setPreferredSize(new Dimension(245, 150));
 
     // Current User panel
