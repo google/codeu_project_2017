@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Apr 28, 2017 8:48:00 PM codeu.chat.ClientMain main
 INFO: ============================= START OF LOG =============================
 Apr 28, 2017 8:48:00 PM codeu.chat.ClientMain main
@@ -62,3 +63,15 @@ INFO: ConversationHead: Title="convo" UUID=[UUID:11.2135340145] first=[UUID:11.3
 Apr 28, 2017 8:50:03 PM codeu.chat.client.ClientMessage updateMessages
 INFO: Retrieved 2 messages for conversation [UUID:11.2135340145] (convo).
 
+=======
+Apr 18, 2017 3:03:11 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 18, 2017 3:03:11 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 18, 2017 3:03:11 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 18, 2017 3:03:11 PM codeu.chat.ClientMain main
+INFO: Created client
+Apr 18, 2017 3:03:32 PM codeu.chat.ClientMain main
+INFO: chat client has exited.
+>>>>>>> unique_userIds_names

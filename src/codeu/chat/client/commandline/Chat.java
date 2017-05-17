@@ -43,7 +43,7 @@ public final class Chat {
   // Print help message.
   private static void help() {
     System.out.println("Chat commands:");
-    System.out.println("   exit      - exit the program.");
+    System.out.println("   exit      - exxit the program.");
     System.out.println("   help      - this help message.");
     System.out.println("   sign-in <username>  - sign in as user <username>.");
     System.out.println("   sign-out  - sign out current user.");
