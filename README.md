@@ -2,6 +2,80 @@
 # CODEU CHAT SERVER | README
 
 
+
+#########################################
+
+## RUBAN'S README ADDITIONS
+
+# Technologies Used
+Jersey Framework (https://jersey.java.net/) 
+(Allows Java to make and recieve http requests)
+
+Apache Maven (https://maven.apache.org/) 
+(Allows easier importing, updating, and managing of libraries)
+
+
+# To Build/Run Java Server
+Download Maven (https://maven.apache.org/download.cgi)
+In the terminal, navigate to the home directory of the project
+To build the project, run the following in the terminal:
+  ```
+  mvn clean
+  mvn package
+  ```
+
+You will want to run the server, and one of the clients below:
+
+
+To run the server, run the following in the terminal 
+(the arguments are '<Team Id> <Team Secret> <Port> <Relay Address (optional)>':
+  ```
+  mvn exec:java -Dexec.args="1 1 2000" -Dexec.mainClass="com.codeu.Main"
+  ```
+  It should then start running on port specified, with additional resources running on port 8080 (this port number can be changed in the code)
+
+
+To run the web client, run the following in the terminal 
+(the arguments are: 'localhost@<Server's Port>'):
+  ```
+  mvn exec:java -Dexec.args="localhost@2000" -Dexec.mainClass="com.codeu.WebClientMain"
+  ```
+
+To run the commandline client, run the following in the terminal
+(the arguments are: 'localhost@<Server's Port>'):
+  ```
+  mvn exec:java -Dexec.args="localhost@2000" -Dexec.mainClass="com.codeu.CommandLineClientMain"
+  ```
+
+
+Quit with 'control - C' in the terminal
+
+
+# To Build/Run Angular2 Code
+Download Node.js 6.9.x and npm 3.x.x or newer (https://nodejs.org/en/download/)
+In the terminal, navigate to the home directory of the project
+To run the Angular2 project, run the following in the terminal
+  ```
+  npm start
+  ```
+
+At the time of writing, Ruban is unsure whether other steps need to be followed, so if that does not work, you can try going here for other things to try before (https://angular.io/docs/ts/latest/cli-quickstart.html)
+
+Once it starts, it should automatically direct you to: http://localhost:3000/dashboard
+
+Quit with 'control - C' in the terminal
+
+# Potentially Helpful Tutorials
+For Jersey Framework's JAX-RS APIs: 
+http://www.vogella.com/tutorials/REST/article.html
+
+
+#########################################
+
+
+
+
+
 ## DISCLAIMER
 
 CODEU is a program created by Google to develop the skills of future software

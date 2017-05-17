@@ -25,6 +25,7 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.PasswordGenerator;
 
 public final class Controller implements RawController, BasicController {
 
@@ -44,8 +45,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(String name) {
-    return newUser(createId(), name, Time.now());
+  public User newUser(String name, String password) {
+    return newUser(createId(), name, password, Time.now());
   }
 
   @Override
@@ -103,13 +104,15 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(Uuid id, String name, String password, Time creationTime) {
 
     User user = null;
 
     if (isIdFree(id)) {
+      byte[] salt = PasswordGenerator.getSalt();
+      byte[] hashedPassword = PasswordGenerator.hash(password.toCharArray(), salt);
 
-      user = new User(id, name, creationTime);
+      user = new User(id, name, salt, hashedPassword, creationTime);
       model.add(user);
 
       LOG.info(
