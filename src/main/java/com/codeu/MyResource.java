@@ -23,13 +23,12 @@ public class MyResource {
      * @return String that will be returned as a text/plain response.
      */
     @GET
+    @Path("testtext")
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
         return "This text is being sent from java backend!";
     }
 
-
-    
 }
 
 

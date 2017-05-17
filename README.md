@@ -23,11 +23,30 @@ To build the project, run the following in the terminal:
   mvn clean
   mvn package
   ```
-To run the project, run the following in the terminal (you can change the arguments (<Team Id> <Team Secret> <Port> <Relay Address (optional)>) as you see fit):
+
+You will want to run the server, and one of the clients below:
+
+
+To run the server, run the following in the terminal 
+(the arguments are '<Team Id> <Team Secret> <Port> <Relay Address (optional)>':
   ```
-  mvn exec:java -Dexec.args="1 1 2000"
+  mvn exec:java -Dexec.args="1 1 2000" -Dexec.mainClass="com.codeu.Main"
   ```
-It should then start running on port 8080
+  It should then start running on port specified, with additional resources running on port 8080 (this port number can be changed in the code)
+
+
+To run the web client, run the following in the terminal 
+(the arguments are: 'localhost@<Server's Port>'):
+  ```
+  mvn exec:java -Dexec.args="localhost@2000" -Dexec.mainClass="com.codeu.WebClientMain"
+  ```
+
+To run the commandline client, run the following in the terminal
+(the arguments are: 'localhost@<Server's Port>'):
+  ```
+  mvn exec:java -Dexec.args="localhost@2000" -Dexec.mainClass="com.codeu.CommandLineClientMain"
+  ```
+
 
 Quit with 'control - C' in the terminal
 

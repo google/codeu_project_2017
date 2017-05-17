@@ -53,14 +53,47 @@
                 <version>1.2.1</version>
                 <executions>
                     <execution>
+                        <id>WebClient</id>
                         <goals>
                             <goal>java</goal>
                         </goals>
+                        <configuration>
+                            <mainClass>com.codeu.WebClientMain</mainClass>
+                            <includePluginDependencies>false</includePluginDependencies>
+                        </configuration>
                     </execution>
+                    <execution>
+                        <id>WebServer</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.codeu.Main</mainClass>
+                            <includePluginDependencies>false</includePluginDependencies>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>CommandLineClient</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.codeu.CommandLineClientMain</mainClass>
+                            <includePluginDependencies>false</includePluginDependencies>
+                        </configuration>
+                    </execution>
+
+
+
+                    <!-- <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution> -->
                 </executions>
-                <configuration>
+                <!-- <configuration>
                     <mainClass>com.codeu.Main</mainClass>
-                </configuration>
+                </configuration> -->
             </plugin>
         </plugins>
     </build>

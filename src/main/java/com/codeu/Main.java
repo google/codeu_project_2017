@@ -42,6 +42,7 @@ import java.net.URI;
 final class Main {
 
   private static final Logger.Log LOG = Logger.newLog(Main.class);
+  
 
   // Base URI the Grizzly HTTP server will listen on (for the web client)
   public static final String BASE_URI = "http://localhost:8080/myapp/";
@@ -65,6 +66,14 @@ final class Main {
     // exposing the Jersey application at BASE_URI
     return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
   }
+
+
+  private static void runWebClient(int myPort, ConnectionSource serverSource) {
+
+  }
+
+
+
 
 
   public static void main(String[] args) {
