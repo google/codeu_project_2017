@@ -33,11 +33,11 @@
 #                                        the java class when it runs.
 ###############################################################################
 
-
 import os
 import shutil
 import subprocess
 import sys
+
 
 # Dictionary of settings that control java source compilation
 CONFIG = {
@@ -82,15 +82,14 @@ def build(config) :
   separator = config['separators'][os.name]
   src = config['src']
 
-  # Find all the source files in the given source directories. Only allow java files
-  # because javac will fail if a non-java file is given.
+  # Find all the java source files in the given source directories.
+  # Non-java source files are ignored.
   src_files = [ ]
   for src_path in src :
     for root, dirs, files in os.walk(src_path) :
       src_files += [ os.path.join(root, file) for file in files if file.endswith('.java') ]
 
-  # Take all the data from above and build a single command that can
-  # be ran to build the project.
+  # Take everything so far and construct a single command to build the project.
   command = [ ]
   command += [ 'javac' ]
   command += [ '-d', out ]
@@ -160,18 +159,18 @@ def main(args) :
         java_params = args[3:]
         run(CONFIG, java_class, java_params)
       else :
-        print('Error: Run command requires a java class to run.')
+        print('Run command requires a java class to run.')
         usage();
     else :
-      print 'Error: Unknown command: [',
+      print 'Unknown command: [',
       for x in args :
         print x,
       print ']'
       usage();
   else :
-    print ('Error: No parameters provided -')
+    print ('No parameters provided.')
     usage()
 
+
 if __name__ == '__main__':
-  # Remove the first argument as that will be the name of this file
   main(sys.argv)
