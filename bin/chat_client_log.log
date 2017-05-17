@@ -1,0 +1,36 @@
+Mar 30, 2017 5:44:00 PM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Mar 30, 2017 5:44:00 PM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Mar 30, 2017 5:44:00 PM codeu.chat.ClientMain main
+INFO: Creating client...
+Mar 30, 2017 5:44:00 PM codeu.chat.ClientMain main
+INFO: Created client
+Mar 31, 2017 9:17:15 PM codeu.chat.ClientMain main
+INFO: chat client has exited.
+Apr 07, 2017 11:40:44 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 07, 2017 11:40:44 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 07, 2017 11:40:44 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 07, 2017 11:40:44 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 07, 2017 11:41:51 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Apr 07, 2017 11:41:51 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Apr 07, 2017 11:41:51 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "preska" UUID=[UUID:100.101.1772769068]
+Apr 07, 2017 11:42:07 AM codeu.chat.ClientMain main
+INFO: chat client has exited.
+Apr 07, 2017 11:42:39 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 07, 2017 11:42:39 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+Apr 07, 2017 11:42:39 AM codeu.chat.ClientMain main
+INFO: Creating client...
+Apr 07, 2017 11:42:39 AM codeu.chat.ClientMain main
+INFO: Created client
+Apr 07, 2017 11:42:52 AM codeu.chat.ClientMain main
+INFO: chat client has exited.
