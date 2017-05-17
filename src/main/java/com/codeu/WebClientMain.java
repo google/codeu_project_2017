@@ -3,7 +3,7 @@ package com.codeu;
 import java.io.IOException;
 import java.util.Scanner;
 
-import codeu.chat.client.commandline.Chat;
+import codeu.chat.client.angular.WebChat;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
@@ -62,9 +62,6 @@ final class WebClientMain {
 
 
 
-
-
-
   public static void main(String [] args) {
 
     try {
@@ -77,18 +74,18 @@ final class WebClientMain {
 
     LOG.info("Starting chat client...");
 
-    final RemoteAddress address = RemoteAddress.parse(args[0]);
+    // final RemoteAddress address = RemoteAddress.parse(args[0]);
 
-    final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
-    final Controller controller = new Controller(source);
-    final View view = new View(source);
+    // final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
+    // final Controller controller = new Controller(source);
+    // final View view = new View(source);
 
-    LOG.info("Creating client...");
-    final Chat chat = new Chat(controller, view);
+    // LOG.info("Creating client...");
+    // final WebChat chat = new WebChat(controller, view);
 
-    LOG.info("Created client");
+    // LOG.info("Created client");
 
-    final Scanner input = new Scanner(System.in);
+    // final Scanner input = new Scanner(System.in);
 
 
 
@@ -103,16 +100,18 @@ final class WebClientMain {
 
 
 
-
-
-
-
-    while (chat.handleCommand(input)) {
-      // everything is done in "run"
+    while(true){
+      
     }
 
-    input.close();
 
-    LOG.info("chat client has exited.");
+
+    // while (chat.handleCommand(input)) {
+    //   // everything is done in "run"
+    // }
+
+    // input.close();
+
+    // LOG.info("chat client has exited.");
   }
 }
