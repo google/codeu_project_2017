@@ -69,8 +69,7 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   
   public void remove(KEY key){
   	if(index.remove(key)!=null){
-  		//don't need to do anything, since return is not null and returning null, so we know it is gone
-  		System.out.println(index.get(key)); 
+  		//don't need to do anything, since return is not null and returning null, so we know it is gone 
   	}
   	else{
   		//issue with removing 

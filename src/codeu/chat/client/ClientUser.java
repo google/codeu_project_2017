@@ -127,20 +127,17 @@ public boolean isValidName(String userName) {
 			if(currentUser.name.equals(name)){
 				target = currentUser; 
 				targetId = target.id;
+				
 				//delete user from hashmap and from store...
 				usersById.remove(targetId);
-				
-				System.out.println(usersById.get(targetId)); 
-				//updateUsers();
 				usersByName.remove(name); 
-				System.out.println(EMPTY.add(targetId));
-				System.out.println("empty size " + EMPTY.size());  
-				showAllUsers(); 
+				
+				//Add deleted user to EMPTY 
+				EMPTY.add(targetId);
+				
 				LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
 				System.out.println("User deleted, Name = " + name); 
-				
-				//need to pull from the server to ensure the user doesn't show up because they are deleted
-				//updateUsers();
+		
 				return true; 
 			}
 		}
