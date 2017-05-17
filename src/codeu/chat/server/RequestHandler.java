@@ -54,8 +54,9 @@ public class RequestHandler {
         for (i++; i < struct.length; i++) {
             body.append(" " + struct[i]);
         }
-        if (!r.getVerb().equals("GET"))
-        r.setBody(body.toString().substring(1));
+        if (r.getVerb().equals("POST")) {
+            r.setBody(body.toString().substring(1));
+        }
 
         return r;
     }
@@ -87,6 +88,20 @@ public class RequestHandler {
         out.write(("HTTP/1.1 400 Bad Request\r\n\r\n").getBytes());
         out.write((message).getBytes());
         return false;
+    }
+
+    /**
+     *
+     * Handles pre-flight
+     *
+     * @param out the remote connection's data stream.
+     * @return success.
+     */
+    public static boolean optionsResponse(OutputStream out) throws IOException {
+        out.write(("HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods:" +
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS\r\nAccess-Control-Allow-Headers:" +
+          "content-type,type,x-requested-with").getBytes());
+        return true;
     }
 
 }
