@@ -67,6 +67,7 @@ public final class ClientUserTest {
   	//Create a View
   	View viewTest = new View(connectionSourceTest); 
   	
+  	//Create a mock instance of mock Controller and View!
   	//Create an instance of the ClientUser
   	ClientUser clientUserTest = new ClientUser(controllerTest, viewTest); 
   	
