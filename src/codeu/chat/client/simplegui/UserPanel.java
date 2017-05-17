@@ -159,11 +159,11 @@ public final class UserPanel extends JPanel {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
           //Ask user for password
-          final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter " + data + "'s password:", "Add User", JOptionPane.PLAIN_MESSAGE,
+          final String userPassword = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Enter " + data + "'s password:", "Enter Password", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
           //check password to make sure it is correct and check it against the user's password
-          if(s.equals("password")){  
+          if(userPassword.equals("password")){ //access userByName, get User, access the user's password (String)
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
           } else{
