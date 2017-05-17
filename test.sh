@@ -17,3 +17,7 @@
 set -e
 
 java -cp ./third_party/junit4.jar:./bin codeu.chat.TestRunner
+
+#;./third_party/mockito-all-1.9.5-sources.jar:./bin codeu.chat.TestRunner
+
+java -cp ./third_party/mockito-all-1.9.5.jar:./bin codeu.chat.TestRunner
