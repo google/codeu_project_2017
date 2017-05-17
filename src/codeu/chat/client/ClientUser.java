@@ -29,7 +29,8 @@ public final class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 
-  private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
+  //private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
+  private static Collection<Uuid> EMPTY = new ArrayList<Uuid>(); 
   private final Controller controller;
   private final View view;
 
@@ -128,15 +129,18 @@ public boolean isValidName(String userName) {
 				targetId = target.id;
 				//delete user from hashmap and from store...
 				usersById.remove(targetId);
-				//System.out.println(usersById.get(targetId)); 
+				
+				System.out.println(usersById.get(targetId)); 
 				//updateUsers();
 				usersByName.remove(name); 
-				
+				System.out.println(EMPTY.add(targetId));
+				System.out.println("empty size " + EMPTY.size());  
+				showAllUsers(); 
 				LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
 				System.out.println("User deleted, Name = " + name); 
 				
 				//need to pull from the server to ensure the user doesn't show up because they are deleted
-				updateUsers();
+				//updateUsers();
 				return true; 
 			}
 		}
