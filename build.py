@@ -33,13 +33,13 @@
 #                                        the java class when it runs.
 ###############################################################################
 
-
 import os
 import shutil
 import subprocess
 import sys
 
 
+# Dictionary of settings that control java source compilation
 CONFIG = {
   'out' : 'bin',
   'src' : [ 'src', 'test' ],
@@ -68,7 +68,6 @@ def clean(config) :
       os.remove(entry)
 
   print('Clean PASSED')
-### def clean ###
 
 
 # BUILD
@@ -83,15 +82,14 @@ def build(config) :
   separator = config['separators'][os.name]
   src = config['src']
 
-  # Find all the source files in the given source directories. Only allow java files
-  # because javac will fail if a non-java file is given.
+  # Find all the java source files in the given source directories.
+  # Non-java source files are ignored.
   src_files = [ ]
   for src_path in src :
     for root, dirs, files in os.walk(src_path) :
       src_files += [ os.path.join(root, file) for file in files if file.endswith('.java') ]
 
-  # Take all the data from above and build a single command that can
-  # be ran to build the project.
+  # Take everything so far and construct a single command to build the project.
   command = [ ]
   command += [ 'javac' ]
   command += [ '-d', out ]
@@ -101,7 +99,6 @@ def build(config) :
 
   print('running : %s' % command)
   print('Build %s' % ('PASSED' if subprocess.call(command) == 0 else 'FAILED'))
-### def build ###
 
 
 # RUN
@@ -119,26 +116,61 @@ def run(config, start_class_path, arguments):
   command += [ start_class_path ]
   command += arguments
 
-  print('running : %s' % command)
-  print('Build %s' % ('PASSED' if subprocess.call(command) == 0 else 'FAILED'))
-### def run ###
+  print 'Running: [',
+  for x in command :
+    print x,
+  print ']'
+  print('Run %s' % ('PASSED' if subprocess.call(command) == 0 else 'FAILED'))
+
+
+# USAGE
+#
+# Print basic usage info.
+#
+def usage() :
+  print('Usage: python build.py clean | build | rebuild | run | help')
+  print('  clean   : Remove all files in the output directory.')
+  print('            This does not remove the root of the output tree.')
+  print('  build   : Build the full project. This will build all java files')
+  print('            found in all of the src directories.')
+  print('  rebuild : perform clean followed by build.')
+  print('  run <class path> [ arguments ... ] : Run the specified class.')
+  print('            All arguments after the class path will be passed to')
+  print('            the java class when it runs.')
+  print('  help    : Print this helpful message.')
 
 
 # MAIN
 def main(args) :
-  if 'clean' == args[0] :
-    clean(CONFIG)
-  elif 'build' == args[0] :
-    build(CONFIG)
-  elif 'rebuild' == args[0] :
-    clean(CONFIG)
-    build(CONFIG)
-  elif 'run' == args[0] :
-    run(CONFIG, args[1], args[2:])
+  if len(args) > 1 :
+    command = args[1]
+    if 'help' == command :
+      usage()
+    elif 'clean' == command :
+      clean(CONFIG)
+    elif 'build' == command :
+      build(CONFIG)
+    elif 'rebuild' == command :
+      clean(CONFIG)
+      build(CONFIG)
+    elif 'run' == command :
+      if len(args) > 2 :
+        java_class = args[2]
+        java_params = args[3:]
+        run(CONFIG, java_class, java_params)
+      else :
+        print('Run command requires a java class to run.')
+        usage();
+    else :
+      print 'Unknown command: [',
+      for x in args :
+        print x,
+      print ']'
+      usage();
   else :
-    print('Unknown command "%s"' % args)
+    print ('No parameters provided.')
+    usage()
 
 
 if __name__ == '__main__':
-  # Remove the first argument as that will be the name of this file
-  main(sys.argv[1:])
+  main(sys.argv)
