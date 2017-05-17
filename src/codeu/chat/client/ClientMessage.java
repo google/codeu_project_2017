@@ -237,6 +237,8 @@ public final class ClientMessage {
 
       System.out.format(" Author: %s   Id: %s created: %s\n   Body: %s\n",
           (authorName == null) ? m.author : authorName, m.id, m.creation, m.content);
+      //also sound off the morse code translation. the m.content should be in morse format by now
+      MorseConverter.morseToSoundTranslate(m.content);
     }
   }
 

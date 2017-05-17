@@ -163,9 +163,13 @@ public final class Chat {
         if (!tokenScanner.hasNext()) {
           System.out.println("ERROR: Message body not supplied.");
         } else {
+          //takes the body of the message and immediately translates it to morse code
+          String body = tokenScanner.nextLine().trim();
+          String morse = MorseConverter.paragraphToMorse(body);
+          System.out.println("This was called.");
           clientContext.message.addMessage(clientContext.user.getCurrent().id,
               clientContext.conversation.getCurrentId(),
-              tokenScanner.nextLine().trim());
+              morse);
         }
       }
 

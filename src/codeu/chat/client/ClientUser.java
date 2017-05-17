@@ -81,6 +81,9 @@ public final class ClientUser {
     final User prev = current;
     if (parsedInput[0] != null) {
       final User newCurrent = usersByName.first(parsedInput[0]);
+       System.out.println(parsedInput[1]);
+      System.out.println(newCurrent.salt);
+       System.out.println(newCurrent.password);
       boolean validPassword = PasswordGenerator.validatePassword(parsedInput[1], newCurrent.salt,
       newCurrent.password);
       if (validPassword && newCurrent != null) {
