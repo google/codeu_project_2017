@@ -18,8 +18,5 @@ set -e
 
 mkdir -p bin
 
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./bin
-
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/mockito-all-1.9.5.jar:./bin
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/mockito-all-1.9.5.jar:./bin
+javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./third_party/mockito-core-2.8.29.jar:./bin
+javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./third_party/mockito-core-2.8.29.jar:./bin

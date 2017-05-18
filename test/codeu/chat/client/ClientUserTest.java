@@ -3,7 +3,7 @@
 package codeu.chat.client;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+//import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 import java.util.Arrays;
