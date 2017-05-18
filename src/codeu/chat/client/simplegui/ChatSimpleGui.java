@@ -52,37 +52,37 @@ public final class ChatSimpleGui {
     }
   }
 
-  private Border paneBorder() {
+  /*private Border paneBorder() {
     Border outside = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
-  }
+  }*/
 
   // Initialize the GUI
   private void initialize() {
 
     // Outermost frame.
     // NOTE: may have tweak size, or place in scrollable panel.
-    mainFrame = new JFrame("Chat");
+    mainFrame = new JFrame("ChatU");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
-    mainViewPanel.setBorder(paneBorder());
+    //mainViewPanel.setBorder(paneBorder());
 
     // Build main panels - Users, Conversations, Messages.
     final JPanel usersViewPanel = new UserPanel(clientContext);
-    usersViewPanel.setBorder(paneBorder());
+    //usersViewPanel.setBorder(paneBorder());
     final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
-    messagesViewPanel.setBorder(paneBorder());
+    //messagesViewPanel.setBorder(paneBorder());
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
     final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
-    conversationsViewPanel.setBorder(paneBorder());
+    //conversationsViewPanel.setBorder(paneBorder());
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels.
