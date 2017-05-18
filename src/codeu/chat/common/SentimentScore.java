@@ -17,16 +17,27 @@ import java.io.OutputStream;
  */
 public class SentimentScore {
 
-  private int score;              // the average score for this object
-  private int numScores;          // this will mark how many messages have been included in the calculation of the current score
+  private int score;
 
-  // The language client is used to connect to the natural language API.
-  // todo: requires environment variable GOOGLE_APPLICATION_CREDENTIALS=<PATH/TO/SERVICE-ACCOUNT/JSON>
   /*
-   * Issue - How will this work with the google hosting. How will we make the environment variable
-   * and point to the json file. Will this be feasible?
+   * this will mark how many messages have been included in the calculation of the current score
+   * todo: figure out how this will be used
    */
 
+  private int numScores;
+
+  /*
+   * The language client is used to connect to the natural language API.
+   * Requires environment variable GOOGLE_APPLICATION_CREDENTIALS=<PATH/TO/SERVICE-ACCOUNT/JSON>
+   * Requires Google Cloud SDK
+   */
+
+
+  /*
+   * The language client is static because it was found that the first sentiment analysis
+   * had a long delay. Having a static client ensures that this delay happens only once
+   * (the first time an analysis is requested)
+   */
   private static LanguageServiceClient languageClient;
 
   public static final Serializer<SentimentScore> SERIALIZER = new Serializer<SentimentScore>() {
@@ -66,10 +77,8 @@ public class SentimentScore {
 
     if (m == null) return score;
 
-    Sentiment sentiment;
-
     try {
-      sentiment = calculateSentiment(m);
+      Sentiment sentiment = calculateSentiment(m);
       updateScore(sentiment);
     } catch (IOException exc) {
       System.out.println("Error with sentiment analysis");
