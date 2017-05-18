@@ -4,6 +4,7 @@ package codeu.chat.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import org.mockito.Mock;
@@ -32,8 +33,8 @@ import codeu.chat.client.View;
 //@RunWith(MockitoJUnitRunner.class)
 public final class ClientUserTest {
 
-
 	private ClientUser user;
+	private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
 
 	@Mock
 	private Controller controller;
@@ -43,8 +44,8 @@ public final class ClientUserTest {
 
 	@Before
 	public void doBefore() {
-
 		user = new ClientUser(controller, view);
+
 
 	}
 
@@ -58,12 +59,17 @@ public final class ClientUserTest {
 		userList.add(new User(new Uuid(4), "SaraH", new Time(800)));
 		userList.add(new User(new Uuid(5), "SARAH", new Time(900)));
 
+		Mockito.when(view.getUsersExcluding(EMPTY)).thenReturn(userList);
+
+		user.updateUsers();
+
 	//	usersList.addAll(Arrays.asList("JESS", "jess", "SARAh", "SARAH", "mathangi", "MATHANGI"));
 
-		Mockito.when(user.getUsers()).thenReturn(userList);
+		//Mockito.when(user.getUsers()).thenReturn(list);
 
-		assertTrue(user.isValidName("jess"));
-		assertFalse(user.isValidName("SARAH"));
+	//	assertTrue(user.isValidName("jess"));
+//		assertFalse(user.isValidName("SARAH"));
+		assertEquals(true, user.isValidName("Mathangi Ganesh"));
 
 	}
 
