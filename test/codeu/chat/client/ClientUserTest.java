@@ -21,7 +21,6 @@ import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.client.Controller; 
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
-import codeu.chat.server.Model;
 
 
 /*
