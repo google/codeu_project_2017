@@ -21,7 +21,7 @@ class ConversationList extends React.Component {
 
     var settings = {
       "async": true,
-      "crossDomain": false,
+      "crossDomain": true,
       "url": this.props.url + ":" + this.props.port,
       "method": "GET",
       "contentType": "json",
@@ -29,12 +29,16 @@ class ConversationList extends React.Component {
         "type": "TIMED_CONVERSATIONS",
         "to": clickTime,
         "from": this.state.lastClick
-      }
+      },
+      "error": function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
     }
 
     $.ajax(settings).done(function (response) {
+      console.log(response)
       this.setState({ "data": this.state.data.concat(JSON.parse(response)), "lastClick": clickTime });
-    }.bind(this));
+    }.bind(this)).then(function (err){console.log(err)} );
   }
 
   render() {
