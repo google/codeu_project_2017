@@ -19,12 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PushbackInputStream;
+import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -40,6 +38,9 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public final class Server {
 
@@ -157,35 +158,28 @@ public final class Server {
     LOG.info("Receiving a RESTful message.");
     Request r = RequestHandler.parseRaw(in);
 
-    if (r.getHeader("type") == null) {
+    if (r.getVerb().equals("OPTIONS")) {
+      return RequestHandler.optionsResponse(out);
+    } else if (r.getHeader("type") == null) {
       return RequestHandler.failResponse(out, "Missing type header, which specifies which function to run.");
-    }
-
-    if (r.getVerb().equals("POST")) {
+    } else if (r.getVerb().equals("POST")) {
+      String body;
+      User user;
+      Uuid uuid1;
+      Uuid uuid2;
+      String value;
+      Conversation conv;
+      Message message;
 
       switch (r.getHeader("type")) {
 
-        // Creates a new message
-        case ("NEW_MESSAGE_REQUEST"):
-          final Uuid author = Uuid.fromString(r.getHeader("author"));
-          final Uuid conversation = Uuid.fromString(r.getHeader("conversation"));
-          final String content = r.getHeader("content");
-          if (author == null || conversation == null || content == null) {
-            return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
-          }
-          final Message message = controller.newMessage(author, conversation, content);
-          if (message == null) {
-            return RequestHandler.failResponse(out, "Invalid message.");
-          }
-          return RequestHandler.successResponse(out, message.toString());
-
         // Creates a new user
         case ("NEW_USER"):
-          final String name = r.getBody();
-          if (name == null) {
+          body = r.getBody();
+          if (body == null) {
             return RequestHandler.failResponse(out, "Missing or invalid name header.");
           }
-          final User user = controller.newUser(name);
+          user = controller.newUser(body);
           if (user == null) {
             return RequestHandler.failResponse(out, "Invalid username.");
           }
@@ -193,16 +187,30 @@ public final class Server {
 
         // Creates a new conversation
         case ("NEW_CONVERSATION"):
-          final String title = r.getBody();
-          final Uuid owner = Uuid.fromString(r.getHeader("owner"));
-          if (title == null || owner == null) {
+          body = r.getBody();
+          uuid1= Uuid.parse(r.getHeader("owner"));
+          if (body == null || uuid1 == null) {
             return RequestHandler.failResponse(out, "Missing or invalid title or owner header.");
           }
-          final Conversation conv = controller.newConversation(title, owner);
+          conv = controller.newConversation(body, uuid1);
           if (conv == null) {
             return RequestHandler.failResponse(out, "Invalid conversation.");
           }
-          return RequestHandler.successResponse(out, conv.id.toString());
+          return RequestHandler.successResponse(out, conv.toString());
+
+        // Creates a new message
+        case ("NEW_MESSAGE"):
+          uuid1 = Uuid.parse(r.getHeader("author"));
+          uuid2 = Uuid.parse(r.getHeader("conversation"));
+          body = r.getBody();
+          if (uuid1 == null || uuid2 == null || body == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
+          }
+          message = controller.newMessage(uuid1, uuid2, body);
+          if (message == null) {
+            return RequestHandler.failResponse(out, "Invalid message.");
+          }
+          return RequestHandler.successResponse(out, message.toString());
 
         default:
           return RequestHandler.failResponse(out, "Unknown function type.");
@@ -210,14 +218,141 @@ public final class Server {
       }
 
     } else if (r.getVerb().equals("GET")) {
+      Collection<User> users;
+      Collection<Conversation> convs;
+      Collection<Message> msgs;
+      Collection<String> ids;
+      Collection<Uuid> uuids;
+      Uuid uuid;
+      String value;
+      String value2;
+      String value3;
+      Gson g = new Gson();
+      Type listType = new TypeToken<Collection<String>>(){}.getType();
 
       switch (r.getHeader("type")) {
 
         // Returns a list of all users
         case ("ALL_USERS"):
-          final List<Uuid> excl = new ArrayList<Uuid>();
-          final Collection<User> users = view.getUsersExcluding(excl);
+          users = view.getUsersExcluding(new ArrayList<Uuid>());
           return RequestHandler.successResponse(out, users.toString());
+
+        // Return list of all users in the provided list of UUIDs
+        case ("GET_USERS"):
+          value = null;
+          value2 = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              value2 = item;
+              uuids.add(Uuid.parse(item));
+            }
+            users = view.getUsers(uuids);
+            return RequestHandler.successResponse(out, users.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + value2 + ".");
+          }
+
+        // Return list of all conversations in the provided list of UUIDs
+        case ("GET_CONVERSATIONS"):
+          value = null;
+          value2 = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              value2 = item;
+              uuids.add(Uuid.parse(item));
+            }
+            convs = view.getConversations(uuids);
+            return RequestHandler.successResponse(out, convs.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + value2 + ".");
+          }
+
+         // Return list of all conversations between two dates
+        case ("TIMED_CONVERSATIONS"):
+          value = r.getHeader("from");
+          value2 = r.getHeader("to");
+          if (value == null || value2 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid to or from header.");
+          }
+          convs = view.getConversations(Time.fromMs(Long.parseLong(value)), Time.fromMs(Long.parseLong(value2)));
+          return RequestHandler.successResponse(out, convs.toString());
+
+        // Return list of all conversations that match a regex filter
+        case ("FIND_CONVERSATIONS"):
+          value = r.getHeader("filter");
+          if (value == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid filter header.");
+          }
+          try {
+            convs = view.getConversations(value);
+          } catch (Exception e) {
+            return RequestHandler.failResponse(out, "Problem with your filter.");
+          }
+          return RequestHandler.successResponse(out, convs.toString());
+
+        // Return list of all messages in the provided list of UUIDs
+        case ("GET_MESSAGES"):
+          value = null;
+          value2 = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              value2 = item;
+              uuids.add(Uuid.parse(item));
+            }
+            msgs = view.getMessages(uuids);
+            return RequestHandler.successResponse(out, msgs.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + value2 + ".");
+          }
+
+        // Return list of all messages between two dates
+        case ("TIMED_MESSAGES"):
+          value = r.getHeader("from");
+          value2 = r.getHeader("to");
+          value3 = r.getHeader("conversation");
+          if (value == null || value2 == null || value3 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid to or from or conversation header.");
+          }
+          try {
+            uuid = Uuid.parse(value3);
+          } catch (Exception e) {
+            return RequestHandler.failResponse(out, "Conversation " + value3 + " does not exist.");
+          }
+          msgs = view.getMessages(uuid, Time.fromMs(Long.parseLong(value)), Time.fromMs(Long.parseLong(value2)));
+          return RequestHandler.successResponse(out, msgs.toString());
+
+        // Return list of all messages in the provided a root message and a range of messages that grow from it.
+        case ("RANGED_MESSAGES"):
+          value = r.getHeader("root_message");
+          value2 = r.getHeader("range");
+          if (value == null || value2 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid root message or range header.");
+          }
+          try {
+            uuid = Uuid.parse(value);
+            Integer.parseInt(value2);
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, value2 + " is not an integer.");
+          } catch (Exception e) {
+            return RequestHandler.failResponse(out, "Message " + value + " does not exist.");
+          }
+          msgs = view.getMessages(uuid, Integer.parseInt(value2));
+          return RequestHandler.successResponse(out, msgs.toString());
 
         default:
           return RequestHandler.failResponse(out, "Unknown function type.");

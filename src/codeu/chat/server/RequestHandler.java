@@ -12,6 +12,17 @@ public class RequestHandler {
 
     /**
      *
+     * Responsible for interpreting request queries. Populates a request object given a remote connection input stream and
+     * then returns it. For reference, here's an example request parseRaw may encounter:
+     *
+     * POST  HTTP/1.1
+     * Host: 127.0.0.1:8000
+     * type: ALL_USERS
+     *
+     * This method simple structures this data.
+     *
+     * Parses the raw string that it is getting from the INPUT string as arg.
+     *  --> client connection to server, looks at data, and interprets what the data means.
      * @param in the remote connection's data stream.
      * @return the constructed Request object.
      */
@@ -43,22 +54,54 @@ public class RequestHandler {
         for (i++; i < struct.length; i++) {
             body.append(" " + struct[i]);
         }
-        if (!r.getVerb().equals("GET"))
-        r.setBody(body.toString().substring(1));
+        if (r.getVerb().equals("POST")) {
+            r.setBody(body.toString().substring(1));
+        }
 
         return r;
     }
 
+
+    /**
+     *
+     * Tells the user the request was successful, and typically includes the JSONified object result(s) as well via string
+     *
+     * @param out the remote connection's data stream.
+     * @param body the response message.
+     * @return success.
+     */
     public static boolean successResponse(OutputStream out, String body) throws IOException {
         out.write(("HTTP/1.1 200 OK\r\n\r\n").getBytes());
         out.write((body).getBytes());
         return true;
     }
 
+    /**
+     *
+     * Tells the user the request was a failure, and
+     *
+     * @param out the remote connection's data stream.
+     * @param message the response message.
+     * @return success.
+     */
     public static boolean failResponse(OutputStream out, String message) throws IOException {
         out.write(("HTTP/1.1 400 Bad Request\r\n\r\n").getBytes());
         out.write((message).getBytes());
         return false;
+    }
+
+    /**
+     *
+     * Handles pre-flight
+     *
+     * @param out the remote connection's data stream.
+     * @return success.
+     */
+    public static boolean optionsResponse(OutputStream out) throws IOException {
+        out.write(("HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods:" +
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS\r\nAccess-Control-Allow-Headers:" +
+          "content-type,type,x-requested-with").getBytes());
+        return true;
     }
 
 }
