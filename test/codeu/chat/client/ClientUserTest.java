@@ -3,8 +3,14 @@
 package codeu.chat.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import static org.junit.Assert.*;
-import static org.mockito.*;
+import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.InjectMocks;
+import codeu.chat.util.Time;
+
+
 
 import org.junit.Test;
 import org.junit.Before;
@@ -23,7 +29,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public final class ClientUserTest {
 
 
@@ -45,13 +51,16 @@ public final class ClientUserTest {
 	@Test
 	public void testClientUserTest() {
 
+		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(new User(new Uuid(1), "Mathangi", new Time(500)));
+		userList.add(new User(new Uuid(2), "JESS", new Time(600)));
+		userList.add(new User(new Uuid(3), "JesS", new Time(700)));
+		userList.add(new User(new Uuid(4), "SaraH", new Time(800)));
+		userList.add(new User(new Uuid(5), "SARAH", new Time(900)));
 
-		ArrayList<String> usersList = new ArrayList<String>();
+	//	usersList.addAll(Arrays.asList("JESS", "jess", "SARAh", "SARAH", "mathangi", "MATHANGI"));
 
-
-		usersList.addAll(Arrays.asList("JESS", "jess", "SARAh", "SARAH", "mathangi", "MATHANGI"));
-
-		Mockito.when(user.getAll()).thenReturn(usersList);
+		Mockito.when(user.getUsers()).thenReturn(userList);
 
 		assertTrue(user.isValidName("jess"));
 		assertFalse(user.isValidName("SARAH"));
