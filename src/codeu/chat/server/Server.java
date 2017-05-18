@@ -159,7 +159,7 @@ public final class Server {
     Request r = RequestHandler.parseRaw(in);
 
     if (r.getVerb().equals("OPTIONS")) {
-      return RequestHandler.optionsResponse(out);
+      return RequestHandler.optionsResponse(out, r);
     } else if (r.getHeader("type") == null) {
       return RequestHandler.failResponse(out, "Missing type header, which specifies which function to run.");
     } else if (r.getVerb().equals("POST")) {

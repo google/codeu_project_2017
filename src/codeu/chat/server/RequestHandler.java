@@ -97,10 +97,10 @@ public class RequestHandler {
      * @param out the remote connection's data stream.
      * @return success.
      */
-    public static boolean optionsResponse(OutputStream out) throws IOException {
+    public static boolean optionsResponse(OutputStream out, Request r) throws IOException {
         out.write(("HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods:" +
           "GET, POST, PATCH, PUT, DELETE, OPTIONS\r\nAccess-Control-Allow-Headers:" +
-          "content-type,type,x-requested-with").getBytes());
+          r.getHeader("Access-Control-Request-Headers")).getBytes());
         return true;
     }
 
