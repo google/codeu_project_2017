@@ -2,12 +2,13 @@
 
 package codeu.chat.client;
 
+import java.util.ArrayList;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.*;
 
 import org.junit.Test;
 import org.junit.Before;
-import java.util.*;
+
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -22,19 +23,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
 
-
-/*
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.junit.Before;
-
-import codeu.chat.common.BasicController;
-import codeu.chat.common.Conversation;
-import codeu.chat.common.Message;
-import codeu.chat.common.User;
-import codeu.chat.util.Uuid;
-*/
-
+@RunWith(MockitoJUnitRunner.class)
 public final class ClientUserTest {
 
 
@@ -56,7 +45,6 @@ public final class ClientUserTest {
 	@Test
 	public void testClientUserTest() {
 
-		String [] users =
 
 		ArrayList<String> usersList = new ArrayList<String>();
 
