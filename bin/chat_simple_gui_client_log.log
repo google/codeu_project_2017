@@ -665,3 +665,27 @@ May 17, 2017 1:47:18 PM codeu.chat.client.ClientUser deleteUser
 INFO: User deleted, Name = "Sarah" UUID = [UUID:100.3968283296]
 May 17, 2017 1:47:24 PM codeu.chat.client.ClientUser deleteUser
 INFO: User deleted, Name = "SarahDepew97" UUID = [UUID:100.2357340537]
+May 18, 2017 12:36:33 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 18, 2017 12:36:34 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 18, 2017 12:36:34 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 18, 2017 12:36:34 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 18, 2017 12:36:35 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 18, 2017 12:36:37 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 18, 2017 12:36:41 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 18, 2017 12:36:41 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Kate" UUID = [UUID:100.114.2400389564]
+May 18, 2017 12:36:49 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 18, 2017 12:36:49 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Rebecca" UUID = [UUID:100.114.2540353058]
+May 18, 2017 12:36:52 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 18, 2017 12:36:52 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Sarah" UUID = [UUID:100.114.1631863586]

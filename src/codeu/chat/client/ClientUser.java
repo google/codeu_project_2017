@@ -128,17 +128,22 @@ public boolean isValidName(String userName) {
 				target = currentUser; 
 				targetId = target.id;
 				
+				/*
 				//delete user from hashmap and from store...
 				usersById.remove(targetId);
 				usersByName.remove(name); 
 				
 				//Add deleted user to EMPTY 
 				EMPTY.add(targetId);
+				*/
+				
+				deleteUser(target); 
 				
 				LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
 				System.out.println("User deleted, Name = " + name); 
 		
 				return true; 
+				
 			}
 		}
 		return false; 
@@ -169,6 +174,10 @@ public boolean isValidName(String userName) {
     return usersByName.all();
   }
 
+  public void deleteUser(Collection<Uuid> userIds) {
+    view.deleteUser(userIds); 
+  }
+  
   public void updateUsers() {
     usersById.clear();
     usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
