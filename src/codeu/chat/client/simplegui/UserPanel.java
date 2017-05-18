@@ -37,6 +37,7 @@ public final class UserPanel extends JPanel {
     initialize();
   }
 
+
   private void initialize() {
 
     // This panel contains from top to bottom; a title bar, a list of users,
@@ -156,6 +157,7 @@ public final class UserPanel extends JPanel {
     userSignInButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
           //Ask user for password
@@ -163,7 +165,7 @@ public final class UserPanel extends JPanel {
             UserPanel.this, "Enter " + data + "'s password:", "Enter Password", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
           //check password to make sure it is correct and check it against the user's password
-          if(userPassword.equals("password")){ //access userByName, get User, access the user's password (String)
+          if(userPassword.equals(clientContext.user.checkPassword(data, userPassword))){ //access userByName, get User, access the user's password (String)
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
           } else{
@@ -178,11 +180,27 @@ public final class UserPanel extends JPanel {
     userAddButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
-            null, null, "");
-        if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
+
+        JPanel p = new JPanel();
+        JTextField userNameField = new JTextField(10);
+        JTextField passwordField = new JPasswordField(10);
+
+        p.add(new JLabel("Enter user name :"));
+        p.add(userNameField);
+        p.add(new JLabel("Enter password : "));
+        p.add(passwordField);
+
+        JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION);
+        final String name = userNameField.getText();
+        final String password = passwordField.getText();
+
+       // final String p = (String) JOPtionPane.showInputDialog(UserPanel.this, "Enter Password:", "Add User", JOptionPane.PLAIN_MESSAGE,
+         //       null, null, "");
+
+        if (name != null && name.length() > 0) {
+          User u = clientContext.user.addUser(name);
+          clientContext.user.setUserPassword(u, password);
+
           UserPanel.this.getAllUsers(listModel);
         }
       }
@@ -210,4 +228,8 @@ public final class UserPanel extends JPanel {
       usersList.addElement(u.name);
     }
   }
+
+
+
+
 }

@@ -48,8 +48,11 @@ public final class User {
     }
   };
 
+
+  //Potentially change these values back to private?
   public final Uuid id;
   public final String name;
+  public String password;
   public final Time creation;
 
   public User(Uuid id, String name, Time creation) {
@@ -59,4 +62,15 @@ public final class User {
     this.creation = creation;
 
   }
+
+  public void setPassword(String password){
+
+    this.password = password;
+  }
+
+  public String getPassword(){
+
+    return this.password;
+  }
+
 }

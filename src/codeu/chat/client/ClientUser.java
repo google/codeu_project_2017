@@ -78,6 +78,19 @@ public final class ClientUser {
     return (prev != current);
   }
 
+  public boolean checkPassword(String name, String password){
+
+    final User user = usersByName.first(name);
+
+    if( user != null  && (user.getPassword() == password)) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -88,7 +101,7 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  public User addUser(String name) {
     final boolean validInputs = isValidName(name);
 
     final User user = (validInputs) ? controller.newUser(name) : null;
@@ -100,6 +113,14 @@ public final class ClientUser {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }
+
+    return user;
+  }
+
+  public void setUserPassword(User user, String password){
+
+    user.setPassword(password);
+
   }
 
   public void showAllUsers() {
