@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#LOCAL_MACHINE="130.211.140.178@10006"
-
 LOCAL_MACHINE="130.211.140.178@10140"
 
 cd './bin'
