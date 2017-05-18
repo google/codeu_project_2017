@@ -37,6 +37,7 @@ import codeu.chat.util.Uuid;
 
 public final class ClientUserTest {
 
+
 	private ClientUser user;
 
 	@Mock
@@ -68,5 +69,6 @@ public final class ClientUserTest {
 		assertFalse(user.isValidName("SARAH"));
 
 	}
+
 
 }
