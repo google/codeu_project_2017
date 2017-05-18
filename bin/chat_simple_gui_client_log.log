@@ -10,6 +10,7 @@ Apr 14, 2017 10:49:53 AM codeu.chat.client.ClientMessage updateMessages
 SEVERE: conversation argument is null - do nothing.
 Apr 14, 2017 10:49:55 AM codeu.chat.SimpleGuiClientMain runClient
 INFO: chat client is running.
+<<<<<<< HEAD
 May 17, 2017 5:28:52 PM codeu.chat.SimpleGuiClientMain main
 INFO: ============================= START OF LOG =============================
 May 17, 2017 5:28:52 PM codeu.chat.SimpleGuiClientMain main
@@ -103,3 +104,172 @@ May 17, 2017 6:14:20 PM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 May 17, 2017 6:14:20 PM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "Kate" UUID=[UUID:100.114.2400389564]
+=======
+May 16, 2017 5:45:38 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 5:45:38 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 5:45:38 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 5:45:38 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 5:45:39 PM codeu.chat.client.View getUsersExcluding
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getUsersExcluding(View.java:169)
+	at codeu.chat.client.ClientUser.updateUsers(ClientUser.java:134)
+	at codeu.chat.client.simplegui.UserPanel.getAllUsers(UserPanel.java:195)
+	at codeu.chat.client.simplegui.UserPanel.initialize(UserPanel.java:190)
+	at codeu.chat.client.simplegui.UserPanel.<init>(UserPanel.java:37)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:78)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 16, 2017 5:45:39 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 5:45:39 PM codeu.chat.client.View getAllConversations
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getAllConversations(View.java:78)
+	at codeu.chat.client.ClientConversation.updateAllConversations(ClientConversation.java:164)
+	at codeu.chat.client.simplegui.ConversationPanel.getAllConversations(ConversationPanel.java:162)
+	at codeu.chat.client.simplegui.ConversationPanel.initialize(ConversationPanel.java:156)
+	at codeu.chat.client.simplegui.ConversationPanel.<init>(ConversationPanel.java:39)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:91)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 16, 2017 5:45:41 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 16, 2017 5:46:47 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 5:46:47 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 5:46:47 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 5:46:47 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 5:46:47 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 5:46:49 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 16, 2017 5:47:01 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 16, 2017 5:47:01 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 16, 2017 5:47:01 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.3968283296]
+May 16, 2017 5:55:20 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "Hello" UUID= [UUID:100.3517310660]
+May 16, 2017 5:55:20 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="Hello" UUID=[UUID:100.3517310660] first=[UUID:0] last=[UUID:0]
+
+May 16, 2017 5:55:20 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Hello" UUID=[UUID:100.3517310660] first=[UUID:0] last=[UUID:0]
+
+May 16, 2017 5:55:20 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+May 16, 2017 5:55:20 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:100.3517310660] (Hello).
+
+May 16, 2017 5:57:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 5:57:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 5:57:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 5:57:55 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 5:57:56 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 5:57:57 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 16, 2017 5:58:06 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 16, 2017 5:58:06 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 16, 2017 5:58:06 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Mathangi" UUID=[UUID:100.1159007652]
+May 16, 2017 5:59:18 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 5:59:18 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 5:59:18 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 5:59:18 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 5:59:19 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 5:59:20 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 16, 2017 6:01:38 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 6:01:38 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 6:01:38 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 6:01:38 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 6:01:39 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 6:01:40 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 16, 2017 6:03:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 6:03:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 6:03:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 6:03:52 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 6:03:52 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 6:03:54 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 16, 2017 6:06:16 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 16, 2017 6:06:16 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 16, 2017 6:06:16 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 16, 2017 6:06:16 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 16, 2017 6:06:16 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 16, 2017 6:06:18 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 17, 2017 1:11:13 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 17, 2017 1:11:13 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 17, 2017 1:11:14 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 17, 2017 1:11:14 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 17, 2017 1:11:16 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 17, 2017 1:11:21 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+>>>>>>> 3256ddb7ead3b012a9b45ebbfd0b3efff34b47f6
