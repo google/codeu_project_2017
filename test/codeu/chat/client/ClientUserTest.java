@@ -3,14 +3,11 @@
 package codeu.chat.client;
 
 import static org.junit.Assert.*;
-//import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import org.junit.Before;
-import java.util.Map;
+import java.util.*;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -40,107 +37,37 @@ import codeu.chat.util.Uuid;
 */
 
 public final class ClientUserTest {
-  /*
-  private Model model;
-  private BasicController controllerTest;
 
-  @Before
-  public void doBefore() {
-    model = new Model();
-    //Create a Controller
-    controllerTest = new Controller(Uuid.NULL, model);
-  }
-  */
-  @Test
-  public void testClientUserTest() {
-  	
-  	//Create a Connection Source
-  	String host = "localhost@2007"; 
-  	int port = 2007; 
-  	
-  	ConnectionSource connectionSourceTest = new ClientConnectionSource(host, port); 
-  	
-  
-  	//Create a Controller
-  	Controller controllerTest = new Controller(connectionSourceTest); 
-  	
-  	//Create a View
-  	View viewTest = new View(connectionSourceTest); 
-  	
-  	//Create an instance of the ClientUser
-  	ClientUser clientUserTest = new ClientUser(controllerTest, viewTest); 
-  	
-  	//Add users using addUser method in ClientUser class
-  	String name1 = "   "; //all spaces 
-  	String name2 = ""; //empty
-  	String name3 = "JESS"; 
-  	String name4 = "jess"; 
-  	String name5 = "Sarah"; 
-  	String name6 = "sArAh"; 
-  	String name7 = "Sarah Depew"; 
-  	String name8 = "Mathang*"; 
-  	String name9 = "**#*@(!*#*$*@"; 
-  	String name10 = "Mathangi97";
-  	
-  	/*
-  	//test isValidName
-  	assertFalse(clientUserTest.isValidName(name1)); 
-  	assertFalse(clientUserTest.isValidName(name2)); 
-  	assertTrue(clientUserTest.isValidName(name3));   	
-  	`//assertFalse(clientUserTest.isValidName(name4)); //returning null, rather than false like it should...
-  	System.out.println(clientUserTest.isValidName(name4)); 
-  	assertTrue(clientUserTest.isValidName(name5)); 
-  	//assertFalse(clientUserTest.isValidName(name6)); 
-  	assertTrue(clientUserTest.isValidName(name7));  
-  	assertTrue(clientUserTest.isValidName(name8));
-  	assertTrue(clientUserTest.isValidName(name9)); 
-  	assertTrue(clientUserTest.isValidName(name10));  
-  	*/
-  	
-  	//test Add User
-  	clientUserTest.addUser(name1);
-  	clientUserTest.addUser(name2);
-  	clientUserTest.addUser(name3);
-  	clientUserTest.addUser(name4);
-  	clientUserTest.addUser(name5);
-  	clientUserTest.addUser(name6);
-  	clientUserTest.addUser(name7);
-  	clientUserTest.addUser(name8);
-  	clientUserTest.addUser(name9);
-  	clientUserTest.addUser(name10);
-  	
-  	//assertFalse(clientUserTest.getUsers().contains(name1)); 
-  	
-  	Iterable<User> users = clientUserTest.getUsers(); 
-  	
-  	for(User u: users){
-  		System.out.println(u); 
-  	}
-  	System.out.println("Hi"); 
-  	
-  	/* 
-  	assertFalse(clientUserTest.addUser(name2)); 
-  	assertTrue(clientUserTest.addUser(name3));   	
-  	assertFalse(clientUserTest.addUser(name4)); 
-  	assertTrue(clientUserTest.addUser(name5)); 
-  	assertFalse(clientUserTest.addUser(name6)); 
-  	assertTrue(clientUserTest.addUser(name7));  
-  	assertTrue(clientUserTest.addUser(name8));
-  	assertTrue(clientUserTest.addUser(name9)); 
-  	assertTrue(clientUserTest.addUser(name10));  
-  	
-  	/*
-  	
-  	ClientUser clientUser = new ClientUser(someController, someView);
-clientUser.addUser(someName);
-assertTrue(getUsers().contains(someName));
+	private ClientUser user;
 
-clientUser.addUser(someName);
-assertThat the server error was logged
-assertTrue(getUsers().contains(one(someName)));
-*/
-  
-  	
-  }
+	@Mock
+	private Controller controller;
+
+	@Mock
+	private View view;
+
+	@Before
+	public void doBefore() {
+
+		user = new ClientUser(controller, view);
+
+	}
+
+	@Test
+	public void testClientUserTest() {
+
+		String [] users =
+
+		ArrayList<String> usersList = new ArrayList<String>();
+
+
+		usersList.addAll(Arrays.asList("JESS", "jess", "SARAh", "SARAH", "mathangi", "MATHANGI"));
+
+		Mockito.when(user.getAll()).thenReturn(usersList);
+
+		assertTrue(user.isValidName("jess"));
+		assertFalse(user.isValidName("SARAH"));
+
+	}
 
 }
