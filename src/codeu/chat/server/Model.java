@@ -75,7 +75,8 @@ public final class Model {
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
   }
- 
+  
+  //method to delete a user from the server
   public void deleteUser(User user) {
     userById.remove(user.id);
     userByTime.remove(user.creation);

@@ -56,6 +56,8 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
   
   public void deleteUser(User user) {
+    //Collection<Uuid> ids = new ArrayList<Uuid>(); 
+    //ids.add(user.id); 
     model.deleteUser(user); 
   }
 

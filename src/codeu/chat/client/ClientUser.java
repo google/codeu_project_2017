@@ -174,8 +174,8 @@ public boolean isValidName(String userName) {
     return usersByName.all();
   }
 
-  public void deleteUser(Collection<Uuid> userIds) {
-    view.deleteUser(userIds); 
+  public void deleteUser(User user) {
+    view.deleteUser(user); 
   }
   
   public void updateUsers() {

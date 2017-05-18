@@ -70,20 +70,19 @@ public final class View implements BasicView, LogicalView{
     return users;
   }
   
-  public Collection<User> deleteUser(User userDelete) {
+  public Collection<User> deleteUser(User user) {
   
-    final Collection<User> usersOut = new ArrayList<>();
-    
-    final Collection<Uuid> user = new ArrayList<>();
-    user.add(userDelete.id); 
+    final Collection<User> users = new ArrayList<>();
+    Collection<Uuid> ids = new ArrayList<>(); 
+    ids.add(user.id); 
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USERS_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), user);
+      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USERS_RESPONSE) {
-        usersOut.addAll(Serializers.collection(User.SERIALIZER).read(connection.in())).remove(user);
+        users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");
       }
