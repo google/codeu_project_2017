@@ -158,11 +158,11 @@ public final class Server {
     LOG.info("Receiving a RESTful message.");
     Request r = RequestHandler.parseRaw(in);
 
-    if (r.getHeader("type") == null) {
+    if (r.getVerb().equals("OPTIONS")) {
+      return RequestHandler.optionsResponse(out);
+    } else if (r.getHeader("type") == null) {
       return RequestHandler.failResponse(out, "Missing type header, which specifies which function to run.");
-    }
-
-    if (r.getVerb().equals("POST")) {
+    } else if (r.getVerb().equals("POST")) {
       String body;
       User user;
       Uuid uuid1;

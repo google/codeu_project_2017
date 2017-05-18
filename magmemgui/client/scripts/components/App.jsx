@@ -7,8 +7,8 @@ class App extends React.Component {
       super(props);
 
       this.state = {
-        url: "130.211.140.178",
-        port: "10110"
+        url: "http://localhost",
+        port: "8000"
       }
 
    }
