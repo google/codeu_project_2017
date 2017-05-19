@@ -142,21 +142,15 @@ public final class UuidTest {
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       PrintWriter writer = new PrintWriter(outputStream, true);
 
-      Gson gson = new Gson();
-
       final String string = "100";
       final Uuid id = Uuid.fromString(string);
 
-      String output = gson.toJson(id);
-      writer.println(output);
-
-      writer.close();
-      outputStream.close();
+      Uuid.SERIALIZER.write(writer, id);
 
       ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
       BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-      Uuid value = gson.fromJson(reader.readLine(), Uuid.class);
+      Uuid value = Uuid.SERIALIZER.read(reader);
 
       assertNull(value.root());
       assertEquals(value.id(), 100);
@@ -174,21 +168,15 @@ public final class UuidTest {
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       PrintWriter writer = new PrintWriter(outputStream, true);
 
-      Gson gson = new Gson();
-
       final String string = "100.200";
       final Uuid id = Uuid.fromString(string);
 
-      String output = gson.toJson(id);
-      writer.println(output);
-
-      writer.close();
-      outputStream.close();
+      Uuid.SERIALIZER.write(writer, id);
 
       ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
       BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-      Uuid value = gson.fromJson(reader.readLine(), Uuid.class);
+      Uuid value = Uuid.SERIALIZER.read(reader); 
 
       assertNotNull(value);
       assertNotNull(value.root());
