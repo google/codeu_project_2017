@@ -17,9 +17,7 @@ package codeu.chat.util;
 import com.google.gson.Gson;
 import java.io.*;
 import java.lang.StringBuilder;
-import java.nio.Buffer;
 import java.util.Objects;
-import java.util.StringTokenizer;
 
 public final class Uuid {
 
