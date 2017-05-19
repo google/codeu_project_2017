@@ -8,9 +8,12 @@ import com.google.cloud.language.v1beta2.AnalyzeSentimentResponse;
 import com.google.cloud.language.v1beta2.Document;
 import com.google.cloud.language.v1beta2.Document.Type;
 import com.google.cloud.language.v1beta2.Sentiment;
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 /**
  * Created by rsharif on 5/3/17.
@@ -55,6 +58,20 @@ public class SentimentScore {
           Serializers.INTEGER.read(in)
       );
 
+    }
+
+    @Override
+    public void write(PrintWriter out, SentimentScore value) {
+      Gson gson = Serializers.GSON;
+      String output = gson.toJson(value);
+      out.println(output);
+    }
+
+    @Override
+    public SentimentScore read(BufferedReader in) throws IOException {
+      Gson gson = Serializers.GSON;
+      SentimentScore value = gson.fromJson(in.readLine(), SentimentScore.class);
+      return value;
     }
   };
 
