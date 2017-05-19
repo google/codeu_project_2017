@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8c22e39b-3d94-46ba-91e5-b5be67a9292c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeU/chat/client/simplegui/SignInPanel.class" afterPath="$PROJECT_DIR$/bin/codeU/chat/client/simplegui/SignInPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/ChatSimpleGui.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/ChatSimpleGui.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log" afterPath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" />
-    </list>
+    <list default="true" id="8c22e39b-3d94-46ba-91e5-b5be67a9292c" name="Default" comment="" />
     <ignored path="codeu_project_2017.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -62,8 +56,8 @@
       <file leaf-file-name="ChatSimpleGui.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="75" column="60" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+            <state relative-caret-position="30">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -931,8 +925,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="75" column="60" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+        <state relative-caret-position="30">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
