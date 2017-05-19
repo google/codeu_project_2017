@@ -30,7 +30,7 @@ import codeu.chat.client.Controller;
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public final class ClientUserTest {
 
 	private ClientUser user;
