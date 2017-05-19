@@ -67,7 +67,6 @@ public final class Time implements Comparable<Time> {
 
     }
 
-
     @Override
     public void write(PrintWriter out, Time value) {
       Gson gson = Serializers.GSON;

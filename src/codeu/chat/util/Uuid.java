@@ -15,8 +15,12 @@
 package codeu.chat.util;
 
 import com.google.gson.Gson;
-import java.io.*;
 import java.lang.StringBuilder;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public final class Uuid {
@@ -82,7 +86,6 @@ public final class Uuid {
       Uuid value = gson.fromJson(in.readLine(), Uuid.class);
       return value;
     }
-
   };
 
   // GENERATOR
