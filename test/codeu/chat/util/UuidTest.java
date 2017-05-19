@@ -15,6 +15,14 @@
 package codeu.chat.util;
 
 import static org.junit.Assert.*;
+
+import com.google.gson.Gson;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import org.junit.Test;
 
 public final class UuidTest {
@@ -125,5 +133,73 @@ public final class UuidTest {
 
     assertEquals(id.id(), 200);
     assertEquals(id.root().id(), 100);
+  }
+
+  @Test
+  public void testJsonSerializer() {
+
+    try {
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      PrintWriter writer = new PrintWriter(outputStream, true);
+
+      Gson gson = new Gson();
+
+      final String string = "100";
+      final Uuid id = Uuid.fromString(string);
+
+      String output = gson.toJson(id);
+      writer.println(output);
+
+      writer.close();
+      outputStream.close();
+
+      ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
+      BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+      Uuid value = gson.fromJson(reader.readLine(), Uuid.class);
+
+      assertNull(value.root());
+      assertEquals(value.id(), 100);
+
+    } catch (IOException exc) {
+      System.out.println("Exception thrown");
+    }
+
+  }
+
+  @Test
+  public void testJsonSerializerRoot() {
+
+    try {
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      PrintWriter writer = new PrintWriter(outputStream, true);
+
+      Gson gson = new Gson();
+
+      final String string = "100.200";
+      final Uuid id = Uuid.fromString(string);
+
+      String output = gson.toJson(id);
+      writer.println(output);
+
+      writer.close();
+      outputStream.close();
+
+      ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
+      BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+      Uuid value = gson.fromJson(reader.readLine(), Uuid.class);
+
+      assertNotNull(value);
+      assertNotNull(value.root());
+      assertNull(value.root().root());
+
+      assertEquals(value.id(), 200);
+      assertEquals(value.root().id(), 100);
+
+    } catch (IOException exc) {
+      System.out.println("Exception thrown");
+    }
+
   }
 }
