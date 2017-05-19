@@ -14,6 +14,8 @@
 
 package codeu.chat.util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -274,5 +276,16 @@ public final class Serializers {
       }
     };
   }
+
+  /*
+   * In order for the Time to contain the milliseconds, a custom Json Serializer was needed.
+   * Adding this Gson object, would allow all serializers to use this Gson, rather than having
+   * to rebuild the Gson multiple times.
+   */
+  public static Gson GSON = new GsonBuilder()
+      .registerTypeAdapter(Time.class, Time.JSON_SERIALIZER)
+      .registerTypeAdapter(Time.class, Time.JSON_DESERIALIZER)
+      .create();
+
 }
 

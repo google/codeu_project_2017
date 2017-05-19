@@ -70,7 +70,7 @@ public final class Uuid {
 
     @Override
     public void write(PrintWriter out, Uuid value) {
-      Gson gson = new Gson();
+      Gson gson = Serializers.GSON;
       String output = gson.toJson(value);
       out.println(output);
 
@@ -78,7 +78,7 @@ public final class Uuid {
 
     @Override
     public Uuid read(BufferedReader in) throws IOException {
-      Gson gson = new Gson();
+      Gson gson = Serializers.GSON;
       Uuid value = gson.fromJson(in.readLine(), Uuid.class);
       return value;
     }

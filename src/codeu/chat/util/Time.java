@@ -14,11 +14,42 @@
 
 package codeu.chat.util;
 
-import java.io.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public final class Time implements Comparable<Time> {
+
+  public static final JsonSerializer<Time> JSON_SERIALIZER = new JsonSerializer<Time>() {
+    @Override
+    public JsonElement serialize(Time src, Type typeOfSrc, JsonSerializationContext
+        context) {
+      return src == null ? null : new JsonPrimitive(src.inMs());
+    }
+  };
+
+  public static final JsonDeserializer<Time> JSON_DESERIALIZER = new JsonDeserializer<Time>() {
+    @Override
+    public Time deserialize(JsonElement json, Type typeOfT,  JsonDeserializationContext context)
+        throws JsonParseException {
+
+      return json == null ? null : Time.fromMs(json.getAsLong());
+
+    }
+  };
 
   public static final Serializer<Time> SERIALIZER = new Serializer<Time>() {
 
@@ -39,13 +70,16 @@ public final class Time implements Comparable<Time> {
 
     @Override
     public void write(PrintWriter out, Time value) {
-
-      Serializers.LONG.write(out, value.inMs());
+      Gson gson = Serializers.GSON;
+      String output = gson.toJson(value);
+      out.println(output);
     }
 
     @Override
     public Time read(BufferedReader in) throws IOException{
-      return Time.fromMs(Serializers.LONG.read(in));
+      Gson gson = Serializers.GSON;
+      Time value = gson.fromJson(in.readLine(), Time.class);
+      return value;
     }
   };
 
