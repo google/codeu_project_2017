@@ -1,0 +1,10 @@
+May 18, 2017 6:32:00 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 18, 2017 6:32:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 18, 2017 6:32:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 18, 2017 6:32:01 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 18, 2017 6:32:05 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
