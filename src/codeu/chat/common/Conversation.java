@@ -14,6 +14,7 @@
 
 package codeu.chat.common;
 
+import com.google.gson.Gson;
 import java.io.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -62,29 +63,15 @@ public final class Conversation {
 
     @Override
     public void write(PrintWriter out, Conversation value) {
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
-      Time.SERIALIZER.write(out, value.creation);
-      Serializers.STRING.write(out, value.title);
-      Serializers.collection(Uuid.SERIALIZER).write(out, value.users);
-      Uuid.SERIALIZER.write(out, value.firstMessage);
-      Uuid.SERIALIZER.write(out, value.lastMessage);
+      Gson gson = new Gson();
+      String output = gson.toJson(value);
+      out.println(output);
     }
 
     @Override
     public Conversation read(BufferedReader in) throws IOException {
-      final Conversation value = new Conversation(
-              Uuid.SERIALIZER.read(in),
-              Uuid.SERIALIZER.read(in),
-              Time.SERIALIZER.read(in),
-              Serializers.STRING.read(in)
-      );
-
-      value.users.addAll(Serializers.collection(Uuid.SERIALIZER).read(in));
-
-      value.firstMessage = Uuid.SERIALIZER.read(in);
-      value.lastMessage = Uuid.SERIALIZER.read(in);
-
+      Gson gson = new Gson();
+      Conversation value = gson.fromJson(in.readLine(), Conversation.class);
       return value;
     }
   };

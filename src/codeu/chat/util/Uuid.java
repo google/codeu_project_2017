@@ -14,6 +14,7 @@
 
 package codeu.chat.util;
 
+import com.google.gson.Gson;
 import java.io.*;
 import java.lang.StringBuilder;
 import java.nio.Buffer;
@@ -71,43 +72,20 @@ public final class Uuid {
 
     @Override
     public void write(PrintWriter out, Uuid value) {
-      int length = 0;
-      for (Uuid current = value; current != null; current = current.root()) {
-        length+=1;
-      }
-      if (length >= 0 && length <= 255) {
-        out.println(length);
-      } else {
-        throw new RuntimeException("Max supported Uuid chain length is 255");
-      }
-
-      for (Uuid current = value; current != null; current = current.root()) {
-        Serializers.INTEGER.write(out, current.id());
-      }
+      Gson gson = new Gson();
+      String output = gson.toJson(value);
+      out.println(output);
 
     }
 
     @Override
     public Uuid read(BufferedReader in) throws IOException {
-      final int length = Integer.parseInt(in.readLine());
-      final int[] chain = new int[length];
-
-      for (int i = 0; i < length; i++) {
-        chain[i] = Serializers.INTEGER.read(in);
-      }
-
-      Uuid head = null;
-
-      for (int i = length - 1; i >= 0; i--) {
-        head = new Uuid(head, chain[i]);
-      }
-
-      return head;
+      Gson gson = new Gson();
+      Uuid value = gson.fromJson(in.readLine(), Uuid.class);
+      return value;
     }
 
-
   };
-
 
   // GENERATOR
   //
