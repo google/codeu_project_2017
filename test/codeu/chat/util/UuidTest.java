@@ -16,7 +16,6 @@ package codeu.chat.util;
 
 import static org.junit.Assert.*;
 
-import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -176,7 +175,7 @@ public final class UuidTest {
       ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
       BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-      Uuid value = Uuid.SERIALIZER.read(reader); 
+      Uuid value = Uuid.SERIALIZER.read(reader);
 
       assertNotNull(value);
       assertNotNull(value.root());
