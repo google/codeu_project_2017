@@ -14,6 +14,7 @@
 
 package codeu.chat.common;
 
+import com.google.gson.Gson;
 import java.io.*;
 
 import codeu.chat.util.Serializer;
@@ -47,18 +48,16 @@ public final class User {
 
     @Override
     public void write(PrintWriter out, User value) {
-        Uuid.SERIALIZER.write(out, value.id);
-        Serializers.STRING.write(out, value.name);
-        Time.SERIALIZER.write(out, value.creation);
+      Gson gson = new Gson();
+      String output = gson.toJson(value);
+      out.println(output);
     }
 
     @Override
     public User read(BufferedReader in) throws IOException {
-        return new User(
-                Uuid.SERIALIZER.read(in),
-                Serializers.STRING.read(in),
-                Time.SERIALIZER.read(in)
-        );
+        Gson gson = new Gson();
+        User value = gson.fromJson(in.readLine(), User.class);
+        return value;
     }
   };
 

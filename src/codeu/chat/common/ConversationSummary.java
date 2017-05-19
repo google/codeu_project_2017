@@ -14,6 +14,7 @@
 
 package codeu.chat.common;
 
+import com.google.gson.Gson;
 import java.io.*;
 
 import codeu.chat.util.Serializer;
@@ -49,20 +50,16 @@ public final class ConversationSummary implements ListViewable {
 
     @Override
     public void write(PrintWriter out, ConversationSummary value) {
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
-      Time.SERIALIZER.write(out, value.creation);
-      Serializers.STRING.write(out, value.title);
+      Gson gson = new Gson();
+      String output = gson.toJson(value);
+      out.println(output);
     }
 
     @Override
     public ConversationSummary read(BufferedReader in) throws IOException {
-      return new ConversationSummary(
-              Uuid.SERIALIZER.read(in),
-              Uuid.SERIALIZER.read(in),
-              Time.SERIALIZER.read(in),
-              Serializers.STRING.read(in)
-      );
+      Gson gson = new Gson();
+      ConversationSummary value = gson.fromJson(in.readLine(), ConversationSummary.class);
+      return value;
     }
   };
 

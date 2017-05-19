@@ -40,15 +40,15 @@ if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_
 fi
 
 
-cd './bin'
+
 if [ "$RELAY_ADDRESS" == "" ] ; then
-  java codeu.chat.ServerMain \
+  java -cp ./third_party/gson-2.8.0.jar:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
       "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
+  java -cp ./third_party/gson-2.8.0.jar:./bin codeu.chat.ServerMain \
       "$TEAM_ID" \
       "$TEAM_SECRET" \
       "$PORT" \
