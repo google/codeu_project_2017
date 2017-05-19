@@ -15,6 +15,13 @@
 package codeu.chat.util;
 
 import static org.junit.Assert.*;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import org.junit.Test;
 
 public final class UuidTest {
@@ -125,5 +132,61 @@ public final class UuidTest {
 
     assertEquals(id.id(), 200);
     assertEquals(id.root().id(), 100);
+  }
+
+  @Test
+  public void testJsonSerializer() {
+
+    try {
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      PrintWriter writer = new PrintWriter(outputStream, true);
+
+      final String string = "100";
+      final Uuid id = Uuid.fromString(string);
+
+      Uuid.SERIALIZER.write(writer, id);
+
+      ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
+      BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+      Uuid value = Uuid.SERIALIZER.read(reader);
+
+      assertNull(value.root());
+      assertEquals(value.id(), 100);
+
+    } catch (IOException exc) {
+      System.out.println("Exception thrown");
+    }
+
+  }
+
+  @Test
+  public void testJsonSerializerRoot() {
+
+    try {
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      PrintWriter writer = new PrintWriter(outputStream, true);
+
+      final String string = "100.200";
+      final Uuid id = Uuid.fromString(string);
+
+      Uuid.SERIALIZER.write(writer, id);
+
+      ByteArrayInputStream in = new ByteArrayInputStream(outputStream.toByteArray());
+      BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+      Uuid value = Uuid.SERIALIZER.read(reader);
+
+      assertNotNull(value);
+      assertNotNull(value.root());
+      assertNull(value.root().root());
+
+      assertEquals(value.id(), 200);
+      assertEquals(value.root().id(), 100);
+
+    } catch (IOException exc) {
+      System.out.println("Exception thrown");
+    }
+
   }
 }
