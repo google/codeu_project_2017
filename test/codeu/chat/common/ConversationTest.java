@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
