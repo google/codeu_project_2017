@@ -17,11 +17,18 @@ package codeu.chat.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 public interface Serializer<T> {
 
   void write(OutputStream out, T value) throws IOException;
 
   T read(InputStream in) throws IOException;
+
+  // These two methods transition the current interface
+  void write(PrintWriter out, T value);
+
+  T read(BufferedReader in) throws IOException;
 
 }

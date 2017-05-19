@@ -14,10 +14,12 @@
 
 package codeu.chat.common;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Collection;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
 import java.util.HashSet;
 
 import codeu.chat.util.Serializer;
@@ -60,6 +62,21 @@ public final class Conversation {
       return value;
 
     }
+
+
+    @Override
+    public void write(PrintWriter out, Conversation value) {
+      Gson gson = Serializers.GSON;
+      String output = gson.toJson(value);
+      out.println(output);
+    }
+
+    @Override
+    public Conversation read(BufferedReader in) throws IOException {
+      Gson gson = Serializers.GSON;
+      Conversation value = gson.fromJson(in.readLine(), Conversation.class);
+      return value;
+    }
   };
 
   public final ConversationSummary summary;
@@ -68,7 +85,7 @@ public final class Conversation {
   public final Uuid owner;
   public final Time creation;
   public final String title;
-  public final Collection<Uuid> users = new HashSet<>();
+  public final HashSet<Uuid> users = new HashSet<>();
   public Uuid firstMessage = Uuid.NULL;
   public Uuid lastMessage = Uuid.NULL;
 
