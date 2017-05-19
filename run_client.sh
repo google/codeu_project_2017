@@ -22,5 +22,4 @@ if [[ "$HOST" == "" || "$PORT" == "" ]] ; then
   exit 1
 fi
 
-cd './bin'
-java codeu.chat.ClientMain "$HOST@$PORT"
+java -cp ./third_party/gson-2.8.0.jar:./bin codeu.chat.ClientMain "$HOST@$PORT"
