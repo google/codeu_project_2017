@@ -52,17 +52,17 @@ public final class ChatSimpleGui {
     }
   }
 
-  /*private Border paneBorder() {
+  private Border paneBorder() {
     Border outside = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
-  }*/
+  }
 
   // Initialize the GUI
   private void initialize() {
 
     // Outermost frame.
-    // NOTE: may have tweak size, or place in scrollable panel.
+    // NOTE: may have to tweak size, or place in scrollable panel.
     mainFrame = new JFrame("ChatU");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
@@ -71,18 +71,18 @@ public final class ChatSimpleGui {
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     //mainViewPanel.setBorder(paneBorder());
 
-    // Build main panels - Users, Conversations, Messages.
-    final JPanel usersViewPanel = new UserPanel(clientContext);
-    //usersViewPanel.setBorder(paneBorder());
+    // Build main panels - Sign In, Create Account.
+    final JPanel userSignIn = new SignInPanel();
+    userSignIn.setBorder(paneBorder());
     final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
-    //messagesViewPanel.setBorder(paneBorder());
+    messagesViewPanel.setBorder(paneBorder());
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
     final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
-    //conversationsViewPanel.setBorder(paneBorder());
+    conversationsViewPanel.setBorder(paneBorder());
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels.
@@ -109,7 +109,7 @@ public final class ChatSimpleGui {
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
 
-    mainViewPanel.add(usersViewPanel, usersViewC);
+    mainViewPanel.add(userSignIn, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
 
