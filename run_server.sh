@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+echo Team Magenta Chat Server
+
 TEAM_ID="$1"
 TEAM_SECRET="$2"
 PORT="$3"

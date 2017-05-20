@@ -1,0 +1,25 @@
+{
+  "name": "chatterbox-client",
+  "version": "1.0.0",
+  "description": "Your new favorite chat client",
+  "authors": [
+    "Hack Reactor <curriculum.team@hackreactor.com>"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "underscore": "^1.8.3",
+    "jquery": "~2.1.1"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "underscore": "^1.8.3"
+  }
+}
