@@ -8,7 +8,7 @@ app.use( bodyParser.json() );
 app.use(express.static(__dirname + '/../client'));
 
 
-var port = 443;
+var port = 8000;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
