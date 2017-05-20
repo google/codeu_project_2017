@@ -27,17 +27,17 @@ public class ConversationTest {
 
       // Set the conversation variables
 
-      Uuid id = Uuid.fromString("100.101");
-      Uuid owner = Uuid.fromString("100.102");
+      Uuid id = Uuid.parse("100.101");
+      Uuid owner = Uuid.parse("100.102");
       Time creation = Time.fromMs(10);
       String title = "Conversation 1";
 
       HashSet<Uuid> users = new HashSet<>();
-      users.add(Uuid.fromString("100.103"));
-      users.add(Uuid.fromString("100.104"));
+      users.add(Uuid.parse("100.103"));
+      users.add(Uuid.parse("100.104"));
 
-      Uuid firstMessage = Uuid.fromString("100.105");
-      Uuid lastMessage = Uuid.fromString("100.106");
+      Uuid firstMessage = Uuid.parse("100.105");
+      Uuid lastMessage = Uuid.parse("100.106");
 
       // Create the conversation
 

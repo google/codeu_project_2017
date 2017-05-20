@@ -155,7 +155,7 @@ public final class UuidTest {
       PrintWriter writer = new PrintWriter(outputStream, true);
 
       final String string = "100";
-      final Uuid id = Uuid.fromString(string);
+      final Uuid id = Uuid.parse(string);
 
       Uuid.SERIALIZER.write(writer, id);
 
@@ -181,7 +181,7 @@ public final class UuidTest {
       PrintWriter writer = new PrintWriter(outputStream, true);
 
       final String string = "100.200";
-      final Uuid id = Uuid.fromString(string);
+      final Uuid id = Uuid.parse(string);
 
       Uuid.SERIALIZER.write(writer, id);
 
