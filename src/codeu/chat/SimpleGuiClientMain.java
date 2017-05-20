@@ -29,7 +29,7 @@ final class SimpleGuiClientMain {
 
   private static final Logger.Log LOG = Logger.newLog(SimpleGuiClientMain.class);
 
-  public static void main(String [] args) {
+  public static void main(String[] args) {
 
     try {
       Logger.enableFileOutput("chat_simple_gui_client_log.log");
@@ -46,11 +46,11 @@ final class SimpleGuiClientMain {
     final RemoteAddress address = RemoteAddress.parse(args[0]);
 
     try (
-      final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
+        final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
     ) {
-      BroadCastReceiver receiver = new BroadCastReceiver(source);
-       final Controller controller = new Controller(receiver);
-       final View view = new View(receiver);
+      final BroadCastReceiver receiver = new BroadCastReceiver(source);
+      final Controller controller = new Controller(receiver);
+      final View view = new View(receiver);
 
       LOG.info("Creating client...");
 
@@ -71,7 +71,5 @@ final class SimpleGuiClientMain {
     chatSimpleGui.run();
 
     LOG.info("chat client is running.");
-
   }
-
 }

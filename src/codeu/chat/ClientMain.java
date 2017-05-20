@@ -52,7 +52,7 @@ final class ClientMain {
     final View view = new View(receiver);
 
     LOG.info("Creating client...");
-    final Chat chat = new Chat(receiver ,controller, view);
+    final Chat chat = new Chat(receiver, controller, view);
 
     LOG.info("Created client");
 
