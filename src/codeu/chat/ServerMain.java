@@ -15,7 +15,7 @@
 
 package codeu.chat;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Arrays;
 
 import codeu.chat.common.Relay;
@@ -47,28 +47,8 @@ final class ServerMain {
 
     LOG.info("============================= START OF LOG =============================");
 
-    try {
-      Runtime rt = Runtime.getRuntime();
-      Process pr = rt.exec("npm -v");
-
-      BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-
-      String line=null;
-
-      while((line=input.readLine()) != null) {
-        LOG.info("NPM INFOMRATION: " + line);
-      }
-
-      int exitVal = pr.waitFor();
-      LOG.error("Exited with error code "+exitVal);
-
-    } catch(Exception e) {
-      LOG.error(e.toString());
-      e.printStackTrace();
-    }
-
     //final int myPort = Integer.parseInt(args[2]);
-    final int myPort = 10111;
+    final int myPort = 10110;
     final byte[] secret = Secret.parse(args[1]);
 
     Uuid id = null;
