@@ -171,8 +171,11 @@ public final class UserPanel extends JPanel {
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
-          UserPanel.this.getAllUsers(listModel);
+          if(clientContext.user.addUser(s)==true){
+          	UserPanel.this.getAllUsers(listModel);
+          } else{
+          	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
+          }
         }
       }
     });
