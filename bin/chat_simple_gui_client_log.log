@@ -103,3 +103,59 @@ May 17, 2017 6:14:20 PM codeu.chat.client.Controller newUser
 INFO: newUser: Response completed.
 May 17, 2017 6:14:20 PM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "Kate" UUID=[UUID:100.114.2400389564]
+May 20, 2017 11:57:01 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 11:57:01 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 11:57:01 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 11:57:01 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 11:57:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 11:57:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 11:57:24 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 11:57:25 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 11:57:51 AM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 11:57:51 AM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 11:57:51 AM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 11:57:51 AM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 12:02:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 12:02:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 12:02:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 12:02:01 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 12:02:45 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 12:02:45 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 12:02:45 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 12:02:45 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 12:03:30 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 12:03:30 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 12:03:30 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 12:03:30 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 12:08:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 12:08:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 12:08:01 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 12:08:01 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
