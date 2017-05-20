@@ -30,11 +30,7 @@ import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
-import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
-import codeu.chat.util.Timeline;
-import codeu.chat.util.Uuid;
+import codeu.chat.util.*;
 import codeu.chat.util.connections.Connection;
 
 public final class Server {
@@ -138,7 +134,9 @@ public final class Server {
 
       final String name = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final String password = Serializers.STRING.read(in);
+
+      final User user = controller.newUser(name, password);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
       Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -262,7 +260,7 @@ public final class Server {
     User user = model.userById().first(relayUser.id());
 
     if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
+      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.text(), relayUser.time());
     }
 
     Conversation conversation = model.conversationById().first(relayConversation.id());

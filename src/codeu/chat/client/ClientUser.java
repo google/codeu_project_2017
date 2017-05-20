@@ -19,8 +19,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.Iterator;
-
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -70,6 +68,10 @@ public final class ClientUser {
     return true;
   }
 
+  public boolean isValidPassword(String password) {
+    return password.length() > 0 && password != null;
+  }
+
   public boolean hasCurrent() {
     return (current != null);
   }
@@ -78,13 +80,17 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, String password) {
     updateUsers();
 
     final User prev = current;
     if (name != null) {
       
-    	final User newCurrent = usersByName.first(name);
+    	final User tempCurrent = usersByName.first(name);
+    	User newCurrent = null;
+    	if(password != null && password.equals(tempCurrent.password)) {
+    	  newCurrent = tempCurrent;
+        }
       if (newCurrent != null) {
         current = newCurrent;
       }
@@ -104,11 +110,11 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  public void addUser(String name, String password) {
     
-	  final boolean validInputs = isValidName(name);
+	  final boolean validInputs = isValidName(name) && isValidPassword(password);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       

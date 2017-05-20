@@ -151,20 +151,24 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
+          clientContext.user.signInUser(data, "");
           userSignedInLabel.setText("Hello " + data);
         }
       }
     });
 
     userAddButton.addActionListener(new ActionListener() {
+      // MAY NOT WORK
       @Override
       public void actionPerformed(ActionEvent e) {
-        final String s = (String) JOptionPane.showInputDialog(
+        final String username = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
-        if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s);
+        final String password = (String) JOptionPane.showInputDialog(
+                UserPanel.this, "Enter Password:", "Add User", JOptionPane.PLAIN_MESSAGE,
+                null, null, "");
+        if (username != null && username.length() > 0 && password != null && password.length() > 0) {
+          clientContext.user.addUser(username, password);
           UserPanel.this.getAllUsers(listModel);
         }
       }

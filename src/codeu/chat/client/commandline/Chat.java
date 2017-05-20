@@ -43,14 +43,14 @@ public final class Chat {
   // Print help message.
   private static void help() {
     System.out.println("Chat commands:");
-    System.out.println("   exit      - exxit the program.");
-    System.out.println("   help      - this help message.");
-    System.out.println("   sign-in <username>  - sign in as user <username>.");
-    System.out.println("   sign-out  - sign out current user.");
-    System.out.println("   current   - show current user, conversation, message.");
+    System.out.println("   exit                           - exit the program.");
+    System.out.println("   help                           - this help message.");
+    System.out.println("   sign-in <username>  <password> - sign in as user <username>.");
+    System.out.println("   sign-out                       - sign out current user.");
+    System.out.println("   current                        - show current user, conversation, message.");
     System.out.println("User commands:");
-    System.out.println("   u-add <name>  - add a new user.");
-    System.out.println("   u-list-all    - list all users known to system.");
+    System.out.println("   u-add <name>  <password>  - add a new user.");
+    System.out.println("   u-list-all                - list all users known to system.");
     System.out.println("Conversation commands:");
     System.out.println("   c-add <title>    - add a new conversation.");
     System.out.println("   c-list-all       - list all conversations known to system.");
@@ -89,7 +89,14 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        String username = tokenScanner.next().trim();
+        if (!tokenScanner.hasNext()) {
+          System.out.println("ERROR: Password not supplied.");
+        } else {
+          String password = tokenScanner.next().trim();
+          signInUser(username, password);
+
+        }
       }
 
     } else if (token.equals("sign-out")) {
@@ -109,7 +116,14 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        String username = tokenScanner.next().trim();
+        if(!tokenScanner.hasNext()) {
+          System.out.println("ERROR: Password not supplied.");
+        } else {
+          String password = tokenScanner.next().trim();
+          addUser(username, password);
+
+        }
       }
 
     } else if (token.equals("u-list-all")) {
@@ -193,9 +207,9 @@ public final class Chat {
   }
 
   // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
+  private void signInUser(String name, String password) {
+    if (!clientContext.user.signInUser(name, password)) {
+      System.out.println("Error: sign in failed (incorrect name or password)");
     }
   }
 
@@ -266,8 +280,8 @@ public final class Chat {
   }
 
   // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
+  private void addUser(String name, String password) {
+    clientContext.user.addUser(name, password);
   }
 
   // Display all users known to server.
