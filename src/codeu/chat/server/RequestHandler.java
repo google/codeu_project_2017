@@ -2,6 +2,9 @@ package codeu.chat.server;
 
 import codeu.chat.server.model.Request;
 import java.util.*;
+import java.io.*;
+import java.nio.file.Files;
+
 /**
  * Controller for HTTP requests.
  *
@@ -118,14 +121,19 @@ public class RequestHandler {
         String resource = r.getEndpoint();
         String body = "";
         String stub = System.getProperty("user.dir") + "/../magmemgui/client";
+
+        out.write(("HTTP/1.1 200 OK" + "\r\n\r\n" + body).getBytes());
+
         switch (resource) {
             case "/":
-                body = new Scanner(new File(stub + "/index.html")).useDelimiter("\\Z").next();
+                File file = new File(stub + resource + "index.html");
+                Files.copy(file.toPath(), out);
                 break;
             default:
-                body = body = new Scanner(new File(stub + resource)).useDelimiter("\\Z").next();
+                file = new File(stub + resource);
+                Files.copy(file.toPath(), out);
         }
-        out.write(("HTTP/1.1 200 OK\r\n\r\n" + body).getBytes());
+
         return true;
     }
 
