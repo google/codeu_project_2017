@@ -91,7 +91,7 @@ public final class UserPanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    final JButton userUpdateButton = new JButton("Update");
+    final JButton userUpdateButton = new JButton("Update Users");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userAddButton = new JButton("Add");
 
