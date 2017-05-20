@@ -16,16 +16,14 @@
 package codeu.chat.server;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
@@ -94,9 +92,10 @@ public final class Server {
 
           LOG.info("Handling connection...");
 
-          final boolean success = onMessage(
-              connection.in(),
-              connection.out());
+          final BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+          final PrintWriter out = new PrintWriter(connection.out(),true);
+
+          final boolean success = onMessage(in, out);
 
           LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
         } catch (Exception ex) {
@@ -114,7 +113,9 @@ public final class Server {
     });
   }
 
-  private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+  private boolean onMessage(BufferedReader in, PrintWriter out) throws IOException {
+
+    // todo (raami) : add a new if for networkcode getuserscore(uuid)
 
     final int type = Serializers.INTEGER.read(in);
 
@@ -126,6 +127,12 @@ public final class Server {
 
       final Message message = controller.newMessage(author, conversation, content);
 
+      /* todo (raami): Update the sentiment score for the user in order to reflect the new message
+
+       * Use the view.findUser(author) to get the user with the uuid of the author
+       * Call user.sentimentscore.addmessage(message) to add the message to the sentiment score
+
+      */
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 
