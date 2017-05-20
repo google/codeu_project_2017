@@ -241,7 +241,17 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
-    } else {
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
+
+      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+    
+    else {
 
       // In the case that the message was not handled make a dummy message with
       // the type "NO_MESSAGE" so that the client still gets something.

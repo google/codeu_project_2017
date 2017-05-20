@@ -190,7 +190,15 @@ public final class MessagePanel extends JPanel {
         	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
         	System.out.println("HI"); 
+        	
+        	clientContext.message.addMessage(
+      	    clientContext.user.getCurrent().id,
+      	    clientContext.conversation.getCurrentId(),
+      	    "");
+        	//clientContext.conversation.setCurrent(clientContext.conversation.getCurrent()); 
           	MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent()); //Not, yet, working
+          	
+          	System.out.println("Bye"); 
         }
       }
     });
@@ -237,7 +245,6 @@ public final class MessagePanel extends JPanel {
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
-
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 

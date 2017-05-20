@@ -25,6 +25,7 @@ import codeu.chat.common.Message;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.Time; 
 
 public final class ClientMessage {
 
@@ -58,8 +59,10 @@ public final class ClientMessage {
   // Validate the message body.
   public static boolean isValidBody(String body) {
     boolean clean = true;
-    if ((body.length() <= 0) || (body.length() > 1024)) {
+    if ((body.length() < 0) || (body.length() > 1024)) {
       clean = false;
+    } else if (body.length()==0){
+      
     } else {
 
       // TODO: check for invalid characters
@@ -206,15 +209,20 @@ public final class ClientMessage {
       while (!nextMessageId.equals(Uuid.NULL) && conversationContents.size() < MESSAGE_MAX_COUNT) {
 
         for (final Message msg : view.getMessages(nextMessageId, MESSAGE_FETCH_COUNT)) {
+        
+        //view.getMessages(nextMessageId, conversationContents.get(0).creation, Time.now())){
+        
+        //view.getMessages(nextMessageId, MESSAGE_FETCH_COUNT)) {
 
           conversationContents.add(msg);
-
+          
           // Race: message possibly added since conversation fetched.  If that occurs,
           // pretend the newer messages do not exist - they'll get picked up next time).
           if (msg.next.equals(Uuid.NULL) || msg.id.equals(conversationHead.lastMessage)) {
             msg.next = Uuid.NULL;
             break;
           }
+          
         }
         nextMessageId = conversationContents.get(conversationContents.size() - 1).next;
       }
