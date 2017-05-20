@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class Request {
 
     private String verb;
+    private String endpoint;
     private HashMap<String, String> headers;
     private String body;
 
@@ -29,6 +30,13 @@ public class Request {
         return verb;
     }
 
+
+    /**
+     *
+     * @return this request's endpoint.
+     */
+    public String getEndpoint() {return endpoint; }
+
     /**
      *
      * @param verb sets this request's verb (GET, POST, PUT, ...).
@@ -36,6 +44,12 @@ public class Request {
     public void setVerb(String verb) {
         this.verb = verb;
     }
+
+    /**
+     *
+     * @param endpoint sets this request's endpoint.
+     */
+    public void setEndpoint(String endpoint) {this.endpoint = endpoint; }
 
     /**
      *

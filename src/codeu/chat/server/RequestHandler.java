@@ -1,6 +1,7 @@
 package codeu.chat.server;
 
 import codeu.chat.server.model.Request;
+import java.util.*;
 /**
  * Controller for HTTP requests.
  *
@@ -39,7 +40,8 @@ public class RequestHandler {
 
         // Extract verb.
         // Stop split operation after finding the first space.
-        r.setVerb(struct[0].split(" ", 2)[0]);
+        r.setVerb(struct[0].split(" ")[0]);
+        r.setEndpoint(struct[0].split(" ")[1]);
 
         // Extract headers.
         int i;
@@ -101,6 +103,29 @@ public class RequestHandler {
         out.write(("HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin:*\r\nAccess-Control-Allow-Methods:" +
           "GET, POST, PATCH, PUT, DELETE, OPTIONS\r\nAccess-Control-Allow-Headers:" +
           r.getHeader("Access-Control-Request-Headers")).getBytes());
+        return true;
+    }
+
+    /**
+     *
+     * Handles website
+     *
+     * @param out the remote connection's data stream.
+     * @return success.
+     */
+    public static boolean website(OutputStream out, Request r) throws IOException {
+        System.out.println("website accessed");
+        String resource = r.getEndpoint();
+        String body = "";
+        String stub = System.getProperty("user.dir") + "/../magmemgui/client";
+        switch (resource) {
+            case "/":
+                body = new Scanner(new File(stub + "/index.html")).useDelimiter("\\Z").next();
+                break;
+            default:
+                body = body = new Scanner(new File(stub + resource)).useDelimiter("\\Z").next();
+        }
+        out.write(("HTTP/1.1 200 OK\r\n\r\n" + body).getBytes());
         return true;
     }
 
