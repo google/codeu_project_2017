@@ -2,57 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c2ddf5f-ee3f-4e7d-b4d5-3c9f8e7d70bf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/ServerMain$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$Handler.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$Processor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/LinearUuidGenerator$BasicUuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Time$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Time.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuid$Generator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/UuidTest$TestUuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/UuidTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$2$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/UuidsTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/relay/ServerTest$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RandomUuidGenerator$BasicUuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RandomUuidGenerator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RawControllerTest$1.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/RelayMain.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/RelayMain.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/ServerMain.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/ServerMain.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/ClientUser.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/ClientUser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/Controller.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/commandline/Chat.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/commandline/Chat.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$3.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$4.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/BasicController.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/BasicController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/RawController.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/RawController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/User$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/User$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/User.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/BasicControllerTest.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/BasicControllerTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Controller.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RawControllerTest.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/RawControllerTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server$3.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Uuid.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Uuid.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/UuidTest.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/UuidTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_client_log.log" afterPath="$PROJECT_DIR$/bin/chat_client_log.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_server_log.log" afterPath="$PROJECT_DIR$/bin/chat_server_log.log" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -615,7 +566,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -629,7 +580,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27825466" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
