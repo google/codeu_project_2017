@@ -7,9 +7,11 @@ import codeu.chat.util.Uuid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -33,7 +35,7 @@ public class BroadCastSystem {
 
   }
 
-  private ConcurrentHashMap<Integer, List<Connection>> conversationUsers;
+  private ConcurrentHashMap<Uuid, Set<Connection>> conversationUsers;
   private final BlockingQueue<ConversationMessageLink> messagesToBroadcast;
   private final Thread broadCaster;
 
@@ -42,20 +44,22 @@ public class BroadCastSystem {
     @Override
     public void run() {
 
-      try {
-        while (true) {
+      while (true) {
+        try {
           broadCastMessage(messagesToBroadcast.take());
+        } catch (InterruptedException exc) {
+          System.out.println("Queue Interrupted");
         }
-      } catch (InterruptedException exc) {
-        System.out.println("Error broadcasting message");
       }
+
 
     }
   }
 
   public BroadCastSystem() {
-    conversationUsers = new ConcurrentHashMap<>();
-    messagesToBroadcast = new LinkedBlockingQueue<>();
+
+    conversationUsers = new ConcurrentHashMap<Uuid, Set<Connection>>();
+    messagesToBroadcast = new LinkedBlockingQueue<ConversationMessageLink>();
 
     MessageBroadCaster messageBroadCaster = new MessageBroadCaster();
 
@@ -69,7 +73,7 @@ public class BroadCastSystem {
     if (connection == null) {
       throw new NullPointerException();
     }
-    List<Connection> recipients = conversationUsers.get(uuid.id());
+    Set<Connection> recipients = conversationUsers.get(uuid);
     recipients.add(connection);
 
   }
@@ -79,7 +83,7 @@ public class BroadCastSystem {
     if (connection == null) {
       throw new NullPointerException();
     }
-    List<Connection> recipients = conversationUsers.get(uuid.id());
+    Set<Connection> recipients = conversationUsers.get(uuid);
     recipients.remove(connection);
 
   }
@@ -87,6 +91,7 @@ public class BroadCastSystem {
   public void switchConversation(Connection connection, ConversationSummary oldCon,
       ConversationSummary newCon) {
 
+    // todo currently user can be part of two conversations at once. ex: if they use a null old con twice
     if (newCon == null && oldCon == null) {
       throw new NullPointerException();
     }
@@ -101,7 +106,7 @@ public class BroadCastSystem {
 
   private void broadCastMessage(ConversationMessageLink messageLink) {
 
-    int conversationId = messageLink.conversationUuid.id();
+    Uuid conversationId = messageLink.conversationUuid;
     Message message = messageLink.message;
 
     // using an iterator in order to remove connections if they return an exception
@@ -122,6 +127,7 @@ public class BroadCastSystem {
         }
 
       } catch (Exception ex) {
+        // todo (raami): consider adding a way to retry sending messages
         try {
           connection.close();
         } catch (IOException ioexc) {
@@ -143,13 +149,13 @@ public class BroadCastSystem {
       throw new NullPointerException("Null ID in conversation summary");
     }
 
-    int uid = conversationSummary.id.id();
+    Uuid uid = conversationSummary.id;
 
     if (conversationUsers.contains(uid)) {
       throw new IllegalArgumentException("Conversation already exists");
     }
 
-    conversationUsers.put(uid, Collections.synchronizedList(new LinkedList<>()));
+    conversationUsers.put(uid, Collections.synchronizedSet(new HashSet<Connection>()));
 
   }
 
