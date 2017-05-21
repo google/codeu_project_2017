@@ -15,10 +15,8 @@
 package codeu.chat.client;
 
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import codeu.chat.common.SentimentScore;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,8 +32,6 @@ import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import codeu.chat.util.connections.Connection;
-import codeu.chat.util.connections.ConnectionSource;
 
 // VIEW
 //
@@ -366,4 +362,12 @@ public final class View implements BasicView, LogicalView{
     receiver.responseProcessed();
     return messages;
   }
+
+  public SentimentScore getSentimentScore(Uuid useruid) {
+
+    // todo (raami): request the sentiment score for the user with the specified uid, from the server
+
+    return null;
+  }
+
 }

@@ -39,15 +39,16 @@ if [[ "${TEAM_ID}" == "" || "${TEAM_SECRET}" == "" || "${PORT}" == "" || "${PERS
   exit 1
 fi
 
+export GOOGLE_APPLICATION_CREDENTIALS=./TestingNLAPI-03ba34a1872e.json
 
 if [ "${RELAY_ADDRESS}" == "" ] ; then
-  java -cp ./third_party/gson-2.8.0.jar:./bin codeu.chat.ServerMain \
+  java -cp ./third_party/*:./bin codeu.chat.ServerMain \
       "${TEAM_ID}" \
       "${TEAM_SECRET}" \
       "${PORT}" \
       "${PERSISTENT_DIR}"
 else
-  java -cp ./third_party/gson-2.8.0.jar:./bin codeu.chat.ServerMain \
+  java -cp ./third_party/*:./bin codeu.chat.ServerMain \
       "${TEAM_ID}" \
       "${TEAM_SECRET}" \
       "${PORT}" \
