@@ -78,190 +78,160 @@ public final class Server {
 
     final int type = Serializers.INTEGER.read(in);
 
-    switch(type){
-    case NetworkCode.NEW_MESSAGE_REQUEST: {
-	
-	      final Uuid author = Uuids.SERIALIZER.read(in);
-	      final Uuid conversation = Uuids.SERIALIZER.read(in);
-	      final String content = Serializers.STRING.read(in);
-	
-	      final Message message = controller.newMessage(author, conversation, content);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
-	      Serializers.nullable(Message.SERIALIZER).write(out, message);
-	
-	      // Unlike the other calls - we need to send something the result of this
-	      // call to the relay. Waiting until after the server has written back to
-	      // the client allows the client to get the response, but the network
-	      // connection has not been closed. However to wait after until the client-server
-	      // connection was closed before sending would be very complicated.
-	
-	      sendToRelay(author, conversation, message.id);
-	      break;
-    }
-    case NetworkCode.NEW_USER_REQUEST: {
+    if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
-	      final String name = Serializers.STRING.read(in);
-	
-	      final User user = controller.newUser(name);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
-	      Serializers.nullable(User.SERIALIZER).write(out, user);
+      final Uuid author = Uuids.SERIALIZER.read(in);
+      final Uuid conversation = Uuids.SERIALIZER.read(in);
+      final String content = Serializers.STRING.read(in);
 
-    }
-    case NetworkCode.NEW_CONVERSATION_REQUEST: {
+      final Message message = controller.newMessage(author, conversation, content);
 
-	      final String title = Serializers.STRING.read(in);
-	      final Uuid owner = Uuids.SERIALIZER.read(in);
-	
-	      final Conversation conversation = controller.newConversation(title, owner);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
-	      Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
-	      break;
+      Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
+      Serializers.nullable(Message.SERIALIZER).write(out, message);
 
-    } 
-    case NetworkCode.GET_USERS_BY_ID_REQUEST: {
+      // Unlike the other calls - we need to send something the result of this
+      // call to the relay. Waiting until after the server has written back to
+      // the client allows the client to get the response, but the network
+      // connection has not been closed. However to wait after until the client-server
+      // connection was closed before sending would be very complicated.
 
-	      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
-	
-	      final Collection<User> users = view.getUsers(ids);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_RESPONSE);
-	      Serializers.collection(User.SERIALIZER).write(out, users);
-	      break;
+      sendToRelay(author, conversation, message.id);
 
-    } 
-    case NetworkCode.GET_ALL_CONVERSATIONS_REQUEST: {
+    } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
-	      final Collection<ConversationSummary> conversations = view.getAllConversations();
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE);
-	      Serializers.collection(ConversationSummary.SERIALIZER).write(out, conversations);
-	      break;
+      final String name = Serializers.STRING.read(in);
 
-    } 
-    case NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST: {
+      final User user = controller.newUser(name);
 
-	      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
-	
-	      final Collection<Conversation> conversations = view.getConversations(ids);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE);
-	      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-	      break;
+      Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, user);
 
-    } 
-    case NetworkCode.GET_MESSAGES_BY_ID_REQUEST: {
+    } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
+
+      final String title = Serializers.STRING.read(in);
+      final Uuid owner = Uuids.SERIALIZER.read(in);
+
+      final Conversation conversation = controller.newConversation(title, owner);
+
+      Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
+      Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
+
+    } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
+
+      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+
+      final Collection<User> users = view.getUsers(ids);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_RESPONSE);
+      Serializers.collection(User.SERIALIZER).write(out, users);
+
+    } else if (type == NetworkCode.GET_ALL_CONVERSATIONS_REQUEST) {
+
+      final Collection<ConversationSummary> conversations = view.getAllConversations();
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE);
+      Serializers.collection(ConversationSummary.SERIALIZER).write(out, conversations);
+
+    } else if (type == NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST) {
+
+      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+
+      final Collection<Conversation> conversations = view.getConversations(ids);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE);
+      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+
+    } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
       
-	      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
-	
-	      final Collection<Message> messages = view.getMessages(ids);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_RESPONSE);
-	      Serializers.collection(Message.SERIALIZER).write(out, messages);
-	      break;
+      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
+
+      final Collection<Message> messages = view.getMessages(ids);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
       
 
-    } 
-    case NetworkCode.GET_USER_GENERATION_REQUEST: {
+    } else if (type == NetworkCode.GET_USER_GENERATION_REQUEST) {
 
-	      Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_RESPONSE);
-	      Uuids.SERIALIZER.write(out, view.getUserGeneration());
-	      break;
+      Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_RESPONSE);
+      Uuids.SERIALIZER.write(out, view.getUserGeneration());
 
-    } 
-    case NetworkCode.GET_USERS_EXCLUDING_REQUEST: {
+    } else if (type == NetworkCode.GET_USERS_EXCLUDING_REQUEST) {
 
-	      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
-	
-	      final Collection<User> users = view.getUsersExcluding(ids);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_RESPONSE);
-	      Serializers.collection(User.SERIALIZER).write(out, users);
-	      break;
+      final Collection<Uuid> ids = Serializers.collection(Uuids.SERIALIZER).read(in);
 
-    } 
-    case NetworkCode.GET_CONVERSATIONS_BY_TIME_REQUEST: {
+      final Collection<User> users = view.getUsersExcluding(ids);
 
-	      final Time startTime = Time.SERIALIZER.read(in);
-	      final Time endTime = Time.SERIALIZER.read(in);
-	
-	      final Collection<Conversation> conversations = view.getConversations(startTime, endTime);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE);
-	      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-	      break;
+      Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_RESPONSE);
+      Serializers.collection(User.SERIALIZER).write(out, users);
 
-    } 
-    case NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST: {
+    } else if (type == NetworkCode.GET_CONVERSATIONS_BY_TIME_REQUEST) {
 
-	      final String filter = Serializers.STRING.read(in);
-	
-	      final Collection<Conversation> conversations = view.getConversations(filter);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE);
-	      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-	      break;
+      final Time startTime = Time.SERIALIZER.read(in);
+      final Time endTime = Time.SERIALIZER.read(in);
 
-    } 
-    case NetworkCode.GET_MESSAGES_BY_TIME_REQUEST: {
+      final Collection<Conversation> conversations = view.getConversations(startTime, endTime);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE);
+      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+
+    } else if (type == NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST) {
+
+      final String filter = Serializers.STRING.read(in);
+
+      final Collection<Conversation> conversations = view.getConversations(filter);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE);
+      Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
+
+    } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
       
-	      final Uuid conversation = Uuids.SERIALIZER.read(in);
-	      final Time startTime = Time.SERIALIZER.read(in);
-	      final Time endTime = Time.SERIALIZER.read(in);
-	
-	      final Collection<Message> messages = view.getMessages(conversation, startTime, endTime);
-	
-	      
-	      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE);
-	      Serializers.collection(Message.SERIALIZER).write(out, messages);
-	      break;
+      final Uuid conversation = Uuids.SERIALIZER.read(in);
+      final Time startTime = Time.SERIALIZER.read(in);
+      final Time endTime = Time.SERIALIZER.read(in);
 
-    } 
-    case NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST: {
+      final Collection<Message> messages = view.getMessages(conversation, startTime, endTime);
+
+      
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
     	
-	      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
-	      final int range = Serializers.INTEGER.read(in);
-	
-	      final Collection<Message> messages = view.getMessages(rootMessage, range);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
-	      Serializers.collection(Message.SERIALIZER).write(out, messages);
-	      break;
+      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
       
-    } 
-    case NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST: {
+
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
 	
-	      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
-	      final int range = Serializers.INTEGER.read(in);
-	
-	      final Collection<Message> messages = view.getMessages(rootMessage, range);
-	
-	      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
-	      break;
+      final Uuid rootMessage = Uuids.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
 
     
-    } 
-    case NetworkCode.DELETE_USER_REQUEST: {
+    } else if (type == NetworkCode.DELETE_USER_REQUEST) {
 
     	final String name = Serializers.STRING.read(in);
 
         controller.deleteUser(name);
         
         Serializers.INTEGER.write(out, NetworkCode.DELETE_USER_RESPONSE);
-        break;
 
-    } 
-    default: {
+    } else {
 
-	    // In the case that the message was not handled make a dummy message with
-	    // the type "NO_MESSAGE" so that the client still gets something.
-	
-	    Serializers.INTEGER.write(out, NetworkCode.NO_MESSAGE);
-	    break;
+      // In the case that the message was not handled make a dummy message with
+      // the type "NO_MESSAGE" so that the client still gets something.
 
-    }
+      Serializers.INTEGER.write(out, NetworkCode.NO_MESSAGE);
+
     }
 
     return true;
