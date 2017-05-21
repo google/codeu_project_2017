@@ -47,7 +47,7 @@ public class Controller implements BasicController {
 
 
 
-    final OutputStream out = receiver.out();
+    final PrintWriter out = receiver.out();
 
     try {
 
@@ -57,7 +57,7 @@ public class Controller implements BasicController {
       Serializers.STRING.write(out, body);
 
       if (receiver.getType() == NetworkCode.NEW_MESSAGE_RESPONSE) {
-        InputStream in = receiver.getInputStream();
+        BufferedReader in = receiver.getInputStream();
 
         response = Serializers.nullable(Message.SERIALIZER).read(in);
       } else {
@@ -77,7 +77,7 @@ public class Controller implements BasicController {
 
     User response = null;
 
-    final OutputStream out = receiver.out();
+    final PrintWriter out = receiver.out();
 
 
 
@@ -88,9 +88,8 @@ public class Controller implements BasicController {
       Serializers.STRING.write(out, name);
       LOG.info("newUser: Request completed.");
 
-
       if (receiver.getType() == NetworkCode.NEW_USER_RESPONSE) {
-        InputStream in = receiver.getInputStream();
+        BufferedReader in = receiver.getInputStream();
         response = Serializers.nullable(User.SERIALIZER).read(in);
 
         LOG.info("newUser: Response completed.");
@@ -111,7 +110,7 @@ public class Controller implements BasicController {
 
     Conversation response = null;
 
-    final OutputStream out = receiver.out();
+    final PrintWriter out = receiver.out();
 
     try {
 
@@ -119,7 +118,7 @@ public class Controller implements BasicController {
       Serializers.STRING.write(out, title);
       Uuid.SERIALIZER.write(out, owner);
 
-      InputStream in = receiver.getInputStream();
+      BufferedReader in = receiver.getInputStream();
 
       if (receiver.getType() == NetworkCode.NEW_CONVERSATION_RESPONSE) {
 

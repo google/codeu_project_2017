@@ -80,7 +80,9 @@ public final class Serializers {
 
     @Override
     public Integer read(BufferedReader in) throws IOException {
-      return Integer.parseInt(in.readLine());
+      String st = in.readLine();
+      if (st == null) return -1;
+      return Integer.parseInt(st);
     }
   };
 
