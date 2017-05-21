@@ -151,8 +151,10 @@ public final class View implements BasicView, LogicalView{
 
       InputStream in = receiver.getInputStream();
 
+
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
+
       } else {
         LOG.error("Response from server failed.");
       }
