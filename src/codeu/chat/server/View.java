@@ -55,10 +55,8 @@ public final class View implements BasicView, LogicalView, SinglesView {
     return intersect(model.userById(), ids);
   }
   
-  public void deleteUser(User user) {
-    //Collection<Uuid> ids = new ArrayList<Uuid>(); 
-    //ids.add(user.id); 
-    model.deleteUser(user); 
+  public Collection<User> deleteUser(Collection<Uuid> ids) {
+    return intersect(model.deleteUsers(ids), ids); 
   }
 
   @Override
