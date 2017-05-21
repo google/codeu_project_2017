@@ -69,7 +69,7 @@ public final class ClientUser {
   }
 
   public boolean isValidPassword(String password) {
-    return password.length() > 0 && password != null;
+    return password != null && password.length() > 0;
   }
 
   public boolean hasCurrent() {
