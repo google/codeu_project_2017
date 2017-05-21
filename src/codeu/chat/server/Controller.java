@@ -48,6 +48,37 @@ public final class Controller implements RawController, BasicController {
     return newUser(createId(), name, Time.now());
   }
 
+  public User newUser(String name, String password){
+
+    User user = null;
+    Uuid id = createId();
+    Time creationTime = Time.now();
+
+    if (isIdFree(id)) {
+
+      user = new User(id, name, Time.now(), password);
+      model.add(user);
+
+      LOG.info(
+              "newUser success (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+
+    } else {
+
+      LOG.info(
+              "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+    }
+
+    return user;
+
+  }
+
+
   @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
@@ -103,13 +134,17 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(Uuid id, String namePassword, Time creationTime) {
 
     User user = null;
+    String [] info = namePassword.split("\\s+");
+    String name = info[0];
+    String password = info[1];
 
     if (isIdFree(id)) {
 
       user = new User(id, name, creationTime);
+      user.setPassword(password);
       model.add(user);
 
       LOG.info(
@@ -129,6 +164,7 @@ public final class Controller implements RawController, BasicController {
 
     return user;
   }
+
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {

@@ -33,20 +33,45 @@ public final class User {
       Uuid.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
+      Serializers.STRING.write(out, value.password);
 
     }
+
+/*    public void writePasswordUser(OutputStream out, User value) throws IOException {
+
+      Uuid.SERIALIZER.write(out, value.id);
+      Serializers.STRING.write(out, value.name);
+      Time.SERIALIZER.write(out, value.creation);
+      Serializers.STRING.write(out, value.password);
+
+    }*/
 
     @Override
     public User read(InputStream in) throws IOException {
 
       return new User(
-          Uuid.SERIALIZER.read(in),
-          Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
-      );
-
+              Uuid.SERIALIZER.read(in),
+              Serializers.STRING.read(in),
+              Time.SERIALIZER.read(in),
+              Serializers.STRING.read(in)
+              );
     }
+
+
+ /*   public User readPasswordUser(InputStream in) throws IOException {
+
+      return new User(
+              Uuid.SERIALIZER.read(in),
+              Serializers.STRING.read(in),
+              Time.SERIALIZER.read(in),
+              Serializers.STRING.read(in)
+              );
+
+    }*/
+
   };
+
+
 
 
   //Potentially change these values back to private?
@@ -63,6 +88,17 @@ public final class User {
 
   }
 
+  //create new constructors
+  public User(Uuid id, String name, Time creation, String password){
+
+    this.id = id;
+    this.name = name;
+    this.creation = creation;
+    this.password = password;
+
+  }
+
+  //Potentially get rid of setter
   public void setPassword(String password){
 
     this.password = password;

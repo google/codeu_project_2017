@@ -87,7 +87,39 @@ public class Controller implements BasicController {
     }
 
     return response;
+
   }
+
+  public User newUser(String name, String password){
+
+    System.out.println("password method");
+    User response = null;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
+      Serializers.STRING.write(connection.out(), name);
+      Serializers.STRING.write(connection.out(), password);
+
+      LOG.info("newUser: Request completed.");
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {
+        response = Serializers.nullable(User.SERIALIZER).read(connection.in());
+        LOG.info("newUser: Response completed.");
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    System.out.println("response: " + response);
+
+    return response;
+
+  }
+
 
   @Override
   public Conversation newConversation(String title, Uuid owner)  {

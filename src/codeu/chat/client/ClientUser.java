@@ -81,8 +81,10 @@ public final class ClientUser {
   public boolean checkPassword(String name, String password){
 
     final User user = usersByName.first(name);
+    System.out.print("check password: " + user.getPassword());
+    printUser(user);
 
-    if( user != null  && (user.getPassword() == password)) {
+    if( user != null  && (user.getPassword().equals(password))) {
       return true;
     }
 
@@ -101,10 +103,13 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public User addUser(String name) {
-    final boolean validInputs = isValidName(name);
+  public User addUser(String name, String password) {
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final boolean validInputs = isValidName(name);
+    String namePassword = name + " " + password;
+
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
+
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
@@ -117,11 +122,13 @@ public final class ClientUser {
     return user;
   }
 
-  public void setUserPassword(User user, String password){
+ /*public void setUserPassword(User user, String password){
 
+    System.out.println("set user password: " + user);
     user.setPassword(password);
+    System.out.println("password: " + user.getPassword());
 
-  }
+  }*/
 
   public void showAllUsers() {
     updateUsers();

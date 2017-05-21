@@ -164,8 +164,9 @@ public final class UserPanel extends JPanel {
           final String userPassword = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter " + data + "'s password:", "Enter Password", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
+          System.out.println("sign in panel: " + userPassword);
           //check password to make sure it is correct and check it against the user's password
-          if(userPassword.equals(clientContext.user.checkPassword(data, userPassword))){ //access userByName, get User, access the user's password (String)
+          if(clientContext.user.checkPassword(data, userPassword)){ //access userByName, get User, access the user's password (String)
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
           } else{
@@ -198,10 +199,12 @@ public final class UserPanel extends JPanel {
          //       null, null, "");
 
         if (name != null && name.length() > 0) {
-          User u = clientContext.user.addUser(name);
-          clientContext.user.setUserPassword(u, password);
-
+          User u = clientContext.user.addUser(name, password);
+         // clientContext.user.setUserPassword(u, password);
+          System.out.println("add user panel password: ");
+          System.out.println(u.getPassword());
           UserPanel.this.getAllUsers(listModel);
+
         }
       }
     });
