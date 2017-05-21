@@ -291,7 +291,7 @@ public final class Chat {
     clientContext.user.addUser(name);
   }
   
-  // Add a new user.
+  // Delete a user.
   private void deleteUser(String name) {
     clientContext.user.deleteUser(name);
   }

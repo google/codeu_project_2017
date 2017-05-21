@@ -120,14 +120,14 @@ public class Controller implements BasicController {
 	  Conversation response = null;
 
 	  try (final Connection connection = source.connect()) {
-        Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USER_REQUEST);
-	    Serializers.STRING.write(connection.out(), user);
+	      Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USER_REQUEST);
+	      Serializers.STRING.write(connection.out(), user);
 	    
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USER_RESPONSE) {
-          LOG.info("Delete user: %s success", user);
-        } else {
-          LOG.error("Response from server failed.");
-        }
+	      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USER_RESPONSE) {
+	          LOG.info("Delete user: %s success", user);
+	        } else {
+	          LOG.error("Response from server failed.");
+	        }
 	  
 	  } catch (Exception ex) {
 	    System.out.println("ERROR: Exception during call on server. Check log for details.");

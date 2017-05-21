@@ -166,23 +166,28 @@ public final class Controller implements RawController, BasicController {
   @Override
   public void deleteUser(String name){
 	 final User removeUser = model.userByText().first(name);
-
-	  model.userByText().removeByValue(removeUser);
-	  model.userById().removeByValue(removeUser);
-	  model.userByTime().removeByValue(removeUser);
-	  
-	  if(isUserFree(name) && isIdFree(removeUser.id)){
-	      LOG.info(
-		          "deleteUser success (user.id=%s user.name=%s user.time=%s)",
-		          removeUser.id,
-		          removeUser.name,
-		          removeUser.creation);
+	 
+	  if(removeUser != null){
+		  model.userByText().removeByValue(removeUser);
+		  model.userById().removeByValue(removeUser);
+		  model.userByTime().removeByValue(removeUser);
+		  
+		  if(isUserFree(name) && isIdFree(removeUser.id)){
+		      LOG.info(
+			          "deleteUser success (user.id=%s user.name=%s user.time=%s)",
+			          removeUser.id,
+			          removeUser.name,
+			          removeUser.creation);
+		  }else{
+		      LOG.info(
+			          "deleteUser fail (user.id=%s user.name=%s user.time=%s)",
+			          removeUser.id,
+			          removeUser.name,
+			          removeUser.creation);		  
+		  }
 	  }else{
-	      LOG.info(
-		          "deleteUser fail (user.id=%s user.name=%s user.time=%s)",
-		          removeUser.id,
-		          removeUser.name,
-		          removeUser.creation);		  
+		  LOG.info("deleteUser fail - user does not exist.");
+
 	  }
   }
 
