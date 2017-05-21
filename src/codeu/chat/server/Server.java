@@ -17,15 +17,15 @@ package codeu.chat.server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
@@ -127,9 +127,11 @@ public final class Server {
 
           LOG.info("Handling connection...");
 
+
           ConnectionListener connectionListener = new ConnectionListener(connection);
           Thread connectionThread = new Thread(connectionListener);
           connectionThread.start();
+
 
         } catch (Exception ex) {
 
@@ -142,7 +144,9 @@ public final class Server {
 
   }
 
+
   private boolean onMessage(Connection connection, InputStream in, OutputStream out) throws IOException {
+
 
     final int type = Serializers.INTEGER.read(in);
 

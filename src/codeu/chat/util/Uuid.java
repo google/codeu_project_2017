@@ -14,10 +14,13 @@
 
 package codeu.chat.util;
 
+import com.google.gson.Gson;
 import java.lang.StringBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public final class Uuid {
@@ -68,8 +71,22 @@ public final class Uuid {
 
       return head;
     }
-  };
 
+    @Override
+    public void write(PrintWriter out, Uuid value) {
+      Gson gson = Serializers.GSON;
+      String output = gson.toJson(value);
+      out.println(output);
+
+    }
+
+    @Override
+    public Uuid read(BufferedReader in) throws IOException {
+      Gson gson = Serializers.GSON;
+      Uuid value = gson.fromJson(in.readLine(), Uuid.class);
+      return value;
+    }
+  };
 
   // GENERATOR
   //
