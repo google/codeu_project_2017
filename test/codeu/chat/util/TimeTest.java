@@ -15,8 +15,14 @@
 package codeu.chat.util;
 
 import static org.junit.Assert.*;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import org.junit.Test;
-import org.junit.Before;
 
 public final class TimeTest {
 
@@ -25,4 +31,28 @@ public final class TimeTest {
     assertEquals(0, Time.fromMs(0).inMs());
     assertEquals(10, Time.fromMs(10).inMs());
   }
+
+  @Test
+  public void testJsonSerializer() {
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintWriter writer = new PrintWriter(outputStream, true);
+
+    Time value = Time.fromMs(10);
+
+    Time.SERIALIZER.write(writer, value);
+
+    ByteArrayInputStream input = new ByteArrayInputStream(outputStream.toByteArray());
+
+    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+    try {
+      Time received = Time.SERIALIZER.read(reader);
+      assertEquals(value.inMs(), received.inMs());
+    } catch (IOException exc) {
+      System.out.println("Exception thrown");
+    }
+
+  }
+
 }

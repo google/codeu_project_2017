@@ -17,15 +17,15 @@ package codeu.chat.server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
@@ -76,7 +76,10 @@ public final class Server {
 
       try {
 
-        while (onMessage(myConnection, myConnection.in(), myConnection.out()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.in()));
+        PrintWriter out = new PrintWriter(myConnection.out(), true);
+
+        while (onMessage(myConnection, in, out));
 
       } catch (IOException exc) {
         System.out.println("IOException in BroadCast System");
@@ -101,7 +104,7 @@ public final class Server {
       public void run() {
         try {
 
-          LOG.info("Reading update from relay...");
+          // LOG.info("Reading update from relay...");
 
           for (final Relay.Bundle bundle : relay.read(id, secret, lastSeen, 32)) {
             onBundle(bundle);
@@ -127,9 +130,11 @@ public final class Server {
 
           LOG.info("Handling connection...");
 
+
           ConnectionListener connectionListener = new ConnectionListener(connection);
           Thread connectionThread = new Thread(connectionListener);
           connectionThread.start();
+
 
         } catch (Exception ex) {
 
@@ -142,7 +147,9 @@ public final class Server {
 
   }
 
-  private boolean onMessage(Connection connection, InputStream in, OutputStream out) throws IOException {
+
+  private boolean onMessage(Connection connection, BufferedReader in, PrintWriter out) throws IOException {
+
 
     final int type = Serializers.INTEGER.read(in);
 
@@ -160,7 +167,7 @@ public final class Server {
       final Message message = controller.newMessage(author, conversation, content);
 
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
         Serializers.nullable(Message.SERIALIZER).write(out, message);
       }
@@ -178,7 +185,7 @@ public final class Server {
 
       final User user = controller.newUser(name);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
 
         Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
         Serializers.nullable(User.SERIALIZER).write(out, user);
@@ -192,7 +199,7 @@ public final class Server {
       final Conversation conversation = controller.newConversation(title, owner);
 
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
         Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
       }
@@ -204,7 +211,7 @@ public final class Server {
 
       final Collection<User> users = view.getUsers(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_RESPONSE);
         Serializers.collection(User.SERIALIZER).write(out, users);
 
@@ -213,7 +220,7 @@ public final class Server {
 
       final Collection<ConversationSummary> conversations = view.getAllConversations();
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE);
         Serializers.collection(ConversationSummary.SERIALIZER).write(out, conversations);
       }
@@ -223,7 +230,7 @@ public final class Server {
 
       final Collection<Conversation> conversations = view.getConversations(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE);
         Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
 
@@ -234,7 +241,7 @@ public final class Server {
 
       final Collection<Message> messages = view.getMessages(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_RESPONSE);
         Serializers.collection(Message.SERIALIZER).write(out, messages);
 
@@ -251,7 +258,7 @@ public final class Server {
 
       final Collection<User> users = view.getUsersExcluding(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_RESPONSE);
         Serializers.collection(User.SERIALIZER).write(out, users);
       }
@@ -262,7 +269,7 @@ public final class Server {
 
       final Collection<Conversation> conversations = view.getConversations(startTime, endTime);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE);
         Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
       }
@@ -273,7 +280,7 @@ public final class Server {
       final Collection<Conversation> conversations = view.getConversations(filter);
 
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE);
         Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
 
@@ -287,7 +294,7 @@ public final class Server {
       final Collection<Message> messages = view.getMessages(conversation, startTime, endTime);
 
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE);
         Serializers.collection(Message.SERIALIZER).write(out, messages);
       }
@@ -299,7 +306,7 @@ public final class Server {
       final Collection<Message> messages = view.getMessages(rootMessage, range);
 
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
         Serializers.collection(Message.SERIALIZER).write(out, messages);
 
@@ -315,7 +322,7 @@ public final class Server {
 
       // can send join conversation response
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_RESPONSE);
       }
 
