@@ -161,7 +161,7 @@ public final class Server {
     if (r.getVerb().equals("OPTIONS")) {
       return RequestHandler.optionsResponse(out, r);
     } else if (r.getHeader("type") == null) {
-      return RequestHandler.failResponse(out, "Missing type header, which specifies which function to run.");
+      return RequestHandler.website(out, r);
     } else if (r.getVerb().equals("POST")) {
       String body;
       User user;

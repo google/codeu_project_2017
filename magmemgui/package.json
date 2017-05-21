@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "react-dev": "webpack -d --watch"
   },
   "author": "Ayesha Omarali",
   "devDependencies": {
@@ -20,8 +19,8 @@
     "bootstrap": "^3.3.7",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
-    "nodemon": "^1.11.0",
     "react": "^15.4.2",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
     "react-modal": "^1.7.7",
     "request": "^2.81.0",

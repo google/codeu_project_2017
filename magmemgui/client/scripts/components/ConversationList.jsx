@@ -1,6 +1,8 @@
 import React from 'react';
 import ConversationListItem from "./ConversationListItem.jsx"
 import $ from 'jquery';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+
 
 class ConversationList extends React.Component {
 
@@ -13,6 +15,16 @@ class ConversationList extends React.Component {
     }
 
     this.request = this.request.bind(this);
+  }
+
+  componentWillMount() {
+    this.request();
+  }
+
+  componentDidMount() {
+    window.setInterval(function () {
+      this.request();
+    }.bind(this), 1000);
   }
 
   request() {
@@ -37,18 +49,16 @@ class ConversationList extends React.Component {
 
     $.ajax(settings).done(function (response) {
       console.log(response)
-      this.setState({ "data": this.state.data.concat(JSON.parse(response)), "lastClick": clickTime });
-    }.bind(this)).then(function (err){console.log(err)} );
+      this.setState({ "data": JSON.parse(response).reverse().concat(this.state.data), "lastClick": clickTime });
+    }.bind(this));
+
   }
 
   render() {
     return (
-      <div>
-      <button onClick = {this.request}>SET STATE</button>
-      <h1>
+      <ListGroup>
         {this.state.data.map((convo, i) => <ConversationListItem key = {i} data = {convo} />)}
-      </h1>
-      </div>
+      </ListGroup>
     );
   }
 
