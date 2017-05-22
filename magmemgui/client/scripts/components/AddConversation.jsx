@@ -1,9 +1,13 @@
 import React from 'react';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
 import Form from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
+import Panel from 'react-bootstrap/lib/Panel';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import InputGroup from 'react-bootstrap/lib/InputGroup';
 
 class AddConversation extends React.Component {
 
@@ -12,56 +16,60 @@ class AddConversation extends React.Component {
      super(props);
 
      this.state = {
-       submittable: false,
-       innerShow: false
+       "value": "",
+       "show": false
      }
 
      this.handleChange = this.handleChange.bind(this);
-     this.clicked = this.clicked.bind(this);
-
-  }
-
-
-  handleChange(e) {
-    this.setState({ "submittable": e.target.value.length > 1 });
-  }
-
-  clicked() {
-    this.setState({ "innerShow": false, "submittable": false });
+     this.onAdd = this.onAdd.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.innerShow != nextProps.show) {
-      this.setState({ "innerShow": nextProps.show, "submittable": false });
-    } else {
-      this.setState({ "innerShow": !nextProps.show, "submittable": false });
-    }
+    this.setState( {"show": !this.state.show} );
   }
 
+  handleChange(e) {
+    this.setState({ "value": e.target.value });
+  }
 
-  // ADD REQUEST
-
+  onAdd(e) {
+    this.setState( {"show": false} );
+    alert(this.props.username);
+    e.preventDefault();
+    this.request();
+  }
 
   render() {
 
-     var myStyle = {
+     var loginStyle = {
        "fontFamily": "Space Mono",
-       "paddingTop": "2%"
      }
 
+     var formStyle = {
+       "marginBottom": "0%",
+       "paddingBottom": "0%"
+     }
+
+     var addConvo =
+     <Row>
+    <Col xs={12} style={loginStyle}>
+     <form style={formStyle} onSubmit={this.onAdd}>
+       <FormGroup>
+         <InputGroup >
+           <FormControl type="text" value={this.state.value} onChange={this.handleChange} />
+           <InputGroup.Button>
+             <Button type="submit" disabled={this.state.value.length < 3}>
+             Create
+           </Button>
+           </InputGroup.Button>
+         </InputGroup>
+       </FormGroup>
+      </form>
+    </Col>
+  </Row>
+
       return (
-        <div style={myStyle}>
-         {this.state.innerShow ?
-              <FormGroup>
-                 <InputGroup>
-                   <FormControl type="text" value={this.state.value} placeholder="Name your thread." onChange={this.handleChange}/>
-                   <InputGroup.Button>
-                     <Button disabled={!this.state.submittable} onClick={this.clicked}>Submit</Button>
-                   </InputGroup.Button>
-                 </InputGroup>
-               </FormGroup>
-            : ""}
-         </div>
+         <span>{(this.state.show) ? addConvo : ""}</span>
       );
    }
 }
