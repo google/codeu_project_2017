@@ -77,6 +77,12 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   	  System.out.println(v + " was not removed successfully. There was an issue."); 
   	} 
   }
+  
+  //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
+  public boolean exists(KEY key){
+    boolean userExists = (index.remove(key)!=null);  
+  	return userExists; 
+  }
 
   @Override
   public VALUE first(KEY key) {

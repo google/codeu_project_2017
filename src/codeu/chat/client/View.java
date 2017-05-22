@@ -70,29 +70,6 @@ public final class View implements BasicView, LogicalView{
     return users;
   }
   
-  public Collection<User> deleteUser(User userToDelete) {  
-  
-    final Collection<User> usersRemaining = new ArrayList<>();
-
-    try (final Connection connection = source.connect()) {
-	  
-      Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USERS_REQUEST);
-      Serializers.collection(User.SERIALIZER).write(connection.out(), user);
-
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USERS_RESPONSE) {
-        usersRemaining.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
-      } else {
-        LOG.error("Response from server failed.");
-      }
-
-    } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
-    }
-    
-    return usersRemaining; 
-  }
-
   @Override
   public Collection<ConversationSummary> getAllConversations() {
 

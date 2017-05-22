@@ -54,10 +54,6 @@ public final class View implements BasicView, LogicalView, SinglesView {
   public Collection<User> getUsers(Collection<Uuid> ids) {
     return intersect(model.userById(), ids);
   }
-  
-  public void deleteUser(User userToRemove) {
-    model.deleteUsers(userToRemove);  
-  }
 
   @Override
   public Collection<ConversationSummary> getAllConversations() {

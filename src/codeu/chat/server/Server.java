@@ -243,12 +243,14 @@ public final class Server {
 
     } else if (type == NetworkCode.DELETE_USERS_REQUEST) {
       
-      final User userToRemove = User.SERIALIZER.read(in);    
+      final Collection<User> userToRemove = Serializers.collection(User.SERIALIZER).read(in);    
       
-      final Collection<User> users = view.deleteUser(user);
+      boolean userDeleted = false; 
+
+      userDeleted = controller.deleteUser(userToRemove);
       
-	  Serializers.INTEGER.write(out, NetworkCode.DELETE_USERS_RESPONSE);
-      Serializers.collection(User.SERIALIZER).write(out, users);
+	  Serializers.INTEGER.write(out, NetworkCode.DELETE_USERS_RESPONSE);      
+      Serializers.BOOLEAN.write(out, userDeleted);
     
     } else {
 

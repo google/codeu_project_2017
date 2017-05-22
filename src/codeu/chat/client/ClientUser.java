@@ -118,6 +118,7 @@ public final class ClientUser {
 		
 	User target; 
 	Uuid targetId; 
+	boolean deleteUser = false; 
 		
 	//find user and get id
 	for(User currentUser:users){
@@ -125,17 +126,21 @@ public final class ClientUser {
 	    target = currentUser; 
 	    targetId = target.id;
 	    
-	    view.deleteUser(target); 
+	    deleteUser = controller.deleteUser(target); 
+	  
+	    if(deleteUser==true){
+	      LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
+	      System.out.println("User deleted, Name = " + name); 
+	    } else {   	
+	      LOG.warning("User not deleted, Name = \"%s\" UUID = %s", name, targetId);
+	      System.out.println("Error with deleting User, Name = " + name);
+	    }
 	    
-	    LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
-	    System.out.println("User deleted, Name = " + name); 
-		
-		return true; 
-				
-	  }
+	    break;
+	  } 
 	}
 	
-	return false; 
+	return deleteUser;  
   }
   
   public void showAllUsers() {

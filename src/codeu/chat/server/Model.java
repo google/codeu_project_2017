@@ -78,10 +78,14 @@ public final class Model {
   }
   
   //method to delete a user from the server
-  public void deleteUsers(User targetUser) { 
-    userById.remove(targetUser.id);
-    userByTime.remove(targetUser.creation);
-    userByText.remove(targetUser.name);
+  public boolean deleteUsers(Collection<User> targetUser) { 
+    User userToDelete = (User)(targetUser.toArray())[0]; 
+    
+    userById.remove(userToDelete.id);
+    userByTime.remove(userToDelete.creation);
+    userByText.remove(userToDelete.name);
+    
+    return !(userById.exists(userToDelete.id) && userByTime.exists(userToDelete.creation) && userByText.exists(userToDelete.name)); 
   }
 	
   public StoreAccessor<Uuid, User> userById() {
