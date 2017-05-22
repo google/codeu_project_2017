@@ -48,7 +48,6 @@ class ConversationList extends React.Component {
     }
 
     $.ajax(settings).done(function (response) {
-      console.log(response)
       this.setState({ "data": JSON.parse(response).reverse().concat(this.state.data), "lastClick": clickTime });
     }.bind(this));
 
