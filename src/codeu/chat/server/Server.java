@@ -56,10 +56,10 @@ public final class Server {
 
   private class ConnectionListener implements Runnable {
 
-    private Connection myConnection;
+    private Connection connection;
 
-    public ConnectionListener(Connection myConnection) {
-      this.myConnection = myConnection;
+    public ConnectionListener(Connection connection) {
+      this.connection = connection;
     }
 
     @Override
@@ -70,10 +70,10 @@ public final class Server {
 
       try {
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.in()));
-        PrintWriter out = new PrintWriter(myConnection.out(), true);
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+        PrintWriter out = new PrintWriter(connection.out(), true);
 
-        while (onMessage(myConnection, in, out)) {
+        while (onMessage(connection, in, out)) {
           ;
         }
 

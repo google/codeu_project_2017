@@ -82,14 +82,13 @@ public class BroadCastReceiver extends Thread {
 
   public void joinConversation(ConversationSummary old, ConversationSummary newCon) {
 
+    Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_REQUEST);
+    Serializers.nullable(ConversationSummary.SERIALIZER).write(out, old);
+    Serializers.nullable(ConversationSummary.SERIALIZER).write(out, newCon);
+    while (!this.receivedResponse.get()) {
 
-      Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_REQUEST);
-      Serializers.nullable(ConversationSummary.SERIALIZER).write(out, old);
-      Serializers.nullable(ConversationSummary.SERIALIZER).write(out, newCon);
-      while (!this.receivedResponse.get()) {
-
-      }
-      this.receivedResponse.set(false);
+    }
+    this.receivedResponse.set(false);
 
   }
 
@@ -112,7 +111,7 @@ public class BroadCastReceiver extends Thread {
   public int getType() {
 
     while (!receivedResponse.get()) {
-      ;
+      // Thread.sleep() ??
     }
     return this.lastType;
 
@@ -121,7 +120,7 @@ public class BroadCastReceiver extends Thread {
   public BufferedReader getInputStream() {
 
     while (!receivedResponse.get()) {
-      ;
+      // Thread.sleep() ??
     }
     return in;
 
