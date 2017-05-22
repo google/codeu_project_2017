@@ -67,13 +67,15 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     }
   }
   
+  //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
   public void remove(KEY key){
-  	if(index.remove(key)!=null){
-  		//don't need to do anything, since return is not null and returning null, so we know it is gone 
-  	}
-  	else{
-  		//issue with removing 
-  	}
+    StoreLink<KEY, VALUE> v; 
+  	if((v=index.remove(key))!=null){
+  	  //Success
+  	  System.out.println(v + " was removed successfully."); 
+  	} else {
+  	  System.out.println(v + " was not removed successfully. There was an issue."); 
+  	} 
   }
 
   @Override

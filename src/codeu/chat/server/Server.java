@@ -243,9 +243,9 @@ public final class Server {
 
     } else if (type == NetworkCode.DELETE_USERS_REQUEST) {
       
-      final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);
+      final User userToRemove = User.SERIALIZER.read(in);    
       
-      final Collection<User> users = view.deleteUser(ids);
+      final Collection<User> users = view.deleteUser(user);
       
 	  Serializers.INTEGER.write(out, NetworkCode.DELETE_USERS_RESPONSE);
       Serializers.collection(User.SERIALIZER).write(out, users);

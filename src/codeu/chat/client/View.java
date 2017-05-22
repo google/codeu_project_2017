@@ -70,18 +70,14 @@ public final class View implements BasicView, LogicalView{
     return users;
   }
   
-  public Collection<User> deleteUser(User userToDelete) { 
-  
-  	final Collection<Uuid> ids = new ArrayList<>(); 
-  	
-  	ids.add(userToDelete.id); 
+  public Collection<User> deleteUser(User userToDelete) {  
   
     final Collection<User> usersRemaining = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 	  
       Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USERS_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(User.SERIALIZER).write(connection.out(), user);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USERS_RESPONSE) {
         usersRemaining.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));

@@ -769,3 +769,628 @@ May 20, 2017 7:02:10 PM codeu.chat.client.ClientUser addUser
 INFO: New user complete, Name= "Mathangi" UUID=[UUID:100.2363929266]
 May 20, 2017 7:02:15 PM codeu.chat.client.ClientUser deleteUser
 INFO: User deleted, Name = "Mathangi" UUID = [UUID:100.2363929266]
+May 20, 2017 8:07:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 8:07:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 8:07:55 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 8:07:55 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 8:07:56 PM codeu.chat.client.View getUsersExcluding
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getUsersExcluding(View.java:196)
+	at codeu.chat.client.ClientUser.updateUsers(ClientUser.java:185)
+	at codeu.chat.client.simplegui.UserPanel.getAllUsers(UserPanel.java:243)
+	at codeu.chat.client.simplegui.UserPanel.initialize(UserPanel.java:238)
+	at codeu.chat.client.simplegui.UserPanel.<init>(UserPanel.java:37)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:78)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 20, 2017 8:07:56 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 20, 2017 8:07:56 PM codeu.chat.client.View getAllConversations
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getAllConversations(View.java:105)
+	at codeu.chat.client.ClientConversation.updateAllConversations(ClientConversation.java:164)
+	at codeu.chat.client.simplegui.ConversationPanel.getAllConversations(ConversationPanel.java:162)
+	at codeu.chat.client.simplegui.ConversationPanel.initialize(ConversationPanel.java:156)
+	at codeu.chat.client.simplegui.ConversationPanel.<init>(ConversationPanel.java:39)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:91)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 20, 2017 8:07:58 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 20, 2017 8:16:00 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:72)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:102)
+	at codeu.chat.client.simplegui.UserPanel$3.actionPerformed(UserPanel.java:190)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6533)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6298)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+May 20, 2017 8:16:07 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:72)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:102)
+	at codeu.chat.client.simplegui.UserPanel$3.actionPerformed(UserPanel.java:190)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6533)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6298)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+May 20, 2017 8:16:17 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:72)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:102)
+	at codeu.chat.client.simplegui.UserPanel$3.actionPerformed(UserPanel.java:190)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6533)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6298)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+May 20, 2017 8:16:20 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:72)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:102)
+	at codeu.chat.client.simplegui.UserPanel$3.actionPerformed(UserPanel.java:190)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6533)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6298)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+May 20, 2017 8:16:23 PM codeu.chat.client.Controller newUser
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.Controller.newUser(Controller.java:72)
+	at codeu.chat.client.ClientUser.addUser(ClientUser.java:102)
+	at codeu.chat.client.simplegui.UserPanel$3.actionPerformed(UserPanel.java:190)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6533)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6298)
+	at java.awt.Container.processEvent(Container.java:2236)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2294)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
+	at java.awt.Container.dispatchEventImpl(Container.java:2280)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+May 20, 2017 8:16:41 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 8:16:41 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 8:16:41 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 8:16:41 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 8:16:42 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 20, 2017 8:16:44 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 20, 2017 8:16:50 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:16:50 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:16:50 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.1564720115]
+May 20, 2017 8:16:52 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:16:52 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:16:52 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.3868722868]
+May 20, 2017 8:16:57 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:16:57 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:16:57 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Mathangi" UUID=[UUID:100.438664794]
+May 20, 2017 8:17:07 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Sarah" UUID = [UUID:100.1564720115]
+May 20, 2017 8:17:15 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:17:19 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 8:17:19 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 8:17:19 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 8:17:19 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 8:17:20 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 20, 2017 8:17:22 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 20, 2017 8:17:26 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:17:26 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:17:26 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.1148797149]
+May 20, 2017 8:17:30 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:17:30 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:17:30 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "SARAH" UUID=[UUID:100.1517328364]
+May 20, 2017 8:17:35 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "SARAH" UUID = [UUID:100.1517328364]
+May 20, 2017 8:17:38 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:17:38 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:17:38 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.3400365195]
+May 20, 2017 8:17:45 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.1148797149]
+May 20, 2017 8:17:59 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:17:59 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:18:05 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:18:05 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:18:08 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:18:08 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:18:16 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Sarah" UUID = [UUID:100.3400365195]
+May 20, 2017 8:18:21 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Mathangi" UUID = [UUID:100.438664794]
+May 20, 2017 8:18:25 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:18:25 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:18:25 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.2823107869]
+May 20, 2017 8:18:28 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.2823107869]
+May 20, 2017 8:24:05 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 20, 2017 8:24:05 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 20, 2017 8:24:05 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 20, 2017 8:24:05 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 20, 2017 8:24:05 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 20, 2017 8:24:07 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 20, 2017 8:24:10 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:24:10 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:24:10 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.59961960]
+May 20, 2017 8:24:16 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.59961960]
+May 20, 2017 8:24:18 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:24:18 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:24:18 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.2014467221]
+May 20, 2017 8:24:24 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:24:24 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:24:24 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.800321243]
+May 20, 2017 8:24:33 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:24:33 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:24:33 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Mathangi" UUID=[UUID:100.449098044]
+May 20, 2017 8:24:54 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:24:54 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "SARAH" UUID = [UUID:100.1517328364]
+May 20, 2017 8:24:56 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.2014467221]
+May 20, 2017 8:25:02 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Mathangi" UUID = [UUID:100.449098044]
+May 20, 2017 8:25:04 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Sarah" UUID = [UUID:100.800321243]
+May 20, 2017 8:25:07 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:25:07 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:25:07 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.3559774890]
+May 20, 2017 8:25:10 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 20, 2017 8:25:10 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 20, 2017 8:25:10 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.370481968]
+May 20, 2017 8:25:19 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:25:19 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:25:21 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:25:21 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:25:24 PM codeu.chat.client.View deleteUser
+SEVERE: Response from server failed.
+May 20, 2017 8:25:24 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3868722868]
+May 20, 2017 8:25:27 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Sarah" UUID = [UUID:100.370481968]
+May 20, 2017 8:25:33 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.3559774890]
+May 22, 2017 12:44:26 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 22, 2017 12:44:26 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 22, 2017 12:44:26 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 22, 2017 12:44:26 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 22, 2017 12:44:26 PM codeu.chat.client.View getUsersExcluding
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getUsersExcluding(View.java:196)
+	at codeu.chat.client.ClientUser.updateUsers(ClientUser.java:185)
+	at codeu.chat.client.simplegui.UserPanel.getAllUsers(UserPanel.java:243)
+	at codeu.chat.client.simplegui.UserPanel.initialize(UserPanel.java:238)
+	at codeu.chat.client.simplegui.UserPanel.<init>(UserPanel.java:37)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:78)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 22, 2017 12:44:26 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 22, 2017 12:44:26 PM codeu.chat.client.View getAllConversations
+SEVERE: Exception during call on server.
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at codeu.chat.util.connections.ClientConnectionSource.connect(ClientConnectionSource.java:39)
+	at codeu.chat.client.View.getAllConversations(View.java:105)
+	at codeu.chat.client.ClientConversation.updateAllConversations(ClientConversation.java:164)
+	at codeu.chat.client.simplegui.ConversationPanel.getAllConversations(ConversationPanel.java:162)
+	at codeu.chat.client.simplegui.ConversationPanel.initialize(ConversationPanel.java:156)
+	at codeu.chat.client.simplegui.ConversationPanel.<init>(ConversationPanel.java:39)
+	at codeu.chat.client.simplegui.ChatSimpleGui.initialize(ChatSimpleGui.java:91)
+	at codeu.chat.client.simplegui.ChatSimpleGui.run(ChatSimpleGui.java:46)
+	at codeu.chat.SimpleGuiClientMain.runClient(SimpleGuiClientMain.java:69)
+	at codeu.chat.SimpleGuiClientMain.main(SimpleGuiClientMain.java:55)
+
+May 22, 2017 12:44:28 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 22, 2017 12:44:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 22, 2017 12:44:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 22, 2017 12:44:52 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 22, 2017 12:44:52 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 22, 2017 12:45:34 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 22, 2017 12:45:34 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 22, 2017 12:45:34 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 22, 2017 12:45:35 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 22, 2017 12:45:35 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 22, 2017 12:45:36 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 22, 2017 12:45:44 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 22, 2017 12:45:44 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 22, 2017 12:45:44 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.49469002]
+May 22, 2017 12:45:47 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 22, 2017 12:45:47 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 22, 2017 12:45:47 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Mathangi" UUID=[UUID:100.2553216414]
+May 22, 2017 12:45:49 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 22, 2017 12:45:49 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 22, 2017 12:45:49 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.4217545240]
+May 22, 2017 12:46:14 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Mathangi" UUID = [UUID:100.2553216414]
+May 22, 2017 12:49:25 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+May 22, 2017 12:49:25 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+May 22, 2017 12:49:25 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+May 22, 2017 12:49:25 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+May 22, 2017 12:49:26 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+May 22, 2017 12:49:27 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.
+May 22, 2017 12:49:30 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 22, 2017 12:49:30 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 22, 2017 12:49:30 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Sarah" UUID=[UUID:100.2935560802]
+May 22, 2017 12:49:32 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 22, 2017 12:49:32 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 22, 2017 12:49:32 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Jess" UUID=[UUID:100.1111606902]
+May 22, 2017 12:49:35 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 22, 2017 12:49:35 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 22, 2017 12:49:35 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Mathangi" UUID=[UUID:100.3203902514]
+May 22, 2017 12:49:38 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Jess" UUID = [UUID:100.1111606902]
+May 22, 2017 12:49:46 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Sarah" UUID = [UUID:100.2935560802]
+May 22, 2017 12:49:48 PM codeu.chat.client.ClientUser deleteUser
+INFO: User deleted, Name = "Mathangi" UUID = [UUID:100.3203902514]

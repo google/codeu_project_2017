@@ -78,14 +78,12 @@ public final class Model {
   }
   
   //method to delete a user from the server
-  public StoreAccessor<Uuid, User> deleteUsers(Collection<Uuid> ids) {
-  	User targetUser = userById.first((Uuid)(ids.toArray())[0]); 
+  public void deleteUsers(User targetUser) { 
     userById.remove(targetUser.id);
     userByTime.remove(targetUser.creation);
     userByText.remove(targetUser.name);
-    return userById; 
   }
-
+	
   public StoreAccessor<Uuid, User> userById() {
     return userById;
   }
