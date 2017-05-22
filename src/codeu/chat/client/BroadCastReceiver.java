@@ -91,7 +91,6 @@ public class BroadCastReceiver extends Thread {
       }
       this.receivedResponse.set(false);
 
-
   }
 
   public void exit() {
@@ -100,7 +99,6 @@ public class BroadCastReceiver extends Thread {
       // todo: (Issue) -- the buffered reader isn't closing
       source.close();
       in.close();
-
     } catch (IOException exc) {
       // todo error... there was an error closing the input stream
     }

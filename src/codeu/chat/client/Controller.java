@@ -41,9 +41,7 @@ public class Controller implements BasicController {
 
     Message response = null;
 
-
     final PrintWriter out = receiver.out();
-
     try {
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_REQUEST);
       Uuid.SERIALIZER.write(out, author);
@@ -52,7 +50,6 @@ public class Controller implements BasicController {
 
       if (receiver.getType() == NetworkCode.NEW_MESSAGE_RESPONSE) {
         BufferedReader in = receiver.getInputStream();
-
         response = Serializers.nullable(Message.SERIALIZER).read(in);
       } else {
         LOG.error("Response from server failed.");
@@ -72,7 +69,7 @@ public class Controller implements BasicController {
     User response = null;
 
     final PrintWriter out = receiver.out();
-    try  {
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(out, name);
@@ -108,9 +105,8 @@ public class Controller implements BasicController {
       Serializers.STRING.write(out, title);
       Uuid.SERIALIZER.write(out, owner);
 
-      BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.NEW_CONVERSATION_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         response = Serializers.nullable(Conversation.SERIALIZER).read(in);
       } else {
         LOG.error("Response from server failed.");

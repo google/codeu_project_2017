@@ -60,8 +60,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         users.addAll(Serializers.collection(User.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -87,8 +87,8 @@ public final class View implements BasicView, LogicalView{
 
       Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_REQUEST);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         summaries.addAll(Serializers.collection(ConversationSummary.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -115,9 +115,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-      BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -143,8 +142,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -169,8 +168,8 @@ public final class View implements BasicView, LogicalView{
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_REQUEST);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_USER_GENERATION_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         generation = Uuid.SERIALIZER.read(in);
 
       } else {
@@ -198,9 +197,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         users.addAll(Serializers.collection(User.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -227,8 +225,8 @@ public final class View implements BasicView, LogicalView{
       Time.SERIALIZER.write(out, start);
       Time.SERIALIZER.write(out, end);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -254,8 +252,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST);
       Serializers.STRING.write(out, filter);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -282,8 +280,8 @@ public final class View implements BasicView, LogicalView{
       Time.SERIALIZER.write(out, start);
       Time.SERIALIZER.write(out, end);
 
-      BufferedReader in = receiver.getInputStream();
       if (receiver.getType() == NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -311,9 +309,8 @@ public final class View implements BasicView, LogicalView{
       Uuid.SERIALIZER.write(out, rootMessage);
       Serializers.INTEGER.write(out, range);
 
-      BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");

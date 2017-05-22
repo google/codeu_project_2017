@@ -55,7 +55,6 @@ public final class MessagePanel extends JPanel {
             }
     );
 
-
     initialize();
   }
 
