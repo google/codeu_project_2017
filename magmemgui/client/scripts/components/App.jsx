@@ -8,15 +8,15 @@ class App extends React.Component {
    constructor(props) {
       super(props);
 
-      /*this.state = {
+      this.state = {
         url: "http://130.211.140.178",
         port: "10110"
-      }*/
+      }
 
-      this.state = {
+      /*this.state = {
         url: "http://localhost",
         port: "8000",
-      }
+      }*/
    }
 
    render() {
