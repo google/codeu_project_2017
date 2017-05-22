@@ -57,13 +57,13 @@ final class ServerMain {
       System.exit(1);
     }
 
-
     // This is the directory where it is safe to store data accross runs
     // of the server.
     final String persistentPath = args[3];
 
     final RemoteAddress relayAddress = args.length > 4 ?
-                                       RemoteAddress.parse(args[4]) : null;
+                                       RemoteAddress.parse(args[4]) :
+                                       null;
 
     try (
         final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
@@ -80,10 +80,14 @@ final class ServerMain {
     }
   }
 
-  private static void runServer(Uuid id, byte[] secret, ConnectionSource serverSource, ConnectionSource relaySource) {
+  private static void runServer(Uuid id,
+                                byte[] secret,
+                                ConnectionSource serverSource,
+                                ConnectionSource relaySource) {
 
-
-    final Relay relay = relaySource == null ? new NoOpRelay() : new RemoteRelay(relaySource);
+    final Relay relay = relaySource == null ?
+                        new NoOpRelay() :
+                        new RemoteRelay(relaySource);
 
     final Server server = new Server(id, secret, relay);
 
@@ -102,7 +106,6 @@ final class ServerMain {
       } catch (IOException ex) {
         LOG.error(ex, "Failed to establish connection.");
       }
-
     }
   }
 }

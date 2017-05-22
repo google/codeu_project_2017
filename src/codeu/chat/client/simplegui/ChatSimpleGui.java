@@ -34,7 +34,6 @@ public final class ChatSimpleGui {
   private final ClientContext clientContext;
 
   private BroadCastReceiver receiver;
-
   // Constructor - sets up the Chat Application
   public ChatSimpleGui(Controller controller, View view, BroadCastReceiver receiver) {
     clientContext = new ClientContext(controller, view);
@@ -66,7 +65,6 @@ public final class ChatSimpleGui {
   private void initialize() {
 
     this.receiver.start();
-
     // Outermost frame.
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");

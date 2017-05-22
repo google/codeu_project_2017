@@ -45,9 +45,7 @@ final class ClientMain {
     final RemoteAddress address = RemoteAddress.parse(args[0]);
 
     final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
-
     final BroadCastReceiver receiver = new BroadCastReceiver(source);
-
     final Controller controller = new Controller(receiver);
     final View view = new View(receiver);
 

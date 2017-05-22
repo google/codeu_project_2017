@@ -14,11 +14,7 @@
 
 package codeu.chat.client;
 
-
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import codeu.chat.common.BasicController;
@@ -46,11 +42,9 @@ public class Controller implements BasicController {
     Message response = null;
 
 
-
     final PrintWriter out = receiver.out();
 
     try {
-
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_REQUEST);
       Uuid.SERIALIZER.write(out, author);
       Uuid.SERIALIZER.write(out, conversation);
@@ -78,11 +72,7 @@ public class Controller implements BasicController {
     User response = null;
 
     final PrintWriter out = receiver.out();
-
-
-
     try  {
-
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(out, name);
@@ -121,7 +111,6 @@ public class Controller implements BasicController {
       BufferedReader in = receiver.getInputStream();
 
       if (receiver.getType() == NetworkCode.NEW_CONVERSATION_RESPONSE) {
-
         response = Serializers.nullable(Conversation.SERIALIZER).read(in);
       } else {
         LOG.error("Response from server failed.");

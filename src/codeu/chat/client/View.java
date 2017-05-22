@@ -14,7 +14,6 @@
 
 package codeu.chat.client;
 
-
 import codeu.chat.common.SentimentScore;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -56,17 +55,13 @@ public final class View implements BasicView, LogicalView{
     final PrintWriter out = receiver.out();
 
 
-
     try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-
       BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
-
         users.addAll(Serializers.collection(User.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -76,7 +71,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return users;
@@ -94,9 +88,7 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_REQUEST);
 
       BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE) {
-
         summaries.addAll(Serializers.collection(ConversationSummary.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -106,7 +98,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return summaries;
@@ -127,7 +118,6 @@ public final class View implements BasicView, LogicalView{
       BufferedReader in = receiver.getInputStream();
 
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
-
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -154,12 +144,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
       BufferedReader in = receiver.getInputStream();
-
-
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
-
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
-
       } else {
         LOG.error("Response from server failed.");
       }
@@ -167,7 +153,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return messages;
@@ -185,10 +170,7 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_REQUEST);
 
       BufferedReader in = receiver.getInputStream();
-
-
       if (receiver.getType() == NetworkCode.GET_USER_GENERATION_RESPONSE) {
-
         generation = Uuid.SERIALIZER.read(in);
 
       } else {
@@ -198,7 +180,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return generation;
@@ -219,9 +200,7 @@ public final class View implements BasicView, LogicalView{
 
 
       BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
-
         users.addAll(Serializers.collection(User.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -242,19 +221,14 @@ public final class View implements BasicView, LogicalView{
 
     final PrintWriter out = receiver.out();
 
-
     try {
-
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_REQUEST);
       Time.SERIALIZER.write(out, start);
       Time.SERIALIZER.write(out, end);
 
-
       BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
-
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -263,7 +237,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return conversations;
@@ -278,14 +251,11 @@ public final class View implements BasicView, LogicalView{
 
     try  {
 
-
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST);
       Serializers.STRING.write(out, filter);
 
       BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
-
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -294,7 +264,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return conversations;
@@ -314,9 +283,7 @@ public final class View implements BasicView, LogicalView{
       Time.SERIALIZER.write(out, end);
 
       BufferedReader in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE) {
-
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -347,7 +314,6 @@ public final class View implements BasicView, LogicalView{
       BufferedReader in = receiver.getInputStream();
 
       if (receiver.getType() == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
-
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -357,7 +323,6 @@ public final class View implements BasicView, LogicalView{
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server.");
     }
-
 
     receiver.responseProcessed();
     return messages;
