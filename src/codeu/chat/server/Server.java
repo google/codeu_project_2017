@@ -15,6 +15,8 @@
 
 package codeu.chat.server;
 
+import codeu.chat.common.SentimentScore;
+import codeu.chat.util.Serializer;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -115,8 +117,6 @@ public final class Server {
 
   private boolean onMessage(BufferedReader in, PrintWriter out) throws IOException {
 
-    // todo (raami) : add a new if for networkcode getuserscore(uuid)
-
     final int type = Serializers.INTEGER.read(in);
 
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
@@ -126,13 +126,9 @@ public final class Server {
       final String content = Serializers.STRING.read(in);
 
       final Message message = controller.newMessage(author, conversation, content);
+      final User user = view.findUser(author);
+      user.sentimentScore.addMessage(message);
 
-      /* todo (raami): Update the sentiment score for the user in order to reflect the new message
-
-       * Use the view.findUser(author) to get the user with the uuid of the author
-       * Call user.sentimentscore.addmessage(message) to add the message to the sentiment score
-
-      */
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 
@@ -247,6 +243,14 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
+
+    } else if (type == NetworkCode.GET_USER_SCORE_REQUEST) {
+
+      final User user = User.SERIALIZER.read(in);
+      final SentimentScore score = view.findUser(user.id).sentimentScore;
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_USER_SCORE_RESPONSE);
+      SentimentScore.SERIALIZER.write(out, score);
 
     } else {
 
