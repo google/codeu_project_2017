@@ -24,12 +24,12 @@ public class MessageTest {
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       PrintWriter writer = new PrintWriter(outputStream, true);
 
-      Uuid id = Uuid.fromString("100.100");
-      Uuid previous = Uuid.fromString("100.101");
+      Uuid id = Uuid.parse("100.100");
+      Uuid previous = Uuid.parse("100.101");
       Time creation = Time.fromMs(10);
-      Uuid author = Uuid.fromString("100.102");
+      Uuid author = Uuid.parse("100.102");
       String content = "Hello";
-      Uuid next = Uuid.fromString("100.103");
+      Uuid next = Uuid.parse("100.103");
 
       Message message = new Message(id, next, previous, creation, author, content);
 
