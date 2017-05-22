@@ -187,7 +187,7 @@ public final class MessagePanel extends JPanel {
     listShowPanel.setBackground(new Color(102, 162, 237));
     scrollPanel.setBackground(new Color(102, 162, 237));
     buttonPanel.setBackground(new Color(102, 162, 237));
-	searchPanel.setBackground(new Color(102, 162, 237));
+    searchPanel.setBackground(new Color(102, 162, 237));
 	
     // User click Messages Add button - prompt for message body and add new Message to Conversation
     
