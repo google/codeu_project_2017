@@ -48,7 +48,7 @@ public final class ClientUser {
     
 // Validate the username string
 public boolean isValidName(String userName) {
-	boolean clean = true; 
+    boolean clean = true; 
     if (userName.trim().length() == 0) {
       clean = false;
     } else {
