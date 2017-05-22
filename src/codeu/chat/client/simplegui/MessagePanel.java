@@ -80,7 +80,6 @@ public final class MessagePanel extends JPanel {
     titleOwnerPanelC.gridwidth = 3;  
     titleOwnerPanelC.gridx = 0;
     titleOwnerPanelC.gridy = 3;
-    
     titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
 
     // messageConversationLabel is an instance variable of Conversation panel
@@ -107,7 +106,7 @@ public final class MessagePanel extends JPanel {
     final JPanel scrollPanel = new JPanel();
     final GridBagConstraints scrollPanelC = new GridBagConstraints();
 	
-	// Search panel and text field
+    // Search panel and text field
     final JPanel searchPanel = new JPanel();
     final GridBagConstraints searchPanelC = new GridBagConstraints();
     final JTextField textFieldSearch = new JTextField(20);
@@ -134,8 +133,8 @@ public final class MessagePanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
     final JTextField textField = new JTextField(20);
-    
     final JButton addButton = new JButton("Send Message");
+    
     buttonPanel.add(textField); //Adds the message box before the "Send Message" button
     buttonPanel.add(addButton);
 
@@ -186,14 +185,13 @@ public final class MessagePanel extends JPanel {
     
     titlePanel.setBackground(new Color(102, 162, 237));
     listShowPanel.setBackground(new Color(102, 162, 237));
-    //scrollPanel.setBackground(new Color(0,0,0)); 
     scrollPanel.setBackground(new Color(102, 162, 237));
     buttonPanel.setBackground(new Color(102, 162, 237));
 	searchPanel.setBackground(new Color(102, 162, 237));
 	
     // User click Messages Add button - prompt for message body and add new Message to Conversation
     
-    //Add button is pressed
+    // Add button is pressed
     addButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -217,7 +215,7 @@ public final class MessagePanel extends JPanel {
       }
     });
     
-    //Responds if user enters ENTER or RETURN the message sends
+    // Responds if user enters ENTER or RETURN the message sends
     textField.addKeyListener(new KeyListener() {
     	@Override
       	public void keyTyped(KeyEvent e) {
