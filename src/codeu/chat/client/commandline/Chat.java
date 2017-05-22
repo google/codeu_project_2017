@@ -16,11 +16,13 @@ package codeu.chat.client.commandline;
 
 import java.util.Scanner;
 
-import codeu.chat.client.*;
+import codeu.chat.client.ClientContext;
+import codeu.chat.client.Controller;
+import codeu.chat.client.View;
+import codeu.chat.client.BroadCastReceiver;
+import codeu.chat.client.ClientMessage;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.Message;
 import codeu.chat.util.Logger;
-import codeu.chat.util.connections.ClientConnectionSource;
 
 // Chat - top-level client application.
 public final class Chat {
@@ -36,7 +38,6 @@ public final class Chat {
   private final ClientContext clientContext;
 
   private final BroadCastReceiver broadCastReceiver;
-
   // Constructor - sets up the Chat Application
   public Chat(BroadCastReceiver receiver, Controller controller, View view) {
     clientContext = new ClientContext(controller, view);

@@ -14,11 +14,12 @@
 
 package codeu.chat.server;
 
-import java.util.Collection;
+import codeu.chat.common.SentimentScore;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
+import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
@@ -108,7 +109,7 @@ public final class Controller implements RawController, BasicController {
 
     if (isIdFree(id)) {
 
-      user = new User(id, name, creationTime);
+      user = new User(id, name, creationTime, new SentimentScore());
       model.add(user);
 
       LOG.info(

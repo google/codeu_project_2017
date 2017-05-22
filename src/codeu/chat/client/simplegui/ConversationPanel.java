@@ -144,16 +144,10 @@ public final class ConversationPanel extends JPanel {
           final ConversationSummary previous = clientContext.conversation.getCurrent();
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
 
-
           clientContext.conversation.setCurrent(cs);
 
-
           messagePanel.getReceiver().joinConversation(previous, cs);
-
-
           messagePanel.update(cs);
-
-
         }
       }
     });

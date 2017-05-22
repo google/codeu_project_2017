@@ -45,14 +45,12 @@ final class ClientMain {
     final RemoteAddress address = RemoteAddress.parse(args[0]);
 
     final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
-
     final BroadCastReceiver receiver = new BroadCastReceiver(source);
-
     final Controller controller = new Controller(receiver);
     final View view = new View(receiver);
 
     LOG.info("Creating client...");
-    final Chat chat = new Chat(receiver ,controller, view);
+    final Chat chat = new Chat(receiver, controller, view);
 
     LOG.info("Created client");
 

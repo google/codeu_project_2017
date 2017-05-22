@@ -48,9 +48,9 @@ final class SimpleGuiClientMain {
     try (
       final ConnectionSource source = new ClientConnectionSource(address.host, address.port)
     ) {
-      BroadCastReceiver receiver = new BroadCastReceiver(source);
-       final Controller controller = new Controller(receiver);
-       final View view = new View(receiver);
+      final BroadCastReceiver receiver = new BroadCastReceiver(source);
+      final Controller controller = new Controller(receiver);
+      final View view = new View(receiver);
 
       LOG.info("Creating client...");
 
@@ -71,7 +71,5 @@ final class SimpleGuiClientMain {
     chatSimpleGui.run();
 
     LOG.info("chat client is running.");
-
   }
-
 }
