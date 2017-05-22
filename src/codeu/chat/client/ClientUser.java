@@ -46,21 +46,19 @@ public final class ClientUser {
     this.view = view;
   }
     
-// Validate the username string
-public boolean isValidName(String userName) {
+  // Validate the username string
+  public boolean isValidName(String userName) {
     boolean clean = true; 
     if (userName.trim().length() == 0) {
       clean = false;
     } else {
-
-      for (User currentUser : getUsers()) {
-		
+      for (User currentUser : getUsers()) {	
         if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
           System.out.format("Error: user not created - %s already exists.\n", userName);
           clean = false;
         }
       } 
-    }
+    } 
     return clean;
   }
   
@@ -95,7 +93,6 @@ public boolean isValidName(String userName) {
     printUser(current);
   }
 
-  //change the type to a boolean, so we can check if the user was created or not in the GUI
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
 
@@ -115,38 +112,30 @@ public boolean isValidName(String userName) {
 
   //delete user method
   public boolean deleteUser(String name) {
-  
-  		//get all users by name
-		Iterable <User> users = getUsers();
+    
+    //get all users by name
+	Iterable <User> users = getUsers();
 		
-		User target; 
-		Uuid targetId; 
+	User target; 
+	Uuid targetId; 
 		
-		//find user and get id
-		for(User currentUser:users){
-			if(currentUser.name.equals(name)){
-				target = currentUser; 
-				targetId = target.id;
-				
-				/*
-				//delete user from hashmap and from store...
-				usersById.remove(targetId);
-				usersByName.remove(name); 
-				
-				//Add deleted user to EMPTY 
-				EMPTY.add(targetId);
-				*/
-				
-				deleteUser(target); 
-				
-				LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
-				System.out.println("User deleted, Name = " + name); 
+	//find user and get id
+	for(User currentUser:users){
+	  if(currentUser.name.equals(name)){
+	    target = currentUser; 
+	    targetId = target.id;
+	    
+	    view.deleteUser(target); 
+	    
+	    LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
+	    System.out.println("User deleted, Name = " + name); 
 		
-				return true; 
+		return true; 
 				
-			}
-		}
-		return false; 
+	  }
+	}
+	
+	return false; 
   }
   
   public void showAllUsers() {
@@ -172,10 +161,6 @@ public boolean isValidName(String userName) {
 
   public Iterable<User> getUsers() {
     return usersByName.all();
-  }
-
-  public void deleteUser(User user) {
-    view.deleteUser(user); 
   }
   
   public void updateUsers() {

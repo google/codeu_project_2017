@@ -189,8 +189,7 @@ public final class UserPanel extends JPanel {
         if (s != null && s.length() > 0) {
           if(clientContext.user.addUser(s)==true){
           	UserPanel.this.getAllUsers(listModel);
-          	}
-          else{
+          } else {
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
           }
         }
@@ -211,14 +210,11 @@ public final class UserPanel extends JPanel {
           			//update the user's list and 
           			UserPanel.this.getAllUsers(listModel);
           			userSignedInLabel.setText("Goodbye " + data);
-          		}
-          		else{
+          		} else {
           			JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
           		}
           	
-          	}
-          	//there was an issue with signing the user out
-          	else{
+          	} else {
           		JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted. Please check that the user to be deleted is signed in.", "Error", JOptionPane.ERROR_MESSAGE);
           	}
         }
