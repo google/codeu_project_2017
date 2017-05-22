@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*; 
 
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
@@ -43,20 +44,24 @@ public final class ClientUser {
     this.controller = controller;
     this.view = view;
   }
-
-  // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
-
-      // TODO: check for invalid characters
-
+    
+// Validate the username string
+public boolean isValidName(String userName) {
+  boolean isUniqueUser = true; 
+  if (userName.trim().length() == 0) {
+    isUniqueUser = false;
+  } else {
+    for (User currentUser : getUsers()) {
+      if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
+        System.out.format("Error: user not created - %s already exists.", userName);
+        isUniqueUser = false;
+      }
     }
-    return clean;
+    isUniqueUser = true; 
   }
-
+  return isUniqueUser;
+}
+  
   public boolean hasCurrent() {
     return (current != null);
   }
@@ -88,20 +93,24 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  //boolean to check if the user was created or not in the GUI
+  public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
 
     final User user = (validInputs) ? controller.newUser(name) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+          (validInputs) ? "server failure" : "bad input value"); 
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
+      
+      return true; 
     }
+    return false;
   }
-
+  
   public void showAllUsers() {
     updateUsers();
     for (final User u : usersByName.all()) {
