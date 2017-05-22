@@ -1,4 +1,6 @@
 import React from 'react';
+import $ from 'jquery';
+
 import Form from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
@@ -34,9 +36,30 @@ class AddConversation extends React.Component {
 
   onAdd(e) {
     this.setState( {"show": false} );
-    alert(this.props.username);
     e.preventDefault();
     this.request();
+  }
+
+  request() {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": this.props.url + ":" + this.props.port,
+      "method": "POST",
+      "contentType": "json",
+      "headers": {
+        "type": "NEW_CONVERSATION",
+        "owner": this.props.uuid,
+      },
+      "data": this.state.value,
+      "error": function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    }
+
+    $.ajax(settings).done(function (response) {
+      this.setState({ "value": "" });
+    }.bind(this));
   }
 
   render() {
