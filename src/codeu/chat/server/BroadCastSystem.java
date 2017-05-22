@@ -6,11 +6,10 @@ import codeu.chat.util.connections.Connection;
 import codeu.chat.util.Uuid;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -122,8 +121,11 @@ public class BroadCastSystem {
         OutputStream out = connection.out();
 
         synchronized (out) {
-          Serializers.INTEGER.write(out, NetworkCode.NEW_BROADCAST);
-          Message.SERIALIZER.write(out, message);
+
+          PrintWriter writer = new PrintWriter(out, true);
+
+          Serializers.INTEGER.write(writer, NetworkCode.NEW_BROADCAST);
+          Message.SERIALIZER.write(writer, message);
         }
 
       } catch (Exception ex) {

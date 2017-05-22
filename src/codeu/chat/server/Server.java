@@ -16,22 +16,19 @@
 package codeu.chat.server;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
-import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
@@ -54,15 +51,12 @@ public final class Server {
   private final Controller controller;
 
   private final Relay relay;
-
   private Uuid lastSeen = Uuid.NULL;
   private BroadCastSystem broadCastSystem = null;
-
 
   private class ConnectionListener implements Runnable {
 
     private Connection myConnection;
-
 
     public ConnectionListener(Connection myConnection) {
       this.myConnection = myConnection;
@@ -76,7 +70,12 @@ public final class Server {
 
       try {
 
-        while (onMessage(myConnection, myConnection.in(), myConnection.out()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.in()));
+        PrintWriter out = new PrintWriter(myConnection.out(), true);
+
+        while (onMessage(myConnection, in, out)) {
+          ;
+        }
 
       } catch (IOException exc) {
         System.out.println("IOException in BroadCast System");
@@ -85,8 +84,6 @@ public final class Server {
     }
 
   }
-
-
 
   public Server(final Uuid id, final byte[] secret, final Relay relay) {
 
@@ -101,7 +98,7 @@ public final class Server {
       public void run() {
         try {
 
-          LOG.info("Reading update from relay...");
+          // LOG.info("Reading update from relay...");
 
           for (final Relay.Bundle bundle : relay.read(id, secret, lastSeen, 32)) {
             onBundle(bundle);
@@ -130,7 +127,6 @@ public final class Server {
           ConnectionListener connectionListener = new ConnectionListener(connection);
           Thread connectionThread = new Thread(connectionListener);
           connectionThread.start();
-
         } catch (Exception ex) {
 
           LOG.error(ex, "Exception while handling connection.");
@@ -139,10 +135,11 @@ public final class Server {
 
       }
     });
-
   }
 
-  private boolean onMessage(Connection connection, InputStream in, OutputStream out) throws IOException {
+  private boolean onMessage(Connection connection, BufferedReader in, PrintWriter out)
+      throws IOException {
+    // todo (raami) : add a new if for networkcode getuserscore(uuid)
 
     final int type = Serializers.INTEGER.read(in);
 
@@ -150,7 +147,6 @@ public final class Server {
     if (type == -1) {
       return false;
     }
-
     if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
 
       final Uuid author = Uuid.SERIALIZER.read(in);
@@ -159,13 +155,18 @@ public final class Server {
 
       final Message message = controller.newMessage(author, conversation, content);
 
-
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
         Serializers.nullable(Message.SERIALIZER).write(out, message);
       }
 
       broadCastSystem.addMessage(conversation, message);
+      /* todo (raami): Update the sentiment score for the user in order to reflect the new message
+
+       * Use the view.findUser(author) to get the user with the uuid of the author
+       * Call user.sentimentscore.addmessage(message) to add the message to the sentiment score
+
+      */
 
       timeline.scheduleNow(createSendToRelayEvent(
           author,
@@ -178,11 +179,9 @@ public final class Server {
 
       final User user = controller.newUser(name);
 
-      synchronized (out) {
-
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
         Serializers.nullable(User.SERIALIZER).write(out, user);
-
       }
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
 
@@ -191,8 +190,7 @@ public final class Server {
 
       final Conversation conversation = controller.newConversation(title, owner);
 
-
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
         Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
       }
@@ -204,16 +202,15 @@ public final class Server {
 
       final Collection<User> users = view.getUsers(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_RESPONSE);
         Serializers.collection(User.SERIALIZER).write(out, users);
-
       }
     } else if (type == NetworkCode.GET_ALL_CONVERSATIONS_REQUEST) {
 
       final Collection<ConversationSummary> conversations = view.getAllConversations();
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE);
         Serializers.collection(ConversationSummary.SERIALIZER).write(out, conversations);
       }
@@ -223,10 +220,9 @@ public final class Server {
 
       final Collection<Conversation> conversations = view.getConversations(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE);
         Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-
       }
     } else if (type == NetworkCode.GET_MESSAGES_BY_ID_REQUEST) {
 
@@ -234,11 +230,9 @@ public final class Server {
 
       final Collection<Message> messages = view.getMessages(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_RESPONSE);
         Serializers.collection(Message.SERIALIZER).write(out, messages);
-
-
       }
     } else if (type == NetworkCode.GET_USER_GENERATION_REQUEST) {
 
@@ -251,7 +245,7 @@ public final class Server {
 
       final Collection<User> users = view.getUsersExcluding(ids);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_RESPONSE);
         Serializers.collection(User.SERIALIZER).write(out, users);
       }
@@ -262,7 +256,7 @@ public final class Server {
 
       final Collection<Conversation> conversations = view.getConversations(startTime, endTime);
 
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE);
         Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
       }
@@ -272,11 +266,9 @@ public final class Server {
 
       final Collection<Conversation> conversations = view.getConversations(filter);
 
-
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE);
         Serializers.collection(Conversation.SERIALIZER).write(out, conversations);
-
       }
     } else if (type == NetworkCode.GET_MESSAGES_BY_TIME_REQUEST) {
 
@@ -286,8 +278,7 @@ public final class Server {
 
       final Collection<Message> messages = view.getMessages(conversation, startTime, endTime);
 
-
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE);
         Serializers.collection(Message.SERIALIZER).write(out, messages);
       }
@@ -298,32 +289,24 @@ public final class Server {
 
       final Collection<Message> messages = view.getMessages(rootMessage, range);
 
-
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
         Serializers.collection(Message.SERIALIZER).write(out, messages);
-
       }
+
     } else if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
 
       System.out.println("Conversation request received");
-
       ConversationSummary old = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
       ConversationSummary newCon = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
-
       broadCastSystem.switchConversation(connection, old, newCon);
-
       // can send join conversation response
-
-      synchronized (out) {
+      synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_RESPONSE);
       }
-
       System.out.println("Connection switched");
 
-    }
-
-    else {
+    } else {
 
       // In the case that the message was not handled make a dummy message with
       // the type "NO_MESSAGE" so that the client still gets something.
@@ -355,25 +338,25 @@ public final class Server {
       // has a message in the conversation will get ownership over this server's copy
       // of the conversation.
       conversation = controller.newConversation(relayConversation.id(),
-                                                relayConversation.text(),
-                                                user.id,
-                                                relayConversation.time());
+          relayConversation.text(),
+          user.id,
+          relayConversation.time());
     }
 
     Message message = model.messageById().first(relayMessage.id());
 
     if (message == null) {
       message = controller.newMessage(relayMessage.id(),
-                                      user.id,
-                                      conversation.id,
-                                      relayMessage.text(),
-                                      relayMessage.time());
+          user.id,
+          conversation.id,
+          relayMessage.text(),
+          relayMessage.time());
     }
   }
 
   private Runnable createSendToRelayEvent(final Uuid userId,
-                                          final Uuid conversationId,
-                                          final Uuid messageId) {
+      final Uuid conversationId,
+      final Uuid messageId) {
     return new Runnable() {
       @Override
       public void run() {
@@ -381,10 +364,10 @@ public final class Server {
         final Conversation conversation = view.findConversation(conversationId);
         final Message message = view.findMessage(messageId);
         relay.write(id,
-                    secret,
-                    relay.pack(user.id, user.name, user.creation),
-                    relay.pack(conversation.id, conversation.title, conversation.creation),
-                    relay.pack(message.id, message.content, message.creation));
+            secret,
+            relay.pack(user.id, user.name, user.creation),
+            relay.pack(conversation.id, conversation.title, conversation.creation),
+            relay.pack(message.id, message.content, message.creation));
       }
     };
   }

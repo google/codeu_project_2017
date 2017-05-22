@@ -17,6 +17,8 @@ package codeu.chat.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -75,7 +77,17 @@ public final class RemoteRelay implements Relay {
       Serializers.STRING.write(out, value.text());
       Time.SERIALIZER.write(out, value.time());
     }
-  };
+
+        @Override
+        public void write(PrintWriter out, Bundle.Component value) {
+
+        }
+
+        @Override
+        public Bundle.Component read(BufferedReader in) throws IOException  {
+          return null;
+        }
+      };
 
   private static final Serializer<Relay.Bundle> BUNDLE_SERIALIZER =
       new Serializer<Relay.Bundle>() {
@@ -115,7 +127,17 @@ public final class RemoteRelay implements Relay {
       COMPONENT_SERIALIZER.write(out, value.conversation());
       COMPONENT_SERIALIZER.write(out, value.message());
     }
-  };
+
+        @Override
+        public void write(PrintWriter out, Bundle value) {
+
+        }
+
+        @Override
+        public Bundle read(BufferedReader in) throws IOException {
+          return null;
+        }
+      };
 
   private final ConnectionSource source;
 

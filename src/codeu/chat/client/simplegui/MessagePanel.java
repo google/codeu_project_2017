@@ -24,7 +24,6 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
-import codeu.chat.util.connections.ClientConnectionSource;
 
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -39,29 +38,22 @@ public final class MessagePanel extends JPanel {
   private final ClientContext clientContext;
 
   private final BroadCastReceiver receiver;
-
   public MessagePanel(ClientContext clientContext, BroadCastReceiver receiver) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
-
     this.receiver = receiver;
-
     this.receiver.onBroadCast(
+        (message) -> {
 
-            (message) -> {
-
-                // Display author name if available.  Otherwise display the author UUID.
+          // Display author name if available.  Otherwise display the author UUID.
                 final String authorName = clientContext.user.getName(message.author);
 
                 final String displayString = String.format("%s: [%s]: %s",
                         ((authorName == null) ? message.author : authorName), message.creation, message.content);
 
                 messageListModel.addElement(displayString);
-
             }
-
     );
-
 
     initialize();
   }
@@ -194,7 +186,6 @@ public final class MessagePanel extends JPanel {
 
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
-
   }
 
   // Populate ListModel

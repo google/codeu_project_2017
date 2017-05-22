@@ -7,9 +7,10 @@ import codeu.chat.util.Serializers;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -18,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class BroadCastReceiver extends Thread {
 
   private ConnectionSource source;
-  private OutputStream out;
+  private PrintWriter out;
   private BroadcastEvent response;
   private boolean alive;
-  private InputStream in;
+  private BufferedReader in;
   private int lastType;
   private AtomicBoolean receivedResponse;
 
@@ -45,8 +46,8 @@ public class BroadCastReceiver extends Thread {
     try (
         final Connection myConnection = this.source.connect()
     ) {
-      in = myConnection.in();
-      out = myConnection.out();
+      in = new BufferedReader(new InputStreamReader(myConnection.in()));
+      out = new PrintWriter(myConnection.out(), true);
 
       while (alive) {
 
@@ -81,7 +82,6 @@ public class BroadCastReceiver extends Thread {
 
   public void joinConversation(ConversationSummary old, ConversationSummary newCon) {
 
-    try {
 
       Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_REQUEST);
       Serializers.nullable(ConversationSummary.SERIALIZER).write(out, old);
@@ -90,15 +90,14 @@ public class BroadCastReceiver extends Thread {
 
       }
       this.receivedResponse.set(false);
-    } catch (IOException exc) {
-      System.out.println("Error in join conversation");
-    }
 
   }
 
   public void exit() {
     alive = false;
     try {
+      // todo: (Issue) -- the buffered reader isn't closing
+      source.close();
       in.close();
     } catch (IOException exc) {
       // todo error... there was an error closing the input stream
@@ -119,7 +118,7 @@ public class BroadCastReceiver extends Thread {
 
   }
 
-  public InputStream getInputStream() {
+  public BufferedReader getInputStream() {
 
     while (!receivedResponse.get()) {
       ;
@@ -132,7 +131,7 @@ public class BroadCastReceiver extends Thread {
     receivedResponse.set(false);
   }
 
-  public OutputStream out() {
+  public PrintWriter out() {
     return out;
   }
 

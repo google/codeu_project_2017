@@ -14,11 +14,8 @@
 
 package codeu.chat.client;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.BufferedReader;
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.lang.Thread;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -28,8 +25,6 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Uuid;
-import codeu.chat.util.connections.Connection;
-import codeu.chat.util.connections.ConnectionSource;
 
 public class Controller implements BasicController {
 
@@ -46,18 +41,15 @@ public class Controller implements BasicController {
 
     Message response = null;
 
-
-    final OutputStream out = receiver.out();
-
+    final PrintWriter out = receiver.out();
     try {
-
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_REQUEST);
       Uuid.SERIALIZER.write(out, author);
       Uuid.SERIALIZER.write(out, conversation);
       Serializers.STRING.write(out, body);
 
       if (receiver.getType() == NetworkCode.NEW_MESSAGE_RESPONSE) {
-        InputStream in = receiver.getInputStream();
+        BufferedReader in = receiver.getInputStream();
         response = Serializers.nullable(Message.SERIALIZER).read(in);
       } else {
         LOG.error("Response from server failed.");
@@ -76,18 +68,17 @@ public class Controller implements BasicController {
 
     User response = null;
 
-    final OutputStream out = receiver.out();
-
-
-    try  {
+    final PrintWriter out = receiver.out();
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(out, name);
       LOG.info("newUser: Request completed.");
 
       if (receiver.getType() == NetworkCode.NEW_USER_RESPONSE) {
-        InputStream in = receiver.getInputStream();
+        BufferedReader in = receiver.getInputStream();
         response = Serializers.nullable(User.SERIALIZER).read(in);
+
         LOG.info("newUser: Response completed.");
       } else {
         LOG.error("Response from server failed.");
@@ -106,7 +97,7 @@ public class Controller implements BasicController {
 
     Conversation response = null;
 
-    final OutputStream out = receiver.out();
+    final PrintWriter out = receiver.out();
 
     try {
 
@@ -114,9 +105,8 @@ public class Controller implements BasicController {
       Serializers.STRING.write(out, title);
       Uuid.SERIALIZER.write(out, owner);
 
-      InputStream in = receiver.getInputStream();
-
       if (receiver.getType() == NetworkCode.NEW_CONVERSATION_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         response = Serializers.nullable(Conversation.SERIALIZER).read(in);
       } else {
         LOG.error("Response from server failed.");
