@@ -75,13 +75,13 @@ public class SentimentScore {
     }
   };
 
-
   public SentimentScore() {
     score = 0;
     numScores = 0;
   }
 
-  public SentimentScore(int score, int numScores) {
+  // This was made private because it shouldn't be used other than by the serializer
+  private SentimentScore(int score, int numScores) {
     this.score = score;
     this.numScores = numScores;
   }
@@ -92,7 +92,9 @@ public class SentimentScore {
    */
   public int addMessage(Message m) {
 
-    if (m == null) return score;
+    if (m == null) {
+      return score;
+    }
 
     try {
       Sentiment sentiment = calculateSentiment(m);
@@ -119,7 +121,9 @@ public class SentimentScore {
 
     String content = message.content;
 
-    if (languageClient == null) languageClient = LanguageServiceClient.create();
+    if (languageClient == null) {
+      languageClient = LanguageServiceClient.create();
+    }
 
     Document doc = Document.newBuilder()
         .setContent(content)

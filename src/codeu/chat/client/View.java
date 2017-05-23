@@ -40,7 +40,7 @@ import codeu.chat.util.connections.ConnectionSource;
 // This is the view component of the Model-View-Controller pattern used by the
 // the client to reterive readonly data from the server. All methods are blocking
 // calls.
-public final class View implements BasicView, LogicalView{
+public final class View implements BasicView, LogicalView {
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -56,7 +56,6 @@ public final class View implements BasicView, LogicalView{
     final Collection<User> users = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
-
 
       PrintWriter out = new PrintWriter(connection.out(), true);
       BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
@@ -111,13 +110,11 @@ public final class View implements BasicView, LogicalView{
 
     try (final Connection connection = source.connect()) {
 
-
       PrintWriter out = new PrintWriter(connection.out(), true);
       BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
-
 
       if (Serializers.INTEGER.read(in) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
@@ -139,11 +136,8 @@ public final class View implements BasicView, LogicalView{
 
     try (final Connection connection = source.connect()) {
 
-
       PrintWriter out = new PrintWriter(connection.out(), true);
       BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
-
-
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
@@ -194,10 +188,8 @@ public final class View implements BasicView, LogicalView{
 
     try (final Connection connection = source.connect()) {
 
-
       PrintWriter out = new PrintWriter(connection.out(), true);
       BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
-
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
@@ -310,7 +302,6 @@ public final class View implements BasicView, LogicalView{
       Uuid.SERIALIZER.write(out, rootMessage);
       Serializers.INTEGER.write(out, range);
 
-
       if (Serializers.INTEGER.read(in) == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
@@ -325,11 +316,34 @@ public final class View implements BasicView, LogicalView{
     return messages;
   }
 
-  public SentimentScore getSentimentScore(Uuid useruid) {
+  public SentimentScore getSentimentScore(User user) {
 
-    // todo (raami): request the sentiment score for the user with the specified uid, from the server
+    if (user == null) {
+      throw new IllegalArgumentException();
+    }
 
-    return null;
+    SentimentScore score = null;
+    // todo (raami): correct after merging of realtime
+    try (final Connection connection = source.connect()) {
+
+      PrintWriter out = new PrintWriter(connection.out(), true);
+      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_USER_SCORE_REQUEST);
+      User.SERIALIZER.write(out, user);
+
+      if (Serializers.INTEGER.read(in) == NetworkCode.GET_USER_SCORE_RESPONSE) {
+        score = SentimentScore.SERIALIZER.read(in);
+      } else {
+        LOG.error("Response from server failed.");
+      }
+
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return score;
   }
 
 }
