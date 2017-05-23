@@ -1,3 +1,6 @@
+/* The popdown dialog that shows when a user selects 'Create a new thread.'
+Makes an ajax POST request to create a new conversation server-side.*/
+
 import React from 'react';
 import $ from 'jquery';
 
@@ -17,29 +20,37 @@ class AddConversation extends React.Component {
   constructor(props) {
      super(props);
 
+     // State declaration. Tracks textbox value and current visibility of dialog
      this.state = {
        "value": "",
        "show": false
      }
 
+     // Bindings so we can setState
      this.handleChange = this.handleChange.bind(this);
      this.onAdd = this.onAdd.bind(this);
   }
 
+  /* If the props our parent is providing change, then this function is
+  triggered. Inverts the visiblity of the dialog. */
   componentWillReceiveProps(nextProps) {
     this.setState( {"show": !this.state.show} );
   }
 
+  /* Called every time a new character is entered in the textbox. */
   handleChange(e) {
     this.setState({ "value": e.target.value });
   }
 
+  /* Called when user clicks the create button. Hides the dialog and requests.*/
   onAdd(e) {
     this.setState( {"show": false} );
     e.preventDefault();
     this.request();
   }
 
+  /* The post request that creates a new conversation. It also clears the
+  existing fields. */
   request() {
     var settings = {
       "async": true,
@@ -64,6 +75,7 @@ class AddConversation extends React.Component {
 
   render() {
 
+     /* These are just styling structs. */
      var loginStyle = {
        "fontFamily": "Space Mono",
      }
@@ -92,6 +104,7 @@ class AddConversation extends React.Component {
   </Row>
 
       return (
+        /* Visibility of dialog is determined by inner state. */
          <span>{(this.state.show) ? addConvo : ""}</span>
       );
    }

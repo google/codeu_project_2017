@@ -1,12 +1,12 @@
 {
-  "name": "github-fetcher-fullstack-v2",
+  "name": "magenta-messenger",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch"
   },
-  "author": "Ayesha Omarali",
+  "author": "Nick Petosa and Ayesha Omarali",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
