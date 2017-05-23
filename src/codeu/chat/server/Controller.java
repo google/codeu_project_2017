@@ -51,13 +51,14 @@ public final class Controller implements RawController, BasicController {
   private final String persistancePath = (new File(System.getProperty("user.dir")))
   .getParent() + "/persistance/";
 
-  private final PersistanceController persistanceController = new PersistanceController(persistancePath,
-  "/keys/codeu-firebase-key.json");
+  private PersistanceController persistanceController;
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
 
+    persistanceController = new PersistanceController(persistancePath,serverId,
+      "/keys/codeu-firebase-key.json");
     // Load all database users from the file to the model
     loadDatabaseUsers();
     // Load all database conversations from firebase to the model

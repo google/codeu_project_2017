@@ -154,7 +154,7 @@ public final class ClientUser {
 
   // Check for user in database
   public User checkUserInDatabase(String username, String password){
-    // If user matches with the username and password retreive the User from the server model if don't return null
+    // If user matches with the username and password, retrieve the user from the server model. If not, return null
     return controller.searchUserInDatabase(username, password);
   } 
 
