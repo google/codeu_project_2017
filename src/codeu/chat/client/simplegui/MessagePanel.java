@@ -123,8 +123,6 @@ public final class MessagePanel extends JPanel {
     userList.setSelectedIndex(-1);
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
-    //listShowPanel.add(userListScrollPane);
-    //searchPanel.add(userListScrollPane);
     scrollPanel.add(userListScrollPane);
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
     userListScrollPane.setPreferredSize(new Dimension(500, 400));
@@ -196,19 +194,17 @@ public final class MessagePanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (!clientContext.user.hasCurrent()) {
-        	JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!clientContext.conversation.hasCurrent()) {
-        	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-          
           final String messageText = textField.getText().trim();
-          
           if (messageText != null && messageText.length() > 0) {
-        	textField.setText(""); //clears the text field after use
+          	textField.setText(""); //clears the text field after use
             clientContext.message.addMessage(
-                clientContext.user.getCurrent().id,
-                clientContext.conversation.getCurrentId(),
-                messageText);
+              clientContext.user.getCurrent().id,
+              clientContext.conversation.getCurrentId(),
+              messageText);
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
           }
         }
@@ -217,33 +213,42 @@ public final class MessagePanel extends JPanel {
     
     // Responds if user enters ENTER or RETURN the message sends
     textField.addKeyListener(new KeyListener() {
-    	@Override
-      	public void keyTyped(KeyEvent e) {
-      		if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
-      			if (!clientContext.user.hasCurrent()) {
-      				JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
-      	        } else if (!clientContext.conversation.hasCurrent()) {
-      	          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
-      	        } else {
-      	          
-      	          final String messageText = textField.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces
-      	          
-      	          if (messageText != null && messageText.length() > 0) {
-      	        	textField.setText(""); //clears the text field after use
-      	            clientContext.message.addMessage(
-      	                clientContext.user.getCurrent().id,
-      	                clientContext.conversation.getCurrentId(),
-      	                messageText);
-      	            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
-      	          }
-      	        }
-      		}
+      @Override
+      public void keyTyped(KeyEvent e) {
+      	if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
+      	  if (!clientContext.user.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else if (!clientContext.conversation.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else {
+      	    final String messageText = textField.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces      
+      	      if (messageText != null && messageText.length() > 0) {
+      	        textField.setText(""); //clears the text field after use
+      	        clientContext.message.addMessage(
+      	          clientContext.user.getCurrent().id,
+      	          clientContext.conversation.getCurrentId(),
+      	          messageText);
+      	        MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+      	      }
+      	    }
+      	  }
       	} 
       	@Override
       	public void keyPressed(KeyEvent e) {}
       	@Override
       	public void keyReleased(KeyEvent e) {}
       });
+    
+    // Code to adjust the scroll bar for the message window down to the bottom - https://stackoverflow.com/questions/6379061/how-to-auto-scroll-to-bottom-in-java-swing is source  
+    userListScrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+      @Override  
+      public void adjustmentValueChanged(AdjustmentEvent e) {
+        if(userListScrollPane.getVerticalScrollBar().getValueIsAdjusting()==true){
+        } else {  
+          e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+        }  
+      }
+    });
     
     // Panel is set up. If there is a current conversation, Populate the conversation list.
     getAllMessages(clientContext.conversation.getCurrent());
