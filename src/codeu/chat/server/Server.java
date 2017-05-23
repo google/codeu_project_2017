@@ -211,12 +211,10 @@ public final class Server {
           
           /////////Added this section of code///////////
           if (type == NetworkCode.SERVER_INFO_REQUEST) {
-        	  Serializers.INTEGER.write(out, NetworkCode.SERVER_INFO_RESPONSE);
-        	  Uuid.SERIALIZER.write(out, info.version);
-          }else if(type == 0){
-        	  //fix else if statement
-        	  //NEED TO ADD STUFF HERE
+        	  Serializers.INTEGER.write(connection.out(), NetworkCode.SERVER_INFO_RESPONSE);
+        	  Time.SERIALIZER.write(connection.out(), info.startTime);
           }
+          ///add version check statements here
      
         ////////////////////////////////////////////////
           if (command == null) {

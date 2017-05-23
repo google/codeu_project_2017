@@ -139,7 +139,7 @@ final class View implements BasicView {
   }
   //Added this block of code////////////
   public ServerInfo getInfo() {
-	  try (final Connection connection = source.connection()) {
+	  try (final Connection connection = source.connect()) {
 	    Serializers.INTEGER.write(connection.out(), NetworkCode.SERVER_INFO_REQUEST);
 	    if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SERVER_INFO_RESPONSE) {
 	      final Time startTime = Time.SERIALIZER.read(connection.in());

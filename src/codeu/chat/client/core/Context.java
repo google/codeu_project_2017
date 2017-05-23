@@ -19,13 +19,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import codeu.chat.common.BasicView;
+import codeu.chat.common.ServerInfo;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.ConnectionSource;
 
 public final class Context {
 
-  private final BasicView view;
+  private final View view;
   private final Controller controller;
 
   public Context(ConnectionSource source) {
@@ -47,9 +48,10 @@ public final class Context {
     }
     return users;
   }
-  
-  public Info getInfo() {
+  ///////Added this code///////
+  public ServerInfo getInfo() {
 	  return view.getInfo();
   }
+  ///////////
 
 }
