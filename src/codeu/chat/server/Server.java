@@ -33,6 +33,7 @@ import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
 import codeu.chat.common.User;
+import codeu.chat.common.ServerInfo;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
@@ -63,6 +64,8 @@ public final class Server {
 
   private final Relay relay;
   private Uuid lastSeen = Uuid.NULL;
+  //Added this line to create an instance of the server client
+  private static final ServerInfo info = new ServerInfo();
 
   public Server(final Uuid id, final Secret secret, final Relay relay) {
 
@@ -202,10 +205,20 @@ public final class Server {
         try {
 
           LOG.info("Handling connection...");
-
+          
           final int type = Serializers.INTEGER.read(connection.in());
           final Command command = commands.get(type);
-
+          
+          /////////Added this section of code///////////
+          if (type == NetworkCode.SERVER_INFO_REQUEST) {
+        	  Serializers.INTEGER.write(out, NetworkCode.SERVER_INFO_RESPONSE);
+        	  Uuid.SERIALIZER.write(out, info.version);
+          }else if(type == 0){
+        	  //fix else if statement
+        	  //NEED TO ADD STUFF HERE
+          }
+     
+        ////////////////////////////////////////////////
           if (command == null) {
             // The message type cannot be handled so return a dummy message.
             Serializers.INTEGER.write(connection.out(), NetworkCode.NO_MESSAGE);

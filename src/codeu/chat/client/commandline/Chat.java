@@ -23,6 +23,7 @@ import codeu.chat.client.core.Context;
 import codeu.chat.client.core.ConversationContext;
 import codeu.chat.client.core.MessageContext;
 import codeu.chat.client.core.UserContext;
+import codeu.chat.common.ServerInfo;
 
 public final class Chat {
 
@@ -180,6 +181,23 @@ public final class Chat {
         return null;
       }
     });
+    
+    /////////Added this block of code//////////////////////
+    panel.register("info", new Panel.Command() {
+	  @Override
+	  public void invoke(Scanner args) {
+	    final ServerInfo info = context.getInfo();
+	    if (info == null) {
+	      // Communicate error to user - the server did not send us a valid
+	              // info object.
+	    	System.out.println("ERROR: Failed to create new user");
+	    } else {
+	      // Print the server info to the user in a pretty way
+	    	
+	    }
+	  }
+	});
+    //////////////////////////////////////////////
 
     // Now that the panel has all its commands registered, return the panel
     // so that it can be used.
