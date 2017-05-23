@@ -45,6 +45,8 @@ public final class MessagePanel extends JPanel {
     this.receiver.onBroadCast(
         (message) -> {
 
+          // todo this does not add the message to the client context...just print it
+
           // Display author name if available.  Otherwise display the author UUID.
                 final String authorName = clientContext.user.getName(message.author);
 
