@@ -1,3 +1,7 @@
+/* This is the view for the available conversations. It is called by the
+Main component and makes ajax calls every second to see if there are any new
+conversations. */
+
 import React from 'react';
 import ConversationListItem from "./ConversationListItem.jsx"
 import $ from 'jquery';
@@ -9,24 +13,34 @@ class ConversationList extends React.Component {
   constructor(props) {
     super(props);
 
+    /* State declaration. data will contain our conversation items, and
+    lastClick keeps track of the last time we requested new data. This is done
+    so that we can only request to update with conversations created between
+    the last call and the current time. This cuts down on memory usage and
+    search time. */
     this.state = {
       data: [],
       lastClick: 1
     }
 
+    // Again, bind a setState function.
     this.request = this.request.bind(this);
   }
 
+  /* This is called when the parent initializes this child.
+  An update request is made. */
   componentWillMount() {
     this.request();
   }
 
+  /* If the mounting was a success, then call an update every second. */
   componentDidMount() {
     window.setInterval(function () {
       this.request();
     }.bind(this), 1000);
   }
 
+  /* The update function. Updates our data state with new conversations. */
   request() {
 
     var clickTime = (new Date()).getTime();
@@ -53,6 +67,8 @@ class ConversationList extends React.Component {
 
   }
 
+  /* This syntactic sugar is essentially a "foreach". Draw a
+  ConversationListItem for each item in data. */
   render() {
     return (
       <ListGroup>

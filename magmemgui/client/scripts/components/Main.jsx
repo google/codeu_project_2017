@@ -1,3 +1,6 @@
+/* Once making it past the login screen, the user can view the main page.
+This is the container component for the rest of the app. */
+
 import React from 'react';
 
 import AddConversation from './AddConversation.jsx'
@@ -17,14 +20,18 @@ class Main extends React.Component {
   constructor(props) {
      super(props);
 
+     // State declaration
      this.state = {
        addingConversation: false,
      }
 
+     // Again, bind this function so it can set state.
      this.toggleVisibility = this.toggleVisibility.bind(this);
   }
 
 
+  /* Flips the state for addingConversation state. This propagates to
+  AddConversation, either enabling or disabling the textbox.*/
   toggleVisibility() {
      this.setState({ "addingConversation": !this.state.addingConversation })
   }
@@ -32,6 +39,7 @@ class Main extends React.Component {
 
   render() {
 
+    /* The following structs are all for styling.*/
     var headerStyle = {
       "fontFamily": "Space Mono",
       "color": "white",

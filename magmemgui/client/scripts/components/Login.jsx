@@ -1,3 +1,5 @@
+/* Manages user registration and login.*/
+
 import React from 'react';
 import $ from 'jquery';
 
@@ -19,17 +21,19 @@ class Login extends React.Component {
   constructor(props) {
      super(props);
 
+     // Our initial states
      this.state = {
        "register": "",
        "username": "",
        "password": "",
        "loggedIn": false,
        "user:": "",
-       "username:": "",
-       "uuid:": "",
        "submitting": false
      }
 
+     /* We bind these functions to this component's mounting so that they are
+     allowed to setState. Quite simply, if a function must change the component
+     state, we must bind it first here in the constructor. */
      this.onRegister = this.onRegister.bind(this);
      this.onLogin = this.onLogin.bind(this);
      this.handleRegisterChange = this.handleRegisterChange.bind(this);
@@ -37,31 +41,41 @@ class Login extends React.Component {
      this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
+  /* Captures the submission of a new user registration and triggers a
+  new user request.*/
   onRegister(e) {
     this.setState( {"submitting": true} );
     e.preventDefault();
-    this.request();
+    this.newUserRequest();
   }
 
+  /* Captures the submission of a user login and triggers a login request. */
   onLogin(e) {
     alert(this.state.username);
     alert(this.state.password);
     e.preventDefault();
   }
 
+  /* Called each time a character changes in the registration text box.
+  This even handler keeps our inner state value updated. */
   handleRegisterChange(e) {
     this.setState( {"register": e.target.value} );
   }
 
+  /* See above */
   handleUsernameChange(e) {
     this.setState( {"username": e.target.value} );
   }
 
+  /* See above */
   handlePasswordChange(e) {
     this.setState( {"password": e.target.value} );
   }
 
-  request() {
+  /* Request function. Triggers a single ajax post request for making a new
+  user. Called when user clicks on the Register button. On success, the new
+  user is created serverside and the client is logged in to the main page. */
+  newUserRequest() {
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -74,7 +88,7 @@ class Login extends React.Component {
       "data": this.state.register,
       "success": function(response) {
         var struct = JSON.parse(response);
-        this.setState({ "loggedIn": true, "user": struct, "username":struct.name, "uuid": struct.id.uuid, "submitting": false});
+        this.setState({ "loggedIn": true, "user": struct, "submitting": false});
       }.bind(this),
       "error": function(xhr, status, err) {
         this.setState({"submitting": false});
@@ -86,6 +100,7 @@ class Login extends React.Component {
 
   render() {
 
+    /* Following structs are just style declarations for the html.*/
     var headerStyle = {
       "fontFamily": "Space Mono",
       "color": "white",
@@ -167,6 +182,8 @@ class Login extends React.Component {
 
     var mainPage = <Main url={this.props.url} port={this.props.port} user={this.state.user} username={this.state.username} uuid={this.state.uuid}/>
 
+    /* Depending on login state, either display the main page or the current
+    login page.*/
     return (
       <span>
         {this.state.loggedIn ? mainPage : loginPage}
