@@ -199,26 +199,6 @@ public final class View implements BasicView, LogicalView, SinglesView {
     searchResult = model.searchMessages(conversationToBeSearched, keyword); 
     
     return searchResult; 
-    
-    
-    
-
-    final List<Message> foundMessages = new ArrayList<>();
-
-    Message current = (foundConversation == null) ?
-        null :
-        model.messageById().first(foundConversation.firstMessage);
-
-    while (current != null && current.creation.compareTo(start) < 0) {
-      current = model.messageById().first(current.next);
-    }
-
-    while (current != null && current.creation.compareTo(end) <= 0) {
-      foundMessages.add(current);
-      current = model.messageById().first(current.next);
-    }
-
-    return foundMessages;
   }
 
   private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
