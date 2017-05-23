@@ -250,7 +250,7 @@ public final class Server {
 
       List<Message> messages = new ArrayList<Message>(); 
     
-      //messages = view.searchMessages(conversation, keyword);
+      messages = view.searchMessages(conversation, keyword);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);

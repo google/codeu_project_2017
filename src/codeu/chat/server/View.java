@@ -128,7 +128,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
   @Override
   public Collection<Message> getMessages(Uuid conversation, Time start, Time end) {
 
-    final Conversation foundConversation = model.conversationById().first(conversation);
+    final Conversation foundConversation = model.conversationById().first(conversation); 
 
     final List<Message> foundMessages = new ArrayList<>();
 
@@ -190,6 +190,36 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
   @Override
   public Message findMessage(Uuid id) { return model.messageById().first(id); }
+  
+  public List<Message> searchMessages(Uuid conversation, String keyword) {
+    List<Message> searchResult = new ArrayList<Message>(); 
+    
+    final Conversation conversationToBeSearched = model.conversationById().first(conversation); 
+    
+    searchResult = model.searchMessages(conversationToBeSearched, keyword); 
+    
+    return searchResult; 
+    
+    
+    
+
+    final List<Message> foundMessages = new ArrayList<>();
+
+    Message current = (foundConversation == null) ?
+        null :
+        model.messageById().first(foundConversation.firstMessage);
+
+    while (current != null && current.creation.compareTo(start) < 0) {
+      current = model.messageById().first(current.next);
+    }
+
+    while (current != null && current.creation.compareTo(end) <= 0) {
+      foundMessages.add(current);
+      current = model.messageById().first(current.next);
+    }
+
+    return foundMessages;
+  }
 
   private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
 

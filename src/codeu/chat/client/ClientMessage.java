@@ -115,7 +115,8 @@ public final class ClientMessage {
   public List<Message> searchMessages(Uuid conversation, String keyword){
     List<Message> messagesContainingKeyword = new ArrayList<Message>();
     //call the view messageSearch function
-    //view.searchMessages(conversation, keyword); 
+    messagesContainingKeyword = view.searchMessages(conversation, keyword);
+     
     return messagesContainingKeyword; 
   }
 
