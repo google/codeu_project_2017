@@ -47,22 +47,19 @@ public final class ClientUser {
     
 // Validate the username string
 public boolean isValidName(String userName) {
-	boolean clean = true; 
-    if (userName.trim().length() == 0) {
-      clean = false;
-    } else {
-
-      for (User currentUser : getUsers()) {
-		
-        if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
-          System.out.format("Error: user not created - %s already exists.", userName);
-          clean = false;
-        }
+  boolean isUniqueUser = true; 
+  if (userName.trim().length() == 0) {
+    isUniqueUser = false;
+  } else {
+    for (User currentUser : getUsers()) {
+      if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
+        System.out.format("Error: user not created - %s already exists.", userName);
+        isUniqueUser = false;
       }
     }
-    System.out.println("Clean Value: " + clean);
-    return clean;
   }
+  return isUniqueUser;
+}
   
   public boolean hasCurrent() {
     return (current != null);
@@ -95,7 +92,7 @@ public boolean isValidName(String userName) {
     printUser(current);
   }
 
-  //change the type to a boolean, so we can check if the user was created or not in the GUI
+  //boolean to check if the user was created or not in the GUI
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
 

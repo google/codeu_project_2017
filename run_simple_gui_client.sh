@@ -19,6 +19,9 @@
 LOCAL_MACHINE="130.211.140.178@10140"
 
 
+#LOCAL_MACHINE="localhost@2007"
+
+
 
 cd './bin'
 

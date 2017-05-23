@@ -82,6 +82,7 @@ public final class UserPanel extends JPanel {
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
+    userListScrollPane.setMinimumSize(new Dimension(245, 150));
     userListScrollPane.setPreferredSize(new Dimension(245, 150));
 
     // Current User panel
@@ -158,8 +159,19 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+          //Ask user for password
+          final String userPassword = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Enter " + data + "'s password:", "Enter Password", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+          //check password to make sure it is correct and check it against the user's password
+          if(userPassword.equals("password")){ //access userByName, get User, access the user's password (String)
+            clientContext.user.signInUser(data);
+            userSignedInLabel.setText("Hello " + data);
+          } else{
+            //user's password was incorrect
+            JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Password for " + data + " was incorrect."); 
+          }  
         }
       }
     });
@@ -173,8 +185,7 @@ public final class UserPanel extends JPanel {
         if (s != null && s.length() > 0) {
           if(clientContext.user.addUser(s)==true){
           	UserPanel.this.getAllUsers(listModel);
-          	}
-          else{
+          } else{
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
           }
         }
