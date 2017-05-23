@@ -5,6 +5,7 @@ import React from 'react';
 
 import AddConversation from './AddConversation.jsx'
 import ConversationList from './ConversationList.jsx'
+import MessagePanel from './MessagePanel.jsx'
 
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
@@ -58,6 +59,7 @@ class Main extends React.Component {
 
     var pinkHeader = {
       "backgroundColor": "#ff66ff",
+      "borderColor": "#ff66ff",
       "color": "white"
     }
 
@@ -70,7 +72,7 @@ class Main extends React.Component {
     var fontStyle = {
       "fontFamily": "Space Mono",
       "float": "left",
-      "paddingLeft": "2%"
+      "paddingLeft": "5%"
     }
 
     return (
@@ -83,7 +85,7 @@ class Main extends React.Component {
                   <h2>
                      <div style={fontStyle}>Threads</div>
                      <div style={buttonStyle}>
-                        <Button bsStyle="info" onClick={this.toggleVisibility}>
+                        <Button onClick={this.toggleVisibility}>
                         Start a new thread
                         </Button>
                      </div>
@@ -95,6 +97,9 @@ class Main extends React.Component {
                <ConversationList url={this.props.url} port={this.props.port}/>
             </div>
          </div>
+         </Col>
+         <Col xs={8}>
+           <MessagePanel/>
          </Col>
       </div>
     );
