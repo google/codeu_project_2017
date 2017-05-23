@@ -180,7 +180,7 @@ class Login extends React.Component {
          </Col>
       </div>
 
-    var mainPage = <Main url={this.props.url} port={this.props.port} user={this.state.user} username={this.state.username} uuid={this.state.uuid}/>
+    var mainPage = <Main url={this.props.url} port={this.props.port} user={this.state.user}/>
 
     /* Depending on login state, either display the main page or the current
     login page.*/
