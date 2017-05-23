@@ -60,7 +60,7 @@ class AddConversation extends React.Component {
       "contentType": "json",
       "headers": {
         "type": "NEW_CONVERSATION",
-        "owner": this.props.uuid,
+        "owner": this.props.user.id.uuid,
       },
       "data": this.state.value,
       "error": function(xhr, status, err) {

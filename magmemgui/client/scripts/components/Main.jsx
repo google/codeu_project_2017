@@ -89,7 +89,7 @@ class Main extends React.Component {
                      </div>
                   </h2>
                </Row>
-               <AddConversation url={this.props.url} port={this.props.port} show={this.state.addingConversation} user={this.props.user} username={this.props.username} uuid={this.props.uuid}/>
+               <AddConversation url={this.props.url} port={this.props.port} show={this.state.addingConversation} user={this.props.user}/>
             </ListGroupItem>
             <div style={divStyle}>
                <ConversationList url={this.props.url} port={this.props.port}/>
