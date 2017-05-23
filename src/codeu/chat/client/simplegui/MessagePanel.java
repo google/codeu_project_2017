@@ -269,9 +269,10 @@ public final class MessagePanel extends JPanel {
             messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
             if(messages.size()==0){
               //there are no messages found for the query, so a popup should display saying that
-              
+              JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQuery + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
             } else {
-              // display the messages
+              // display the messages list, since messages were found
+              
             }
           }
         }
@@ -295,9 +296,10 @@ public final class MessagePanel extends JPanel {
       	      messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
       	      if(messages.size()==0){
       	        //there are no messages found for the query, so a popup should display saying that
-              
-               } else {
-                // display the messages
+                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQuery + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+              } else {
+                // display the messages list, since messages were found
+                
               }
             }
       	  }
