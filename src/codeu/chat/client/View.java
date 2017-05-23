@@ -14,6 +14,7 @@
 
 package codeu.chat.client;
 
+import java.util.List; 
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -137,6 +138,29 @@ public final class View implements BasicView, LogicalView{
     }
 
     return messages;
+  }
+  
+  public List<Message> searchMessages(Uuid conversation, String keyword) {
+
+    final List<Message> searchResult = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_MESSAGE_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), conversation);
+      Serializers.STRING.write(connection.out(), keyword); 
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_MESSAGE_RESPONSE) {
+        searchResult.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return searchResult;
   }
 
   @Override

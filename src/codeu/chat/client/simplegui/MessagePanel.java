@@ -19,6 +19,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import java.util.List;
+import java.util.ArrayList;  
+
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
@@ -248,6 +251,62 @@ public final class MessagePanel extends JPanel {
           e.getAdjustable().setValue(e.getAdjustable().getMaximum());
         }  
       }
+    });
+    
+    // Search Messages button is pressed
+    addButtonSearch.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.user.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+          final String searchQuery = textFieldSearch.getText().trim();
+          if (searchQuery != null && searchQuery.length() > 0) {
+          	textFieldSearch.setText(""); //clears the text field after use
+            List<Message> messages = new ArrayList<Message>(); 
+            messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
+            if(messages.size()==0){
+              //there are no messages found for the query, so a popup should display saying that
+              
+            } else {
+              // display the messages
+            }
+          }
+        }
+      }
+    });
+    
+    // Responds if user enters ENTER or RETURN the search query is sent
+    textFieldSearch.addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+      	if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
+      	  if (!clientContext.user.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else if (!clientContext.conversation.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else {
+      	    String searchQuery = textFieldSearch.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces     
+      	    if (searchQuery != null && searchQuery.length() > 0) {
+      	      textFieldSearch.setText(""); //clears the text field after use
+      	      List<Message> messages = new ArrayList<Message>(); 
+      	      messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
+      	      if(messages.size()==0){
+      	        //there are no messages found for the query, so a popup should display saying that
+              
+               } else {
+                // display the messages
+              }
+            }
+      	  }
+        }
+	  } 
+      @Override
+      public void keyPressed(KeyEvent e) {}
+      @Override
+      public void keyReleased(KeyEvent e) {}
     });
     
     // Panel is set up. If there is a current conversation, Populate the conversation list.

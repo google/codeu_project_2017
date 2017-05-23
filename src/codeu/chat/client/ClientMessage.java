@@ -110,6 +110,14 @@ public final class ClientMessage {
     }
     updateMessages(false);
   }
+  
+  // method that searches messages in a specific conversation on the server based on a keyword input by the client
+  public List<Message> searchMessages(Uuid conversation, String keyword){
+    List<Message> messagesContainingKeyword = new ArrayList<Message>();
+    //call the view messageSearch function
+    //view.searchMessages(conversation, keyword); 
+    return messagesContainingKeyword; 
+  }
 
   // For m-list-all command.
   // Show all messages attached to the current conversation. This will balk if the conversation
