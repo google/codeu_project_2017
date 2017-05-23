@@ -95,6 +95,8 @@ public final class ClientUser {
 
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
+    
+    System.out.println("Valid Inputs: " + validInputs); 
 
     final User user = (validInputs) ? controller.newUser(name) : null;
 

@@ -94,6 +94,8 @@ public class Controller implements BasicController {
   
   public boolean deleteUser(User userToDelete) {  
     
+    System.out.println(userToDelete); 
+    
     final Collection<User> user = new ArrayList<>();     
     boolean userDeleted = false; 
     

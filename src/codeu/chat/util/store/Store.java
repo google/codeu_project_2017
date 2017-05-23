@@ -70,6 +70,14 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
   public void remove(KEY key){
     StoreLink<KEY, VALUE> v; 
+    
+    StoreLink<KEY, VALUE> linkBefore = floor(key);
+    linkBefore.next = null; 
+    
+    //print data structures, all of the links and the next pointers and everything in the index to see what is there 
+    //Goal: See what everything points to 
+    
+    //teindex.floor(key).next = index.ceiling(key); 
   	if((v=index.remove(key))!=null){
   	  //Success
   	  System.out.println(v + " was removed successfully."); 
@@ -80,7 +88,7 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   
   //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
   public boolean exists(KEY key){
-    boolean userExists = (index.remove(key)!=null);  
+    boolean userExists = (index.get(key)!=null);  
   	return userExists; 
   }
 

@@ -71,7 +71,7 @@ public final class Model {
 
   public void add(User user) {
     currentUserGeneration = userGenerations.make();
-
+    
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
@@ -79,11 +79,23 @@ public final class Model {
   
   //method to delete a user from the server
   public boolean deleteUsers(Collection<User> targetUser) { 
-    User userToDelete = (User)(targetUser.toArray())[0]; 
+    User userToDelete = (User)(targetUser.toArray())[0];
+    
+    Iterable<User> usersByTextBeforeDeletion = userByText.all(); 
+    
+    for(User u: usersByTextBeforeDeletion){
+    	System.out.println(u.name); 
+    }  
     
     userById.remove(userToDelete.id);
     userByTime.remove(userToDelete.creation);
     userByText.remove(userToDelete.name);
+    
+    Iterable<User> usersByTextAfterDeletion = userByText.all(); 
+    
+    for(User u: usersByTextAfterDeletion){
+    	System.out.println(u.name); 
+    }
     
     return !(userById.exists(userToDelete.id) && userByTime.exists(userToDelete.creation) && userByText.exists(userToDelete.name)); 
   }
