@@ -16,7 +16,6 @@
 package codeu.chat.server;
 
 import codeu.chat.common.SentimentScore;
-import codeu.chat.util.Serializer;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;

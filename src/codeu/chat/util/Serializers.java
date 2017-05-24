@@ -90,7 +90,7 @@ public final class Serializers {
     public void write(OutputStream out, Long value) throws IOException {
 
       for (int i = 56; i >= 0; i -= 8) {
-        out.write((int)(0xFF & (value >>> i)));
+        out.write((int) (0xFF & (value >>> i)));
       }
 
     }
@@ -119,6 +119,28 @@ public final class Serializers {
     }
   };
 
+  public static final Serializer<Double> DOUBLE = new Serializer<Double>() {
+    @Override
+    public void write(OutputStream out, Double value) throws IOException {
+      Serializers.LONG.write(out, Double.doubleToLongBits(value));
+    }
+
+    @Override
+    public Double read(InputStream in) throws IOException {
+      return Double.longBitsToDouble(Serializers.LONG.read(in));
+    }
+
+    @Override
+    public void write(PrintWriter out, Double value) {
+      out.println(value);
+    }
+
+    @Override
+    public Double read(BufferedReader in) throws IOException {
+      return Double.parseDouble(in.readLine());
+    }
+  };
+
   public static final Serializer<byte[]> BYTES = new Serializer<byte[]>() {
 
     @Override
@@ -136,7 +158,7 @@ public final class Serializers {
       final byte[] array = new byte[length];
 
       for (int i = 0; i < length; i++) {
-        array[i] = (byte)input.read();
+        array[i] = (byte) input.read();
       }
 
       return array;
@@ -225,7 +247,7 @@ public final class Serializers {
       }
 
       @Override
-      public Collection<T> read(BufferedReader in) throws IOException{
+      public Collection<T> read(BufferedReader in) throws IOException {
         final int size = INTEGER.read(in);
         Collection<T> list = new ArrayList<T>(size);
         for (int i = 0; i < size; i++) {
@@ -281,7 +303,7 @@ public final class Serializers {
    * Adding this Gson object, would allow all serializers to use this Gson, rather than having
    * to rebuild the Gson multiple times.
    */
-  public static Gson GSON = new GsonBuilder()
+  public static final Gson GSON = new GsonBuilder()
       .registerTypeAdapter(Time.class, Time.JSON_SERIALIZER)
       .registerTypeAdapter(Time.class, Time.JSON_DESERIALIZER)
       .create();

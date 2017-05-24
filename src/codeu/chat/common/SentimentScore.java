@@ -20,14 +20,13 @@ import java.io.PrintWriter;
  */
 public class SentimentScore {
 
-  private int score;
+  private double score;
 
   /*
-   * this will mark how many messages have been included in the calculation of the current score
-   * todo: figure out how this will be used
+   * This keeps track of the sum of all the past weights to be used in updating the score
    */
 
-  private int numScores;
+  private double weighting;
 
   /*
    * The language client is used to connect to the natural language API.
@@ -46,16 +45,16 @@ public class SentimentScore {
   public static final Serializer<SentimentScore> SERIALIZER = new Serializer<SentimentScore>() {
     @Override
     public void write(OutputStream out, SentimentScore value) throws IOException {
-      Serializers.INTEGER.write(out, value.score);
-      Serializers.INTEGER.write(out, value.numScores);
+      Serializers.DOUBLE.write(out, value.score);
+      Serializers.DOUBLE.write(out, value.weighting);
     }
 
     @Override
     public SentimentScore read(InputStream in) throws IOException {
 
       return new SentimentScore(
-          Serializers.INTEGER.read(in),
-          Serializers.INTEGER.read(in)
+          Serializers.DOUBLE.read(in),
+          Serializers.DOUBLE.read(in)
       );
 
     }
@@ -77,20 +76,20 @@ public class SentimentScore {
 
   public SentimentScore() {
     score = 0;
-    numScores = 0;
+    weighting = 0;
   }
 
   // This was made private because it shouldn't be used other than by the serializer
-  private SentimentScore(int score, int numScores) {
+  private SentimentScore(double score, double weighting) {
     this.score = score;
-    this.numScores = numScores;
+    this.weighting = weighting;
   }
 
   /*
    * When a new message is sent to the server, the server will add the message to the authors sentiment score
    * using this method
    */
-  public int addMessage(Message m) {
+  public double addMessage(Message m) {
 
     if (m == null) {
       return score;
@@ -107,7 +106,7 @@ public class SentimentScore {
 
   }
 
-  private void updateScore(Sentiment score) {
+  private void updateScore(Sentiment sentiment) {
 
     // todo: based on the given sentiment, update the sentiment score.
     /*
@@ -115,6 +114,17 @@ public class SentimentScore {
      * the sentiment has both a score and a magnitude. How will they both be used in the
      * calculation?
     */
+
+    final float score = sentiment.getScore();
+    final float magnitude = sentiment.getMagnitude();
+
+    // the following is a temporary solution to avoid the weighting getting too high
+    final double nextWeighting = Math.max(this.weighting + magnitude, 50);
+
+    this.score = (this.score * this.weighting) +  (score * magnitude);
+    this.score /= nextWeighting;
+    this.weighting = nextWeighting;
+
   }
 
   private Sentiment calculateSentiment(Message message) throws IOException {
@@ -136,12 +146,8 @@ public class SentimentScore {
 
   }
 
-  public int getScore() {
+  public double getScore() {
     return this.score;
-  }
-
-  public int getNumScores() {
-    return this.numScores;
   }
 
 }
