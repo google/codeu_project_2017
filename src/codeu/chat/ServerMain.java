@@ -47,23 +47,9 @@ final class ServerMain {
 
     LOG.info("============================= START OF LOG =============================");
 
-<<<<<<< HEAD
     Uuid id = null;
     Secret secret = null;
     int port = -1;
-=======
-    final int myPort = Integer.parseInt(args[2]);
-    final byte[] secret = Secret.parse(args[1]);
-
-    Uuid id = null;
-    try {
-      id = Uuid.parse(args[0]);
-    } catch (IOException ex) {
-      System.out.println("Invalid id - shutting down server");
-      System.exit(1);
-    }
-
->>>>>>> ca95d6d22fa43077ff48c651542d7287accc2d53
     // This is the directory where it is safe to store data accross runs
     // of the server.
     File persistentPath = null;
