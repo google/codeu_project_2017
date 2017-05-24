@@ -54,5 +54,4 @@ else
       "${PORT}" \
       "${PERSISTENT_DIR}" \
       "${RELAY_ADDRESS}"
-
 fi

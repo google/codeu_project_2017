@@ -145,9 +145,9 @@ public final class UuidTest {
 
     assertNotNull(id);
     assertEquals(id.id(), 0xFFFFFFFF);
-
   }
 
+  @Test
   public void testJsonSerializer() {
 
     try {
@@ -200,6 +200,6 @@ public final class UuidTest {
     } catch (IOException exc) {
       System.out.println("Exception thrown");
     }
-    
+
   }
 }
