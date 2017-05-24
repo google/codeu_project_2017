@@ -6,6 +6,7 @@ import React from 'react';
 import AddConversation from './AddConversation.jsx'
 import ConversationList from './ConversationList.jsx'
 import MessagePanel from './MessagePanel.jsx'
+import MessageBox from './MessageBox.jsx'
 
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
@@ -101,6 +102,11 @@ class Main extends React.Component {
          <Col xs={8}>
            <MessagePanel/>
          </Col>
+         <Row>
+           <Col xs={8} xsOffset={4}>
+             <MessageBox/>
+           </Col>
+         </Row>
       </div>
     );
   }
