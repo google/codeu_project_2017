@@ -40,6 +40,13 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   public void insert(KEY key, VALUE value) {
 
     final StoreLink<KEY, VALUE> closestLink = floor(key);
+    
+    StoreLink<KEY, VALUE> currentLink = rootLink; 
+    System.out.println("Before Adding Another User (Store): "); 
+    while(currentLink != null){
+      System.out.println(currentLink.key); 
+      currentLink = currentLink.next; 
+    }
 
     // Assume that the new value can only come after the current position. Move
     // through the chain of links until the next link is either the end (null)
@@ -64,13 +71,6 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     //     it would not help with the interators. As long as the key will map
     //     to the first link, the other links will always be found. This is
     //     why the insert is always put at the end of the series.
-    
-    StoreLink<KEY, VALUE> currentLink = rootLink; 
-    System.out.println("Before Adding Another User (Store): "); 
-    while(currentLink != null){
-      System.out.println(currentLink.key); 
-      currentLink = currentLink.next; 
-    }
     
     if (closestLink == null || comparator.compare(newLink.key, closestLink.key) != 0) {
       index.put(key, newLink);

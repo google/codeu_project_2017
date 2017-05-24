@@ -92,7 +92,7 @@ public final class Model {
     userByText.remove(userToDelete.name);
     
     Iterable<User> usersByTextAfterDeletion = userByText.all(); 
-    
+    System.out.println("Contents of userByText: "); 
     for(User u: usersByTextAfterDeletion){
     	System.out.println(u.name); 
     }

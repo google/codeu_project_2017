@@ -132,7 +132,7 @@ public final class Controller implements RawController, BasicController {
   public boolean deleteUser(Collection<User> userToDelete) {
     boolean deletionSuccessful = model.deleteUsers(userToDelete);
     
-    System.out.println(deletionSuccessful); 
+    System.out.println("Deletion Successful" + deletionSuccessful); 
     
     return deletionSuccessful; 
   }
