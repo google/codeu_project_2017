@@ -139,7 +139,6 @@ public final class UuidTest {
     assertNotNull(id);
     assertEquals(id.id(), 0xFFFFFFFF);
   }
-<<<<<<< HEAD
 
   @Test
   public void testParsingToString() throws IOException {
@@ -150,6 +149,4 @@ public final class UuidTest {
 
     assertEquals(start, end);
   }
-=======
->>>>>>> ca95d6d22fa43077ff48c651542d7287accc2d53
 }
