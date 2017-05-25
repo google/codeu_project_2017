@@ -3,8 +3,9 @@ Main component and makes ajax calls every second to see if there are any new
 conversations. */
 
 import React from 'react';
-import ConversationListItem from "./ConversationListItem.jsx"
 import $ from 'jquery';
+
+import ConversationListItem from "./ConversationListItem.jsx"
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 
 
@@ -20,11 +21,13 @@ class ConversationList extends React.Component {
     search time. */
     this.state = {
       data: [],
-      lastClick: 1
+      lastClick: 1,
+      selection: ""
     }
 
     // Again, bind a setState function.
     this.request = this.request.bind(this);
+    this.setSelection = this.setSelection.bind(this);
   }
 
   /* This is called when the parent initializes this child.
@@ -37,7 +40,7 @@ class ConversationList extends React.Component {
   componentDidMount() {
     window.setInterval(function () {
       this.request();
-    }.bind(this), 1000);
+    }.bind(this), 600);
   }
 
   /* The update function. Updates our data state with new conversations. */
@@ -67,12 +70,17 @@ class ConversationList extends React.Component {
 
   }
 
+  setSelection(uuid) {
+    this.setState({ "selection": uuid });
+    this.props.threadSelect(uuid);
+  }
+
   /* This syntactic sugar is essentially a "foreach". Draw a
   ConversationListItem for each item in data. */
   render() {
     return (
       <ListGroup>
-        {this.state.data.map((convo, i) => <ConversationListItem key = {i} data = {convo} />)}
+        {this.state.data.map((convo, i) => <ConversationListItem selection={this.state.selection} setSelection={this.setSelection} uuid={convo.id.uuid} key = {i} data = {convo} />)}
       </ListGroup>
     );
   }

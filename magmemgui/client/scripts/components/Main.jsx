@@ -24,11 +24,13 @@ class Main extends React.Component {
 
      // State declaration
      this.state = {
-       addingConversation: false,
+       "addingConversation": false,
+       "selection": ""
      }
 
      // Again, bind this function so it can set state.
      this.toggleVisibility = this.toggleVisibility.bind(this);
+     this.threadSelect = this.threadSelect.bind(this);
   }
 
 
@@ -36,6 +38,10 @@ class Main extends React.Component {
   AddConversation, either enabling or disabling the textbox.*/
   toggleVisibility() {
      this.setState({ "addingConversation": !this.state.addingConversation })
+  }
+
+  threadSelect(uuid) {
+    this.setState({ "selection": uuid });
   }
 
 
@@ -95,16 +101,16 @@ class Main extends React.Component {
                <AddConversation url={this.props.url} port={this.props.port} show={this.state.addingConversation} user={this.props.user}/>
             </ListGroupItem>
             <div style={divStyle}>
-               <ConversationList url={this.props.url} port={this.props.port}/>
+               <ConversationList url={this.props.url} port={this.props.port} threadSelect={this.threadSelect}/>
             </div>
          </div>
          </Col>
          <Col xs={8}>
-           <MessagePanel/>
+           <MessagePanel url={this.props.url} port={this.props.port} selection={this.state.selection} user={this.props.user}/>
          </Col>
          <Row>
            <Col xs={8} xsOffset={4}>
-             <MessageBox/>
+             <MessageBox url={this.props.url} port={this.props.port} selection={this.state.selection} user={this.props.user}/>
            </Col>
          </Row>
       </div>

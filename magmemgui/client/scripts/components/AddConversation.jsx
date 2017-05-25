@@ -23,7 +23,8 @@ class AddConversation extends React.Component {
      // State declaration. Tracks textbox value and current visibility of dialog
      this.state = {
        "value": "",
-       "show": false
+       "show": false,
+       "cachedShow": false
      }
 
      // Bindings so we can setState
@@ -34,7 +35,9 @@ class AddConversation extends React.Component {
   /* If the props our parent is providing change, then this function is
   triggered. Inverts the visiblity of the dialog. */
   componentWillReceiveProps(nextProps) {
-    this.setState( {"show": !this.state.show} );
+    if (nextProps.show != this.state.cachedShow) {
+      this.setState( {"show": !this.state.show, "cachedShow": nextProps.show} );
+    }
   }
 
   /* Called every time a new character is entered in the textbox. */
