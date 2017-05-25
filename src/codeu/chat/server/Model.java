@@ -97,11 +97,6 @@ public final class Model {
     conversationByTime.insert(conversation.creation, conversation);
     conversationByText.insert(conversation.title, conversation);
   }
-  
-  // Method that searches the messages of a specific conversation for the keyword input as an argument
-  public List<Messages> searchMessages (Conversation conversation, String keyword){
-  
-  }
 
   public StoreAccessor<Uuid, Conversation> conversationById() {
     return conversationById;

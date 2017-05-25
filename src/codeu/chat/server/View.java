@@ -181,7 +181,25 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
     return found;
   }
-
+  
+  // Write a search method that uses Model's messageByText() method and all() from Store uses String's contains() method to check for keyword 
+   public List<Message> searchMessages(Uuid conversation, String keyword) {
+    List<Message> searchResult = new ArrayList<Message>(); 
+    
+    Iterable<Message> allMessages = model.messageByText().all(); 
+    
+    for(Message current: allMessages){
+      if(current.content.contains(keyword)==true){
+        System.out.println(current.content); 
+        searchResult.add(current); 
+      } else {
+        // Message does not contain the keyword, so it should not be added
+      }
+    }
+    
+    return searchResult; 
+  }
+  
   @Override
   public User findUser(Uuid id) { return model.userById().first(id); }
 
@@ -191,16 +209,6 @@ public final class View implements BasicView, LogicalView, SinglesView {
   @Override
   public Message findMessage(Uuid id) { return model.messageById().first(id); }
   
-  public List<Message> searchMessages(Uuid conversation, String keyword) {
-    List<Message> searchResult = new ArrayList<Message>(); 
-    
-    final Conversation conversationToBeSearched = model.conversationById().first(conversation); 
-    
-    searchResult = model.searchMessages(conversationToBeSearched, keyword); 
-    
-    return searchResult; 
-  }
-
   private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
 
     // Use a set to hold the found users as this will prevent duplicate ids from

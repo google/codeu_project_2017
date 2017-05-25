@@ -280,7 +280,7 @@ public final class MessagePanel extends JPanel {
     });
     
     // Responds if user enters ENTER or RETURN the search query is sent
-    textFieldSearch.addKeyListener(new KeyListener() {
+    textFieldSearch.addKeyListener(new KeyListener() {        
       @Override
       public void keyTyped(KeyEvent e) {
       	if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
@@ -300,6 +300,17 @@ public final class MessagePanel extends JPanel {
               } else {
                 // display the messages list, since messages were found
                 
+                JPanel popUp = new JPanel();
+                
+                //(Message[]) messages.toArray()
+                JList<Message> searchResult = new JList<Message>(); 
+                JScrollPane messagesPane = new JScrollPane(searchResult); 
+                
+                popUp.add(messagesPane); 
+                
+                //JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", null);
+                
+                 JOptionPane.showConfirmDialog(null, popUp, "Search Results", JOptionPane.OK_CANCEL_OPTION);
               }
             }
       	  }
