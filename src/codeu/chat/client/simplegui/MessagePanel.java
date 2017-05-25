@@ -272,7 +272,24 @@ public final class MessagePanel extends JPanel {
               JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQuery + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
             } else {
               // display the messages list, since messages were found
-              
+              JPanel popUp = new JPanel();
+                String[] messagesArray = new String[messages.size()]; 
+                
+                for(int i=0; i<messages.size(); i++){
+                  Message currentMessage = messages.get(i); 
+                  String authorName = clientContext.user.getName(currentMessage.author);
+                  
+                  messagesArray[i] = String.format("%s: [%s]: %s",
+                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentMessage.content);
+                }
+                
+                JList<String> searchResult = new JList<String>(messagesArray); 
+                JScrollPane messagesPane = new JScrollPane(searchResult); 
+                messagesPane.setMinimumSize(new Dimension(250, 200));
+                messagesPane.setPreferredSize(new Dimension(250, 200));
+                
+                popUp.add(messagesPane); 
+                JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
             }
           }
         }
@@ -299,18 +316,24 @@ public final class MessagePanel extends JPanel {
                 JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQuery + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
               } else {
                 // display the messages list, since messages were found
-                
                 JPanel popUp = new JPanel();
+                String[] messagesArray = new String[messages.size()]; 
                 
-                //(Message[]) messages.toArray()
-                JList<Message> searchResult = new JList<Message>(); 
+                for(int i=0; i<messages.size(); i++){
+                  Message currentMessage = messages.get(i); 
+                  String authorName = clientContext.user.getName(currentMessage.author);
+                  
+                  messagesArray[i] = String.format("%s: [%s]: %s",
+                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentMessage.content);
+                }
+                
+                JList<String> searchResult = new JList<String>(messagesArray); 
                 JScrollPane messagesPane = new JScrollPane(searchResult); 
+                messagesPane.setMinimumSize(new Dimension(250, 200));
+                messagesPane.setPreferredSize(new Dimension(250, 200));
                 
                 popUp.add(messagesPane); 
-                
-                //JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", null);
-                
-                 JOptionPane.showConfirmDialog(null, popUp, "Search Results", JOptionPane.OK_CANCEL_OPTION);
+                JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
               }
             }
       	  }
