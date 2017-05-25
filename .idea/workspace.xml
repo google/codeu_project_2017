@@ -1,7 +1,900 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c6e837c-9cd7-4d12-a2f8-2270aa375a17" name="Default" comment="" />
+    <list default="true" id="7c6e837c-9cd7-4d12-a2f8-2270aa375a17" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/NOTICE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/jars-info.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/allclasses-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/allclasses-noframe.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/constant-values.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/deprecated-list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/help-doc.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/index-all.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/jquery-1.7.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/jquery.beautyOfCode-min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/LGPLv3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/clipboard.swf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushAS3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushBash.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushCSharp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushColdFusion.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushCpp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushCss.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushDelphi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushDiff.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushErlang.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushGroovy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushJScript.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushJava.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushJavaFX.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushPerl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushPhp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushPlain.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushPowerShell.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushPython.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushRuby.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushScala.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushSql.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushVb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shBrushXml.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shCore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/scripts/shLegacy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/src/shCore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/src/shLegacy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/help.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/magnifier.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/page_white_code.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/page_white_copy.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/printer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shCore.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeDjango.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeEclipse.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeEmacs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeFadeToGrey.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeMidnight.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/js/sh-2.1.382/styles/shThemeRDark.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/AdditionalAnswers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/AdditionalMatchers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Answers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/ArgumentCaptor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/ArgumentMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/BDDMockito.BDDMyOngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/BDDMockito.BDDOngoingStubbingImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/BDDMockito.BDDStubber.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/BDDMockito.BDDStubberImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/BDDMockito.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Captor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/InOrder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Incubating.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/InjectMocks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Matchers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Mock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/MockSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/MockingDetails.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Mockito.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/MockitoAnnotations.Mock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/MockitoAnnotations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/MockitoDebugger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/ReturnValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/Spy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/AdditionalAnswers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/AdditionalMatchers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Answers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/ArgumentCaptor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/ArgumentMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/BDDMockito.BDDMyOngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/BDDMockito.BDDOngoingStubbingImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/BDDMockito.BDDStubber.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/BDDMockito.BDDStubberImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/BDDMockito.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Captor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/InOrder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Incubating.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/InjectMocks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Matchers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Mock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/MockSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/MockingDetails.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Mockito.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/MockitoAnnotations.Mock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/MockitoAnnotations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/MockitoDebugger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/ReturnValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/class-use/Spy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/AnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/DefaultMockitoConfiguration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/IMockitoConfiguration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/class-use/AnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/class-use/DefaultMockitoConfiguration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/class-use/IMockitoConfiguration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/configuration/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/Discrepancy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/Pluralizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/PrintableInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/Reporter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/MockitoAssertionError.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/MockitoException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/class-use/MockitoAssertionError.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/class-use/MockitoException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/base/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/class-use/Discrepancy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/class-use/Pluralizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/class-use/PrintableInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/class-use/Reporter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/FriendlyReminderException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/InvalidUseOfMatchersException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/MissingMethodInvocationException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/MockitoConfigurationException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/NotAMockException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/NullInsteadOfMockException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/UnfinishedStubbingException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/UnfinishedVerificationException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/WrongTypeOfReturnValue.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/FriendlyReminderException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/InvalidUseOfMatchersException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/MissingMethodInvocationException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/MockitoConfigurationException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/NotAMockException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/NullInsteadOfMockException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/UnfinishedStubbingException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/UnfinishedVerificationException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/class-use/WrongTypeOfReturnValue.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/misusing/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/stacktrace/StackTraceCleaner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/stacktrace/class-use/StackTraceCleaner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/stacktrace/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/stacktrace/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/stacktrace/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/stacktrace/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/ArgumentsAreDifferent.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/NeverWantedButInvoked.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/NoInteractionsWanted.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/SmartNullPointerException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/TooLittleActualInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/TooManyActualInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/VerificationInOrderFailure.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/WantedButNotInvoked.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/ArgumentsAreDifferent.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/NeverWantedButInvoked.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/NoInteractionsWanted.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/SmartNullPointerException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/TooLittleActualInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/TooManyActualInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/VerificationInOrderFailure.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/class-use/WantedButNotInvoked.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/ArgumentsAreDifferent.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/JUnitTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/class-use/ArgumentsAreDifferent.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/class-use/JUnitTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/junit/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/exceptions/verification/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/InOrderImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/InternalMockHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/MockitoCore.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/class-use/InOrderImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/class-use/InternalMockHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/class-use/MockitoCore.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/CaptorAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/ClassPathLoader.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/DefaultAnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/DefaultInjectionEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/FieldAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/GlobalConfiguration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/InjectingAnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/MockAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/MockitoAnnotationsMockAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/SpyAnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/CaptorAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/ClassPathLoader.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/DefaultAnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/DefaultInjectionEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/FieldAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/GlobalConfiguration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/InjectingAnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/MockAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/MockitoAnnotationsMockAnnotationProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/class-use/SpyAnnotationEngine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/ConstructorInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/MockInjection.OngoingMockInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/MockInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/MockInjectionStrategy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/PropertyAndSetterInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/SpyOnInjectedFieldsHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/class-use/ConstructorInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/class-use/MockInjection.OngoingMockInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/class-use/MockInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/class-use/MockInjectionStrategy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/class-use/PropertyAndSetterInjection.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/class-use/SpyOnInjectedFieldsHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/FinalMockCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/MockCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/NameBasedCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/OngoingInjecter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/TypeBasedCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/class-use/FinalMockCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/class-use/MockCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/class-use/NameBasedCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/class-use/OngoingInjecter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/class-use/TypeBasedCandidateFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/filter/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/InjectMocksScanner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/MockScanner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/class-use/InjectMocksScanner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/class-use/MockScanner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/injection/scanner/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/configuration/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/AbstractMockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/CglibMockMaker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/ClassNameFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/DelegatingMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/DelegatingMockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/MethodInterceptorFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/MockSettingsImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/MockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/SerializableMockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/CGLIBHacker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/MockitoNamingPolicy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/class-use/CGLIBHacker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/class-use/MockitoNamingPolicy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/cglib/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/AbstractMockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/CglibMockMaker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/ClassNameFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/DelegatingMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/DelegatingMockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/MethodInterceptorFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/MockSettingsImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/MockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/class-use/SerializableMockitoMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/ClassImposterizer.ClassWithSuperclassToWorkAroundCglibBug.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/ClassImposterizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/SearchingClassLoader.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/SerializableNoOp.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/class-use/ClassImposterizer.ClassWithSuperclassToWorkAroundCglibBug.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/class-use/ClassImposterizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/class-use/SearchingClassLoader.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/class-use/SerializableNoOp.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/jmock/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/settings/CreationSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/settings/class-use/CreationSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/settings/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/settings/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/settings/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/creation/settings/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/FindingsListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/Localized.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/LocationImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/LoggingListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/MockitoDebuggerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/VerboseMockInvocationLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/WarningsCollector.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/WarningsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/WarningsPrinterImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/FindingsListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/Localized.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/LocationImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/LoggingListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/MockitoDebuggerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/VerboseMockInvocationLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/WarningsCollector.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/WarningsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/class-use/WarningsPrinterImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/debugging/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/ExceptionIncludingMockitoWarnings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/VerificationAwareInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/class-use/ExceptionIncludingMockitoWarnings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/class-use/VerificationAwareInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/ConditionalStackTraceFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/DefaultStackTraceCleaner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/DefaultStackTraceCleanerProvider.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/StackTraceFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/class-use/ConditionalStackTraceFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/class-use/DefaultStackTraceCleaner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/class-use/DefaultStackTraceCleanerProvider.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/class-use/StackTraceFilter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/stacktrace/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/util/ScenarioPrinter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/util/class-use/ScenarioPrinter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/util/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/util/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/util/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/exceptions/util/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/handler/MockHandlerFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/handler/class-use/MockHandlerFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/handler/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/handler/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/handler/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/handler/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/ArgumentsComparator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/ArgumentsProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/CapturesArgumensFromInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/InvocationImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/InvocationMarker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/InvocationMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/InvocationsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/MatchersBinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/MockitoMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/SerializableMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/StubInfoImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/UnusedStubsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/ArgumentsComparator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/ArgumentsProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/CapturesArgumensFromInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/InvocationImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/InvocationMarker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/InvocationMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/InvocationsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/MatchersBinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/MockitoMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/SerializableMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/StubInfoImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/class-use/UnusedStubsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/AllInvocationsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/VerifiableInvocationsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/class-use/AllInvocationsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/class-use/VerifiableInvocationsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/finder/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/CGLIBProxyRealMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/FilteredCGLIBProxyRealMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/HasCGLIBMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/RealMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/class-use/CGLIBProxyRealMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/class-use/FilteredCGLIBProxyRealMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/class-use/HasCGLIBMethodProxy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/class-use/RealMethod.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/invocation/realmethod/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/junit/JUnitTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/junit/class-use/JUnitTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/junit/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/junit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/junit/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/junit/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/CollectCreatedMocks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/MockingProgressListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/MockingStartedListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/NotifiedMethodInvocationReport.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/class-use/CollectCreatedMocks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/class-use/MockingProgressListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/class-use/MockingStartedListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/class-use/NotifiedMethodInvocationReport.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/listeners/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/And.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Any.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/AnyVararg.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/ArrayEquals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/CapturesArguments.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/CapturingMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/CompareEqual.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/CompareTo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Contains.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/ContainsExtraTypeInformation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/EndsWith.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Equality.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/EqualsWithDelta.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Find.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/GreaterOrEqual.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/GreaterThan.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/InstanceOf.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/LessOrEqual.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/LessThan.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/LocalizedMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/MatcherDecorator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/MatchersPrinter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Matches.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Not.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/NotNull.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Null.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Or.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/Same.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/StartsWith.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/VarargMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/apachecommons/ReflectionEquals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/apachecommons/class-use/ReflectionEquals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/apachecommons/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/apachecommons/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/apachecommons/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/apachecommons/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/And.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Any.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/AnyVararg.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/ArrayEquals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/CapturesArguments.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/CapturingMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/CompareEqual.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/CompareTo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Contains.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/ContainsExtraTypeInformation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/EndsWith.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Equality.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Equals.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/EqualsWithDelta.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Find.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/GreaterOrEqual.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/GreaterThan.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/InstanceOf.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/LessOrEqual.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/LessThan.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/LocalizedMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/MatcherDecorator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/MatchersPrinter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Matches.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Not.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/NotNull.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Null.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Or.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/Same.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/StartsWith.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/class-use/VarargMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/matchers/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/ArgumentMatcherStorage.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/ArgumentMatcherStorageImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/HandyReturnValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/IOngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/MockingProgress.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/MockingProgressImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/SequenceNumber.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/ThreadSafeMockingProgress.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/ArgumentMatcherStorage.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/ArgumentMatcherStorageImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/HandyReturnValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/IOngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/MockingProgress.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/MockingProgressImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/SequenceNumber.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/class-use/ThreadSafeMockingProgress.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/progress/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/Discrepancy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/Pluralizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/PrintSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/SmartPrinter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/class-use/Discrepancy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/class-use/Pluralizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/class-use/PrintSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/class-use/SmartPrinter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/reporting/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/JUnit44RunnerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/JUnit45AndHigherRunnerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/RunnerFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/RunnerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/class-use/JUnit44RunnerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/class-use/JUnit45AndHigherRunnerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/class-use/RunnerFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/class-use/RunnerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/FrameworkUsageValidator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/RunnerProvider.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/TestMethodsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/class-use/FrameworkUsageValidator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/class-use/RunnerProvider.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/class-use/TestMethodsFinder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/runners/util/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/BaseStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/ConsecutiveStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/InvocationContainer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/InvocationContainerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/OngoingStubbingImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/StubbedInvocationMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/StubberImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/VoidMethodStubbableImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/AnswerReturnValuesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/AnswersValidator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/CallsRealMethods.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/ClonesArguments.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/DoesNothing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/MethodInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/Returns.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/ReturnsArgumentAt.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/ReturnsElementsOf.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/ThrowsException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/ThrowsExceptionClass.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/AnswerReturnValuesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/AnswersValidator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/CallsRealMethods.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/ClonesArguments.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/DoesNothing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/MethodInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/Returns.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/ReturnsArgumentAt.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/ReturnsElementsOf.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/ThrowsException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/class-use/ThrowsExceptionClass.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/answers/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/BaseStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/ConsecutiveStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/InvocationContainer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/InvocationContainerImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/OngoingStubbingImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/StubbedInvocationMatcher.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/StubberImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/class-use/VoidMethodStubbableImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/Answers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/ForwardsInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/GloballyConfiguredAnswer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/ReturnsMocks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/ReturnsMoreEmptyValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/Answers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/ForwardsInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/GloballyConfiguredAnswer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/ReturnsDeepStubs.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/ReturnsEmptyValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/ReturnsMocks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/ReturnsMoreEmptyValues.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/class-use/ReturnsSmartNulls.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/defaultanswers/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/stubbing/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/Checks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/ConsoleMockitoLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/Decamelizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/DefaultMockingDetails.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/MockCreationValidator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/MockNameImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/MockUtil.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/MockitoLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/MockitoSpy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/ObjectMethodsGuru.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/Primitives.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/RemoveFirstLine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/SimpleMockitoLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/StringJoiner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/Checks.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/ConsoleMockitoLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/Decamelizer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/DefaultMockingDetails.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/MockCreationValidator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/MockNameImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/MockUtil.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/MockitoLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/MockitoSpy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/ObjectMethodsGuru.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/Primitives.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/RemoveFirstLine.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/SimpleMockitoLogger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/class-use/StringJoiner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/ArrayUtils.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/HashCodeAndEqualsMockWrapper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/HashCodeAndEqualsSafeSet.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/IdentitySet.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/ListUtil.Filter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/ListUtil.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/Sets.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/ArrayUtils.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/HashCodeAndEqualsMockWrapper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/HashCodeAndEqualsSafeSet.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/IdentitySet.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/ListUtil.Filter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/ListUtil.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/class-use/Sets.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/collections/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/junit/JUnitFailureHacker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/junit/class-use/JUnitFailureHacker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/junit/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/junit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/junit/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/junit/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/AccessibilityChanger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/BeanPropertySetter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/FieldCopier.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/FieldInitializationReport.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/FieldInitializer.ConstructorArgumentResolver.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/FieldInitializer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/FieldReader.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/FieldSetter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/Fields.InstanceFields.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/Fields.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/GenericMaster.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/InstanceField.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/LenientCopyTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/Whitebox.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/AccessibilityChanger.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/BeanPropertySetter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/FieldCopier.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/FieldInitializationReport.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/FieldInitializer.ConstructorArgumentResolver.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/FieldInitializer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/FieldReader.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/FieldSetter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/Fields.InstanceFields.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/Fields.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/GenericMaster.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/InstanceField.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/LenientCopyTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/class-use/Whitebox.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/util/reflection/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/AtLeast.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/AtMost.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/Calls.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/InOrderContextImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/InOrderWrapper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/MockAwareVerificationMode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/NoMoreInteractions.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/Only.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/RegisteredInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/Times.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/VerificationDataImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/VerificationModeFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/VerificationWithTimeoutImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/InOrderContext.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/VerificationData.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/VerificationDataInOrder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/VerificationDataInOrderImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/VerificationInOrderMode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/class-use/InOrderContext.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/class-use/VerificationData.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/class-use/VerificationDataInOrder.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/class-use/VerificationDataInOrderImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/class-use/VerificationInOrderMode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/api/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/argumentmatching/class-use/ArgumentMatchingTool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/argumentmatching/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/argumentmatching/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/argumentmatching/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/argumentmatching/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/AtLeastDiscrepancy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/AtLeastXNumberOfInvocationsChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/AtLeastXNumberOfInvocationsInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/MissingInvocationChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/MissingInvocationInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/NonGreedyNumberOfInvocationsInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/NumberOfInvocationsChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/NumberOfInvocationsInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/AtLeastDiscrepancy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/AtLeastXNumberOfInvocationsChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/AtLeastXNumberOfInvocationsInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/MissingInvocationChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/MissingInvocationInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/NonGreedyNumberOfInvocationsInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/NumberOfInvocationsChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/class-use/NumberOfInvocationsInOrderChecker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/checkers/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/AtLeast.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/AtMost.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/Calls.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/InOrderContextImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/InOrderWrapper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/MockAwareVerificationMode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/NoMoreInteractions.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/Only.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/RegisteredInvocations.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/Times.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/VerificationDataImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/VerificationModeFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/class-use/VerificationWithTimeoutImpl.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/internal/verification/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/DescribedInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/Invocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/InvocationOnMock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/Location.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/MockHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/StubInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/class-use/DescribedInvocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/class-use/Invocation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/class-use/InvocationOnMock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/class-use/Location.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/class-use/MockHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/class-use/StubInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/invocation/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/InvocationListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/MethodInvocationReport.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/class-use/InvocationListener.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/class-use/MethodInvocationReport.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/listeners/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/logo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/MockCreationSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/MockName.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/class-use/MockCreationSettings.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/class-use/MockName.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/mock/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/MockMaker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/StackTraceCleanerProvider.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/class-use/MockMaker.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/class-use/StackTraceCleanerProvider.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/plugins/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/ConsoleSpammingMockitoJUnitRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/MockitoJUnit44Runner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/MockitoJUnitRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/VerboseMockitoJUnitRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/class-use/ConsoleSpammingMockitoJUnitRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/class-use/MockitoJUnit44Runner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/class-use/MockitoJUnitRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/class-use/VerboseMockitoJUnitRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/runners/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/Answer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/DeprecatedOngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/OngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/Stubber.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/VoidMethodStubbable.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/answers/ReturnsElementsOf.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/answers/class-use/ReturnsElementsOf.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/answers/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/answers/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/answers/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/answers/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/class-use/Answer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/class-use/DeprecatedOngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/class-use/OngoingStubbing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/class-use/Stubber.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/class-use/VoidMethodStubbable.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/stubbing/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/Timeout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/VerificationMode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/VerificationWithTimeout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/class-use/Timeout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/class-use/VerificationMode.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/class-use/VerificationWithTimeout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/org/mockito/verification/package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/overview-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/overview-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/overview-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/resources/inherit.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/serialized-form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/javadoc/stylesheet.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/mockito-all-1.9.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/asm-license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/cglib-license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/com.springsource.org.hamcrest.core-1.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/com.springsource.org.objenesis-1.0.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/hamcrest-license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/mockito-core-1.9.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/separate-jars/objenesis-license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/sources/mockito-all-1.9.5-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-1/sources/mockito-core-1.9.5-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mockito-all-2.0.2-beta.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/codeu/chat/client/mockito-all-1.9.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/mockito-all-1.9.5-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/mockito-all-1.9.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/mockito-core-1.9.5-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/third_party/mockito-core-1.9.5.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/make.sh" afterPath="$PROJECT_DIR$/make.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/TestRunner.java" afterPath="$PROJECT_DIR$/test/codeu/chat/TestRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/client/ClientUserTest.java" afterPath="$PROJECT_DIR$/test/codeu/chat/client/ClientUserTest.java" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,63 +905,116 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+      <file leaf-file-name="Timeline.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/Timeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-110">
-              <caret line="156" column="15" lean-forward="false" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="15" />
+            <state relative-caret-position="34">
+              <caret line="6" column="48" lean-forward="false" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientUserTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientMessage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
+              <folding>
+                <element signature="e#2398#2399#0" expanded="true" />
+                <element signature="e#2434#2435#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientUserTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/codeu/chat/client/ClientUserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+            <state relative-caret-position="165">
+              <caret line="11" column="37" lean-forward="true" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="make.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/make.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="11" lean-forward="true" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="108" column="45" lean-forward="true" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
               <folding>
+                <element signature="e#0#4098#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-169">
+              <caret line="27" column="80" lean-forward="true" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#2101#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#931#940#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/Controller.java">
+      <file leaf-file-name="Conversation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Conversation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="73" column="75" lean-forward="false" selection-start-line="73" selection-start-column="75" selection-end-line="73" selection-end-column="75" />
+            <state relative-caret-position="187">
+              <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
               <folding>
-                <element signature="e#0#3893#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1295#1296#0" expanded="false" />
-                <element signature="e#1325#1326#0" expanded="false" />
+                <element signature="e#0#2536#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/ServerMain.java">
+      <file leaf-file-name="ConversationPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="69" column="88" lean-forward="false" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
+            <state relative-caret-position="228">
+              <caret line="130" column="44" lean-forward="true" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessagePanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3462">
+              <caret line="256" column="89" lean-forward="true" selection-start-line="256" selection-start-column="89" selection-end-line="256" selection-end-column="89" />
               <folding>
-                <element signature="e#0#3397#0" expanded="false" />
-                <element signature="imports" expanded="false" />
+                <element signature="e#0#10908#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/relay/Server.java">
+      <file leaf-file-name="ChatSimpleGui.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+            <state relative-caret-position="-839">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="method#write#0;class#Server#0" expanded="false" />
+                <element signature="e#0#6889#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,11 +1024,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>anchor</find>
-      <find>conversations</find>
-      <find>message</find>
-      <find>messagePanel</find>
-      <find>convDisplay</find>
       <find>main</find>
       <find>clientContext</find>
       <find>getUserInfoString</find>
@@ -92,7 +1033,6 @@
       <find>text</find>
       <find>iterator</find>
       <find>valid</find>
-      <find>getAll</find>
       <find>update</find>
       <find>button</find>
       <find>updateAllConversations</find>
@@ -107,6 +1047,13 @@
       <find>user</find>
       <find>addUser</find>
       <find>userSign</find>
+      <find>floor</find>
+      <find>updateMessages</find>
+      <find>message</find>
+      <find>JList</find>
+      <find>objectList</find>
+      <find>getAll</find>
+      <find>getAllConversations</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,10 +1077,14 @@
         <option value="$PROJECT_DIR$/src/codeu/chat/relay/Server.java" />
         <option value="$PROJECT_DIR$/src/codeu/chat/server/Controller.java" />
         <option value="$PROJECT_DIR$/src/codeu/chat/common/User.java" />
-        <option value="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" />
         <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/server/Server.java" />
         <option value="$PROJECT_DIR$/run_simple_gui_client.sh" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" />
+        <option value="$PROJECT_DIR$/test/codeu/chat/TestRunner.java" />
+        <option value="$PROJECT_DIR$/org.mockito.plugins.MockMaker" />
         <option value="$PROJECT_DIR$/test/codeu/chat/client/ClientUserTest.java" />
+        <option value="$PROJECT_DIR$/make.sh" />
       </list>
     </option>
   </component>
@@ -141,18 +1092,19 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-259" />
+    <option name="x" value="300" />
     <option name="y" value="23" />
-    <option name="width" value="759" />
-    <option name="height" value="698" />
+    <option name="width" value="1054" />
+    <option name="height" value="700" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
       <showLibraryContents />
-      <hideEmptyPackages />
+      <hideEmptyPackages ProjectPane="false" />
       <abbreviatePackageNames />
       <autoscrollToSource />
       <autoscrollFromSource />
@@ -161,8 +1113,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -305,12 +1255,18 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -558,7 +1514,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-259" y="23" width="759" height="698" extended-state="0" />
+    <frame x="300" y="23" width="1054" height="700" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -567,15 +1524,15 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.060734462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.060576923" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.69636965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16323024" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15620641" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24908425" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24848942" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -584,6 +1541,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5519031" sideWeight="0.49644127" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -623,14 +1581,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/codeu/chat/client/ClientUserTest.java</url>
-          <line>98</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
@@ -640,60 +1590,158 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/connections/ClientConnectionSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="45">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1111">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/#*merge*#40682nDB#">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-500">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/BasicView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="154">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/BasicController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/RawController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/connections/ServerConnectionSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-651">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/codeu/chat/server/BasicControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/Uuid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-912">
+          <caret line="114" column="11" lean-forward="true" selection-start-line="114" selection-start-column="11" selection-end-line="114" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/codeu/chat/client/simplegui/SimpleGuiTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="405">
+          <caret line="51" column="22" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java">
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/relay/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="69" column="88" lean-forward="false" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/relay/ServerFrontEnd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1890">
+          <caret line="152" column="70" lean-forward="false" selection-start-line="152" selection-start-column="70" selection-end-line="152" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="73" column="75" lean-forward="false" selection-start-line="73" selection-start-column="75" selection-end-line="73" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2190">
+          <caret line="166" column="66" lean-forward="false" selection-start-line="166" selection-start-column="66" selection-end-line="166" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_simple_gui_client.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="60">
+          <caret line="31" column="52" lean-forward="false" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2010">
-          <caret line="161" column="39" lean-forward="false" selection-start-line="161" selection-start-column="39" selection-end-line="161" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Time.java" />
-    <entry file="file://$PROJECT_DIR$/run_client.sh">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="148" column="21" lean-forward="false" selection-start-line="148" selection-start-column="21" selection-end-line="148" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -704,243 +1752,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_server.sh">
+    <entry file="file://$PROJECT_DIR$/tools/lf-client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Message.java">
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/NetworkCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-333">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/LogicalView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-567">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/ListViewable.java">
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/Serializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/ConversationSummary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/RelayMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1229">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="133" column="93" lean-forward="false" selection-start-line="133" selection-start-column="93" selection-end-line="133" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/store/Store.java">
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/store/StoreAccessor.java">
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1470">
-          <caret line="118" column="6" lean-forward="false" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/connections/ConnectionSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="31" column="52" lean-forward="true" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/codeu/chat/TestRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
+        <state relative-caret-position="-15545">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/connections/ClientConnectionSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1828#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="134" column="17" lean-forward="false" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="101" column="54" lean-forward="false" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1515">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1111">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#10477#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/#*merge*#40682nDB#">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-500">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/BasicView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/BasicController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/RawController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/connections/ServerConnectionSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-651">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1173#1174#0" expanded="false" />
-            <element signature="e#1215#1216#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/codeu/chat/server/BasicControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#2309#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/Uuid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-912">
-          <caret line="114" column="11" lean-forward="true" selection-start-line="114" selection-start-column="11" selection-end-line="114" selection-end-column="11" />
-          <folding>
-            <marker date="1495028139000" expanded="false" signature="899:905" ph="&lt;~&gt;" />
-            <marker date="1495028139000" expanded="false" signature="2920:2927" ph=" { " />
-            <marker date="1495028139000" expanded="false" signature="2939:2943" ph=" }" />
-            <marker date="1495028139000" expanded="false" signature="2962:2969" ph=" { " />
-            <marker date="1495028139000" expanded="false" signature="2979:2983" ph=" }" />
-            <marker date="1495028139000" expanded="false" signature="3034:3041" ph=" { " />
-            <marker date="1495028139000" expanded="false" signature="3100:3104" ph=" }" />
-            <marker date="1495028139000" expanded="false" signature="3204:3211" ph=" { " />
-            <marker date="1495028139000" expanded="false" signature="3233:3237" ph=" }" />
-            <marker date="1495028139000" expanded="false" signature="3366:3373" ph=" { " />
-            <marker date="1495028139000" expanded="false" signature="3407:3411" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/codeu/chat/client/simplegui/SimpleGuiTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -952,120 +1802,185 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/store/StoreAccessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="30" column="59" lean-forward="false" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
+        <state relative-caret-position="289">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/store/StoreLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/codeu/chat/TestRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1574#1575#0" expanded="false" />
-            <element signature="e#1628#1629#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Model.java">
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/store/Store.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-538">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#4098#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/relay/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
-          <folding>
-            <element signature="method#write#0;class#Server#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="69" column="88" lean-forward="false" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
-          <folding>
-            <element signature="e#0#3397#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/relay/ServerFrontEnd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="152" column="70" lean-forward="false" selection-start-line="152" selection-start-column="70" selection-end-line="152" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="73" column="75" lean-forward="false" selection-start-line="73" selection-start-column="75" selection-end-line="73" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#3893#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1295#1296#0" expanded="false" />
-            <element signature="e#1325#1326#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="13">
+          <caret line="85" column="11" lean-forward="true" selection-start-line="85" selection-start-column="11" selection-end-line="85" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-586">
-          <caret line="112" column="0" lean-forward="true" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+        <state relative-caret-position="705">
+          <caret line="72" column="18" lean-forward="true" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/codeu/chat/server/RawControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="8" column="70" lean-forward="false" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2029#2030#0" expanded="true" />
-            <element signature="e#2063#2064#0" expanded="true" />
-            <element signature="e#2093#2094#0" expanded="true" />
-            <element signature="e#2117#2118#0" expanded="true" />
-            <element signature="e#2552#2553#0" expanded="true" />
-            <element signature="e#2580#2581#0" expanded="true" />
-            <marker date="1495066936000" expanded="false" signature="3314:3321" ph=" { " />
-            <marker date="1495066936000" expanded="false" signature="3383:3387" ph=" }" />
-            <marker date="1495066936000" expanded="false" signature="3647:3654" ph=" { " />
-            <marker date="1495066936000" expanded="false" signature="3679:3683" ph=" }" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+    <entry file="file://$PROJECT_DIR$/org.mockito.plugins.MockMaker">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <caret line="156" column="15" lean-forward="false" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="15" />
+        <state relative-caret-position="0">
+          <caret line="0" column="17" lean-forward="true" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_simple_gui_client.sh">
+    <entry file="file://$PROJECT_DIR$/test/resources/mockito-extensions/org.mockito.plugins.MockMaker">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/Timeline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="6" column="48" lean-forward="false" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/codeu/chat/client/mockito-2.8.29/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codeu_project_2017">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/make.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="11" lean-forward="true" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/codeu/chat/client/ClientUserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+        <state relative-caret-position="165">
+          <caret line="11" column="37" lean-forward="true" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
           <folding>
+            <element signature="e#2398#2399#0" expanded="true" />
+            <element signature="e#2434#2435#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169">
+          <caret line="27" column="80" lean-forward="true" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#2101#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#931#940#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="108" column="45" lean-forward="true" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#4098#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Conversation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#2536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="130" column="44" lean-forward="true" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3462">
+          <caret line="256" column="89" lean-forward="true" selection-start-line="256" selection-start-column="89" selection-end-line="256" selection-end-column="89" />
+          <folding>
+            <element signature="e#0#10908#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-839">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#6889#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1073,9 +1988,79 @@
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>mockito-core-2.8.29</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

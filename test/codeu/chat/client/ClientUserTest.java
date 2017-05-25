@@ -8,13 +8,17 @@ import java.util.Collection;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.plugins.MockMaker;
 import org.mockito.InjectMocks;
 import codeu.chat.util.Time;
 
 
-
 import org.junit.Test;
 import org.junit.Before;
+import org.junit.runners.Suite.SuiteClasses;
+import org.junit.runners.Suite;
+import org.junit.runner.RunWith;
 
 
 import codeu.chat.common.BasicController;
@@ -63,12 +67,6 @@ public final class ClientUserTest {
 
 		user.updateUsers();
 
-	//	usersList.addAll(Arrays.asList("JESS", "jess", "SARAh", "SARAH", "mathangi", "MATHANGI"));
-
-		//Mockito.when(user.getUsers()).thenReturn(list);
-
-	//	assertTrue(user.isValidName("jess"));
-//		assertFalse(user.isValidName("SARAH"));
 		assertEquals(true, user.isValidName("Mathangi Ganesh"));
 
 	}
