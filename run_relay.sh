@@ -17,15 +17,15 @@
 PORT="$1"
 TEAM_FILE="$2"
 
-if [[ "$PORT" == "" || "$TEAM_FILE" == "" ]] ; then
+if [[ "${PORT}" == "" || "${TEAM_FILE}" == "" ]] ; then
   echo 'usage: <PORT> <TEAM FILE>'
   exit 1
 fi
 
-if [ ! -f "$TEAM_FILE" ] ; then
-  echo "No file at $TEAM_FILE"
+if [ ! -f "${TEAM_FILE}" ] ; then
+  echo "No file at ${TEAM_FILE}"
   exit 1
 fi
 
 cd './bin'
-java codeu.chat.RelayMain "$PORT" "$TEAM_FILE"
+java codeu.chat.RelayMain "${PORT}" "${TEAM_FILE}"
