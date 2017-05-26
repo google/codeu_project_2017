@@ -83,7 +83,7 @@ public final class MessagePanel extends JPanel {
     titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
 
 	// Color selector for the text
-	String[] colors = {"Black", "Red"};
+	String[] colors = {"Black", "Red", "Blue", "Cyan", "Gray", "Green", "Orange", "Pink", "Yellow"};
 	final JComboBox colorList = new JComboBox(colors);
 	final GridBagConstraints titleColorsPanelC = new GridBagConstraints();
 	colorList.setSelectedIndex(0);
@@ -115,7 +115,7 @@ public final class MessagePanel extends JPanel {
     // messageListModel is an instance variable so Conversation panel
     // can update it.
     JList<String> userList = new JList<>(messageListModel);
-    userList.setCellRenderer(new MyCellRenderer());
+    userList.setCellRenderer(new MyListRenderer());
     userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
@@ -180,9 +180,16 @@ public final class MessagePanel extends JPanel {
           String messageText = messageField.getText();
           int indx = colorList.getSelectedIndex();
           
+          //{"Black", "Red", "Blue", "Cyan", "Gray", "Green", "Orange", "Pink", "Yellow"}
           // May want to change to something else in front of string
-          if(indx == 0)	messageText = "\u0001" + messageText; // Black text
-          else if (indx == 1) messageText = "\u0002" + messageText; // Red text
+          if (indx == 1) messageText = messageText+"\u0002"; // Red text
+          else if (indx == 2) messageText = messageText+"\u0003"; // Blue text
+          else if (indx == 3) messageText = messageText+"\u0004"; // Cyan text
+          else if (indx == 4) messageText = messageText+"\u0005"; // Gray text
+          else if (indx == 5) messageText = messageText+"\u0006"; // Green text
+          else if (indx == 6) messageText = messageText+"\u0007"; // Orange text
+          else if (indx == 7) messageText = messageText+"\u0008"; // Pink text
+		  else if (indx == 8) messageText = messageText+"\u0009"; // Yellow text
           
           System.out.println(messageText);
           messageField.setText("");
@@ -191,8 +198,8 @@ public final class MessagePanel extends JPanel {
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
                 messageText);
-            //userList.setSelectedIndex(1);
-            //userList.setSelectionForeground(Color.RED);
+            userList.setSelectedIndex(1);
+            userList.setSelectionForeground(Color.RED);
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
             
           }
@@ -204,33 +211,30 @@ public final class MessagePanel extends JPanel {
     getAllMessages(clientContext.conversation.getCurrent());
   }
   
-  public class MyCellRenderer extends JLabel implements ListCellRenderer {
-  	public MyCellRenderer() {
-        setOpaque(false);
-    }
-    
-    @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        String str = value.toString();
-        setText(value.toString());
-		
-		// These might change
-        System.out.println(str);
-        if (str.contains("\u0002")) {
-        	setBackground(Color.RED);
-        	System.out.println("hello");
-        }
-        else if(str.contains("\u0001")) {
-        	setBackground(Color.BLACK);
-        	System.out.println("test");
-        }
-
-
-
-
-        return this;
-    }
+  // List Cell Renderer used for changing the color of the text
+  class MyListRenderer implements ListCellRenderer {
+  	JLabel renderer;
+  	boolean showDesc = true;
+  	public MyListRenderer() {
+  		renderer = new JLabel();
+  	}
+  	public Component getListCellRendererComponent(  JList table, Object value, int row, 
+  													boolean selected, boolean focus) {
+  		renderer.setText(value.toString());
+  		renderer.setForeground(Color.black);
+  		if(((String)value).endsWith("\u0002")) renderer.setForeground(Color.red);
+  		else if(((String)value).endsWith("\u0003")) renderer.setForeground(Color.blue);
+  		else if(((String)value).endsWith("\u0004")) renderer.setForeground(Color.cyan);
+  		else if(((String)value).endsWith("\u0005")) renderer.setForeground(Color.gray);
+  		else if(((String)value).endsWith("\u0006")) renderer.setForeground(Color.green);
+  		else if(((String)value).endsWith("\u0007")) renderer.setForeground(Color.orange);
+  		else if(((String)value).endsWith("\u0008")) renderer.setForeground(Color.pink);
+  		else if(((String)value).endsWith("\u0009")) renderer.setForeground(Color.yellow);
+  		//System.out.println("here");
+  		return renderer;
+  	}
   }
+  
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
