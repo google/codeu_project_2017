@@ -37,7 +37,7 @@ import codeu.chat.util.Uuid;
 // This is the view component of the Model-View-Controller pattern used by the
 // the client to reterive readonly data from the server. All methods are blocking
 // calls.
-public final class View implements BasicView, LogicalView{
+public final class View implements BasicView, LogicalView {
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -325,11 +325,33 @@ public final class View implements BasicView, LogicalView{
     return messages;
   }
 
-  public SentimentScore getSentimentScore(Uuid useruid) {
+  public SentimentScore getSentimentScore(User user) {
 
-    // todo (raami): request the sentiment score for the user with the specified uid, from the server
+    if (user == null) {
+      throw new IllegalArgumentException();
+    }
 
-    return null;
+    final PrintWriter out = receiver.out();
+    SentimentScore score = null;
+    // todo (raami): correct after merging of realtime
+    try {
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_USER_SCORE_REQUEST);
+      User.SERIALIZER.write(out, user);
+
+      if (receiver.getType() == NetworkCode.GET_USER_SCORE_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
+        score = SentimentScore.SERIALIZER.read(in);
+      } else {
+        LOG.error("Response from server failed.");
+      }
+
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return score;
   }
 
 }

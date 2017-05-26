@@ -15,6 +15,7 @@
 
 package codeu.chat.server;
 
+import codeu.chat.common.SentimentScore;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -139,7 +140,6 @@ public final class Server {
 
   private boolean onMessage(Connection connection, BufferedReader in, PrintWriter out)
       throws IOException {
-    // todo (raami) : add a new if for networkcode getuserscore(uuid)
 
     final int type = Serializers.INTEGER.read(in);
 
@@ -154,6 +154,8 @@ public final class Server {
       final String content = Serializers.STRING.read(in);
 
       final Message message = controller.newMessage(author, conversation, content);
+      final User user = view.findUser(author);
+      user.sentimentScore.addMessage(message);
 
       synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
@@ -161,12 +163,6 @@ public final class Server {
       }
 
       broadCastSystem.addMessage(conversation, message);
-      /* todo (raami): Update the sentiment score for the user in order to reflect the new message
-
-       * Use the view.findUser(author) to get the user with the uuid of the author
-       * Call user.sentimentscore.addmessage(message) to add the message to the sentiment score
-
-      */
 
       timeline.scheduleNow(createSendToRelayEvent(
           author,
@@ -306,13 +302,24 @@ public final class Server {
       }
       System.out.println("Connection switched");
 
+    } else if (type == NetworkCode.GET_USER_SCORE_REQUEST) {
+
+      final User user = User.SERIALIZER.read(in);
+      final SentimentScore score = view.findUser(user.id).sentimentScore;
+
+      synchronized (connection.out()) {
+        Serializers.INTEGER.write(out, NetworkCode.GET_USER_SCORE_RESPONSE);
+        SentimentScore.SERIALIZER.write(out, score);
+      }
+      
     } else {
 
       // In the case that the message was not handled make a dummy message with
       // the type "NO_MESSAGE" so that the client still gets something.
 
-      Serializers.INTEGER.write(out, NetworkCode.NO_MESSAGE);
-
+      synchronized (connection.out()) {
+        Serializers.INTEGER.write(out, NetworkCode.NO_MESSAGE);
+      }
     }
 
     return true;

@@ -24,22 +24,16 @@ public class SentimentScoreTest {
       PrintWriter writer = new PrintWriter(outputStream, true);
 
       SentimentScore sentimentScore1 = new SentimentScore();
-      SentimentScore sentimentScore2 = new SentimentScore(20, 10);
 
       SentimentScore.SERIALIZER.write(writer, sentimentScore1);
-      SentimentScore.SERIALIZER.write(writer, sentimentScore2);
 
       ByteArrayInputStream byteStream = new ByteArrayInputStream(outputStream.toByteArray());
       BufferedReader reader = new BufferedReader(new InputStreamReader(byteStream));
 
       SentimentScore value1 = SentimentScore.SERIALIZER.read(reader);
-      SentimentScore value2 = SentimentScore.SERIALIZER.read(reader);
 
-      assertEquals(sentimentScore1.getScore(), value1.getScore());
-      assertEquals(sentimentScore1.getNumScores(), value1.getNumScores());
+      assertEquals(sentimentScore1.getScore(), value1.getScore(), 0.0001);
 
-      assertEquals(sentimentScore2.getScore(), value2.getScore());
-      assertEquals(sentimentScore2.getNumScores(), value2.getNumScores());
 
     } catch (IOException exc) {
       System.out.println("Exception thrown");

@@ -31,7 +31,8 @@ public final class TestRunner {
              codeu.chat.util.store.StoreTest.class,
              codeu.chat.common.ConversationTest.class,
              codeu.chat.common.MessageTest.class,
-             codeu.chat.common.SentimentScoreTest.class
+             codeu.chat.common.SentimentScoreTest.class,
+             codeu.chat.util.SerializersTests.class
          );
       for (final Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
