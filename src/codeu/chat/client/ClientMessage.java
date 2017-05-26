@@ -62,11 +62,9 @@ public final class ClientMessage {
     if ((body.length() < 0) || (body.length() > 1024)) {
       clean = false;
     } else if (body.length()==0){
-      
+      //this allows for message updating, but adds unnecessary messages
     } else {
-
-      // TODO: check for invalid characters
-
+      //no other invalid characters, since we are permitting all ASCII characters, which can be typed
     }
     return clean;
   }
@@ -92,9 +90,8 @@ public final class ClientMessage {
   }
 
   public List<Message> getConversationContents(ConversationSummary summary) {
-    if (conversationHead == null || summary == null || !conversationHead.id.equals(summary.id)) {
-      updateMessages(summary, true);
-    }
+    // We always want to update the conversation contents, so that new messages are fetched from the server
+    updateMessages(summary, true);
     return conversationContents;
   }
 
@@ -209,11 +206,7 @@ public final class ClientMessage {
       while (!nextMessageId.equals(Uuid.NULL) && conversationContents.size() < MESSAGE_MAX_COUNT) {
 
         for (final Message msg : view.getMessages(nextMessageId, MESSAGE_FETCH_COUNT)) {
-        
-        //view.getMessages(nextMessageId, conversationContents.get(0).creation, Time.now())){
-        
-        //view.getMessages(nextMessageId, MESSAGE_FETCH_COUNT)) {
-
+ 
           conversationContents.add(msg);
           
           // Race: message possibly added since conversation fetched.  If that occurs,

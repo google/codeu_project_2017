@@ -189,21 +189,21 @@ public final class MessagePanel extends JPanel {
         } else if (!clientContext.conversation.hasCurrent()) {
         	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-        	System.out.println("HI"); 
-        	
+            /* 	
         	clientContext.message.addMessage(
       	    clientContext.user.getCurrent().id,
       	    clientContext.conversation.getCurrentId(),
-      	    "");
-        	//clientContext.conversation.setCurrent(clientContext.conversation.getCurrent()); 
-          	MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent()); //Not, yet, working
-          	
-          	System.out.println("Bye"); 
+      	    "Messages Were Refreshed");
+      	    */
+      	
+        	//clientContext.conversation.setCurrent(clientContext.conversation.getCurrent());
+        	 
+          	MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
         }
       }
     });
     
-    //Responds if user enters ENTER or RETURN the message sends
+  //Responds if user enters ENTER or RETURN the message sends
   textField.addKeyListener(new KeyListener() {
   @Override
     public void keyTyped(KeyEvent e) {
