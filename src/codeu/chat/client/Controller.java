@@ -99,8 +99,6 @@ public class Controller implements BasicController {
     final Collection<User> user = new ArrayList<>();     
     boolean userDeleted = false; 
     
-    //final Collection<User> usersRemaining = new ArrayList<>();
-    
     user.add(userToDelete);
 
     try (final Connection connection = source.connect()) {

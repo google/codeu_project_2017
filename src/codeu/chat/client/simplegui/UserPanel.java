@@ -174,7 +174,7 @@ public final class UserPanel extends JPanel {
     userSignOutButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
+        if (userList.getSelectedIndex()f != -1) {
           final String data = userList.getSelectedValue();
           clientContext.user.signOutUser();
           userSignedInLabel.setText("Goodbye " + data);
