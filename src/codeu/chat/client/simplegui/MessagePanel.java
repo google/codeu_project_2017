@@ -279,10 +279,11 @@ public final class MessagePanel extends JPanel {
               for(int i=0; i<messages.size(); i++){
                 Message currentMessage = messages.get(i); 
                 String authorName = clientContext.user.getName(currentMessage.author);
+                String currentConversation = clientContext.conversation.getCurrent().title; 
                   
-                messagesArray[i] = String.format("%s: [%s]: %s",
-                ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentMessage.content);
-              }
+                  messagesArray[i] = String.format("%s: [%s]: in %s wrote %s",
+                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
+              }  
                 
               JList<String> searchResult = new JList<String>(messagesArray); 
               JScrollPane messagesPane = new JScrollPane(searchResult); 
@@ -324,9 +325,10 @@ public final class MessagePanel extends JPanel {
                 for(int i=0; i<messages.size(); i++){
                   Message currentMessage = messages.get(i); 
                   String authorName = clientContext.user.getName(currentMessage.author);
+                  String currentConversation = clientContext.conversation.getCurrent().title; 
                   
-                  messagesArray[i] = String.format("%s: [%s]: %s",
-                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentMessage.content);
+                  messagesArray[i] = String.format("%s: [%s]: in %s wrote %s",
+                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
                 }
                 
                 JList<String> searchResult = new JList<String>(messagesArray); 
@@ -359,7 +361,7 @@ public final class MessagePanel extends JPanel {
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
-
+ 
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
