@@ -187,13 +187,13 @@ public final class View implements BasicView, LogicalView, SinglesView {
     List<Message> searchResult = new ArrayList<Message>(); 
     
     Iterable<Message> allMessages = model.messageByText().all(); 
-    
+    System.out.println("Search query: " + keyword); 
     for(Message current: allMessages){
-      if(current.content.contains(keyword)==true){
+      if(current.content.toUpperCase().contains(keyword)==true){
         System.out.println(current.content); 
         searchResult.add(current); 
       } else {
-        // Message does not contain the keyword, so it should not be added
+        // Message does not contain the keyword, so it should not be added, so do nothing here 
       }
     }
     

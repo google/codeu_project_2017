@@ -262,34 +262,35 @@ public final class MessagePanel extends JPanel {
         } else if (!clientContext.conversation.hasCurrent()) {
           JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-          final String searchQuery = textFieldSearch.getText().trim();
+          final String searchQueryTextBox = textFieldSearch.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces     
+      	  String searchQuery = searchQueryTextBox.toUpperCase(); 
           if (searchQuery != null && searchQuery.length() > 0) {
           	textFieldSearch.setText(""); //clears the text field after use
             List<Message> messages = new ArrayList<Message>(); 
             messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
             if(messages.size()==0){
               //there are no messages found for the query, so a popup should display saying that
-              JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQuery + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
             } else {
               // display the messages list, since messages were found
               JPanel popUp = new JPanel();
-                String[] messagesArray = new String[messages.size()]; 
+              String[] messagesArray = new String[messages.size()]; 
                 
-                for(int i=0; i<messages.size(); i++){
-                  Message currentMessage = messages.get(i); 
-                  String authorName = clientContext.user.getName(currentMessage.author);
+              for(int i=0; i<messages.size(); i++){
+                Message currentMessage = messages.get(i); 
+                String authorName = clientContext.user.getName(currentMessage.author);
                   
-                  messagesArray[i] = String.format("%s: [%s]: %s",
-                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentMessage.content);
-                }
+                messagesArray[i] = String.format("%s: [%s]: %s",
+                ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentMessage.content);
+              }
                 
-                JList<String> searchResult = new JList<String>(messagesArray); 
-                JScrollPane messagesPane = new JScrollPane(searchResult); 
-                messagesPane.setMinimumSize(new Dimension(250, 200));
-                messagesPane.setPreferredSize(new Dimension(250, 200));
+              JList<String> searchResult = new JList<String>(messagesArray); 
+              JScrollPane messagesPane = new JScrollPane(searchResult); 
+              messagesPane.setMinimumSize(new Dimension(250, 200));
+              messagesPane.setPreferredSize(new Dimension(250, 200));
                 
-                popUp.add(messagesPane); 
-                JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
+              popUp.add(messagesPane); 
+              JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
             }
           }
         }
@@ -306,14 +307,15 @@ public final class MessagePanel extends JPanel {
       	  } else if (!clientContext.conversation.hasCurrent()) {
       	    JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
       	  } else {
-      	    String searchQuery = textFieldSearch.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces     
+      	    final String searchQueryTextBox = textFieldSearch.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces     
+      	    String searchQuery = searchQueryTextBox.toUpperCase(); 
       	    if (searchQuery != null && searchQuery.length() > 0) {
       	      textFieldSearch.setText(""); //clears the text field after use
       	      List<Message> messages = new ArrayList<Message>(); 
       	      messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
       	      if(messages.size()==0){
       	        //there are no messages found for the query, so a popup should display saying that
-                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQuery + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
               } else {
                 // display the messages list, since messages were found
                 JPanel popUp = new JPanel();
