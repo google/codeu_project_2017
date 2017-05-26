@@ -181,28 +181,6 @@ public final class MessagePanel extends JPanel {
       }
     });
     
-    updateButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (!clientContext.user.hasCurrent()) {
-        	JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!clientContext.conversation.hasCurrent()) {
-        	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            /* 	
-        	clientContext.message.addMessage(
-      	    clientContext.user.getCurrent().id,
-      	    clientContext.conversation.getCurrentId(),
-      	    "Messages Were Refreshed");
-      	    */
-      	
-        	//clientContext.conversation.setCurrent(clientContext.conversation.getCurrent());
-        	 
-          	MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
-        }
-      }
-    });
-    
   //Responds if user enters ENTER or RETURN the message sends
   textField.addKeyListener(new KeyListener() {
   @Override
@@ -231,6 +209,20 @@ public final class MessagePanel extends JPanel {
     public void keyPressed(KeyEvent e) {}
   @Override
     public void keyReleased(KeyEvent e) {}
+  });
+  
+  updateButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.user.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+          // Update the messages when the user presses the "update" button, so users can see other user's messages that were sent to the server 
+          MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+        }
+      }
   });
   
   // Panel is set up. If there is a current conversation, Populate the conversation list.
