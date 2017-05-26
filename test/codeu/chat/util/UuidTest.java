@@ -14,7 +14,6 @@
 
 package codeu.chat.util;
 
-import java.io.IOException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -104,10 +103,10 @@ public final class UuidTest {
   }
 
   @Test
-  public void testValidSingleLink() throws IOException {
+  public void testValidSingleLink() {
 
     final String string = "100";
-    final Uuid id = Uuid.parse(string);
+    final Uuid id = Uuid.fromString(string);
 
     assertNotNull(id);
     assertNull(id.root());
@@ -115,10 +114,10 @@ public final class UuidTest {
   }
 
   @Test
-  public void testValidMultiLink() throws IOException {
+  public void testValidMultiLink() {
 
     final String string = "100.200";
-    final Uuid id = Uuid.parse(string);
+    final Uuid id = Uuid.fromString(string);
 
     assertNotNull(id);
     assertNotNull(id.root());
@@ -126,17 +125,5 @@ public final class UuidTest {
 
     assertEquals(id.id(), 200);
     assertEquals(id.root().id(), 100);
-  }
-
-  @Test
-  public void testLargeId() throws IOException {
-
-    // Use a id value that would be too large for Integer.parseInt to handle
-    // but would still parse if we could use unsigned integers.
-    final String string = Long.toString(0xFFFFFFFFL);
-    final Uuid id = Uuid.parse(string);
-
-    assertNotNull(id);
-    assertEquals(id.id(), 0xFFFFFFFF);
   }
 }

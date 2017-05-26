@@ -97,7 +97,7 @@ public final class ClientConversation {
     } else {
       LOG.info("New conversation: Title= \"%s\" UUID= %s", conv.title, conv.id);
 
-      currentSummary = conv.getConversationSummary();
+      currentSummary = conv.summary;
 
       updateAllConversations(currentSummary != null);
     }

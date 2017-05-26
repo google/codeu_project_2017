@@ -87,18 +87,15 @@ public final class Uuid {
 
   private final Uuid root;
   private final int id;
-  private final String uuid;
 
   public Uuid(Uuid root, int id) {
     this.root = root;
     this.id = id;
-    this.uuid = toString(this);
   }
 
   public Uuid(int id) {
     this.root = null;
     this.id = id;
-    this.uuid = toString(this);
   }
 
   public Uuid root() {
@@ -171,40 +168,34 @@ public final class Uuid {
   private static String toString(Uuid id) {
     final StringBuilder build = new StringBuilder();
     buildString(id, build);
-    return String.format("%s", build.substring(1));  // index of 1 to skip initial '.'
+    return String.format("[UUID:%s]", build.substring(1));  // index of 1 to skip initial '.'
   }
 
   private static void buildString(Uuid current, StringBuilder build) {
-    long mask = (1L << 32) - 1;
+    final long mask = (1L << 32) - 1;  // removes sign extension
     if (current != null) {
       buildString(current.root(), build);
       build.append(".").append(current.id() & mask);
     }
   }
 
-  // Parse
+  // FROM STRING
   //
   // Create a uuid from a sting.
-  public static Uuid parse(String string) throws IOException {
-    return parse(null, string.split("\\."), 0);
+  public static Uuid fromString(String string) {
+    return fromString(null, string.split("\\."), 0);
   }
 
-  private static Uuid parse(final Uuid root, String[] tokens, int index) throws IOException {
+  private static Uuid fromString(final Uuid root, String[] tokens, int index) {
 
-    final long id = Long.parseLong(tokens[index]);
+    final int id = Integer.parseInt(tokens[index]);
 
-    if ((id >> 32) != 0) {
-      throw new IOException(String.format(
-          "ID value '%s' is too large to be an unsigned 32 bit integer",
-          tokens[index]));
-    }
-
-    final Uuid link = new Uuid(root, (int)(id & 0xFFFFFFFF));
+    final Uuid link = new Uuid(root, id);
 
     final int nextIndex = index + 1;
 
     return nextIndex < tokens.length ?
-        parse(link, tokens, nextIndex) :
+        fromString(link, tokens, nextIndex) :
         link;
   }
 }

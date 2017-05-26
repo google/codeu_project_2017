@@ -24,7 +24,6 @@ import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import com.google.gson.Gson;
 
 public final class Conversation {
 
@@ -63,6 +62,8 @@ public final class Conversation {
     }
   };
 
+  public final ConversationSummary summary;
+
   public final Uuid id;
   public final Uuid owner;
   public final Time creation;
@@ -78,16 +79,7 @@ public final class Conversation {
     this.creation = creation;
     this.title = title;
 
-  }
+    this.summary = new ConversationSummary(id, owner, creation, title);
 
-  public ConversationSummary getConversationSummary() {
-    return new ConversationSummary(id, owner, creation, title);
   }
-
-  @Override
-  public String toString() {
-    Gson g = new Gson();
-    return g.toJson(this, Conversation.class);
-  }
-
 }

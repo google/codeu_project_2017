@@ -43,12 +43,8 @@ public final class Time implements Comparable<Time> {
       new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
 
   private final Date date;
-  private long unix_date;
 
-  private Time(long totalMs) {
-    this.date = new Date(totalMs);
-    this.unix_date = date.getTime();
-  }
+  private Time(long totalMs) { this.date = new Date(totalMs); }
 
   public long inMs() { return date.getTime(); }
 
