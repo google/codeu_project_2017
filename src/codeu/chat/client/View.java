@@ -16,7 +16,6 @@ package codeu.chat.client;
 
 import codeu.chat.common.SentimentScore;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,8 +31,6 @@ import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import codeu.chat.util.connections.Connection;
-import codeu.chat.util.connections.ConnectionSource;
 
 // VIEW
 //
@@ -44,10 +41,10 @@ public final class View implements BasicView, LogicalView{
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
-  private final ConnectionSource source;
+  private final BroadCastReceiver receiver;
 
-  public View(ConnectionSource source) {
-    this.source = source;
+  public View(BroadCastReceiver receiver) {
+    this.receiver = receiver;
   }
 
   @Override
@@ -55,16 +52,16 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<User> users = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         users.addAll(Serializers.collection(User.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -75,6 +72,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return users;
   }
 
@@ -83,14 +81,14 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<ConversationSummary> summaries = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try  {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_ALL_CONVERSATIONS_REQUEST);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         summaries.addAll(Serializers.collection(ConversationSummary.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -101,6 +99,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return summaries;
   }
 
@@ -109,17 +108,15 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<Conversation> conversations = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -129,6 +126,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return conversations;
   }
 
@@ -137,18 +135,15 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<Message> messages = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
-
-
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -158,6 +153,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return messages;
   }
 
@@ -166,14 +162,14 @@ public final class View implements BasicView, LogicalView{
 
     Uuid generation = Uuid.NULL;
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USER_GENERATION_REQUEST);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_USER_GENERATION_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_USER_GENERATION_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         generation = Uuid.SERIALIZER.read(in);
 
       } else {
@@ -184,6 +180,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return generation;
   }
 
@@ -192,17 +189,16 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<User> users = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
-
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_USERS_EXCLUDING_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(out, ids);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         users.addAll(Serializers.collection(User.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -212,6 +208,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return users;
   }
 
@@ -220,16 +217,16 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<Conversation> conversations = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TIME_REQUEST);
       Time.SERIALIZER.write(out, start);
       Time.SERIALIZER.write(out, end);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -239,6 +236,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return conversations;
   }
 
@@ -247,15 +245,15 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<Conversation> conversations = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try  {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST);
       Serializers.STRING.write(out, filter);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -265,6 +263,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return conversations;
   }
 
@@ -273,16 +272,16 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<Message> messages = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_REQUEST);
       Time.SERIALIZER.write(out, start);
       Time.SERIALIZER.write(out, end);
 
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -293,6 +292,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return messages;
   }
 
@@ -301,17 +301,16 @@ public final class View implements BasicView, LogicalView{
 
     final Collection<Message> messages = new ArrayList<>();
 
-    try (final Connection connection = source.connect()) {
+    final PrintWriter out = receiver.out();
 
-      PrintWriter out = new PrintWriter(connection.out(), true);
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.in()));
+    try {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST);
       Uuid.SERIALIZER.write(out, rootMessage);
       Serializers.INTEGER.write(out, range);
 
-
-      if (Serializers.INTEGER.read(in) == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
+      if (receiver.getType() == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
+        BufferedReader in = receiver.getInputStream();
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(in));
       } else {
         LOG.error("Response from server failed.");
@@ -322,6 +321,7 @@ public final class View implements BasicView, LogicalView{
       LOG.error(ex, "Exception during call on server.");
     }
 
+    receiver.responseProcessed();
     return messages;
   }
 

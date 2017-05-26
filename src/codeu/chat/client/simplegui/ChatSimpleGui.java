@@ -18,6 +18,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import codeu.chat.client.BroadCastReceiver;
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
@@ -32,9 +33,11 @@ public final class ChatSimpleGui {
 
   private final ClientContext clientContext;
 
+  private BroadCastReceiver receiver;
   // Constructor - sets up the Chat Application
-  public ChatSimpleGui(Controller controller, View view) {
+  public ChatSimpleGui(Controller controller, View view, BroadCastReceiver receiver) {
     clientContext = new ClientContext(controller, view);
+    this.receiver = receiver;
   }
 
   // Run the GUI client
@@ -61,6 +64,7 @@ public final class ChatSimpleGui {
   // Initialize the GUI
   private void initialize() {
 
+    this.receiver.start();
     // Outermost frame.
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
@@ -76,7 +80,7 @@ public final class ChatSimpleGui {
     usersViewPanel.setBorder(paneBorder());
     final GridBagConstraints usersViewC = new GridBagConstraints();
 
-    final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
+    final MessagePanel messagesViewPanel = new MessagePanel(clientContext, this.receiver);
     messagesViewPanel.setBorder(paneBorder());
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
