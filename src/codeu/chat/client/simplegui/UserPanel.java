@@ -211,34 +211,31 @@ public final class UserPanel extends JPanel {
           boolean sucessfulSignout = clientContext.user.signOutUser();
           //System.out.println(sucessfulSignout);
           	if(sucessfulSignout==true){
-          	    int size = userList.getModel().getSize();
-          	    StringBuilder values = new StringBuilder("Users Before Deletion:"); 
-          	    for(int i=0; i<size; i++){
-          	      values.append("\n").append(userList.getModel().getElementAt(i));
-          	    }
-          	    System.out.print(values);
-          	    
-          		//remove the user's name from the list 
-          		if(clientContext.user.deleteUser(data)==true){
-          			//update the user's list and 
-          			UserPanel.this.getAllUsers(listModel);
-          			userSignedInLabel.setText("Goodbye " + data);
+          	  int size = userList.getModel().getSize();
+          	  StringBuilder values = new StringBuilder("Users Before Deletion:"); 
+          	  for(int i=0; i<size; i++){
+          	    values.append("\n").append(userList.getModel().getElementAt(i));
+          	  }
+          	  System.out.print(values);
+          	  //remove the user's name from the list 
+          	  if(clientContext.user.deleteUser(data)==true){
+          		//update the user's list and 
+          		UserPanel.this.getAllUsers(listModel);
+          		userSignedInLabel.setText("Goodbye " + data);
           			
-          			int sizeList = userList.getModel().getSize();
-          	        StringBuilder valuesAfter = new StringBuilder("Users After Deletion:"); 
-          	        for(int i=0; i<sizeList; i++){
-          	          valuesAfter.append("\n").append(userList.getModel().getElementAt(i));
-          	         }
-          	        System.out.print(valuesAfter);
-          		} else {
-          			JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
-          			UserPanel.this.getAllUsers(listModel);
-          		}
-          	
-          	} else {
-          		JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted. Please check that the user to be deleted is signed in.", "Error", JOptionPane.ERROR_MESSAGE);
-          	}
-        }
+          		int sizeList = userList.getModel().getSize();
+          	    StringBuilder valuesAfter = new StringBuilder("Users After Deletion:"); 
+          	    for(int i=0; i<sizeList; i++){
+          	      valuesAfter.append("\n").append(userList.getModel().getElementAt(i));
+          	    }
+          	    System.out.print(valuesAfter);
+          	  } else {
+          		JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
+          		UserPanel.this.getAllUsers(listModel);
+          	  }
+            }
+          }
+        }  
       }
     });
 
