@@ -196,5 +196,6 @@ public final class Timeline {
     while (!queue.offer(value)) {
       LOG.warning("Failed to add to queue, trying again...");
     }
+    LOG.info("QUEUE ITEM ADDED: " + queue.toString());
   }
 }
