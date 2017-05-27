@@ -105,6 +105,7 @@ final class ServerMain {
         LOG.info("Connection established. Here's connection now: " + connection.toString());
 
         server.handleConnection(connection);
+        LOG.info("Handled Connection");
 
       } catch (IOException ex) {
         LOG.error(ex, "Failed to establish connection.");

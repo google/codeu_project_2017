@@ -95,6 +95,7 @@ public final class Server {
   }
 
   public void handleConnection(final Connection connection) {
+    LOG.info("Doing handleConnection");
     timeline.scheduleNow(new Runnable() {
       @Override
       public void run() {
