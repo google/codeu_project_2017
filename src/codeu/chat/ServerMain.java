@@ -55,7 +55,7 @@ final class ServerMain {
     //final int myPort = 10110;
     final byte[] secret = Secret.parse(args[1]);
 
-    final Process p = Runtime.getRuntime().exec("ls .. -a");
+    final Process p = Runtime.getRuntime().exec("ls ../teams -a");
 
     new Thread(new Runnable() {
       public void run() {
