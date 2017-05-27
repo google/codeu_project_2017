@@ -117,7 +117,7 @@ public final class Timeline {
     @Override
     public void run() {
       while (running) {
-        LOG.info("runnign");
+        LOG.info("WE HAVE LOADED THE EXECUTOR");
         try {
           Runnable ev = todo.take();
           LOG.info("AND popped it");
@@ -143,7 +143,7 @@ public final class Timeline {
   //
   // Add an event to the timeline so that it will occur as soon as possible.
   public void scheduleNow(Runnable callback) {
-    scheduleAt(0, callback);
+    scheduleAt(System.currentTimeMillis(), callback);
   }
 
   // SCHEDULE IN
@@ -151,7 +151,7 @@ public final class Timeline {
   // Add an event to the timeline so that it will occur in approximately in a
   // set amount of milliseconds.
   public void scheduleIn(long ms, Runnable callback) {
-    scheduleAt(0, callback);
+    scheduleAt(System.currentTimeMillis() + ms, callback);
   }
 
   // SCHEDULE AT
