@@ -15,7 +15,7 @@
 package codeu.chat.util;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
 // TIMELINE
@@ -45,7 +45,7 @@ public final class Timeline {
   }
 
   private final BlockingQueue<Event> backlog = new PriorityBlockingQueue<>();
-  private final BlockingQueue<Runnable> todo = new LinkedBlockingQueue<>();
+  private final BlockingQueue<Runnable> todo = new ArrayBlockingQueue<>(100);
 
   private boolean running = true;
 
