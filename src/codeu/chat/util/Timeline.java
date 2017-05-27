@@ -85,6 +85,7 @@ public final class Timeline {
           // it will be until it will be executed. That means we can sleep
           // until then.
           if (next.time <= now) {
+            LOG.info("ADDDED TO TODO");
             forceAdd(todo, next.callback);
             sleep = 0;
           } else {
@@ -118,6 +119,7 @@ public final class Timeline {
       while (running) {
         try {
           todo.take().run();
+          LOG.info("AND RAN IT");
         } catch (Exception ex) {
           // Catch all exceptions here to stop any rogue action from
           // take down the timeline.
