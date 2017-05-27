@@ -70,7 +70,6 @@ public final class UserPanel extends JPanel {
     titlePanel.add(Box.createHorizontalGlue(), titleGapC);
     titlePanel.add(userSignedInLabel, titleUserC);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    //titlePanel.setBackground(Color.black); //I just added this
 
     // User List panel.
     final JPanel listShowPanel = new JPanel();
@@ -84,29 +83,24 @@ public final class UserPanel extends JPanel {
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
     listShowPanel.add(userListScrollPane);
+    userListScrollPane.setMinimumSize(new Dimension(245, 150));
     userListScrollPane.setPreferredSize(new Dimension(245, 150));
 
     // Current User panel
     final JPanel currentPanel = new JPanel();
     final GridBagConstraints currentPanelC = new GridBagConstraints();
 
-    /*final JTextArea userInfoPanel = new JTextArea();
-    final JScrollPane userInfoScrollPane = new JScrollPane(userInfoPanel);
-    currentPanel.add(userInfoScrollPane);
-    userInfoScrollPane.setPreferredSize(new Dimension(245, 85));
-    */
-
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    //final JButton userUpdateButton = new JButton("Update");
+    final JButton userUpdateButton = new JButton("Update Users");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userSignOutButton = new JButton("Sign Out");
     final JButton userAddButton = new JButton("Add");
     final JButton userDeleteButton = new JButton("Delete");
 
-    //buttonPanel.add(userUpdateButton);
+    buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
     buttonPanel.add(userSignOutButton); 
     buttonPanel.add(userAddButton);
@@ -151,21 +145,31 @@ public final class UserPanel extends JPanel {
     currentPanel.setBackground(new Color(102, 162, 237));
     buttonPanel.setBackground(new Color(102, 162, 237));
 
-    /*userUpdateButton.addActionListener(new ActionListener() {
+    userUpdateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         UserPanel.this.getAllUsers(listModel);
       }
     });
-    */
 
     userSignInButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+          //Ask user for password
+          final String userPassword = (String) JOptionPane.showInputDialog(
+            UserPanel.this, "Enter " + data + "'s password:", "Enter Password", JOptionPane.PLAIN_MESSAGE,
+            null, null, "");
+          //check password to make sure it is correct and check it against the user's password
+          if(userPassword.equals("password")){ //access userByName, get User, access the user's password (String)
+            clientContext.user.signInUser(data);
+            userSignedInLabel.setText("Hello " + data);
+          } else{
+            //user's password was incorrect
+            JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Password for " + data + " was incorrect."); 
+          }  
         }
       }
     });
@@ -191,7 +195,7 @@ public final class UserPanel extends JPanel {
         if (s != null && s.length() > 0) {
           if(clientContext.user.addUser(s)==true){
           	UserPanel.this.getAllUsers(listModel);
-          } else {
+          } else{
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
           }
         }

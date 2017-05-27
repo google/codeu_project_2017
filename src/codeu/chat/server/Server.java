@@ -21,6 +21,8 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList; 
 import java.util.Collection;
 
 import codeu.chat.common.Conversation;
@@ -231,6 +233,28 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
+
+      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+      
+    } else if (type == NetworkCode.SEARCH_MESSAGE_REQUEST) {
+
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
+      final String keyword = Serializers.STRING.read(in);
+
+      List<Message> messages = new ArrayList<Message>(); 
+    
+      messages = view.searchMessages(conversation, keyword);
+
+      Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+      
     } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
 
       final Uuid rootMessage = Uuid.SERIALIZER.read(in);

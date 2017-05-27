@@ -45,22 +45,22 @@ public final class ClientUser {
     this.controller = controller;
     this.view = view;
   }
-    
-  // Validate the username string
-  public boolean isValidName(String userName) {
-    boolean clean = true; 
-    if (userName.trim().length() == 0) {
-      clean = false;
-    } else {
-      for (User currentUser : getUsers()) {	
-        if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
-          System.out.format("Error: user not created - %s already exists.\n", userName);
-          clean = false;
-        }
-      } 
-    } 
-    return clean;
+
+// Validate the username string
+public boolean isValidName(String userName) {
+  boolean isUniqueUser = true; 
+  if (userName.trim().length() == 0) {
+    isUniqueUser = false;
+  } else {
+    for (User currentUser : getUsers()) {
+      if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
+        System.out.format("Error: user not created - %s already exists.", userName);
+        isUniqueUser = false;
+      }
+    }
   }
+  return isUniqueUser;
+}
   
   public boolean hasCurrent() {
     return (current != null);
@@ -93,11 +93,10 @@ public final class ClientUser {
     printUser(current);
   }
 
+  //boolean to check if the user was created or not in the GUI
   public boolean addUser(String name) {
     final boolean validInputs = isValidName(name);
     
-    System.out.println("Valid Inputs: " + validInputs); 
-
     final User user = (validInputs) ? controller.newUser(name) : null;
 
     if (user == null) {
