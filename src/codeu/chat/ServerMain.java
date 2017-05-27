@@ -68,8 +68,8 @@ final class ServerMain {
                                        RemoteAddress.parse(args[4]) :
                                        null;
 
-    System.out.println("secret: " + secret);
-    System.out.println("relayAddress " + relayAddress);
+    LOG.info("secret: " + secret);
+    LOG.info("relayAddress " + relayAddress);
 
     try (
         final ConnectionSource serverSource = ServerConnectionSource.forPort(myPort);
