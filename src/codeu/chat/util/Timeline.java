@@ -150,6 +150,7 @@ public final class Timeline {
   // Add an event to the timeline so that will occur approximately at a fixed
   // point in time.
   public void scheduleAt(long timeMs, Runnable callback) {
+    LOG.info("Registering event");
     final Event event = new Event(timeMs, callback);
     forceAdd(backlog, event);
     scheduler.interrupt();  // wake it up
