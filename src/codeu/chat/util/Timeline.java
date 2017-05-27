@@ -122,7 +122,7 @@ public final class Timeline {
           try {
             Runnable ev = todo.take();
             LOG.info("AND popped it");
-            LOG.info(ev.toString());
+            LOG.info("Hereo it is boio: " + ev.toString());
             ev.run();
             LOG.info("AND RAN IT");
           } catch (Exception ex) {
