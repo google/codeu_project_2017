@@ -134,10 +134,13 @@ public final class MessagePanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
     final JTextField textField = new JTextField(20);
-    final JButton addButton = new JButton("Send Message");
+
+    final JButton sendButton = new JButton("Send Message");
+    final JButton updateButton = new JButton("Refresh Messages");
     
     buttonPanel.add(textField); //Adds the message box before the "Send Message" button
-    buttonPanel.add(addButton);
+    buttonPanel.add(sendButton);
+    buttonPanel.add(updateButton);
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -191,9 +194,9 @@ public final class MessagePanel extends JPanel {
     searchPanel.setBackground(new Color(102, 162, 237));
 	
     // User click Messages Add button - prompt for message body and add new Message to Conversation
-    
-    // Add button is pressed
-    addButton.addActionListener(new ActionListener() {
+
+    //Send Message button is pressed
+    sendButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (!clientContext.user.hasCurrent()) {
@@ -348,10 +351,24 @@ public final class MessagePanel extends JPanel {
       @Override
       public void keyReleased(KeyEvent e) {}
     });
-    
-    // Panel is set up. If there is a current conversation, Populate the conversation list.
-    getAllMessages(clientContext.conversation.getCurrent());
-  }
+     
+  updateButton.addActionListener(new ActionListener() {
+     @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.user.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+          // Update the messages when the user presses the "update" button, so users can see other user's messages that were sent to the server 
+          MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+        }
+      }
+  });
+  
+  // Panel is set up. If there is a current conversation, Populate the conversation list.
+  getAllMessages(clientContext.conversation.getCurrent());
+}
   
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
@@ -361,7 +378,6 @@ public final class MessagePanel extends JPanel {
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
- 
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 

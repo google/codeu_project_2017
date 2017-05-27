@@ -242,7 +242,7 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
-
+      
     } else if (type == NetworkCode.SEARCH_MESSAGE_REQUEST) {
 
       final Uuid conversation = Uuid.SERIALIZER.read(in);
@@ -253,6 +253,16 @@ public final class Server {
       messages = view.searchMessages(conversation, keyword);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+      
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
+
+      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
     } else {
