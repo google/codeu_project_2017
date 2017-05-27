@@ -45,42 +45,46 @@ public final class User {
               Serializers.STRING.read(in),
               Time.SERIALIZER.read(in),
               Serializers.STRING.read(in)
-              );
+      );
     }
 
+  };
 
-  public final Uuid id;
-  public final String name;
-  public String password;
-  public final Time creation;
 
-  public User(Uuid id, String name, Time creation) {
+    public final Uuid id;
+    public final String name;
+    public String password;
+    public final Time creation;
 
-    this.id = id;
-    this.name = name;
-    this.creation = creation;
+    public User(Uuid id, String name, Time creation) {
 
-  }
+      this.id = id;
+      this.name = name;
+      this.creation = creation;
+      this.password = null;
 
-  //create new constructors
-  public User(Uuid id, String name, Time creation, String password){
+    }
 
-    this.id = id;
-    this.name = name;
-    this.creation = creation;
-    this.password = password;
+    //create new constructors
+    public User(Uuid id, String name, Time creation, String password) {
 
-  }
+      this.id = id;
+      this.name = name;
+      this.creation = creation;
+      this.password = password;
 
-  //Potentially get rid of setter
-  public void setPassword(String password){
+    }
 
-    this.password = password;
-  }
+    //Potentially get rid of setter
+    public void setPassword(String password) {
 
-  public String getPassword(){
+      this.password = password;
+    }
 
-    return this.password;
-  }
+    public String getPassword() {
+
+      return this.password;
+    }
+
 
 }
