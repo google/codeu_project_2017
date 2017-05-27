@@ -135,18 +135,12 @@ public final class MessagePanel extends JPanel {
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
     final JTextField textField = new JTextField(20);
 
-<<<<<<< HEAD
-    final JButton addButton = new JButton("Send Message");
-    buttonPanel.add(textField); //Adds the message box before the "Send Message" button
-    buttonPanel.add(addButton);
-=======
     final JButton sendButton = new JButton("Send Message");
     final JButton updateButton = new JButton("Refresh Messages");
     
     buttonPanel.add(textField); //Adds the message box before the "Send Message" button
     buttonPanel.add(sendButton);
     buttonPanel.add(updateButton);
->>>>>>> master
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
