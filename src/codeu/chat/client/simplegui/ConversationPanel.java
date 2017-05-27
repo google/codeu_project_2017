@@ -68,6 +68,7 @@ public final class ConversationPanel extends JPanel {
     final JScrollPane listScrollPane = new JScrollPane(objectList);
     listShowPanel.add(listScrollPane);
     listScrollPane.setMinimumSize(new Dimension(250, 200));
+    listScrollPane.setPreferredSize(new Dimension(250, 200));
 
     // Button bar
     final JPanel buttonPanel = new JPanel();

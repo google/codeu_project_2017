@@ -77,8 +77,9 @@ public final class MessagePanel extends JPanel {
 
     final JPanel titleOwnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     final GridBagConstraints titleOwnerPanelC = new GridBagConstraints();
+    titleOwnerPanelC.gridwidth = 3;  
     titleOwnerPanelC.gridx = 0;
-    titleOwnerPanelC.gridy = 1;
+    titleOwnerPanelC.gridy = 3;
     titleOwnerPanelC.anchor = GridBagConstraints.PAGE_START;
 
     // messageConversationLabel is an instance variable of Conversation panel
@@ -100,7 +101,20 @@ public final class MessagePanel extends JPanel {
     // User List panel.
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
+    
+    // Panel for JScrollPane.
+    final JPanel scrollPanel = new JPanel();
+    final GridBagConstraints scrollPanelC = new GridBagConstraints();
+	
+    // Search panel and text field
+    final JPanel searchPanel = new JPanel();
+    final GridBagConstraints searchPanelC = new GridBagConstraints();
+    final JTextField textFieldSearch = new JTextField(20);
 
+    final JButton addButtonSearch = new JButton("Search Messages");
+    searchPanel.add(textFieldSearch); //Adds the message box before the "Search Message" button
+    searchPanel.add(addButtonSearch);
+    
     // messageListModel is an instance variable so Conversation panel
     // can update it.
     final JList<String> userList = new JList<>(messageListModel);
@@ -109,9 +123,11 @@ public final class MessagePanel extends JPanel {
     userList.setSelectedIndex(-1);
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
-    listShowPanel.add(userListScrollPane);
-    userListScrollPane.setMinimumSize(new Dimension(500, 200));
-    userListScrollPane.setPreferredSize(new Dimension(500, 200));
+    //listShowPanel.add(userListScrollPane);
+    //searchPanel.add(userListScrollPane);
+    scrollPanel.add(userListScrollPane);
+    userListScrollPane.setMinimumSize(new Dimension(500, 400));
+    userListScrollPane.setPreferredSize(new Dimension(500, 400));
 
     // Button panel and text field
     final JPanel buttonPanel = new JPanel();
@@ -140,6 +156,22 @@ public final class MessagePanel extends JPanel {
     listPanelC.fill = GridBagConstraints.BOTH;
     listPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
     listPanelC.weighty = 0.8;
+    
+    searchPanelC.gridx = 0;
+    searchPanelC.gridy = 2;
+    searchPanelC.gridwidth = 10;
+    searchPanelC.gridheight = 1;
+    searchPanelC.fill = GridBagConstraints.BOTH;
+    searchPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+    searchPanelC.weighty = 0.8;
+    
+    scrollPanelC.gridx = 0;
+    scrollPanelC.gridy = 3;
+    scrollPanelC.gridwidth = 10;
+    scrollPanelC.gridheight = 8;
+    scrollPanelC.fill = GridBagConstraints.BOTH;
+    scrollPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+    scrollPanelC.weighty = 0.8;
 
     buttonPanelC.gridx = 0;
     buttonPanelC.gridy = 11;
@@ -147,16 +179,21 @@ public final class MessagePanel extends JPanel {
     buttonPanelC.gridheight = 1;
     buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
     buttonPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
-
+	
     this.add(titlePanel, titlePanelC);
+    this.add(searchPanel, searchPanelC); 
     this.add(listShowPanel, listPanelC);
+    this.add(scrollPanel, scrollPanelC);
     this.add(buttonPanel, buttonPanelC);
+    
     titlePanel.setBackground(new Color(102, 162, 237));
     listShowPanel.setBackground(new Color(102, 162, 237));
+    scrollPanel.setBackground(new Color(102, 162, 237));
     buttonPanel.setBackground(new Color(102, 162, 237));
-
+    searchPanel.setBackground(new Color(102, 162, 237));
+	
     // User click Messages Add button - prompt for message body and add new Message to Conversation
-    
+
     //Send Message button is pressed
     sendButton.addActionListener(new ActionListener() {
       @Override
