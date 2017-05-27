@@ -117,7 +117,21 @@ public final class Timeline {
     @Override
     public void run() {
       while (running) {
-        LOG.info(todo.toString());
+        LOG.info("WE HAVE LOADED THE EXECUTOR");
+        if (todo.size() > 0) {
+          try {
+            Runnable ev = todo.take();
+            LOG.info("AND popped it");
+            ev.run();
+            LOG.info("AND RAN IT");
+          } catch (Exception ex) {
+            // Catch all exceptions here to stop any rogue action from
+            // take down the timeline.
+            LOG.warning(
+                    "An exception was seen on the timeline (%s)",
+                    ex.toString());
+          }
+        }
       }
     }
   };
