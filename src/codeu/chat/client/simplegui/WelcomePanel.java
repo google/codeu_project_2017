@@ -9,7 +9,7 @@ import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
-import codeu.chat.client.ChatSimpleGui;
+ 
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -23,14 +23,19 @@ public final class WelcomePanel extends JPanel {
     this.clientContext = clientContext;
     initialize();
   }
-
+  
+  //Initializes button panel
   private void initialize() {
   
+  //Creates button panel 
   final JPanel buttonPanel = new JPanel();  
   final GridBagConstraints buttonPanelC = new GridBagConstraints();
+
+  //Creates start button
   final JButton startButton = new JButton("START");
   buttonPanel.add(startButton);
-
+  
+  //Parameters of button panel
   buttonPanelC.gridx = 0;
   buttonPanelC.gridy = 0;
   buttonPanelC.gridwidth = 10;
@@ -40,12 +45,13 @@ public final class WelcomePanel extends JPanel {
  
   this.add(buttonPanel, buttonPanelC);
   
-  
+   //Button links to messaging portion of app
    startButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        ChatSimpleGui.this.linkPage();
+	//must link to messenger/conversation panels
+
       }
    });
-  }
+  } 
 }

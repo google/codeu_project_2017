@@ -61,11 +61,12 @@ public final class ChatSimpleGui {
   // Initialize the GUI
   private void initialize() {
      
-  //Main Page, Outermost frame
+  //Welcome Page, Outermost frame
 
   final JPanel welcomeViewPanel = new WelcomePanel(clientContext);
   welcomeViewPanel.setBorder(paneBorder());
-//  final GridBagConstraints welcomeViewC = new GridBagConstraints();
+  //delete?
+  final GridBagConstraints welcomeViewC = new GridBagConstraints();
 
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
@@ -91,6 +92,8 @@ public final class ChatSimpleGui {
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels.
+
+    //User Panel Parameters
     usersViewC.gridx = 0;
     usersViewC.gridy = 0;
     usersViewC.gridwidth = 1;
@@ -99,6 +102,7 @@ public final class ChatSimpleGui {
     usersViewC.weightx = 0.3;
     usersViewC.weighty = 0.3;
 
+    //Conversation Panel Parameters
     conversationViewC.gridx = 1;
     conversationViewC.gridy = 0;
     conversationViewC.gridwidth = 1;
@@ -107,6 +111,7 @@ public final class ChatSimpleGui {
     conversationViewC.weightx = 0.7;
     conversationViewC.weighty = 0.3;
 
+    //Message Panel Parameters
     messagesViewC.gridx = 0;
     messagesViewC.gridy = 1;
     messagesViewC.gridwidth = 2;
@@ -114,18 +119,34 @@ public final class ChatSimpleGui {
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
     
+    //Welcome View Panel Parameters
+    //New Addition
+    welcomeViewC.gridx = 100;
+    welcomeViewC.gridy = 100;
+    welcomeViewC.gridwidth = 500;
+    welcomeViewC.gridheight = 500;
+    welcomeViewC.fill = GridBagConstraints.BOTH;
+    welcomeViewC.weightx = 0.7;
+    welcomeViewC.weighty = 0.3;
+
+    //Main View Panel Parameters
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
+
+//delete?
 //  welcomePanel.add(welcomePanel, welcomeViewC);    
 
     mainFrame.add(welcomeViewPanel);
+
+//delete?
 //  mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
 
   private void linkPage(){
-    mainFrame.add(mainViewPanel);
+//delete?
+//  mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
 }
