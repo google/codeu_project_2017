@@ -40,7 +40,9 @@ public final class ServerConnectionSource implements ConnectionSource {
   @Override
   public Connection connect() throws IOException {
     LOG.info(serverSocket.toString());
-    return fromSocket(serverSocket.accept());
+    Connection c = fromSocket(serverSocket.accept());
+    LOG.info("Here's the connection: " + c.toString());
+    return c;
   }
 
   @Override
