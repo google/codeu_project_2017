@@ -119,7 +119,9 @@ public final class Timeline {
       while (running) {
         LOG.info("runnign");
         try {
-          todo.take().run();
+          Runnable ev = todo.take();
+          LOG.info("AND popped it");
+          ev.run();
           LOG.info("AND RAN IT");
         } catch (Exception ex) {
           // Catch all exceptions here to stop any rogue action from
