@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+//import codeu.chat.common.User;
+
 public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
 
   // To make the code simpler - use a dummy link for the first link in this
@@ -38,6 +40,13 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   public void insert(KEY key, VALUE value) {
 
     final StoreLink<KEY, VALUE> closestLink = floor(key);
+    
+    StoreLink<KEY, VALUE> currentLink = rootLink; 
+    System.out.println("Before Adding Another User (Store): "); 
+    while(currentLink != null){
+      System.out.println(currentLink.key); 
+      currentLink = currentLink.next; 
+    }
 
     // Assume that the new value can only come after the current position. Move
     // through the chain of links until the next link is either the end (null)
@@ -62,9 +71,79 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     //     it would not help with the interators. As long as the key will map
     //     to the first link, the other links will always be found. This is
     //     why the insert is always put at the end of the series.
+    
     if (closestLink == null || comparator.compare(newLink.key, closestLink.key) != 0) {
       index.put(key, newLink);
     }
+    
+    StoreLink<KEY, VALUE> currentLinkAfter = rootLink; 
+    System.out.println("After Adding Another User (Store): "); 
+    while(currentLinkAfter != null){
+      System.out.println(currentLinkAfter.key); 
+      currentLinkAfter = currentLinkAfter.next; 
+    }
+  }
+  
+  //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
+  public void remove(KEY key){
+    StoreLink<KEY, VALUE> v; 
+    
+    StoreLink<KEY, VALUE> linkBefore = extract(index.lowerEntry(key)); 
+    
+    // Check if linkBefore is null, if so then we know the previous link is the root link, so set accordingly 
+    if(linkBefore==null){
+      linkBefore = rootLink; 
+    }
+    
+    StoreLink<KEY, VALUE> linkToDelete = index.get(key); 
+    StoreLink<KEY, VALUE> linkAfter = linkToDelete.next;
+    
+    linkBefore.next = linkAfter; 
+    
+    System.out.println("Link Before " + linkBefore.key); 
+    
+    // Check if linkAfter is null, so that we know not to access its key later on  
+    if(linkAfter==null){
+      System.out.println("Link After: null");
+    } else {
+      System.out.println("Link After " + linkAfter.key);
+    }
+    
+    StoreLink<KEY, VALUE> currentLink = rootLink; 
+    System.out.println("Before Deletion (Store): "); 
+    while(currentLink != null){
+      System.out.println(currentLink.key); 
+      currentLink = currentLink.next; 
+    }
+    
+    System.out.println(); 
+    
+    //print data structures, all of the links and the next pointers and everything in the index to see what is there 
+    //Goal: See what everything points to 
+    
+    //teindex.floor(key).next = index.ceiling(key); 
+  	if((v=index.remove(key))!=null){
+  	  //Success
+  	  System.out.println(v + " was removed successfully."); 
+  	} else {
+  	  System.out.println(v + " was not removed successfully. There was an issue."); 
+  	} 
+  	
+  	StoreLink<KEY, VALUE> currentLinkAfter = rootLink; 
+    System.out.println("After Deletion (Store): "); 
+    while(currentLinkAfter != null){
+      System.out.println(currentLinkAfter.key); 
+      currentLinkAfter = currentLinkAfter.next; 
+    }
+    
+    System.out.println(); 
+    
+  }
+  
+  //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
+  public boolean exists(KEY key){
+    boolean userExists = (index.get(key)!=null);  
+  	return userExists; 
   }
 
   @Override

@@ -68,12 +68,13 @@ public final class ConversationPanel extends JPanel {
     final JScrollPane listScrollPane = new JScrollPane(objectList);
     listShowPanel.add(listScrollPane);
     listScrollPane.setMinimumSize(new Dimension(250, 200));
+    listScrollPane.setPreferredSize(new Dimension(250, 200));
 
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    final JButton updateButton = new JButton("Update");
+	final JButton updateButton = new JButton("Update Conversations");
     final JButton addButton = new JButton("Add");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -106,7 +107,10 @@ public final class ConversationPanel extends JPanel {
 
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
-    this.add(buttonPanel, buttonPanelC);
+    this.add(buttonPanel, buttonPanelC); 
+    titlePanel.setBackground(new Color(102, 162, 237));
+    listShowPanel.setBackground(new Color(102, 162, 237));
+    buttonPanel.setBackground(new Color(102, 162, 237));
 
     // User clicks Conversations Update button.
     updateButton.addActionListener(new ActionListener() {
@@ -129,11 +133,11 @@ public final class ConversationPanel extends JPanel {
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {
-          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
+          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
-
+     
     // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
     objectList.addListSelectionListener(new ListSelectionListener() {
       @Override
