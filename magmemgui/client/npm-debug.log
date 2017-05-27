@@ -1,0 +1,47 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/nick/.nvm/versions/node/v6.9.4/bin/node',
+1 verbose cli   '/home/nick/.nvm/versions/node/v6.9.4/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'react-dev' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.4
+4 verbose run-script [ 'prereact-dev', 'react-dev', 'postreact-dev' ]
+5 info lifecycle magenta-messenger@1.0.0~prereact-dev: magenta-messenger@1.0.0
+6 silly lifecycle magenta-messenger@1.0.0~prereact-dev: no script for prereact-dev, continuing
+7 info lifecycle magenta-messenger@1.0.0~react-dev: magenta-messenger@1.0.0
+8 verbose lifecycle magenta-messenger@1.0.0~react-dev: unsafe-perm in lifecycle true
+9 verbose lifecycle magenta-messenger@1.0.0~react-dev: PATH: /home/nick/.nvm/versions/node/v6.9.4/lib/node_modules/npm/bin/node-gyp-bin:/home/nick/Code/CodeU/codeu_project_2017/magmemgui/node_modules/.bin:/home/nick/.nvm/versions/node/v6.9.4/bin:/home/nick/anaconda3/bin:/home/nick/.local/share/umake/bin:/home/nick/bin:/home/nick/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle magenta-messenger@1.0.0~react-dev: CWD: /home/nick/Code/CodeU/codeu_project_2017/magmemgui
+11 silly lifecycle magenta-messenger@1.0.0~react-dev: Args: [ '-c', 'webpack -d --watch' ]
+12 info lifecycle magenta-messenger@1.0.0~react-dev: Failed to exec react-dev script
+13 verbose stack Error: magenta-messenger@1.0.0 react-dev: `webpack -d --watch`
+13 verbose stack spawn ENOENT
+13 verbose stack     at ChildProcess.<anonymous> (/home/nick/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/spawn.js:33:16)
+13 verbose stack     at emitTwo (events.js:106:13)
+13 verbose stack     at ChildProcess.emit (events.js:191:7)
+13 verbose stack     at maybeClose (internal/child_process.js:877:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+14 verbose pkgid magenta-messenger@1.0.0
+15 verbose cwd /home/nick/Code/CodeU/codeu_project_2017/magmemgui/client
+16 error Linux 4.4.0-57-generic
+17 error argv "/home/nick/.nvm/versions/node/v6.9.4/bin/node" "/home/nick/.nvm/versions/node/v6.9.4/bin/npm" "run" "react-dev"
+18 error node v6.9.4
+19 error npm  v3.10.10
+20 error file sh
+21 error code ELIFECYCLE
+22 error errno ENOENT
+23 error syscall spawn
+24 error magenta-messenger@1.0.0 react-dev: `webpack -d --watch`
+24 error spawn ENOENT
+25 error Failed at the magenta-messenger@1.0.0 react-dev script 'webpack -d --watch'.
+25 error Make sure you have the latest version of node.js and npm installed.
+25 error If you do, this is most likely a problem with the magenta-messenger package,
+25 error not with npm itself.
+25 error Tell the author that this fails on your system:
+25 error     webpack -d --watch
+25 error You can get information on how to open an issue for this project with:
+25 error     npm bugs magenta-messenger
+25 error Or if that isn't available, you can get their info via:
+25 error     npm owner ls magenta-messenger
+25 error There is likely additional logging output above.
+26 verbose exit [ 1, true ]
