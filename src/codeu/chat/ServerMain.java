@@ -64,7 +64,7 @@ final class ServerMain {
 
         try {
           while ((line = input.readLine()) != null)
-            System.out.println(line);
+            LOG.info(line);
         } catch (IOException e) {
           e.printStackTrace();
         }
