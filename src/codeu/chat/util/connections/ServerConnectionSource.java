@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import codeu.chat.util.Logger;
+
 
 // SERVER CONNECTION SOURCE
 //
@@ -26,6 +28,8 @@ import java.net.Socket;
 // one of their ports so that clients can connect to it. Calls to "connect"
 // will block until a connection is established.
 public final class ServerConnectionSource implements ConnectionSource {
+
+  private static final Logger.Log LOG = Logger.newLog(ServerConnectionSource.class);
 
   private final ServerSocket serverSocket;
 
@@ -35,6 +39,7 @@ public final class ServerConnectionSource implements ConnectionSource {
 
   @Override
   public Connection connect() throws IOException {
+    LOG.info(serverSocket.toString());
     return fromSocket(serverSocket.accept());
   }
 

@@ -30,15 +30,12 @@ import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 final class ServerMain {
 
   private static final Logger.Log LOG = Logger.newLog(ServerMain.class);
 
-
-  public static void main(String[] args) throws IOException, InterruptedException {
+  public static void main(String[] args) {
 
     Logger.enableConsoleOutput();
 
@@ -54,26 +51,6 @@ final class ServerMain {
     LOG.info("Starting server on port " + myPort);
     //final int myPort = 10110;
     final byte[] secret = Secret.parse(args[1]);
-
-    final Process p = Runtime.getRuntime().exec("cat /var/log/syslog");
-
-    new Thread(new Runnable() {
-      public void run() {
-        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        String line = null;
-
-        try {
-          String out = "";
-          while ((line = input.readLine()) != null)
-            out = out + "\n" + line;
-          LOG.info(out);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }).start();
-
-    p.waitFor();
 
     Uuid id = null;
     try {
