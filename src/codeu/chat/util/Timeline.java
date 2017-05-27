@@ -57,6 +57,10 @@ public final class Timeline {
     public void run() {
       while (running) {
 
+        if (backlog.size() > 0) {
+          LOG.info(backlog.toString());
+        }
+
         Event next;
 
         try {
