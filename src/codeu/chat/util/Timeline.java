@@ -117,8 +117,7 @@ public final class Timeline {
     @Override
     public void run() {
       while (running) {
-        LOG.info("WE HAVE LOADED THE EXECUTOR");
-        
+        LOG.info(todo.toString());
       }
     }
   };
