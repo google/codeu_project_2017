@@ -265,6 +265,17 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
 
+    } else if (type == NetworkCode.DELETE_USERS_REQUEST) {
+      
+      final Collection<User> userToRemove = Serializers.collection(User.SERIALIZER).read(in);    
+      
+      boolean userDeleted = false; 
+
+      userDeleted = controller.deleteUser(userToRemove);
+      
+	  Serializers.INTEGER.write(out, NetworkCode.DELETE_USERS_RESPONSE);      
+      Serializers.BOOLEAN.write(out, userDeleted);
+    
     } else {
 
       // In the case that the message was not handled make a dummy message with

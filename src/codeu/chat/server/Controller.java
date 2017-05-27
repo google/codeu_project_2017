@@ -129,6 +129,14 @@ public final class Controller implements RawController, BasicController {
 
     return user;
   }
+  
+  public boolean deleteUser(Collection<User> userToDelete) {
+    boolean deletionSuccessful = model.deleteUsers(userToDelete);
+    
+    System.out.println("Deletion Successful" + deletionSuccessful); 
+    
+    return deletionSuccessful; 
+  }
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {

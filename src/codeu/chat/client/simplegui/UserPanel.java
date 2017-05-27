@@ -21,6 +21,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import java.lang.StringBuilder; 
+
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
 
@@ -94,11 +96,15 @@ public final class UserPanel extends JPanel {
 
     final JButton userUpdateButton = new JButton("Update Users");
     final JButton userSignInButton = new JButton("Sign In");
+    final JButton userSignOutButton = new JButton("Sign Out");
     final JButton userAddButton = new JButton("Add");
+    final JButton userDeleteButton = new JButton("Delete");
 
     buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
+    buttonPanel.add(userSignOutButton); 
     buttonPanel.add(userAddButton);
+    buttonPanel.add(userDeleteButton); 
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -167,6 +173,18 @@ public final class UserPanel extends JPanel {
         }
       }
     });
+    
+    //signs out the user so that someone cannot access your account
+    userSignOutButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          clientContext.user.signOutUser();
+          userSignedInLabel.setText("Goodbye " + data);
+        }
+      }
+    });
 
     userAddButton.addActionListener(new ActionListener() {
       @Override
@@ -180,6 +198,46 @@ public final class UserPanel extends JPanel {
           } else{
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
           }
+        }
+      }
+    });
+    
+    userDeleteButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          //need to delete user and set it so that they are not logged in...
+          boolean sucessfulSignout = clientContext.user.signOutUser();
+          //System.out.println(sucessfulSignout);
+          	if(sucessfulSignout==true){
+          	    int size = userList.getModel().getSize();
+          	    StringBuilder values = new StringBuilder("Users Before Deletion:"); 
+          	    for(int i=0; i<size; i++){
+          	      values.append("\n").append(userList.getModel().getElementAt(i));
+          	    }
+          	    System.out.print(values);
+          	    
+          		//remove the user's name from the list 
+          		if(clientContext.user.deleteUser(data)==true){
+          			//update the user's list and 
+          			UserPanel.this.getAllUsers(listModel);
+          			userSignedInLabel.setText("Goodbye " + data);
+          			
+          			int sizeList = userList.getModel().getSize();
+          	        StringBuilder valuesAfter = new StringBuilder("Users After Deletion:"); 
+          	        for(int i=0; i<sizeList; i++){
+          	          valuesAfter.append("\n").append(userList.getModel().getElementAt(i));
+          	         }
+          	        System.out.print(valuesAfter);
+          		} else {
+          			JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
+          			UserPanel.this.getAllUsers(listModel);
+          		}
+          	
+          	} else {
+          		JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted. Please check that the user to be deleted is signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+          	}
         }
       }
     });

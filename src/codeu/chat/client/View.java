@@ -70,7 +70,7 @@ public final class View implements BasicView, LogicalView{
 
     return users;
   }
-
+  
   @Override
   public Collection<ConversationSummary> getAllConversations() {
 
