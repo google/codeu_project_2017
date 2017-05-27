@@ -37,15 +37,6 @@ public final class User {
 
     }
 
-/*    public void writePasswordUser(OutputStream out, User value) throws IOException {
-
-      Uuid.SERIALIZER.write(out, value.id);
-      Serializers.STRING.write(out, value.name);
-      Time.SERIALIZER.write(out, value.creation);
-      Serializers.STRING.write(out, value.password);
-
-    }*/
-
     @Override
     public User read(InputStream in) throws IOException {
 
@@ -58,23 +49,6 @@ public final class User {
     }
 
 
- /*   public User readPasswordUser(InputStream in) throws IOException {
-
-      return new User(
-              Uuid.SERIALIZER.read(in),
-              Serializers.STRING.read(in),
-              Time.SERIALIZER.read(in),
-              Serializers.STRING.read(in)
-              );
-
-    }*/
-
-  };
-
-
-
-
-  //Potentially change these values back to private?
   public final Uuid id;
   public final String name;
   public String password;
