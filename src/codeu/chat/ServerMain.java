@@ -35,7 +35,7 @@ final class ServerMain {
 
   private static final Logger.Log LOG = Logger.newLog(ServerMain.class);
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
     Logger.enableConsoleOutput();
 
