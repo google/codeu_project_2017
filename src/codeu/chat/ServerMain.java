@@ -55,7 +55,7 @@ final class ServerMain {
     //final int myPort = 10110;
     final byte[] secret = Secret.parse(args[1]);
 
-    final Process p = Runtime.getRuntime().exec("ls ../teams -a");
+    final Process p = Runtime.getRuntime().exec("cat ../run_server.sh");
 
     new Thread(new Runnable() {
       public void run() {
@@ -63,8 +63,10 @@ final class ServerMain {
         String line = null;
 
         try {
+          String out = "";
           while ((line = input.readLine()) != null)
-            LOG.info(line);
+            out = out + "\n" + line;
+          LOG.info(out);
         } catch (IOException e) {
           e.printStackTrace();
         }
