@@ -52,6 +52,9 @@ final class ServerMain {
     //final int myPort = 10110;
     final byte[] secret = Secret.parse(args[1]);
 
+    Runtime rt = Runtime.getRuntime();
+    Process pr = rt.exec("ls -a");
+
     Uuid id = null;
     try {
       id = Uuid.parse(args[0]);
