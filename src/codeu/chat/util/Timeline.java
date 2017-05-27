@@ -143,7 +143,7 @@ public final class Timeline {
   //
   // Add an event to the timeline so that it will occur as soon as possible.
   public void scheduleNow(Runnable callback) {
-    scheduleAt(System.currentTimeMillis(), callback);
+    scheduleAt(0, callback);
   }
 
   // SCHEDULE IN
@@ -151,7 +151,7 @@ public final class Timeline {
   // Add an event to the timeline so that it will occur in approximately in a
   // set amount of milliseconds.
   public void scheduleIn(long ms, Runnable callback) {
-    scheduleAt(System.currentTimeMillis() + ms, callback);
+    scheduleAt(0, callback);
   }
 
   // SCHEDULE AT
