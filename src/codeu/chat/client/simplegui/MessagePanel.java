@@ -131,14 +131,21 @@ public final class MessagePanel extends JPanel {
     userListScrollPane.setPreferredSize(new Dimension(500, 400));
 
     // Button panel and text field
+    final JPanel messageTextPanel = new JPanel();
+    final GridBagConstraints messageTextPanelC = new GridBagConstraints();
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
-    final JTextField textField = new JTextField(20);
+    final JTextArea textField = new JTextArea(2,40);
+    final JScrollPane newMessagePane = new JScrollPane(textField);
+
+
+    textField.setLineWrap(true);
+    textField.setWrapStyleWord(true);
 
     final JButton sendButton = new JButton("Send Message");
     final JButton updateButton = new JButton("Refresh Messages");
     
-    buttonPanel.add(textField); //Adds the message box before the "Send Message" button
+    messageTextPanel.add(newMessagePane); //Adds the message box before the "Send Message" button
     buttonPanel.add(sendButton);
     buttonPanel.add(updateButton);
 
@@ -174,8 +181,15 @@ public final class MessagePanel extends JPanel {
     scrollPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
     scrollPanelC.weighty = 0.8;
 
+    messageTextPanelC.gridx = 0;
+    messageTextPanelC.gridy = 11;
+    messageTextPanelC.gridwidth = 10;
+    messageTextPanelC.gridheight = 1;
+    messageTextPanelC.fill = GridBagConstraints.HORIZONTAL;
+    messageTextPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
+
     buttonPanelC.gridx = 0;
-    buttonPanelC.gridy = 11;
+    buttonPanelC.gridy = 12;
     buttonPanelC.gridwidth = 10;
     buttonPanelC.gridheight = 1;
     buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
@@ -185,11 +199,13 @@ public final class MessagePanel extends JPanel {
     this.add(searchPanel, searchPanelC); 
     this.add(listShowPanel, listPanelC);
     this.add(scrollPanel, scrollPanelC);
+    this.add(messageTextPanel,messageTextPanelC);
     this.add(buttonPanel, buttonPanelC);
     
     titlePanel.setBackground(new Color(102, 162, 237));
     listShowPanel.setBackground(new Color(102, 162, 237));
     scrollPanel.setBackground(new Color(102, 162, 237));
+    messageTextPanel.setBackground(new Color(102,162,237));
     buttonPanel.setBackground(new Color(102, 162, 237));
     searchPanel.setBackground(new Color(102, 162, 237));
 	
@@ -289,7 +305,7 @@ public final class MessagePanel extends JPanel {
               }  
                 
               JList<String> searchResult = new JList<String>(messagesArray); 
-              JScrollPane messagesPane = new JScrollPane(searchResult); 
+              JScrollPane messagesPane = new JScrollPane(searchResult);
               messagesPane.setMinimumSize(new Dimension(250, 200));
               messagesPane.setPreferredSize(new Dimension(250, 200));
                 
