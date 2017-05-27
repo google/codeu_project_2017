@@ -20,6 +20,8 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import codeu.chat.util.Logger;
+import java.io.StringWriter;
+import java.io.PrintWriter;
 
 
 // SERVER CONNECTION SOURCE
@@ -38,11 +40,20 @@ public final class ServerConnectionSource implements ConnectionSource {
   }
 
   @Override
-  public Connection connect() throws IOException {
-    LOG.info(serverSocket.toString());
-    Connection c = fromSocket(serverSocket.accept());
-    LOG.info("Here's the connection: " + c.toString());
-    return c;
+  public Connection connect() {
+    try {
+      LOG.info(serverSocket.toString());
+      Connection c = fromSocket(serverSocket.accept());
+      LOG.info("Here's the connection: " + c.toString());
+      return c;
+    } catch (Exception e) {
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter(sw);
+      e.printStackTrace(pw);
+
+      LOG.info(sw.toString());
+    }
+    return null;
   }
 
   @Override
