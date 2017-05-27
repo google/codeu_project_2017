@@ -244,4 +244,8 @@ public final class ClientMessage {
   public static void printMessage(Message m) {
     printMessage(m, null);
   }
+
+  public void linkReceiver(BroadCastReceiver receiver) {
+    receiver.setMessages(conversationContents);
+  }
 }

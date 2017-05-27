@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -25,6 +27,7 @@ public class BroadCastReceiver extends Thread {
   private BufferedReader in;
   private int lastType;
   private AtomicBoolean receivedResponse;
+  private List<Message> storedMessages;
 
   // A broadcast event will be fired whenever a new broadcast is pushed to the client.
   @FunctionalInterface
@@ -59,6 +62,7 @@ public class BroadCastReceiver extends Thread {
             Message message = Message.SERIALIZER.read(in);
             if (response != null) {
               response.onBroadcast(message);
+              storedMessages.add(message); 
             }
             // todo send a broadcast response to inform server that broadcast was received
           } else if (type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
@@ -132,6 +136,10 @@ public class BroadCastReceiver extends Thread {
 
   public PrintWriter out() {
     return out;
+  }
+
+  public void setMessages(List<Message> list) {
+    storedMessages = list;
   }
 
 }
