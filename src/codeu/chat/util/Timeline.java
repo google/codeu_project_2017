@@ -117,6 +117,7 @@ public final class Timeline {
     @Override
     public void run() {
       while (running) {
+        LOG.info("runnign");
         try {
           todo.take().run();
           LOG.info("AND RAN IT");
