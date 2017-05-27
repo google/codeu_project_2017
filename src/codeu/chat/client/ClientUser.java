@@ -83,6 +83,21 @@ public boolean isValidName(String userName) {
     return (prev != current);
   }
 
+  public boolean checkPassword(String name, String password){
+
+    final User user = usersByName.first(name);
+    System.out.print("check password: " + user.getPassword());
+    printUser(user);
+
+    if( user != null  && (user.getPassword().equals(password))) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -93,21 +108,21 @@ public boolean isValidName(String userName) {
     printUser(current);
   }
 
-  //boolean to check if the user was created or not in the GUI
-  public boolean addUser(String name) {
+  public boolean addUser(String name, String password) {
+
     final boolean validInputs = isValidName(name);
-    
-    final User user = (validInputs) ? controller.newUser(name) : null;
+
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value"); 
+          (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
-      
-      return true; 
+      return true;
     }
+
     return false;
   }
 
@@ -144,6 +159,7 @@ public boolean isValidName(String userName) {
 	return deleteUser;  
   }
   
+
   public void showAllUsers() {
     updateUsers();
     for (final User u : usersByName.all()) {

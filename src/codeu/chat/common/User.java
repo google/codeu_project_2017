@@ -33,6 +33,7 @@ public final class User {
       Uuid.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
       Time.SERIALIZER.write(out, value.creation);
+      Serializers.STRING.write(out, value.password);
 
     }
 
@@ -40,15 +41,17 @@ public final class User {
     public User read(InputStream in) throws IOException {
 
       return new User(
-          Uuid.SERIALIZER.read(in),
-          Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
-      );
+              Uuid.SERIALIZER.read(in),
+              Serializers.STRING.read(in),
+              Time.SERIALIZER.read(in),
+              Serializers.STRING.read(in)
+              );
     }
-  };
+
 
   public final Uuid id;
   public final String name;
+  public String password;
   public final Time creation;
 
   public User(Uuid id, String name, Time creation) {
@@ -58,4 +61,26 @@ public final class User {
     this.creation = creation;
 
   }
+
+  //create new constructors
+  public User(Uuid id, String name, Time creation, String password){
+
+    this.id = id;
+    this.name = name;
+    this.creation = creation;
+    this.password = password;
+
+  }
+
+  //Potentially get rid of setter
+  public void setPassword(String password){
+
+    this.password = password;
+  }
+
+  public String getPassword(){
+
+    return this.password;
+  }
+
 }
