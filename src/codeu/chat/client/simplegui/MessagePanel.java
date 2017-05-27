@@ -121,14 +121,26 @@ public final class MessagePanel extends JPanel {
     // messageListModel is an instance variable so Conversation panel
     // can update it.
     final JList<String> userList = new JList<>(messageListModel);
+    userList.setVisibleRowCount(-1);
+    userList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
     userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
 
-    final JScrollPane userListScrollPane = new JScrollPane(userList);
-    scrollPanel.add(userListScrollPane);
+
+    /*final JTextArea messageText = new JTextArea(30,10); //
+    messageText.setLineWrap(true); //
+    messageText.setWrapStyleWord(true); //
+    for (int i = 0; i < userList.getSize(); i++) {
+      messageText.append(userList[i]);
+    }
+    */
+    //messageText.append(userList); //
+    final JScrollPane userListScrollPane = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //
+
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
     userListScrollPane.setPreferredSize(new Dimension(500, 400));
+    scrollPanel.add(userListScrollPane);
 
     // Button panel and text field
     final JPanel messageTextPanel = new JPanel();
@@ -385,7 +397,20 @@ public final class MessagePanel extends JPanel {
   // Panel is set up. If there is a current conversation, Populate the conversation list.
   getAllMessages(clientContext.conversation.getCurrent());
 }
-  
+
+
+FontMetrics metrics = getFontMetrics(getFont());
+  // get the height of a line of text in this
+// font and render context
+  // int hgt = metrics.getHeight();
+  // get the advance of my text in this font
+// and render context
+ // int adv = metrics.stringWidth(text);
+  // calculate the size of a box to hold the
+// text with some padding.
+  //Dimension size = new Dimension(adv+2, hgt+2);
+
+
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
@@ -394,10 +419,43 @@ public final class MessagePanel extends JPanel {
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
-      final String displayString = String.format("%s: [%s]: %s",
+      final String fullString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
-      messageListModel.addElement(displayString);
+      //int remainingWidth = metrics.stringWidth(displayString);
+
+      String displayString = "";
+      String currentLine = "";
+      String[] words = fullString.split(" ");
+      int i = 0;
+      //String tryLine = "";
+      while (i < words.length) {
+        System.out.println("INSIDE OUTSIDE WHILE");
+        currentLine = "";
+        String tryLine = words[i];
+        while (metrics.stringWidth(tryLine) < 495 && i < words.length) {
+          System.out.println("INSIDE WHILE");
+          System.out.println(tryLine);
+          System.out.println(metrics.stringWidth(tryLine));
+          currentLine += words[i] + " ";
+          i ++;
+          if (i < words.length) {
+            tryLine = (currentLine + words[i]);
+          }
+        }
+        if (currentLine.equals("")) {
+          System.out.println("INSIDE IF");
+          currentLine += words[i];
+          i++;
+        }
+          System.out.println("ADDING NEW LINE\n");
+          messageListModel.addElement(currentLine);
+          //displayString += currentLine + "\n";
+      }
+
+      //System.out.println(width);
+
+      //messageListModel.addElement(displayString);
     }
   }
 }
