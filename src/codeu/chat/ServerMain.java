@@ -102,7 +102,7 @@ final class ServerMain {
 
         LOG.info("Established connection...");
         final Connection connection = serverSource.connect();
-        LOG.info("Connection established. Here's connection now: " + c.toString());
+        LOG.info("Connection established. Here's connection now: " + connection.toString());
 
         server.handleConnection(connection);
 
