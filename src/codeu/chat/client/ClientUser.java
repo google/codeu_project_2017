@@ -57,7 +57,6 @@ public boolean isValidName(String userName) {
         isUniqueUser = false;
       }
     }
-    isUniqueUser = true; 
   }
   return isUniqueUser;
 }
