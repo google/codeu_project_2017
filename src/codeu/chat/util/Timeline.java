@@ -15,7 +15,7 @@
 package codeu.chat.util;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
 // TIMELINE
@@ -45,7 +45,7 @@ public final class Timeline {
   }
 
   private final BlockingQueue<Event> backlog = new PriorityBlockingQueue<>();
-  private final BlockingQueue<Runnable> todo = new ArrayBlockingQueue<>(100);
+  private final BlockingQueue<Runnable> todo = new LinkedBlockingQueue<>();
 
   private boolean running = true;
 
@@ -118,18 +118,7 @@ public final class Timeline {
     public void run() {
       while (running) {
         LOG.info("WE HAVE LOADED THE EXECUTOR");
-        try {
-          Runnable ev = todo.take();
-          LOG.info("AND popped it");
-          ev.run();
-          LOG.info("AND RAN IT");
-        } catch (Exception ex) {
-          // Catch all exceptions here to stop any rogue action from
-          // take down the timeline.
-          LOG.warning(
-              "An exception was seen on the timeline (%s)",
-              ex.toString());
-        }
+        
       }
     }
   };
