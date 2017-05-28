@@ -136,7 +136,7 @@ public final class MessagePanel extends JPanel {
     }
     */
     //messageText.append(userList); //
-    final JScrollPane userListScrollPane = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //
+    final JScrollPane userListScrollPane = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //
 
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
     userListScrollPane.setPreferredSize(new Dimension(500, 400));
@@ -147,7 +147,7 @@ public final class MessagePanel extends JPanel {
     final GridBagConstraints messageTextPanelC = new GridBagConstraints();
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
-    final JTextArea textField = new JTextArea(2,40);
+    final JTextArea textField = new JTextArea(3,40);
     final JScrollPane newMessagePane = new JScrollPane(textField);
 
 
@@ -400,16 +400,6 @@ public final class MessagePanel extends JPanel {
 
 
 FontMetrics metrics = getFontMetrics(getFont());
-  // get the height of a line of text in this
-// font and render context
-  // int hgt = metrics.getHeight();
-  // get the advance of my text in this font
-// and render context
- // int adv = metrics.stringWidth(text);
-  // calculate the size of a box to hold the
-// text with some padding.
-  //Dimension size = new Dimension(adv+2, hgt+2);
-
 
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
@@ -422,21 +412,14 @@ FontMetrics metrics = getFontMetrics(getFont());
       final String fullString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
-      //int remainingWidth = metrics.stringWidth(displayString);
 
-      String displayString = "";
       String currentLine = "";
       String[] words = fullString.split(" ");
       int i = 0;
-      //String tryLine = "";
       while (i < words.length) {
-        System.out.println("INSIDE OUTSIDE WHILE");
         currentLine = "";
         String tryLine = words[i];
-        while (metrics.stringWidth(tryLine) < 495 && i < words.length) {
-          System.out.println("INSIDE WHILE");
-          System.out.println(tryLine);
-          System.out.println(metrics.stringWidth(tryLine));
+        while (metrics.stringWidth(tryLine) < 515 && i < words.length) {
           currentLine += words[i] + " ";
           i ++;
           if (i < words.length) {
@@ -444,13 +427,10 @@ FontMetrics metrics = getFontMetrics(getFont());
           }
         }
         if (currentLine.equals("")) {
-          System.out.println("INSIDE IF");
           currentLine += words[i];
           i++;
         }
-          System.out.println("ADDING NEW LINE\n");
           messageListModel.addElement(currentLine);
-          //displayString += currentLine + "\n";
       }
 
       //System.out.println(width);
