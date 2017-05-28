@@ -76,6 +76,12 @@ public class BroadCastReceiver extends Thread {
       if (alive) {
         System.out.println("Error connecting with broadcaster");
       }
+    } finally {
+      try {
+        in.close();
+      } catch (IOException exc) {
+        System.out.println("Error closing");
+      }
     }
 
   }
@@ -94,13 +100,7 @@ public class BroadCastReceiver extends Thread {
 
   public void exit() {
     alive = false;
-    try {
-      // todo: (Issue) -- the buffered reader isn't closing
-      source.close();
-      in.close();
-    } catch (IOException exc) {
-      // todo error... there was an error closing the input stream
-    }
+    out.close();
   }
 
   public void onBroadCast(BroadcastEvent broadcastEvent) {
