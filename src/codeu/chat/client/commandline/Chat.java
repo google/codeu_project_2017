@@ -48,6 +48,8 @@ public final class Chat {
     System.out.println("   sign-in <username>  <password> - sign in as user <username>.");
     System.out.println("   sign-out                       - sign out current user.");
     System.out.println("   current                        - show current user, conversation, message.");
+    System.out.println("   stats                          - show statistics");
+
     System.out.println("User commands:");
     System.out.println("   u-add <name>  <password>  - add a new user.");
     System.out.println("   u-list-all                - list all users known to system.");
@@ -60,6 +62,7 @@ public final class Chat {
     System.out.println("   m-list-all       - list all messages in the current conversation.");
     System.out.println("   m-next <index>   - index of next message to view.");
     System.out.println("   m-show <count>   - show next <count> messages.");
+
   }
 
   // Prompt for new command.
@@ -196,6 +199,12 @@ public final class Chat {
         clientContext.message.showMessages(count);
       }
 
+    } else if (token.equals("stats")) {
+
+      showUserStatistics();
+      showConversationStatistics();
+      showMessageStatistics();
+
     } else {
 
       System.out.format("Command not recognized: %s\n", token);
@@ -234,6 +243,18 @@ public final class Chat {
         clientContext.message.showCurrent();
       }
     }
+  }
+
+  private void showUserStatistics() {
+    clientContext.user.showStatistics();
+  }
+
+  private void showConversationStatistics() {
+    clientContext.conversation.showStatistics();
+  }
+
+  private void showMessageStatistics() {
+    clientContext.message.showStatistics();
   }
 
   // Show current user, conversation, message, if any

@@ -175,4 +175,13 @@ public final class ClientUser {
   public static void printUser(User user) {
     System.out.println(getUserInfoString(user));
   }
+
+  public void showStatistics() {
+    int numberOfUsers = getNumberOfUsers();
+    System.out.println("Number of users:  " + numberOfUsers);
+  }
+
+  public int getNumberOfUsers() {
+    return usersById.size();
+  }
 }

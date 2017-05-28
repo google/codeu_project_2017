@@ -259,4 +259,19 @@ public final class ClientMessage {
   public static void printMessage(Message m) {
     printMessage(m, null);
   }
+
+  public void showStatistics() {
+    int numberOfMessages = getNumberOfMessages();
+    int numberOfUsers = userContext.getNumberOfUsers();
+    System.out.println("Total number of messages: " + numberOfMessages);
+    double messagesPerUser = 0;
+    if(numberOfUsers != 0) {
+      messagesPerUser = (double)Math.round(numberOfMessages/numberOfUsers * 100)/100;
+    }
+    System.out.println("Average number of messages per user: " + messagesPerUser);
+  }
+
+  public int getNumberOfMessages() {
+    return conversationContents.size();
+  }
 }
