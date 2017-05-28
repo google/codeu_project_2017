@@ -165,7 +165,7 @@ public final class UserPanel extends JPanel {
           if(userPassword.equals("password")){ //access userByName, get User, access the user's password (String)
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
-          } else{
+          } else {
             //user's password was incorrect
             JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Password for " + data + " was incorrect."); 
