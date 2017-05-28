@@ -46,6 +46,10 @@ public final class ClientMessage {
   private final ClientUser userContext;
   private final ClientConversation conversationContext;
 
+  private HashMap<String, Integer> wordCount = new HashMap<String, Integer>();
+
+  private HashMap<Integer, Integer> wordLengthCount = new HashMap<Integer, Integer>();
+
   public ClientMessage(Controller controller, View view, ClientUser userContext,
                        ClientConversation conversationContext) {
     this.controller = controller;
@@ -108,7 +112,19 @@ public final class ClientMessage {
       LOG.info("New message:, Author= %s UUID= %s", author, message.id);
       current = message;
     }
+
+    updateWordLengthCount(body);
+
     updateMessages(false);
+  }
+
+  private void updateWordLengthCount(String body) {
+    String[] splited = body.trim().split("\\s+");
+    for(String str: splited) {
+      int len = str.length();
+      int count = wordLengthCount.containsKey(len) ? wordLengthCount.get(len) : 0 ;
+      wordLengthCount.put(len, count + 1);
+    }
   }
 
   // For m-list-all command.
@@ -269,6 +285,14 @@ public final class ClientMessage {
       messagesPerUser = (double)Math.round(numberOfMessages/numberOfUsers * 100)/100;
     }
     System.out.println("Average number of messages per user: " + messagesPerUser);
+    System.out.println("Frequencies of word lengths:");
+    System.out.println("Length\t\tFrequency" );
+    for (Map.Entry<Integer, Integer> entry : wordLengthCount.entrySet()) {
+      int length = entry.getKey();
+      int frequency = entry.getValue();
+      System.out.println(length + "\t\t" + frequency);
+    }
+
   }
 
   public int getNumberOfMessages() {
