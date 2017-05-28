@@ -119,7 +119,7 @@ public class SentimentScore {
     final float magnitude = sentiment.getMagnitude();
 
     // the following is a temporary solution to avoid the weighting getting too high
-    final double nextWeighting = Math.max(this.weighting + magnitude, 50);
+    final double nextWeighting = Math.min(this.weighting + magnitude, 50);
 
     this.score = (this.score * this.weighting) +  (score * magnitude);
     this.score /= nextWeighting;
