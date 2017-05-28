@@ -75,10 +75,10 @@ public final class ChatSimpleGui {
     mainViewPanel.setBorder(paneBorder()); 
 
     // Build main panels - Users, Conversations, Messages
-    final JPanel usersViewPanel = new UserPanel(clientContext);
+    final UserPanel usersViewPanel = new UserPanel(clientContext);
 
     usersViewPanel.setBorder(paneBorder());
-    usersViewPanel.setBackground(new Color(102, 162, 237)); 
+    usersViewPanel.setBackground(new Color(102, 162, 237));
 
     final GridBagConstraints usersViewC = new GridBagConstraints();
 

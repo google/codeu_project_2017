@@ -23,6 +23,8 @@ import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.User;
+
 
 // NOTE: JPanel is serializable, but there is no need to serialize ConversationPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -31,11 +33,13 @@ public final class ConversationPanel extends JPanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
+ // private final UserPanel userPanel;
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
     this.messagePanel = messagePanel;
+    //this.userPanel = userPanel;
     initialize();
   }
 
@@ -60,10 +64,17 @@ public final class ConversationPanel extends JPanel {
     final GridBagConstraints listPanelC = new GridBagConstraints();
 
     final DefaultListModel<String> listModel = new DefaultListModel<>();
+    final DefaultListModel<String> inviteListModel = new DefaultListModel<>();
     final JList<String> objectList = new JList<>(listModel);
+    final JList<String> inviteList = new JList<>(inviteListModel);
+
     objectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     objectList.setVisibleRowCount(15);
     objectList.setSelectedIndex(-1);
+
+    inviteList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    inviteList.setVisibleRowCount(15);
+    inviteList.setSelectedIndex(-1);
 
     final JScrollPane listScrollPane = new JScrollPane(objectList);
     listShowPanel.add(listScrollPane);
@@ -76,10 +87,12 @@ public final class ConversationPanel extends JPanel {
 
 	final JButton updateButton = new JButton("Update Conversations");
     final JButton addButton = new JButton("Add");
+    final JButton inviteButton = new JButton("Invite Users to Conversations");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
     buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
+    buttonPanel.add(inviteButton);
 
     // Put panels together
     titlePanelC.gridx = 0;
@@ -137,8 +150,40 @@ public final class ConversationPanel extends JPanel {
         }
       }
     });
-     
-    // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
+
+    //user clicks invite button
+    inviteButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+        ConversationPanel.this.getInvitableUsers(inviteListModel);
+        if (objectList.getSelectedIndex() != -1 && !inviteListModel.isEmpty()) {
+          JPanel p = new JPanel();
+
+          final JScrollPane inviteScrollPane = new JScrollPane(inviteList);
+
+          p.add(inviteScrollPane);
+          JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION);
+
+          if (inviteList.getSelectedIndex() != -1) {
+            final String data = inviteList.getSelectedValue();
+            //compare data
+            if (inviteListModel.contains(data)) {
+              System.out.print("user exists");
+            } else {
+              JOptionPane.showMessageDialog(ConversationPanel.this, "No users selected", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+          }
+        } else if (inviteListModel.isEmpty()) {
+          JOptionPane.showMessageDialog(ConversationPanel.this, "No available users to add", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+          JOptionPane.showMessageDialog(ConversationPanel.this, "No conversations selected", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+      }
+    });
+
+  // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
     objectList.addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent e) {
@@ -181,4 +226,16 @@ public final class ConversationPanel extends JPanel {
     }
     return null;
   }
+
+  private void getInvitableUsers(DefaultListModel<String> usersList) {
+    clientContext.user.updateUsers();
+    usersList.clear();
+
+    for (final User u : clientContext.user.getUsers()) {
+      if(!(u.name).equals(clientContext.user.getCurrent().name)) {
+        usersList.addElement(u.name);
+      }
+    }
+  }
+
 }
