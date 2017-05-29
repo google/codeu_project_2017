@@ -1,0 +1,106 @@
+May 22, 2017 1:02:26 PM codeu.chat.EchobotMain main
+INFO: ============================= START OF LOG =============================
+May 22, 2017 1:02:26 PM codeu.chat.EchobotMain main
+INFO: Starting chat client...
+May 22, 2017 1:02:26 PM codeu.chat.EchobotMain main
+INFO: Creating client...
+May 22, 2017 1:02:26 PM codeu.chat.EchobotMain main
+INFO: Created client
+May 22, 2017 1:02:38 PM codeu.chat.EchobotMain main
+INFO: chat client has exited.
+May 23, 2017 9:34:27 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+May 23, 2017 9:34:27 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+May 23, 2017 9:34:27 AM codeu.chat.ClientMain main
+INFO: Creating client...
+May 23, 2017 9:34:27 AM codeu.chat.ClientMain main
+INFO: Created client
+May 23, 2017 9:34:43 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 23, 2017 9:34:44 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 23, 2017 9:34:44 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "angus" UUID=[UUID:29.518744337]
+May 23, 2017 10:24:25 AM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "test" UUID= [UUID:29.2803319173]
+May 23, 2017 10:24:25 AM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="test" UUID=[UUID:29.2803319173] first=[UUID:0] last=[UUID:0]
+
+May 23, 2017 10:24:25 AM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="test" UUID=[UUID:29.2803319173] first=[UUID:0] last=[UUID:0]
+
+May 23, 2017 10:24:25 AM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+May 23, 2017 10:24:25 AM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:29.2803319173] (test).
+
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="test" UUID=[UUID:29.2803319173] first=[UUID:0] last=[UUID:0]
+
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:29.2803319173] (test).
+
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="test" UUID=[UUID:29.2803319173] first=[UUID:0] last=[UUID:0]
+
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="test" UUID=[UUID:29.2803319173] first=[UUID:0] last=[UUID:0]
+
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+May 23, 2017 10:24:52 AM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:29.2803319173] (test).
+
+May 23, 2017 5:43:02 PM codeu.chat.ClientMain main
+INFO: chat client has exited.
+May 29, 2017 1:04:13 AM codeu.chat.ClientMain main
+INFO: ============================= START OF LOG =============================
+May 29, 2017 1:04:13 AM codeu.chat.ClientMain main
+INFO: Starting chat client...
+May 29, 2017 1:04:13 AM codeu.chat.ClientMain main
+INFO: Creating client...
+May 29, 2017 1:04:13 AM codeu.chat.ClientMain main
+INFO: Created client
+May 29, 2017 1:04:26 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 29, 2017 1:04:26 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 29, 2017 1:04:26 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Echobot-0" UUID=[UUID:29.1866966160]
+May 29, 2017 1:04:30 AM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+May 29, 2017 1:04:30 AM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+May 29, 2017 1:04:30 AM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "Echobot-0" UUID=[UUID:29.910430120]
+May 29, 2017 2:07:21 AM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "Test" UUID= [UUID:29.964340]
+May 29, 2017 2:07:21 AM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="Test" UUID=[UUID:29.964340] first=[UUID:0] last=[UUID:0]
+
+May 29, 2017 2:07:21 AM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Test" UUID=[UUID:29.964340] first=[UUID:0] last=[UUID:0]
+
+May 29, 2017 2:07:21 AM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+May 29, 2017 2:07:21 AM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:29.964340] (Test).
+
+May 29, 2017 2:07:27 AM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "Test" UUID= [UUID:29.2754330499]
+May 29, 2017 2:07:27 AM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="Test" UUID=[UUID:29.2754330499] first=[UUID:0] last=[UUID:0]
+
+May 29, 2017 2:07:27 AM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="Test" UUID=[UUID:29.2754330499] first=[UUID:0] last=[UUID:0]
+
+May 29, 2017 2:07:27 AM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+May 29, 2017 2:07:27 AM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:29.2754330499] (Test).
+
+May 29, 2017 3:25:39 AM codeu.chat.ClientMain main
+INFO: chat client has exited.

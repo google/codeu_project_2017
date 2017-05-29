@@ -121,12 +121,18 @@ public final class ClientConversation {
     return null;
   }
 
-  private void joinConversation(String match) {
-    Method.notImplemented();
+  private boolean joinConversation(String match) {
+    currentSummary = summariesSortedByTitle.first(match);
+
+    if (currentSummary == null) return false;
+
+    currentConversation = getConversation(currentSummary.id);
+    return true;
   }
 
   private void leaveCurrentConversation() {
-    Method.notImplemented();
+    currentSummary = null;
+    currentConversation = null;
   }
 
   private void updateCurrentConversation() {
