@@ -87,8 +87,8 @@ public final class Server {
         }
         timeline.scheduleIn(RELAY_REFRESH_MS, this);
       }
-    });
-  }*/
+    });*/
+  }
 
   public void kill() {
     timeline.stop();
