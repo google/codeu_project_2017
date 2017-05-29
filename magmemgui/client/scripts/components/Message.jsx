@@ -25,7 +25,6 @@ class Message extends React.Component {
     var blue =  Math.floor(elem/1000000 % 256);
     return "rgb(" + red + ", " + green + ", " + blue + ")";
   } catch(e){
-    console.log("memd")
     return "rgb(0,0,0)";
   }
   }
