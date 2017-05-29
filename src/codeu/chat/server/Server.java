@@ -68,7 +68,7 @@ public final class Server {
     this.controller = new Controller(id, model);
     this.relay = relay;
 
-    timeline.scheduleNow(new Runnable() {
+    /*timeline.scheduleNow(new Runnable() {
       @Override
       public void run() {
         try {
@@ -87,7 +87,7 @@ public final class Server {
         }
         timeline.scheduleIn(RELAY_REFRESH_MS, this);
       }
-    });
+    });*/
   }
 
   public void kill() {

@@ -23,21 +23,12 @@ class AddConversation extends React.Component {
      // State declaration. Tracks textbox value and current visibility of dialog
      this.state = {
        "value": "",
-       "show": false,
-       "cachedShow": false
+       "show": false
      }
 
      // Bindings so we can setState
      this.handleChange = this.handleChange.bind(this);
      this.onAdd = this.onAdd.bind(this);
-  }
-
-  /* If the props our parent is providing change, then this function is
-  triggered. Inverts the visiblity of the dialog. */
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.show != this.state.cachedShow) {
-      this.setState( {"show": !this.state.show, "cachedShow": nextProps.show} );
-    }
   }
 
   /* Called every time a new character is entered in the textbox. */
@@ -47,7 +38,6 @@ class AddConversation extends React.Component {
 
   /* Called when user clicks the create button. Hides the dialog and requests.*/
   onAdd(e) {
-    this.setState( {"show": false} );
     e.preventDefault();
     this.request();
   }
@@ -73,6 +63,7 @@ class AddConversation extends React.Component {
 
     $.ajax(settings).done(function (response) {
       this.setState({ "value": "" });
+      this.props.toggle();
     }.bind(this));
   }
 
@@ -108,7 +99,7 @@ class AddConversation extends React.Component {
 
       return (
         /* Visibility of dialog is determined by inner state. */
-         <span>{(this.state.show) ? addConvo : ""}</span>
+         <span>{(this.props.show) ? addConvo : ""}</span>
       );
    }
 }
