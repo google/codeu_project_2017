@@ -21,6 +21,8 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList; 
 import java.util.Collection;
 
 import codeu.chat.common.Conversation;
@@ -137,10 +139,12 @@ public final class Server {
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
       final String name = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
 
-      final User user = controller.newUser(name);
+      final User user = controller.newUser(name, password); //call the first constructor in User
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_USER_RESPONSE);
+
       Serializers.nullable(User.SERIALIZER).write(out, user);
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
@@ -240,7 +244,40 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
+      
+    } else if (type == NetworkCode.SEARCH_MESSAGE_REQUEST) {
 
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
+      final String keyword = Serializers.STRING.read(in);
+
+      List<Message> messages = new ArrayList<Message>(); 
+    
+      messages = view.searchMessages(conversation, keyword);
+
+      Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+      
+    } else if (type == NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST) {
+
+      final Uuid rootMessage = Uuid.SERIALIZER.read(in);
+      final int range = Serializers.INTEGER.read(in);
+
+      final Collection<Message> messages = view.getMessages(rootMessage, range);
+
+      Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
+      Serializers.collection(Message.SERIALIZER).write(out, messages);
+
+    } else if (type == NetworkCode.DELETE_USERS_REQUEST) {
+      
+      final Collection<User> userToRemove = Serializers.collection(User.SERIALIZER).read(in);    
+      
+      boolean userDeleted = false; 
+
+      userDeleted = controller.deleteUser(userToRemove);
+      
+	  Serializers.INTEGER.write(out, NetworkCode.DELETE_USERS_RESPONSE);      
+      Serializers.BOOLEAN.write(out, userDeleted);
+    
     } else {
 
       // In the case that the message was not handled make a dummy message with

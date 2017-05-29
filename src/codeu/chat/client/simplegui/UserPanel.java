@@ -21,6 +21,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import java.lang.StringBuilder; 
+
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
 
@@ -36,6 +38,7 @@ public final class UserPanel extends JPanel {
     this.clientContext = clientContext;
     initialize();
   }
+
 
   private void initialize() {
 
@@ -68,7 +71,6 @@ public final class UserPanel extends JPanel {
     titlePanel.add(Box.createHorizontalGlue(), titleGapC);
     titlePanel.add(userSignedInLabel, titleUserC);
     titlePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    //titlePanel.setBackground(Color.black); //I just added this
 
     // User List panel.
     final JPanel listShowPanel = new JPanel();
@@ -89,23 +91,21 @@ public final class UserPanel extends JPanel {
     final JPanel currentPanel = new JPanel();
     final GridBagConstraints currentPanelC = new GridBagConstraints();
 
-    /*final JTextArea userInfoPanel = new JTextArea();
-    final JScrollPane userInfoScrollPane = new JScrollPane(userInfoPanel);
-    currentPanel.add(userInfoScrollPane);
-    userInfoScrollPane.setPreferredSize(new Dimension(245, 85));
-    */
-
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
 
-    //final JButton userUpdateButton = new JButton("Update");
+    final JButton userUpdateButton = new JButton("Update Users");
     final JButton userSignInButton = new JButton("Sign In");
+    final JButton userSignOutButton = new JButton("Sign Out");
     final JButton userAddButton = new JButton("Add");
+    final JButton userDeleteButton = new JButton("Delete");
 
-    //buttonPanel.add(userUpdateButton);
+    buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
+    buttonPanel.add(userSignOutButton); 
     buttonPanel.add(userAddButton);
+    buttonPanel.add(userDeleteButton); 
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -146,25 +146,26 @@ public final class UserPanel extends JPanel {
     currentPanel.setBackground(new Color(102, 162, 237));
     buttonPanel.setBackground(new Color(102, 162, 237));
 
-    /*userUpdateButton.addActionListener(new ActionListener() {
+    userUpdateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         UserPanel.this.getAllUsers(listModel);
       }
     });
-    */
 
     userSignInButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+
         if (userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
           //Ask user for password
           final String userPassword = (String) JOptionPane.showInputDialog(
             UserPanel.this, "Enter " + data + "'s password:", "Enter Password", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
+          System.out.println("sign in panel: " + userPassword);
           //check password to make sure it is correct and check it against the user's password
-          if(userPassword.equals("password")){ //access userByName, get User, access the user's password (String)
+          if(clientContext.user.checkPassword(data, userPassword)){ //access userByName, get User, access the user's password (String)
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
           } else{
@@ -175,18 +176,63 @@ public final class UserPanel extends JPanel {
         }
       }
     });
+    
+    //signs out the user so that someone cannot access your account
+    userSignOutButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          clientContext.user.signOutUser();
+          userSignedInLabel.setText("Goodbye " + data);
+        }
+      }
+    });
 
     userAddButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
-            null, null, "");
-        if (s != null && s.length() > 0) {
-          if(clientContext.user.addUser(s)==true){
+        JPanel p = new JPanel();
+        JTextField userNameField = new JTextField(10);
+        JTextField passwordField = new JPasswordField(10);
+
+        p.add(new JLabel("Enter user name :"));
+        p.add(userNameField);
+        p.add(new JLabel("Enter password : "));
+        p.add(passwordField);
+
+        JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION);
+        final String name = userNameField.getText();
+        final String password = passwordField.getText();
+
+        if (name != null && name.length() > 0) {
+          if(clientContext.user.addUser(name, password)==true){
           	UserPanel.this.getAllUsers(listModel);
           } else{
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+    
+    userDeleteButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          //need to delete user and set it so that they are not logged in...
+
+          System.out.println(data);
+          System.out.println(clientContext.user.getCurrent().name);
+          //remove the user's name from the list
+
+          if (clientContext.user.getCurrent().name.equals(data) && clientContext.user.deleteUser(data) == true) {
+            //update the user's list and
+            UserPanel.this.getAllUsers(listModel);
+            userSignedInLabel.setText("Goodbye " + data);
+          } else {
+            JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
+            UserPanel.this.getAllUsers(listModel);
           }
         }
       }
@@ -214,4 +260,8 @@ public final class UserPanel extends JPanel {
       usersList.addElement(u.name);
     }
   }
+
+
+
+
 }

@@ -19,6 +19,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import java.util.List;
+import java.util.ArrayList;  
+
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
@@ -123,8 +126,6 @@ public final class MessagePanel extends JPanel {
     userList.setSelectedIndex(-1);
 
     final JScrollPane userListScrollPane = new JScrollPane(userList);
-    //listShowPanel.add(userListScrollPane);
-    //searchPanel.add(userListScrollPane);
     scrollPanel.add(userListScrollPane);
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
     userListScrollPane.setPreferredSize(new Dimension(500, 400));
@@ -133,10 +134,13 @@ public final class MessagePanel extends JPanel {
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
     final JTextField textField = new JTextField(20);
-    final JButton addButton = new JButton("Send Message");
+
+    final JButton sendButton = new JButton("Send Message");
+    final JButton updateButton = new JButton("Refresh Messages");
     
     buttonPanel.add(textField); //Adds the message box before the "Send Message" button
-    buttonPanel.add(addButton);
+    buttonPanel.add(sendButton);
+    buttonPanel.add(updateButton);
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -190,25 +194,23 @@ public final class MessagePanel extends JPanel {
     searchPanel.setBackground(new Color(102, 162, 237));
 	
     // User click Messages Add button - prompt for message body and add new Message to Conversation
-    
-    // Add button is pressed
-    addButton.addActionListener(new ActionListener() {
+
+    //Send Message button is pressed
+    sendButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (!clientContext.user.hasCurrent()) {
-        	JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!clientContext.conversation.hasCurrent()) {
-        	JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-          
           final String messageText = textField.getText().trim();
-          
           if (messageText != null && messageText.length() > 0) {
-        	textField.setText(""); //clears the text field after use
+          	textField.setText(""); //clears the text field after use
             clientContext.message.addMessage(
-                clientContext.user.getCurrent().id,
-                clientContext.conversation.getCurrentId(),
-                messageText);
+              clientContext.user.getCurrent().id,
+              clientContext.conversation.getCurrentId(),
+              messageText);
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
           }
         }
@@ -217,27 +219,25 @@ public final class MessagePanel extends JPanel {
     
     // Responds if user enters ENTER or RETURN the message sends
     textField.addKeyListener(new KeyListener() {
-    	@Override
-      	public void keyTyped(KeyEvent e) {
-      		if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
-      			if (!clientContext.user.hasCurrent()) {
-      				JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
-      	        } else if (!clientContext.conversation.hasCurrent()) {
-      	          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
-      	        } else {
-      	          
-      	          final String messageText = textField.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces
-      	          
-      	          if (messageText != null && messageText.length() > 0) {
-      	        	textField.setText(""); //clears the text field after use
-      	            clientContext.message.addMessage(
-      	                clientContext.user.getCurrent().id,
-      	                clientContext.conversation.getCurrentId(),
-      	                messageText);
-      	            MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
-      	          }
-      	        }
-      		}
+      @Override
+      public void keyTyped(KeyEvent e) {
+      	if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
+      	  if (!clientContext.user.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else if (!clientContext.conversation.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else {
+      	    final String messageText = textField.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces      
+      	      if (messageText != null && messageText.length() > 0) {
+      	        textField.setText(""); //clears the text field after use
+      	        clientContext.message.addMessage(
+      	          clientContext.user.getCurrent().id,
+      	          clientContext.conversation.getCurrentId(),
+      	          messageText);
+      	        MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+      	      }
+      	    }
+      	  }
       	} 
       	@Override
       	public void keyPressed(KeyEvent e) {}
@@ -245,9 +245,130 @@ public final class MessagePanel extends JPanel {
       	public void keyReleased(KeyEvent e) {}
       });
     
-    // Panel is set up. If there is a current conversation, Populate the conversation list.
-    getAllMessages(clientContext.conversation.getCurrent());
-  }
+    // Code to adjust the scroll bar for the message window down to the bottom - https://stackoverflow.com/questions/6379061/how-to-auto-scroll-to-bottom-in-java-swing is source  
+    userListScrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+      @Override  
+      public void adjustmentValueChanged(AdjustmentEvent e) {
+        if(userListScrollPane.getVerticalScrollBar().getValueIsAdjusting()==true){
+        } else {  
+          e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+        }  
+      }
+    });
+    
+    // Search Messages button is pressed
+    addButtonSearch.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.user.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+          final String searchQueryTextBox = textFieldSearch.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces     
+      	  String searchQuery = searchQueryTextBox.toUpperCase(); 
+          if (searchQuery != null && searchQuery.length() > 0) {
+          	textFieldSearch.setText(""); //clears the text field after use
+            List<Message> messages = new ArrayList<Message>(); 
+            messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
+            if(messages.size()==0){
+              //there are no messages found for the query, so a popup should display saying that
+              JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+            } else {
+              // display the messages list, since messages were found
+              JPanel popUp = new JPanel();
+              String[] messagesArray = new String[messages.size()]; 
+                
+              for(int i=0; i<messages.size(); i++){
+                Message currentMessage = messages.get(i); 
+                String authorName = clientContext.user.getName(currentMessage.author);
+                String currentConversation = clientContext.conversation.getCurrent().title; 
+                  
+                  messagesArray[i] = String.format("%s: [%s]: in %s wrote %s",
+                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
+              }  
+                
+              JList<String> searchResult = new JList<String>(messagesArray); 
+              JScrollPane messagesPane = new JScrollPane(searchResult); 
+              messagesPane.setMinimumSize(new Dimension(250, 200));
+              messagesPane.setPreferredSize(new Dimension(250, 200));
+                
+              popUp.add(messagesPane); 
+              JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
+            }
+          }
+        }
+      }
+    });
+    
+    // Responds if user enters ENTER or RETURN the search query is sent
+    textFieldSearch.addKeyListener(new KeyListener() {        
+      @Override
+      public void keyTyped(KeyEvent e) {
+      	if((int) e.getKeyChar()==13 || (int) e.getKeyChar()==10){
+      	  if (!clientContext.user.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else if (!clientContext.conversation.hasCurrent()) {
+      	    JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+      	  } else {
+      	    final String searchQueryTextBox = textFieldSearch.getText().trim(); //trim ensures the user cannot enter a string of only whitespaces     
+      	    String searchQuery = searchQueryTextBox.toUpperCase(); 
+      	    if (searchQuery != null && searchQuery.length() > 0) {
+      	      textFieldSearch.setText(""); //clears the text field after use
+      	      List<Message> messages = new ArrayList<Message>(); 
+      	      messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
+      	      if(messages.size()==0){
+      	        //there are no messages found for the query, so a popup should display saying that
+                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+              } else {
+                // display the messages list, since messages were found
+                JPanel popUp = new JPanel();
+                String[] messagesArray = new String[messages.size()]; 
+                
+                for(int i=0; i<messages.size(); i++){
+                  Message currentMessage = messages.get(i); 
+                  String authorName = clientContext.user.getName(currentMessage.author);
+                  String currentConversation = clientContext.conversation.getCurrent().title; 
+                  
+                  messagesArray[i] = String.format("%s: [%s]: in %s wrote %s",
+                  ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
+                }
+                
+                JList<String> searchResult = new JList<String>(messagesArray); 
+                JScrollPane messagesPane = new JScrollPane(searchResult); 
+                messagesPane.setMinimumSize(new Dimension(250, 200));
+                messagesPane.setPreferredSize(new Dimension(250, 200));
+                
+                popUp.add(messagesPane); 
+                JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
+              }
+            }
+      	  }
+        }
+	  } 
+      @Override
+      public void keyPressed(KeyEvent e) {}
+      @Override
+      public void keyReleased(KeyEvent e) {}
+    });
+     
+  updateButton.addActionListener(new ActionListener() {
+     @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!clientContext.user.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!clientContext.conversation.hasCurrent()) {
+          JOptionPane.showMessageDialog(MessagePanel.this, "You must select a conversation.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+          // Update the messages when the user presses the "update" button, so users can see other user's messages that were sent to the server 
+          MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
+        }
+      }
+  });
+  
+  // Panel is set up. If there is a current conversation, Populate the conversation list.
+  getAllMessages(clientContext.conversation.getCurrent());
+}
   
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
@@ -257,7 +378,6 @@ public final class MessagePanel extends JPanel {
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
-
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
