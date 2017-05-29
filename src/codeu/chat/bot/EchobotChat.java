@@ -18,8 +18,10 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.client.commandline.ListNavigator;
+import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Uuid;
 
 import java.util.Scanner;
 
@@ -27,12 +29,6 @@ import java.util.Scanner;
 public final class EchobotChat {
 
   private final static Logger.Log LOG = Logger.newLog(EchobotChat.class);
-
-  private static final String PROMPT = ">>";
-
-  private final static int PAGE_SIZE = 10;
-
-  private boolean alive = true;
 
   private final ClientContext clientContext;
 
@@ -56,7 +52,15 @@ public final class EchobotChat {
     clientContext.user.addUser(uname);
     clientContext.user.signInUser(uname);
 
-    // Create a new conversation based on the bot's name and join it.
+    Uuid uuid = clientContext.user.getCurrent().id;
 
+    // Create a new conversation based on the bot's name and join it.
+    Conversation conv = null;
+    if (!clientContext.conversation.joinConversation(uname)) {
+      conv = clientContext.conversation.startConversation(uname, uuid);
+      clientContext.conversation.joinConversation(uname);
+    }
+
+    clientContext.message.addMessage(uuid, conv.id, "Magic");
   }
 }

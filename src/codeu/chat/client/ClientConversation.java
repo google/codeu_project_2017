@@ -86,7 +86,7 @@ public final class ClientConversation {
     printConversation(currentSummary, userContext);
   }
 
-  public void startConversation(String title, Uuid owner) {
+  public Conversation startConversation(String title, Uuid owner) {
     final boolean validInputs = isValidTitle(title);
 
     final Conversation conv = (validInputs) ? controller.newConversation(title, owner) : null;
@@ -101,6 +101,8 @@ public final class ClientConversation {
 
       updateAllConversations(currentSummary != null);
     }
+
+    return conv;
   }
 
   public void setCurrent(ConversationSummary conv) { currentSummary = conv; }
@@ -121,7 +123,7 @@ public final class ClientConversation {
     return null;
   }
 
-  private boolean joinConversation(String match) {
+  public boolean joinConversation(String match) {
     currentSummary = summariesSortedByTitle.first(match);
 
     if (currentSummary == null) return false;
@@ -130,7 +132,7 @@ public final class ClientConversation {
     return true;
   }
 
-  private void leaveCurrentConversation() {
+  public void leaveCurrentConversation() {
     currentSummary = null;
     currentConversation = null;
   }
