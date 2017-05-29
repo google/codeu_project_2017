@@ -42,7 +42,7 @@ public final class ConversationPanel extends JPanel {
   }
 
   public void update() {
-      getAllConversations(listModel);
+    getAllConversations(listModel);
   }
 
   private void initialize() {

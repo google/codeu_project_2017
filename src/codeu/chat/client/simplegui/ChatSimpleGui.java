@@ -122,24 +122,18 @@ public final class ChatSimpleGui {
     mainFrame.pack();
 
     timeline.scheduleNow(new Runnable() {
-        @Override
-        public void run() {
-            DefaultListModel<String> listModel = new DefaultListModel<>();
-            try {
-
-                LOG.info("Updating...");
-
-                conversationsViewPanel.update();
-                messagesViewPanel.update(clientContext.conversation.getCurrent());
-
-            } catch (Exception ex) {
-
-                LOG.error(ex, "Failed to update.");
-
-            }
-
-            timeline.scheduleIn(SERVER_REFRESH_MS, this);
+      @Override
+      public void run() {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        try {
+          LOG.info("Updating...");
+          conversationsViewPanel.update();
+          messagesViewPanel.update(clientContext.conversation.getCurrent());
+        } catch (Exception ex) {
+          LOG.error(ex, "Failed to update.");
         }
+        timeline.scheduleIn(SERVER_REFRESH_MS, this);
+      }
     });
   }
 }
