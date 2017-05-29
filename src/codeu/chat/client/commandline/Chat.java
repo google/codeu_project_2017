@@ -325,7 +325,7 @@ public final class Chat {
     }
     if (newCurrent != previous) {
       clientContext.conversation.setCurrent(newCurrent);
-      broadCastReceiver.joinConversation(previous,newCurrent);
+      broadCastReceiver.joinConversation(newCurrent);
       clientContext.conversation.updateAllConversations(true);
     }
   }

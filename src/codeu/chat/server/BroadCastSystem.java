@@ -125,6 +125,7 @@ public class BroadCastSystem {
           PrintWriter writer = new PrintWriter(out, true);
 
           Serializers.INTEGER.write(writer, NetworkCode.NEW_BROADCAST);
+          Uuid.SERIALIZER.write(writer, conversationId);
           Message.SERIALIZER.write(writer, message);
         }
 
