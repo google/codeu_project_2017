@@ -56,7 +56,9 @@ class Main extends React.Component {
 
     var divStyleStatic = {
       "height": "71vh",
-      "overflowY": "hidden"
+      "overflowY": "hidden",
+      "backgroundColor": "white",
+      "borderRadius": "25px"
     }
 
     var divStyle = {

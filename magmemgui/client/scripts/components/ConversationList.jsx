@@ -40,7 +40,7 @@ class ConversationList extends React.Component {
   componentDidMount() {
     window.setInterval(function () {
       this.request();
-    }.bind(this), 600);
+    }.bind(this), 1000);
   }
 
   /* The update function. Updates our data state with new conversations. */

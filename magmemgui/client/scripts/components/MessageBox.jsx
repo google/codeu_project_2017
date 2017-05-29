@@ -15,7 +15,8 @@ class MessageBox extends React.Component {
 		super(props)
 
 		this.state = {
-			"value": ""
+			"value": "",
+			"disabled": false
 		}
 
 		this.submitAction = this.submitAction.bind(this);
@@ -38,6 +39,7 @@ class MessageBox extends React.Component {
 	}
 
 	request() {
+		this.setState( {"disabled": true} );
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -56,7 +58,7 @@ class MessageBox extends React.Component {
     }
 
     $.ajax(settings).done(function (response) {
-      this.setState({ "value": "" });
+      this.setState({ "value": "", "disabled": false });
     }.bind(this));
   }
 
@@ -66,7 +68,7 @@ class MessageBox extends React.Component {
       "fontFamily": "Space Mono",
       "float": "right",
       "paddingRight": "2%",
-			"marginTop": "-60px"
+			"marginTop": "-60px",
     }
 
 		var msgBoxStyle = {
@@ -89,7 +91,7 @@ class MessageBox extends React.Component {
 		    	<FormControl componentClass="textarea" value={this.state.value} onChange={this.handleChange} style={msgBoxStyle} placeholder="Type a message here" />
 		    </FormGroup>
          <div style={buttonStyle}>
-                <Button bsStyle="info" type="submit">
+                <Button bsStyle="info" disabled={this.state.disabled} type="submit">
                 Send
                 </Button>
          </div>
