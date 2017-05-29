@@ -67,6 +67,22 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     }
   }
 
+  public boolean remove(VALUE value) {
+    StoreLink<KEY, VALUE> current = first();
+    StoreLink<KEY, VALUE> next = current.next;
+    while(next != null) {
+      if(value != next.value) {
+        current = next;
+        next = current.next;
+      }
+      else {
+        current.next = next.next;
+        return true;
+      }
+    }
+    return false;
+  }
+
   @Override
   public VALUE first(KEY key) {
     final StoreLink<KEY, VALUE> link = index.get(key);

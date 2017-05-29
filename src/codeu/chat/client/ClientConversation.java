@@ -198,9 +198,14 @@ public final class ClientConversation {
       conversationsPerUser = (double) Math.round(numberOfConversations / numberOfUsers * 100) / 100;
     }
     System.out.println("Average number of conversations per user:  " + conversationsPerUser);
+    System.out.println("");
   }
 
   public int getNumberOfConversations() {
     return summariesByUuid.size();
+  }
+
+  public void deleteConversation() {
+    //TODO: implement
   }
 }

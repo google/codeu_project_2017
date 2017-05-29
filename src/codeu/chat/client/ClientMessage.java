@@ -48,6 +48,7 @@ public final class ClientMessage {
 
   private HashMap<String, Integer> wordCount = new HashMap<String, Integer>();
 
+  private HashMap<Integer, Integer> messageLengthCount = new HashMap<Integer, Integer>();
   private HashMap<Integer, Integer> wordLengthCount = new HashMap<Integer, Integer>();
 
   public ClientMessage(Controller controller, View view, ClientUser userContext,
@@ -111,9 +112,11 @@ public final class ClientMessage {
     } else {
       LOG.info("New message:, Author= %s UUID= %s", author, message.id);
       current = message;
+      updateWordLengthCount(body);
+      updateMessageLengthCount(body);
     }
 
-    updateWordLengthCount(body);
+
 
     updateMessages(false);
   }
@@ -125,6 +128,12 @@ public final class ClientMessage {
       int count = wordLengthCount.containsKey(len) ? wordLengthCount.get(len) : 0 ;
       wordLengthCount.put(len, count + 1);
     }
+  }
+
+  private void updateMessageLengthCount(String body) {
+    int len = body.length();
+    int count = messageLengthCount.containsKey(len) ? messageLengthCount.get(len) : 0;
+    messageLengthCount.put(len, count + 1);
   }
 
   // For m-list-all command.
@@ -285,8 +294,17 @@ public final class ClientMessage {
       messagesPerUser = (double)Math.round(numberOfMessages/numberOfUsers * 100)/100;
     }
     System.out.println("Average number of messages per user: " + messagesPerUser);
+    System.out.println("");
+    System.out.println("Frequencies of message lengths:");
+    System.out.println("Length\t\tFrequency");
+    for (Map.Entry<Integer, Integer> entry : messageLengthCount.entrySet()) {
+      int length = entry.getKey();
+      int frequency = entry.getValue();
+      System.out.println(length + "\t\t" + frequency);
+    }
+    System.out.println("");
     System.out.println("Frequencies of word lengths:");
-    System.out.println("Length\t\tFrequency" );
+    System.out.println("Length\t\tFrequency");
     for (Map.Entry<Integer, Integer> entry : wordLengthCount.entrySet()) {
       int length = entry.getKey();
       int frequency = entry.getValue();

@@ -179,6 +179,7 @@ public final class ClientUser {
   public void showStatistics() {
     int numberOfUsers = getNumberOfUsers();
     System.out.println("Number of users:  " + numberOfUsers);
+    System.out.println("");
   }
 
   public int getNumberOfUsers() {
