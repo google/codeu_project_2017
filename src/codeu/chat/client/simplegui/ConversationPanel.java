@@ -161,15 +161,17 @@ public final class ConversationPanel extends JPanel {
           JPanel p = new JPanel();
 
           final JScrollPane inviteScrollPane = new JScrollPane(inviteList);
+          inviteScrollPane.setMinimumSize(new Dimension(250, 200));
+          inviteScrollPane.setPreferredSize(new Dimension(250, 200));
 
           p.add(inviteScrollPane);
-          JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION);
+          JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.PLAIN_MESSAGE);
 
           if (inviteList.getSelectedIndex() != -1) {
             final String data = inviteList.getSelectedValue();
             //compare data
             if (inviteListModel.contains(data)) {
-              System.out.print("user exists");
+
             } else {
               JOptionPane.showMessageDialog(ConversationPanel.this, "No users selected", "Error", JOptionPane.ERROR_MESSAGE);
             }
