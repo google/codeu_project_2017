@@ -35,6 +35,8 @@ public final class EchobotChat {
   private final ClientContext clientContext;
 
   private String uname;
+  private Uuid uuid;
+  private Conversation conv;
 
   // Constructor - sets up the Chat Application
   public EchobotChat(Controller controller, View view) {
@@ -59,16 +61,16 @@ public final class EchobotChat {
     clientContext.user.addUser(uname);
     clientContext.user.signInUser(uname);
 
-    Uuid uuid = clientContext.user.getCurrent().id;
+    uuid = clientContext.user.getCurrent().id;
 
     // Create a new conversation based on the bot's name and join it.
-    Conversation conv = null;
     if (!clientContext.conversation.joinConversation(uname)) {
       conv = clientContext.conversation.startConversation(uname, uuid);
       clientContext.conversation.joinConversation(uname);
     }
 
-    if (conv != null) clientContext.message.addMessage(uuid, conv.id, "Magic");
+    if (conv != null) clientContext.message.addMessage(uuid, conv.id, "Welcome to Echobot's conversation!");
+    System.out.println("Startup completed.");
   }
 
   /**
@@ -82,8 +84,14 @@ public final class EchobotChat {
     if (contents.isEmpty()) return null;
 
     // If the last message is not from another user, it's still null
-    if (contents.get(contents.size() - 1).author == clientContext.user.getCurrent().id) return null;
+    if (!contents.get(contents.size() - 1).author.equals(clientContext.user.getCurrent().id)) return null;
 
     return contents.get(contents.size() - 1).content;
+  }
+
+  public void addMessage(String msg) {
+    clientContext.message.addMessage(clientContext.user.getCurrent().id,
+            clientContext.conversation.getCurrent().id,
+            msg);
   }
 }

@@ -53,21 +53,22 @@ final class EchobotMain {
 
     LOG.info("Created bot");
 
-    final Scanner input = new Scanner(System.in);
+    String input;
 
     while (true) {
       // Loop goes here
+      input = chat.getLastUserInput();
+
+      if (input != null) {
+        System.out.println("Echo: " + input);
+        chat.addMessage(input);
+      }
 
       try {
-        Thread.sleep(1000);
+        Thread.sleep(3000);
       } catch(InterruptedException ex) {
         Thread.currentThread().interrupt();
-        input.close();
-
       }
     }
-
-//    input.close();
-//    LOG.info("chat client has exited.");
   }
 }
