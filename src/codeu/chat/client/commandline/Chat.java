@@ -42,7 +42,7 @@ public final class Chat {
   public Chat(BroadCastReceiver receiver, Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
     broadCastReceiver = receiver;
-    // todo: This does not add the message to the client context...just prints it
+    this.clientContext.message.linkReceiver(broadCastReceiver);
     broadCastReceiver.onBroadCast( (message) -> ClientMessage.printMessage(message,clientContext.user) );
     broadCastReceiver.start();
   }
