@@ -45,6 +45,8 @@ class MessagePanel extends React.Component {
 
     var clickTime = (new Date()).getTime();
 
+    this.setState({ "lastClick": clickTime });
+
     // Settings for a first ajax call to TIMED_MESSAGES
     var settings1 = {
       "async": true,
@@ -100,7 +102,7 @@ class MessagePanel extends React.Component {
         })
       });
 
-      this.setState({ "data": this.state.data.concat(msgResponse), "lastClick": clickTime });
+      this.setState({ "data": this.state.data.concat(msgResponse)});
       if (msgResponse.length != 0) {
         this.scrollToBottom();
       }
