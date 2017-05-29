@@ -56,8 +56,7 @@ final class EchobotMain {
     final Scanner input = new Scanner(System.in);
 
     while (true) {
-      // Game loop goes here
-
+      // Loop goes here
 
       try {
         Thread.sleep(1000);
@@ -69,7 +68,6 @@ final class EchobotMain {
     }
 
 //    input.close();
-
 //    LOG.info("chat client has exited.");
   }
 }

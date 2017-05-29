@@ -20,9 +20,11 @@ import codeu.chat.client.View;
 import codeu.chat.client.commandline.ListNavigator;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.Message;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 
+import java.util.List;
 import java.util.Scanner;
 
 // Chat - top-level client application.
@@ -32,23 +34,28 @@ public final class EchobotChat {
 
   private final ClientContext clientContext;
 
+  private String uname;
+
   // Constructor - sets up the Chat Application
   public EchobotChat(Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
     init();
   }
 
+  /**
+   * This function handles the initialization of this bot, like joining the server, joining the conversation, etc.
+   */
   private void init() {
     // Attempt to join the bot channel as a bot.
-    final String botname = "Echobot";
+    final String name = "Echobot";
     int i = 0;
 
     // Make sure the user's name is unique
-    while (clientContext.user.isUsernameTaken(botname + "-" + i)) {
+    while (clientContext.user.isUsernameTaken(name + "-" + i)) {
       i++;
     }
 
-    String uname = botname + "-" + i;
+    uname = name + "-" + i;
     clientContext.user.addUser(uname);
     clientContext.user.signInUser(uname);
 
@@ -61,6 +68,22 @@ public final class EchobotChat {
       clientContext.conversation.joinConversation(uname);
     }
 
-    clientContext.message.addMessage(uuid, conv.id, "Magic");
+    if (conv != null) clientContext.message.addMessage(uuid, conv.id, "Magic");
+  }
+
+  /**
+   * This function returns the last user message received in the current channel.
+   * @return
+   */
+  public String getLastUserInput() {
+    List<Message> contents = clientContext.message.getConversationContents(clientContext.conversation.getCurrent());
+
+    // If there aren't any messages, there aren't any user input.
+    if (contents.isEmpty()) return null;
+
+    // If the last message is not from another user, it's still null
+    if (contents.get(contents.size() - 1).author == clientContext.user.getCurrent().id) return null;
+
+    return contents.get(contents.size() - 1).content;
   }
 }
