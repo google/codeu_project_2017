@@ -63,6 +63,8 @@ class MessagePanel extends React.Component {
       }.bind(this)
     }
 
+    this.setState({ "lastClick": clickTime });
+
     // Detect all uuids
     $.ajax(settings1).done(function (msgResponse) {
       var ids = []
@@ -100,7 +102,7 @@ class MessagePanel extends React.Component {
         })
       });
 
-      this.setState({ "data": this.state.data.concat(msgResponse), "lastClick": clickTime });
+      this.setState({ "data": this.state.data.concat(msgResponse) });
       if (msgResponse.length != 0) {
         this.scrollToBottom();
       }

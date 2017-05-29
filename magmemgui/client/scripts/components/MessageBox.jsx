@@ -80,7 +80,9 @@ class MessageBox extends React.Component {
 		var formStyle = {
       "marginRight": "-15px",
       "paddingRight": "-15px",
-			"fontFamily": "Space Mono"
+			"fontFamily": "Space Mono",
+			"width": "99.5%",
+			"marginLeft": "13px"
     }
 
 
