@@ -66,6 +66,15 @@ public final class ChatSimpleGui {
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
+    mainFrame.setJMenuBar(help_info());
+
+    //Search Panel
+    final JPanel searchPanel = new JPanel(new GridBagLayout());
+    final JTextField searchBar = new JTextField(20);
+    final JButton searchButton = new JButton("Search Messages");
+    searchPanel.setBorder(paneBorder());
+    searchPanel.add(searchButton);
+    final GridBagConstraints searchBarViewC = new GridBagConstraints();
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
@@ -109,11 +118,35 @@ public final class ChatSimpleGui {
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
 
+    searchBarViewC.gridx = 0;
+    searchBarViewC.gridy = -1;
+    searchBarViewC.gridwidth = 10;
+    searchBarViewC.gridheight = 1;
+    searchBarViewC.fill = GridBagConstraints.HORIZONTAL;
+    searchBarViewC.anchor = GridBagConstraints.FIRST_LINE_START;
+
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
+    mainViewPanel.add(searchBar, searchBarViewC);
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
+  }
+
+  //create a menu bar
+  private JMenuBar help_info()
+  {
+    JMenuBar top_bar = new JMenuBar();
+
+    JMenu help_bar = new JMenu("Help"); //first category of menu
+    JMenu view_bar = new JMenu("View");
+    JMenu color_bar = new JMenu("Color Preferences");
+
+    top_bar.add(help_bar);
+    top_bar.add(view_bar);
+    view_bar.add(color_bar);
+
+    return top_bar;
   }
 }

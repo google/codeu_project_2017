@@ -14,10 +14,7 @@
 
 package codeu.chat.client;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
@@ -72,7 +69,16 @@ public final class ClientUser {
     if (name != null) {
       final User newCurrent = usersByName.first(name);
       if (newCurrent != null) {
-        current = newCurrent;
+	System.out.print("Enter your password: ");
+	boolean isCorrect = newCurrent.isPassword(new Scanner(System.in).nextLine().trim());
+	if(isCorrect)
+	{
+		current = newCurrent;
+	}
+	else
+	{
+		System.out.println("Password is incorrect.");
+	}
       }
     }
     return (prev != current);
@@ -88,10 +94,10 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
+  public void addUser(String name, String hash, String salt) {
     final boolean validInputs = isValidName(name);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, hash, salt) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
