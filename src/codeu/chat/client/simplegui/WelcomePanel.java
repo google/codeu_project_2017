@@ -17,10 +17,14 @@ import codeu.chat.common.User;
 public final class WelcomePanel extends JPanel {
 
   private final ClientContext clientContext;
+  private final JFrame jFrame;
+  private final JPanel jPanel;
 
-  public WelcomePanel(ClientContext clientContext) {
+  public WelcomePanel(ClientContext clientContext, JFrame jFrame, JPanel jPanel) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
+    this.jFrame = jFrame;
+    this.jPanel = jPanel;
     initialize();
   }
   
@@ -49,6 +53,9 @@ public final class WelcomePanel extends JPanel {
    startButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+  	 System.out.println("CATS");
+         jFrame.getContentPane().removeAll();
+         jFrame.getContentPane().add(jPanel);
 	//must link to messenger/conversation panels
 
       }

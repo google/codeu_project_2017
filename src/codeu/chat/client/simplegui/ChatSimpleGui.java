@@ -61,13 +61,6 @@ public final class ChatSimpleGui {
   // Initialize the GUI
   private void initialize() {
      
-  //Welcome Page, Outermost frame
-
-  final JPanel welcomeViewPanel = new WelcomePanel(clientContext);
-  welcomeViewPanel.setBorder(paneBorder());
-  //delete?
-  final GridBagConstraints welcomeViewC = new GridBagConstraints();
-
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,6 +69,12 @@ public final class ChatSimpleGui {
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
+
+    //Welcome Panel, Outermost Frame
+    final JPanel welcomeViewPanel = new WelcomePanel(clientContext, mainFrame, mainViewPanel);
+    welcomeViewPanel.setBorder(paneBorder());
+    //delete?
+    final GridBagConstraints welcomeViewC = new GridBagConstraints();
 
     // Build main panels - Users, Conversations, Messages.
     final JPanel usersViewPanel = new UserPanel(clientContext);
