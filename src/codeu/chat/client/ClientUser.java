@@ -25,7 +25,7 @@ import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 
-public final class ClientUser {
+public class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 

@@ -9,12 +9,13 @@ import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.plugins.MockMaker;
 import org.mockito.InjectMocks;
 import codeu.chat.util.Time;
 
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+//import org.powermock.api.mockito.PowerMockito;
+//import org.powermock.core.classloader.annotations.PrepareForTest;
+//import org.powermock.modules.junit4.PowerMockRunner;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -31,7 +32,7 @@ import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ClientConnectionSource;
-import codeu.chat.client.Controller; 
+import codeu.chat.client.Controller;
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
 
@@ -43,7 +44,7 @@ public final class ClientUserTest {
 	@Mock
 	Controller controller;
 
-	View view = PowerMockito.mock(View.class);
+	View view = Mockito.mock(View.class);
 
 	ClientUser user;
 
@@ -55,9 +56,9 @@ public final class ClientUserTest {
 	@Test
 	public void testClientUserTest() {
 
-	//	Controller controller = PowerMockito.mock(Controller.class);
-	//	View view = PowerMockito.mock(View.class);
-	//	user = new ClientUser(controller, view);
+		//	Controller controller = PowerMockito.mock(Controller.class);
+		//	View view = PowerMockito.mock(View.class);
+		//	user = new ClientUser(controller, view);
 
 		//ClientUser user = Mockito.spy(new ClientUser(null, null));
 
@@ -68,7 +69,7 @@ public final class ClientUserTest {
 		userList.add(new User(new Uuid(4), "SaraH", new Time(800)));
 		userList.add(new User(new Uuid(5), "SARAH", new Time(900)));
 
-		Mockito.doReturn(userList).when(user.getUsers());
+		Mockito.doReturn(userList).when(user).getUsers();
 
 		assertEquals(true, user.isValidName("Mathangi Ganesh"));
 
