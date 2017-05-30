@@ -27,7 +27,6 @@ import java.util.concurrent.PriorityBlockingQueue;
 public final class Timeline {
 
   private final int NUM_EXECUTORS = 16;
-
   private final static Logger.Log LOG = Logger.newLog(Timeline.class);
 
   private static final class Event implements Comparable<Event> {
