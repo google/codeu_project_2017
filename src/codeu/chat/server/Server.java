@@ -153,6 +153,26 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
 
+    } else if (type == NetworkCode.ADD_USER_TO_CONVERSATION_REQUEST) {
+
+      final Uuid user = Uuid.SERIALIZER.read(in);
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
+
+      boolean result = controller.addUserToConversation(user, conversation);
+
+      Serializers.INTEGER.write(out, NetworkCode.ADD_USER_TO_CONVERSATION_RESPONSE);
+      Serializers.BOOLEAN.write(out, result);
+
+    } else if (type == NetworkCode.REMOVE_USER_FROM_CONVERSATION_REQUEST) {
+
+      final Uuid user = Uuid.SERIALIZER.read(in);
+      final Uuid conversation = Uuid.SERIALIZER.read(in);
+
+      boolean result = controller.removeUserFromConversation(user, conversation);
+
+      Serializers.INTEGER.write(out, NetworkCode.REMOVE_USER_FROM_CONVERSATION_RESPONSE);
+      Serializers.BOOLEAN.write(out, result);
+
     } else if (type == NetworkCode.GET_USERS_BY_ID_REQUEST) {
 
       final Collection<Uuid> ids = Serializers.collection(Uuid.SERIALIZER).read(in);

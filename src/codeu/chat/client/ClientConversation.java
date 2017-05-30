@@ -121,12 +121,16 @@ public final class ClientConversation {
     return null;
   }
 
-  private void joinConversation(String match) {
-    Method.notImplemented();
+  private void joinConversation(Uuid conversation) {
+    if (userContext.current != null) {
+      controller.addUserToConversation(userContext.current.id, conversation);
+    }
   }
 
   private void leaveCurrentConversation() {
-    Method.notImplemented();
+    if (currentConversation != null && userContext.current != null) {
+      controller.removeUserFromConversation(userContext.current.id, currentConversation.id);
+    }
   }
 
   private void updateCurrentConversation() {
