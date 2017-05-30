@@ -122,14 +122,14 @@ public final class ClientConversation {
   }
 
   private void joinConversation(Uuid conversation) {
-    if (userContext.current != null) {
-      controller.addUserToConversation(userContext.current.id, conversation);
+    if (userContext.getCurrent() != null) {
+      controller.addUserToConversation(userContext.getCurrent().id, conversation);
     }
   }
 
   private void leaveCurrentConversation() {
-    if (currentConversation != null && userContext.current != null) {
-      controller.removeUserFromConversation(userContext.current.id, currentConversation.id);
+    if (currentConversation != null && userContext.getCurrent() != null) {
+      controller.removeUserFromConversation(userContext.getCurrent().id, currentConversation.id);
     }
   }
 
