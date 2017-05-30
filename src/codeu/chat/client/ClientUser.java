@@ -29,7 +29,8 @@ public final class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 
-  private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
+  //private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
+  private static Collection<Uuid> EMPTY = new ArrayList<Uuid>(); 
   private final Controller controller;
   private final View view;
 
@@ -44,7 +45,7 @@ public final class ClientUser {
     this.controller = controller;
     this.view = view;
   }
-    
+
 // Validate the username string
 public boolean isValidName(String userName) {
   boolean isUniqueUser = true; 
@@ -82,6 +83,21 @@ public boolean isValidName(String userName) {
     return (prev != current);
   }
 
+  public boolean checkPassword(String name, String password){
+
+    final User user = usersByName.first(name);
+    System.out.print("check password: " + user.getPassword());
+    printUser(user);
+
+    if( user != null  && (user.getPassword().equals(password))) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
@@ -92,31 +108,65 @@ public boolean isValidName(String userName) {
     printUser(current);
   }
 
-  //boolean to check if the user was created or not in the GUI
-  public boolean addUser(String name) {
+  public boolean addUser(String name, String password) {
+
     final boolean validInputs = isValidName(name);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value"); 
+          (validInputs) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
-      
-      return true; 
+      return true;
     }
+
     return false;
   }
+
+  //delete user method
+  public boolean deleteUser(String name) {
+    
+    //get all users by name
+	Iterable <User> users = getUsers();
+		
+	User target; 
+	Uuid targetId; 
+	boolean deleteUser = false; 
+		
+	//find user and get id
+	for(User currentUser:users){
+	  if(currentUser.name.equals(name)){
+	    target = currentUser; 
+	    targetId = target.id;
+	    
+	    deleteUser = controller.deleteUser(target); 
+	  
+	    if(deleteUser==true){
+	      LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
+	      System.out.println("User deleted, Name = " + name); 
+	    } else {   	
+	      LOG.warning("User not deleted, Name = \"%s\" UUID = %s", name, targetId);
+	      System.out.println("Error with deleting User, Name = " + name);
+	    }
+	    
+	    break;
+	  } 
+	}
+	
+	return deleteUser;  
+  }
   
+
   public void showAllUsers() {
     updateUsers();
     for (final User u : usersByName.all()) {
       printUser(u);
     }
   }
-
+  
   public User lookup(Uuid id) {
     return (usersById.containsKey(id)) ? usersById.get(id) : null;
   }
@@ -134,7 +184,7 @@ public boolean isValidName(String userName) {
   public Iterable<User> getUsers() {
     return usersByName.all();
   }
-
+  
   public void updateUsers() {
     usersById.clear();
     usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
