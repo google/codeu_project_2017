@@ -292,7 +292,6 @@ public final class Server {
 
     } else if (type == NetworkCode.JOIN_CONVERSATION_REQUEST) {
 
-      System.out.println("Conversation request received");
       ConversationSummary old = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
       ConversationSummary newCon = Serializers.nullable(ConversationSummary.SERIALIZER).read(in);
       broadCastSystem.switchConversation(connection, old, newCon);
@@ -300,7 +299,6 @@ public final class Server {
       synchronized (connection.out()) {
         Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_RESPONSE);
       }
-      System.out.println("Connection switched");
 
     } else if (type == NetworkCode.GET_USER_SCORE_REQUEST) {
 

@@ -4,6 +4,7 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.util.Serializers;
+import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 
@@ -28,6 +29,7 @@ public class BroadCastReceiver extends Thread {
   private int lastType;
   private AtomicBoolean receivedResponse;
   private List<Message> storedMessages;
+  private ConversationSummary currentCon;
 
   // A broadcast event will be fired whenever a new broadcast is pushed to the client.
   @FunctionalInterface
@@ -59,10 +61,15 @@ public class BroadCastReceiver extends Thread {
           int type = Serializers.INTEGER.read(in);
 
           if (type == NetworkCode.NEW_BROADCAST) {
+            Uuid conversationUuid = Uuid.SERIALIZER.read(in);
             Message message = Message.SERIALIZER.read(in);
-            if (response != null) {
-              response.onBroadcast(message);
-              storedMessages.add(message); 
+            if (currentCon.id.equals(conversationUuid)) {
+              if (response != null) {
+                response.onBroadcast(message);
+              }
+              if (storedMessages != null) {
+                storedMessages.add(message);
+              }
             }
             // todo send a broadcast response to inform server that broadcast was received
           } else if (type == NetworkCode.JOIN_CONVERSATION_RESPONSE) {
@@ -90,14 +97,15 @@ public class BroadCastReceiver extends Thread {
 
   }
 
-  public void joinConversation(ConversationSummary old, ConversationSummary newCon) {
+  public void joinConversation(ConversationSummary newCon) {
 
     Serializers.INTEGER.write(out, NetworkCode.JOIN_CONVERSATION_REQUEST);
-    Serializers.nullable(ConversationSummary.SERIALIZER).write(out, old);
+    Serializers.nullable(ConversationSummary.SERIALIZER).write(out, currentCon);
     Serializers.nullable(ConversationSummary.SERIALIZER).write(out, newCon);
     while (!this.receivedResponse.get()) {
 
     }
+    currentCon = newCon;
     this.receivedResponse.set(false);
 
   }
