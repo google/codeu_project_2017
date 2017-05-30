@@ -146,7 +146,7 @@ class Login extends React.Component {
                </FormGroup>
             </Form>
          </Panel>
-         <Panel header="Returning User" style={loginStyle}>
+        {/* <Panel header="Returning User" style={loginStyle}>
             <Form horizontal onSubmit={this.onLogin}>
                <Row>
                   <FormGroup controlId="formHorizontalUser">
@@ -176,7 +176,7 @@ class Login extends React.Component {
                   </Col>
                </FormGroup>
             </Form>
-         </Panel>
+         </Panel> */}
          </Col>
       </div>
 
