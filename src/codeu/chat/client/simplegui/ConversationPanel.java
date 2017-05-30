@@ -165,7 +165,7 @@ public final class ConversationPanel extends JPanel {
           inviteScrollPane.setPreferredSize(new Dimension(250, 200));
 
           p.add(inviteScrollPane);
-          JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.PLAIN_MESSAGE);
+          JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
           if (inviteList.getSelectedIndex() != -1) {
             final String data = inviteList.getSelectedValue();
