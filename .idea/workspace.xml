@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02d8263d-b5d0-4a5d-a42b-65024872502d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/chat_bot.log.lck" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/EchobotMain.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/EchobotMain.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/bot/EchobotChat.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/bot/EchobotChat.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_bot.log" afterPath="$PROJECT_DIR$/bin/chat_bot.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_client_log.log" afterPath="$PROJECT_DIR$/bin/chat_client_log.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_server_log.log" afterPath="$PROJECT_DIR$/bin/chat_server_log.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/EchobotMain.java" afterPath="$PROJECT_DIR$/src/codeu/chat/EchobotMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/bot/EchobotChat.java" afterPath="$PROJECT_DIR$/src/codeu/chat/bot/EchobotChat.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,8 +20,8 @@
       <file leaf-file-name="EchobotMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/EchobotMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="62" column="43" lean-forward="false" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="43" />
+            <state relative-caret-position="214">
+              <caret line="37" column="41" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -36,8 +30,8 @@
       <file leaf-file-name="EchobotChat.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/bot/EchobotChat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="86" column="53" lean-forward="true" selection-start-line="86" selection-start-column="53" selection-end-line="86" selection-end-column="53" />
+            <state relative-caret-position="623">
+              <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -66,8 +60,8 @@
       <file leaf-file-name="ClientConversation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-39">
-              <caret line="110" column="27" lean-forward="false" selection-start-line="110" selection-start-column="27" selection-end-line="110" selection-end-column="27" />
+            <state relative-caret-position="304">
+              <caret line="166" column="14" lean-forward="false" selection-start-line="166" selection-start-column="14" selection-end-line="166" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -493,6 +487,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="02d8263d-b5d0-4a5d-a42b-65024872502d" name="Default" comment="" />
@@ -505,12 +502,12 @@
       <workItem from="1495545430918" duration="1365000" />
       <workItem from="1496023056303" duration="5688000" />
       <workItem from="1496077629435" duration="5177000" />
-      <workItem from="1496093110618" duration="3357000" />
+      <workItem from="1496093110618" duration="4155000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20656000" />
+    <option name="totallyTimeSpent" value="21454000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1120" height="977" extended-state="0" />
@@ -831,26 +828,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-39">
-          <caret line="110" column="27" lean-forward="false" selection-start-line="110" selection-start-column="27" selection-end-line="110" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/util/Uuid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1226">
           <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -863,18 +844,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/EchobotMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="62" column="43" lean-forward="false" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="43" />
+        <state relative-caret-position="214">
+          <caret line="37" column="41" lean-forward="false" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="166" column="14" lean-forward="false" selection-start-line="166" selection-start-column="14" selection-end-line="166" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/bot/EchobotChat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="86" column="53" lean-forward="true" selection-start-line="86" selection-start-column="53" selection-end-line="86" selection-end-column="53" />
+        <state relative-caret-position="623">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding />
         </state>
       </provider>

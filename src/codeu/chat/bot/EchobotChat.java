@@ -78,15 +78,23 @@ public final class EchobotChat {
    * @return
    */
   public String getLastUserInput() {
+    clientContext.conversation.updateAllConversations(true);
     List<Message> contents = clientContext.message.getConversationContents(clientContext.conversation.getCurrent());
 
     // If there aren't any messages, there aren't any user input.
     if (contents.isEmpty()) return null;
 
-    // If the last message is not from another user, it's still null
-    if (!contents.get(contents.size() - 1).author.equals(clientContext.user.getCurrent().id)) return null;
+    Message lastMessage = contents.get(contents.size() - 1);
 
-    return contents.get(contents.size() - 1).content;
+    // If the last message is not from another user, it's still null
+    Uuid msgUuid = lastMessage.author;
+    Uuid botUuid = clientContext.user.getCurrent().id;
+
+//    System.out.println("Msg UUID: " + msgUuid + ", Bot UUID: " + botUuid + ", MC: " + contents.size());
+
+    if (msgUuid.equals(botUuid)) return null;
+
+    return lastMessage.content;
   }
 
   public void addMessage(String msg) {
