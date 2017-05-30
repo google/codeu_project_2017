@@ -31,7 +31,6 @@ public final class ConversationPanel extends JPanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
-  private final int DEFAULT_JLIST_WIDTH = 110;
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
@@ -68,7 +67,7 @@ public final class ConversationPanel extends JPanel {
 
     final JScrollPane listScrollPane = new JScrollPane(objectList);
     listShowPanel.add(listScrollPane);
-    listScrollPane.setPreferredSize(new Dimension(250, 200));
+    listScrollPane.setMinimumSize(new Dimension(250, 200));
 
     // Button bar
     final JPanel buttonPanel = new JPanel();
@@ -122,19 +121,15 @@ public final class ConversationPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (clientContext.user.hasCurrent()) {
-          String s = JOptionPane.showInputDialog(
-              ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE);
-          while (s != null && s.length() > 64) {     // in case the conversation title is too long, notify the user and prompt again.
-            s = JOptionPane.showInputDialog(
-                ConversationPanel.this, "Please enter a shorter conversation title and try again.",
-                "Add Conversation", JOptionPane.PLAIN_MESSAGE);
-          }
+          final String s = (String) JOptionPane.showInputDialog(
+              ConversationPanel.this, "Enter title:", "Add Conversation", JOptionPane.PLAIN_MESSAGE,
+              null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
             ConversationPanel.this.getAllConversations(listModel);
           }
         } else {
-          JOptionPane.showMessageDialog(ConversationPanel.this, "Please sign in to access conversations.");
+          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
         }
       }
     });
