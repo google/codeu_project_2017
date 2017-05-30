@@ -5,6 +5,7 @@
 .idea
 *.eml
 .shelf
+.DS_Store
 
 # Eclipse
 .classpath
