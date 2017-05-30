@@ -49,11 +49,6 @@ public final class User {
     }
   };
 
-  public final Uuid id;
-  public final String name;
-  public String password;
-  public final Time creation;
-
   public User(Uuid id, String name, Time creation) {
   
     this.id = id;
