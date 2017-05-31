@@ -39,12 +39,9 @@ public final class ChatSimpleGui {
 
   // Run the GUI client
   public void run() {
-
     try {
-
       initialize();
       mainFrame.setVisible(true);
-
     } catch (Exception ex) {
       System.out.println("ERROR: Exception in ChatSimpleGui.run. Check log for details.");
       LOG.error(ex, "Exception in ChatSimpleGui.run");
@@ -63,17 +60,16 @@ public final class ChatSimpleGui {
      
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
-    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
 
-    //Welcome Panel, Outermost Frame
-    final JPanel welcomeViewPanel = new WelcomePanel(clientContext, mainFrame, mainViewPanel);
+    // Welcome Panel, Outermost Frame
+    final WelcomePanel welcomeViewPanel = new WelcomePanel();
     welcomeViewPanel.setBorder(paneBorder());
-    //delete?
     final GridBagConstraints welcomeViewC = new GridBagConstraints();
 
     // Build main panels - Users, Conversations, Messages.
@@ -118,34 +114,19 @@ public final class ChatSimpleGui {
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
     
-    //Welcome View Panel Parameters
-    //New Addition
-    welcomeViewC.gridx = 100;
-    welcomeViewC.gridy = 100;
-    welcomeViewC.gridwidth = 500;
-    welcomeViewC.gridheight = 500;
-    welcomeViewC.fill = GridBagConstraints.BOTH;
-    welcomeViewC.weightx = 0.7;
-    welcomeViewC.weighty = 0.3;
-
     //Main View Panel Parameters
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
+ 
+    welcomeViewPanel.getStartButton().addActionListener(ae -> {
+	mainFrame.remove(welcomeViewPanel);
+	mainFrame.add(mainViewPanel);
+	mainFrame.pack();
 
-//delete?
-//  welcomePanel.add(welcomePanel, welcomeViewC);    
+    });
 
     mainFrame.add(welcomeViewPanel);
-
-//delete?
-//  mainFrame.add(mainViewPanel);
-    mainFrame.pack();
-  }
-
-  private void linkPage(){
-//delete?
-//  mainFrame.add(mainViewPanel);
     mainFrame.pack();
   }
 }
