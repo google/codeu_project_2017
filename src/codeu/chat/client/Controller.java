@@ -23,9 +23,10 @@ import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 
@@ -47,8 +48,8 @@ public class Controller implements BasicController {
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_MESSAGE_REQUEST);
-      Uuid.SERIALIZER.write(connection.out(), author);
-      Uuid.SERIALIZER.write(connection.out(), conversation);
+      Uuids.SERIALIZER.write(connection.out(), author);
+      Uuids.SERIALIZER.write(connection.out(), conversation);
       Serializers.STRING.write(connection.out(), body);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_MESSAGE_RESPONSE) {
@@ -98,7 +99,7 @@ public class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_CONVERSATION_REQUEST);
       Serializers.STRING.write(connection.out(), title);
-      Uuid.SERIALIZER.write(connection.out(), owner);
+      Uuids.SERIALIZER.write(connection.out(), owner);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());

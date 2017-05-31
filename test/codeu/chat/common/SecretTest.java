@@ -14,10 +14,12 @@
 
 package codeu.chat.common;
 
-import static org.junit.Assert.*;
-
 import java.util.Arrays;
+
+import static org.junit.Assert.*;
 import org.junit.Test;
+import org.junit.BeforeClass;
+import org.junit.AfterClass;
 
 public final class SecretTest {
 
@@ -25,43 +27,20 @@ public final class SecretTest {
   public void testParseEvenLength() {
 
     final String input = "2345";
-    final byte[] expected = {0x23, 0x45};
+    final byte[] expected = { 0x23, 0x45 };
 
     final byte[] actual = Secret.parse(input);
 
     assertNotNull(actual);
     assertTrue(Arrays.equals(expected, actual));
-  }
 
-  @Test
-  public void testParseEvenLengthWithUppercaseLetters() {
-
-    final String input = "ABCDEF";
-    final byte[] expected = {(byte) 0xAB, (byte) 0xCD, (byte) 0xEF};
-
-    final byte[] actual = Secret.parse(input);
-
-    assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
-  }
-
-  @Test
-  public void testParseEvenLengthWithLowercaseLetters() {
-
-    final String input = "abcdef";
-    final byte[] expected = {(byte) 0xAB, (byte) 0xCD, (byte) 0xEF};
-
-    final byte[] actual = Secret.parse(input);
-
-    assertNotNull(actual);
-    assertTrue(Arrays.equals(expected, actual));
   }
 
   @Test
   public void testParseEvenLengthWithLeadingZero() {
 
     final String input = "012345";
-    final byte[] expected = {0x01, 0x23, 0x45};
+    final byte[] expected = { 0x01, 0x23, 0x45 };
 
     final byte[] actual = Secret.parse(input);
 
@@ -73,7 +52,7 @@ public final class SecretTest {
   public void testParseEvenLengthWithLeadingDoubleZero() {
 
     final String input = "00123456";
-    final byte[] expected = {0x00, 0x12, 0x34, 0x56};
+    final byte[] expected = { 0x00, 0x12, 0x34, 0x56 };
 
     final byte[] actual = Secret.parse(input);
 
@@ -85,7 +64,7 @@ public final class SecretTest {
   public void testParseOddLength() {
 
     final String input = "12345";
-    final byte[] expected = {0x01, 0x23, 0x45};
+    final byte[] expected = { 0x01, 0x23, 0x45 };
 
     final byte[] actual = Secret.parse(input);
 
@@ -97,7 +76,7 @@ public final class SecretTest {
   public void testParseOddLengthWithLeadingZero() {
 
     final String input = "0123456";
-    final byte[] expected = {0x00, 0x12, 0x34, 0x56};
+    final byte[] expected = { 0x00, 0x12, 0x34, 0x56 };
 
     final byte[] actual = Secret.parse(input);
 
@@ -109,7 +88,7 @@ public final class SecretTest {
   public void testParseOddLengthWithLeadingDoubleZero() {
 
     final String input = "001234567";
-    final byte[] expected = {0x00, 0x01, 0x23, 0x45, 0x67};
+    final byte[] expected = { 0x00, 0x01, 0x23, 0x45, 0x67 };
 
     final byte[] actual = Secret.parse(input);
 
