@@ -37,7 +37,7 @@ import codeu.chat.util.connections.ConnectionSource;
 // This is the view component of the Model-View-Controller pattern used by the
 // the client to reterive readonly data from the server. All methods are blocking
 // calls.
-public final class View implements BasicView, LogicalView{
+public class View implements BasicView, LogicalView{
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -140,14 +140,13 @@ public final class View implements BasicView, LogicalView{
     return messages;
   }
   
-  public List<Message> searchMessages(Uuid conversation, String keyword) {
+  public List<Message> searchMessages(String keyword) {
 
     final List<Message> searchResult = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_MESSAGE_REQUEST);
-      Uuid.SERIALIZER.write(connection.out(), conversation);
       Serializers.STRING.write(connection.out(), keyword); 
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_MESSAGE_RESPONSE) {

@@ -220,7 +220,8 @@ public final class UserPanel extends JPanel {
           final String data = userList.getSelectedValue();
 
           //remove the user's name from the list
-          if (clientContext.user.getCurrent().name.equals(data) && clientContext.user.deleteUser(data) == true) {
+
+          if (clientContext.user.getCurrent().name.equals(data) && (clientContext.user.deleteUser(data) == true)) {
             //update the user's list and
             UserPanel.this.getAllUsers(listModel);
             userSignedInLabel.setText("Goodbye " + data);
@@ -228,6 +229,8 @@ public final class UserPanel extends JPanel {
             JOptionPane.showMessageDialog(UserPanel.this, "This username cannot be deleted.", "Error", JOptionPane.ERROR_MESSAGE);
             UserPanel.this.getAllUsers(listModel);
           }
+        } else {
+          JOptionPane.showMessageDialog(UserPanel.this, "There is no user selected to be deleted.", "Error", JOptionPane.ERROR_MESSAGE); 
         }
       }
     });

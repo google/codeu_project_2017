@@ -78,7 +78,6 @@ public final class Controller implements RawController, BasicController {
 
   }
 
-
   @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
@@ -137,9 +136,19 @@ public final class Controller implements RawController, BasicController {
   public User newUser(Uuid id, String namePassword, Time creationTime) {
 
     User user = null;
+   
     String [] info = namePassword.split("\\s+");
+    
     String name = info[0];
-    String password = info[1];
+    
+    String password; 
+    
+    //it is possible the password is null, so you must account for this possibility 
+    if(info.length==1){
+      password = null; 
+    } else {
+      password = info[1];
+    }
 
     if (isIdFree(id)) {
 

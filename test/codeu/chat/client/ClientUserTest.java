@@ -2,82 +2,86 @@
 
 package codeu.chat.client;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.plugins.MockMaker;
+import org.mockito.InjectMocks;
+import codeu.chat.util.Time;
 
+//import org.powermock.api.mockito.PowerMockito;
+//import org.powermock.core.classloader.annotations.PrepareForTest;
+//import org.powermock.modules.junit4.PowerMockRunner;
+
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.runners.Suite.SuiteClasses;
+import org.junit.runners.Suite;
+import org.junit.runner.RunWith;
+
+import codeu.chat.common.BasicController;
+import codeu.chat.common.Conversation;
+import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ClientConnectionSource;
-import codeu.chat.client.Controller; 
+import codeu.chat.client.Controller;
+import codeu.chat.client.ClientUser;
 import codeu.chat.client.View;
 
+@RunWith(MockitoJUnitRunner.class)
+//@PrepareForTest(ClientUser.class)
 public final class ClientUserTest {
-  
-  @Test
-  public void testClientUserTest() {
-  	
-  	//Create a Connection Source
-  	String host = "localhost@2007"; 
-  	int port = 1234; 
-  	
-  	ConnectionSource connectionSourceTest = new ClientConnectionSource(host, port); 
-  	
-  	//Create a Controller
-  	Controller controllerTest = new Controller(connectionSourceTest); 
-  	
-  	//Create a View
-  	View viewTest = new View(connectionSourceTest); 
-  	
-  	//Create an instance of the ClientUser
-  	ClientUser clientUserTest = new ClientUser(controllerTest, viewTest); 
-  	
-  	//Add users using addUser method in ClientUser class
-  	String name1 = "   "; //all spaces 
-  	String name2 = ""; //empty
-  	String name3 = "JESS"; 
-  	String name4 = "jess"; 
-  	String name5 = "Sarah"; 
-  	String name6 = "sArAh"; 
-  	String name7 = "Sarah Depew"; 
-  	String name8 = "Mathang*"; 
-  	String name9 = "**#*@(!*#*$*@"; 
-  	String name10 = "Mathangi97";
-  	
-  	//test isValidName
-  	assertFalse(clientUserTest.isValidName(name1)); 
-  	assertFalse(clientUserTest.isValidName(name2)); 
-  	assertTrue(clientUserTest.isValidName(name3));   	
-  	//assertFalse(clientUserTest.isValidName(name4)); //returning null, rather than false like it should...
-  	System.out.println(clientUserTest.isValidName(name4)); 
-  	assertTrue(clientUserTest.isValidName(name5)); 
-  	//assertFalse(clientUserTest.isValidName(name6)); 
-  	assertTrue(clientUserTest.isValidName(name7));  
-  	assertTrue(clientUserTest.isValidName(name8));
-  	assertTrue(clientUserTest.isValidName(name9)); 
-  	assertTrue(clientUserTest.isValidName(name10));  
-  	
-  	/*
-  	//test Add User
-  	assertFalse(clientUserTest.addUser(name1)); 
-  	assertFalse(clientUserTest.addUser(name2)); 
-  	assertTrue(clientUserTest.addUser(name3));   	
-  	assertFalse(clientUserTest.addUser(name4)); 
-  	assertTrue(clientUserTest.addUser(name5)); 
-  	assertFalse(clientUserTest.addUser(name6)); 
-  	assertTrue(clientUserTest.addUser(name7));  
-  	assertTrue(clientUserTest.addUser(name8));
-  	assertTrue(clientUserTest.addUser(name9)); 
-  	assertTrue(clientUserTest.addUser(name10));  
-  	*/
-  	
-  	
-  }
+
+
+	@Mock
+	Controller controller;
+
+	View view = Mockito.mock(View.class);
+
+	ClientUser user;
+
+	@Before
+	public void doBefore() {
+		user = Mockito.spy(new ClientUser(controller, view));
+	}
+
+	@Test
+	public void testUniqueUserNames() {
+
+		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(new User(new Uuid(1), "Mathangi", new Time(500)));
+		userList.add(new User(new Uuid(2), "JESS", new Time(600)));
+		userList.add(new User(new Uuid(3), "JesS", new Time(700)));
+		userList.add(new User(new Uuid(4), "SaraH", new Time(800)));
+		userList.add(new User(new Uuid(5), "SARAH", new Time(900)));
+
+		Mockito.doReturn(userList).when(user).getUsers();
+
+		assertEquals(true, user.isValidName("Mathangi Ganesh"));
+
+	}
+
+	@Test
+	public void testCheckPassword(){
+
+		User u = new User(new Uuid(1), "Mathangi", new Time(500), "password");
+		String password = "password";
+
+		Store<String, User> users = new Store<>(String.CASE_INSENSITIVE_ORDER);
+		users.insert(u.name, u);
+
+		Mockito.doReturn(users).when(user).getUserNameStore();
+
+		assertEquals(true, user.checkPassword(u.name, password));
+
+	}
 
 }

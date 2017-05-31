@@ -21,7 +21,7 @@ import java.util.TreeMap;
 
 //import codeu.chat.common.User;
 
-public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
+public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
 
   // To make the code simpler - use a dummy link for the first link in this
   // list. The root link is never read from. To avoid reading from this link
@@ -94,7 +94,7 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   	} 
   }
   
-  //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
+  //exist method for Store that uses the TreeMap's get method and ensures that a value was removed
   public boolean exists(KEY key){
     boolean userExists = (index.get(key)!=null);  
   	return userExists; 
