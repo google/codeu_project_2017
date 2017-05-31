@@ -17,7 +17,7 @@ package codeu.chat.common;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
-import codeu.chat.common.Uuid;
+import codeu.chat.util.Uuid;
 
 // SINGLES VIEW
 //
