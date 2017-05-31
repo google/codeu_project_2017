@@ -220,8 +220,8 @@ public final class UserPanel extends JPanel {
           final String data = userList.getSelectedValue();
 
           //remove the user's name from the list
+          if (clientContext.user.getCurrent().name.equals(data) && clientContext.user.deleteUser(data) == true) {
 
-          if (clientContext.user.getCurrent().name.equals(data) && (clientContext.user.deleteUser(data) == true)) {
             //update the user's list and
             UserPanel.this.getAllUsers(listModel);
             userSignedInLabel.setText("Goodbye " + data);

@@ -1,4 +1,4 @@
-/*package codeu.chat.server;
+package codeu.chat.server;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -9,8 +9,10 @@ import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.Time;
 
-public final class BasicControllerTest {
+
+public final class ModelTest {
 
     private Model model;
 
@@ -22,11 +24,16 @@ public final class BasicControllerTest {
     @Test
     public void testdeleteUser() {
 
-        final User user = controller.newUser("user");
+        User mathangi = new User(new Uuid(1), "Mathangi", new Time(500));
+        User jess = new User(new Uuid(2), "JESS", new Time(600));
+        User sarah = new User(new Uuid(4), "SaraH", new Time(800));
 
-        assertFalse(
-                "Check that user has a valid reference",
-                user == null);
+        model.add(mathangi);
+        model.add(jess);
+        model.add(sarah);
+
+        assertEquals(true, model.deleteUser(mathangi));
+
     }
 
-}*/
+}
