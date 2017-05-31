@@ -278,7 +278,21 @@ public final class Server {
 	  Serializers.INTEGER.write(out, NetworkCode.DELETE_USERS_RESPONSE);      
       Serializers.BOOLEAN.write(out, userDeleted);
     
-    } else {
+    } else if (type == NetworkCode.ADD_CONVERSATION_USER_REQUEST){
+
+      User u = Serializers.nullable(User.SERIALIZER).read(in);
+      System.out.println("Add conversation user request user SERVER: " + u.name);
+      Conversation conv = Serializers.nullable(Conversation.SERIALIZER).read(in);
+      System.out.println("Add conversation user request conversation: " + conv.title);
+
+      boolean userAdded = false;
+      userAdded = controller.addConversationUser(u, conv);
+
+      Serializers.INTEGER.write(out, NetworkCode.ADD_CONVERSATION_USER_RESPONSE);
+      Serializers.BOOLEAN.write(out, userAdded);
+
+    }
+    else {
 
       // In the case that the message was not handled make a dummy message with
       // the type "NO_MESSAGE" so that the client still gets something.

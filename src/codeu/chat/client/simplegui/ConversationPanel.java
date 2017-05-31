@@ -24,6 +24,7 @@ import javax.swing.event.ListSelectionListener;
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.User;
+import codeu.chat.util.Uuid;
 import codeu.chat.common.Conversation;
 
 
@@ -169,17 +170,20 @@ public final class ConversationPanel extends JPanel {
           JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
           if (inviteList.getSelectedIndex() != -1) {
-            final String data = inviteList.getSelectedValue();
-            for (final User u : clientContext.user.getUsers()) {
+            final String data = inviteList.getSelectedValue(); //select from list
+            for (final User u : clientContext.user.getUsers()) { //go through users and see if name selected matches any user in list
               //User names are unique. Checking if selected name matches any of the existing users
-              if((u.name).equals(data)) {
-                Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
-                current.users.add(u.id);
-                System.out.println(u.name + ": " + u.id);
-                System.out.println("Users in conversation: " + current.users);
+              if((u.name).equals(data)){ //we found user
+                Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId()); //get current conversation
+                if(!current.users.contains(u.id)){ //if user is not in userlist
+                  clientContext.conversation.joinConversation(u); //make user join conversation
+                  System.out.println("Users in current conversation [conversation panel]: " + current.users);
+                }
+                else{
+                  JOptionPane.showMessageDialog(ConversationPanel.this, "User already part of conversation", "Error", JOptionPane.ERROR_MESSAGE);
+                }
               }
             }
-
 
           } else {
               JOptionPane.showMessageDialog(ConversationPanel.this, "No users selected", "Error", JOptionPane.ERROR_MESSAGE);
@@ -220,7 +224,11 @@ public final class ConversationPanel extends JPanel {
     convDisplayList.clear();
 
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {
-      convDisplayList.addElement(conv.title);
+      Conversation c = clientContext.conversation.getConversation(conv.id);
+      Uuid userID = clientContext.user.getCurrent().id;
+      if((userID.equals(conv.owner))|| c.users.contains(userID)) {
+        convDisplayList.addElement(conv.title);
+      }
     }
   }
 
