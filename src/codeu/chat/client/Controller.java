@@ -122,6 +122,8 @@ public class Controller implements BasicController {
     return response;
 
   }
+
+  public boolean
   
   public boolean deleteUser(User userToDelete) {  
     

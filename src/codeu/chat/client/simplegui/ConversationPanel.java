@@ -24,6 +24,7 @@ import javax.swing.event.ListSelectionListener;
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.User;
+import codeu.chat.common.Conversation;
 
 
 // NOTE: JPanel is serializable, but there is no need to serialize ConversationPanel
@@ -169,13 +170,21 @@ public final class ConversationPanel extends JPanel {
 
           if (inviteList.getSelectedIndex() != -1) {
             final String data = inviteList.getSelectedValue();
-            //compare data
-            if (inviteListModel.contains(data)) {
+            for (final User u : clientContext.user.getUsers()) {
+              //User names are unique. Checking if selected name matches any of the existing users
+              if((u.name).equals(data)) {
+                Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
+                current.users.add(u.id);
+                System.out.println(u.name + ": " + u.id);
+                System.out.println("Users in conversation: " + current.users);
+              }
+            }
 
-            } else {
+
+          } else {
               JOptionPane.showMessageDialog(ConversationPanel.this, "No users selected", "Error", JOptionPane.ERROR_MESSAGE);
             }
-          }
+
         } else if (inviteListModel.isEmpty()) {
           JOptionPane.showMessageDialog(ConversationPanel.this, "No available users to add", "Error", JOptionPane.ERROR_MESSAGE);
 

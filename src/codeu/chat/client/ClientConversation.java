@@ -122,7 +122,9 @@ public final class ClientConversation {
   }
 
   private void joinConversation(String match) {
-    Method.notImplemented();
+
+
+
   }
 
   private void leaveCurrentConversation() {
