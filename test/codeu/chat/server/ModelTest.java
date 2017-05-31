@@ -9,6 +9,8 @@ import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.Time;
+
 
 public final class ModelTest {
 

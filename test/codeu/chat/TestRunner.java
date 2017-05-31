@@ -33,7 +33,8 @@ public final class TestRunner {
              codeu.chat.util.store.StoreTest.class,
              codeu.chat.client.simplegui.SimpleGuiTest.class, 
              codeu.chat.client.ClientUserTest.class, 
-             codeu.chat.server.ViewTest.class
+             codeu.chat.server.ViewTest.class,
+             codeu.chat.server.ModelTest.class
          );
       for (final Failure failure : result.getFailures()) {
       	 System.out.println(failure.getTrace());
