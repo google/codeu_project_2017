@@ -46,12 +46,26 @@ public final class ClientUser {
     this.view = view;
   }
 
-// Validate the username string
+  /*
+   * Validates the username string.
+   *
+   * Returns a boolean stating whether the given username
+   * is a valid username. Usernames are valid if they their non-space
+   * characters do not match any other usernames (case-insensitive).
+   *
+   * And even more explanations to follow in consecutive
+   * paragraphs separated by HTML paragraph breaks.
+   *
+   * @param userName
+   * @return boolean stating whether username is valid
+   */
 public boolean isValidName(String userName) {
-  boolean isUniqueUser = true; 
+  boolean isUniqueUser = true;
+  // remove spaces
   if (userName.trim().length() == 0) {
     isUniqueUser = false;
   } else {
+    // test if each existing username matches
     for (User currentUser : getUsers()) {
       if(currentUser.name.toUpperCase().equals(userName.toUpperCase())){
         System.out.format("Error: user not created - %s already exists.", userName);
@@ -108,12 +122,27 @@ public boolean isValidName(String userName) {
     printUser(current);
   }
 
+
+
+  /**
+   * Adds user to the server and returns whether
+   * user was successfully added
+   *
+   * Attempts to add the user to the collection of users on the server,
+   * prints an error message if the user is not successfully added
+   * and returns a boolean stating whether the user was successfully added
+   *
+   * @param  name name of user to be added to server
+   * @param password password of user to be added to server
+   * @return boolean stating whether user was successfully added to the server
+   */
   public boolean addUser(String name, String password) {
 
     final boolean validInputs = isValidName(name);
 
     final User user = (validInputs) ? controller.newUser(name, password) : null;
 
+    // prints error if server fails or input was invalid
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
           (validInputs) ? "server failure" : "bad input value");
@@ -123,10 +152,22 @@ public boolean isValidName(String userName) {
       return true;
     }
 
+    // returns false if new user was not successfully created
     return false;
   }
 
-  //delete user method
+  /**
+   * Attempts to delete a user from the server given a name and returns a boolean
+   * stating whether it was successfully deleted.
+   *
+   * Given the name of a user to delete, finds the corresonding id and attempts to delete
+   * the user from the collection of users on the server, prints messages to the server
+   * and client stating whether the user was successfully deleted,
+   * and returns a boolean stating whether the user was successfully added
+   *
+   * @param  name name of user to be deleted
+   * @return boolean stating whether user was successfully deleted from the server
+   */
   public boolean deleteUser(String name) {
     
     //get all users by name
@@ -138,16 +179,21 @@ public boolean isValidName(String userName) {
 		
 	//find user and get id
 	for(User currentUser:users){
+	  // check if each user's name matches the given name
 	  if(currentUser.name.equals(name)){
 	    target = currentUser; 
 	    targetId = target.id;
-	    
+
+	    // calls controller's deleteUser, which attempts to delete the user from
+        // the server, true if user was deleted from server
 	    deleteUser = controller.deleteUser(target); 
 	  
 	    if(deleteUser==true){
+	      // prints information if user was deleted
 	      LOG.info("User deleted, Name = \"%s\" UUID = %s", name, targetId);
 	      System.out.println("User deleted, Name = " + name); 
-	    } else {   	
+	    } else {
+	      // prints information if user was not deleted
 	      LOG.warning("User not deleted, Name = \"%s\" UUID = %s", name, targetId);
 	      System.out.println("Error with deleting User, Name = " + name);
 	    }
@@ -155,7 +201,8 @@ public boolean isValidName(String userName) {
 	    break;
 	  } 
 	}
-	
+
+	// returns whether user was deleted
 	return deleteUser;  
   }
   
