@@ -14,16 +14,12 @@
 
 package codeu.chat;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
-import codeu.chat.common.Secret;
+import codeu.chat.common.Hub;
 import codeu.chat.relay.Server;
 import codeu.chat.relay.ServerFrontEnd;
 import codeu.chat.util.Logger;
-import codeu.chat.util.Timeline;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
@@ -48,106 +44,51 @@ final class RelayMain {
 
     try (final ConnectionSource source = ServerConnectionSource.forPort(myPort)) {
 
-      // Limit the number of messages that the server tracks to be 1024 and limit the
-      // max number of messages that the relay will send out to be 16.
-      final Server relay = new Server(1024, 16);
-
-      LOG.info("Relay object created.");
-
       LOG.info("Starting relay...");
 
-      startRelay(relay, source, args[1]);
+      startRelay(source);
 
     } catch (IOException ex) {
       LOG.error(ex, "Failed to establish server accept port");
     }
   }
 
-  private static void startRelay(final Server relay,
-                                 final ConnectionSource source,
-                                 final String teamFile) {
+  private static void startRelay(ConnectionSource source) {
+
+    final Server relay = new Server(1024, 16);
+
+    LOG.info("Relay object created.");
+
+    // TODO: Load team information
 
     final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
+
     LOG.info("Relay front end object created.");
-
-    final Timeline timeline = new Timeline();
-    LOG.info("Relay timeline created.");
-
-    timeline.scheduleNow(new Runnable() {
-      @Override
-      public void run() {
-        LOG.info("Loading team data...");
-        loadTeamInfo(relay, teamFile);
-        LOG.info("Done loading team data.");
-
-        // Add this again in 1 minute so that new team entries will be added to
-        // the relay. This won't support updating entries.
-        timeline.scheduleIn(60000, this);
-      }
-    });
 
     LOG.info("Starting relay main loop...");
 
-    while (true) {
-      try {
+    final Runnable hub = new Hub(source, new Hub.Handler() {
 
-        LOG.info("Establishing connection...");
-        final Connection connection = source.connect();
-        LOG.info("Connection established.");
+      @Override
+      public void handle(Connection connection) throws Exception {
 
-        timeline.scheduleNow(new Runnable() {
-          @Override
-          public void run() {
-            try {
-              frontEnd.handleConnection(connection);
-            } catch (Exception ex) {
-              LOG.error(ex, "Exception handling connection.");
-            }
-          }
-        });
+        frontEnd.handleConnection(connection);
 
-      } catch (IOException ex) {
-        LOG.error(ex, "Failed to establish connection.");
       }
-    }
-  }
 
-  private static void loadTeamInfo(Server relay, String file) {
+      @Override
+      public void onException(Exception ex) {
 
-    try (final BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        System.out.println("ERROR: front end failed to handle connection. Check log for details.");
+        LOG.error(ex, "Exception handling connection.");
 
-      String line;
-      for (line = reader.readLine();
-           line != null;
-           line = reader.readLine()) {
-
-        line = line.trim();
-
-        if (line.length() == 0) {
-          // This line is blank, skip it
-        } else if (line.startsWith("#")) {
-          // this is a comment, skip it
-        } else {
-
-          try {
-
-            final String[] tokens = line.split(":");
-
-            // There are just so many things that could go wrong when parsing
-            // this line that it is not worth trying to handle ahead of time.
-            // So instead just try to parse it and catch any exception.
-
-            final Uuid id = Uuid.parse(tokens[0].trim());
-            final byte[] secret = Secret.parse(tokens[1].trim());
-
-            relay.addTeam(id, secret);
-          } catch (Exception ex) {
-            LOG.error(ex, "Skipping line \"%s\". Could not parse", line);
-          }
-        }
       }
-    } catch (IOException ex) {
-      LOG.error(ex, "Failed to load team data");
-    }
+    });
+
+    LOG.info("Starting hub...");
+
+    hub.run();
+
+    LOG.info("Hub exited.");
   }
 }

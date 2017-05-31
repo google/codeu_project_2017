@@ -12,11 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.common;
+package codeu.chat.server;
 
-import java.lang.IllegalStateException;
+import java.util.Random;
 
-public final class LinearUuidGenerator implements Uuid.Generator {
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
+
+// Create a new random uuid. Uuids from this generator are random
+// but are not guaranteed to be unique. Checking uniqueness is left
+// to the caller.
+final class RandomUuidGenerator implements Uuid.Generator {
 
   private static final class BasicUuid implements Uuid {
 
@@ -36,29 +42,15 @@ public final class LinearUuidGenerator implements Uuid.Generator {
   }
 
   private final Uuid commonRoot;
-  private final int start;
-  private final int end;
+  private final Random random;
 
-  private int current;
-
-  public LinearUuidGenerator(Uuid root, int start, int end) {
+  public RandomUuidGenerator(Uuid root, long seed) {
     this.commonRoot = root;
-    this.start = start;
-    this.end = end;
-    this.current = start;
+    this.random = new Random(seed);
   }
 
   @Override
   public Uuid make() {
-    return Uuids.complete(new BasicUuid(commonRoot, next()));
-  }
-
-  private int next() {
-    if (current == end) {
-      throw new IllegalStateException("Uuid overflow");
-    } else {
-      current++;
-      return current;
-    }
+    return Uuids.complete(new BasicUuid(commonRoot, random.nextInt()));
   }
 }

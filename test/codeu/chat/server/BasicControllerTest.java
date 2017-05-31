@@ -22,7 +22,7 @@ import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
-import codeu.chat.util.Uuid;
+import codeu.chat.common.Uuids;
 
 public final class BasicControllerTest {
 
@@ -32,7 +32,7 @@ public final class BasicControllerTest {
   @Before
   public void doBefore() {
     model = new Model();
-    controller = new Controller(Uuid.NULL, model);
+    controller = new Controller(Uuids.NULL, model);
   }
 
   @Test

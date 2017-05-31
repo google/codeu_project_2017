@@ -14,8 +14,6 @@
 
 package codeu.chat.common;
 
-import codeu.chat.util.Uuid;
-
 // BASIC CONTROLLER
 //
 //   The controller component in the Model-View-Controller pattern. This

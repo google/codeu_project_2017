@@ -12,13 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.util;
+package codeu.chat.common;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import codeu.chat.util.Serializer;
+import codeu.chat.util.Serializers;
 
 public final class Time implements Comparable<Time> {
 
@@ -27,14 +30,18 @@ public final class Time implements Comparable<Time> {
     @Override
     public void write(OutputStream out, Time value) throws IOException {
 
-      Serializers.LONG.write(out, value.inMs());
+      Serializers.INTEGER.write(out, (int)(0xFFFFFFFF & (value.totalMs >>> 32)));
+      Serializers.INTEGER.write(out, (int)(0xFFFFFFFF & (value.totalMs >>> 0)));
 
     }
 
     @Override
     public Time read(InputStream in) throws IOException {
 
-      return Time.fromMs(Serializers.LONG.read(in));
+      final long high = (long)Serializers.INTEGER.read(in);
+      final long low = (long)Serializers.INTEGER.read(in);
+
+      return Time.fromMs((high << 32) | low);
 
     }
   };
@@ -42,24 +49,24 @@ public final class Time implements Comparable<Time> {
   private static final SimpleDateFormat formatter =
       new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
 
-  private final Date date;
+  private final long totalMs;
 
-  private Time(long totalMs) { this.date = new Date(totalMs); }
+  private Time(long totalMs) { this.totalMs = totalMs; }
 
-  public long inMs() { return date.getTime(); }
+  public long inMs() { return totalMs; }
 
   @Override
   public int compareTo(Time other) {
-    return date.compareTo(other.date);
+    return Long.compare(totalMs, other.totalMs);
   }
 
   public boolean inRange(Time start, Time end) {
-    return this.compareTo(start) >= 0 && this.compareTo(end) <= 0;
+    return totalMs >= start.totalMs && totalMs <= end.totalMs;
   }
 
   @Override
   public String toString() {
-    return formatter.format(date);
+    return formatter.format(new Date(totalMs));
   }
 
   public static Time fromMs(long ms) { return new Time(ms); }
