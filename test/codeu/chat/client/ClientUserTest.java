@@ -54,13 +54,7 @@ public final class ClientUserTest {
 	}
 
 	@Test
-	public void testClientUserTest() {
-
-		//	Controller controller = PowerMockito.mock(Controller.class);
-		//	View view = PowerMockito.mock(View.class);
-		//	user = new ClientUser(controller, view);
-
-		//ClientUser user = Mockito.spy(new ClientUser(null, null));
+	public void testUniqueUserNames() {
 
 		ArrayList<User> userList = new ArrayList<User>();
 		userList.add(new User(new Uuid(1), "Mathangi", new Time(500)));
@@ -75,5 +69,19 @@ public final class ClientUserTest {
 
 	}
 
+	@Test
+	public void testCheckPassword(){
+
+		User u = new User(new Uuid(1), "Mathangi", new Time(500), "password");
+		String password = "password";
+
+		Store<String, User> users = new Store<>(String.CASE_INSENSITIVE_ORDER);
+		users.insert(u.name, u);
+
+		Mockito.doReturn(users).when(user).getUserNameStore();
+
+		assertEquals(true, user.checkPassword(u.name, password));
+
+	}
 
 }

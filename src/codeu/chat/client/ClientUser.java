@@ -85,9 +85,7 @@ public boolean isValidName(String userName) {
 
   public boolean checkPassword(String name, String password){
 
-    final User user = usersByName.first(name);
-    System.out.print("check password: " + user.getPassword());
-    printUser(user);
+    final User user = getUserNameStore().first(name);
 
     if( user != null  && (user.getPassword().equals(password))) {
       return true;
@@ -184,6 +182,8 @@ public boolean isValidName(String userName) {
   public Iterable<User> getUsers() {
     return usersByName.all();
   }
+
+  public Store<String, User> getUserNameStore(){ return usersByName;}
   
   public void updateUsers() {
     usersById.clear();

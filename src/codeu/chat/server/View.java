@@ -39,7 +39,7 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.StoreAccessor; 
 
-public class View implements BasicView, LogicalView, SinglesView {
+public final class View implements BasicView, LogicalView, SinglesView {
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -188,8 +188,8 @@ public class View implements BasicView, LogicalView, SinglesView {
     Iterable<Message> allMessages = model.messageByText().all(); 
     
     for(Message current: allMessages){
-      if(current.content.toUpperCase().contains(keyword)==true){
-        System.out.println(current.content); 
+      if(current.content.toUpperCase().contains(keyword.toUpperCase())==true){
+       // System.out.println(current.content);
         searchResult.add(current); 
       } else {
         // Message does not contain the keyword, so it should not be added, so do nothing here 

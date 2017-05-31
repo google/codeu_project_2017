@@ -21,7 +21,7 @@ import java.util.TreeMap;
 
 //import codeu.chat.common.User;
 
-public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
+public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
 
   // To make the code simpler - use a dummy link for the first link in this
   // list. The root link is never read from. To avoid reading from this link
