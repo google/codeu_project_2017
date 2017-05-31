@@ -268,8 +268,7 @@ public final class Server {
 
     } else if (type == NetworkCode.DELETE_USERS_REQUEST) {
       
-      final Collection<User> userToRemove = Serializers.collection(User.SERIALIZER).read(in);    
-      
+      final User userToRemove = User.SERIALIZER.read(in);    
       boolean userDeleted = false; 
 
       userDeleted = controller.deleteUser(userToRemove);

@@ -78,26 +78,13 @@ public final class Model {
   }
   
   //method to delete a user from the server
-  public boolean deleteUsers(Collection<User> targetUser) { 
-    User userToDelete = (User)(targetUser.toArray())[0];
+  public boolean deleteUser(User targetUser) {  
     
-    Iterable<User> usersByTextBeforeDeletion = userByText.all(); 
+    userById.remove(targetUser.id);
+    userByTime.remove(targetUser.creation);
+    userByText.remove(targetUser.name);
     
-    for(User u: usersByTextBeforeDeletion){
-    	System.out.println(u.name); 
-    }  
-    
-    userById.remove(userToDelete.id);
-    userByTime.remove(userToDelete.creation);
-    userByText.remove(userToDelete.name);
-    
-    Iterable<User> usersByTextAfterDeletion = userByText.all(); 
-    System.out.println("Contents of userByText: "); 
-    for(User u: usersByTextAfterDeletion){
-    	System.out.println(u.name); 
-    }
-    
-    return !(userById.exists(userToDelete.id) && userByTime.exists(userToDelete.creation) && userByText.exists(userToDelete.name)); 
+    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name)); 
   }
 	
   public StoreAccessor<Uuid, User> userById() {

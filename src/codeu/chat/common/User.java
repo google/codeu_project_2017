@@ -41,50 +41,44 @@ public final class User {
     public User read(InputStream in) throws IOException {
 
       return new User(
-              Uuid.SERIALIZER.read(in),
-              Serializers.STRING.read(in),
-              Time.SERIALIZER.read(in),
-              Serializers.STRING.read(in)
+        Uuid.SERIALIZER.read(in),
+        Serializers.STRING.read(in),
+        Time.SERIALIZER.read(in),
+        Serializers.STRING.read(in)
       );
     }
-
   };
+  
+  public final Uuid id; 
+  public final String name; 
+  public String password; 
+  public final Time creation; 
 
+  public User(Uuid id, String name, Time creation) {
+  
+    this.id = id;
+    this.name = name;
+    this.creation = creation;
+    this.password = null; 
+  }
 
-    public final Uuid id;
-    public final String name;
-    public String password;
-    public final Time creation;
+  //create new constructors
+  public User(Uuid id, String name, Time creation, String password){
+  
+    this.id = id;
+    this.name = name;
+    this.creation = creation;
+    this.password = password;
+  }
 
-    public User(Uuid id, String name, Time creation) {
+  //Potentially get rid of setter
+  public void setPassword(String password){
+  
+    this.password = password;
+  }
 
-      this.id = id;
-      this.name = name;
-      this.creation = creation;
-      this.password = null;
-
-    }
-
-    //create new constructors
-    public User(Uuid id, String name, Time creation, String password) {
-
-      this.id = id;
-      this.name = name;
-      this.creation = creation;
-      this.password = password;
-
-    }
-
-    //Potentially get rid of setter
-    public void setPassword(String password) {
-
-      this.password = password;
-    }
-
-    public String getPassword() {
-
-      return this.password;
-    }
-
-
+  public String getPassword(){
+  
+    return this.password;
+  }
 }
