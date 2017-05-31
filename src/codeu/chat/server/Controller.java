@@ -133,27 +133,12 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String namePassword, Time creationTime) {
+  public User newUser(Uuid id, String name, Time creationTime) {
 
     User user = null;
-   
-    String [] info = namePassword.split("\\s+");
-    
-    String name = info[0];
-    
-    String password; 
-    
-    //it is possible the password is null, so you must account for this possibility 
-    if(info.length==1){
-      password = null; 
-    } else {
-      password = info[1];
-    }
 
     if (isIdFree(id)) {
-
       user = new User(id, name, creationTime);
-      user.setPassword(password);
       model.add(user);
 
       LOG.info(
@@ -161,7 +146,6 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
-
     } else {
 
       LOG.info(
