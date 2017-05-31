@@ -26,8 +26,8 @@ public final class TestRunner {
          JUnitCore.runClasses(
              codeu.chat.common.SecretTest.class,
              codeu.chat.relay.ServerTest.class,
-             /*codeu.chat.server.BasicControllerTest.class,
-             codeu.chat.server.RawControllerTest.class,*/
+             codeu.chat.server.BasicControllerTest.class,
+             codeu.chat.server.RawControllerTest.class,
              codeu.chat.util.TimeTest.class,
              codeu.chat.util.UuidTest.class,
              codeu.chat.util.store.StoreTest.class,
@@ -36,6 +36,7 @@ public final class TestRunner {
              codeu.chat.server.ViewTest.class
          );
       for (final Failure failure : result.getFailures()) {
+      	 System.out.println(failure.getTrace());
          System.out.println(failure.getException());
       }
       System.out.println(result.wasSuccessful());
