@@ -83,14 +83,9 @@ public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     
     StoreLink<KEY, VALUE> linkToDelete = index.get(key); 
     StoreLink<KEY, VALUE> linkAfter = linkToDelete.next;
-    
-<<<<<<< HEAD
+
     linkBefore.next = linkAfter;
 
-=======
-    linkBefore.next = linkAfter; 
-    
->>>>>>> 6b4a1e2714a7acf84e1532b4294ed82f129dcd8d
   	if((v=index.remove(key))!=null){
   	  //Success
   	  System.out.println(v + " was removed successfully."); 
