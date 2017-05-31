@@ -216,14 +216,10 @@ public final class UserPanel extends JPanel {
     userDeleteButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
+        if (userList.getSelectedIndex() != -1 && clientContext.user.hasCurrent()) {
           final String data = userList.getSelectedValue();
-          //need to delete user and set it so that they are not logged in...
 
-          System.out.println(data);
-          System.out.println(clientContext.user.getCurrent().name);
           //remove the user's name from the list
-
           if (clientContext.user.getCurrent().name.equals(data) && clientContext.user.deleteUser(data) == true) {
             //update the user's list and
             UserPanel.this.getAllUsers(listModel);
