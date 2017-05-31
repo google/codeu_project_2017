@@ -53,9 +53,6 @@ public final class ClientUser {
    * is a valid username. Usernames are valid if they their non-space
    * characters do not match any other usernames (case-insensitive).
    *
-   * And even more explanations to follow in consecutive
-   * paragraphs separated by HTML paragraph breaks.
-   *
    * @param userName
    * @return boolean stating whether username is valid
    */
@@ -97,6 +94,17 @@ public boolean isValidName(String userName) {
     return (prev != current);
   }
 
+
+  /*
+  * Checks whether a provided password is the correct password
+  *
+  * Given a name and password, returns true if the password
+  * is the password corresponding to name, and false otherwise.
+  *
+  * @param name name of user whose password to check
+  * @param password password to compare with name's password
+  * @return boolean stating whether password is name's password
+  */
   public boolean checkPassword(String name, String password){
 
     final User user = usersByName.first(name);
