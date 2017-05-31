@@ -15,16 +15,23 @@
 package codeu.chat.server;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
+import codeu.chat.database.DatabaseAccess;
+import codeu.chat.database.model.UserModel;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.store.StoreAccessor;
+
+import com.google.firebase.database.*;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 public final class Model {
 
@@ -68,12 +75,29 @@ public final class Model {
   private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1, Integer.MAX_VALUE);
   private Uuid currentUserGeneration = userGenerations.make();
 
+  private final String USERS = "users";
+  private final String MESSAGES = "messages";
+  private final String CONVERSATIONS = "converstaions";
+
+  // Get access to Firebase
+  private final DatabaseAccess access = new DatabaseAccess();
+  private DatabaseReference ref = access.initialize();
+
+  // Users ref
+  DatabaseReference usersRef = ref.child(USERS);
+
   public void add(User user) {
+    Map<String, UserModel> userMap  = new HashMap<String,  UserModel>();
     currentUserGeneration = userGenerations.make();
 
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
+
+    userMap.put(user.id.toString(), new UserModel(user.name.toString(), user.creation.toString()));
+
+    System.out.println(user.id.toString());
+    usersRef.setValue(userMap);
   }
 
   public StoreAccessor<Uuid, User> userById() {

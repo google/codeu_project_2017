@@ -185,14 +185,14 @@ public final class Uuid {
   private static String toString(Uuid id) {
     final StringBuilder build = new StringBuilder();
     buildString(id, build);
-    return String.format("[UUID:%s]", build.substring(1));  // index of 1 to skip initial '.'
+    return String.format(build.substring(1));  // index of 1 to skip initial '.'
   }
 
   private static void buildString(Uuid current, StringBuilder build) {
     final long mask = (1L << 32) - 1;  // removes sign extension
     if (current != null) {
       buildString(current.root(), build);
-      build.append(".").append(current.id() & mask);
+      build.append(current.id() & mask);
     }
   }
 
