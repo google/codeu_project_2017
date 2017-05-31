@@ -270,7 +270,7 @@ public final class MessagePanel extends JPanel {
           if (searchQuery != null && searchQuery.length() > 0) {
           	textFieldSearch.setText(""); //clears the text field after use
             List<Message> messages = new ArrayList<Message>(); 
-            messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
+            messages = clientContext.message.searchMessages(searchQuery);
             if(messages.size()==0){
               //there are no messages found for the query, so a popup should display saying that
               JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
@@ -284,7 +284,7 @@ public final class MessagePanel extends JPanel {
                 String authorName = clientContext.user.getName(currentMessage.author);
                 String currentConversation = clientContext.conversation.getCurrent().title; 
                   
-                  messagesArray[i] = String.format("%s: [%s]: in %s wrote %s",
+                  messagesArray[i] = String.format("%s: [%s in %s]: %s",
                   ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
               }  
                 
@@ -316,7 +316,7 @@ public final class MessagePanel extends JPanel {
       	    if (searchQuery != null && searchQuery.length() > 0) {
       	      textFieldSearch.setText(""); //clears the text field after use
       	      List<Message> messages = new ArrayList<Message>(); 
-      	      messages = clientContext.message.searchMessages(clientContext.conversation.getCurrentId(), searchQuery);
+      	      messages = clientContext.message.searchMessages(searchQuery);
       	      if(messages.size()==0){
       	        //there are no messages found for the query, so a popup should display saying that
                 JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
@@ -330,7 +330,7 @@ public final class MessagePanel extends JPanel {
                   String authorName = clientContext.user.getName(currentMessage.author);
                   String currentConversation = clientContext.conversation.getCurrent().title; 
                   
-                  messagesArray[i] = String.format("%s: [%s]: in %s wrote %s",
+                  messagesArray[i] = String.format("%s: [%s in %s]: %s",
                   ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
                 }
                 

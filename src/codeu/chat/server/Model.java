@@ -27,7 +27,7 @@ import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.store.StoreAccessor;
 
-public final class Model {
+public class Model {
 
   private static final Comparator<Uuid> UUID_COMPARE = new Comparator<Uuid>() {
 

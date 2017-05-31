@@ -39,7 +39,7 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.StoreAccessor; 
 
-public final class View implements BasicView, LogicalView, SinglesView {
+public class View implements BasicView, LogicalView, SinglesView {
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -183,11 +183,10 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
   
   // Write a search method that uses Model's messageByText() method and all() from Store uses String's contains() method to check for keyword 
-   public List<Message> searchMessages(Uuid conversation, String keyword) {
+   public List<Message> searchMessages(String keyword) {
     List<Message> searchResult = new ArrayList<Message>(); 
-    
     Iterable<Message> allMessages = model.messageByText().all(); 
-    System.out.println("Search query: " + keyword); 
+    
     for(Message current: allMessages){
       if(current.content.toUpperCase().contains(keyword)==true){
         System.out.println(current.content); 
