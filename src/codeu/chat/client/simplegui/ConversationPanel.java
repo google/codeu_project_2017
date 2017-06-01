@@ -35,7 +35,7 @@ public final class ConversationPanel extends JPanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
- // private final UserPanel userPanel;
+  private final DefaultListModel<String> convDisplayList = new DefaultListModel<>();
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
@@ -65,9 +65,8 @@ public final class ConversationPanel extends JPanel {
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
 
-    final DefaultListModel<String> listModel = new DefaultListModel<>();
     final DefaultListModel<String> inviteListModel = new DefaultListModel<>();
-    final JList<String> objectList = new JList<>(listModel);
+    final JList<String> objectList = new JList<>(convDisplayList);
     final JList<String> inviteList = new JList<>(inviteListModel);
 
     objectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -131,7 +130,7 @@ public final class ConversationPanel extends JPanel {
     updateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        ConversationPanel.this.getAllConversations(listModel);
+        ConversationPanel.this.getAllConversations();
       }
     });
 
@@ -145,7 +144,7 @@ public final class ConversationPanel extends JPanel {
               null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
-            ConversationPanel.this.getAllConversations(listModel);
+            ConversationPanel.this.getAllConversations();
           }
         } else {
           JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -184,10 +183,7 @@ public final class ConversationPanel extends JPanel {
                 }
               }
             }
-
-          } else {
-              JOptionPane.showMessageDialog(ConversationPanel.this, "No users selected", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+          }
 
         } else if (inviteListModel.isEmpty()) {
           JOptionPane.showMessageDialog(ConversationPanel.this, "No available users to add", "Error", JOptionPane.ERROR_MESSAGE);
@@ -214,20 +210,24 @@ public final class ConversationPanel extends JPanel {
       }
     });
 
-    getAllConversations(listModel);
+    getAllConversations();
   }
 
   // Populate ListModel - updates display objects.
-  private void getAllConversations(DefaultListModel<String> convDisplayList) {
+  public void getAllConversations() {
 
     clientContext.conversation.updateAllConversations(false);
     convDisplayList.clear();
 
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {
       Conversation c = clientContext.conversation.getConversation(conv.id);
-      Uuid userID = clientContext.user.getCurrent().id;
-      if((userID.equals(conv.owner))|| c.users.contains(userID)) {
-        convDisplayList.addElement(conv.title);
+      if (clientContext.user.getCurrent() != null){
+
+        Uuid userID = clientContext.user.getCurrent().id;
+
+        if((userID.equals(conv.owner))|| c.users.contains(userID)) {
+          convDisplayList.addElement(conv.title);
+        }
       }
     }
   }
@@ -249,9 +249,9 @@ public final class ConversationPanel extends JPanel {
   private void getInvitableUsers(DefaultListModel<String> usersList) {
     clientContext.user.updateUsers();
     usersList.clear();
-
+    Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
     for (final User u : clientContext.user.getUsers()) {
-      if(!(u.name).equals(clientContext.user.getCurrent().name)) {
+      if(!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
         usersList.addElement(u.name);
       }
     }
