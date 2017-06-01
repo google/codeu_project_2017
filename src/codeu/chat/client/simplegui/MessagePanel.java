@@ -430,29 +430,33 @@ FontMetrics metrics = getFontMetrics(getFont());
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
 
+      // split lines in panel on appropriate space (last whole word that will fit without scroll bar)
       String currentLine = "";
       String[] words = fullString.split(" ");
       int i = 0;
       while (i < words.length) {
+        // build current line word by word until it is too long to fit in panel
         currentLine = "";
         String tryLine = words[i];
+        // check if next word would make line too long
         while (metrics.stringWidth(tryLine) < 515 && i < words.length) {
+          // if within length limit, add word to current line
           currentLine += words[i] + " ";
           i ++;
+          // add next word to check if too long
           if (i < words.length) {
             tryLine = (currentLine + words[i]);
           }
         }
+        // if one single word is longer than the panel, add that as its own line (scroll bar will be added)
         if (currentLine.equals("")) {
           currentLine += words[i];
           i++;
         }
+         // add one line at a time
           messageListModel.addElement(currentLine);
       }
 
-      //System.out.println(width);
-
-      //messageListModel.addElement(displayString);
     }
   }
 }
