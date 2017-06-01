@@ -14,14 +14,20 @@
 
 package codeu.chat.client.simplegui;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.Border;
-
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
 public final class ChatSimpleGui {
@@ -118,15 +124,20 @@ public final class ChatSimpleGui {
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
- 
-    welcomeViewPanel.getStartButton().addActionListener(ae -> {
+    
+   //Enables mouse to move to next panel
+    welcomeViewPanel.getImageLabel().addMouseListener(new MouseAdapter() {
+        @Override
+	public void mouseClicked(MouseEvent e) {
+        welcomeViewPanel.remove(welcomeViewPanel.getImageLabel());
 	mainFrame.remove(welcomeViewPanel);
 	mainFrame.add(mainViewPanel);
 	mainFrame.pack();
-
+        }
     });
 
     mainFrame.add(welcomeViewPanel);
-    mainFrame.pack();
+    mainFrame.setContentPane(welcomeViewPanel.getImageLabel());
+    mainFrame.setSize(371, 480);
   }
 }
