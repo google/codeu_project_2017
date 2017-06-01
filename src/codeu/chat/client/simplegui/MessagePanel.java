@@ -122,43 +122,24 @@ public final class MessagePanel extends JPanel {
     // messageListModel is an instance variable so Conversation panel
     // can update it.
     final JList<String> userList = new JList<>(messageListModel);
-    userList.setVisibleRowCount(-1);
-    userList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
     userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
 
-
-    /*final JTextArea messageText = new JTextArea(30,10); //
-    messageText.setLineWrap(true); //
-    messageText.setWrapStyleWord(true); //
-    for (int i = 0; i < userList.getSize(); i++) {
-      messageText.append(userList[i]);
-    }
-    */
-    //messageText.append(userList); //
-    final JScrollPane userListScrollPane = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //
-
+    final JScrollPane userListScrollPane = new JScrollPane(userList);
+    scrollPanel.add(userListScrollPane);
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
     userListScrollPane.setPreferredSize(new Dimension(500, 400));
-    scrollPanel.add(userListScrollPane);
 
     // Button panel and text field
-    final JPanel messageTextPanel = new JPanel();
-    final GridBagConstraints messageTextPanelC = new GridBagConstraints();
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
-    final JTextArea textField = new JTextArea(3,40);
-    final JScrollPane newMessagePane = new JScrollPane(textField);
-
-
-    textField.setLineWrap(true);
-    textField.setWrapStyleWord(true);
+    final JTextField textField = new JTextField(20);
 
     final JButton sendButton = new JButton("Send Message");
     final JButton updateButton = new JButton("Refresh Messages");
     
-    messageTextPanel.add(newMessagePane); //Adds the message box before the "Send Message" button
+    buttonPanel.add(textField); //Adds the message box before the "Send Message" button
     buttonPanel.add(sendButton);
     buttonPanel.add(updateButton);
 
@@ -194,15 +175,8 @@ public final class MessagePanel extends JPanel {
     scrollPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
     scrollPanelC.weighty = 0.8;
 
-    messageTextPanelC.gridx = 0;
-    messageTextPanelC.gridy = 11;
-    messageTextPanelC.gridwidth = 10;
-    messageTextPanelC.gridheight = 1;
-    messageTextPanelC.fill = GridBagConstraints.HORIZONTAL;
-    messageTextPanelC.anchor = GridBagConstraints.FIRST_LINE_START;
-
     buttonPanelC.gridx = 0;
-    buttonPanelC.gridy = 12;
+    buttonPanelC.gridy = 11;
     buttonPanelC.gridwidth = 10;
     buttonPanelC.gridheight = 1;
     buttonPanelC.fill = GridBagConstraints.HORIZONTAL;
@@ -212,13 +186,11 @@ public final class MessagePanel extends JPanel {
     this.add(searchPanel, searchPanelC); 
     this.add(listShowPanel, listPanelC);
     this.add(scrollPanel, scrollPanelC);
-    this.add(messageTextPanel,messageTextPanelC);
     this.add(buttonPanel, buttonPanelC);
     
     titlePanel.setBackground(new Color(102, 162, 237));
     listShowPanel.setBackground(new Color(102, 162, 237));
     scrollPanel.setBackground(new Color(102, 162, 237));
-    messageTextPanel.setBackground(new Color(102,162,237));
     buttonPanel.setBackground(new Color(102, 162, 237));
     searchPanel.setBackground(new Color(102, 162, 237));
 	
@@ -299,13 +271,12 @@ public final class MessagePanel extends JPanel {
           if (searchQuery != null && searchQuery.length() > 0) {
           	textFieldSearch.setText(""); //clears the text field after use
           	
-            List<Message> messages = new ArrayList<Message>();
-            messages = clientContext.message.searchMessages(searchQuery);
+            List<Message> messages = new ArrayList<Message>(); 
             Uuid currentConversationId = clientContext.conversation.getCurrentId(); 
             Uuid userSearching = clientContext.user.getCurrent().id;
  
             messages = clientContext.message.searchMessages(currentConversationId, userSearching, searchQuery);
-
+            
             if(messages.size()==0){
               //there are no messages found for the query, so a popup should display saying that
               JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results. Please note that to search a conversation, you must be a participant in it.", "Search Results", JOptionPane.ERROR_MESSAGE);
@@ -324,7 +295,7 @@ public final class MessagePanel extends JPanel {
               }  
                 
               JList<String> searchResult = new JList<String>(messagesArray); 
-              JScrollPane messagesPane = new JScrollPane(searchResult);
+              JScrollPane messagesPane = new JScrollPane(searchResult); 
               messagesPane.setMinimumSize(new Dimension(250, 200));
               messagesPane.setPreferredSize(new Dimension(250, 200));
                 
@@ -350,13 +321,6 @@ public final class MessagePanel extends JPanel {
       	    String searchQuery = searchQueryTextBox.toUpperCase(); 
       	    if (searchQuery != null && searchQuery.length() > 0) {
       	      textFieldSearch.setText(""); //clears the text field after use
-
-      	      List<Message> messages = new ArrayList<Message>(); 
-      	      messages = clientContext.message.searchMessages(searchQuery);
-      	      if(messages.size()==0){
-      	        //there are no messages found for the query, so a popup should display saying that
-                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
-
           	
               List<Message> messages = new ArrayList<Message>(); 
               Uuid currentConversationId = clientContext.conversation.getCurrentId(); 
@@ -367,7 +331,6 @@ public final class MessagePanel extends JPanel {
               if(messages.size()==0){
                 //there are no messages found for the query, so a popup should display saying that
                 JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results. Please note that to search a conversation, you must be a participant in it.", "Search Results", JOptionPane.ERROR_MESSAGE);
-
               } else {
                 // display the messages list, since messages were found
                 JPanel popUp = new JPanel();
@@ -413,8 +376,11 @@ public final class MessagePanel extends JPanel {
         }
       }
   });
-
-FontMetrics metrics = getFontMetrics(getFont());
+  
+  // Panel is set up. If there is a current conversation, Populate the conversation list.
+  getAllMessages(clientContext.conversation.getCurrent());
+}
+  
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
@@ -423,33 +389,10 @@ FontMetrics metrics = getFontMetrics(getFont());
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
-      final String fullString = String.format("%s: [%s]: %s",
+      final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
-
-      String currentLine = "";
-      String[] words = fullString.split(" ");
-      int i = 0;
-      while (i < words.length) {
-        currentLine = "";
-        String tryLine = words[i];
-        while (metrics.stringWidth(tryLine) < 515 && i < words.length) {
-          currentLine += words[i] + " ";
-          i ++;
-          if (i < words.length) {
-            tryLine = (currentLine + words[i]);
-          }
-        }
-        if (currentLine.equals("")) {
-          currentLine += words[i];
-          i++;
-        }
-          messageListModel.addElement(currentLine);
-      }
-
-      //System.out.println(width);
-
-      //messageListModel.addElement(displayString);
+      messageListModel.addElement(displayString);
     }
   }
 }
