@@ -150,16 +150,31 @@ public final class UserPanel extends JPanel {
 
     userUpdateButton.addActionListener(new ActionListener() {
       @Override
-      public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(ActionEvent e) { 
         UserPanel.this.getAllUsers(listModel);
+        if(clientContext.user.hasCurrent()){
+          User currentUser = clientContext.user.getCurrent();
+          if(!clientContext.user.getUsersByName().exists(currentUser.name)){
+            //sign out the user, since they should not still be signed in on the other client
+            clientContext.user.signOutUser();
+            userSignedInLabel.setText("Nobody Signed In"); 
+          } 
+        }
       }
     });
 
     userSignInButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-
-        if (!clientContext.user.hasCurrent() && userList.getSelectedIndex() != -1) {
+        clientContext.user.updateUsers();
+        
+        for(User u:clientContext.user.getUsersByName().all()){
+          System.out.println("user name in panel" + u.name); 
+        }
+        System.out.println("User has current " + !clientContext.user.hasCurrent()); 
+        System.out.println("User value selected " + (userList.getSelectedIndex() != -1)); 
+        System.out.println("User exists " + clientContext.user.getUsersByName().exists(userList.getSelectedValue())); 
+        if (!clientContext.user.hasCurrent() && (userList.getSelectedIndex() != -1) && clientContext.user.getUsersByName().exists(userList.getSelectedValue())) {
 
           final String data = userList.getSelectedValue();
           //Ask user for password
@@ -178,8 +193,17 @@ public final class UserPanel extends JPanel {
             JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Password for " + data + " was incorrect."); 
           }  
-        } else{
-          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user or sign out the current user.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+           UserPanel.this.getAllUsers(listModel);
+           if(clientContext.user.hasCurrent()){
+             User currentUser = clientContext.user.getCurrent();
+           if(!clientContext.user.getUsersByName().exists(currentUser.name)){
+            //sign out the user, since they should not still be signed in on the other client
+            clientContext.user.signOutUser();
+            userSignedInLabel.setText("Nobody Signed In"); 
+          }  
+        }
+        JOptionPane.showMessageDialog(UserPanel.this, "Please select a valid user or sign out the current user.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
@@ -194,7 +218,7 @@ public final class UserPanel extends JPanel {
           clientContext.user.signOutUser();
           userSignedInLabel.setText("Goodbye " + data);
         } else {
-          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user, ensure someone is signed in, and/or ensure you are signing out " + clientContext.user.getCurrent().name + ".", "Error", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user or ensure someone is signed in as a user.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
@@ -216,11 +240,10 @@ public final class UserPanel extends JPanel {
         final String password = passwordField.getText();
 
         if (name != null && name.length() > 0) {
-          if(clientContext.user.addUser(name, password)==true){
-          	UserPanel.this.getAllUsers(listModel);
-          } else{
+          if(clientContext.user.addUser(name, password)==false) {
           	JOptionPane.showMessageDialog(UserPanel.this, "This username is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
-          }
+          } 
+          UserPanel.this.getAllUsers(listModel);
         }
       }
     });
@@ -232,7 +255,7 @@ public final class UserPanel extends JPanel {
           final String data = userList.getSelectedValue();
 
           //remove the user's name from the list
-          if (clientContext.user.getCurrent().name.equals(data) && clientContext.user.deleteUser(data) == true) {
+          if (clientContext.user.getCurrent().name.equals(data) && clientContext.user.signOutUser() && clientContext.user.deleteUser(data) == true) {
 
             //update the user's list and
             UserPanel.this.getAllUsers(listModel);

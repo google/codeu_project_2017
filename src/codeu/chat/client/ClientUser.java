@@ -45,9 +45,14 @@ public class ClientUser {
     this.controller = controller;
     this.view = view;
   }
+  
+  public Store<String, User> getUsersByName(){
+    return usersByName; 
+  }
 
 // Validate the username string
 public boolean isValidName(String userName) {
+  updateUsers(); //pull information from the server 
   boolean isUniqueUser = true; 
   if (userName.trim().length() == 0) {
     isUniqueUser = false;
