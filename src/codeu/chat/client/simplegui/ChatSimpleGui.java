@@ -14,14 +14,26 @@
 
 package codeu.chat.client.simplegui;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.Border;
-
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
 public final class ChatSimpleGui {
@@ -39,12 +51,9 @@ public final class ChatSimpleGui {
 
   // Run the GUI client
   public void run() {
-
     try {
-
       initialize();
       mainFrame.setVisible(true);
-
     } catch (Exception ex) {
       System.out.println("ERROR: Exception in ChatSimpleGui.run. Check log for details.");
       LOG.error(ex, "Exception in ChatSimpleGui.run");
@@ -57,19 +66,22 @@ public final class ChatSimpleGui {
     Border inside = BorderFactory.createEmptyBorder(8, 8, 8, 8);
     return BorderFactory.createCompoundBorder(outside, inside);
   }
-
+  
   // Initialize the GUI
-  private void initialize() {
-
-    // Outermost frame.
+  private void initialize() throws IOException {
+     
     // NOTE: may have tweak size, or place in scrollable panel.
     mainFrame = new JFrame("Chat");
-    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     mainFrame.setSize(790, 450);
 
     // Main View - outermost graphics panel.
     final JPanel mainViewPanel = new JPanel(new GridBagLayout());
     mainViewPanel.setBorder(paneBorder());
+
+    //Creates graphic for display
+    final JLabel landingImage;
+    landingImage = buildLandingImage();
 
     // Build main panels - Users, Conversations, Messages.
     final JPanel usersViewPanel = new UserPanel(clientContext);
@@ -86,6 +98,8 @@ public final class ChatSimpleGui {
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
     // Placement of main panels.
+
+    //User Panel Parameters
     usersViewC.gridx = 0;
     usersViewC.gridy = 0;
     usersViewC.gridwidth = 1;
@@ -94,6 +108,7 @@ public final class ChatSimpleGui {
     usersViewC.weightx = 0.3;
     usersViewC.weighty = 0.3;
 
+    //Conversation Panel Parameters
     conversationViewC.gridx = 1;
     conversationViewC.gridy = 0;
     conversationViewC.gridwidth = 1;
@@ -102,18 +117,36 @@ public final class ChatSimpleGui {
     conversationViewC.weightx = 0.7;
     conversationViewC.weighty = 0.3;
 
+    //Message Panel Parameters
     messagesViewC.gridx = 0;
     messagesViewC.gridy = 1;
     messagesViewC.gridwidth = 2;
     messagesViewC.gridheight = 1;
     messagesViewC.fill = GridBagConstraints.BOTH;
     messagesViewC.weighty = 0.7;
-
+    
+    //Main View Panel Parameters
     mainViewPanel.add(usersViewPanel, usersViewC);
     mainViewPanel.add(conversationsViewPanel, conversationViewC);
     mainViewPanel.add(messagesViewPanel, messagesViewC);
+    
+   //Enables mouse to move to next panel
+    landingImage.addMouseListener(new MouseAdapter() {
+        @Override
+	public void mouseClicked(MouseEvent e) {
+	  mainFrame.remove(landingImage);
+	  mainFrame.add(mainViewPanel);
+	  mainFrame.pack();
+        }
+    });
 
-    mainFrame.add(mainViewPanel);
-    mainFrame.pack();
-  }
-}
+    mainFrame.add(landingImage);
+    mainFrame.setSize(371, 480);
+    } 
+   
+    //Reads in graphic for landing page
+    private JLabel buildLandingImage() throws IOException {
+	BufferedImage img = ImageIO.read(new File("../src/codeu/chat/client/simplegui/Controller.png"));
+	return new JLabel(new ImageIcon(img));
+    }
+ }
