@@ -413,14 +413,8 @@ public final class MessagePanel extends JPanel {
         }
       }
   });
-  
-  // Panel is set up. If there is a current conversation, Populate the conversation list.
-  getAllMessages(clientContext.conversation.getCurrent());
-}
-
 
 FontMetrics metrics = getFontMetrics(getFont());
-
   // Populate ListModel
   // TODO: don't refetch messages if current conversation not changed
   private void getAllMessages(ConversationSummary conversation) {
