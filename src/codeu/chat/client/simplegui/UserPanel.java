@@ -168,7 +168,7 @@ public final class UserPanel extends JPanel {
             null, null, "");
           System.out.println("sign in panel: " + userPassword);
           //check password to make sure it is correct and check it against the user's password
-          if(clientContext.user.checkPassword(data, userPassword)){ //access userByName, get User, access the user's password (String)
+          if(clientContext.user.checkPassword(data, userPassword)){
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
             conversationPanel.getAllConversations();
