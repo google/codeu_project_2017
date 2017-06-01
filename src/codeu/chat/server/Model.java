@@ -80,24 +80,27 @@ public final class Model {
   private final String CONVERSATIONS = "converstaions";
 
   // Get access to Firebase
-  private final DatabaseAccess access = new DatabaseAccess();
-  private DatabaseReference ref = access.initialize();
 
-  // Users ref
-  DatabaseReference usersRef = ref.child(USERS);
 
   public void add(User user) {
-    Map<String, UserModel> userMap  = new HashMap<String,  UserModel>();
+    final DatabaseAccess access = new DatabaseAccess();
+    DatabaseReference ref = access.initialize();
+    //Map<String, UserModel> userMap  = new HashMap<>();
     currentUserGeneration = userGenerations.make();
 
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
 
-    userMap.put(user.id.toString(), new UserModel(user.name.toString(), user.creation.toString()));
+    //userMap.put(user.id.toString(), new UserModel(user.name.toString(), user.creation.toString()));
 
-    System.out.println(user.id.toString());
-    usersRef.setValue(userMap);
+    DatabaseReference usersRef = ref.child("users");
+
+    Map<String, UserModel> users = new HashMap<>();
+    users.put("alanisawesome", new UserModel("June 23, 1912", "Alan Turing"));
+    //users.put("gracehop", new UserModel("December 9, 1906", "Grace Hopper"));
+
+    usersRef.setValue(users);
   }
 
   public StoreAccessor<Uuid, User> userById() {

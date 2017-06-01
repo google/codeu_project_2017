@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class DatabaseAccess {
-    private final String account = "/home/greg/Dropbox/gproj/codeu_project_2017/codeu-56fe6-firebase-adminsdk-6et4u-ee5d587b5a.json";
+    private final String account = "/home/greg/Dropbox/gproj/codeu_project_2017/codeu-56fe6-firebase-adminsdk-6et4u-e78898c410.json";
     private final String databaseUrl = "https://codeu-56fe6.firebaseio.com";
 
     public DatabaseReference initialize() {
@@ -31,6 +31,7 @@ public class DatabaseAccess {
             //LOG.info("Database initiliazed");
         } catch (IOException e) {
             //LOG.error("Failed to load service account key: %s", e.toString());
+            System.out.println(e.toString());
         }
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         return database.getReference();
