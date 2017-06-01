@@ -75,12 +75,6 @@ public final class ChatSimpleGui {
     mainViewPanel.setBorder(paneBorder()); 
 
     // Build main panels - Users, Conversations, Messages
-    final JPanel usersViewPanel = new UserPanel(clientContext);
-
-    usersViewPanel.setBorder(paneBorder());
-    usersViewPanel.setBackground(new Color(102, 162, 237)); 
-
-    final GridBagConstraints usersViewC = new GridBagConstraints();
 
     final MessagePanel messagesViewPanel = new MessagePanel(clientContext);
     messagesViewPanel.setBorder(paneBorder());
@@ -88,10 +82,15 @@ public final class ChatSimpleGui {
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
-    final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
+    final ConversationPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
     conversationsViewPanel.setBorder(paneBorder());
     conversationsViewPanel.setBackground(new Color(102, 162, 237));
     final GridBagConstraints conversationViewC = new GridBagConstraints();
+
+    final UserPanel usersViewPanel = new UserPanel(clientContext, conversationsViewPanel);
+    usersViewPanel.setBorder(paneBorder());
+    usersViewPanel.setBackground(new Color(102, 162, 237));
+    final GridBagConstraints usersViewC = new GridBagConstraints();
 
     // Placement of main panels and search bar.
     usersViewC.gridx = 0;

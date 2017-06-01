@@ -163,6 +163,12 @@ public final class Controller implements RawController, BasicController {
     return model.deleteUser(userToDelete);
   }
 
+  public boolean addConversationUser(User u, Conversation conv){
+
+    boolean userAdded = model.addConversationUser(u, conv);
+    return userAdded;
+
+  }
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {

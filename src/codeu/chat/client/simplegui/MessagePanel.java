@@ -299,12 +299,13 @@ public final class MessagePanel extends JPanel {
           if (searchQuery != null && searchQuery.length() > 0) {
           	textFieldSearch.setText(""); //clears the text field after use
           	
-            List<Message> messages = new ArrayList<Message>(); 
+            List<Message> messages = new ArrayList<Message>();
+            messages = clientContext.message.searchMessages(searchQuery);
             Uuid currentConversationId = clientContext.conversation.getCurrentId(); 
             Uuid userSearching = clientContext.user.getCurrent().id;
  
             messages = clientContext.message.searchMessages(currentConversationId, userSearching, searchQuery);
-            
+
             if(messages.size()==0){
               //there are no messages found for the query, so a popup should display saying that
               JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results. Please note that to search a conversation, you must be a participant in it.", "Search Results", JOptionPane.ERROR_MESSAGE);
@@ -349,6 +350,13 @@ public final class MessagePanel extends JPanel {
       	    String searchQuery = searchQueryTextBox.toUpperCase(); 
       	    if (searchQuery != null && searchQuery.length() > 0) {
       	      textFieldSearch.setText(""); //clears the text field after use
+
+      	      List<Message> messages = new ArrayList<Message>(); 
+      	      messages = clientContext.message.searchMessages(searchQuery);
+      	      if(messages.size()==0){
+      	        //there are no messages found for the query, so a popup should display saying that
+                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+
           	
               List<Message> messages = new ArrayList<Message>(); 
               Uuid currentConversationId = clientContext.conversation.getCurrentId(); 
@@ -359,6 +367,7 @@ public final class MessagePanel extends JPanel {
               if(messages.size()==0){
                 //there are no messages found for the query, so a popup should display saying that
                 JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results. Please note that to search a conversation, you must be a participant in it.", "Search Results", JOptionPane.ERROR_MESSAGE);
+
               } else {
                 // display the messages list, since messages were found
                 JPanel popUp = new JPanel();

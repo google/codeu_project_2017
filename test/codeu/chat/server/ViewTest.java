@@ -51,7 +51,10 @@ public final class ViewTest {
 
 		List<Message> returnValuesHello = new ArrayList<Message>();
 		List<Message> returnValuesSarah = new ArrayList<Message>();
+<<<<<<< HEAD
+=======
 		List<Message> returnValuesJess = new ArrayList<Message>();
+>>>>>>> 959b71dd509811f3e166bbde6c5455283e72a45a
 		List<Message> returnValuesNone = new ArrayList<Message>();
 
 		Uuid Sarah = new Uuid(100);
@@ -63,6 +66,15 @@ public final class ViewTest {
 		Uuid three = new Uuid(3);
 		Uuid four = new Uuid(4);
 		Uuid five = new Uuid(5);
+<<<<<<< HEAD
+
+		Message mOne = new Message(one, two, null, new Time(500), Sarah, "Hello World");
+		Message mTwo = new Message(two, three, one, new Time(600), Jess, "What's up, Sarah?");
+		Message mThree = new Message(three, four, two, new Time(700), Sarah, "Nothing much, Jess!");
+		Message mFour = new Message(four, five, three, new Time(800), Mathangi, "Hey Sarah and Jess! How are we testing our code?");
+		Message mFive = new Message(five, null, four, new Time(900), Sarah, "Okay, I have to go! Talk to you all soon!");
+
+=======
 		
 		Uuid conversation = new Uuid(1000); 
 		Uuid conversation2 = new Uuid(2000); 
@@ -89,10 +101,24 @@ public final class ViewTest {
 
         
         //add the messages to the model
+>>>>>>> 959b71dd509811f3e166bbde6c5455283e72a45a
 		model.add(mOne);
 		model.add(mTwo);
 		model.add(mThree);
 		model.add(mFour);
+<<<<<<< HEAD
+		model.add(mFive);
+
+		view = new View(model);
+
+		returnValuesHello.add(mOne);
+		returnValuesSarah.add(mFour);
+		returnValuesSarah.add(mTwo);
+
+		assertEquals(returnValuesHello, view.searchMessages("Hello"));
+		assertEquals(returnValuesSarah, view.searchMessages("Sarah"));
+		assertEquals(returnValuesNone, view.searchMessages("Purple Duck"));
+=======
 		model.add(mFive);		
 		 
         //create the view
@@ -111,5 +137,6 @@ public final class ViewTest {
 		assertEquals(returnValuesNone, view.searchMessages(conversation2, Sarah, "Purple Duck"));
 		assertEquals(returnValuesNone, view.searchMessages(conversation2, Mathangi, "Talk"));
 		assertEquals(returnValuesNone, view.searchMessages(conversation, Sarah, "Purple Duck"));
+>>>>>>> 959b71dd509811f3e166bbde6c5455283e72a45a
 	}
 }

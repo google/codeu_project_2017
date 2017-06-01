@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import codeu.chat.common.Conversation;
+import codeu.chat.common.User;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
@@ -121,8 +122,19 @@ public final class ClientConversation {
     return null;
   }
 
-  private void joinConversation(String match) {
-    Method.notImplemented();
+  public void joinConversation(User u) {
+
+    final Conversation current = getConversation(getCurrentId()); //get current conversation
+
+    if(!current.users.contains(u.id)){
+      controller.addConversationUser(u, current); //add user to current conversation
+      System.out.println("Client conversation: added user to conversation");
+      LOG.info("User added to conversation: Title= \"%s\" UUID= %s", current.title, current.id);
+    }
+
+    else {
+      System.out.format("Error: user not added to conversation - %s.\n");
+    }
   }
 
   private void leaveCurrentConversation() {

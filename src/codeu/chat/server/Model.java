@@ -84,7 +84,19 @@ public final class Model {
     userByTime.remove(targetUser.creation);
     userByText.remove(targetUser.name);
     
-    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name)); 
+    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name));
+  }
+
+  public boolean addConversationUser(User u, Conversation conv){
+
+    for(Conversation c: conversationById.all()){
+
+      if((c.id).equals(conv.id)){
+        c.users.add(u.id);
+        return true;
+      }
+    }
+    return false;
   }
 	
   public StoreAccessor<Uuid, User> userById() {

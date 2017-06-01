@@ -25,6 +25,8 @@ import java.lang.StringBuilder;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.User;
+import codeu.chat.common.Conversation;
+
 
 // NOTE: JPanel is serializable, but there is no need to serialize UserPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -32,10 +34,12 @@ import codeu.chat.common.User;
 public final class UserPanel extends JPanel {
 
   private final ClientContext clientContext;
+  private final ConversationPanel conversationPanel;
 
-  public UserPanel(ClientContext clientContext) {
+  public UserPanel(ClientContext clientContext, ConversationPanel conversationPanel) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
+    this.conversationPanel = conversationPanel;
     initialize();
   }
 
@@ -155,7 +159,8 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
 
-        if (userList.getSelectedIndex() != -1 ) {
+        if (!clientContext.user.hasCurrent() && userList.getSelectedIndex() != -1) {
+
           final String data = userList.getSelectedValue();
           //Ask user for password
           final String userPassword = (String) JOptionPane.showInputDialog(
@@ -166,11 +171,21 @@ public final class UserPanel extends JPanel {
           if(clientContext.user.checkPassword(data, userPassword)){ //access userByName, get User, access the user's password (String)
             clientContext.user.signInUser(data);
             userSignedInLabel.setText("Hello " + data);
-          } else {
+            conversationPanel.getAllConversations();
+            Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
+
+            if(current != null) {
+              clientContext.conversation.joinConversation(clientContext.user.getCurrent());
+              current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
+              System.out.println("All users in conversation: " + current.users);
+            }
+          } else{
             //user's password was incorrect
             JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Password for " + data + " was incorrect."); 
           }  
+        } else{
+          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user or sign out the current user.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
