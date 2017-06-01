@@ -173,12 +173,6 @@ public final class UserPanel extends JPanel {
             userSignedInLabel.setText("Hello " + data);
             conversationPanel.getAllConversations();
             Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
-
-            if(current != null) {
-              clientContext.conversation.joinConversation(clientContext.user.getCurrent());
-              current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
-              System.out.println("All users in conversation: " + current.users);
-            }
           } else{
             //user's password was incorrect
             JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
