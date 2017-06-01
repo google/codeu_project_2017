@@ -150,9 +150,14 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (userList.getSelectedIndex() != -1) {
-          final String data = userList.getSelectedValue();
-          clientContext.user.signInUser(data);
-          userSignedInLabel.setText("Hello " + data);
+          final String name = userList.getSelectedValue();
+          final String password = getPassword();
+
+          if (clientContext.user.signInUser(name, password)){
+              userSignedInLabel.setText("Hello " + name);
+          } else{
+              userSignedInLabel.setText("User Not Found");
+          }
         }
       }
     });
@@ -161,10 +166,13 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         final String s = (String) JOptionPane.showInputDialog(
-            UserPanel.this, "Enter user name:", "Add User", JOptionPane.PLAIN_MESSAGE,
+            UserPanel.this, "Enter new user name:", "Submit", JOptionPane.PLAIN_MESSAGE,
             null, null, "");
+        
+        final String password = getNewPassword();
+          
         if (s != null && s.length() > 0) {
-          clientContext.user.addUser(s, "password", "salt");
+          clientContext.user.addUser(s, password);
           UserPanel.this.getAllUsers(listModel);
         }
       }
@@ -192,4 +200,30 @@ public final class UserPanel extends JPanel {
       usersList.addElement(u.name);
     }
   }
+    public static String getPassword() {
+        JPasswordField jpf = new JPasswordField(24);
+        JLabel jl = new JLabel("Enter your password: ");
+        Box box = Box.createHorizontalBox();
+        box.add(jl);
+        box.add(jpf);
+        int x = JOptionPane.showConfirmDialog(null, box, "Name Entry", JOptionPane.OK_CANCEL_OPTION);
+
+        if (x == JOptionPane.OK_OPTION) {
+            return jpf.getText();
+        }
+        return null;
+    }
+    public static String getNewPassword() {
+        JPasswordField jpf = new JPasswordField(24);
+        JLabel jl = new JLabel("Enter new password: ");
+        Box box = Box.createHorizontalBox();
+        box.add(jl);
+        box.add(jpf);
+        int x = JOptionPane.showConfirmDialog(null, box, "Name Entry", JOptionPane.OK_CANCEL_OPTION);
+
+        if (x == JOptionPane.OK_OPTION) {
+            return jpf.getText();
+        }
+        return null;
+    }
 }

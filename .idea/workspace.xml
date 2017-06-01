@@ -2,31 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e43bcf43-cbd9-4c60-8123-4ded5d43dfa6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/ServerMain$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$Handler.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub$Processor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Hub.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/LinearUuidGenerator$BasicUuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Time$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Time.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuid$Generator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/UuidTest$TestUuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/UuidTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$2$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Uuids.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/UuidsTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/relay/ServerTest$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RandomUuidGenerator$BasicUuid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RandomUuidGenerator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RawControllerTest$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/chat_client_log.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/RelayMain$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Password.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/RandomUuidGenerator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Time$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Time.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/TimeTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Uuid$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Uuid$Generator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Uuid.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/UuidTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/codeu/chat/common/Password.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/codeu/chat/common/RandomUuidGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Time.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Uuid.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/codeu/chat/util/TimeTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/codeu/chat/util/UuidTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/RelayMain$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/RelayMain$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/RelayMain.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/RelayMain.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/ServerMain.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/ServerMain.class" />
@@ -41,6 +33,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/ConversationPanel$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/ConversationPanel$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/MessagePanel$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/MessagePanel$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/MessagePanel.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/MessagePanel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$3.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$4.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/client/simplegui/UserPanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/BasicController.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/BasicController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/BasicView.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/BasicView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Conversation$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/Conversation$1.class" />
@@ -51,6 +47,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/LogicalView.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/LogicalView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Message$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/Message$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Message.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/Message.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/NetworkCode.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/NetworkCode.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/RawController.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/RawController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Relay$Bundle$Component.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/Relay$Bundle$Component.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/common/Relay$Bundle.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/common/Relay$Bundle.class" />
@@ -82,20 +79,84 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RemoteRelay$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/RemoteRelay$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RemoteRelay$Component.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/RemoteRelay$Component.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/RemoteRelay.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/RemoteRelay.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server$1.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server$3.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/Server.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/Server.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/server/View.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/server/View.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$2.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$3.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$4.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$5.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$6.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers.class" afterPath="$PROJECT_DIR$/bin/codeu/chat/util/Serializers.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/third_party/hamcrest-core-1.3.jar" afterPath="$PROJECT_DIR$/third_party/hamcrest-core-1.3.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/third_party/junit4-4.11.jar" afterPath="$PROJECT_DIR$/third_party/junit4-4.11.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_client_log.log" afterPath="$PROJECT_DIR$/bin/chat_client_log.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/CONTRIBUTING.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_server_log.log" afterPath="$PROJECT_DIR$/bin/chat_server_log.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log" afterPath="$PROJECT_DIR$/bin/chat_simple_gui_client_log.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_client.sh" afterPath="$PROJECT_DIR$/run_client.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_relay.sh" afterPath="$PROJECT_DIR$/run_relay.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_server.sh" afterPath="$PROJECT_DIR$/run_server.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run_simple_gui_client.sh" afterPath="$PROJECT_DIR$/run_simple_gui_client.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/ClientMain.java" afterPath="$PROJECT_DIR$/src/codeu/chat/ClientMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/RelayMain.java" afterPath="$PROJECT_DIR$/src/codeu/chat/RelayMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/ServerMain.java" afterPath="$PROJECT_DIR$/src/codeu/chat/ServerMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java" afterPath="$PROJECT_DIR$/src/codeu/chat/SimpleGuiClientMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/ClientContext.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/ClientContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/ClientMessage.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/ClientMessage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/Controller.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/View.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/View.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/commandline/ListNavigator.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/commandline/ListNavigator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" afterPath="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/BasicController.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/BasicController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/BasicView.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/BasicView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/Conversation.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/Conversation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/ConversationSummary.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/ConversationSummary.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/LinearUuidGenerator.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/LinearUuidGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/ListViewable.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/ListViewable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/LogicalView.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/LogicalView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/Message.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/NetworkCode.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/NetworkCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/RawController.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/RawController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/Relay.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/Relay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/Secret.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/Secret.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/SinglesView.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/SinglesView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/common/User.java" afterPath="$PROJECT_DIR$/src/codeu/chat/common/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/relay/Server.java" afterPath="$PROJECT_DIR$/src/codeu/chat/relay/Server.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/relay/ServerFrontEnd.java" afterPath="$PROJECT_DIR$/src/codeu/chat/relay/ServerFrontEnd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/server/Controller.java" afterPath="$PROJECT_DIR$/src/codeu/chat/server/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/server/Model.java" afterPath="$PROJECT_DIR$/src/codeu/chat/server/Model.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/server/NoOpRelay.java" afterPath="$PROJECT_DIR$/src/codeu/chat/server/NoOpRelay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/server/RemoteRelay.java" afterPath="$PROJECT_DIR$/src/codeu/chat/server/RemoteRelay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/server/Server.java" afterPath="$PROJECT_DIR$/src/codeu/chat/server/Server.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/server/View.java" afterPath="$PROJECT_DIR$/src/codeu/chat/server/View.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Logger.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/Logger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Method.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/Method.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/RemoteAddress.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/RemoteAddress.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Serializer.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/Serializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Serializers.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/Serializers.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/Timeline.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/Timeline.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/connections/ClientConnectionSource.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/connections/ClientConnectionSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/connections/Connection.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/connections/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/connections/ConnectionSource.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/connections/ConnectionSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/connections/ServerConnectionSource.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/connections/ServerConnectionSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/store/LinkIterable.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/store/LinkIterable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/store/LinkIterator.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/store/LinkIterator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/store/Store.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/store/Store.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/store/StoreAccessor.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/store/StoreAccessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codeu/chat/util/store/StoreLink.java" afterPath="$PROJECT_DIR$/src/codeu/chat/util/store/StoreLink.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teams" afterPath="$PROJECT_DIR$/teams" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/TestRunner.java" afterPath="$PROJECT_DIR$/test/codeu/chat/TestRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/common/SecretTest.java" afterPath="$PROJECT_DIR$/test/codeu/chat/common/SecretTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/relay/ServerTest.java" afterPath="$PROJECT_DIR$/test/codeu/chat/relay/ServerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/server/BasicControllerTest.java" afterPath="$PROJECT_DIR$/test/codeu/chat/server/BasicControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/server/RawControllerTest.java" afterPath="$PROJECT_DIR$/test/codeu/chat/server/RawControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/codeu/chat/util/store/StoreTest.java" afterPath="$PROJECT_DIR$/test/codeu/chat/util/store/StoreTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/third_party/LICENSE" afterPath="$PROJECT_DIR$/third_party/LICENSE" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -106,21 +167,31 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ChatSimpleGui.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="UserPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="591">
-              <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+            <state relative-caret-position="351">
+              <caret line="171" column="49" lean-forward="false" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
               <folding>
-                <element signature="e#0#5006#0" expanded="true" />
+                <element signature="e#0#8117#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#5390#5391#0" expanded="true" />
+                <element signature="e#5445#5446#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>enter</find>
+      <find>newUser</find>
+      <find>addUser</find>
+      <find>passwordfi</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,7 +204,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java" />
         <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/Controller.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/common/BasicController.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/server/Controller.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/common/User.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/common/RawController.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/server/Server.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java" />
+        <option value="$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java" />
       </list>
     </option>
   </component>
@@ -156,8 +238,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -214,6 +297,58 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeu_project_2017" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeu_project_2017" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeu_project_2017" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeu_project_2017" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -244,13 +379,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simplegui" />
+              <option name="myItemId" value="commandline" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -498,7 +632,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -537,10 +671,101 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#6424#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2115">
+          <caret line="161" column="10" lean-forward="false" selection-start-line="161" selection-start-column="10" selection-end-line="161" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#7522#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="7311:7519" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2820">
+          <caret line="218" column="48" lean-forward="false" selection-start-line="218" selection-start-column="48" selection-end-line="218" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#8117#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="103" column="16" lean-forward="false" selection-start-line="103" selection-start-column="16" selection-end-line="103" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#4174#0" expanded="false" />
+            <element signature="e#1843#1844#0" expanded="false" />
+            <element signature="e#1906#1907#0" expanded="false" />
+            <element signature="e#1939#1940#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2003#2004#0" expanded="false" />
+            <element signature="e#2027#2028#0" expanded="false" />
+            <element signature="e#2383#2384#0" expanded="false" />
+            <element signature="e#2411#2412#0" expanded="false" />
+            <marker date="1496293211000" expanded="false" signature="3100:3107" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3169:3173" ph=" }" />
+            <marker date="1496293211000" expanded="false" signature="3433:3440" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3465:3469" ph=" }" />
+            <marker date="1496293211000" expanded="true" signature="3916:3936" ph="{...}" />
+            <marker date="1496293211000" expanded="false" signature="3980:3987" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="4038:4042" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3705">
+          <caret line="269" column="41" lean-forward="false" selection-start-line="269" selection-start-column="41" selection-end-line="269" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#10595#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8731#8732#0" expanded="false" />
+            <element signature="e#8783#8784#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="8779:8784" ph="{...}" />
+            <marker date="1491302388000" expanded="false" signature="8855:8862" ph=" { " />
+            <marker date="1491302388000" expanded="false" signature="8896:8900" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#4174#0" expanded="false" />
+            <element signature="e#1843#1844#0" expanded="false" />
+            <element signature="e#1906#1907#0" expanded="false" />
+            <element signature="e#1939#1940#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2003#2004#0" expanded="false" />
+            <element signature="e#2027#2028#0" expanded="false" />
+            <element signature="e#2383#2384#0" expanded="false" />
+            <element signature="e#2411#2412#0" expanded="false" />
+            <marker date="1496293211000" expanded="false" signature="3100:3107" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3169:3173" ph=" }" />
+            <marker date="1496293211000" expanded="false" signature="3433:3440" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3465:3469" ph=" }" />
+            <marker date="1496293211000" expanded="true" signature="3916:3936" ph="{...}" />
+            <marker date="1496293211000" expanded="false" signature="3980:3987" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="4038:4042" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -548,20 +773,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#10595#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8731#8732#0" expanded="false" />
+            <element signature="e#8783#8784#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="8779:8784" ph="{...}" />
+            <marker date="1491302388000" expanded="false" signature="8855:8862" ph=" { " />
+            <marker date="1491302388000" expanded="false" signature="8896:8900" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Password.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="39" column="1" lean-forward="false" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Password.java" />
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#4174#0" expanded="false" />
+            <element signature="e#1843#1844#0" expanded="false" />
+            <element signature="e#1906#1907#0" expanded="false" />
+            <element signature="e#1939#1940#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2003#2004#0" expanded="false" />
+            <element signature="e#2027#2028#0" expanded="false" />
+            <element signature="e#2383#2384#0" expanded="false" />
+            <element signature="e#2411#2412#0" expanded="false" />
+            <marker date="1496293211000" expanded="false" signature="3100:3107" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3169:3173" ph=" }" />
+            <marker date="1496293211000" expanded="false" signature="3433:3440" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3465:3469" ph=" }" />
+            <marker date="1496293211000" expanded="true" signature="3916:3936" ph="{...}" />
+            <marker date="1496293211000" expanded="false" signature="3980:3987" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="4038:4042" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -569,20 +815,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#10595#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8731#8732#0" expanded="false" />
+            <element signature="e#8783#8784#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="8779:8784" ph="{...}" />
+            <marker date="1491302388000" expanded="false" signature="8855:8862" ph=" { " />
+            <marker date="1491302388000" expanded="false" signature="8896:8900" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Password.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="39" column="1" lean-forward="true" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Password.java" />
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#4174#0" expanded="false" />
+            <element signature="e#1843#1844#0" expanded="false" />
+            <element signature="e#1906#1907#0" expanded="false" />
+            <element signature="e#1939#1940#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2003#2004#0" expanded="false" />
+            <element signature="e#2027#2028#0" expanded="false" />
+            <element signature="e#2383#2384#0" expanded="false" />
+            <element signature="e#2411#2412#0" expanded="false" />
+            <marker date="1496293211000" expanded="false" signature="3100:3107" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3169:3173" ph=" }" />
+            <marker date="1496293211000" expanded="false" signature="3433:3440" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3465:3469" ph=" }" />
+            <marker date="1496293211000" expanded="true" signature="3916:3936" ph="{...}" />
+            <marker date="1496293211000" expanded="false" signature="3980:3987" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="4038:4042" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -597,6 +864,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#10595#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8731#8732#0" expanded="false" />
+            <element signature="e#8783#8784#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="8779:8784" ph="{...}" />
+            <marker date="1491302388000" expanded="false" signature="8855:8862" ph=" { " />
+            <marker date="1491302388000" expanded="false" signature="8896:8900" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -607,13 +883,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Password.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="39" column="1" lean-forward="false" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/Password.java" />
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/LogicalView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-351">
@@ -628,35 +898,171 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientConversation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ChatSimpleGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+        <state relative-caret-position="825">
+          <caret line="57" column="63" lean-forward="false" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1423">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/ClientMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-129">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/ConversationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1860">
+          <caret line="134" column="81" lean-forward="false" selection-start-line="134" selection-start-column="81" selection-end-line="134" selection-end-column="81" />
           <folding>
-            <element signature="e#0#5006#0" expanded="true" />
+            <element signature="e#0#6424#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/MessagePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="771">
+          <caret line="161" column="10" lean-forward="false" selection-start-line="161" selection-start-column="10" selection-end-line="161" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#7522#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="7311:7519" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/ClientUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="138" column="3" lean-forward="true" selection-start-line="138" selection-start-column="3" selection-end-line="138" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#4174#0" expanded="false" />
+            <element signature="e#1843#1844#0" expanded="false" />
+            <element signature="e#1906#1907#0" expanded="false" />
+            <element signature="e#1939#1940#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2003#2004#0" expanded="false" />
+            <element signature="e#2027#2028#0" expanded="false" />
+            <element signature="e#2383#2384#0" expanded="false" />
+            <element signature="e#2411#2412#0" expanded="false" />
+            <marker date="1496293211000" expanded="false" signature="3100:3107" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3169:3173" ph=" }" />
+            <marker date="1496293211000" expanded="false" signature="3433:3440" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="3465:3469" ph=" }" />
+            <marker date="1496293211000" expanded="true" signature="3916:3936" ph="{...}" />
+            <marker date="1496293211000" expanded="false" signature="3980:3987" ph=" { " />
+            <marker date="1496293211000" expanded="false" signature="4038:4042" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="90" column="20" lean-forward="true" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#4012#0" expanded="false" />
+            <element signature="e#1329#1330#0" expanded="false" />
+            <element signature="e#1359#1360#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/RawController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="53" lean-forward="false" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#1596#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/BasicController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="40" column="43" lean-forward="false" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#2193#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/commandline/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1917">
+          <caret line="268" column="43" lean-forward="false" selection-start-line="268" selection-start-column="43" selection-end-line="268" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#10595#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8731#8732#0" expanded="false" />
+            <element signature="e#8783#8784#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="8779:8784" ph="{...}" />
+            <marker date="1491302388000" expanded="false" signature="8855:8862" ph=" { " />
+            <marker date="1491302388000" expanded="false" signature="8896:8900" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/common/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#1793#0" expanded="false" />
+            <element signature="e#930#936#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#5423#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="262" column="40" lean-forward="false" selection-start-line="262" selection-start-column="40" selection-end-line="262" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11325#0" expanded="false" />
+            <marker date="1491302388000" expanded="true" signature="9557:10554" ph="{...}" />
+            <marker date="1491302388000" expanded="true" signature="9688:9885" ph="//..." />
+            <marker date="1491302388000" expanded="true" signature="10750:11322" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/codeu/chat/client/simplegui/UserPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="171" column="49" lean-forward="false" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#8117#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#5390#5391#0" expanded="true" />
+            <element signature="e#5445#5446#0" expanded="true" />
           </folding>
         </state>
       </provider>

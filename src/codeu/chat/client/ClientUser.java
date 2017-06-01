@@ -14,11 +14,14 @@
 
 package codeu.chat.client;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import codeu.chat.common.User;
+import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 
 public final class ClientUser {
@@ -43,6 +46,8 @@ public final class ClientUser {
 
   // Validate the username string
   static public boolean isValidName(String userName) {
+    // TO DO: check that new userName is unique!!!
+      
     boolean clean = true;
     if (userName.length() == 0) {
       clean = false;
@@ -53,6 +58,10 @@ public final class ClientUser {
     }
     return clean;
   }
+    
+  static public boolean isValidPassword(String password) {
+    return ((password != null) && (password.length()!=0));
+  }
 
   public boolean hasCurrent() {
     return (current != null);
@@ -62,26 +71,12 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
-    updateUsers();
-
-    final User prev = current;
-    if (name != null) {
-      final User newCurrent = usersByName.first(name);
-      if (newCurrent != null) {
-	System.out.print("Enter your password: ");
-	boolean isCorrect = newCurrent.isPassword(new Scanner(System.in).nextLine().trim());
-	if(isCorrect)
-	{
-		current = newCurrent;
-	}
-	else
-	{
-		System.out.println("Password is incorrect.");
-	}
-      }
-    }
-    return (prev != current);
+  public boolean signInUser(String name, String password) {
+    User response = view.getSignInStatus(name, password);
+    if (response == null)
+	return false;
+    current = response;
+    return true;
   }
 
   public boolean signOutUser() {
@@ -94,14 +89,14 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name, String hash, String salt) {
-    final boolean validInputs = isValidName(name);
-
-    final User user = (validInputs) ? controller.newUser(name, hash, salt) : null;
+  public void addUser(String name, String password) {
+    final boolean validName = isValidName(name);
+    final boolean validPassword = isValidPassword(password);
+    final User user = (validName && validPassword) ? controller.newUser(name, password) : null;
 
     if (user == null) {
       System.out.format("Error: user not created - %s.\n",
-          (validInputs) ? "server failure" : "bad input value");
+          (validName) ? "server failure" : "bad input value");
     } else {
       LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();

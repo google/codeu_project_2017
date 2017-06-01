@@ -20,8 +20,8 @@ import java.io.OutputStream;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
 
 public final class User {
 
@@ -29,69 +29,38 @@ public final class User {
 
     @Override
     public void write(OutputStream out, User value) throws IOException {
-
-      Uuid.SERIALIZER.write(out, value.id);
+    
+      Uuids.SERIALIZER.write(out, value.id);
       Serializers.STRING.write(out, value.name);
+      //Serializers.STRING.write(out, value.password);
       Time.SERIALIZER.write(out, value.creation);
-      Serializers.STRING.write(out, value.getPasswordHash());
-      Serializers.STRING.write(out, value.getSalt());
+
     }
 
     @Override
     public User read(InputStream in) throws IOException {
 
       return new User(
-          Uuid.SERIALIZER.read(in),
+          Uuids.SERIALIZER.read(in),
           Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in),
-          Serializers.STRING.read(in), //hash
-          Serializers.STRING.read(in)); //salt
+          //Serializers.STRING.read(in),
+          Time.SERIALIZER.read(in)
+      );
+
     }
   };
 
   public final Uuid id;
   public final String name;
+    //public final String password;
   public final Time creation;
-  private final String hash;
-  private final String salt;
 
-  public User(Uuid id, String name, Time creation, String hash, String salt) {
+  public User(Uuid id, String name, Time creation) {
 
     this.id = id;
     this.name = name;
+    //this.password = password;
     this.creation = creation;
-    this.hash = hash;
-    this.salt = salt;
-  }
 
-  public boolean hasPassword()
-  {
-    if(hash.equalsIgnoreCase("password"))
-      return false;
-    else
-      return true;
-  }
-
-  public boolean isPassword(String password)
-  {
-    String hashed = Password.createHash(password, this.salt);
-    if(hashed.equals(this.hash))
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public String getPasswordHash()
-  {
-    return hash;
-  }
-
-  public String getSalt()
-  {
-    return salt;
   }
 }

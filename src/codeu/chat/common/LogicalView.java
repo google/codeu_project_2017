@@ -16,8 +16,7 @@ package codeu.chat.common;
 
 import java.util.Collection;
 
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
+import codeu.chat.common.Uuid;
 
 // LOGICAL VIEW
 //
@@ -68,5 +67,7 @@ public interface LogicalView {
   //   including |range| will be returned. If the root message is not found
   //   no messages will be returned.
   Collection<Message> getMessages(Uuid rootMessage, int range);
+
+  User getSignInStatus(String name, String password);
 
 }

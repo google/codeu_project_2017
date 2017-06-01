@@ -14,8 +14,6 @@
 
 package codeu.chat.common;
 
-import codeu.chat.util.Uuid;
-
 // BASIC CONTROLLER
 //
 //   The controller component in the Model-View-Controller pattern. This
@@ -40,7 +38,7 @@ public interface BasicController {
   //   successful, a User object will be returned representing the full
   //   state of the user on the server. Whether user names can be shared
   //   is undefined.
-  User newUser(String name, String hash, String salt);
+  User newUser(String name, String password);
 
   // NEW CONVERSATION
   //
