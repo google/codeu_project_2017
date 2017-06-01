@@ -199,7 +199,7 @@ public final class UserPanel extends JPanel {
         p.add(new JLabel("Enter password : "));
         p.add(passwordField);
 
-        JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showMessageDialog(null, p, "Add User", JOptionPane.PLAIN_MESSAGE);
         final String name = userNameField.getText();
         final String password = passwordField.getText();
 
