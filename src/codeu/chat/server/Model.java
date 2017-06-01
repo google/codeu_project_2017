@@ -84,7 +84,7 @@ public final class Model {
     userByTime.remove(targetUser.creation);
     userByText.remove(targetUser.name);
     
-    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name)); 
+    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name));
   }
 
   public boolean addConversationUser(User u, Conversation conv){

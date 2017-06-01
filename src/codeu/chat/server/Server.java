@@ -247,11 +247,13 @@ public final class Server {
       
     } else if (type == NetworkCode.SEARCH_MESSAGE_REQUEST) {
 
+      final Uuid currentConversation = Uuid.SERIALIZER.read(in);
+      final Uuid userSearching = Uuid.SERIALIZER.read(in);
       final String keyword = Serializers.STRING.read(in);
 
       List<Message> messages = new ArrayList<Message>(); 
-    
-      messages = view.searchMessages(keyword);
+
+      messages = view.searchMessages(currentConversation, userSearching, keyword);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
@@ -287,8 +289,7 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.ADD_CONVERSATION_USER_RESPONSE);
       Serializers.BOOLEAN.write(out, userAdded);
 
-    }
-    else {
+    } else {
 
       // In the case that the message was not handled make a dummy message with
       // the type "NO_MESSAGE" so that the client still gets something.

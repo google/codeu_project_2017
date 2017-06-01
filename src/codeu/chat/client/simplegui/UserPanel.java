@@ -160,6 +160,7 @@ public final class UserPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
 
         if (!clientContext.user.hasCurrent() && userList.getSelectedIndex() != -1) {
+
           final String data = userList.getSelectedValue();
           //Ask user for password
           final String userPassword = (String) JOptionPane.showInputDialog(
@@ -172,6 +173,7 @@ public final class UserPanel extends JPanel {
             userSignedInLabel.setText("Hello " + data);
             conversationPanel.getAllConversations();
             Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
+
             if(current != null) {
               clientContext.conversation.joinConversation(clientContext.user.getCurrent());
               current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
@@ -192,10 +194,13 @@ public final class UserPanel extends JPanel {
     userSignOutButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
+        //can compare via name, since names unique
+        if (userList.getSelectedIndex() != -1 && clientContext.user.hasCurrent() && clientContext.user.getCurrent().name.equals(userList.getSelectedValue())){
           final String data = userList.getSelectedValue();
           clientContext.user.signOutUser();
           userSignedInLabel.setText("Goodbye " + data);
+        } else {
+          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user, ensure someone is signed in, and/or ensure you are signing out " + clientContext.user.getCurrent().name + ".", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
@@ -212,7 +217,7 @@ public final class UserPanel extends JPanel {
         p.add(new JLabel("Enter password : "));
         p.add(passwordField);
 
-        JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showMessageDialog(null, p, "Add User", JOptionPane.PLAIN_MESSAGE);
         final String name = userNameField.getText();
         final String password = passwordField.getText();
 
