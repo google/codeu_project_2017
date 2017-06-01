@@ -78,7 +78,6 @@ public final class Controller implements RawController, BasicController {
 
   }
 
-
   @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
@@ -134,17 +133,12 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String namePassword, Time creationTime) {
+  public User newUser(Uuid id, String name, Time creationTime) {
 
     User user = null;
-    String [] info = namePassword.split("\\s+");
-    String name = info[0];
-    String password = info[1];
 
     if (isIdFree(id)) {
-
       user = new User(id, name, creationTime);
-      user.setPassword(password);
       model.add(user);
 
       LOG.info(
@@ -152,7 +146,6 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
-
     } else {
 
       LOG.info(
@@ -165,12 +158,9 @@ public final class Controller implements RawController, BasicController {
     return user;
   }
   
-  public boolean deleteUser(Collection<User> userToDelete) {
-    boolean deletionSuccessful = model.deleteUsers(userToDelete);
-    
-    System.out.println("Deletion Successful" + deletionSuccessful); 
-    
-    return deletionSuccessful; 
+  public boolean deleteUser(User userToDelete) {
+  
+    return model.deleteUser(userToDelete);
   }
 
   public boolean addConversationUser(User u, Conversation conv){

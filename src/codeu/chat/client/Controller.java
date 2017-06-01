@@ -124,18 +124,13 @@ public class Controller implements BasicController {
   }
 
   public boolean deleteUser(User userToDelete) {  
-    
-    System.out.println(userToDelete); 
-    
-    final Collection<User> user = new ArrayList<>();     
+      
     boolean userDeleted = false; 
-    
-    user.add(userToDelete);
 
     try (final Connection connection = source.connect()) {
 	  
       Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USERS_REQUEST);
-      Serializers.collection(User.SERIALIZER).write(connection.out(), user);
+      User.SERIALIZER.write(connection.out(), userToDelete);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USERS_RESPONSE) {
         userDeleted = Serializers.BOOLEAN.read(connection.in());

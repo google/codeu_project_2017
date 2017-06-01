@@ -85,8 +85,8 @@ public final class ConversationPanel extends JPanel {
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
-
-	final JButton updateButton = new JButton("Update Conversations");
+    
+    final JButton updateButton = new JButton("Update Conversations");
     final JButton addButton = new JButton("Add");
     final JButton inviteButton = new JButton("Invite Users to Conversations");
 
@@ -204,7 +204,6 @@ public final class ConversationPanel extends JPanel {
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
 
           clientContext.conversation.setCurrent(cs);
-
           messagePanel.update(cs);
         }
       }
