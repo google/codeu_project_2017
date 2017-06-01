@@ -26,6 +26,7 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
+import codeu.chat.util.Uuid;
 
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -269,11 +270,16 @@ public final class MessagePanel extends JPanel {
       	  String searchQuery = searchQueryTextBox.toUpperCase(); 
           if (searchQuery != null && searchQuery.length() > 0) {
           	textFieldSearch.setText(""); //clears the text field after use
+          	
             List<Message> messages = new ArrayList<Message>(); 
-            messages = clientContext.message.searchMessages(searchQuery);
+            Uuid currentConversationId = clientContext.conversation.getCurrentId(); 
+            Uuid userSearching = clientContext.user.getCurrent().id;
+ 
+            messages = clientContext.message.searchMessages(currentConversationId, userSearching, searchQuery);
+            
             if(messages.size()==0){
               //there are no messages found for the query, so a popup should display saying that
-              JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results. Please note that to search a conversation, you must be a participant in it.", "Search Results", JOptionPane.ERROR_MESSAGE);
             } else {
               // display the messages list, since messages were found
               JPanel popUp = new JPanel();
@@ -315,11 +321,16 @@ public final class MessagePanel extends JPanel {
       	    String searchQuery = searchQueryTextBox.toUpperCase(); 
       	    if (searchQuery != null && searchQuery.length() > 0) {
       	      textFieldSearch.setText(""); //clears the text field after use
-      	      List<Message> messages = new ArrayList<Message>(); 
-      	      messages = clientContext.message.searchMessages(searchQuery);
-      	      if(messages.size()==0){
-      	        //there are no messages found for the query, so a popup should display saying that
-                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results.", "Search Results", JOptionPane.ERROR_MESSAGE);
+          	
+              List<Message> messages = new ArrayList<Message>(); 
+              Uuid currentConversationId = clientContext.conversation.getCurrentId(); 
+              Uuid userSearching = clientContext.user.getCurrent().id;
+ 
+              messages = clientContext.message.searchMessages(currentConversationId, userSearching, searchQuery);
+            
+              if(messages.size()==0){
+                //there are no messages found for the query, so a popup should display saying that
+                JOptionPane.showMessageDialog(MessagePanel.this, "The search query for " + searchQueryTextBox + " in the current conversation yielded no results. Please note that to search a conversation, you must be a participant in it.", "Search Results", JOptionPane.ERROR_MESSAGE);
               } else {
                 // display the messages list, since messages were found
                 JPanel popUp = new JPanel();
@@ -332,7 +343,7 @@ public final class MessagePanel extends JPanel {
                   
                   messagesArray[i] = String.format("%s: [%s in %s]: %s",
                   ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
-                }
+                }  
                 
                 JList<String> searchResult = new JList<String>(messagesArray); 
                 JScrollPane messagesPane = new JScrollPane(searchResult); 

@@ -112,10 +112,10 @@ public final class ClientMessage {
   }
   
   // method that searches messages in a specific conversation on the server based on a keyword input by the client
-  public List<Message> searchMessages(String keyword){
+  public List<Message> searchMessages(Uuid conversation, Uuid user, String keyword){
     List<Message> messagesContainingKeyword = new ArrayList<Message>();
     //call the view messageSearch function
-    messagesContainingKeyword = view.searchMessages(keyword);
+    messagesContainingKeyword = view.searchMessages(conversation, user, keyword);
      
     return messagesContainingKeyword; 
   }

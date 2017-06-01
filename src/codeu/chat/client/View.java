@@ -140,13 +140,15 @@ public class View implements BasicView, LogicalView{
     return messages;
   }
   
-  public List<Message> searchMessages(String keyword) {
+  public List<Message> searchMessages(Uuid conversation, Uuid user, String keyword) {
 
     final List<Message> searchResult = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_MESSAGE_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), conversation); 
+      Uuid.SERIALIZER.write(connection.out(), user); 
       Serializers.STRING.write(connection.out(), keyword); 
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_MESSAGE_RESPONSE) {

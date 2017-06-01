@@ -183,13 +183,13 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
   
   // Write a search method that uses Model's messageByText() method and all() from Store uses String's contains() method to check for keyword 
-   public List<Message> searchMessages(String keyword) {
+   public List<Message> searchMessages(Uuid conversation, Uuid user, String keyword) {
     List<Message> searchResult = new ArrayList<Message>(); 
     Iterable<Message> allMessages = model.messageByText().all(); 
     
     for(Message current: allMessages){
-      if(current.content.toUpperCase().contains(keyword.toUpperCase())==true){
-       // System.out.println(current.content);
+      //checks that the message contains the keyword, the user is included in the conversation, and that the messages being searched are only from the current conversation
+      if(current.content.toUpperCase().contains(keyword.toUpperCase()) && findConversation(current.conversation).users.contains(user) && current.conversation.equals(conversation)){ 
         searchResult.add(current); 
       } else {
         // Message does not contain the keyword, so it should not be added, so do nothing here 
