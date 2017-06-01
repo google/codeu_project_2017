@@ -78,7 +78,6 @@ public final class Controller implements RawController, BasicController {
 
   }
 
-
   @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
@@ -134,17 +133,12 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String namePassword, Time creationTime) {
+  public User newUser(Uuid id, String name, Time creationTime) {
 
     User user = null;
-    String [] info = namePassword.split("\\s+");
-    String name = info[0];
-    String password = info[1];
 
     if (isIdFree(id)) {
-
       user = new User(id, name, creationTime);
-      user.setPassword(password);
       model.add(user);
 
       LOG.info(
@@ -152,7 +146,6 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
-
     } else {
 
       LOG.info(
@@ -164,13 +157,22 @@ public final class Controller implements RawController, BasicController {
 
     return user;
   }
-  
-  public boolean deleteUser(Collection<User> userToDelete) {
-    boolean deletionSuccessful = model.deleteUsers(userToDelete);
-    
-    System.out.println("Deletion Successful" + deletionSuccessful); 
-    
-    return deletionSuccessful; 
+
+
+  /*
+ * Tells the model to delete the provided user from the server
+ *
+ * Provided a user to delete, calls model's deleteUser method to
+ * delete the user from the server. Returns a boolean stating whether
+ * the user was successfully deleted from the server.
+ *
+ * @param userToDelete user to be deleted from the server
+ * @return boolean stating whether user was successfully deleted from server
+ */
+  public boolean deleteUser(User userToDelete) {
+
+    // returns boolean stating whether user was deleted
+    return model.deleteUser(userToDelete);
   }
 
 

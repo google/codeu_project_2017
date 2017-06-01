@@ -28,10 +28,12 @@ public final class StoreTest {
   };
 
   private Store<Integer, Integer> store;
+  private Store<Integer, Integer> removeTest;
 
   @Before
   public void doBefore() {
     store = new Store<>(COMPARATOR);
+    removeTest = new Store<>(COMPARATOR); 
   }
 
   @Test
@@ -146,12 +148,63 @@ public final class StoreTest {
     assertTrue(store.first(3) == 30);
     assertTrue(store.first(4) == 40);
   }
+  
+  @Test
+  public void testRemove() {
+  
+    removeTest.insert(0, 0); 
+    removeTest.insert(1, 10); 
+    removeTest.insert(2, 20);
+    removeTest.insert(3, 30); 
+    removeTest.insert(4, 40);
+    
+    //test removing from beginning
+    removeTest.remove(0); 
+    
+    int[] order = { 10, 20, 30, 40 }; 
+    
+    assertOrder(removeTest.all(), order);
+    
+    //test removing from middle
+    removeTest.remove(3); 
+    
+    int[] order2 = { 10, 20, 40 };
+    
+    assertOrder(removeTest.all(), order2); 
+    
+    //test removing from end
+    removeTest.remove(4); 
+    
+    int[] order3 = { 10, 20 };
+    
+    assertOrder(removeTest.all(), order3); 
+  }
+  
+  @Test
+  public void testExists() {
+  
+    removeTest.insert(0, 0); 
+    removeTest.insert(1, 10); 
+    removeTest.insert(2, 20);
+    removeTest.insert(3, 30); 
+    removeTest.insert(4, 40);
+    
+    removeTest.remove(0); 
+    removeTest.remove(3);
+    removeTest.remove(4);  
+    
+    assertFalse(removeTest.exists(0));
+    assertFalse(removeTest.exists(3));
+    assertFalse(removeTest.exists(4));
+    assertTrue(removeTest.exists(1));
+    assertTrue(removeTest.exists(2));     
+  }
 
   private static void assertOrder(Iterable<Integer> actual, int[] expected) {
 
     int at = 0;
 
-    for (final Integer i : actual) {
+    for (final Integer i : actual) { 
       assertTrue(i == expected[at]);
       at += 1;
     }

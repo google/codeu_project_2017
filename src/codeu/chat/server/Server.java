@@ -247,12 +247,11 @@ public final class Server {
       
     } else if (type == NetworkCode.SEARCH_MESSAGE_REQUEST) {
 
-      final Uuid conversation = Uuid.SERIALIZER.read(in);
       final String keyword = Serializers.STRING.read(in);
 
       List<Message> messages = new ArrayList<Message>(); 
     
-      messages = view.searchMessages(conversation, keyword);
+      messages = view.searchMessages(keyword);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
@@ -269,8 +268,7 @@ public final class Server {
 
     } else if (type == NetworkCode.DELETE_USERS_REQUEST) {
       
-      final Collection<User> userToRemove = Serializers.collection(User.SERIALIZER).read(in);    
-      
+      final User userToRemove = User.SERIALIZER.read(in);    
       boolean userDeleted = false; 
 
       userDeleted = controller.deleteUser(userToRemove);

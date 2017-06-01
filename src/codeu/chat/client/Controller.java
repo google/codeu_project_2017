@@ -122,21 +122,30 @@ public class Controller implements BasicController {
     return response;
 
   }
-  
+
+
+
+  /*
+ * Tells the server to delete the provided user
+ *
+ * Given a user to delete, serializes user information to the server and requests the
+ * user be deleted from the server. Prints an error message if user is not
+ * successfully deleted, and returns a boolean stating whether user was
+ * successfully deleted.
+ *
+ * @param userToDelete user to be deleted from the server
+ * @return boolean stating whether user was deleted from server
+ */
   public boolean deleteUser(User userToDelete) {  
-    
-    System.out.println(userToDelete); 
-    
-    final Collection<User> user = new ArrayList<>();     
+      
     boolean userDeleted = false; 
-    
-    user.add(userToDelete);
 
     try (final Connection connection = source.connect()) {
 	  
       Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_USERS_REQUEST);
-      Serializers.collection(User.SERIALIZER).write(connection.out(), user);
+      User.SERIALIZER.write(connection.out(), userToDelete);
 
+      // prints error message if user not successfully deleted
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_USERS_RESPONSE) {
         userDeleted = Serializers.BOOLEAN.read(connection.in());
       } else {
@@ -147,7 +156,8 @@ public class Controller implements BasicController {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
       LOG.error(ex, "Exception during call on server."); 
     }
-    
+
+    //boolean stating whether user was successfully deleted
     return userDeleted; 
   }
 

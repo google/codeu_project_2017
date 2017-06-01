@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#LOCAL_MACHINE="130.211.140.178@10140"
+LOCAL_MACHINE="130.211.140.178@10140"
 
-LOCAL_MACHINE="localhost@2007"
+#LOCAL_MACHINE="localhost@2007"
 
 cd './bin'
 

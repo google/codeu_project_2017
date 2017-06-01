@@ -25,7 +25,7 @@ import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 
-public final class ClientUser {
+public class ClientUser {
 
   private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 
@@ -107,9 +107,7 @@ public boolean isValidName(String userName) {
   */
   public boolean checkPassword(String name, String password){
 
-    final User user = usersByName.first(name);
-    System.out.print("check password: " + user.getPassword());
-    printUser(user);
+    final User user = getUserNameStore().first(name);
 
     if( user != null  && (user.getPassword().equals(password))) {
       return true;
@@ -165,11 +163,11 @@ public boolean isValidName(String userName) {
   }
 
   /**
-   * Attempts to delete a user from the server given a name and returns a boolean
+   * Attempts to delete a user from the server given the name of a user and returns a boolean
    * stating whether it was successfully deleted.
    *
-   * Given the name of a user to delete, finds the corresonding id and attempts to delete
-   * the user from the collection of users on the server, prints messages to the server
+   * Given the name of a user to delete, finds the corresponding id and calls deleteUser in controller to
+   * attempts to delete the user from the collection of users on the server, prints messages to the server
    * and client stating whether the user was successfully deleted,
    * and returns a boolean stating whether the user was successfully added
    *
@@ -239,6 +237,8 @@ public boolean isValidName(String userName) {
   public Iterable<User> getUsers() {
     return usersByName.all();
   }
+
+  public Store<String, User> getUserNameStore(){ return usersByName;}
   
   public void updateUsers() {
     usersById.clear();
