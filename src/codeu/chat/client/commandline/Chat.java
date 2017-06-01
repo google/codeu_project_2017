@@ -19,6 +19,8 @@ import java.util.Scanner;
 import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
+import codeu.chat.client.BroadCastReceiver;
+import codeu.chat.client.ClientMessage;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
 
@@ -35,9 +37,14 @@ public final class Chat {
 
   private final ClientContext clientContext;
 
+  private final BroadCastReceiver broadCastReceiver;
   // Constructor - sets up the Chat Application
-  public Chat(Controller controller, View view) {
+  public Chat(BroadCastReceiver receiver, Controller controller, View view) {
     clientContext = new ClientContext(controller, view);
+    broadCastReceiver = receiver;
+    this.clientContext.message.linkReceiver(broadCastReceiver);
+    broadCastReceiver.onBroadCast( (message) -> ClientMessage.printMessage(message,clientContext.user) );
+    broadCastReceiver.start();
   }
 
   // Print help message.
@@ -79,6 +86,7 @@ public final class Chat {
     if (token.equals("exit")) {
 
       alive = false;
+      broadCastReceiver.exit();
 
     } else if (token.equals("help")) {
 
@@ -317,6 +325,7 @@ public final class Chat {
     }
     if (newCurrent != previous) {
       clientContext.conversation.setCurrent(newCurrent);
+      broadCastReceiver.joinConversation(newCurrent);
       clientContext.conversation.updateAllConversations(true);
     }
   }

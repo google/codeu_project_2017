@@ -14,10 +14,13 @@
 
 package codeu.chat.util;
 
+import com.google.gson.Gson;
 import java.lang.StringBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public final class Uuid {
@@ -68,8 +71,22 @@ public final class Uuid {
 
       return head;
     }
-  };
 
+    @Override
+    public void write(PrintWriter out, Uuid value) {
+      Gson gson = Serializers.GSON;
+      String output = gson.toJson(value);
+      out.println(output);
+
+    }
+
+    @Override
+    public Uuid read(BufferedReader in) throws IOException {
+      Gson gson = Serializers.GSON;
+      Uuid value = gson.fromJson(in.readLine(), Uuid.class);
+      return value;
+    }
+  };
 
   // GENERATOR
   //
@@ -168,14 +185,14 @@ public final class Uuid {
   private static String toString(Uuid id) {
     final StringBuilder build = new StringBuilder();
     buildString(id, build);
-    return String.format("[UUID:%s]", build.substring(1));  // index of 1 to skip initial '.'
+    return String.format(build.substring(1));  // index of 1 to skip initial '.'
   }
 
   private static void buildString(Uuid current, StringBuilder build) {
     final long mask = (1L << 32) - 1;  // removes sign extension
     if (current != null) {
       buildString(current.root(), build);
-      build.append(".").append(current.id() & mask);
+      build.append(current.id() & mask);
     }
   }
 

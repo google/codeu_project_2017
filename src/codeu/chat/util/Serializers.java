@@ -14,9 +14,13 @@
 
 package codeu.chat.util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -32,6 +36,16 @@ public final class Serializers {
     @Override
     public Boolean read(InputStream in) throws IOException {
       return in.read() != 0;
+    }
+
+    @Override
+    public void write(PrintWriter out, Boolean value) {
+      out.println(value);
+    }
+
+    @Override
+    public Boolean read(BufferedReader in) throws IOException {
+      return in.readLine().equals("true");
     }
   };
 
@@ -58,6 +72,18 @@ public final class Serializers {
       return value;
 
     }
+
+    @Override
+    public void write(PrintWriter out, Integer value) {
+      out.println(value);
+    }
+
+    @Override
+    public Integer read(BufferedReader in) throws IOException {
+      String st = in.readLine();
+      if (st == null) return -1;
+      return Integer.parseInt(st);
+    }
   };
 
   public static final Serializer<Long> LONG = new Serializer<Long>() {
@@ -66,7 +92,7 @@ public final class Serializers {
     public void write(OutputStream out, Long value) throws IOException {
 
       for (int i = 56; i >= 0; i -= 8) {
-        out.write((int)(0xFF & (value >>> i)));
+        out.write((int) (0xFF & (value >>> i)));
       }
 
     }
@@ -82,6 +108,38 @@ public final class Serializers {
 
       return value;
 
+    }
+
+    @Override
+    public void write(PrintWriter out, Long value) {
+      out.println(value);
+    }
+
+    @Override
+    public Long read(BufferedReader in) throws IOException {
+      return Long.parseLong(in.readLine());
+    }
+  };
+
+  public static final Serializer<Double> DOUBLE = new Serializer<Double>() {
+    @Override
+    public void write(OutputStream out, Double value) throws IOException {
+      Serializers.LONG.write(out, Double.doubleToLongBits(value));
+    }
+
+    @Override
+    public Double read(InputStream in) throws IOException {
+      return Double.longBitsToDouble(Serializers.LONG.read(in));
+    }
+
+    @Override
+    public void write(PrintWriter out, Double value) {
+      out.println(value);
+    }
+
+    @Override
+    public Double read(BufferedReader in) throws IOException {
+      return Double.parseDouble(in.readLine());
     }
   };
 
@@ -102,11 +160,34 @@ public final class Serializers {
       final byte[] array = new byte[length];
 
       for (int i = 0; i < length; i++) {
-        array[i] = (byte)input.read();
+        array[i] = (byte) input.read();
       }
 
       return array;
 
+    }
+
+    @Override
+    public void write(PrintWriter out, byte[] value) {
+      INTEGER.write(out, value.length);
+
+      for (int i = 0; i < value.length; i++) {
+        out.println(value[i]);
+      }
+
+    }
+
+    @Override
+    public byte[] read(BufferedReader in) throws IOException {
+
+      final int length = INTEGER.read(in);
+      final byte[] array = new byte[length];
+
+      for (int i = 0; i < length; i++) {
+        array[i] = Byte.parseByte(in.readLine());
+      }
+
+      return array;
     }
   };
 
@@ -124,6 +205,16 @@ public final class Serializers {
 
       return new String(BYTES.read(input));
 
+    }
+
+    @Override
+    public void write(PrintWriter out, String value) {
+      out.println(value);
+    }
+
+    @Override
+    public String read(BufferedReader in) throws IOException {
+      return in.readLine();
     }
   };
 
@@ -146,6 +237,25 @@ public final class Serializers {
         for (int i = 0; i < size; i++) {
           list.add(serializer.read(in));
         }
+        return list;
+      }
+
+      @Override
+      public void write(PrintWriter out, Collection<T> value) {
+        INTEGER.write(out, value.size());
+        for (final T x : value) {
+          serializer.write(out, x);
+        }
+      }
+
+      @Override
+      public Collection<T> read(BufferedReader in) throws IOException {
+        final int size = INTEGER.read(in);
+        Collection<T> list = new ArrayList<T>(size);
+        for (int i = 0; i < size; i++) {
+          list.add(serializer.read(in));
+        }
+
         return list;
       }
     };
@@ -172,7 +282,33 @@ public final class Serializers {
       public T read(InputStream in) throws IOException {
         return in.read() == NO_VALUE ? null : serializer.read(in);
       }
+
+      @Override
+      public void write(PrintWriter out, T value) {
+        if (value == null) {
+          out.println("NO_VALUE");
+        } else {
+          out.println("YES_VALUE");
+          serializer.write(out, value);
+        }
+      }
+
+      @Override
+      public T read(BufferedReader in) throws IOException {
+        return in.readLine().equals("NO_VALUE") ? null : serializer.read(in);
+      }
     };
   }
+
+  /*
+   * In order for the Time to contain the milliseconds, a custom Json Serializer was needed.
+   * Adding this Gson object, would allow all serializers to use this Gson, rather than having
+   * to rebuild the Gson multiple times.
+   */
+  public static final Gson GSON = new GsonBuilder()
+      .registerTypeAdapter(Time.class, Time.JSON_SERIALIZER)
+      .registerTypeAdapter(Time.class, Time.JSON_DESERIALIZER)
+      .create();
+
 }
 

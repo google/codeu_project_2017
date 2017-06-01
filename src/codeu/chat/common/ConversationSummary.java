@@ -14,9 +14,12 @@
 
 package codeu.chat.common;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
@@ -47,6 +50,20 @@ public final class ConversationSummary implements ListViewable {
           Serializers.STRING.read(in)
       );
 
+    }
+
+    @Override
+    public void write(PrintWriter out, ConversationSummary value) {
+      Gson gson = Serializers.GSON;
+      String output = gson.toJson(value);
+      out.println(output);
+    }
+
+    @Override
+    public ConversationSummary read(BufferedReader in) throws IOException {
+      Gson gson = Serializers.GSON;
+      ConversationSummary value = gson.fromJson(in.readLine(), ConversationSummary.class);
+      return value;
     }
   };
 
