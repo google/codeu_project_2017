@@ -139,7 +139,7 @@ public class View implements BasicView, LogicalView{
 
     return messages;
   }
-  
+
   public List<Message> searchMessages(Uuid currentConversation, Uuid userSearching, String keyword) {
 
     final List<Message> searchResult = new ArrayList<>();
@@ -148,7 +148,7 @@ public class View implements BasicView, LogicalView{
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_MESSAGE_REQUEST);
       Uuid.SERIALIZER.write(connection.out(), currentConversation); 
-      Uuid.SERIALIZER.write(connection.out(), userSearching); 
+      Uuid.SERIALIZER.write(connection.out(), userSearching);
       Serializers.STRING.write(connection.out(), keyword); 
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_MESSAGE_RESPONSE) {
