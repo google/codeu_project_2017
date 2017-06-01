@@ -250,11 +250,9 @@ public final class ConversationPanel extends JPanel {
     clientContext.user.updateUsers();
     usersList.clear();
     Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
-    if (current != null) {
-      for (final User u : clientContext.user.getUsers()) {
-        if (!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
-          usersList.addElement(u.name);
-        }
+    for (final User u : clientContext.user.getUsers()) {
+      if (!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
+        usersList.addElement(u.name);
       }
     }
   }

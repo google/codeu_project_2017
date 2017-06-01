@@ -161,7 +161,7 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
 
-        if (userList.getSelectedIndex() != -1) {
+        if (!clientContext.user.hasCurrent() && userList.getSelectedIndex() != -1) {
           final String data = userList.getSelectedValue();
           //Ask user for password
           final String userPassword = (String) JOptionPane.showInputDialog(
@@ -184,6 +184,8 @@ public final class UserPanel extends JPanel {
             JOptionPane.showMessageDialog(UserPanel.this, "Password for " + data + " was incorrect. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Password for " + data + " was incorrect."); 
           }  
+        } else{
+          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user or sign out the current user.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });

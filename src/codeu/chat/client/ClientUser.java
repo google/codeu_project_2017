@@ -97,7 +97,6 @@ public boolean isValidName(String userName) {
 
   }
 
-
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
     current = null;
