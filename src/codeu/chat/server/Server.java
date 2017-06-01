@@ -246,12 +246,14 @@ public final class Server {
       Serializers.collection(Message.SERIALIZER).write(out, messages);
       
     } else if (type == NetworkCode.SEARCH_MESSAGE_REQUEST) {
-
+    
+      final Uuid currentConversation = Uuid.SERIALIZER.read(in); 
+      final Uuid userSearching = Uuid.SERIALIZER.read(in);
       final String keyword = Serializers.STRING.read(in);
 
       List<Message> messages = new ArrayList<Message>(); 
     
-      messages = view.searchMessages(keyword);
+      messages = view.searchMessages(currentConversation, userSearching, keyword);
 
       Serializers.INTEGER.write(out, NetworkCode.SEARCH_MESSAGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
