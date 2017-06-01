@@ -23,6 +23,10 @@ import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.User;
+import codeu.chat.util.Uuid;
+import codeu.chat.common.Conversation;
+
 
 // NOTE: JPanel is serializable, but there is no need to serialize ConversationPanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -31,11 +35,13 @@ public final class ConversationPanel extends JPanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
+  private final DefaultListModel<String> convDisplayList = new DefaultListModel<>();
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
     this.messagePanel = messagePanel;
+    //this.userPanel = userPanel;
     initialize();
   }
 
@@ -59,26 +65,35 @@ public final class ConversationPanel extends JPanel {
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
 
-    final DefaultListModel<String> listModel = new DefaultListModel<>();
-    final JList<String> objectList = new JList<>(listModel);
+    final DefaultListModel<String> inviteListModel = new DefaultListModel<>();
+    final JList<String> objectList = new JList<>(convDisplayList);
+    final JList<String> inviteList = new JList<>(inviteListModel);
+
     objectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     objectList.setVisibleRowCount(15);
     objectList.setSelectedIndex(-1);
 
+    inviteList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    inviteList.setVisibleRowCount(15);
+    inviteList.setSelectedIndex(-1);
+
     final JScrollPane listScrollPane = new JScrollPane(objectList);
     listShowPanel.add(listScrollPane);
     listScrollPane.setMinimumSize(new Dimension(250, 200));
+    listScrollPane.setPreferredSize(new Dimension(250, 200));
 
     // Button bar
     final JPanel buttonPanel = new JPanel();
     final GridBagConstraints buttonPanelC = new GridBagConstraints();
-
-    final JButton updateButton = new JButton("Update");
+    
+    final JButton updateButton = new JButton("Update Conversations");
     final JButton addButton = new JButton("Add");
+    final JButton inviteButton = new JButton("Invite Users to Conversations");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
     buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
+    buttonPanel.add(inviteButton);
 
     // Put panels together
     titlePanelC.gridx = 0;
@@ -106,13 +121,16 @@ public final class ConversationPanel extends JPanel {
 
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
-    this.add(buttonPanel, buttonPanelC);
+    this.add(buttonPanel, buttonPanelC); 
+    titlePanel.setBackground(new Color(102, 162, 237));
+    listShowPanel.setBackground(new Color(102, 162, 237));
+    buttonPanel.setBackground(new Color(102, 162, 237));
 
     // User clicks Conversations Update button.
     updateButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        ConversationPanel.this.getAllConversations(listModel);
+        ConversationPanel.this.getAllConversations();
       }
     });
 
@@ -126,15 +144,57 @@ public final class ConversationPanel extends JPanel {
               null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
-            ConversationPanel.this.getAllConversations(listModel);
+            ConversationPanel.this.getAllConversations();
           }
         } else {
-          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.");
+          JOptionPane.showMessageDialog(ConversationPanel.this, "You are not signed in.", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
 
-    // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
+    //user clicks invite button
+    inviteButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+        ConversationPanel.this.getInvitableUsers(inviteListModel);
+        if (objectList.getSelectedIndex() != -1 && !inviteListModel.isEmpty()) {
+          JPanel p = new JPanel();
+
+          final JScrollPane inviteScrollPane = new JScrollPane(inviteList);
+          inviteScrollPane.setMinimumSize(new Dimension(250, 200));
+          inviteScrollPane.setPreferredSize(new Dimension(250, 200));
+
+          p.add(inviteScrollPane);
+          JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+          //if a user is selected from invite list
+          if (inviteList.getSelectedIndex() != -1) {
+            final String data = inviteList.getSelectedValue(); //select from list
+            for (final User u : clientContext.user.getUsers()) { //go through users and see if name selected matches any user in list
+              //User names are unique. Checking if selected name matches any of the existing users
+              if((u.name).equals(data)){
+                Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId()); //get current conversation
+                if(!current.users.contains(u.id)){
+                  clientContext.conversation.joinConversation(u);
+                }
+                else{
+                  JOptionPane.showMessageDialog(ConversationPanel.this, "User already part of conversation", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+              }
+            }
+          }
+
+        } else if (inviteListModel.isEmpty()) {
+          JOptionPane.showMessageDialog(ConversationPanel.this, "No available users to add", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+          JOptionPane.showMessageDialog(ConversationPanel.this, "No conversations selected", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+      }
+    });
+
+  // User clicks on Conversation - Set Conversation to current and fill in Messages panel.
     objectList.addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent e) {
@@ -144,23 +204,30 @@ public final class ConversationPanel extends JPanel {
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
 
           clientContext.conversation.setCurrent(cs);
-
           messagePanel.update(cs);
         }
       }
     });
 
-    getAllConversations(listModel);
+    getAllConversations();
   }
 
   // Populate ListModel - updates display objects.
-  private void getAllConversations(DefaultListModel<String> convDisplayList) {
+  public void getAllConversations() {
 
     clientContext.conversation.updateAllConversations(false);
     convDisplayList.clear();
 
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {
-      convDisplayList.addElement(conv.title);
+      Conversation c = clientContext.conversation.getConversation(conv.id);
+      if (clientContext.user.getCurrent() != null){
+
+        Uuid userID = clientContext.user.getCurrent().id;
+
+        if((userID.equals(conv.owner))|| c.users.contains(userID)) {
+          convDisplayList.addElement(conv.title);
+        }
+      }
     }
   }
 
@@ -176,5 +243,16 @@ public final class ConversationPanel extends JPanel {
       localIndex++;
     }
     return null;
+  }
+
+  private void getInvitableUsers(DefaultListModel<String> usersList) {
+    clientContext.user.updateUsers();
+    usersList.clear();
+    Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
+    for (final User u : clientContext.user.getUsers()) {
+      if (!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
+        usersList.addElement(u.name);
+      }
+    }
   }
 }

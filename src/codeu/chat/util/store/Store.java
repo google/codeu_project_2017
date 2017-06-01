@@ -19,7 +19,9 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
-public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
+//import codeu.chat.common.User;
+
+public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
 
   // To make the code simpler - use a dummy link for the first link in this
   // list. The root link is never read from. To avoid reading from this link
@@ -62,9 +64,40 @@ public final class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     //     it would not help with the interators. As long as the key will map
     //     to the first link, the other links will always be found. This is
     //     why the insert is always put at the end of the series.
+    
     if (closestLink == null || comparator.compare(newLink.key, closestLink.key) != 0) {
       index.put(key, newLink);
     }
+  }
+  
+  //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
+  public void remove(KEY key){
+    StoreLink<KEY, VALUE> v; 
+    
+    StoreLink<KEY, VALUE> linkBefore = extract(index.lowerEntry(key)); 
+    
+    // Check if linkBefore is null, if so then we know the previous link is the root link, so set accordingly 
+    if(linkBefore==null){
+      linkBefore = rootLink; 
+    }
+    
+    StoreLink<KEY, VALUE> linkToDelete = index.get(key); 
+    StoreLink<KEY, VALUE> linkAfter = linkToDelete.next;
+
+    linkBefore.next = linkAfter;
+
+  	if((v=index.remove(key))!=null){
+  	  //Success
+  	  System.out.println(v + " was removed successfully."); 
+  	} else {
+  	  System.out.println(v + " was not removed successfully. There was an issue."); 
+  	} 
+  }
+  
+  //exist method for Store that uses the TreeMap's get method and ensures that a value was removed
+  public boolean exists(KEY key){
+    boolean userExists = (index.get(key)!=null);  
+  	return userExists; 
   }
 
   @Override

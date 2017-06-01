@@ -18,6 +18,8 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+
+
 public final class TestRunner {
   public static void main(String[] args) {
      final Result result =
@@ -28,10 +30,15 @@ public final class TestRunner {
              codeu.chat.server.RawControllerTest.class,
              codeu.chat.util.TimeTest.class,
              codeu.chat.util.UuidTest.class,
-             codeu.chat.util.store.StoreTest.class
+             codeu.chat.util.store.StoreTest.class,
+             codeu.chat.client.simplegui.SimpleGuiTest.class, 
+             codeu.chat.client.ClientUserTest.class, 
+             codeu.chat.server.ViewTest.class,
+             codeu.chat.server.ModelTest.class
          );
       for (final Failure failure : result.getFailures()) {
-         System.out.println(failure.toString());
+      	 System.out.println(failure.getTrace());
+         System.out.println(failure.getException());
       }
       System.out.println(result.wasSuccessful());
    }

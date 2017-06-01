@@ -15,6 +15,7 @@
 package codeu.chat.server;
 
 import java.util.Comparator;
+import java.util.Collection;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -70,12 +71,34 @@ public final class Model {
 
   public void add(User user) {
     currentUserGeneration = userGenerations.make();
-
+    
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
   }
+  
+  //method to delete a user from the server
+  public boolean deleteUser(User targetUser) {  
+    
+    userById.remove(targetUser.id);
+    userByTime.remove(targetUser.creation);
+    userByText.remove(targetUser.name);
+    
+    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name));
+  }
 
+  public boolean addConversationUser(User u, Conversation conv){
+
+    for(Conversation c: conversationById.all()){
+
+      if((c.id).equals(conv.id)){
+        c.users.add(u.id);
+        return true;
+      }
+    }
+    return false;
+  }
+	
   public StoreAccessor<Uuid, User> userById() {
     return userById;
   }
