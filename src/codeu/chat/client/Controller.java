@@ -157,12 +157,9 @@ public class Controller implements BasicController {
 
     try (final Connection connection = source.connect()) {
 
-      Serializers.INTEGER.write(connection.out(), NetworkCode.ADD_CONVERSATION_USER_REQUEST); //write out network code
-      System.out.println("network code to add user to conversation: " + NetworkCode.ADD_CONVERSATION_USER_REQUEST);
-      System.out.println("User to add to conversation: " + user.name);
-      System.out.println("Conversation to add user to: " + conv.title);
-      Serializers.nullable(User.SERIALIZER).write(connection.out(), user); //write out user
-      Serializers.nullable(Conversation.SERIALIZER).write(connection.out(), conv); //write out conversation
+      Serializers.INTEGER.write(connection.out(), NetworkCode.ADD_CONVERSATION_USER_REQUEST);
+      User.SERIALIZER.write(connection.out(), user);
+      Conversation.SERIALIZER.write(connection.out(), conv);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.ADD_CONVERSATION_USER_RESPONSE) { //read in response
         userAdded = Serializers.BOOLEAN.read(connection.in()); //read in boolean

@@ -102,12 +102,10 @@ public final class Model {
 
   public boolean addConversationUser(User u, Conversation conv){
 
-    System.out.println("Adding conversation reached model");
     for(Conversation c: conversationById.all()){
 
-      if( (c.id).equals(conv.id)){
+      if((c.id).equals(conv.id)){
         c.users.add(u.id);
-        System.out.println("Adding user to conversation in model: " + c.users);
         return true;
       }
     }

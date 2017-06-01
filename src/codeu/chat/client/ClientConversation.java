@@ -126,9 +126,8 @@ public final class ClientConversation {
 
     final Conversation current = getConversation(getCurrentId()); //get current conversation
 
-    if(!current.users.contains(u)){ //if user is not in list
+    if(!current.users.contains(u.id)){
       controller.addConversationUser(u, current); //add user to current conversation
-      System.out.println("Users in conversation[ClientConversation]: " + current.users);
       LOG.info("User added to conversation: Title= \"%s\" UUID= %s", current.title, current.id);
     }
 

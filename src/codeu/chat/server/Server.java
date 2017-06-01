@@ -281,9 +281,7 @@ public final class Server {
     } else if (type == NetworkCode.ADD_CONVERSATION_USER_REQUEST){
 
       User u = Serializers.nullable(User.SERIALIZER).read(in);
-      System.out.println("Add conversation user request user SERVER: " + u.name);
       Conversation conv = Serializers.nullable(Conversation.SERIALIZER).read(in);
-      System.out.println("Add conversation user request conversation: " + conv.title);
 
       boolean userAdded = false;
       userAdded = controller.addConversationUser(u, conv);

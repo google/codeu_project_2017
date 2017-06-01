@@ -168,15 +168,15 @@ public final class ConversationPanel extends JPanel {
           p.add(inviteScrollPane);
           JOptionPane.showConfirmDialog(null, p, "Add User", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
+          //if a user is selected from invite list
           if (inviteList.getSelectedIndex() != -1) {
             final String data = inviteList.getSelectedValue(); //select from list
             for (final User u : clientContext.user.getUsers()) { //go through users and see if name selected matches any user in list
               //User names are unique. Checking if selected name matches any of the existing users
-              if((u.name).equals(data)){ //we found user
+              if((u.name).equals(data)){
                 Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId()); //get current conversation
-                if(!current.users.contains(u.id)){ //if user is not in userlist
-                  clientContext.conversation.joinConversation(u); //make user join conversation
-                  System.out.println("Users in current conversation [conversation panel]: " + current.users);
+                if(!current.users.contains(u.id)){
+                  clientContext.conversation.joinConversation(u);
                 }
                 else{
                   JOptionPane.showMessageDialog(ConversationPanel.this, "User already part of conversation", "Error", JOptionPane.ERROR_MESSAGE);
@@ -250,11 +250,12 @@ public final class ConversationPanel extends JPanel {
     clientContext.user.updateUsers();
     usersList.clear();
     Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
-    for (final User u : clientContext.user.getUsers()) {
-      if(!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
-        usersList.addElement(u.name);
+    if (current != null) {
+      for (final User u : clientContext.user.getUsers()) {
+        if (!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
+          usersList.addElement(u.name);
+        }
       }
     }
   }
-
 }
