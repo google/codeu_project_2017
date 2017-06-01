@@ -155,7 +155,7 @@ public final class UserPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
 
-        if (userList.getSelectedIndex() != -1) {
+        if (userList.getSelectedIndex() != -1 ) {
           final String data = userList.getSelectedValue();
           //Ask user for password
           final String userPassword = (String) JOptionPane.showInputDialog(
@@ -179,10 +179,13 @@ public final class UserPanel extends JPanel {
     userSignOutButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (userList.getSelectedIndex() != -1) {
+        //can compare via name, since names unique
+        if (userList.getSelectedIndex() != -1 && clientContext.user.hasCurrent() && clientContext.user.getCurrent().name.equals(userList.getSelectedValue())){
           final String data = userList.getSelectedValue();
           clientContext.user.signOutUser();
           userSignedInLabel.setText("Goodbye " + data);
+        } else {
+          JOptionPane.showMessageDialog(UserPanel.this, "Please select a user, ensure someone is signed in, and/or ensure you are signing out " + clientContext.user.getCurrent().name + ".", "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
