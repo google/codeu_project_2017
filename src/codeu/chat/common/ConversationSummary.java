@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 
 public final class ConversationSummary implements ListViewable {
 
@@ -30,8 +30,8 @@ public final class ConversationSummary implements ListViewable {
     @Override
     public void write(OutputStream out, ConversationSummary value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
+      Uuids.SERIALIZER.write(out, value.id);
+      Uuids.SERIALIZER.write(out, value.owner);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
 
@@ -41,8 +41,8 @@ public final class ConversationSummary implements ListViewable {
     public ConversationSummary read(InputStream in) throws IOException {
 
       return new ConversationSummary(
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
+          Uuids.SERIALIZER.read(in),
+          Uuids.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );

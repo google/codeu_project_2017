@@ -24,10 +24,10 @@ import java.util.Queue;
 
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Relay;
+import codeu.chat.common.Time;
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
-import codeu.chat.util.Time;
-import codeu.chat.util.Logger;
-import codeu.chat.util.Uuid;
 
 public final class Server implements Relay {
 
@@ -211,23 +211,29 @@ public final class Server implements Relay {
 
     if (authenticate(teamId, teamSecret)) {
 
+      int remaining = Math.min(range, maxRead);
+
       LOG.info(
          "Request to read from server requested=%d allowed=%d",
           range,
           maxRead);
 
+      // Writing is a one way flag (once set it will not be unset) that switches
+      // between looking for the starting message and writing all messages to the
+      // output.
+      boolean writing = root == Uuids.NULL || root == null;
+
       for (final Relay.Bundle message : history) {
 
-        // Only add a message if there is room. We cannot stop
-        // searching in case we see the root later on.
-        if (found.size() < Math.min(range, maxRead)) {
+        if (writing && remaining > 0) {
           found.add(message);
         }
 
-        // If the start is found, drop all previous messages.
-        if (message.id().equals(root)) {
-          found.clear();
-        }
+        remaining = Math.max(remaining - 1, 0);
+
+        // Only update "writing" after the check as the root is already known and
+        // should not be included in the output.
+        writing |= Uuids.equals(root, message.id());
       }
 
       LOG.info(

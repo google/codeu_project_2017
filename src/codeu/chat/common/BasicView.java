@@ -20,7 +20,7 @@ import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
-import codeu.chat.util.Uuid;
+import codeu.chat.common.Uuid;
 
 // BASIC VIEW
 //
@@ -51,5 +51,6 @@ public interface BasicView {
   //
   //   Return all messages whose id is found in the given collection.
   Collection<Message> getMessages(Collection<Uuid> ids);
+
 
 }

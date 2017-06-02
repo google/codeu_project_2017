@@ -23,11 +23,12 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LogicalView;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
+import codeu.chat.common.Time;
 import codeu.chat.common.User;
+import codeu.chat.common.Uuid;
+import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 
@@ -54,7 +55,7 @@ public final class View implements BasicView, LogicalView{
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USERS_BY_ID_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Uuids.SERIALIZER).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
@@ -101,7 +102,7 @@ public final class View implements BasicView, LogicalView{
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Uuids.SERIALIZER).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
@@ -124,9 +125,9 @@ public final class View implements BasicView, LogicalView{
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_MESSAGES_BY_ID_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Uuids.SERIALIZER).write(connection.out(), ids);
 
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_ID_RESPONSE) {
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");
@@ -142,14 +143,14 @@ public final class View implements BasicView, LogicalView{
   @Override
   public Uuid getUserGeneration() {
 
-    Uuid generation = Uuid.NULL;
+    Uuid generation = Uuids.NULL;
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USER_GENERATION_REQUEST);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USER_GENERATION_RESPONSE) {
-        generation = Uuid.SERIALIZER.read(connection.in());
+        generation = Uuids.SERIALIZER.read(connection.in());
       } else {
         LOG.error("Response from server failed");
       }
@@ -169,7 +170,7 @@ public final class View implements BasicView, LogicalView{
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USERS_EXCLUDING_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Uuids.SERIALIZER).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
@@ -264,7 +265,7 @@ public final class View implements BasicView, LogicalView{
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST);
-      Uuid.SERIALIZER.write(connection.out(), rootMessage);
+      Uuids.SERIALIZER.write(connection.out(), rootMessage);
       Serializers.INTEGER.write(connection.out(), range);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
@@ -279,5 +280,33 @@ public final class View implements BasicView, LogicalView{
     }
 
     return messages;
+  }
+
+  @Override
+  public User getSignInStatus(String name, String password){
+
+     
+      User user = null;
+      
+      try(final Connection connection = source.connect()){
+	  Serializers.INTEGER.write(connection.out(), NetworkCode.SIGN_IN_REQUEST);
+	  Serializers.STRING.write(connection.out(), name);
+	  Serializers.STRING.write(connection.out(), password);
+	  LOG.info("%s Sign in request completed.", name);
+
+	  if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SIGN_IN_RESPONSE){
+	      //should read a boolean value, if fails, try using Serializers.nullable(Boolean....
+	      user = Serializers.nullable(User.SERIALIZER).read(connection.in());
+	      LOG.info("Sign in status response completed.");
+	  } else {
+	      LOG.error("Response from server sign in failed");
+	  }
+      } catch (Exception ex) {
+	  System.out.println("ERROR: Exception during call on server. Check log for details.");
+	  LOG.error(ex, "Exception during call on server.");
+      }
+
+      return user;
+      
   }
 }

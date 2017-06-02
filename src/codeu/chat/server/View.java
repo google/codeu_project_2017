@@ -33,10 +33,10 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LogicalView;
 import codeu.chat.common.Message;
 import codeu.chat.common.SinglesView;
+import codeu.chat.common.Time;
 import codeu.chat.common.User;
+import codeu.chat.common.Uuid;
 import codeu.chat.util.Logger;
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.store.StoreAccessor;
 
 public final class View implements BasicView, LogicalView, SinglesView {
@@ -85,7 +85,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
   @Override
   public Collection<User> getUsersExcluding(Collection<Uuid> ids) {
-
+      
     final Set<User> blacklist = new HashSet<>(intersect(model.userById(), ids));
     final Set<User> users = new HashSet<>();
 
@@ -94,7 +94,9 @@ public final class View implements BasicView, LogicalView, SinglesView {
         users.add(user);
       }
     }
-
+    for (final User temp : users){
+	LOG.info(temp.name);
+    }
     return users;
   }
 
@@ -181,6 +183,26 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
     return found;
   }
+
+  @Override
+  public User getSignInStatus(String name, String password){
+      //We want to check to see if the given name password pair exists in our Models database
+      /*
+      for (final User user : model.userByPassword().all()) {
+	  if (password.equals(password) && name.equals(user.name)) {
+	      return user;
+	  }
+      }//*/
+
+      for (final User user :  model.userByPassword().at(password)){
+	  if(name.equals(user.name))
+	      return user;
+      }
+      return null;
+      
+
+  }
+    
 
   @Override
   public User findUser(Uuid id) { return model.userById().first(id); }

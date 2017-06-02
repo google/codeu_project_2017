@@ -14,9 +14,6 @@
 
 package codeu.chat.common;
 
-import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
-
 // RAW CONTROLLER
 //
 // A controller that grants a large amount of control over how data is inserted
@@ -34,7 +31,7 @@ public interface RawController {
   //
   // Add a new user to the model with a specific id. If the id is already in
   // use, the call will fail and null will be returned.
-  User newUser(Uuid id, String name, Time creationTime);
+  User newUser(Uuid id, String name, String password, Time creationTime);
 
   // NEW CONVERSATION
   //
