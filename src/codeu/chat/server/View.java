@@ -182,12 +182,22 @@ public final class View implements BasicView, LogicalView, SinglesView {
     return found;
   }
 
-
+  /*
+   * Searches through each message on the server and returns a list of messages that contain the keyword and are
+   * in the specified conversation if the user is also in that conversation. A message is added to the list only if it
+   * fits all three requirements.
+   *
+   * @param currentConversation - ID of the current conversation to search
+   * @param userSearching - ID of the user searching the conversation to ensure they are in the conversation
+   * @param keyword - phrase to search for in messages
+   * @return List of messages containing the keyword
+   */
   // Write a search method that uses Model's messageByText() method and all() from Store uses String's contains() method to check for keyword
    public List<Message> searchMessages(Uuid currentConversation, Uuid userSearching, String keyword) {
     List<Message> searchResult = new ArrayList<Message>(); 
     Iterable<Message> allMessages = model.messageByText().all(); 
-    
+
+    // searches through all messages
     for(Message currentMessage: allMessages){
       //checks that the message contains the keyword, the user is included in the conversation, and that the messages being searched are only from the current conversation
       if(currentMessage.content.toUpperCase().contains(keyword.toUpperCase()) && findConversation(currentMessage.conversation).users.contains(userSearching) && currentMessage.conversation.equals(currentConversation)){ 
@@ -197,6 +207,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
       }
     }
 
+    // returns the list of messages
     return searchResult; 
   }
   

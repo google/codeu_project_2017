@@ -110,8 +110,21 @@ public final class ClientMessage {
     }
     updateMessages(false);
   }
-  
-  // method that searches messages in a specific conversation on the server based on a keyword input by the client
+
+  /*
+  * Searches messages in a specific conversation on the server based on a keyword inputted
+  * by the client.
+  *
+  * Provided a keyword to find in messages, calls view's messageSearch function to search
+  * messages on the server. Returns a list of messages that contain the keyword. Returns messages
+  * only in the specified conversation that contain the key if the userSearching is in the
+  * conversation.
+  *
+  * @param currentConversation ID of the current conversation to search
+  * @param userSearching ID of the user searching the conversation to ensure they are in the conversation
+  * @param keyword phrase to find in messages
+  * @return List of messages containing the keyword
+  */
   public List<Message> searchMessages(Uuid currentConversation, Uuid userSearching, String keyword){
     List<Message> messagesContainingKeyword = new ArrayList<Message>();
     //call the view messageSearch function
