@@ -26,6 +26,7 @@ import java.util.concurrent.PriorityBlockingQueue;
 // code has been executed.
 public final class Timeline {
 
+  private final int NUM_EXECUTORS = 16;
   private final static Logger.Log LOG = Logger.newLog(Timeline.class);
 
   private static final class Event implements Comparable<Event> {
@@ -108,26 +109,31 @@ public final class Timeline {
   // This thread is used to run the code that was given to the time line. This
   // worker does not need to know anything about the time. Once an event gets to
   // here - it is considered "on time" and will be executed.
-  private final Thread executor = new Thread() {
-    @Override
-    public void run() {
-      while (running) {
-        try {
-          todo.take().run();
-        } catch (Exception ex) {
-          // Catch all exceptions here to stop any rogue action from
-          // take down the timeline.
-          LOG.warning(
-              "An exception was seen on the timeline (%s)",
-              ex.toString());
-        }
-      }
-    }
-  };
+  private Thread[] executors = new Thread[NUM_EXECUTORS];
 
   public Timeline() {
+    for (int i = 0; i < NUM_EXECUTORS; i++) {
+      executors[i] = new Thread() {
+        @Override
+        public void run() {
+          while (running) {
+            try {
+              todo.take().run();
+            } catch (Exception ex) {
+              // Catch all exceptions here to stop any rogue action from
+              // take down the timeline.
+              LOG.warning(
+                  "An exception was seen on the timeline (%s)",
+                  ex.toString());
+            }
+          }
+        }
+      };
+    }
+
     scheduler.start();
-    executor.start();
+    for (int i = 0; i < NUM_EXECUTORS; i++)
+      executors[i].start();
   }
 
   // SCHEDULE NOW
@@ -164,7 +170,8 @@ public final class Timeline {
     // Interrupt does not force a thread to exit. It signals the
     // thead that it is time to stop execution. As the threads may
     // be sleeping, this will force them awake.
-    executor.interrupt();
+    for (int i = 0; i < NUM_EXECUTORS; i++)
+      executors[i].interrupt();
     scheduler.interrupt();
   }
 
@@ -172,7 +179,8 @@ public final class Timeline {
   //
   // Wait for the timeline to shutdown. This is a blocking call.
   public void join() {
-    forceJoin(executor);
+    for (int i = 0; i < NUM_EXECUTORS; i++)
+      forceJoin(executors[i]);
     forceJoin(scheduler);
   }
 
