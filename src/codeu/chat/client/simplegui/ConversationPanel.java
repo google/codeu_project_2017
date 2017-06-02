@@ -175,7 +175,7 @@ public final class ConversationPanel extends JPanel {
               //User names are unique. Checking if selected name matches any of the existing users
               if((u.name).equals(data)){
                 Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId()); //get current conversation
-                if(!current.users.contains(u.id)){
+                if( !current.users.contains(u.id)){
                   clientContext.conversation.joinConversation(u);
                 }
                 else{
@@ -223,8 +223,7 @@ public final class ConversationPanel extends JPanel {
       if (clientContext.user.getCurrent() != null){
 
         Uuid userID = clientContext.user.getCurrent().id;
-
-        if((userID.equals(conv.owner))|| c.users.contains(userID)) {
+        if( c.owner.equals(userID) || c.users.contains(userID)) {
           convDisplayList.addElement(conv.title);
         }
       }
@@ -249,9 +248,11 @@ public final class ConversationPanel extends JPanel {
     clientContext.user.updateUsers();
     usersList.clear();
     Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId());
-    for (final User u : clientContext.user.getUsers()) {
-      if (!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
-        usersList.addElement(u.name);
+    if(current != null) {
+      for (final User u : clientContext.user.getUsers()) {
+        if (!(u.name).equals(clientContext.user.getCurrent().name) && !(current.users.contains(u.id))) {
+          usersList.addElement(u.name);
+        }
       }
     }
   }
