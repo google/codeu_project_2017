@@ -140,11 +140,42 @@ public final class Controller implements RawController, BasicController {
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
+      foundOwner.groups.add(conversation.id);
 
       LOG.info("Conversation added: " + conversation.id);
     }
 
     return conversation;
+  }
+  
+  @Override
+  public boolean addUserToConversation(Uuid user, Uuid conversation) {
+    final User target = model.userById().first(user);
+
+    if (target == null || model.conversationById().first(conversation) == null) {
+      return false;
+    }
+
+    if (!target.groups.contains(conversation)) {
+      target.groups.add(conversation);
+    }
+
+    return true;
+  }
+
+  @Override
+  public boolean removeUserFromConversation(Uuid user, Uuid conversation) {
+    final User target = model.userById().first(user);
+
+    if (target == null || model.conversationById().first(conversation) == null) {
+      return false;
+    }
+
+    if (target.groups.contains(conversation)) {
+      target.groups.remove(conversation);
+    }
+
+    return true;
   }
 
   private Uuid createId() {

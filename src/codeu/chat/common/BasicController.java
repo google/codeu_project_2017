@@ -51,4 +51,20 @@ public interface BasicController {
   //  Whether conversations can have the same title is undefined.
   Conversation newConversation(String title, Uuid owner);
 
+  // JOIN CONVERSATION
+  //
+  //  Add a user to a coversation, both user and conversation Uuid parameters
+  //  are required and no action will be taken if missing. Upon successful
+  //  operation or if the user is already a member of the conversation
+  //  the boolean true will be returned. Otherwise if the user cannot be
+  //  added false is returned.
+  boolean addUserToConversation(Uuid user, Uuid conversation);
+
+  // LEAVE CONVERSATION
+  //
+  //  Remove user from conversation. Both user and conversation Uuids must
+  //  be valid or no action will be taken. If the user is not in the conversation
+  //  or if the removal is successful, boolean true is returned. Otherwise false
+  //  is returned to signify failure to remove the user.
+  boolean removeUserFromConversation(Uuid user, Uuid conversation);
 }

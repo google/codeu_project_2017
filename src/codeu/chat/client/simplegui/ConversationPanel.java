@@ -80,8 +80,10 @@ public final class ConversationPanel extends JPanel {
 
     final JButton updateButton = new JButton("Update");
     final JButton addButton = new JButton("Add");
+    final JButton leaveCurrentChat = new JButton("Leave Chat");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+    buttonPanel.add(leaveCurrentChat);
     buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
 
@@ -112,6 +114,14 @@ public final class ConversationPanel extends JPanel {
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
+
+    // User clicks Leave Chat Button.
+    leaveCurrentChat.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        clientContext.conversation.leaveCurrentConversation();
+      }
+    });
 
     // User clicks Conversations Update button.
     updateButton.addActionListener(new ActionListener() {
