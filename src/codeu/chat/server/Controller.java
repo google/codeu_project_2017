@@ -48,6 +48,36 @@ public final class Controller implements RawController, BasicController {
     return newUser(createId(), name, Time.now());
   }
 
+  public User newUser(String name, String password){
+
+    User user = null;
+    Uuid id = createId();
+    Time creationTime = Time.now();
+
+    if (isIdFree(id)) {
+
+      user = new User(id, name, Time.now(), password);
+      model.add(user);
+
+      LOG.info(
+              "newUser success (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+
+    } else {
+
+      LOG.info(
+              "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
+              id,
+              name,
+              creationTime);
+    }
+
+    return user;
+
+  }
+
   @Override
   public Conversation newConversation(String title, Uuid owner) {
     return newConversation(createId(), title, owner, Time.now());
@@ -63,7 +93,7 @@ public final class Controller implements RawController, BasicController {
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
-      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
+      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body, conversation);
       model.add(message);
       LOG.info("Message added: %s", message.id);
 
@@ -108,7 +138,6 @@ public final class Controller implements RawController, BasicController {
     User user = null;
 
     if (isIdFree(id)) {
-
       user = new User(id, name, creationTime);
       model.add(user);
 
@@ -117,7 +146,6 @@ public final class Controller implements RawController, BasicController {
           id,
           name,
           creationTime);
-
     } else {
 
       LOG.info(
@@ -128,6 +156,28 @@ public final class Controller implements RawController, BasicController {
     }
 
     return user;
+  }
+
+  /*
+ * Tells the model to delete the provided user from the server
+ *
+ * Provided a user to delete, calls model's deleteUser method to
+ * delete the user from the server. Returns a boolean stating whether
+ * the user was successfully deleted from the server.
+ *
+ * @param userToDelete user to be deleted from the server
+ * @return boolean stating whether user was successfully deleted from server
+ */
+  public boolean deleteUser(User userToDelete) {
+    // returns boolean stating whether user was deleted
+    return model.deleteUser(userToDelete);
+  }
+
+  public boolean addConversationUser(User u, Conversation conv){
+
+    boolean userAdded = model.addConversationUser(u, conv);
+    return userAdded;
+
   }
 
   @Override

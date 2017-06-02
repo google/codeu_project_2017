@@ -37,7 +37,7 @@ import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
-import codeu.chat.util.store.StoreAccessor;
+import codeu.chat.util.store.StoreAccessor; 
 
 public final class View implements BasicView, LogicalView, SinglesView {
 
@@ -128,7 +128,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
   @Override
   public Collection<Message> getMessages(Uuid conversation, Time start, Time end) {
 
-    final Conversation foundConversation = model.conversationById().first(conversation);
+    final Conversation foundConversation = model.conversationById().first(conversation); 
 
     final List<Message> foundMessages = new ArrayList<>();
 
@@ -182,6 +182,35 @@ public final class View implements BasicView, LogicalView, SinglesView {
     return found;
   }
 
+  /*
+   * Searches through each message on the server and returns a list of messages that contain the keyword and are
+   * in the specified conversation if the user is also in that conversation. A message is added to the list only if it
+   * fits all three requirements.
+   *
+   * @param currentConversation - ID of the current conversation to search
+   * @param userSearching - ID of the user searching the conversation to ensure they are in the conversation
+   * @param keyword - phrase to search for in messages
+   * @return List of messages containing the keyword
+   */
+  // Write a search method that uses Model's messageByText() method and all() from Store uses String's contains() method to check for keyword
+   public List<Message> searchMessages(Uuid currentConversation, Uuid userSearching, String keyword) {
+    List<Message> searchResult = new ArrayList<Message>(); 
+    Iterable<Message> allMessages = model.messageByText().all(); 
+
+    // searches through all messages
+    for(Message currentMessage: allMessages){
+      //checks that the message contains the keyword, the user is included in the conversation, and that the messages being searched are only from the current conversation
+      if(currentMessage.content.toUpperCase().contains(keyword.toUpperCase()) && findConversation(currentMessage.conversation).users.contains(userSearching) && currentMessage.conversation.equals(currentConversation)){ 
+        searchResult.add(currentMessage);
+      } else {
+        // Message does not contain the keyword, so it should not be added, so do nothing here 
+      }
+    }
+
+    // returns the list of messages
+    return searchResult; 
+  }
+  
   @Override
   public User findUser(Uuid id) { return model.userById().first(id); }
 
@@ -190,7 +219,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
   @Override
   public Message findMessage(Uuid id) { return model.messageById().first(id); }
-
+  
   private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
 
     // Use a set to hold the found users as this will prevent duplicate ids from

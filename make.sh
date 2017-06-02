@@ -18,5 +18,8 @@ set -e
 
 mkdir -p bin
 
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin
-javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./bin
+javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./third_party/mockito-core-2.8.29.jar:./third_party/javassist-3.18.1-GA.jar:./third_party/cglib-nodep-2.2.2.jar:./third_party/byte-buddy-1.6.5.jar:./third_party/byte-buddy-agent-1.6.5.jar:./third_party/objenesis-2.5.jar:./bin
+javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./third_party/mockito-core-2.8.29.jar:./third_party/javassist-3.18.1-GA.jar:./third_party/cglib-nodep-2.2.2.jar:./third_party/byte-buddy-1.6.5.jar:./third_party/byte-buddy-agent-1.6.5.jar:./third_party/objenesis-2.5.jar:./bin
+
+
+

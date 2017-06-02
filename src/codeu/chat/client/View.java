@@ -14,6 +14,7 @@
 
 package codeu.chat.client;
 
+import java.util.List; 
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,7 +37,7 @@ import codeu.chat.util.connections.ConnectionSource;
 // This is the view component of the Model-View-Controller pattern used by the
 // the client to reterive readonly data from the server. All methods are blocking
 // calls.
-public final class View implements BasicView, LogicalView{
+public class View implements BasicView, LogicalView{
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -69,7 +70,7 @@ public final class View implements BasicView, LogicalView{
 
     return users;
   }
-
+  
   @Override
   public Collection<ConversationSummary> getAllConversations() {
 
@@ -137,6 +138,47 @@ public final class View implements BasicView, LogicalView{
     }
 
     return messages;
+  }
+
+  /*
+  * Searches messages in a specific conversation on the server based on a keyword inputted
+  * by the client by serializing information to send to server.
+  *
+  * Provided a keyword to find in messages, serializes information on conversation, user, and keyword to send
+  * to server to search all messages on the server. Returns a list of messages that contain the keyword.
+  * Returns messages only in the specified conversation that contain the key if the userSearching is in the
+  * conversation.
+  *
+  * @param currentConversation - ID of the current conversation to search
+  * @param userSearching - ID of the user searching the conversation to ensure they are in the conversation
+  * @param keyword - phrase to search for in messages
+  * @return List of messages containing the keyword
+  */
+  public List<Message> searchMessages(Uuid currentConversation, Uuid userSearching, String keyword) {
+
+    final List<Message> searchResult = new ArrayList<>();
+
+    try (final Connection connection = source.connect()) {
+
+      //serialize information to send to server
+      Serializers.INTEGER.write(connection.out(), NetworkCode.SEARCH_MESSAGE_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), currentConversation); 
+      Uuid.SERIALIZER.write(connection.out(), userSearching);
+      Serializers.STRING.write(connection.out(), keyword); 
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.SEARCH_MESSAGE_RESPONSE) {
+        searchResult.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
+      } else {
+        // prints info on error from server
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      // prints exception error
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return searchResult;
   }
 
   @Override
