@@ -93,7 +93,7 @@ public final class Controller implements RawController, BasicController {
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
-      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
+      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body, conversation);
       model.add(message);
       LOG.info("Message added: %s", message.id);
 
@@ -158,7 +158,6 @@ public final class Controller implements RawController, BasicController {
     return user;
   }
 
-
   /*
  * Tells the model to delete the provided user from the server
  *
@@ -170,11 +169,16 @@ public final class Controller implements RawController, BasicController {
  * @return boolean stating whether user was successfully deleted from server
  */
   public boolean deleteUser(User userToDelete) {
-
     // returns boolean stating whether user was deleted
     return model.deleteUser(userToDelete);
   }
 
+  public boolean addConversationUser(User u, Conversation conv){
+
+    boolean userAdded = model.addConversationUser(u, conv);
+    return userAdded;
+
+  }
 
   @Override
   public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {

@@ -161,6 +161,31 @@ public class Controller implements BasicController {
     return userDeleted; 
   }
 
+  public boolean addConversationUser(User user, Conversation conv){
+
+    boolean userAdded = false;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.ADD_CONVERSATION_USER_REQUEST);
+      Serializers.nullable(User.SERIALIZER).write(connection.out(), user);
+      Serializers.nullable(Conversation.SERIALIZER).write(connection.out(), conv);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.ADD_CONVERSATION_USER_RESPONSE) { //read in response
+        userAdded = Serializers.BOOLEAN.read(connection.in()); //read in boolean
+        System.out.println("Boolean returned to ClientController [client/controller]: " + userAdded);
+      } else {
+        LOG.error("Response from server failed.");
+      }
+
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return userAdded;
+
+  }
 
   @Override
   public Conversation newConversation(String title, Uuid owner)  {

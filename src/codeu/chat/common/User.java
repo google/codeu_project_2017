@@ -85,6 +85,7 @@ public final class User {
  * @return password of the user
  */
   public String getPassword(){
+
     return this.password;
   }
 }

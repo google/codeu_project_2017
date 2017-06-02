@@ -87,7 +87,7 @@ public final class Model {
  * @param targetUser user to be deleted from server
  * @return boolean stating whether user was successfully deleted from server
  */
-  public boolean deleteUser(User targetUser) {  
+  public boolean deleteUser(User targetUser) {
 
     // removes all information on the user from the server
     userById.remove(targetUser.id);
@@ -95,7 +95,19 @@ public final class Model {
     userByText.remove(targetUser.name);
 
     // returns true if all information on user no longer exists, thus, it has been deleted
-    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name)); 
+    return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name));
+  }
+
+  public boolean addConversationUser(User u, Conversation conv){
+
+    for(Conversation c: conversationById.all()){
+
+      if((c.id).equals(conv.id)){
+        c.users.add(u.id);
+        return true;
+      }
+    }
+    return false;
   }
 	
   public StoreAccessor<Uuid, User> userById() {

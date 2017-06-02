@@ -128,8 +128,6 @@ public final class MessagePanel extends JPanel {
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
 
-
-    //messageText.append(userList); //
     final JScrollPane userListScrollPane = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //
 
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
@@ -314,7 +312,7 @@ public final class MessagePanel extends JPanel {
                   messagesArray[i] = String.format("%s: [%s in %s]: %s",
                   ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
               }  
-                
+
               JList<String> searchResult = new JList<String>(messagesArray);
               final JTextArea searchResultField = new JTextArea(8,15);
               final JScrollPane messagesPane = new JScrollPane(searchResultField);
@@ -328,6 +326,8 @@ public final class MessagePanel extends JPanel {
               }
 
               /*
+              JList<String> searchResult = new JList<String>(messagesArray); 
+>>>>>>> e8afd99e21d4d3d0e93e14d8e00aaac9ec229127
               JScrollPane messagesPane = new JScrollPane(searchResult);
               messagesPane.setMinimumSize(new Dimension(250, 200));
               messagesPane.setPreferredSize(new Dimension(250, 200));
@@ -456,7 +456,6 @@ FontMetrics metrics = getFontMetrics(getFont());
          // add one line at a time
           messageListModel.addElement(currentLine);
       }
-
     }
   }
 }

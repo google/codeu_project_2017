@@ -45,6 +45,10 @@ public class ClientUser {
     this.controller = controller;
     this.view = view;
   }
+  
+  public Store<String, User> getUsersByName(){
+    return usersByName; 
+  }
 
   /*
    * Validates the username string.
@@ -57,8 +61,8 @@ public class ClientUser {
    * @return boolean stating whether username is valid
    */
 public boolean isValidName(String userName) {
+  updateUsers(); //pull information from the server 
   boolean isUniqueUser = true;
-  // remove spaces
   if (userName.trim().length() == 0) {
     isUniqueUser = false;
   } else {
@@ -116,7 +120,6 @@ public boolean isValidName(String userName) {
     return false;
 
   }
-
 
   public boolean signOutUser() {
     boolean hadCurrent = hasCurrent();
