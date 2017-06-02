@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 import java.lang.InterruptedException;
+import java.math.BigInteger;
 
 import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
@@ -68,7 +69,7 @@ public class PersistanceController{
 
         List<Conversation> conversationsList = new ArrayList<Conversation>();
 
-        // Create converstaions database reference
+        // Create conversations database reference
         final DatabaseReference conversationsReference = firebaseDatabase.getReference(serverIdStr)
             .child("conversations");
         conversationsReference.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -57,7 +57,7 @@ final class ServerMain {
       System.exit(1);
     }
 
-    // This is the directory where it is safe to store data accross runs
+    // This is the directory where it is safe to store data across runs
     // of the server.
     final String persistentPath = args[3];
 

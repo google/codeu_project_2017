@@ -149,7 +149,7 @@ public final class Chat {
         } else {
           clientContext.message.addMessage(clientContext.user.getCurrent().id,
               clientContext.conversation.getCurrentId(),
-              tokenScanner.nextLine().trim());
+              tokenScanner.nextLine().trim(), clientContext.conversation.getPublicKey());
         }
       }
 

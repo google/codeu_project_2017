@@ -70,6 +70,7 @@ public final class MainGui implements LoginInputCallback, LogoutCallback{
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
+
   }
   public void loadLoginPanel(){
     final LoginPanel loginViewPanel = new LoginPanel(clientContext,this);

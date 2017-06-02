@@ -45,9 +45,9 @@ public final class LoginPanel extends JPanel{
         passwordInputPanel.add(passwordLabel);
         passwordInputPanel.add(passwordTextField);
 
+
         // Login button
         final Button loginButton = new Button("Login");
-
         // Add fields to main panel
         panelC.insets = new Insets(10, 10, 10, 10);
         panelC.gridx = 0;
@@ -59,6 +59,7 @@ public final class LoginPanel extends JPanel{
         panelC.gridx = 0;
         panelC.gridy = 3;
         this.add(loginButton,panelC);
+
 
         loginButton.addActionListener(new ActionListener(){
             @Override

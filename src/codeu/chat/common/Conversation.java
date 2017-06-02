@@ -38,6 +38,9 @@ public final class Conversation {
       Uuid.SERIALIZER.write(out, value.owner);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
+      Serializers.STRING.write(out, RSA.keyToString(value.PublicKey().getNumber()));
+      Serializers.STRING.write(out, RSA.keyToString(value.SecretKey().getNumber()));
+      Serializers.STRING.write(out, RSA.keyToString(value.PublicKey().getModulus()));
       Serializers.collection(Uuid.SERIALIZER).write(out, value.users);
       Uuid.SERIALIZER.write(out, value.firstMessage);
       Uuid.SERIALIZER.write(out, value.lastMessage);
@@ -51,6 +54,9 @@ public final class Conversation {
           Uuid.SERIALIZER.read(in),
           Uuid.SERIALIZER.read(in),
           Time.SERIALIZER.read(in),
+          Serializers.STRING.read(in),
+          Serializers.STRING.read(in),
+          Serializers.STRING.read(in),
           Serializers.STRING.read(in)
       );
 
@@ -70,6 +76,36 @@ public final class Conversation {
   public Uuid owner;
   public Time creation;
   public String title;
+
+  public String getPublicNumber() {
+    return publicNumber;
+  }
+
+  public void setPublicNumber(String publicNumber) {
+    this.publicNumber = publicNumber;
+  }
+
+  public String getSecretNumber() {
+    return secretNumber;
+  }
+
+  public void setSecretNumber(String secretNumber) {
+    this.secretNumber = secretNumber;
+  }
+
+  public String getModulus() {
+    return modulus;
+  }
+
+  public void setModulus(String modulus) {
+    this.modulus = modulus;
+  }
+
+  //Firebase is unable to parse BigIntegers, so the keys are saved as Strings
+  private String publicNumber;
+  private String secretNumber;
+  private String modulus;
+
   @Exclude
   public final Collection<Uuid> users = new HashSet<>();
   public Uuid firstMessage = Uuid.NULL;
@@ -86,7 +122,53 @@ public final class Conversation {
 
   }
 
-  // Constructor with no agruments (needed for Firebase)
+  public Conversation(Uuid id, Uuid owner, Time creation, String title, EncryptionKey publicKey, EncryptionKey secretKey) {
+
+    this.id = id;
+    this.owner = owner;
+    this.creation = creation;
+    this.title = title;
+    this.publicNumber = RSA.keyToString(publicKey.getNumber());
+    this.secretNumber = RSA.keyToString(secretKey.getNumber());
+    this.modulus = RSA.keyToString(publicKey.getModulus());
+
+    this.summary = new ConversationSummary(id, owner, creation, title);
+
+  }
+
+  public Conversation(Uuid id, Uuid owner, Time creation, String title, String publicNumber, String secretNumber, String modulus) {
+
+    this.id = id;
+    this.owner = owner;
+    this.creation = creation;
+    this.title = title;
+    this.publicNumber = publicNumber;
+    this.secretNumber = secretNumber;
+    this.modulus = modulus;
+
+    this.summary = new ConversationSummary(id, owner, creation, title);
+
+  }
+
+  public void setSecretKey( EncryptionKey secretKey){
+    this.secretNumber = RSA.keyToString(secretKey.getNumber());
+    this.modulus = RSA.keyToString(secretKey.getModulus());
+  }
+
+  public void setPublicKey( EncryptionKey publicKey){
+    this.publicNumber = RSA.keyToString(publicKey.getNumber());
+    this.modulus = RSA.keyToString(publicKey.getModulus());
+  }
+
+  public EncryptionKey PublicKey(){
+    return new EncryptionKey(RSA.keyToBigInteger(publicNumber), RSA.keyToBigInteger(modulus));
+  }
+
+  public EncryptionKey SecretKey(){
+    return new EncryptionKey(RSA.keyToBigInteger(secretNumber), RSA.keyToBigInteger(modulus));
+  }
+
+  // Constructor with no arguments (needed for Firebase)
   public Conversation(){
 
   }

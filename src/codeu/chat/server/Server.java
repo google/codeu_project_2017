@@ -18,18 +18,13 @@ package codeu.chat.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
 
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
-import codeu.chat.common.Message;
-import codeu.chat.common.NetworkCode;
-import codeu.chat.common.Relay;
-import codeu.chat.common.User;
+import codeu.chat.common.*;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
@@ -154,11 +149,14 @@ public final class Server {
       Serializers.nullable(User.SERIALIZER).write(out, user);
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
-
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuid.SERIALIZER.read(in);
-
-      final Conversation conversation = controller.newConversation(title, owner);
+      final BigInteger publicNumber = Serializers.BIG_INTEGER.read(in);
+      final BigInteger secretNumber = Serializers.BIG_INTEGER.read(in);
+      final BigInteger modulus = Serializers.BIG_INTEGER.read(in);
+      final EncryptionKey publicKey = new EncryptionKey(publicNumber, modulus);
+      final EncryptionKey secretKey =  new EncryptionKey(secretNumber, modulus);
+      final Conversation conversation = controller.newConversation(title, owner, publicKey, secretKey);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);

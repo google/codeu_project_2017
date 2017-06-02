@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import codeu.chat.client.ClientContext;
+import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 
 // NOTE: JPanel is serializable, but there is no need to serialize ConversationPanel
@@ -83,7 +84,6 @@ public final class ConversationPanel extends JPanel {
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
             ConversationPanel.this.getAllConversations(listModel);
-            
             messagePanel.update(clientContext.conversation.getCurrent());
           }
         } else {
@@ -100,8 +100,13 @@ public final class ConversationPanel extends JPanel {
           final int index = objectList.getSelectedIndex();
           final String data = objectList.getSelectedValue();
           final ConversationSummary cs = ConversationPanel.this.lookupByTitle(data, index);
-
+          System.out.println("summary " + cs);
           clientContext.conversation.setCurrent(cs);
+          Conversation currentConversation = clientContext.conversation.getConversation(cs.id);
+          System.out.println("current "+ currentConversation);
+          clientContext.conversation.setPublicKey(currentConversation.PublicKey());
+          System.out.println("publicKey" + clientContext.conversation.getPublicKey());
+          clientContext.conversation.setCurrentConversation(currentConversation);
           messagePanel.update(cs);
         }
       }

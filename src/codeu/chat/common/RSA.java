@@ -7,9 +7,9 @@ import java.nio.charset.Charset;
 
 public class RSA{
     private static final Charset CHARSET = Charset.forName("UTF-8"); //or any encoding
-    private BigInteger modulus;
+    private static BigInteger modulus;
     //This will be used as the modulus for both keys and defines de length of the keys.
-    private Key pubKey, secKey;
+    private static EncryptionKey pubKey, secKey;
 
     /**
      * Algorithm to create the public and secret keys to encrypt and decrypt a message based on
@@ -19,17 +19,17 @@ public class RSA{
      *              and should work for long messages and small files.
      * @see BigInteger
      */
-    public void generateKeys(int nBits){
+    public static void generateKeys(int nBits){
         BigInteger prime1, prime2, phi, secretNumber, publicNumber;
         SecureRandom random = new SecureRandom();
         prime1 = BigInteger.probablePrime(nBits, random);
         prime2 = BigInteger.probablePrime(nBits, random);
         modulus = prime1.multiply(prime2);
         phi = prime1.subtract(BigInteger.ONE).multiply(prime2.subtract(BigInteger.ONE));
-        publicNumber = BigInteger.probablePrime(nBits, random); //first part of the Public Key
-        secretNumber = publicNumber.modInverse(phi); // first part of the Secret Key
-        pubKey = new Key(publicNumber, modulus);
-        secKey = new Key(secretNumber, modulus);
+        publicNumber = BigInteger.probablePrime(nBits, random); //first part of the Public EncryptionKey
+        secretNumber = publicNumber.modInverse(phi); // first part of the Secret EncryptionKey
+        pubKey = new EncryptionKey(publicNumber, modulus);
+        secKey = new EncryptionKey(secretNumber, modulus);
     }
 
      /**
@@ -40,7 +40,7 @@ public class RSA{
      *
      * @see BigInteger
      */
-    public static BigInteger encrypt(BigInteger message, Key pubKey){
+    public static BigInteger encrypt(BigInteger message, EncryptionKey pubKey){
 
         return message.modPow(pubKey.getNumber(), pubKey.getModulus());
 
@@ -50,11 +50,11 @@ public class RSA{
      * Static method to encrypt messages
      *
      * @param encryptedMessage the encrypted message to be decrypted
-     * @param pubKey  the private key of the recipient used to decrypt the message
+     * @param secKey  the private key of the recipient used to decrypt the message
      *
      * @see BigInteger
      */
-    public BigInteger decrypt(BigInteger encryptedMessage, Key secKey){
+    public static BigInteger decrypt(BigInteger encryptedMessage, EncryptionKey secKey){
 
         return encryptedMessage.modPow(secKey.getNumber(), secKey.getModulus());
 
@@ -69,9 +69,15 @@ public class RSA{
      *                   be used in the RSA algorithm
      * @see BigInteger
      */
-    public static BigInteger toBigInteger(String message){
-        byte[] bytes = message.getBytes(CHARSET);
+    public static BigInteger messageToBigInteger(String message){
+        byte[] bytes = message.getBytes();
         BigInteger BIMessage =  new BigInteger(1, bytes);
+        //BigInteger BIMessage = new BigInteger(message);
+        return BIMessage;
+    }
+
+    public static BigInteger keyToBigInteger(String message){
+        BigInteger BIMessage = new BigInteger(message);
         return BIMessage;
     }
 
@@ -88,10 +94,15 @@ public class RSA{
      * @return message   a String with the original message decoded 
      * @see BigInteger
      */
-    public static String toString(BigInteger BIMessage){
+    public static String messageToString(BigInteger BIMessage){
        byte[] bytes = BIMessage.toByteArray();
-       String message = new String(bytes, CHARSET);
+       String message = new String(bytes);
        return message;
+    }
+
+    public static String keyToString(BigInteger BIMessage){
+        String message = String.valueOf(BIMessage);
+        return message;
     }
 
     public static byte[] toByteArray (BigInteger BIMessage){
@@ -99,13 +110,13 @@ public class RSA{
        return bytes;
     }
 
-    public Key getPubKey(){
+    public EncryptionKey getPubKey(){
 
         return pubKey;
 
     }
 
-    public Key getSecKey(){
+    public EncryptionKey getSecKey(){
 
         return secKey;
 
