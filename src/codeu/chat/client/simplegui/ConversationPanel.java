@@ -144,7 +144,6 @@ public final class ConversationPanel extends JPanel {
               null, null, "");
           if (s != null && s.length() > 0) {
             clientContext.conversation.startConversation(s, clientContext.user.getCurrent().id);
-            clientContext.conversation.joinConversation(clientContext.user.getCurrent());
             ConversationPanel.this.getAllConversations();
           }
         } else {
@@ -176,7 +175,7 @@ public final class ConversationPanel extends JPanel {
               //User names are unique. Checking if selected name matches any of the existing users
               if((u.name).equals(data)){
                 Conversation current = clientContext.conversation.getConversation(clientContext.conversation.getCurrentId()); //get current conversation
-                if(!current.users.contains(u.id)){
+                if( !current.users.contains(u.id)){
                   clientContext.conversation.joinConversation(u);
                 }
                 else{
@@ -224,7 +223,7 @@ public final class ConversationPanel extends JPanel {
       if (clientContext.user.getCurrent() != null){
 
         Uuid userID = clientContext.user.getCurrent().id;
-        if(c.users.contains(userID)) {
+        if( c.owner.equals(userID) || c.users.contains(userID)) {
           convDisplayList.addElement(conv.title);
         }
       }
