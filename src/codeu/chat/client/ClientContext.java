@@ -19,16 +19,35 @@ import codeu.chat.client.ClientMessage;
 import codeu.chat.client.ClientUser;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
+import codeu.chat.util.Timeline;
+import codeu.chat.util.Logger;
 
 public final class ClientContext {
 
+  private static final Logger.Log LOG = Logger.newLog(ClientContext.class);
+  private static final int SERVER_REFRESH_MS = 5000;  // 5 seconds
   public final ClientUser user;
   public final ClientConversation conversation;
   public final ClientMessage message;
+  private final Timeline timeline = new Timeline();
 
   public ClientContext(Controller controller, View view) {
     user = new ClientUser(controller, view);
     conversation = new ClientConversation(controller, view, user);
     message = new ClientMessage(controller, view, user, conversation);
+
+    timeline.scheduleNow(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          LOG.info("Updating...");
+          user.updateUsers();
+          message.updateMessages(false);
+        } catch (Exception ex) {
+          LOG.error(ex, "Failed to update.");
+        }
+        timeline.scheduleIn(SERVER_REFRESH_MS, this);
+      }
+    });
   }
 }

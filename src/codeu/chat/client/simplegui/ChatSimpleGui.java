@@ -22,11 +22,16 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.util.Logger;
+import codeu.chat.util.Timeline;
 
 // Chat - top-level client application - Java Simple GUI (using Java Swing)
 public final class ChatSimpleGui {
 
   private final static Logger.Log LOG = Logger.newLog(ChatSimpleGui.class);
+
+  private static final int SERVER_REFRESH_MS = 5000;  // 5 seconds
+
+  private final Timeline timeline = new Timeline();
 
   private JFrame mainFrame;
 
@@ -81,7 +86,7 @@ public final class ChatSimpleGui {
     final GridBagConstraints messagesViewC = new GridBagConstraints();
 
     // ConversationsPanel gets access to MessagesPanel
-    final JPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
+    final ConversationPanel conversationsViewPanel = new ConversationPanel(clientContext, messagesViewPanel);
     conversationsViewPanel.setBorder(paneBorder());
     final GridBagConstraints conversationViewC = new GridBagConstraints();
 
@@ -115,5 +120,20 @@ public final class ChatSimpleGui {
 
     mainFrame.add(mainViewPanel);
     mainFrame.pack();
+
+    timeline.scheduleNow(new Runnable() {
+      @Override
+      public void run() {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        try {
+          LOG.info("Updating...");
+          conversationsViewPanel.update();
+          messagesViewPanel.update(clientContext.conversation.getCurrent());
+        } catch (Exception ex) {
+          LOG.error(ex, "Failed to update.");
+        }
+        timeline.scheduleIn(SERVER_REFRESH_MS, this);
+      }
+    });
   }
 }

@@ -31,12 +31,18 @@ public final class ConversationPanel extends JPanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
+  private final DefaultListModel<String> listModel;
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
     this.messagePanel = messagePanel;
+    this.listModel = new DefaultListModel<String>();
     initialize();
+  }
+
+  public void update() {
+    getAllConversations(listModel);
   }
 
   private void initialize() {
@@ -59,7 +65,6 @@ public final class ConversationPanel extends JPanel {
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
 
-    final DefaultListModel<String> listModel = new DefaultListModel<>();
     final JList<String> objectList = new JList<>(listModel);
     objectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     objectList.setVisibleRowCount(15);
