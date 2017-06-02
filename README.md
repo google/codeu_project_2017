@@ -1,6 +1,29 @@
 
 # CODEU CHAT SERVER | README
 
+## Group 17 Getting Started
+
+1. To build the project:
+    ```
+    $ sh clean.sh
+    $ sh make.sh // Already unzip all .jar needed to compile Firebase
+    ```
+2. To run the server just run the same configurations as the [GETTING STARTED](#getting-started) but instead of using `sh` use `bash`
+    ```
+    $ bash run_server.sh <team_id> <team_secret> <port> <persistent-dir>
+    ```
+    Note: `<persistent-dir>` must be `./persistance/`. Example:
+    ```
+    $ bash run_server.sh 100 ABABAB 2007 ./persistance/
+    ```
+3. To run the client:
+    ```
+    $ bash run_main_gui_client.sh <host> <port>
+    ```
+    Example:
+    ```
+    $ bash run_main_gui_client.sh 192.168.0.1 2007
+    ```
 
 ## DISCLAIMER
 

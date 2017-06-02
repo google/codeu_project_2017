@@ -14,9 +14,13 @@
 
 package codeu.chat.util;
 
+import codeu.chat.common.EncryptionKey;
+import codeu.chat.common.RSA;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -123,6 +127,20 @@ public final class Serializers {
     public String read(InputStream input) throws IOException {
 
       return new String(BYTES.read(input));
+
+    }
+  };
+
+  public static final Serializer<BigInteger> BIG_INTEGER = new Serializer<BigInteger>() {
+
+    @Override
+    public void write(OutputStream out, BigInteger value) throws IOException {
+      BYTES.write(out, RSA.toByteArray(value));
+    }
+
+    @Override
+    public BigInteger read(InputStream input) throws IOException {
+      return new BigInteger(BYTES.read(input));
 
     }
   };

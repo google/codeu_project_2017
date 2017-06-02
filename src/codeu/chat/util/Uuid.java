@@ -85,8 +85,8 @@ public final class Uuid {
     Uuid make();
   }
 
-  private final Uuid root;
-  private final int id;
+  private Uuid root;
+  private int id;
 
   public Uuid(Uuid root, int id) {
     this.root = root;
@@ -203,5 +203,17 @@ public final class Uuid {
     return nextIndex < tokens.length ?
         parse(link, tokens, nextIndex) :
         link;
+  }
+
+  // Constructor with no agruments (needed for Firebase)
+  public Uuid(){
+    
+  }
+  // Basic Getters & Setters (needed for Firebase)
+  public int getId(){
+    return this.id;
+  }
+  public Uuid getRoot(){
+    return this.root;
   }
 }

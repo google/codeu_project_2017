@@ -54,11 +54,11 @@ public final class Message {
     }
   };
 
-  public final Uuid id;
-  public final Uuid previous;
-  public final Time creation;
-  public final Uuid author;
-  public final String content;
+  public Uuid id;
+  public Uuid previous;
+  public Time creation;
+  public Uuid author;
+  public String content;
   public Uuid next;
 
   public Message(Uuid id, Uuid next, Uuid previous, Time creation, Uuid author, String content) {
@@ -69,6 +69,11 @@ public final class Message {
     this.creation = creation;
     this.author = author;
     this.content = content;
+
+  }
+
+  // Constructor with no agruments (needed for Firebase)
+  public Message(){
 
   }
 }

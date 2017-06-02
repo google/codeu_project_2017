@@ -18,5 +18,9 @@ set -e
 
 mkdir -p bin
 
+if [ ! -d bin/com/ ] || [ ! -d bin/javax/ ] || [ ! -d bin/org/ ]; then
+  unzip ./third_party/database-api/'*.jar' -d ./bin -x "META-INF/*"
+fi
+
 javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./src -cp ./third_party/junit4.jar:./bin
 javac -Xlint $(find * | grep "\\.java$") -d ./bin -sourcepath ./test -cp ./third_party/junit4.jar:./bin

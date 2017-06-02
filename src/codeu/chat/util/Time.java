@@ -42,7 +42,7 @@ public final class Time implements Comparable<Time> {
   private static final SimpleDateFormat formatter =
       new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
 
-  private final Date date;
+  private Date date;
 
   private Time(long totalMs) { this.date = new Date(totalMs); }
 
@@ -66,4 +66,16 @@ public final class Time implements Comparable<Time> {
 
   public static Time now() { return Time.fromMs(System.currentTimeMillis()); }
 
+
+  // Constructor with no agruments (needed for Firebase)
+  public Time(){
+
+  }
+  // Basic Getters & Setters (needed for Firebase)
+  public Date getDate(){
+    return this.date;
+  }
+  public void setDate(Date date){
+    this.date = date;
+  }
 }

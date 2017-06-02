@@ -18,18 +18,13 @@ package codeu.chat.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collection;
 
-import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
-import codeu.chat.common.Message;
-import codeu.chat.common.NetworkCode;
-import codeu.chat.common.Relay;
-import codeu.chat.common.User;
+import codeu.chat.common.*;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
@@ -118,15 +113,25 @@ public final class Server {
 
     final int type = Serializers.INTEGER.read(in);
 
-    if (type == NetworkCode.NEW_MESSAGE_REQUEST) {
+    if (type == NetworkCode.NEW_MESSAGE_REQUEST || type == NetworkCode.NEW_FILE_MESSAGE_REQUEST) {
 
       final Uuid author = Uuid.SERIALIZER.read(in);
       final Uuid conversation = Uuid.SERIALIZER.read(in);
       final String content = Serializers.STRING.read(in);
 
+      // In a NEW_FILE_MESSAGE_REQUEST the content variable will hold the filename, including extension.
+      if(type == NetworkCode.NEW_FILE_MESSAGE_REQUEST) {
+
+        final byte[] file = Serializers.BYTES.read(in);
+
+        // At this point we have the file on the server as an array of bytes.
+        // We can do whatever we need with this here.
+      }
+
       final Message message = controller.newMessage(author, conversation, content);
 
-      Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
+      Serializers.INTEGER.write(out, type == NetworkCode.NEW_MESSAGE_REQUEST ?
+              NetworkCode.NEW_MESSAGE_RESPONSE : NetworkCode.NEW_FILE_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
 
       timeline.scheduleNow(createSendToRelayEvent(
@@ -144,11 +149,14 @@ public final class Server {
       Serializers.nullable(User.SERIALIZER).write(out, user);
 
     } else if (type == NetworkCode.NEW_CONVERSATION_REQUEST) {
-
       final String title = Serializers.STRING.read(in);
       final Uuid owner = Uuid.SERIALIZER.read(in);
-
-      final Conversation conversation = controller.newConversation(title, owner);
+      final BigInteger publicNumber = Serializers.BIG_INTEGER.read(in);
+      final BigInteger secretNumber = Serializers.BIG_INTEGER.read(in);
+      final BigInteger modulus = Serializers.BIG_INTEGER.read(in);
+      final EncryptionKey publicKey = new EncryptionKey(publicNumber, modulus);
+      final EncryptionKey secretKey =  new EncryptionKey(secretNumber, modulus);
+      final Conversation conversation = controller.newConversation(title, owner, publicKey, secretKey);
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_CONVERSATION_RESPONSE);
       Serializers.nullable(Conversation.SERIALIZER).write(out, conversation);
@@ -240,6 +248,16 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE);
       Serializers.collection(Message.SERIALIZER).write(out, messages);
+
+    } else if (type == NetworkCode.SEARCH_USER_IN_DATABASE_REQUEST){
+
+      final String username = Serializers.STRING.read(in);
+      final String password = Serializers.STRING.read(in);
+
+      final User user = controller.searchUserInDatabase(username, password);
+
+      Serializers.INTEGER.write(out, NetworkCode.SEARCH_USER_IN_DATABASE_RESPONSE);
+      Serializers.nullable(User.SERIALIZER).write(out, user);
 
     } else {
 

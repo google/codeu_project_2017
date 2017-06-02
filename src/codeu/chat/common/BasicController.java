@@ -42,13 +42,10 @@ public interface BasicController {
   //   is undefined.
   User newUser(String name);
 
-  // NEW CONVERSATION
-  //
-  //  Create a new conversation on the server. All parameters must be
-  //  provided or else the server won't apply the change. If the
-  //  operation is successful, a Conversation object will be returned
-  //  representing the full state of the conversation on the server.
-  //  Whether conversations can have the same title is undefined.
-  Conversation newConversation(String title, Uuid owner);
 
+  // SEARCH FOR USER IN DATABASE
+  //
+  //  Create a search request in the database to find the user and
+  //  return the User object. 
+  User searchUserInDatabase(String username, String password);
 }

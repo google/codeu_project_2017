@@ -14,6 +14,7 @@
 
 package codeu.chat.client;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.EncryptionKey;
 import codeu.chat.common.Message;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
@@ -58,12 +60,8 @@ public final class ClientMessage {
   // Validate the message body.
   public static boolean isValidBody(String body) {
     boolean clean = true;
-    if ((body.length() <= 0) || (body.length() > 1024)) {
+    if ((body.length() <= 0) || (body.length() > 2048)) {
       clean = false;
-    } else {
-
-      // TODO: check for invalid characters
-
     }
     return clean;
   }
@@ -96,19 +94,33 @@ public final class ClientMessage {
   }
 
   // For m-add command.
-  public void addMessage(Uuid author, Uuid conversation, String body) {
+  public void addMessage(Uuid author, Uuid conversation, String body, EncryptionKey publicKey) {
+    processAddMessage(author, conversation, body, null, publicKey);
+    updateMessages(false);
+  }
+
+  public void addFileMessage(Uuid author, Uuid conversation, File file, EncryptionKey publicKey) {
+    processAddMessage(author, conversation, file.getName(), file, publicKey);
+    updateMessages(false);
+  }
+
+  private void processAddMessage(Uuid author, Uuid conversation, String body, File file, EncryptionKey publicKey){
+
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
-    final Message message = (validInputs) ? controller.newMessage(author, conversation, body) : null;
+    final Message message = (validInputs) ?
+            ((file != null) ?
+                    controller.newFileMessage(author, conversation, body, file, publicKey) :
+                    controller.newMessage(author, conversation, body, publicKey))
+            : null;
 
     if (message == null) {
       System.out.format("Error: message not created - %s.\n",
-          (validInputs) ? "server error" : "bad input value");
+              (validInputs) ? "server error" : "bad input value");
     } else {
       LOG.info("New message:, Author= %s UUID= %s", author, message.id);
       current = message;
     }
-    updateMessages(false);
   }
 
   // For m-list-all command.

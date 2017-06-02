@@ -17,12 +17,11 @@ package codeu.chat.client.simplegui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import javax.swing.*;
 
 import codeu.chat.client.ClientContext;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.Message;
-import codeu.chat.common.User;
+import codeu.chat.common.*;
 
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -161,7 +160,8 @@ public final class MessagePanel extends JPanel {
             clientContext.message.addMessage(
                 clientContext.user.getCurrent().id,
                 clientContext.conversation.getCurrentId(),
-                messageText);
+                messageText,
+                clientContext.conversation.getPublicKey());
             MessagePanel.this.getAllMessages(clientContext.conversation.getCurrent());
           }
         }
@@ -180,7 +180,6 @@ public final class MessagePanel extends JPanel {
     for (final Message m : clientContext.message.getConversationContents(conversation)) {
       // Display author name if available.  Otherwise display the author UUID.
       final String authorName = clientContext.user.getName(m.author);
-
       final String displayString = String.format("%s: [%s]: %s",
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
