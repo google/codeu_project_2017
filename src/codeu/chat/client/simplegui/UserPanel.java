@@ -99,10 +99,12 @@ public final class UserPanel extends JPanel {
     final JButton userUpdateButton = new JButton("Update");
     final JButton userSignInButton = new JButton("Sign In");
     final JButton userAddButton = new JButton("Add");
+    final JButton addUser = new JButton("Add User");
 
     buttonPanel.add(userUpdateButton);
     buttonPanel.add(userSignInButton);
     buttonPanel.add(userAddButton);
+    buttonPanel.add(addUser);
 
     // Placement of title, list panel, buttons, and current user panel.
     titlePanelC.gridx = 0;
@@ -153,6 +155,17 @@ public final class UserPanel extends JPanel {
           final String data = userList.getSelectedValue();
           clientContext.user.signInUser(data);
           userSignedInLabel.setText("Hello " + data);
+        }
+      }
+    });
+
+    addUser.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (userList.getSelectedIndex() != -1) {
+          final String data = userList.getSelectedValue();
+          User target = clientContext.user.usersByName.first(data);
+          clientContext.conversation.addToConversation(target.id);
         }
       }
     });
