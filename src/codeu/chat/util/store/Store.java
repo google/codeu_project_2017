@@ -69,7 +69,17 @@ public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
       index.put(key, newLink);
     }
   }
-  
+
+
+
+  /*
+  * Removes the StoreLink corresponding to the provided key from the Store
+  *
+  * Uses TreeMap's remove method to remove the StoreLink corresponding to the provided key from
+  * the Store. Checks if the key was successfully removed and prints message.
+  *
+  * @param key key of StoreLink to remove from Store
+  */
   //remove method for Store that uses the TreeMap's remove method and ensures that a value was removed
   public void remove(KEY key){
     StoreLink<KEY, VALUE> v; 
@@ -80,7 +90,8 @@ public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
     if(linkBefore==null){
       linkBefore = rootLink; 
     }
-    
+
+    // updates links so Store remains intact after removal
     StoreLink<KEY, VALUE> linkToDelete = index.get(key); 
     StoreLink<KEY, VALUE> linkAfter = linkToDelete.next;
 
@@ -93,8 +104,17 @@ public class Store<KEY, VALUE> implements StoreAccessor<KEY, VALUE> {
   	  System.out.println(v + " was not removed successfully. There was an issue."); 
   	} 
   }
-  
-  //exist method for Store that uses the TreeMap's get method and ensures that a value was removed
+
+  /*
+  * Checks whether a key exists in the Store.
+  *
+  * Given a key, uses TreeMap's get method to determine if key exists within the Store.
+  * Returns a boolean stating whether the key exists in the store.
+  *
+  * @param key key to find in Store
+  * @return boolean stating whether key exists in Store
+  */
+  //exist method for Store that uses the TreeMap's get method and ensures that a value exists
   public boolean exists(KEY key){
     boolean userExists = (index.get(key)!=null);  
   	return userExists; 

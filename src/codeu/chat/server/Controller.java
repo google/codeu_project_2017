@@ -157,9 +157,19 @@ public final class Controller implements RawController, BasicController {
 
     return user;
   }
-  
+
+  /*
+ * Tells the model to delete the provided user from the server
+ *
+ * Provided a user to delete, calls model's deleteUser method to
+ * delete the user from the server. Returns a boolean stating whether
+ * the user was successfully deleted from the server.
+ *
+ * @param userToDelete user to be deleted from the server
+ * @return boolean stating whether user was successfully deleted from server
+ */
   public boolean deleteUser(User userToDelete) {
-  
+    // returns boolean stating whether user was deleted
     return model.deleteUser(userToDelete);
   }
 

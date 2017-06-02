@@ -181,7 +181,8 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
     return found;
   }
-  
+
+
   // Write a search method that uses Model's messageByText() method and all() from Store uses String's contains() method to check for keyword
    public List<Message> searchMessages(Uuid currentConversation, Uuid userSearching, String keyword) {
     List<Message> searchResult = new ArrayList<Message>(); 

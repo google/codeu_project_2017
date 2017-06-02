@@ -76,14 +76,25 @@ public final class Model {
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
   }
-  
-  //method to delete a user from the server
-  public boolean deleteUser(User targetUser) {  
-    
+
+  /*
+ * Deletes a user from the server
+ *
+ * Given a user to be deleted from the server, removes all information on that
+ * user from the server. Returns true if all information on the user has been
+ * successfully removed.
+ *
+ * @param targetUser user to be deleted from server
+ * @return boolean stating whether user was successfully deleted from server
+ */
+  public boolean deleteUser(User targetUser) {
+
+    // removes all information on the user from the server
     userById.remove(targetUser.id);
     userByTime.remove(targetUser.creation);
     userByText.remove(targetUser.name);
-    
+
+    // returns true if all information on user no longer exists, thus, it has been deleted
     return !(userById.exists(targetUser.id) && userByTime.exists(targetUser.creation) && userByText.exists(targetUser.name));
   }
 

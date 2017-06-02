@@ -128,15 +128,6 @@ public final class MessagePanel extends JPanel {
     userList.setVisibleRowCount(15);
     userList.setSelectedIndex(-1);
 
-
-    /*final JTextArea messageText = new JTextArea(30,10); //
-    messageText.setLineWrap(true); //
-    messageText.setWrapStyleWord(true); //
-    for (int i = 0; i < userList.getSize(); i++) {
-      messageText.append(userList[i]);
-    }
-    */
-    //messageText.append(userList); //
     final JScrollPane userListScrollPane = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //
 
     userListScrollPane.setMinimumSize(new Dimension(500, 400));
@@ -321,11 +312,26 @@ public final class MessagePanel extends JPanel {
                   messagesArray[i] = String.format("%s: [%s in %s]: %s",
                   ((authorName == null) ? currentMessage.author : authorName), currentMessage.creation, currentConversation, currentMessage.content);
               }  
-                
+
+              JList<String> searchResult = new JList<String>(messagesArray);
+              final JTextArea searchResultField = new JTextArea(8,15);
+              final JScrollPane messagesPane = new JScrollPane(searchResultField);
+
+
+              textField.setLineWrap(true);
+              textField.setWrapStyleWord(true);
+
+              for (int index = 0; index < searchResult.getModel().getSize(); index++) {
+                searchResultField.append(searchResult.getModel().getElementAt(index));
+              }
+
+              /*
               JList<String> searchResult = new JList<String>(messagesArray); 
+>>>>>>> e8afd99e21d4d3d0e93e14d8e00aaac9ec229127
               JScrollPane messagesPane = new JScrollPane(searchResult);
               messagesPane.setMinimumSize(new Dimension(250, 200));
               messagesPane.setPreferredSize(new Dimension(250, 200));
+              */
                 
               popUp.add(messagesPane); 
               JOptionPane.showMessageDialog(MessagePanel.this, popUp, "Search Results", JOptionPane.PLAIN_MESSAGE);
@@ -424,29 +430,32 @@ FontMetrics metrics = getFontMetrics(getFont());
           ((authorName == null) ? m.author : authorName), m.creation, m.content);
 
 
+      // split lines in panel on appropriate space (last whole word that will fit without scroll bar)
       String currentLine = "";
       String[] words = fullString.split(" ");
       int i = 0;
       while (i < words.length) {
+        // build current line word by word until it is too long to fit in panel
         currentLine = "";
         String tryLine = words[i];
+        // check if next word would make line too long
         while (metrics.stringWidth(tryLine) < 515 && i < words.length) {
+          // if within length limit, add word to current line
           currentLine += words[i] + " ";
           i ++;
+          // add next word to check if too long
           if (i < words.length) {
             tryLine = (currentLine + words[i]);
           }
         }
+        // if one single word is longer than the panel, add that as its own line (scroll bar will be added)
         if (currentLine.equals("")) {
           currentLine += words[i];
           i++;
         }
+         // add one line at a time
           messageListModel.addElement(currentLine);
       }
-
-      //System.out.println(width);
-
-      //messageListModel.addElement(displayString);
     }
   }
 }

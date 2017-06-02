@@ -77,8 +77,15 @@ public final class User {
     this.password = password;
   }
 
+  /*
+ * Returns the user's password
+ *
+ * Returns the password of the user object the method is called on
+ *
+ * @return password of the user
+ */
   public String getPassword(){
-  
+
     return this.password;
   }
 }
