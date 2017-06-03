@@ -42,12 +42,10 @@ class Login extends React.Component {
        "loggedIn": false,
        "user:": "",
        "submitting": false,
-       "photo": false
+       "photo": false //Save as false so returns true if Google Auth provides a photo URL
      }
 
-     /* We bind these functions to this component's mounting so that they are
-     allowed to setState. Quite simply, if a function must change the component
-     state, we must bind it first here in the constructor. */
+     /* Bind any changing functions */
      this.onRegister = this.onRegister.bind(this);
      this.onLogin = this.onLogin.bind(this);
      this.handleRegisterChange = this.handleRegisterChange.bind(this);
@@ -79,7 +77,6 @@ class Login extends React.Component {
     // Opens IDP Providers sign-in flow in a popup.
     'signInFlow': 'popup',
     'signInOptions': [
-      // TODO(developer): Remove the providers you don't need for your app.
       {
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         scopes: ['https://www.googleapis.com/auth/plus.login']
@@ -197,40 +194,9 @@ class Login extends React.Component {
                </FormGroup>
             </Form>
         ~~OR~~
-      <div id="firebaseui-container"> </div>
-         </Panel>
-        {/* <Panel header="Returning User" style={loginStyle}>
-            <Form horizontal onSubmit={this.onLogin}>
-               <Row>
-                  <FormGroup controlId="formHorizontalUser">
-                     <Col componentClass={ControlLabel} mdOffset={1} md={2}>
-                     Username
-                     </Col>
-                     <Col mdOffset={2} md={7}>
-                     <FormControl style={loginStyle} value={this.state.username} onChange={this.handleUsernameChange} type="search" />
-                     </Col>
-                  </FormGroup>
-               </Row>
-               <Row>
-                  <FormGroup controlId="formHorizontalPassword">
-                     <Col componentClass={ControlLabel} md={2} smOffset={1}>
-                     Password
-                     </Col>
-                     <Col mdOffset={2} md={7}>
-                     <FormControl style={loginStyle} value={this.state.password} onChange={this.handlePasswordChange} type="password" />
-                     </Col>
-                  </FormGroup>
-               </Row>
-               <FormGroup>
-                  <Col md={12}>
-                  <Button type="submit" disabled={this.state.submitting}>
-                  Log in
-                  </Button>
-                  </Col>
-               </FormGroup>
-            </Form>
-         </Panel> */}
-         </Col>
+      <div id="firebaseui-container"> </div> /*Firebase login for authentication*/
+     </Panel>
+     </Col>
       </div>
     </div>
 
