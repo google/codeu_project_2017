@@ -171,7 +171,7 @@ public final class ConversationPanel extends JPanel {
   // Populate ListModel - updates display objects.
   private void getAllConversations(DefaultListModel<String> convDisplayList) {
 
-    clientContext.conversation.updateAllConversations(false);
+    clientContext.conversation.updateAllConversations(true);
     convDisplayList.clear();
 
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {

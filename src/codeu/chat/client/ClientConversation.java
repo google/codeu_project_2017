@@ -106,7 +106,7 @@ public final class ClientConversation {
   public void setCurrent(ConversationSummary conv) { currentSummary = conv; }
 
   public void showAllConversations() {
-    updateAllConversations(false);
+    updateAllConversations(true);
 
     for (final ConversationSummary c : summariesByUuid.values()) {
       printConversation(c, userContext);
