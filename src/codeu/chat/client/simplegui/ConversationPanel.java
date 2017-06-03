@@ -31,12 +31,18 @@ public final class ConversationPanel extends JPanel {
 
   private final ClientContext clientContext;
   private final MessagePanel messagePanel;
+  private final DefaultListModel<String> listModel;
 
   public ConversationPanel(ClientContext clientContext, MessagePanel messagePanel) {
     super(new GridBagLayout());
     this.clientContext = clientContext;
     this.messagePanel = messagePanel;
+    this.listModel = new DefaultListModel<String>();
     initialize();
+  }
+
+  public void update() {
+    getAllConversations(listModel);
   }
 
   private void initialize() {
@@ -59,7 +65,6 @@ public final class ConversationPanel extends JPanel {
     final JPanel listShowPanel = new JPanel();
     final GridBagConstraints listPanelC = new GridBagConstraints();
 
-    final DefaultListModel<String> listModel = new DefaultListModel<>();
     final JList<String> objectList = new JList<>(listModel);
     objectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     objectList.setVisibleRowCount(15);
@@ -75,8 +80,10 @@ public final class ConversationPanel extends JPanel {
 
     final JButton updateButton = new JButton("Update");
     final JButton addButton = new JButton("Add");
+    final JButton leaveCurrentChat = new JButton("Leave Chat");
 
     updateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+    buttonPanel.add(leaveCurrentChat);
     buttonPanel.add(updateButton);
     buttonPanel.add(addButton);
 
@@ -107,6 +114,14 @@ public final class ConversationPanel extends JPanel {
     this.add(titlePanel, titlePanelC);
     this.add(listShowPanel, listPanelC);
     this.add(buttonPanel, buttonPanelC);
+
+    // User clicks Leave Chat Button.
+    leaveCurrentChat.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        clientContext.conversation.leaveCurrentConversation();
+      }
+    });
 
     // User clicks Conversations Update button.
     updateButton.addActionListener(new ActionListener() {
@@ -156,7 +171,7 @@ public final class ConversationPanel extends JPanel {
   // Populate ListModel - updates display objects.
   private void getAllConversations(DefaultListModel<String> convDisplayList) {
 
-    clientContext.conversation.updateAllConversations(false);
+    clientContext.conversation.updateAllConversations(true);
     convDisplayList.clear();
 
     for (final ConversationSummary conv : clientContext.conversation.getConversationSummaries()) {

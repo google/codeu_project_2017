@@ -112,4 +112,50 @@ public class Controller implements BasicController {
 
     return response;
   }
+
+  @Override
+  public boolean addUserToConversation(Uuid user, Uuid conversation) {
+    boolean response = false;
+    
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.ADD_USER_TO_CONVERSATION_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), user);
+      Uuid.SERIALIZER.write(connection.out(), conversation);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.ADD_USER_TO_CONVERSATION_RESPONSE) {
+        response = Serializers.BOOLEAN.read(connection.in());
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return response;
+  }
+
+  @Override
+  public boolean removeUserFromConversation(Uuid user, Uuid conversation) {
+    boolean response = false;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.REMOVE_USER_FROM_CONVERSATION_REQUEST);
+      Uuid.SERIALIZER.write(connection.out(), user);
+      Uuid.SERIALIZER.write(connection.out(), conversation);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.REMOVE_USER_FROM_CONVERSATION_RESPONSE) {
+        response = Serializers.BOOLEAN.read(connection.in());
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return response;
+  }
 }

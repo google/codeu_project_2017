@@ -74,6 +74,11 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
+  public Collection<Conversation> getUserConversations(Uuid user_id) {
+      return intersect(model.conversationById(), model.userById().first(user_id).groups);
+  }
+
+  @Override
   public Collection<Message> getMessages(Collection<Uuid> ids) {
     return intersect(model.messageById(), ids);
   }

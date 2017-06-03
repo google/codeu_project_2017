@@ -106,7 +106,7 @@ public final class ClientConversation {
   public void setCurrent(ConversationSummary conv) { currentSummary = conv; }
 
   public void showAllConversations() {
-    updateAllConversations(false);
+    updateAllConversations(true);
 
     for (final ConversationSummary c : summariesByUuid.values()) {
       printConversation(c, userContext);
@@ -121,12 +121,16 @@ public final class ClientConversation {
     return null;
   }
 
-  private void joinConversation(String match) {
-    Method.notImplemented();
+  public void addToConversation(Uuid user) {
+    if (currentConversation != null) {
+      controller.addUserToConversation(user, currentConversation.id);
+    }
   }
 
-  private void leaveCurrentConversation() {
-    Method.notImplemented();
+  public void leaveCurrentConversation() {
+    if (currentConversation != null && userContext.getCurrent() != null) {
+      controller.removeUserFromConversation(userContext.getCurrent().id, currentConversation.id);
+    }
   }
 
   private void updateCurrentConversation() {
@@ -161,11 +165,13 @@ public final class ClientConversation {
     summariesByUuid.clear();
     summariesSortedByTitle = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
-    for (final ConversationSummary cs : view.getAllConversations()) {
-      summariesByUuid.put(cs.id, cs);
-      summariesSortedByTitle.insert(cs.title, cs);
+    if (userContext.getCurrent() != null) {
+        for (final Conversation c : view.getUserConversations(userContext.getCurrent().id)) {
+          ConversationSummary cs = c.summary;
+          summariesByUuid.put(cs.id, cs);
+          summariesSortedByTitle.insert(cs.title, cs);
+        }
     }
-
     if (currentChanged) {
       updateCurrentConversation();
       messageContext.resetCurrent(true);

@@ -37,7 +37,7 @@ public final class ClientUser {
   private final Map<Uuid, User> usersById = new HashMap<>();
 
   // This is the set of users known to the server, sorted by name.
-  private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
+  public Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
   public ClientUser(Controller controller, View view) {
     this.controller = controller;
