@@ -14,13 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+echo Team Magenta Chat Server
+
 TEAM_ID="$1"
 TEAM_SECRET="$2"
 PORT="$3"
 PERSISTENT_DIR="$4"
 RELAY_ADDRESS="$5"
 
-if [[ "${TEAM_ID}" == "" || "${TEAM_SECRET}" == "" || "${PORT}" == "" || "${PERSISTENT_DIR}" == "" ]] ; then
+if [[ "$TEAM_ID" == "" || "$TEAM_SECRET" == "" || "$PORT" == "" || "$PERSISTENT_DIR" == "" ]] ; then
   echo 'usage: <TEAM ID> <TEAM SECRET> <PORT> <PERSISTENT> [RELAY ADDRESS]'
   echo ''
   echo 'TEAM ID :        The id registered with the relay server. If you are'
@@ -36,22 +38,26 @@ if [[ "${TEAM_ID}" == "" || "${TEAM_SECRET}" == "" || "${PORT}" == "" || "${PERS
   echo '                 the ip address of the relay server and PORT is the port'
   echo '                 the relay server is listing on.'
   echo ''
+
   exit 1
 fi
+echo 'Server script called.'
 
 
 cd './bin'
-if [ "${RELAY_ADDRESS}" == "" ] ; then
-  java codeu.chat.ServerMain \
-      "${TEAM_ID}" \
-      "${TEAM_SECRET}" \
-      "${PORT}" \
-      "${PERSISTENT_DIR}"
+if [ "$RELAY_ADDRESS" == "" ] ; then
+  echo 'Not connecting to relay.'
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
+      "$TEAM_ID" \
+      "$TEAM_SECRET" \
+      "$PORT" \
+      "$PERSISTENT_DIR"
 else
-  java codeu.chat.ServerMain \
-      "${TEAM_ID}" \
-      "${TEAM_SECRET}" \
-      "${PORT}" \
-      "${PERSISTENT_DIR}" \
-      "${RELAY_ADDRESS}"
+  echo 'Connecting to relay with address' $RELAY_ADDRESS
+  java -cp ".:../third_party/*" codeu.chat.ServerMain \
+      "$TEAM_ID" \
+      "$TEAM_SECRET" \
+      "$PORT" \
+      "$PERSISTENT_DIR" \
+      "$RELAY_ADDRESS"
 fi

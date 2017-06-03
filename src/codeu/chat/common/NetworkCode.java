@@ -16,6 +16,8 @@ package codeu.chat.common;
 
 public final class NetworkCode {
 
+  public static final int MAX_NETWORK_CODE = 30;
+
   public static final int
       NO_MESSAGE = 0,
       GET_USERS_BY_ID_REQUEST = 1,

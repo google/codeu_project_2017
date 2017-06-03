@@ -1,0 +1,30 @@
+{
+  "name": "magenta-messenger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "react-dev": "webpack -d --watch"
+  },
+  "author": "Nick Petosa and Ayesha Omarali",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.0",
+    "firebaseui": "^2.0.0",
+    "jquery": "^3.1.1",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "react-modal": "^1.7.7",
+    "request": "^2.81.0",
+    "simple-react-modal": "^0.5.1"
+  }
+}
