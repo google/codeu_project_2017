@@ -18,6 +18,7 @@
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
     "express": "^4.15.0",
+    "firebaseui": "^2.0.0",
     "jquery": "^3.1.1",
     "react": "^15.4.2",
     "react-bootstrap": "^0.31.0",

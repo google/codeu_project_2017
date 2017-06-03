@@ -14,6 +14,19 @@ import Panel from 'react-bootstrap/lib/Panel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
+import * as firebase from 'firebase';
+import * as firebaseui from 'firebaseui';
+
+
+const config = {
+    apiKey: "AIzaSyBCY_aXJlO53NzNk9xnbLoUfQDWN_zmvcc",
+    authDomain: "magentam-23373.firebaseapp.com",
+    databaseURL: "https://magentam-23373.firebaseio.com",
+    projectId: "magentam-23373",
+    storageBucket: "magentam-23373.appspot.com",
+    messagingSenderId: "589929896548"
+};
+
 
 class Login extends React.Component {
 
@@ -28,7 +41,8 @@ class Login extends React.Component {
        "password": "",
        "loggedIn": false,
        "user:": "",
-       "submitting": false
+       "submitting": false,
+       "photo": false
      }
 
      /* We bind these functions to this component's mounting so that they are
@@ -39,10 +53,45 @@ class Login extends React.Component {
      this.handleRegisterChange = this.handleRegisterChange.bind(this);
      this.handleUsernameChange = this.handleUsernameChange.bind(this);
      this.handlePasswordChange = this.handlePasswordChange.bind(this);
+     this.state.getUiConfig = this.getUiConfig.bind(this);
   }
+
+
+  componentDidMount() {
+    const fb = firebase.initializeApp(config)
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-container', this.state.getUiConfig());
+  }
+
+  getUiConfig() {
+  var context = this
+  return {
+    'callbacks': {
+      // Called when the user has been successfully signed in.
+      'signInSuccess': (user, credential, redirectUrl) => {
+        context.setState({photo: user.photoURL})
+        context.setState({register: user.displayName});
+        context.newUserRequest();
+        // Do not redirect.
+        return false;
+      }
+    },
+    // Opens IDP Providers sign-in flow in a popup.
+    'signInFlow': 'popup',
+    'signInOptions': [
+      // TODO(developer): Remove the providers you don't need for your app.
+      {
+        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        scopes: ['https://www.googleapis.com/auth/plus.login']
+      }
+    ]
+  }
+}
+
 
   /* Captures the submission of a new user registration and triggers a
   new user request.*/
+
   onRegister(e) {
     this.setState( {"submitting": true} );
     e.preventDefault();
@@ -118,6 +167,8 @@ class Login extends React.Component {
     }
 
     var loginPage =
+    <div>
+
       <div style={headerStyle}>
          <Jumbotron style = {jumboStyle}>
             <h1>Magenta Messenger</h1>
@@ -125,12 +176,12 @@ class Login extends React.Component {
             <p><Button href="https://github.com/petosa/codeu_project_2017" target="_blank">Learn more</Button></p>
          </Jumbotron>
          <Col md={4} mdOffset={4}>
-         <Panel header="First Time" style={loginStyle}>
+         <Panel header="Sign In:" style={loginStyle}>
             <Form horizontal onSubmit={this.onRegister}>
                <Row>
                   <FormGroup controlId="formHorizontalUser">
                      <Col componentClass={ControlLabel} mdOffset={1} md={2}>
-                     Register
+                     Create User
                      </Col>
                      <Col mdOffset={2} md={7}>
                      <FormControl style={loginStyle} value={this.state.register} onChange={this.handleRegisterChange} type="search" />
@@ -140,11 +191,13 @@ class Login extends React.Component {
                <FormGroup>
                   <Col md={12}>
                   <Button type="submit" disabled={this.state.submitting}>
-                  Sign up
+                    Submit
                   </Button>
                   </Col>
                </FormGroup>
             </Form>
+        ~~OR~~
+      <div id="firebaseui-container"> </div>
          </Panel>
         {/* <Panel header="Returning User" style={loginStyle}>
             <Form horizontal onSubmit={this.onLogin}>
@@ -179,8 +232,9 @@ class Login extends React.Component {
          </Panel> */}
          </Col>
       </div>
+    </div>
 
-    var mainPage = <Main url={this.props.url} port={this.props.port} user={this.state.user}/>
+    var mainPage = <Main imageUrl = {this.state.photo} url={this.props.url} port={this.props.port} user={this.state.user}/>
 
     /* Depending on login state, either display the main page or the current
     login page.*/

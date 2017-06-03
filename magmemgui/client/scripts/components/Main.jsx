@@ -57,6 +57,8 @@ class Main extends React.Component {
 
   render() {
 
+    console.log(this.state.imageUrl);
+
     /* The following structs are all for styling.*/
     var headerStyle = {
       "fontFamily": "Space Mono",
@@ -145,7 +147,7 @@ class Main extends React.Component {
        <Row>
          <Panel style={{"marginTop":"40px","borderRadius": "25px", "marginLeft": "11px", "width": "96.2%", "height": "13vh"}}>
            <Col xs={4}>
-           <Image style={{"maxWidth": "65%", "maxHeight": "65%"}} src={"http://bugs.bluej.org/secure/useravatar?size=xsmall&avatarId=103" + this.state.icon}  circle />
+           <Image style={{"maxWidth": "65%", "maxHeight": "65%"}} src={this.props.imageUrl || "http://bugs.bluej.org/secure/useravatar?size=xsmall&avatarId=103" + this.state.icon}  circle />
            </Col>
            <Col xs={8}>
              <Row><h3 style={smallStyle}>Logged in as</h3></Row>
