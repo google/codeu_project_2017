@@ -60,6 +60,7 @@ public final class Chat {
     System.out.println("   m-list-all       - list all messages in the current conversation.");
     System.out.println("   m-next <index>   - index of next message to view.");
     System.out.println("   m-show <count>   - show next <count> messages.");
+    System.out.println("   m-update         - updates the conversation.");
   }
 
   // Prompt for new command.
@@ -159,6 +160,14 @@ public final class Chat {
         System.out.println("ERROR: No conversation selected.");
       } else {
         clientContext.message.showAllMessages();
+      }
+
+    } else if (token.equals("m-update")) {
+
+      if (!clientContext.conversation.hasCurrent()) {
+        System.out.println("ERROR: No conversation selected.");
+      } else {
+        clientContext.message.updateMessages(true);
       }
 
     } else if (token.equals("m-next")) {

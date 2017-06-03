@@ -150,4 +150,12 @@ public final class ClientUser {
   public static void printUser(User user) {
     System.out.println(getUserInfoString(user));
   }
+
+  /**
+   * Checks if the provided username is already used.
+   * (Multiple users with the same
+   */
+  public boolean isUsernameTaken(String uname){
+    return usersByName.first(uname) != null;
+  }
 }

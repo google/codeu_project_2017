@@ -1,0 +1,4 @@
+Team ID: 29
+Secret Key: ABABAB
+Port: 2007
+Persistence Directory: data
