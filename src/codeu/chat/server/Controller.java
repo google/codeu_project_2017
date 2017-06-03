@@ -15,6 +15,7 @@
 package codeu.chat.server;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -25,17 +26,30 @@ import codeu.chat.common.User;
 import codeu.chat.common.Uuid;
 import codeu.chat.common.Uuids;
 import codeu.chat.util.Logger;
+import codeu.chat.util.store.Database;
 
 public final class Controller implements RawController, BasicController {
 
   private final static Logger.Log LOG = Logger.newLog(Controller.class);
 
   private final Model model;
+  private final Database database;
   private final Uuid.Generator uuidGenerator;
 
   public Controller(Uuid serverId, Model model) {
     this.model = model;
+    this.database = new Database();
     this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
+    database.initialize();
+    ArrayList<User> updateUsers = database.restoreUsers();
+    ArrayList<Conversation> updateConvos = database.restoreConversations();
+    ArrayList<Message> updateMessages = database.restoreMessages();
+    for(int i = 0; i < updateUsers.size(); i++)
+      model.add(updateUsers.get(i));
+    for(int i = 0; i < updateConvos.size(); i++)
+      model.add(updateConvos.get(i));
+    for(int i = 0; i < updateMessages.size(); i++)
+      model.add(updateMessages.get(i));
   }
 
   @Override
@@ -65,6 +79,7 @@ public final class Controller implements RawController, BasicController {
 
       message = new Message(id, Uuids.NULL, Uuids.NULL, creationTime, author, body);
       model.add(message);
+      database.addMessage(message);
       LOG.info("Message added: %s", message.id);
 
       // Find and update the previous "last" message so that it's "next" value
@@ -111,6 +126,7 @@ public final class Controller implements RawController, BasicController {
 
       user = new User(id, name, creationTime);
       model.add(user);
+      database.addUser(user);
 
       LOG.info(
           "newUser success (user.id=%s user.name=%s user.time=%s)",
@@ -140,6 +156,7 @@ public final class Controller implements RawController, BasicController {
     if (foundOwner != null && isIdFree(id)) {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
+      database.addConversation(conversation);
 
       LOG.info("Conversation added: " + conversation.id);
     }
