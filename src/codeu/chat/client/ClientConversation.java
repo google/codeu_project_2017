@@ -188,4 +188,24 @@ public final class ClientConversation {
   public static void printConversation(ConversationSummary c) {
     printConversation(c, null);
   }
+
+  public void showStatistics() {
+    int numberOfConversations = getNumberOfConversations();
+    int numberOfUsers = userContext.getNumberOfUsers();
+    System.out.println("Total number of conversations:  " + numberOfConversations);
+    double conversationsPerUser = 0;
+    if(numberOfUsers != 0) {
+      conversationsPerUser = (double) Math.round(numberOfConversations / numberOfUsers * 100) / 100;
+    }
+    System.out.println("Average number of conversations per user:  " + conversationsPerUser);
+    System.out.println("");
+  }
+
+  public int getNumberOfConversations() {
+    return summariesByUuid.size();
+  }
+
+  public void deleteConversation() {
+    //TODO: implement
+  }
 }

@@ -65,7 +65,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public User newUser(String name) {
+  public User newUser(String name, String password) {
 
     User response = null;
 
@@ -73,6 +73,7 @@ public class Controller implements BasicController {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.NEW_USER_REQUEST);
       Serializers.STRING.write(connection.out(), name);
+      Serializers.STRING.write(connection.out(), password);
       LOG.info("newUser: Request completed.");
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_USER_RESPONSE) {
@@ -101,6 +102,29 @@ public class Controller implements BasicController {
       Uuid.SERIALIZER.write(connection.out(), owner);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.NEW_CONVERSATION_RESPONSE) {
+        response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());
+      } else {
+        LOG.error("Response from server failed.");
+      }
+    } catch (Exception ex) {
+      System.out.println("ERROR: Exception during call on server. Check log for details.");
+      LOG.error(ex, "Exception during call on server.");
+    }
+
+    return response;
+  }
+
+  public Conversation deleteConversation(String title, Uuid owner)  {
+
+    Conversation response = null;
+
+    try (final Connection connection = source.connect()) {
+
+      Serializers.INTEGER.write(connection.out(), NetworkCode.DELETE_CONVERSATION_REQUEST);
+      Serializers.STRING.write(connection.out(), title);
+      Uuid.SERIALIZER.write(connection.out(), owner);
+
+      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.DELETE_CONVERSATION_RESPONSE) {
         response = Serializers.nullable(Conversation.SERIALIZER).read(connection.in());
       } else {
         LOG.error("Response from server failed.");

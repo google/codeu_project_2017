@@ -40,21 +40,36 @@ public final class ClientUser {
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
 
   public ClientUser(Controller controller, View view) {
+	  
     this.controller = controller;
     this.view = view;
+    
   }
 
   // Validate the username string
-  static public boolean isValidName(String userName) {
-    boolean clean = true;
-    if (userName.length() == 0) {
-      clean = false;
-    } else {
+  public boolean isValidName(String userName){
+	  
+    if (userName.length() == 0) 
+    {
+      return false;
+    } 
+    
+    else {
 
-      // TODO: check for invalid characters
+      for (User i : getUsers()){
+    	  if(i.name.toUpperCase().equals(userName.toUpperCase()))
+    	  {
+    		  System.out.format("Error: User not created | User Name already exists");
+    		  return false;
+    	  }
+      }
 
     }
-    return clean;
+    return true;
+  }
+
+  public boolean isValidPassword(String password) {
+    return password != null && password.length() > 0;
   }
 
   public boolean hasCurrent() {
@@ -65,21 +80,28 @@ public final class ClientUser {
     return current;
   }
 
-  public boolean signInUser(String name) {
+  public boolean signInUser(String name, String password) {
     updateUsers();
 
     final User prev = current;
     if (name != null) {
-      final User newCurrent = usersByName.first(name);
+      
+    	final User tempCurrent = usersByName.first(name);
+    	User newCurrent = null;
+    	if(password != null && password.equals(tempCurrent.password)) {
+    	  newCurrent = tempCurrent;
+        }
       if (newCurrent != null) {
         current = newCurrent;
       }
     }
+    
     return (prev != current);
   }
 
   public boolean signOutUser() {
-    boolean hadCurrent = hasCurrent();
+    
+	  boolean hadCurrent = hasCurrent();
     current = null;
     return hadCurrent;
   }
@@ -88,16 +110,19 @@ public final class ClientUser {
     printUser(current);
   }
 
-  public void addUser(String name) {
-    final boolean validInputs = isValidName(name);
+  public void addUser(String name, String password) {
+    
+	  final boolean validInputs = isValidName(name) && isValidPassword(password);
 
-    final User user = (validInputs) ? controller.newUser(name) : null;
+    final User user = (validInputs) ? controller.newUser(name, password) : null;
 
     if (user == null) {
-      System.out.format("Error: user not created - %s.\n",
+      
+    	System.out.format("Error: user not created - %s.\n",
           (validInputs) ? "server failure" : "bad input value");
     } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      
+    	LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }
   }
@@ -149,5 +174,15 @@ public final class ClientUser {
   // Move to User's toString()
   public static void printUser(User user) {
     System.out.println(getUserInfoString(user));
+  }
+
+  public void showStatistics() {
+    int numberOfUsers = getNumberOfUsers();
+    System.out.println("Number of users:  " + numberOfUsers);
+    System.out.println("");
+  }
+
+  public int getNumberOfUsers() {
+    return usersById.size();
   }
 }

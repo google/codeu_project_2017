@@ -1,0 +1,12 @@
+Apr 18, 2017 3:03:49 PM codeu.chat.SimpleGuiClientMain main
+INFO: ============================= START OF LOG =============================
+Apr 18, 2017 3:03:49 PM codeu.chat.SimpleGuiClientMain main
+INFO: Starting chat client...
+Apr 18, 2017 3:03:49 PM codeu.chat.SimpleGuiClientMain main
+INFO: Creating client...
+Apr 18, 2017 3:03:49 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: Created client
+Apr 18, 2017 3:03:51 PM codeu.chat.client.ClientMessage updateMessages
+SEVERE: conversation argument is null - do nothing.
+Apr 18, 2017 3:03:53 PM codeu.chat.SimpleGuiClientMain runClient
+INFO: chat client is running.

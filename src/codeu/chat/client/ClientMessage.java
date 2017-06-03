@@ -46,6 +46,11 @@ public final class ClientMessage {
   private final ClientUser userContext;
   private final ClientConversation conversationContext;
 
+  private HashMap<String, Integer> wordCount = new HashMap<String, Integer>();
+
+  private HashMap<Integer, Integer> messageLengthCount = new HashMap<Integer, Integer>();
+  private HashMap<Integer, Integer> wordLengthCount = new HashMap<Integer, Integer>();
+
   public ClientMessage(Controller controller, View view, ClientUser userContext,
                        ClientConversation conversationContext) {
     this.controller = controller;
@@ -107,8 +112,28 @@ public final class ClientMessage {
     } else {
       LOG.info("New message:, Author= %s UUID= %s", author, message.id);
       current = message;
+      updateWordLengthCount(body);
+      updateMessageLengthCount(body);
     }
+
+
+
     updateMessages(false);
+  }
+
+  private void updateWordLengthCount(String body) {
+    String[] splited = body.trim().split("\\s+");
+    for(String str: splited) {
+      int len = str.length();
+      int count = wordLengthCount.containsKey(len) ? wordLengthCount.get(len) : 0 ;
+      wordLengthCount.put(len, count + 1);
+    }
+  }
+
+  private void updateMessageLengthCount(String body) {
+    int len = body.length();
+    int count = messageLengthCount.containsKey(len) ? messageLengthCount.get(len) : 0;
+    messageLengthCount.put(len, count + 1);
   }
 
   // For m-list-all command.
@@ -129,24 +154,39 @@ public final class ClientMessage {
   // Message 1 is the head of the Conversation's message chain.
   // Message -1 is the tail of the Conversation's message chain.
   public void selectMessage(int index) {
-    Method.notImplemented();
+
+    printMessage(conversationContents.get(index));
   }
 
   // Processing for m-show command.
   // Accept an int for number of messages to attempt to show (1 by default).
   // Negative values go from newest to oldest.
   public void showMessages(int count) {
-    for (final Message m : conversationContents) {
-      printMessage(m, userContext);
+    if(count >= 0) {
+      showNextMessages(count);
     }
+    else {
+      showPreviousMessages(Math.abs(count));
+    }
+
   }
 
   private void showNextMessages(int count) {
-    Method.notImplemented();
+    if(count > conversationContents.size()) {
+      count = conversationContents.size();
+    }
+    for(int i = 0; i < count; i++) {
+      printMessage(conversationContents.get(i), userContext);
+    }
   }
 
   private void showPreviousMessages(int count) {
-    Method.notImplemented();
+    if(count > conversationContents.size()) {
+      count = conversationContents.size();
+    }
+    for(int i = 0; i < count; i++) {
+      printMessage(conversationContents.get(conversationContents.size() - 1 - i), userContext);
+    }
   }
 
   // Determine the next message ID of the current conversation to start pulling.
@@ -243,5 +283,37 @@ public final class ClientMessage {
   // Print Message outside of user context.
   public static void printMessage(Message m) {
     printMessage(m, null);
+  }
+
+  public void showStatistics() {
+    int numberOfMessages = getNumberOfMessages();
+    int numberOfUsers = userContext.getNumberOfUsers();
+    System.out.println("Total number of messages: " + numberOfMessages);
+    double messagesPerUser = 0;
+    if(numberOfUsers != 0) {
+      messagesPerUser = (double)Math.round(numberOfMessages/numberOfUsers * 100)/100;
+    }
+    System.out.println("Average number of messages per user: " + messagesPerUser);
+    System.out.println("");
+    System.out.println("Frequencies of message lengths:");
+    System.out.println("Length\t\tFrequency");
+    for (Map.Entry<Integer, Integer> entry : messageLengthCount.entrySet()) {
+      int length = entry.getKey();
+      int frequency = entry.getValue();
+      System.out.println(length + "\t\t" + frequency);
+    }
+    System.out.println("");
+    System.out.println("Frequencies of word lengths:");
+    System.out.println("Length\t\tFrequency");
+    for (Map.Entry<Integer, Integer> entry : wordLengthCount.entrySet()) {
+      int length = entry.getKey();
+      int frequency = entry.getValue();
+      System.out.println(length + "\t\t" + frequency);
+    }
+
+  }
+
+  public int getNumberOfMessages() {
+    return conversationContents.size();
   }
 }
