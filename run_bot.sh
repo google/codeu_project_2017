@@ -23,4 +23,4 @@ if [[ "${HOST}" == "" || "${PORT}" == "" ]] ; then
 fi
 
 cd './bin'
-java codeu.chat.EchobotMain "${HOST}@${PORT}"
+java codeu.chat.TicTacToeBot "${HOST}@${PORT}"

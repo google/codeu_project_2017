@@ -1,0 +1,1544 @@
+Jun 02, 2017 9:33:03 PM codeu.chat.TicTacToeBot main
+INFO: ============================= START OF LOG =============================
+Jun 02, 2017 9:33:03 PM codeu.chat.TicTacToeBot main
+INFO: Starting bot client...
+Jun 02, 2017 9:33:03 PM codeu.chat.TicTacToeBot main
+INFO: Creating bot...
+Jun 02, 2017 9:33:03 PM codeu.chat.client.Controller newUser
+INFO: newUser: Request completed.
+Jun 02, 2017 9:33:03 PM codeu.chat.client.Controller newUser
+INFO: newUser: Response completed.
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientUser addUser
+INFO: New user complete, Name= "TicTacToe-0" UUID=[UUID:101.3262794554]
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientConversation startConversation
+INFO: New conversation: Title= "TicTacToe-0" UUID= [UUID:101.1494573311]
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:0] last=[UUID:0]
+
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:0] last=[UUID:0]
+
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:0]
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 0 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.2379193344]
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=false firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:03 PM codeu.chat.TicTacToeBot main
+INFO: Created bot
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:04 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:04 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:05 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:05 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:06 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:06 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:06 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:06 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:07 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:07 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:08 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:08 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:08 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:08 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:09 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:09 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:09 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:09 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:10 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:10 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:11 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:11 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:12 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:12 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:12 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:12 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:13 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:13 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:14 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:14 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:14 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:14 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:15 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:15 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:15 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:15 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:16 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:16 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:17 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:17 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:17 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:17 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:19 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:19 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:19 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:19 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:20 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:20 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:20 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:20 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:21 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:21 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:21 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:21 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:22 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:22 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:22 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:22 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:23 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:23 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:23 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:23 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:24 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:24 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:24 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:24 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:25 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:25 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:25 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:25 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:26 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:26 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:26 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:26 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:27 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:27 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:27 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:27 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:28 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:28 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:28 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:28 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:29 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:29 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:29 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:29 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:30 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:30 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:31 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:31 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:31 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:31 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:32 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:32 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:32 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:32 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:33 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:33 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:33 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:33 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:34 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:34 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:34 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:34 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:35 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:35 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:35 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:35 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:36 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:36 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:36 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:36 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:37 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:37 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:38 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:38 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:38 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:38 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:39 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:39 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:39 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:39 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:40 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:40 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:40 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:40 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:41 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:41 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:41 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:41 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:42 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:42 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:42 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:42 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:43 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:43 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:43 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:43 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:44 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:44 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:44 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:44 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:45 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:45 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:45 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:45 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:46 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:46 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:46 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:46 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:47 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:47 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:47 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:47 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:48 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:48 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:48 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:48 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:49 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:49 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:49 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:49 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:50 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:50 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:50 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:50 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:51 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:51 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:51 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:51 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:52 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:52 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2379193344]
+
+Jun 02, 2017 9:33:52 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:52 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 1 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4232776922]
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4232776922]
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 2 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.1120175534]
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1120175534]
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 3 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.226284974]
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.226284974]
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 4 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.4203082554]
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:54 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:54 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:55 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:55 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:55 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:55 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:56 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:56 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:56 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:56 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:57 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:57 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:57 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:57 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:58 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:58 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:58 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:58 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:33:59 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:59 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:33:59 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:33:59 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:00 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:00 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:00 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:00 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:01 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:01 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:01 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:01 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:02 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:02 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:02 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:02 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:03 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4203082554]
+
+Jun 02, 2017 9:34:03 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 5 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2463957715]
+
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2463957715]
+
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 6 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.1532573647]
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:05 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:05 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:06 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:06 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:06 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:06 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:07 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:07 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:08 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:08 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:08 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:08 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:09 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:09 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:09 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:09 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:10 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:10 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:11 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:11 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:12 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:12 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:12 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:12 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:13 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:13 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:14 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:14 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:14 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:14 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:15 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:15 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:15 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:15 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:16 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:16 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:16 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:17 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:17 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:17 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:17 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:18 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:18 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:18 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:18 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:19 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:19 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:19 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:19 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:20 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:20 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:20 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:20 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:21 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:21 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:21 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:21 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:22 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:22 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:22 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:22 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:23 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:23 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:23 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:23 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:24 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:24 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:24 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:25 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:26 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:26 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:26 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:26 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:27 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:27 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:27 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:27 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:28 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:28 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:28 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:28 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:29 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:29 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1532573647]
+
+Jun 02, 2017 9:34:29 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:29 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 7 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2953429995]
+
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.2953429995]
+
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 8 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.4286869967]
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:30 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:31 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:31 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:31 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:31 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:32 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:32 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:32 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:32 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:33 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:33 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:33 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:33 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:34 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:34 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:34 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:34 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:35 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:35 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:35 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:35 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:36 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:36 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.4286869967]
+
+Jun 02, 2017 9:34:36 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:36 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 9 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1305875591]
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1305875591]
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 10 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.1881102864]
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1881102864]
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 11 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.3157233460]
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:37 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:38 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:38 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:38 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:38 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:39 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:39 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:39 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:39 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:40 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:40 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:40 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:40 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:41 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:41 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:41 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:41 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:42 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:42 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:42 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:42 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:43 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:43 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:43 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:43 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:44 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:44 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:44 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:44 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:45 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:45 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:45 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:45 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:46 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:46 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:46 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:46 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:47 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:47 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:47 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:47 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:48 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:48 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:48 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:48 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:49 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:49 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:49 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:49 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:50 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:50 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:50 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:50 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:51 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:51 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:51 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:51 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:52 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:52 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:52 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:52 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:53 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:53 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:53 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:54 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:54 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:54 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:55 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:55 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:55 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:55 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:56 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:56 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:56 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:56 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:57 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:57 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:57 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:57 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:58 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:58 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:58 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:58 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:34:59 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:59 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3157233460]
+
+Jun 02, 2017 9:34:59 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:34:59 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 12 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3889693858]
+
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3889693858]
+
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 13 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.952910501]
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:00 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:01 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:01 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:01 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:01 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:02 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:02 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:02 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:02 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:03 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:03 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:03 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:04 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:04 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:04 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:05 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:05 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:05 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:06 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:06 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:06 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:06 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:07 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:07 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:07 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:08 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:08 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:08 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:08 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:09 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:09 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.952910501]
+
+Jun 02, 2017 9:35:09 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:09 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 14 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:10 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1089063261]
+
+Jun 02, 2017 9:35:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.1089063261]
+
+Jun 02, 2017 9:35:10 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 15 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:10 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.3990280713]
+Jun 02, 2017 9:35:10 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3990280713]
+
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 16 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.747897999]
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.747897999]
+
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 17 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage addMessage
+INFO: New message:, Author= [UUID:101.3262794554] UUID= [UUID:101.3960120542]
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3960120542]
+
+Jun 02, 2017 9:35:11 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 18 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:12 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3960120542]
+
+Jun 02, 2017 9:35:12 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3960120542]
+
+Jun 02, 2017 9:35:12 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:12 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 18 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
+Jun 02, 2017 9:35:13 PM codeu.chat.client.ClientConversation updateCurrentConversation
+INFO: Get Conversation: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3960120542]
+
+Jun 02, 2017 9:35:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: ConversationHead: Title="TicTacToe-0" UUID=[UUID:101.1494573311] first=[UUID:101.2379193344] last=[UUID:101.3960120542]
+
+Jun 02, 2017 9:35:13 PM codeu.chat.client.ClientMessage getCurrentMessageFetchId
+INFO: Refetch all messages: replaceAll=true firstMessage=[UUID:101.2379193344]
+Jun 02, 2017 9:35:13 PM codeu.chat.client.ClientMessage updateMessages
+INFO: Retrieved 18 messages for conversation [UUID:101.1494573311] (TicTacToe-0).
+
