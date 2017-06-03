@@ -1,13 +1,70 @@
+[![Build Status](https://travis-ci.org/petosa/codeu_project_2017.svg?branch=master)](https://travis-ci.org/petosa/codeu_project_2017)
+# Magenta Messenger
 
-# CODEU CHAT SERVER | README
+Try it online! (Warning! Slow.) http://130.211.140.178:10110
 
+## How to run
 
-## DISCLAIMER
+  1. To build the project:
+       ```
+       $ bash clean.sh
+       $ bash make.sh
+       ```
 
-CODEU is a program created by Google to develop the skills of future software
-engineers. This project is not an offical Google Product. This project is a
-playground for those looking to develop their coding and software engineering
-skills.
+  2. To test the project:
+       ```
+       $ bash test.sh
+       ```
+
+  3. To run the project you will only need to run the server. The format for such a command is shown below.
+
+       ```
+       $ bash run_server.sh <team_id> <team_secret> <port> <persistent-dir>
+       ```
+      If you don't know what you should put here, you can just do 
+       ```
+       $ bash run_server.sh 16 16 8000 persistent
+       ```
+       and then connect to http://localhost:8000 to see the web client and start using the messenger locally.
+       
+       
+## FEATURES
+### REST API
+We needed a REST API in order to talk to our server from a web server. This change is completely documented in terms of code changes in comments and in terms of functionality in our wiki's API documentation.
+#### PROS:
++ We now have a platform agnostic chat server and can host a mobile app, web app, or whatever using the same backend.
++ Dual protocol switching depending on incoming request; backwards compatible.
+#### CONS:
+- Security problems by sharing a port for two protocols (network code and REST).
+
+### WEB SERVER
+We used our REST API to host static HTML, CSS, and JS files for clients to download to talk to our server.
+#### PROS:
++ Leverages our existing REST backend to and a huge amount of functionality.
++ Handles pre-flight requests as well as static content delivery.
+#### CONS:
+- Security problems. Since pages and content are delivered in a very rudimentary way, it may be possible for a malicious actor to exploit our system.
+### WEB SITE
+We needed a web UI to replace the CLI and provide a clean interface for communicating with the server.
+#### PROS:
++ Can be accessed from mobile or desktop
++ Can leverage popular web frameworks to make a really cool UI
+#### CONS:
+- There are better ways of implementing polling than checking every second.
+- Different screensizes and browsers means compatability issues.
+- Google's hosting is very slow.
+
+## BUG SQUASHING
+### Bug 1:
+Issue: Conversion from String to int was failing.
+Diagnosis: String needed to be converted to a Long before it could be cast to an int
+Cure: Changed Integer.parseInt to (int) Long.parseLong.
+
+### Bug 2:
+Issue: when hosting on Google's server, web server hangs and does not respond to any requests.
+Diagnosis: When Google's relay server is down, the timeline gets clogged and blocks any other requests from passing through. The result is a hanging server/
+Cure: Completely removed Relay from my application (see commented out block in Server.java). It was only causing problems, and I value reliability.
+
 
 
 ## ENVIRONMENT
@@ -20,103 +77,6 @@ This project was built using JAVA 7. It is recommended that you install
 JAVA&nbsp;7 when working with this project.
 
 
-## GETTING STARTED
-
-  1. To build the project:
-       ```
-       $ sh clean.sh
-       $ sh make.sh
-       ```
-
-  1. To test the project:
-       ```
-       $ sh test.sh
-       ```
-
-  1. To run the project you will need to run both the client and the server. Run
-     the following two commands in separate shells:
-
-       ```
-       $ sh run_server.sh <team_id> <team_secret> <port> <persistent-dir>
-       $ sh run_client.sh <host> <port>
-       ```
-
-     You must specify the following startup arguments for `run_server.sh:
-     + `<team_id>` and `<team_secret>`: a numeric id for your team, and a secret
-       code, which are used to authenticate your server with the Relay server.
-       You can specify any integer value for `<team_id>`, and a value expressed
-       in hexadecimal format (using numbers `0-9` and letters in the range
-       `A-F`) for `<team_secret>` when you launch the server in your local setup
-       since it will not connect to the Relay server.
-     + `<port>`: the TCP port that your Server will listen on for connections
-       from the Client. You can use any value between 1024 and 65535, as long as
-       there is no other service currently listening on that port in your
-       system. The server will return an error:
-
-         ```
-         java.net.BindException: Address already in use (Bind failed)
-         ```
-
-       if the port is already in use.
-     + `<persistent-dir>`: the path where you want the server to save data between
-       runs.
-
-     The startup arguments for `run_client.sh` are the following:
-     + `<host>`: the hostname or IP address of the computer on which the server
-       is listening. If you are running server and client on the same computer,
-       you can use `localhost` here.
-     + `<port>`: the port on which your server is listening. Must be the same
-       port number you have specified when you launched `run_server.sh`.
-
-All running images write informational and exceptional events to log files.
-The default setting for log messages is "INFO". You may change this to get
-more or fewer messages, and you are encouraged to add more LOG statements
-to the code. The logging is implemented in `codeu.chat.util.Logger.java`,
-which is built on top of `java.util.logging.Logger`, which you can refer to
-for more information.
-
-In addition to your team's client and server, the project also includes a
-Relay Server and a script that runs it (`run_relay.sh`).
-This is not needed to get started with the project.
-
-
 ## Finding your way around the project
 
-All the source files (except test-related source files) are in
-`./src/codeu/chat`.  The test source files are in `./test/codeu/chat`. If you
-use the supplied scripts to build the project, the `.class` files will be placed
-in `./bin`. There is a `./third_party` directory that holds the jar files for
-JUnit (a Java testing framework). Your environment may or may not already have
-this installed. The supplied scripts use the version in `./third_party`.
-
-Finally, there are some high-level design documents in the project Wiki. Please
-review them as they can help you find your way around the sources.
-
-
-
-## Source Directories
-
-The major project components have been separated into their own packages. The
-main packages/directories under `src/codeu/chat` are:
-
-### codeu.chat.client
-
-Classes for building the two clients (`codeu.chat.ClientMain` and
-`codeu.chat.SimpleGuiClientMain`).
-
-### codeu.chat.server
-
-Classes for building the server (`codeu.chat.ServerMain`).
-
-### codeu.chat.relay
-
-Classes for building the Relay Server (`codeu.chat.RelayMain`). The Relay Server
-is not needed to get started.
-
-### codeu.chat.common
-
-Classes that are shared by the clients and servers.
-
-### codeu.chat.util
-
-Some basic infrastructure classes used throughout the project.
+In terms of changes from the barebones server Google handed us; magmemgui is completely our code and contains all of our frontend web client code. For the server, all changes are inside Server.java, Request.java, or RequestHandler.java. Check the diff for exact changes.

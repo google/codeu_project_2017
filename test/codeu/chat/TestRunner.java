@@ -26,12 +26,13 @@ public final class TestRunner {
              codeu.chat.relay.ServerTest.class,
              codeu.chat.server.BasicControllerTest.class,
              codeu.chat.server.RawControllerTest.class,
+             codeu.chat.server.RequestTest.class,
              codeu.chat.util.TimeTest.class,
              codeu.chat.util.UuidTest.class,
              codeu.chat.util.store.StoreTest.class
          );
       for (final Failure failure : result.getFailures()) {
-         System.out.println(failure.toString());
+         System.out.println(failure.getException());
       }
       System.out.println(result.wasSuccessful());
    }

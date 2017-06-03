@@ -22,6 +22,7 @@ import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import com.google.gson.Gson;
 
 public final class Message {
 
@@ -71,4 +72,11 @@ public final class Message {
     this.content = content;
 
   }
+
+  @Override
+  public String toString() {
+    Gson g = new Gson();
+    return g.toJson(this, Message.class);
+  }
+
 }

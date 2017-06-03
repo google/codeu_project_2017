@@ -18,10 +18,11 @@ package codeu.chat.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PushbackInputStream;
+import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -30,12 +31,16 @@ import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.common.User;
+import codeu.chat.server.model.Request;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public final class Server {
 
@@ -63,7 +68,7 @@ public final class Server {
     this.controller = new Controller(id, model);
     this.relay = relay;
 
-    timeline.scheduleNow(new Runnable() {
+    /*timeline.scheduleNow(new Runnable() {
       @Override
       public void run() {
         try {
@@ -80,10 +85,13 @@ public final class Server {
           LOG.error(ex, "Failed to read update from relay.");
 
         }
-
         timeline.scheduleIn(RELAY_REFRESH_MS, this);
       }
-    });
+    });*/
+  }
+
+  public void kill() {
+    timeline.stop();
   }
 
   public void handleConnection(final Connection connection) {
@@ -114,7 +122,250 @@ public final class Server {
     });
   }
 
+  /**
+   *
+   * Switch between serialized and restful modes. We use a neat trick here to do so.
+   * Byte looking at the first byte of an incoming request, we can determine whether it is
+   * restful or serial.
+   *
+   * Typically you'd want to do something like inserting a signal byte, but
+   * because we want to connect relay we cannot rely on such a byte being present. Likewise,
+   * we cannot rely on a restful client to append any byte before his request.
+   *
+   * However, since Network Codes are always less than 31, which are numbers with values that correspond to the
+   * ASCII control characters, which will never lead a restful request. Therefore, we can simply check whether
+   * this first byte is less than 31 to make a determination on how to process the incoming data.
+   *
+   * Create a PushbackInputStream so we can restore our input buffer after checking the lead byte.
+   *
+   * @param in input stream from remote.
+   * @param out output stream to remote.
+   * @return success
+   * @throws IOException
+   */
   private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+    PushbackInputStream pb = new PushbackInputStream(in);
+    int leadByte = pb.read();
+    pb.unread(leadByte);
+    if (leadByte < NetworkCode.MAX_NETWORK_CODE) {
+      return onSerialMessage(pb, out);
+    } else {
+      return onRestfulMessage(pb, out);
+    }
+  }
+
+  private boolean onRestfulMessage(InputStream in, OutputStream out) throws IOException {
+    LOG.info("Receiving a RESTful message.");
+    Request r = RequestHandler.parseRaw(in);
+
+    if (r.getVerb().equals("OPTIONS")) {
+      return RequestHandler.optionsResponse(out, r);
+    } else if (r.getHeader("type") == null) {
+      return RequestHandler.website(out, r);
+    } else if (r.getVerb().equals("POST")) {
+      String body;
+      User user;
+      Uuid uuid1;
+      Uuid uuid2;
+      String value;
+      Conversation conv;
+      Message message;
+
+      switch (r.getHeader("type")) {
+
+        // Creates a new user
+        case ("NEW_USER"):
+          body = r.getBody();
+          if (body == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid name header.");
+          }
+          user = controller.newUser(body);
+          if (user == null) {
+            return RequestHandler.failResponse(out, "Invalid username.");
+          }
+          return RequestHandler.successResponse(out, user.toString());
+
+        // Creates a new conversation
+        case ("NEW_CONVERSATION"):
+          body = r.getBody();
+          uuid1= Uuid.parse(r.getHeader("owner"));
+          if (body == null || uuid1 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid title or owner header.");
+          }
+          conv = controller.newConversation(body, uuid1);
+          if (conv == null) {
+            return RequestHandler.failResponse(out, "Invalid conversation.");
+          }
+          return RequestHandler.successResponse(out, conv.toString());
+
+        // Creates a new message
+        case ("NEW_MESSAGE"):
+          uuid1 = Uuid.parse(r.getHeader("author"));
+          uuid2 = Uuid.parse(r.getHeader("conversation"));
+          body = r.getBody();
+          if (uuid1 == null || uuid2 == null || body == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid author, conversation, or content header.");
+          }
+          message = controller.newMessage(uuid1, uuid2, body);
+          if (message == null) {
+            return RequestHandler.failResponse(out, "Invalid message.");
+          }
+          return RequestHandler.successResponse(out, message.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
+
+      }
+
+    } else if (r.getVerb().equals("GET")) {
+      Collection<User> users;
+      Collection<Conversation> convs;
+      Collection<Message> msgs;
+      Collection<String> ids;
+      Collection<Uuid> uuids;
+      Uuid uuid;
+      String value;
+      String value2;
+      String value3;
+      Gson g = new Gson();
+      Type listType = new TypeToken<Collection<String>>(){}.getType();
+
+      switch (r.getHeader("type")) {
+
+        // Returns a list of all users
+        case ("ALL_USERS"):
+          users = view.getUsersExcluding(new ArrayList<Uuid>());
+          return RequestHandler.successResponse(out, users.toString());
+
+        // Return list of all users in the provided list of UUIDs
+        case ("GET_USERS"):
+          value = null;
+          value2 = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              value2 = item;
+              uuids.add(Uuid.parse(item));
+            }
+            users = view.getUsers(uuids);
+            return RequestHandler.successResponse(out, users.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + value2 + ".");
+          }
+
+        // Return list of all conversations in the provided list of UUIDs
+        case ("GET_CONVERSATIONS"):
+          value = null;
+          value2 = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              value2 = item;
+              uuids.add(Uuid.parse(item));
+            }
+            convs = view.getConversations(uuids);
+            return RequestHandler.successResponse(out, convs.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + value2 + ".");
+          }
+
+         // Return list of all conversations between two dates
+        case ("TIMED_CONVERSATIONS"):
+          value = r.getHeader("from");
+          value2 = r.getHeader("to");
+          if (value == null || value2 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid to or from header.");
+          }
+          convs = view.getConversations(Time.fromMs(Long.parseLong(value)), Time.fromMs(Long.parseLong(value2)));
+          return RequestHandler.successResponse(out, convs.toString());
+
+        // Return list of all conversations that match a regex filter
+        case ("FIND_CONVERSATIONS"):
+          value = r.getHeader("filter");
+          if (value == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid filter header.");
+          }
+          try {
+            convs = view.getConversations(value);
+          } catch (Exception e) {
+            return RequestHandler.failResponse(out, "Problem with your filter.");
+          }
+          return RequestHandler.successResponse(out, convs.toString());
+
+        // Return list of all messages in the provided list of UUIDs
+        case ("GET_MESSAGES"):
+          value = null;
+          value2 = null;
+          try {
+            value = r.getHeader("uuids");
+            ids = g.fromJson(value, listType);
+            uuids = new ArrayList<Uuid>();
+            for (String item : ids) {
+              value2 = item;
+              uuids.add(Uuid.parse(item));
+            }
+            msgs = view.getMessages(uuids);
+            return RequestHandler.successResponse(out, msgs.toString());
+          } catch (JsonSyntaxException e) {
+            return RequestHandler.failResponse(out, "Malformed array in GET header (" + value + ").");
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, "Invalid UUID provided from uuid array: " + value2 + ".");
+          }
+
+        // Return list of all messages between two dates
+        case ("TIMED_MESSAGES"):
+          value = r.getHeader("from");
+          value2 = r.getHeader("to");
+          value3 = r.getHeader("conversation");
+          if (value == null || value2 == null || value3 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid to or from or conversation header.");
+          }
+          try {
+            uuid = Uuid.parse(value3);
+          } catch (Exception e) {
+            return RequestHandler.failResponse(out, "Conversation " + value3 + " does not exist.");
+          }
+          msgs = view.getMessages(uuid, Time.fromMs(Long.parseLong(value)), Time.fromMs(Long.parseLong(value2)));
+          return RequestHandler.successResponse(out, msgs.toString());
+
+        // Return list of all messages in the provided a root message and a range of messages that grow from it.
+        case ("RANGED_MESSAGES"):
+          value = r.getHeader("root_message");
+          value2 = r.getHeader("range");
+          if (value == null || value2 == null) {
+            return RequestHandler.failResponse(out, "Missing or invalid root message or range header.");
+          }
+          try {
+            uuid = Uuid.parse(value);
+            Integer.parseInt(value2);
+          } catch (NumberFormatException e) {
+            return RequestHandler.failResponse(out, value2 + " is not an integer.");
+          } catch (Exception e) {
+            return RequestHandler.failResponse(out, "Message " + value + " does not exist.");
+          }
+          msgs = view.getMessages(uuid, Integer.parseInt(value2));
+          return RequestHandler.successResponse(out, msgs.toString());
+
+        default:
+          return RequestHandler.failResponse(out, "Unknown function type.");
+      }
+
+    } else {
+      return RequestHandler.failResponse(out, "Unknown HTTP verb.");
+    }
+
+  }
+
+  private boolean onSerialMessage(InputStream in, OutputStream out) throws IOException {
+    LOG.info("Receiving a serial message.");
 
     final int type = Serializers.INTEGER.read(in);
 

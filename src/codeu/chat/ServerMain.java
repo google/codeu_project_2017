@@ -16,6 +16,7 @@
 package codeu.chat;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import codeu.chat.common.Relay;
 import codeu.chat.common.Secret;
@@ -47,6 +48,8 @@ final class ServerMain {
     LOG.info("============================= START OF LOG =============================");
 
     final int myPort = Integer.parseInt(args[2]);
+    LOG.info("Starting server on port " + myPort);
+    //final int myPort = 10110;
     final byte[] secret = Secret.parse(args[1]);
 
     Uuid id = null;
