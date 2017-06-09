@@ -33,6 +33,11 @@ public final class TestRunner {
       for (final Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }
+
+      if (!result.wasSuccessful()) {
+        System.exit(-1);
+      }
+
       System.out.println(result.wasSuccessful());
    }
 }

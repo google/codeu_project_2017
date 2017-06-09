@@ -98,7 +98,13 @@ def build(config) :
   command += src_files
 
   print('running : %s' % command)
-  print('Build %s' % ('PASSED' if subprocess.call(command) == 0 else 'FAILED'))
+
+  if subprocess.call(command) != 0:
+    print('Build FAILED')
+    sys.exit(1)
+
+  print('Build PASSED')
+
 
 
 # RUN
@@ -120,7 +126,12 @@ def run(config, start_class_path, arguments):
   for x in command :
     print x,
   print ']'
-  print('Run %s' % ('PASSED' if subprocess.call(command) == 0 else 'FAILED'))
+
+  if subprocess.call(command) != 0:
+    print('Run FAILED')
+    sys.exit(1)
+
+  print('Run PASSED')
 
 
 # USAGE
