@@ -89,6 +89,10 @@ def build(config) :
     for root, dirs, files in os.walk(src_path) :
       src_files += [ os.path.join(root, file) for file in files if file.endswith('.java') ]
 
+  # Create the output directory; javac will not create it.
+  if not os.path.exists(out):
+    os.makedirs(out)
+
   # Take everything so far and construct a single command to build the project.
   command = [ ]
   command += [ 'javac' ]
