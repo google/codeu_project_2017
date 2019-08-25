@@ -5,7 +5,7 @@
 ## DISCLAIMER
 
 CODEU is a program created by Google to develop the skills of future software
-engineers. This project is not an offical Google Product. This project is a
+engineers. This project is not an official Google Product. This project is a
 playground for those looking to develop their coding and software engineering
 skills.
 
