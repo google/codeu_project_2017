@@ -86,11 +86,11 @@ public final class View implements BasicView, LogicalView, SinglesView {
   @Override
   public Collection<User> getUsersExcluding(Collection<Uuid> ids) {
 
-    final Set<User> blacklist = new HashSet<>(intersect(model.userById(), ids));
+    final Set<User> blocklist = new HashSet<>(intersect(model.userById(), ids));
     final Set<User> users = new HashSet<>();
 
     for (final User user : model.userById().all()) {
-      if (!blacklist.contains(user)) {
+      if (!blocklist.contains(user)) {
         users.add(user);
       }
     }
