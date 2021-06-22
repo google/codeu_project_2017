@@ -75,11 +75,6 @@ to the code. The logging is implemented in `codeu.chat.util.Logger.java`,
 which is built on top of `java.util.logging.Logger`, which you can refer to
 for more information.
 
-In addition to your team's client and server, the project also includes a
-Relay Server and a script that runs it (`run_relay.sh`).
-This is not needed to get started with the project.
-
-
 ## Finding your way around the project
 
 All the source files (except test-related source files) are in
@@ -106,11 +101,6 @@ Classes for building the clients (`codeu.chat.ClientMain`).
 ### codeu.chat.server
 
 Classes for building the server (`codeu.chat.ServerMain`).
-
-### codeu.chat.relay
-
-Classes for building the Relay Server (`codeu.chat.RelayMain`). The Relay Server
-is not needed to get started.
 
 ### codeu.chat.common
 

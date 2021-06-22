@@ -19,7 +19,6 @@ import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
-import codeu.chat.common.Relay;
 import codeu.chat.common.User;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
@@ -37,8 +36,6 @@ public final class Server {
 
   private static final Logger.Log LOG = Logger.newLog(Server.class);
 
-  private static final int RELAY_REFRESH_MS = 5000;  // 5 seconds
-
   private final Timeline timeline = new Timeline();
 
   private final Uuid id;
@@ -48,38 +45,14 @@ public final class Server {
   private final View view = new View(model);
   private final Controller controller;
 
-  private final Relay relay;
   private Uuid lastSeen = Uuid.NULL;
 
-  public Server(final Uuid id, final byte[] secret, final Relay relay) {
+  public Server(final Uuid id, final byte[] secret) {
 
     this.id = id;
     this.secret = Arrays.copyOf(secret, secret.length);
 
     this.controller = new Controller(id, model);
-    this.relay = relay;
-
-    timeline.scheduleNow(new Runnable() {
-      @Override
-      public void run() {
-        try {
-
-          LOG.info("Reading update from relay...");
-
-          for (final Relay.Bundle bundle : relay.read(id, secret, lastSeen, 32)) {
-            onBundle(bundle);
-            lastSeen = bundle.id();
-          }
-
-        } catch (Exception ex) {
-
-          LOG.error(ex, "Failed to read update from relay.");
-
-        }
-
-        timeline.scheduleIn(RELAY_REFRESH_MS, this);
-      }
-    });
   }
 
   public void handleConnection(final Connection connection) {
@@ -124,11 +97,6 @@ public final class Server {
 
       Serializers.INTEGER.write(out, NetworkCode.NEW_MESSAGE_RESPONSE);
       Serializers.nullable(Message.SERIALIZER).write(out, message);
-
-      timeline.scheduleNow(createSendToRelayEvent(
-          author,
-          conversation,
-          message.id));
 
     } else if (type == NetworkCode.NEW_USER_REQUEST) {
 
@@ -247,59 +215,5 @@ public final class Server {
     }
 
     return true;
-  }
-
-  private void onBundle(Relay.Bundle bundle) {
-
-    final Relay.Bundle.Component relayUser = bundle.user();
-    final Relay.Bundle.Component relayConversation = bundle.conversation();
-    final Relay.Bundle.Component relayMessage = bundle.user();
-
-    User user = model.userById().first(relayUser.id());
-
-    if (user == null) {
-      user = controller.newUser(relayUser.id(), relayUser.text(), relayUser.time());
-    }
-
-    Conversation conversation = model.conversationById().first(relayConversation.id());
-
-    if (conversation == null) {
-
-      // As the relay does not tell us who made the conversation - the first person who
-      // has a message in the conversation will get ownership over this server's copy
-      // of the conversation.
-      conversation = controller.newConversation(relayConversation.id(),
-          relayConversation.text(),
-          user.id,
-          relayConversation.time());
-    }
-
-    Message message = model.messageById().first(relayMessage.id());
-
-    if (message == null) {
-      message = controller.newMessage(relayMessage.id(),
-          user.id,
-          conversation.id,
-          relayMessage.text(),
-          relayMessage.time());
-    }
-  }
-
-  private Runnable createSendToRelayEvent(final Uuid userId,
-      final Uuid conversationId,
-      final Uuid messageId) {
-    return new Runnable() {
-      @Override
-      public void run() {
-        final User user = view.findUser(userId);
-        final Conversation conversation = view.findConversation(conversationId);
-        final Message message = view.findMessage(messageId);
-        relay.write(id,
-            secret,
-            relay.pack(user.id, user.name, user.creation),
-            relay.pack(conversation.id, conversation.title, conversation.creation),
-            relay.pack(message.id, message.content, message.creation));
-      }
-    };
   }
 }
