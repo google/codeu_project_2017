@@ -28,7 +28,7 @@ public final class UuidTest {
   @Test
   public void testBadId() {
     assertNotNull(Uuid.NULL);
-    assertEquals(Uuid.NULL.root(), null);
+    assertNull(Uuid.NULL.root());
     assertEquals(Uuid.NULL.id(), 0);
   }
 

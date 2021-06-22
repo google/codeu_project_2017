@@ -14,6 +14,7 @@
 
 package codeu.chat.relay;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -103,7 +104,7 @@ public final class ServerTest {
         relay.pack(new Uuid(6), "Hello World", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuid.NULL, 1);
-    assertTrue(read.size() == 1);
+    assertEquals(read.size(), 1);
 
     // By the assertion above this loop should only execute once as there should only
     // be a single value in the collection.
@@ -174,7 +175,7 @@ public final class ServerTest {
         relay.pack(new Uuid(7), "Hello World... again", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuid.NULL, 2);
-    assertTrue(read.size() == 1);
+    assertEquals(read.size(), 1);
   }
 
   @Test
@@ -200,7 +201,7 @@ public final class ServerTest {
         relay.pack(new Uuid(7), "Hello World... again", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, Uuid.NULL, 2);
-    assertTrue(read.size() == 1);
+    assertEquals(read.size(), 1);
 
     // By the assertion above this loop should only execute once as there should only
     // be a single value in the collection.
@@ -230,7 +231,7 @@ public final class ServerTest {
         relay.pack(new Uuid(6), "Hello World", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, new Uuid(7), 1);
-    assertTrue(read.size() == 1);
+    assertEquals(read.size(), 1);
 
     // By the assertion above this loop should only execute once as there should only
     // be a single value in the collection.
@@ -272,7 +273,7 @@ public final class ServerTest {
         relay.pack(new Uuid(12), "Hello World", Time.now())));
 
     final Collection<Relay.Bundle> read = relay.read(team, secret, new Uuid(2), 1);
-    assertTrue(read.size() == 1);
+    assertEquals(read.size(), 1);
 
     // By the assertion above this loop should only execute once as there should only
     // be a single value in the collection.

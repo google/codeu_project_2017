@@ -14,7 +14,7 @@
 
 package codeu.chat.util.store;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Comparator;
 import org.junit.jupiter.api.BeforeEach;
@@ -142,11 +142,11 @@ public final class StoreTest {
     store.insert(4, 40);
     store.insert(4, 41);
 
-    assertTrue(store.first(0) == 0);
-    assertTrue(store.first(1) == 10);
-    assertTrue(store.first(2) == 20);
-    assertTrue(store.first(3) == 30);
-    assertTrue(store.first(4) == 40);
+    assertEquals((int) store.first(0), 0);
+    assertEquals((int) store.first(1), 10);
+    assertEquals((int) store.first(2), 20);
+    assertEquals((int) store.first(3), 30);
+    assertEquals((int) store.first(4), 40);
   }
 
   private static void assertOrder(Iterable<Integer> actual, int[] expected) {
@@ -154,10 +154,10 @@ public final class StoreTest {
     int at = 0;
 
     for (final Integer i : actual) {
-      assertTrue(i == expected[at]);
+      assertEquals(expected[at], (int) i);
       at += 1;
     }
 
-    assertTrue(at == expected.length);
+    assertEquals(expected.length, at);
   }
 }

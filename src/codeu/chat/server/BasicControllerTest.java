@@ -14,7 +14,7 @@
 
 package codeu.chat.server;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
@@ -26,12 +26,11 @@ import org.junit.jupiter.api.Test;
 
 public final class BasicControllerTest {
 
-  private Model model;
   private BasicController controller;
 
   @BeforeEach
   public void doBefore() {
-    model = new Model();
+    Model model = new Model();
     controller = new Controller(Uuid.NULL, model);
   }
 
@@ -40,9 +39,7 @@ public final class BasicControllerTest {
 
     final User user = controller.newUser("user");
 
-    assertFalse(
-        user == null,
-        "Check that user has a valid reference");
+    assertNotNull(user, "Check that user has a valid reference");
   }
 
   @Test
@@ -50,14 +47,13 @@ public final class BasicControllerTest {
 
     final User user = controller.newUser("user");
 
-    assertFalse(user == null, "Check that user has a valid reference");
+    assertNotNull(user, "Check that user has a valid reference");
 
     final Conversation conversation = controller.newConversation(
         "conversation",
         user.id);
 
-    assertFalse(conversation == null,
-        "Check that conversation has a valid reference");
+    assertNotNull(conversation, "Check that conversation has a valid reference");
   }
 
   @Test
@@ -65,21 +61,19 @@ public final class BasicControllerTest {
 
     final User user = controller.newUser("user");
 
-    assertFalse(user == null, "Check that user has a valid reference");
+    assertNotNull(user, "Check that user has a valid reference");
 
     final Conversation conversation = controller.newConversation(
         "conversation",
         user.id);
 
-    assertFalse(conversation == null,
-        "Check that conversation has a valid reference");
+    assertNotNull(conversation, "Check that conversation has a valid reference");
 
     final Message message = controller.newMessage(
         user.id,
         conversation.id,
         "Hello World");
 
-    assertFalse(message == null,
-        "Check that the message has a valid reference");
+    assertNotNull(message, "Check that the message has a valid reference");
   }
 }
