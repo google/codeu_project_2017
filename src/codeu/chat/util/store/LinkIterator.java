@@ -24,7 +24,8 @@ final class LinkIterator<KEY, VALUE> implements Iterator<VALUE> {
 
   private StoreLink<KEY, VALUE> current;
 
-  public LinkIterator(Comparator<KEY> comparator, StoreLink<KEY, VALUE> first, StoreLink<KEY, VALUE> last) {
+  public LinkIterator(Comparator<KEY> comparator, StoreLink<KEY, VALUE> first,
+      StoreLink<KEY, VALUE> last) {
     this.comparator = comparator;
     this.last = last;
     this.current = first;

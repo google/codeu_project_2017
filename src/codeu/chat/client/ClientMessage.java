@@ -14,17 +14,16 @@
 
 package codeu.chat.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
 import codeu.chat.util.Uuid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class ClientMessage {
 
@@ -47,7 +46,7 @@ public final class ClientMessage {
   private final ClientConversation conversationContext;
 
   public ClientMessage(Controller controller, View view, ClientUser userContext,
-                       ClientConversation conversationContext) {
+      ClientConversation conversationContext) {
     this.controller = controller;
     this.view = view;
     this.userContext = userContext;
@@ -99,7 +98,8 @@ public final class ClientMessage {
   public void addMessage(Uuid author, Uuid conversation, String body) {
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
-    final Message message = (validInputs) ? controller.newMessage(author, conversation, body) : null;
+    final Message message =
+        (validInputs) ? controller.newMessage(author, conversation, body) : null;
 
     if (message == null) {
       System.out.format("Error: message not created - %s.\n",
@@ -156,7 +156,7 @@ public final class ClientMessage {
       // Fetch/refetch all the messages.
       conversationContents.clear();
       LOG.info("Refetch all messages: replaceAll=%s firstMessage=%s", replaceAll,
-               conversationHead.firstMessage);
+          conversationHead.firstMessage);
       return conversationHead.firstMessage;
     } else {
       // Locate last known message. Its next, if any, becomes our starting point.

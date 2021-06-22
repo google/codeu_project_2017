@@ -23,7 +23,8 @@ final class LinkIterable<KEY, VALUE> implements Iterable<VALUE> {
   private final StoreLink<KEY, VALUE> first;
   private final StoreLink<KEY, VALUE> last;
 
-  public LinkIterable(Comparator<KEY> comparator, StoreLink<KEY, VALUE> first, StoreLink<KEY, VALUE> last) {
+  public LinkIterable(Comparator<KEY> comparator, StoreLink<KEY, VALUE> first,
+      StoreLink<KEY, VALUE> last) {
     this.comparator = comparator;
     this.first = first;
     this.last = last;

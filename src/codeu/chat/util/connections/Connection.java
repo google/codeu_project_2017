@@ -22,6 +22,7 @@ import java.io.OutputStream;
 public interface Connection extends Closeable {
 
   InputStream in() throws IOException;
+
   OutputStream out() throws IOException;
 
 }

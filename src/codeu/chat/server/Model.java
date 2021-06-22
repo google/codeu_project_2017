@@ -14,10 +14,7 @@
 
 package codeu.chat.server;
 
-import java.util.Comparator;
-
 import codeu.chat.common.Conversation;
-import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
@@ -25,6 +22,7 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.store.StoreAccessor;
+import java.util.Comparator;
 
 public final class Model {
 
@@ -33,11 +31,17 @@ public final class Model {
     @Override
     public int compare(Uuid a, Uuid b) {
 
-      if (a == b) { return 0; }
+      if (a == b) {
+        return 0;
+      }
 
-      if (a == null && b != null) { return -1; }
+      if (a == null && b != null) {
+        return -1;
+      }
 
-      if (a != null && b == null) { return 1; }
+      if (a != null && b == null) {
+        return 1;
+      }
 
       final int order = Integer.compare(a.id(), b.id());
       return order == 0 ? compare(a.root(), b.root()) : order;
@@ -65,7 +69,8 @@ public final class Model {
   private final Store<Time, Message> messageByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Message> messageByText = new Store<>(STRING_COMPARE);
 
-  private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1, Integer.MAX_VALUE);
+  private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1,
+      Integer.MAX_VALUE);
   private Uuid currentUserGeneration = userGenerations.make();
 
   public void add(User user) {

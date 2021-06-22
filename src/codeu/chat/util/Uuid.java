@@ -14,7 +14,6 @@
 
 package codeu.chat.util;
 
-import java.lang.StringBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -82,6 +81,7 @@ public final class Uuid {
   // better to place it inside the Uuid rather than have it side equal to
   // Uuid.
   public interface Generator {
+
     Uuid make();
   }
 
@@ -112,7 +112,9 @@ public final class Uuid {
   }
 
   @Override
-  public int hashCode() { return hash(this); }
+  public int hashCode() {
+    return hash(this);
+  }
 
   @Override
   public String toString() {
@@ -196,7 +198,7 @@ public final class Uuid {
           tokens[index]));
     }
 
-    final Uuid link = new Uuid(root, (int)(id & 0xFFFFFFFF));
+    final Uuid link = new Uuid(root, (int) (id & 0xFFFFFFFF));
 
     final int nextIndex = index + 1;
 

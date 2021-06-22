@@ -14,10 +14,6 @@
 
 package codeu.chat;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 import codeu.chat.common.Secret;
 import codeu.chat.relay.Server;
 import codeu.chat.relay.ServerFrontEnd;
@@ -27,6 +23,9 @@ import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 final class RelayMain {
 
@@ -64,8 +63,8 @@ final class RelayMain {
   }
 
   private static void startRelay(final Server relay,
-                                 final ConnectionSource source,
-                                 final String teamFile) {
+      final ConnectionSource source,
+      final String teamFile) {
 
     final ServerFrontEnd frontEnd = new ServerFrontEnd(relay);
     LOG.info("Relay front end object created.");
@@ -118,8 +117,8 @@ final class RelayMain {
 
       String line;
       for (line = reader.readLine();
-           line != null;
-           line = reader.readLine()) {
+          line != null;
+          line = reader.readLine()) {
 
         line = line.trim();
 

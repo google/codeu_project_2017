@@ -14,16 +14,15 @@
 
 package codeu.chat.client;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ClientConversation {
 
@@ -76,7 +75,9 @@ public final class ClientConversation {
     return currentSummary;
   }
 
-  public Uuid getCurrentId() { return (currentSummary != null) ? currentSummary.id : null; }
+  public Uuid getCurrentId() {
+    return (currentSummary != null) ? currentSummary.id : null;
+  }
 
   public int currentMessageCount() {
     return messageContext.currentMessageCount();
@@ -103,7 +104,9 @@ public final class ClientConversation {
     }
   }
 
-  public void setCurrent(ConversationSummary conv) { currentSummary = conv; }
+  public void setCurrent(ConversationSummary conv) {
+    currentSummary = conv;
+  }
 
   public void showAllConversations() {
     updateAllConversations(false);
@@ -146,7 +149,7 @@ public final class ClientConversation {
   }
 
   public int conversationsCount() {
-   return summariesByUuid.size();
+    return summariesByUuid.size();
   }
 
   public Iterable<ConversationSummary> getConversationSummaries() {
@@ -180,7 +183,8 @@ public final class ClientConversation {
       final String name = (userContext == null) ? null : userContext.getName(c.owner);
       final String ownerName = (name == null) ? "" : String.format(" (%s)", name);
       System.out.format(" Title: %s\n", c.title);
-      System.out.format("    Id: %s owner: %s%s created %s\n", c.id, c.owner, ownerName, c.creation);
+      System.out
+          .format("    Id: %s owner: %s%s created %s\n", c.id, c.owner, ownerName, c.creation);
     }
   }
 

@@ -14,14 +14,13 @@
 
 package codeu.chat.common;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public final class User {
 

@@ -25,7 +25,9 @@ public final class RemoteAddress {
   }
 
   @Override
-  public String toString() { return String.format("%s@%d", host, port); }
+  public String toString() {
+    return String.format("%s@%d", host, port);
+  }
 
   // TODO : add tests for this
   public static RemoteAddress parse(String string) {

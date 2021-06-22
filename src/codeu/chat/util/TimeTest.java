@@ -14,9 +14,9 @@
 
 package codeu.chat.util;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.junit.Before;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public final class TimeTest {
 

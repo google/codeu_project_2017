@@ -14,11 +14,6 @@
 
 package codeu.chat.relay;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Collection;
-
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.util.Logger;
@@ -27,6 +22,10 @@ import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Collection;
 
 public final class ServerFrontEnd {
 
@@ -35,72 +34,97 @@ public final class ServerFrontEnd {
   private static final Serializer<Relay.Bundle.Component> COMPONENT_SERIALIZER =
       new Serializer<Relay.Bundle.Component>() {
 
-    @Override
-    public Relay.Bundle.Component read(InputStream in) throws IOException {
+        @Override
+        public Relay.Bundle.Component read(InputStream in) throws IOException {
 
-      final Uuid id = Uuid.SERIALIZER.read(in);
-      final String text = Serializers.STRING.read(in);
-      final Time time = Time.SERIALIZER.read(in);
+          final Uuid id = Uuid.SERIALIZER.read(in);
+          final String text = Serializers.STRING.read(in);
+          final Time time = Time.SERIALIZER.read(in);
 
-      // I could have passed the relay and use its "pack" method but that would
-      // have been more work than just building an object here.
-      return new Relay.Bundle.Component() {
+          // I could have passed the relay and use its "pack" method but that would
+          // have been more work than just building an object here.
+          return new Relay.Bundle.Component() {
+            @Override
+            public Uuid id() {
+              return id;
+            }
+
+            @Override
+            public String text() {
+              return text;
+            }
+
+            @Override
+            public Time time() {
+              return time;
+            }
+          };
+        }
+
         @Override
-        public Uuid id() { return id; }
-        @Override
-        public String text() { return text; }
-        @Override
-        public Time time() { return time; }
+        public void write(OutputStream out, Relay.Bundle.Component value) throws IOException {
+          Uuid.SERIALIZER.write(out, value.id());
+          Serializers.STRING.write(out, value.text());
+          Time.SERIALIZER.write(out, value.time());
+        }
       };
-    }
-
-    @Override
-    public void write(OutputStream out, Relay.Bundle.Component value) throws IOException {
-      Uuid.SERIALIZER.write(out, value.id());
-      Serializers.STRING.write(out, value.text());
-      Time.SERIALIZER.write(out, value.time());
-    }
-  };
 
   private static final Serializer<Relay.Bundle> BUNDLE_SERIALIZER =
       new Serializer<Relay.Bundle>() {
 
-    @Override
-    public Relay.Bundle read(InputStream in) throws IOException {
+        @Override
+        public Relay.Bundle read(InputStream in) throws IOException {
 
-      final Uuid id = Uuid.SERIALIZER.read(in);
-      final Time time = Time.SERIALIZER.read(in);
-      final Uuid team = Uuid.SERIALIZER.read(in);
-      final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
-      final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
-      final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
+          final Uuid id = Uuid.SERIALIZER.read(in);
+          final Time time = Time.SERIALIZER.read(in);
+          final Uuid team = Uuid.SERIALIZER.read(in);
+          final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
+          final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
+          final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
 
-      return new Relay.Bundle() {
+          return new Relay.Bundle() {
+            @Override
+            public Uuid id() {
+              return id;
+            }
+
+            @Override
+            public Time time() {
+              return time;
+            }
+
+            @Override
+            public Uuid team() {
+              return team;
+            }
+
+            @Override
+            public Relay.Bundle.Component user() {
+              return user;
+            }
+
+            @Override
+            public Relay.Bundle.Component conversation() {
+              return conversation;
+            }
+
+            @Override
+            public Relay.Bundle.Component message() {
+              return message;
+            }
+          };
+        }
+
         @Override
-        public Uuid id() { return id; }
-        @Override
-        public Time time() { return time; }
-        @Override
-        public Uuid team() { return team; }
-        @Override
-        public Relay.Bundle.Component user() { return user; }
-        @Override
-        public Relay.Bundle.Component conversation() { return conversation; }
-        @Override
-        public Relay.Bundle.Component message() { return message; }
+        public void write(OutputStream out, Relay.Bundle value) throws IOException {
+          Uuid.SERIALIZER.write(out, value.id());
+          Time.SERIALIZER.write(out, value.time());
+          Uuid.SERIALIZER.write(out, value.team());
+          COMPONENT_SERIALIZER.write(out, value.user());
+          COMPONENT_SERIALIZER.write(out, value.conversation());
+          COMPONENT_SERIALIZER.write(out, value.message());
+        }
       };
-    }
-
-    @Override
-    public void write(OutputStream out, Relay.Bundle value) throws IOException {
-      Uuid.SERIALIZER.write(out, value.id());
-      Time.SERIALIZER.write(out, value.time());
-      Uuid.SERIALIZER.write(out, value.team());
-      COMPONENT_SERIALIZER.write(out, value.user());
-      COMPONENT_SERIALIZER.write(out, value.conversation());
-      COMPONENT_SERIALIZER.write(out, value.message());
-    }
-  };
 
   private final Relay backEnd;
 
@@ -113,8 +137,12 @@ public final class ServerFrontEnd {
     LOG.info("Handling Connection - start");
 
     switch (Serializers.INTEGER.read(connection.in())) {
-      case NetworkCode.RELAY_READ_REQUEST: handleReadMessage(connection); break;
-      case NetworkCode.RELAY_WRITE_REQUEST: handleWriteMessage(connection); break;
+      case NetworkCode.RELAY_READ_REQUEST:
+        handleReadMessage(connection);
+        break;
+      case NetworkCode.RELAY_WRITE_REQUEST:
+        handleWriteMessage(connection);
+        break;
     }
 
     LOG.info("Handling Connection - end");
@@ -163,10 +191,10 @@ public final class ServerFrontEnd {
         message.id());
 
     final boolean result = backEnd.write(teamId,
-                                         teamSecret,
-                                         user,
-                                         conversation,
-                                         message);
+        teamSecret,
+        user,
+        conversation,
+        message);
 
     LOG.info("Writing result=%s", result ? "success" : "fail");
 

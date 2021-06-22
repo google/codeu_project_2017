@@ -14,12 +14,6 @@
 
 package codeu.chat.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
 import codeu.chat.util.Logger;
@@ -29,6 +23,11 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public final class RemoteRelay implements Relay {
 
@@ -47,75 +46,98 @@ public final class RemoteRelay implements Relay {
     }
 
     @Override
-    public Uuid id() { return id; }
+    public Uuid id() {
+      return id;
+    }
 
     @Override
-    public Time time() { return time; }
+    public Time time() {
+      return time;
+    }
 
     @Override
-    public String text() { return text; }
+    public String text() {
+      return text;
+    }
   }
 
   private static final Serializer<Relay.Bundle.Component> COMPONENT_SERIALIZER =
       new Serializer<Relay.Bundle.Component>() {
 
-    @Override
-    public Relay.Bundle.Component read(InputStream in) throws IOException {
+        @Override
+        public Relay.Bundle.Component read(InputStream in) throws IOException {
 
-      final Uuid id = Uuid.SERIALIZER.read(in);
-      final String text = Serializers.STRING.read(in);
-      final Time time = Time.SERIALIZER.read(in);
+          final Uuid id = Uuid.SERIALIZER.read(in);
+          final String text = Serializers.STRING.read(in);
+          final Time time = Time.SERIALIZER.read(in);
 
-      return new Component(id, time, text);
-    }
+          return new Component(id, time, text);
+        }
 
-    @Override
-    public void write(OutputStream out, Relay.Bundle.Component value) throws IOException {
-      Uuid.SERIALIZER.write(out, value.id());
-      Serializers.STRING.write(out, value.text());
-      Time.SERIALIZER.write(out, value.time());
-    }
-  };
+        @Override
+        public void write(OutputStream out, Relay.Bundle.Component value) throws IOException {
+          Uuid.SERIALIZER.write(out, value.id());
+          Serializers.STRING.write(out, value.text());
+          Time.SERIALIZER.write(out, value.time());
+        }
+      };
 
   private static final Serializer<Relay.Bundle> BUNDLE_SERIALIZER =
       new Serializer<Relay.Bundle>() {
 
-    @Override
-    public Relay.Bundle read(InputStream in) throws IOException {
+        @Override
+        public Relay.Bundle read(InputStream in) throws IOException {
 
-      final Uuid id = Uuid.SERIALIZER.read(in);
-      final Time time = Time.SERIALIZER.read(in);
-      final Uuid team = Uuid.SERIALIZER.read(in);
-      final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
-      final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
-      final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
+          final Uuid id = Uuid.SERIALIZER.read(in);
+          final Time time = Time.SERIALIZER.read(in);
+          final Uuid team = Uuid.SERIALIZER.read(in);
+          final Relay.Bundle.Component user = COMPONENT_SERIALIZER.read(in);
+          final Relay.Bundle.Component conversation = COMPONENT_SERIALIZER.read(in);
+          final Relay.Bundle.Component message = COMPONENT_SERIALIZER.read(in);
 
-      return new Relay.Bundle() {
+          return new Relay.Bundle() {
+            @Override
+            public Uuid id() {
+              return id;
+            }
+
+            @Override
+            public Time time() {
+              return time;
+            }
+
+            @Override
+            public Uuid team() {
+              return team;
+            }
+
+            @Override
+            public Relay.Bundle.Component user() {
+              return user;
+            }
+
+            @Override
+            public Relay.Bundle.Component conversation() {
+              return conversation;
+            }
+
+            @Override
+            public Relay.Bundle.Component message() {
+              return message;
+            }
+          };
+        }
+
         @Override
-        public Uuid id() { return id; }
-        @Override
-        public Time time() { return time; }
-        @Override
-        public Uuid team() { return team; }
-        @Override
-        public Relay.Bundle.Component user() { return user; }
-        @Override
-        public Relay.Bundle.Component conversation() { return conversation; }
-        @Override
-        public Relay.Bundle.Component message() { return message; }
+        public void write(OutputStream out, Relay.Bundle value) throws IOException {
+          Uuid.SERIALIZER.write(out, value.id());
+          Time.SERIALIZER.write(out, value.time());
+          Uuid.SERIALIZER.write(out, value.team());
+          COMPONENT_SERIALIZER.write(out, value.user());
+          COMPONENT_SERIALIZER.write(out, value.conversation());
+          COMPONENT_SERIALIZER.write(out, value.message());
+        }
       };
-    }
-
-    @Override
-    public void write(OutputStream out, Relay.Bundle value) throws IOException {
-      Uuid.SERIALIZER.write(out, value.id());
-      Time.SERIALIZER.write(out, value.time());
-      Uuid.SERIALIZER.write(out, value.team());
-      COMPONENT_SERIALIZER.write(out, value.user());
-      COMPONENT_SERIALIZER.write(out, value.conversation());
-      COMPONENT_SERIALIZER.write(out, value.message());
-    }
-  };
 
   private final ConnectionSource source;
 
@@ -130,10 +152,10 @@ public final class RemoteRelay implements Relay {
 
   @Override
   public boolean write(Uuid teamId,
-                       byte[] teamSecret,
-                       Relay.Bundle.Component user,
-                       Relay.Bundle.Component conversation,
-                       Relay.Bundle.Component message) {
+      byte[] teamSecret,
+      Relay.Bundle.Component user,
+      Relay.Bundle.Component conversation,
+      Relay.Bundle.Component message) {
 
     boolean result = false;
 
@@ -152,7 +174,8 @@ public final class RemoteRelay implements Relay {
         LOG.error("Server did not handle RELAY_WRITE_REQUEST");
       }
     } catch (Exception ex) {
-      LOG.error(ex, "Unexpected error when sending RELAY_WRITE_REQUEST");;
+      LOG.error(ex, "Unexpected error when sending RELAY_WRITE_REQUEST");
+      ;
     }
 
     return result;

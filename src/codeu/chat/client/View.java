@@ -14,9 +14,6 @@
 
 package codeu.chat.client;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import codeu.chat.common.BasicView;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -30,13 +27,15 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
+import java.util.ArrayList;
+import java.util.Collection;
 
 // VIEW
 //
 // This is the view component of the Model-View-Controller pattern used by the
 // the client to reterive readonly data from the server. All methods are blocking
 // calls.
-public final class View implements BasicView, LogicalView{
+public final class View implements BasicView, LogicalView {
 
   private final static Logger.Log LOG = Logger.newLog(View.class);
 
@@ -80,7 +79,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_ALL_CONVERSATIONS_REQUEST);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_ALL_CONVERSATIONS_RESPONSE) {
-        summaries.addAll(Serializers.collection(ConversationSummary.SERIALIZER).read(connection.in()));
+        summaries
+            .addAll(Serializers.collection(ConversationSummary.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");
       }
@@ -103,7 +103,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST);
       Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
 
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
+      if (Serializers.INTEGER.read(connection.in())
+          == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");
@@ -195,7 +196,8 @@ public final class View implements BasicView, LogicalView{
       Time.SERIALIZER.write(connection.out(), start);
       Time.SERIALIZER.write(connection.out(), end);
 
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
+      if (Serializers.INTEGER.read(connection.in())
+          == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");
@@ -218,7 +220,8 @@ public final class View implements BasicView, LogicalView{
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_CONVERSATIONS_BY_TITLE_REQUEST);
       Serializers.STRING.write(connection.out(), filter);
 
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
+      if (Serializers.INTEGER.read(connection.in())
+          == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
       } else {
         LOG.error("Response from server failed.");

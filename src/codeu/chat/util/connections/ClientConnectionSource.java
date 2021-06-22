@@ -40,7 +40,8 @@ public final class ClientConnectionSource implements ConnectionSource {
   }
 
   @Override
-  public void close() throws IOException { }
+  public void close() throws IOException {
+  }
 
   private static Connection fromSocket(final Socket socket) throws IOException {
 

@@ -14,9 +14,8 @@
 
 package codeu.chat.server;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.junit.Before;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
@@ -24,6 +23,8 @@ import codeu.chat.common.RawController;
 import codeu.chat.common.User;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public final class RawControllerTest {
 
@@ -34,7 +35,7 @@ public final class RawControllerTest {
   private Uuid conversationId;
   private Uuid messageId;
 
-  @Before
+  @BeforeEach
   public void doBefore() {
     model = new Model();
     controller = new Controller(Uuid.NULL, model);
@@ -49,12 +50,9 @@ public final class RawControllerTest {
 
     final User user = controller.newUser(userId, "user", Time.now());
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuid.equals(user.id, userId));
+    assertFalse(user == null, "Check that user has a valid reference");
+    assertTrue(Uuid.equals(user.id, userId),
+        "Check that the user has the correct id");
   }
 
   @Test
@@ -62,12 +60,10 @@ public final class RawControllerTest {
 
     final User user = controller.newUser(userId, "user", Time.now());
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuid.equals(user.id, userId));
+    assertFalse(user == null,
+        "Check that user has a valid reference");
+    assertTrue(Uuid.equals(user.id, userId),
+        "Check that the user has the correct id");
 
     final Conversation conversation = controller.newConversation(
         conversationId,
@@ -75,12 +71,10 @@ public final class RawControllerTest {
         user.id,
         Time.now());
 
-    assertFalse(
-        "Check that conversation has a valid reference",
-        conversation == null);
-    assertTrue(
-        "Check that the conversation has the correct id",
-        Uuid.equals(conversation.id, conversationId));
+    assertFalse(conversation == null,
+        "Check that conversation has a valid reference");
+    assertTrue(Uuid.equals(conversation.id,
+        conversationId), "Check that the conversation has the correct id");
   }
 
   @Test
@@ -88,12 +82,10 @@ public final class RawControllerTest {
 
     final User user = controller.newUser(userId, "user", Time.now());
 
-    assertFalse(
-        "Check that user has a valid reference",
-        user == null);
-    assertTrue(
-        "Check that the user has the correct id",
-        Uuid.equals(user.id, userId));
+    assertFalse(user == null,
+        "Check that user has a valid reference");
+    assertTrue(Uuid.equals(user.id, userId),
+        "Check that the user has the correct id");
 
     final Conversation conversation = controller.newConversation(
         conversationId,
@@ -101,12 +93,10 @@ public final class RawControllerTest {
         user.id,
         Time.now());
 
-    assertFalse(
-        "Check that conversation has a valid reference",
-        conversation == null);
-    assertTrue(
-        "Check that the conversation has the correct id",
-        Uuid.equals(conversation.id, conversationId));
+    assertFalse(conversation == null,
+        "Check that conversation has a valid reference");
+    assertTrue(Uuid.equals(conversation.id, conversationId),
+        "Check that the conversation has the correct id");
 
     final Message message = controller.newMessage(
         messageId,
@@ -115,11 +105,9 @@ public final class RawControllerTest {
         "Hello World",
         Time.now());
 
-    assertFalse(
-        "Check that the message has a valid reference",
-        message == null);
-    assertTrue(
-        "Check that the message has the correct id",
-        Uuid.equals(message.id, messageId));
+    assertFalse(message == null,
+        "Check that the message has a valid reference");
+    assertTrue(Uuid.equals(message.id, messageId),
+        "Check that the message has the correct id");
   }
 }

@@ -14,8 +14,6 @@
 
 package codeu.chat.server;
 
-import java.util.Collection;
-
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
@@ -54,7 +52,8 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime) {
+  public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body,
+      Time creationTime) {
 
     final User foundUser = model.userById().first(author);
     final Conversation foundConversation = model.conversationById().first(conversation);
@@ -87,8 +86,8 @@ public final class Controller implements RawController, BasicController {
 
       foundConversation.firstMessage =
           Uuid.equals(foundConversation.firstMessage, Uuid.NULL) ?
-          message.id :
-          foundConversation.firstMessage;
+              message.id :
+              foundConversation.firstMessage;
 
       // Update the conversation to point to the new last message as it has changed.
 
@@ -152,12 +151,12 @@ public final class Controller implements RawController, BasicController {
     Uuid candidate;
 
     for (candidate = uuidGenerator.make();
-         isIdInUse(candidate);
-         candidate = uuidGenerator.make()) {
+        isIdInUse(candidate);
+        candidate = uuidGenerator.make()) {
 
-     // Assuming that "randomUuid" is actually well implemented, this
-     // loop should never be needed, but just incase make sure that the
-     // Uuid is not actually in use before returning it.
+      // Assuming that "randomUuid" is actually well implemented, this
+      // loop should never be needed, but just incase make sure that the
+      // Uuid is not actually in use before returning it.
 
     }
 
@@ -166,10 +165,12 @@ public final class Controller implements RawController, BasicController {
 
   private boolean isIdInUse(Uuid id) {
     return model.messageById().first(id) != null ||
-           model.conversationById().first(id) != null ||
-           model.userById().first(id) != null;
+        model.conversationById().first(id) != null ||
+        model.userById().first(id) != null;
   }
 
-  private boolean isIdFree(Uuid id) { return !isIdInUse(id); }
+  private boolean isIdFree(Uuid id) {
+    return !isIdInUse(id);
+  }
 
 }

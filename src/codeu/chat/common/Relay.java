@@ -14,10 +14,9 @@
 
 package codeu.chat.common;
 
-import java.util.Collection;
-
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import java.util.Collection;
 
 // RELAY
 //
@@ -118,10 +117,10 @@ public interface Relay {
   // a message to the relay, a team must write their team id and team secret or
   // else the relay will reject the message.
   boolean write(Uuid teamId,
-                byte[] teamSecret,
-                Bundle.Component user,
-                Bundle.Component conversation,
-                Bundle.Component message);
+      byte[] teamSecret,
+      Bundle.Component user,
+      Bundle.Component conversation,
+      Bundle.Component message);
 
   // READ
   //

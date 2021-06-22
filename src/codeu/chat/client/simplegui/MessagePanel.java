@@ -14,15 +14,26 @@
 
 package codeu.chat.client.simplegui;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-
 import codeu.chat.client.ClientContext;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 // NOTE: JPanel is serializable, but there is no need to serialize MessagePanel
 // without the @SuppressWarnings, the compiler will complain of no override for serialVersionUID
@@ -50,8 +61,8 @@ public final class MessagePanel extends JPanel {
         clientContext.user.lookup(owningConversation.owner);
 
     messageOwnerLabel.setText("Owner: " +
-        ((u==null) ?
-            ((owningConversation==null) ? "" : owningConversation.owner) :
+        ((u == null) ?
+            ((owningConversation == null) ? "" : owningConversation.owner) :
             u.name));
 
     messageConversationLabel.setText("Conversation: " + owningConversation.title);

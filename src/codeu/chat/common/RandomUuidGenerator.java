@@ -14,9 +14,8 @@
 
 package codeu.chat.common;
 
-import java.util.Random;
-
 import codeu.chat.util.Uuid;
+import java.util.Random;
 
 // Create a new random uuid. Uuids from this generator are random
 // but are not guaranteed to be unique. Checking uniqueness is left

@@ -66,7 +66,7 @@ public final class Serializers {
     public void write(OutputStream out, Long value) throws IOException {
 
       for (int i = 56; i >= 0; i -= 8) {
-        out.write((int)(0xFF & (value >>> i)));
+        out.write((int) (0xFF & (value >>> i)));
       }
 
     }
@@ -102,7 +102,7 @@ public final class Serializers {
       final byte[] array = new byte[length];
 
       for (int i = 0; i < length; i++) {
-        array[i] = (byte)input.read();
+        array[i] = (byte) input.read();
       }
 
       return array;

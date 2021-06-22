@@ -14,12 +14,11 @@
 
 package codeu.chat.server;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import codeu.chat.common.Relay;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import java.util.ArrayList;
+import java.util.Collection;
 
 // NO OP RELAY
 //
@@ -30,36 +29,42 @@ public final class NoOpRelay implements Relay {
 
   @Override
   public Relay.Bundle.Component pack(final Uuid id,
-                                     final String text,
-                                     final Time time) {
+      final String text,
+      final Time time) {
 
     return new Relay.Bundle.Component() {
       @Override
-      public Uuid id() { return id; }
+      public Uuid id() {
+        return id;
+      }
 
       @Override
-      public Time time() { return time; }
+      public Time time() {
+        return time;
+      }
 
       @Override
-      public String text() { return text; }
+      public String text() {
+        return text;
+      }
     };
   }
 
   @Override
   public boolean write(Uuid teamId,
-                       byte[] teamSecret,
-                       Relay.Bundle.Component user,
-                       Relay.Bundle.Component conversation,
-                       Relay.Bundle.Component message) {
+      byte[] teamSecret,
+      Relay.Bundle.Component user,
+      Relay.Bundle.Component conversation,
+      Relay.Bundle.Component message) {
 
     return true;
   }
 
   @Override
   public Collection<Relay.Bundle> read(Uuid teamId,
-                                       byte[] teamSecret,
-                                       Uuid root,
-                                       int range) {
+      byte[] teamSecret,
+      Uuid root,
+      int range) {
 
     return new ArrayList<Relay.Bundle>();
   }

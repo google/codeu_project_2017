@@ -44,9 +44,13 @@ public final class Time implements Comparable<Time> {
 
   private final Date date;
 
-  private Time(long totalMs) { this.date = new Date(totalMs); }
+  private Time(long totalMs) {
+    this.date = new Date(totalMs);
+  }
 
-  public long inMs() { return date.getTime(); }
+  public long inMs() {
+    return date.getTime();
+  }
 
   @Override
   public int compareTo(Time other) {
@@ -62,8 +66,12 @@ public final class Time implements Comparable<Time> {
     return formatter.format(date);
   }
 
-  public static Time fromMs(long ms) { return new Time(ms); }
+  public static Time fromMs(long ms) {
+    return new Time(ms);
+  }
 
-  public static Time now() { return Time.fromMs(System.currentTimeMillis()); }
+  public static Time now() {
+    return Time.fromMs(System.currentTimeMillis());
+  }
 
 }

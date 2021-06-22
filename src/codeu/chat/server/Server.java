@@ -15,17 +15,8 @@
 
 package codeu.chat.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Arrays;
-import java.util.Collection;
-
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.Relay;
@@ -36,6 +27,11 @@ import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.Collection;
 
 public final class Server {
 
@@ -273,25 +269,25 @@ public final class Server {
       // has a message in the conversation will get ownership over this server's copy
       // of the conversation.
       conversation = controller.newConversation(relayConversation.id(),
-                                                relayConversation.text(),
-                                                user.id,
-                                                relayConversation.time());
+          relayConversation.text(),
+          user.id,
+          relayConversation.time());
     }
 
     Message message = model.messageById().first(relayMessage.id());
 
     if (message == null) {
       message = controller.newMessage(relayMessage.id(),
-                                      user.id,
-                                      conversation.id,
-                                      relayMessage.text(),
-                                      relayMessage.time());
+          user.id,
+          conversation.id,
+          relayMessage.text(),
+          relayMessage.time());
     }
   }
 
   private Runnable createSendToRelayEvent(final Uuid userId,
-                                          final Uuid conversationId,
-                                          final Uuid messageId) {
+      final Uuid conversationId,
+      final Uuid messageId) {
     return new Runnable() {
       @Override
       public void run() {
@@ -299,10 +295,10 @@ public final class Server {
         final Conversation conversation = view.findConversation(conversationId);
         final Message message = view.findMessage(messageId);
         relay.write(id,
-                    secret,
-                    relay.pack(user.id, user.name, user.creation),
-                    relay.pack(conversation.id, conversation.title, conversation.creation),
-                    relay.pack(message.id, message.content, message.creation));
+            secret,
+            relay.pack(user.id, user.name, user.creation),
+            relay.pack(conversation.id, conversation.title, conversation.creation),
+            relay.pack(message.id, message.content, message.creation));
       }
     };
   }

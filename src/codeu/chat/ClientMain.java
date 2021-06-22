@@ -14,22 +14,21 @@
 
 package codeu.chat;
 
-import java.io.IOException;
-import java.util.Scanner;
-
-import codeu.chat.client.commandline.Chat;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
+import codeu.chat.client.commandline.Chat;
 import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.ConnectionSource;
+import java.io.IOException;
+import java.util.Scanner;
 
 final class ClientMain {
 
   private static final Logger.Log LOG = Logger.newLog(ClientMain.class);
 
-  public static void main(String [] args) {
+  public static void main(String[] args) {
 
     try {
       Logger.enableFileOutput("chat_client_log.log");

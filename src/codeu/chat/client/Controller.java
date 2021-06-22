@@ -14,10 +14,6 @@
 
 package codeu.chat.client;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.lang.Thread;
-
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
@@ -90,7 +86,7 @@ public class Controller implements BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner)  {
+  public Conversation newConversation(String title, Uuid owner) {
 
     Conversation response = null;
 

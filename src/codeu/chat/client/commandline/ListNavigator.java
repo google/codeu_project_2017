@@ -14,13 +14,10 @@
 
 package codeu.chat.client.commandline;
 
-import java.lang.Math;
+import codeu.chat.common.ListViewable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
-
-import codeu.chat.common.ListViewable;
 
 // Page up and down through a list of objects and allow user to select one.
 // T must implement ListViewable. This gives access to listView(), which produces
@@ -145,7 +142,9 @@ public final class ListNavigator<T extends ListViewable> {
 
   // Move the view down one page (or to bottom of page).
   private void moveDown() {
-    if (selection.size() == 0) return;
+    if (selection.size() == 0) {
+      return;
+    }
     bottom = Math.min(bottom + pageSize, selection.size());
     top = bottom - pageSize + 1;
   }

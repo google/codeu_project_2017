@@ -14,19 +14,6 @@
 
 package codeu.chat.server;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
-
 import codeu.chat.common.BasicView;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
@@ -38,6 +25,13 @@ import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.store.StoreAccessor;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public final class View implements BasicView, LogicalView, SinglesView {
 
@@ -61,7 +55,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
     final Collection<ConversationSummary> summaries = new ArrayList<>();
 
     for (final Conversation conversation : model.conversationById().all()) {
-        summaries.add(conversation.summary);
+      summaries.add(conversation.summary);
     }
 
     return summaries;
@@ -183,13 +177,19 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public User findUser(Uuid id) { return model.userById().first(id); }
+  public User findUser(Uuid id) {
+    return model.userById().first(id);
+  }
 
   @Override
-  public Conversation findConversation(Uuid id) { return model.conversationById().first(id); }
+  public Conversation findConversation(Uuid id) {
+    return model.conversationById().first(id);
+  }
 
   @Override
-  public Message findMessage(Uuid id) { return model.messageById().first(id); }
+  public Message findMessage(Uuid id) {
+    return model.messageById().first(id);
+  }
 
   private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
 

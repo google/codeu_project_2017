@@ -14,12 +14,6 @@
 
 package codeu.chat.client;
 
-import codeu.chat.client.ClientConversation;
-import codeu.chat.client.ClientMessage;
-import codeu.chat.client.ClientUser;
-import codeu.chat.client.Controller;
-import codeu.chat.client.View;
-
 public final class ClientContext {
 
   public final ClientUser user;
