@@ -14,8 +14,8 @@
 
 package codeu.chat.common;
 
-import codeu.chat.util.Uuid;
 import java.util.Collection;
+import java.util.UUID;
 
 // BASIC VIEW
 //
@@ -30,7 +30,7 @@ public interface BasicView {
   // GET USERS
   //
   //   Return all users whose id is found in the given collection.
-  Collection<User> getUsers(Collection<Uuid> ids);
+  Collection<User> getUsers(Collection<UUID> ids);
 
   // GET ALL CONVERSATIONS
   //
@@ -40,11 +40,11 @@ public interface BasicView {
   // GET CONVERSATIONS
   //
   //   Return all conversations whose id is found in the given collection.
-  Collection<Conversation> getConversations(Collection<Uuid> ids);
+  Collection<Conversation> getConversations(Collection<UUID> ids);
 
   // GET MESSAGES
   //
   //   Return all messages whose id is found in the given collection.
-  Collection<Message> getMessages(Collection<Uuid> ids);
+  Collection<Message> getMessages(Collection<UUID> ids);
 
 }

@@ -15,8 +15,8 @@
 package codeu.chat.common;
 
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import java.util.Collection;
+import java.util.UUID;
 
 // LOGICAL VIEW
 //
@@ -25,16 +25,10 @@ import java.util.Collection;
 //   based on a query rather than fetching specific objects.
 public interface LogicalView {
 
-  // GET USER GENERATION
-  //
-  //   Get an identifier that specifies the generation of all users. Storing and
-  //   tracking this number will allow checking if it is worth fetching all users.
-  Uuid getUserGeneration();
-
   // GET USERS EXCLUDING
   //
   //   Get all users whose ID are not found in the given set of ids.
-  Collection<User> getUsersExcluding(Collection<Uuid> ids);
+  Collection<User> getUsersExcluding(Collection<UUID> ids);
 
   // GET CONVERSATIONS
   //
@@ -56,7 +50,7 @@ public interface LogicalView {
   //   between the start and end times. If the conversation is not found,
   //   or the start time is invalid, or the end time is invalid, no
   //   messages will be returned.
-  Collection<Message> getMessages(Uuid conversation, Time start, Time end);
+  Collection<Message> getMessages(UUID conversation, Time start, Time end);
 
   // GET MESSAGES
   //
@@ -66,6 +60,6 @@ public interface LogicalView {
   //   range is negative, all messages before the given message up to and
   //   including |range| will be returned. If the root message is not found
   //   no messages will be returned.
-  Collection<Message> getMessages(Uuid rootMessage, int range);
+  Collection<Message> getMessages(UUID rootMessage, int range);
 
 }

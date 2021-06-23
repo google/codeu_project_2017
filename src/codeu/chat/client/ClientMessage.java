@@ -18,12 +18,12 @@ import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.util.Method;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.logging.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public final class ClientMessage {
 
@@ -35,7 +35,7 @@ public final class ClientMessage {
 
   private Message current = null;
 
-  private final Map<Uuid, Message> messageByUuid = new HashMap<>();
+  private final Map<UUID, Message> messageByUuid = new HashMap<>();
 
   private Conversation conversationHead;
   private final List<Message> conversationContents = new ArrayList<>();
@@ -93,7 +93,7 @@ public final class ClientMessage {
   }
 
   // For m-add command.
-  public void addMessage(Uuid author, Uuid conversation, String body) {
+  public void addMessage(UUID author, UUID conversation, String body) {
     final boolean validInputs = isValidBody(body) && (author != null) && (conversation != null);
 
     final Message message =
@@ -149,7 +149,7 @@ public final class ClientMessage {
 
   // Determine the next message ID of the current conversation to start pulling.
   // This requires a read of the last read message to determine if the chain has been extended.
-  private Uuid getCurrentMessageFetchId(boolean replaceAll) {
+  private UUID getCurrentMessageFetchId(boolean replaceAll) {
     if (replaceAll || conversationContents.isEmpty()) {
       // Fetch/refetch all the messages.
       conversationContents.clear();
@@ -163,8 +163,8 @@ public final class ClientMessage {
     }
   }
 
-  private Uuid getCurrentTailMessageId() {
-    Uuid nextMessageId = conversationContents.get(conversationContents.size() - 1).id;
+  private UUID getCurrentTailMessageId() {
+    UUID nextMessageId = conversationContents.get(conversationContents.size() - 1).id;
     final List<Message> messageTail = new ArrayList<>(view.getMessages(nextMessageId, 1));
     if (messageTail.size() > 0) {
       final Message msg = messageTail.get(0);
@@ -202,10 +202,11 @@ public final class ClientMessage {
           conversationHead.firstMessage,
           conversationHead.lastMessage);
 
-      Uuid nextMessageId = getCurrentMessageFetchId(replaceAll);
+      UUID nextMessageId = getCurrentMessageFetchId(replaceAll);
 
       //  Stay in loop until all messages read (up to safety limit)
-      while (!nextMessageId.equals(Uuid.NULL) && conversationContents.size() < MESSAGE_MAX_COUNT) {
+      while (!Message.NULL_MESSAGE_ID.equals(nextMessageId)
+          && conversationContents.size() < MESSAGE_MAX_COUNT) {
 
         for (final Message msg : view.getMessages(nextMessageId, MESSAGE_FETCH_COUNT)) {
 
@@ -213,8 +214,9 @@ public final class ClientMessage {
 
           // Race: message possibly added since conversation fetched.  If that occurs,
           // pretend the newer messages do not exist - they'll get picked up next time).
-          if (msg.next.equals(Uuid.NULL) || msg.id.equals(conversationHead.lastMessage)) {
-            msg.next = Uuid.NULL;
+          if (Message.NULL_MESSAGE_ID.equals(msg.next) || msg.id
+              .equals(conversationHead.lastMessage)) {
+            msg.next = Message.NULL_MESSAGE_ID;
             break;
           }
         }

@@ -17,7 +17,6 @@ package codeu.chat;
 
 import codeu.chat.common.Secret;
 import codeu.chat.server.Server;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
@@ -29,21 +28,13 @@ final class ServerMain {
   public static void main(String[] args) {
     Log.instance.info("============================= START OF LOG =============================");
 
-    final int myPort = Integer.parseInt(args[2]);
-    final byte[] secret = Secret.parse(args[1]);
-
-    Uuid id = null;
-    try {
-      id = Uuid.parse(args[0]);
-    } catch (IOException ex) {
-      System.out.println("Invalid id - shutting down server");
-      System.exit(1);
-    }
+    final int myPort = Integer.parseInt(args[1]);
+    final byte[] secret = Secret.parse(args[0]);
 
     try (ConnectionSource serverSource = ServerConnectionSource.forPort(myPort)) {
 
       Log.instance.info("Starting server...");
-      runServer(id, secret, serverSource);
+      runServer(secret, serverSource);
 
     } catch (IOException ex) {
 
@@ -52,9 +43,9 @@ final class ServerMain {
     }
   }
 
-  private static void runServer(Uuid id, byte[] secret, ConnectionSource serverSource) {
+  private static void runServer(byte[] secret, ConnectionSource serverSource) {
 
-    final Server server = new Server(id, secret);
+    final Server server = new Server(secret);
 
     Log.instance.info("Created server.");
 

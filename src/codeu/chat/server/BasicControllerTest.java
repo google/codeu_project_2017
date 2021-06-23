@@ -20,7 +20,6 @@ import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
-import codeu.chat.util.Uuid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +30,7 @@ public final class BasicControllerTest {
   @BeforeEach
   public void doBefore() {
     Model model = new Model();
-    controller = new Controller(Uuid.NULL, model);
+    controller = new Controller(model);
   }
 
   @Test

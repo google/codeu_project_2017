@@ -17,12 +17,12 @@ package codeu.chat.client;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Method;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public final class ClientConversation {
 
@@ -36,7 +36,7 @@ public final class ClientConversation {
   private ClientMessage messageContext = null;
 
   // This is the set of conversations known to the server.
-  private final Map<Uuid, ConversationSummary> summariesByUuid = new HashMap<>();
+  private final Map<UUID, ConversationSummary> summariesByUuid = new HashMap<>();
 
   // This is the set of conversations known to the server, sorted by title.
   private Store<String, ConversationSummary> summariesSortedByTitle =
@@ -73,7 +73,7 @@ public final class ClientConversation {
     return currentSummary;
   }
 
-  public Uuid getCurrentId() {
+  public UUID getCurrentId() {
     return (currentSummary != null) ? currentSummary.id : null;
   }
 
@@ -85,7 +85,7 @@ public final class ClientConversation {
     printConversation(currentSummary, userContext);
   }
 
-  public void startConversation(String title, Uuid owner) {
+  public void startConversation(String title, UUID owner) {
     final boolean validInputs = isValidTitle(title);
 
     final Conversation conv = (validInputs) ? controller.newConversation(title, owner) : null;
@@ -115,7 +115,7 @@ public final class ClientConversation {
   }
 
   // Get a single conversation from the server.
-  public Conversation getConversation(Uuid conversationId) {
+  public Conversation getConversation(UUID conversationId) {
     for (final Conversation c : view.getConversations(Arrays.asList(conversationId))) {
       return c;
     }

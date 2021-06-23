@@ -17,12 +17,12 @@ package codeu.chat.common;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.UUID;
 
 public final class Conversation {
 
@@ -31,13 +31,13 @@ public final class Conversation {
     @Override
     public void write(OutputStream out, Conversation value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
+      Serializers.UUID.write(out, value.id);
+      Serializers.UUID.write(out, value.owner);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
-      Serializers.collection(Uuid.SERIALIZER).write(out, value.users);
-      Uuid.SERIALIZER.write(out, value.firstMessage);
-      Uuid.SERIALIZER.write(out, value.lastMessage);
+      Serializers.collection(Serializers.UUID).write(out, value.users);
+      Serializers.UUID.write(out, value.firstMessage);
+      Serializers.UUID.write(out, value.lastMessage);
 
     }
 
@@ -45,33 +45,35 @@ public final class Conversation {
     public Conversation read(InputStream in) throws IOException {
 
       final Conversation value = new Conversation(
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
+          Serializers.UUID.read(in),
+          Serializers.UUID.read(in),
           Time.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );
 
-      value.users.addAll(Serializers.collection(Uuid.SERIALIZER).read(in));
+      value.users.addAll(Serializers.collection(Serializers.UUID).read(in));
 
-      value.firstMessage = Uuid.SERIALIZER.read(in);
-      value.lastMessage = Uuid.SERIALIZER.read(in);
+      value.firstMessage = Serializers.UUID.read(in);
+      value.lastMessage = Serializers.UUID.read(in);
 
       return value;
 
     }
   };
 
+  public static final UUID NULL_CONVERSATION_ID = new UUID(0, 0);
+
   public final ConversationSummary summary;
 
-  public final Uuid id;
-  public final Uuid owner;
+  public final UUID id;
+  public final UUID owner;
   public final Time creation;
   public final String title;
-  public final Collection<Uuid> users = new HashSet<>();
-  public Uuid firstMessage = Uuid.NULL;
-  public Uuid lastMessage = Uuid.NULL;
+  public final Collection<UUID> users = new HashSet<>();
+  public UUID firstMessage = Message.NULL_MESSAGE_ID;
+  public UUID lastMessage = Message.NULL_MESSAGE_ID;
 
-  public Conversation(Uuid id, Uuid owner, Time creation, String title) {
+  public Conversation(UUID id, UUID owner, Time creation, String title) {
 
     this.id = id;
     this.owner = owner;

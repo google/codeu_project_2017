@@ -17,10 +17,10 @@ package codeu.chat.common;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
 public final class ConversationSummary implements ListViewable {
 
@@ -29,8 +29,8 @@ public final class ConversationSummary implements ListViewable {
     @Override
     public void write(OutputStream out, ConversationSummary value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.owner);
+      Serializers.UUID.write(out, value.id);
+      Serializers.UUID.write(out, value.owner);
       Time.SERIALIZER.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
 
@@ -40,8 +40,8 @@ public final class ConversationSummary implements ListViewable {
     public ConversationSummary read(InputStream in) throws IOException {
 
       return new ConversationSummary(
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
+          Serializers.UUID.read(in),
+          Serializers.UUID.read(in),
           Time.SERIALIZER.read(in),
           Serializers.STRING.read(in)
       );
@@ -49,12 +49,12 @@ public final class ConversationSummary implements ListViewable {
     }
   };
 
-  public final Uuid id;
-  public final Uuid owner;
+  public final UUID id;
+  public final UUID owner;
   public final Time creation;
   public final String title;
 
-  public ConversationSummary(Uuid id, Uuid owner, Time creation, String title) {
+  public ConversationSummary(UUID id, UUID owner, Time creation, String title) {
 
     this.id = id;
     this.owner = owner;

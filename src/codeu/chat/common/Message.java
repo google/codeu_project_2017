@@ -17,10 +17,10 @@ package codeu.chat.common;
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
 public final class Message {
 
@@ -29,11 +29,11 @@ public final class Message {
     @Override
     public void write(OutputStream out, Message value) throws IOException {
 
-      Uuid.SERIALIZER.write(out, value.id);
-      Uuid.SERIALIZER.write(out, value.next);
-      Uuid.SERIALIZER.write(out, value.previous);
+      Serializers.UUID.write(out, value.id);
+      Serializers.UUID.write(out, value.next);
+      Serializers.UUID.write(out, value.previous);
       Time.SERIALIZER.write(out, value.creation);
-      Uuid.SERIALIZER.write(out, value.author);
+      Serializers.UUID.write(out, value.author);
       Serializers.STRING.write(out, value.content);
 
     }
@@ -42,25 +42,27 @@ public final class Message {
     public Message read(InputStream in) throws IOException {
 
       return new Message(
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
+          Serializers.UUID.read(in),
+          Serializers.UUID.read(in),
+          Serializers.UUID.read(in),
           Time.SERIALIZER.read(in),
-          Uuid.SERIALIZER.read(in),
+          Serializers.UUID.read(in),
           Serializers.STRING.read(in)
       );
 
     }
   };
 
-  public final Uuid id;
-  public final Uuid previous;
-  public final Time creation;
-  public final Uuid author;
-  public final String content;
-  public Uuid next;
+  public static final UUID NULL_MESSAGE_ID = new UUID(0, 0);
 
-  public Message(Uuid id, Uuid next, Uuid previous, Time creation, Uuid author, String content) {
+  public final UUID id;
+  public final UUID previous;
+  public final Time creation;
+  public final UUID author;
+  public final String content;
+  public UUID next;
+
+  public Message(UUID id, UUID next, UUID previous, Time creation, UUID author, String content) {
 
     this.id = id;
     this.next = next;

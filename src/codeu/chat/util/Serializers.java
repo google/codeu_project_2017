@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 public final class Serializers {
 
@@ -124,6 +125,26 @@ public final class Serializers {
 
       return new String(BYTES.read(input));
 
+    }
+  };
+
+  public static Serializer<UUID> UUID = new Serializer<>() {
+    @Override
+    public void write(OutputStream out, UUID value) throws IOException {
+      var str = value.toString();
+      out.write(str.length());  // The UUID will be smaller than 255 so this will fit in a byte.
+      out.write(str.getBytes());
+    }
+
+    @Override
+    public UUID read(InputStream in) throws IOException {
+      var length = in.read();
+
+      var buffer = new byte[length];
+      in.read(buffer);
+
+      var str = new String(buffer);
+      return java.util.UUID.fromString(str);
     }
   };
 

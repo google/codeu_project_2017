@@ -15,38 +15,17 @@
 package codeu.chat.server;
 
 import codeu.chat.common.Conversation;
-import codeu.chat.common.LinearUuidGenerator;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.store.Store;
 import codeu.chat.util.store.StoreAccessor;
 import java.util.Comparator;
+import java.util.UUID;
 
 public final class Model {
 
-  private static final Comparator<Uuid> UUID_COMPARE = new Comparator<Uuid>() {
-
-    @Override
-    public int compare(Uuid a, Uuid b) {
-
-      if (a == b) {
-        return 0;
-      }
-
-      if (a == null && b != null) {
-        return -1;
-      }
-
-      if (a != null && b == null) {
-        return 1;
-      }
-
-      final int order = Integer.compare(a.id(), b.id());
-      return order == 0 ? compare(a.root(), b.root()) : order;
-    }
-  };
+  private static final Comparator<UUID> UUID_COMPARE = (a, b) -> a.compareTo(b);
 
   private static final Comparator<Time> TIME_COMPARE = new Comparator<Time>() {
     @Override
@@ -57,31 +36,25 @@ public final class Model {
 
   private static final Comparator<String> STRING_COMPARE = String.CASE_INSENSITIVE_ORDER;
 
-  private final Store<Uuid, User> userById = new Store<>(UUID_COMPARE);
+  private final Store<UUID, User> userById = new Store<>(UUID_COMPARE);
   private final Store<Time, User> userByTime = new Store<>(TIME_COMPARE);
   private final Store<String, User> userByText = new Store<>(STRING_COMPARE);
 
-  private final Store<Uuid, Conversation> conversationById = new Store<>(UUID_COMPARE);
+  private final Store<UUID, Conversation> conversationById = new Store<>(UUID_COMPARE);
   private final Store<Time, Conversation> conversationByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Conversation> conversationByText = new Store<>(STRING_COMPARE);
 
-  private final Store<Uuid, Message> messageById = new Store<>(UUID_COMPARE);
+  private final Store<UUID, Message> messageById = new Store<>(UUID_COMPARE);
   private final Store<Time, Message> messageByTime = new Store<>(TIME_COMPARE);
   private final Store<String, Message> messageByText = new Store<>(STRING_COMPARE);
 
-  private final Uuid.Generator userGenerations = new LinearUuidGenerator(null, 1,
-      Integer.MAX_VALUE);
-  private Uuid currentUserGeneration = userGenerations.make();
-
   public void add(User user) {
-    currentUserGeneration = userGenerations.make();
-
     userById.insert(user.id, user);
     userByTime.insert(user.creation, user);
     userByText.insert(user.name, user);
   }
 
-  public StoreAccessor<Uuid, User> userById() {
+  public StoreAccessor<UUID, User> userById() {
     return userById;
   }
 
@@ -93,17 +66,13 @@ public final class Model {
     return userByText;
   }
 
-  public Uuid userGeneration() {
-    return currentUserGeneration;
-  }
-
   public void add(Conversation conversation) {
     conversationById.insert(conversation.id, conversation);
     conversationByTime.insert(conversation.creation, conversation);
     conversationByText.insert(conversation.title, conversation);
   }
 
-  public StoreAccessor<Uuid, Conversation> conversationById() {
+  public StoreAccessor<UUID, Conversation> conversationById() {
     return conversationById;
   }
 
@@ -121,7 +90,7 @@ public final class Model {
     messageByText.insert(message.content, message);
   }
 
-  public StoreAccessor<Uuid, Message> messageById() {
+  public StoreAccessor<UUID, Message> messageById() {
     return messageById;
   }
 

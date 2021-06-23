@@ -22,7 +22,6 @@ import codeu.chat.common.Message;
 import codeu.chat.common.SinglesView;
 import codeu.chat.common.User;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.StoreAccessor;
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public final class View implements BasicView, LogicalView, SinglesView {
@@ -43,7 +43,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
 
 
   @Override
-  public Collection<User> getUsers(Collection<Uuid> ids) {
+  public Collection<User> getUsers(Collection<UUID> ids) {
     return intersect(model.userById(), ids);
   }
 
@@ -61,22 +61,17 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public Collection<Conversation> getConversations(Collection<Uuid> ids) {
+  public Collection<Conversation> getConversations(Collection<UUID> ids) {
     return intersect(model.conversationById(), ids);
   }
 
   @Override
-  public Collection<Message> getMessages(Collection<Uuid> ids) {
+  public Collection<Message> getMessages(Collection<UUID> ids) {
     return intersect(model.messageById(), ids);
   }
 
   @Override
-  public Uuid getUserGeneration() {
-    return model.userGeneration();
-  }
-
-  @Override
-  public Collection<User> getUsersExcluding(Collection<Uuid> ids) {
+  public Collection<User> getUsersExcluding(Collection<UUID> ids) {
 
     final Set<User> blocklist = new HashSet<>(intersect(model.userById(), ids));
     final Set<User> users = new HashSet<>();
@@ -118,7 +113,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public Collection<Message> getMessages(Uuid conversation, Time start, Time end) {
+  public Collection<Message> getMessages(UUID conversation, Time start, Time end) {
 
     final Conversation foundConversation = model.conversationById().first(conversation);
 
@@ -141,7 +136,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public Collection<Message> getMessages(Uuid rootMessage, int range) {
+  public Collection<Message> getMessages(UUID rootMessage, int range) {
 
     int remaining = Math.abs(range);
     Log.instance.info("in getMessage: UUID=%s range=%d", rootMessage, range);
@@ -175,28 +170,28 @@ public final class View implements BasicView, LogicalView, SinglesView {
   }
 
   @Override
-  public User findUser(Uuid id) {
+  public User findUser(UUID id) {
     return model.userById().first(id);
   }
 
   @Override
-  public Conversation findConversation(Uuid id) {
+  public Conversation findConversation(UUID id) {
     return model.conversationById().first(id);
   }
 
   @Override
-  public Message findMessage(Uuid id) {
+  public Message findMessage(UUID id) {
     return model.messageById().first(id);
   }
 
-  private static <T> Collection<T> intersect(StoreAccessor<Uuid, T> store, Collection<Uuid> ids) {
+  private static <T> Collection<T> intersect(StoreAccessor<UUID, T> store, Collection<UUID> ids) {
 
     // Use a set to hold the found users as this will prevent duplicate ids from
     // yielding duplicates in the result.
 
     final Collection<T> found = new HashSet<>();
 
-    for (final Uuid id : ids) {
+    for (final UUID id : ids) {
 
       final T t = store.first(id);
 

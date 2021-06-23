@@ -17,25 +17,22 @@ package codeu.chat.server;
 import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
-import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.logging.Log;
+import java.util.UUID;
 
 public final class Controller implements RawController, BasicController {
 
   private final Model model;
-  private final Uuid.Generator uuidGenerator;
 
-  public Controller(Uuid serverId, Model model) {
+  public Controller(Model model) {
     this.model = model;
-    this.uuidGenerator = new RandomUuidGenerator(serverId, System.currentTimeMillis());
   }
 
   @Override
-  public Message newMessage(Uuid author, Uuid conversation, String body) {
+  public Message newMessage(UUID author, UUID conversation, String body) {
     return newMessage(createId(), author, conversation, body, Time.now());
   }
 
@@ -45,12 +42,12 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(String title, Uuid owner) {
+  public Conversation newConversation(String title, UUID owner) {
     return newConversation(createId(), title, owner, Time.now());
   }
 
   @Override
-  public Message newMessage(Uuid id, Uuid author, Uuid conversation, String body,
+  public Message newMessage(UUID id, UUID author, UUID conversation, String body,
       Time creationTime) {
 
     final User foundUser = model.userById().first(author);
@@ -60,14 +57,20 @@ public final class Controller implements RawController, BasicController {
 
     if (foundUser != null && foundConversation != null && isIdFree(id)) {
 
-      message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
+      message = new Message(id,
+          Message.NULL_MESSAGE_ID,
+          Message.NULL_MESSAGE_ID,
+          creationTime,
+          author,
+          body);
+
       model.add(message);
       Log.instance.info("Message added: %s", message.id);
 
       // Find and update the previous "last" message so that it's "next" value
       // will point to the new message.
 
-      if (Uuid.equals(foundConversation.lastMessage, Uuid.NULL)) {
+      if (Message.NULL_MESSAGE_ID.equals(foundConversation.lastMessage)) {
 
         // The conversation has no messages in it, that's why the last message is NULL (the first
         // message should be NULL too. Since there is no last message, then it is not possible
@@ -83,7 +86,7 @@ public final class Controller implements RawController, BasicController {
       // not change.
 
       foundConversation.firstMessage =
-          Uuid.equals(foundConversation.firstMessage, Uuid.NULL) ?
+          Message.NULL_MESSAGE_ID.equals(foundConversation.firstMessage) ?
               message.id :
               foundConversation.firstMessage;
 
@@ -100,7 +103,7 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public User newUser(Uuid id, String name, Time creationTime) {
+  public User newUser(UUID id, String name, Time creationTime) {
 
     User user = null;
 
@@ -125,7 +128,7 @@ public final class Controller implements RawController, BasicController {
   }
 
   @Override
-  public Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime) {
+  public Conversation newConversation(UUID id, String title, UUID owner, Time creationTime) {
 
     final User foundOwner = model.userById().first(owner);
 
@@ -141,30 +144,25 @@ public final class Controller implements RawController, BasicController {
     return conversation;
   }
 
-  private Uuid createId() {
+  private UUID createId() {
+    var candidate = UUID.randomUUID();
 
-    Uuid candidate;
-
-    for (candidate = uuidGenerator.make();
-        isIdInUse(candidate);
-        candidate = uuidGenerator.make()) {
-
-      // Assuming that "randomUuid" is actually well implemented, this
-      // loop should never be needed, but just incase make sure that the
-      // Uuid is not actually in use before returning it.
-
+    while (isIdInUse(candidate)) {
+      // Assuming that "randomUuid" is actually well implemented, this loop should never be needed,
+      // but just in case make sure that the Uuid is not actually in use before returning it.
+      candidate = UUID.randomUUID();
     }
 
     return candidate;
   }
 
-  private boolean isIdInUse(Uuid id) {
+  private boolean isIdInUse(UUID id) {
     return model.messageById().first(id) != null ||
         model.conversationById().first(id) != null ||
         model.userById().first(id) != null;
   }
 
-  private boolean isIdFree(Uuid id) {
+  private boolean isIdFree(UUID id) {
     return !isIdInUse(id);
   }
 

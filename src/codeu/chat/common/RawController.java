@@ -15,7 +15,7 @@
 package codeu.chat.common;
 
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
+import java.util.UUID;
 
 // RAW CONTROLLER
 //
@@ -28,18 +28,18 @@ public interface RawController {
   //
   // Add a new message to the model with a specific id. If the id is already
   // in use, the call will fail and null will be returned.
-  Message newMessage(Uuid id, Uuid author, Uuid conversation, String body, Time creationTime);
+  Message newMessage(UUID id, UUID author, UUID conversation, String body, Time creationTime);
 
   // NEW USER
   //
   // Add a new user to the model with a specific id. If the id is already in
   // use, the call will fail and null will be returned.
-  User newUser(Uuid id, String name, Time creationTime);
+  User newUser(UUID id, String name, Time creationTime);
 
   // NEW CONVERSATION
   //
   // Add a new conversation to the model with a specific if. If the id is
   // already in use, the call will fail and null will be returned.
-  Conversation newConversation(Uuid id, String title, Uuid owner, Time creationTime);
+  Conversation newConversation(UUID id, String title, UUID owner, Time creationTime);
 
 }

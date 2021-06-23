@@ -14,7 +14,7 @@
 
 package codeu.chat.common;
 
-import codeu.chat.util.Uuid;
+import java.util.UUID;
 
 // SINGLES VIEW
 //
@@ -26,18 +26,18 @@ public interface SinglesView {
   //
   // Find the user whose id matches the given id. If no user's id matches
   // the given id, null with be returned.
-  User findUser(Uuid id);
+  User findUser(UUID id);
 
   // FIND CONVERSATION
   //
   // Find the conversation whose id matches the given id. If no conversation's
   // matches the given id, null will be returned.
-  Conversation findConversation(Uuid id);
+  Conversation findConversation(UUID id);
 
   // FIND MESSAGE
   //
   // Find the message whose id matches the given id. if no message's id
   // matches the given id, null will be returned.
-  Message findMessage(Uuid id);
+  Message findMessage(UUID id);
 
 }

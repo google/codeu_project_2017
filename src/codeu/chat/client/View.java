@@ -23,12 +23,12 @@ import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.logging.Log;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 // VIEW
 //
@@ -44,14 +44,14 @@ public final class View implements BasicView, LogicalView {
   }
 
   @Override
-  public Collection<User> getUsers(Collection<Uuid> ids) {
+  public Collection<User> getUsers(Collection<UUID> ids) {
 
     final Collection<User> users = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USERS_BY_ID_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Serializers.UUID).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
@@ -92,14 +92,14 @@ public final class View implements BasicView, LogicalView {
   }
 
   @Override
-  public Collection<Conversation> getConversations(Collection<Uuid> ids) {
+  public Collection<Conversation> getConversations(Collection<UUID> ids) {
 
     final Collection<Conversation> conversations = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_CONVERSATIONS_BY_ID_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Serializers.UUID).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in())
           == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
@@ -116,14 +116,14 @@ public final class View implements BasicView, LogicalView {
   }
 
   @Override
-  public Collection<Message> getMessages(Collection<Uuid> ids) {
+  public Collection<Message> getMessages(Collection<UUID> ids) {
 
     final Collection<Message> messages = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_MESSAGES_BY_ID_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Serializers.UUID).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_ID_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
@@ -139,36 +139,14 @@ public final class View implements BasicView, LogicalView {
   }
 
   @Override
-  public Uuid getUserGeneration() {
-
-    Uuid generation = Uuid.NULL;
-
-    try (final Connection connection = source.connect()) {
-
-      Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USER_GENERATION_REQUEST);
-
-      if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USER_GENERATION_RESPONSE) {
-        generation = Uuid.SERIALIZER.read(connection.in());
-      } else {
-        Log.instance.error("Response from server failed");
-      }
-    } catch (Exception ex) {
-      System.out.println("ERROR: Exception during call on server. Check log for details.");
-      Log.instance.error("Exception during call on server: %s", ex.getMessage());
-    }
-
-    return generation;
-  }
-
-  @Override
-  public Collection<User> getUsersExcluding(Collection<Uuid> ids) {
+  public Collection<User> getUsersExcluding(Collection<UUID> ids) {
 
     final Collection<User> users = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_USERS_EXCLUDING_REQUEST);
-      Serializers.collection(Uuid.SERIALIZER).write(connection.out(), ids);
+      Serializers.collection(Serializers.UUID).write(connection.out(), ids);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
@@ -233,7 +211,7 @@ public final class View implements BasicView, LogicalView {
   }
 
   @Override
-  public Collection<Message> getMessages(Uuid conversation, Time start, Time end) {
+  public Collection<Message> getMessages(UUID conversation, Time start, Time end) {
 
     final Collection<Message> messages = new ArrayList<>();
 
@@ -258,14 +236,14 @@ public final class View implements BasicView, LogicalView {
   }
 
   @Override
-  public Collection<Message> getMessages(Uuid rootMessage, int range) {
+  public Collection<Message> getMessages(UUID rootMessage, int range) {
 
     final Collection<Message> messages = new ArrayList<>();
 
     try (final Connection connection = source.connect()) {
 
       Serializers.INTEGER.write(connection.out(), NetworkCode.GET_MESSAGES_BY_RANGE_REQUEST);
-      Uuid.SERIALIZER.write(connection.out(), rootMessage);
+      Serializers.UUID.write(connection.out(), rootMessage);
       Serializers.INTEGER.write(connection.out(), range);
 
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {

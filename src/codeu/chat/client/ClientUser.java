@@ -15,23 +15,23 @@
 package codeu.chat.client;
 
 import codeu.chat.common.User;
-import codeu.chat.util.Uuid;
 import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public final class ClientUser {
 
-  private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
+  private static final Collection<UUID> EMPTY = Arrays.asList(new UUID[0]);
   private final Controller controller;
   private final View view;
 
   private User current = null;
 
-  private final Map<Uuid, User> usersById = new HashMap<>();
+  private final Map<UUID, User> usersById = new HashMap<>();
 
   // This is the set of users known to the server, sorted by name.
   private Store<String, User> usersByName = new Store<>(String.CASE_INSENSITIVE_ORDER);
@@ -106,11 +106,11 @@ public final class ClientUser {
     }
   }
 
-  public User lookup(Uuid id) {
+  public User lookup(UUID id) {
     return (usersById.containsKey(id)) ? usersById.get(id) : null;
   }
 
-  public String getName(Uuid id) {
+  public String getName(UUID id) {
     final User user = lookup(id);
     if (user == null) {
       Log.instance.warning("userContext.lookup() failed on ID: %s", id);
