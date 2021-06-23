@@ -22,9 +22,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
-public final class ConversationSummary implements ListViewable {
+public final class ConversationSummary {
 
-  public static final Serializer<ConversationSummary> SERIALIZER = new Serializer<ConversationSummary>() {
+  public static final Serializer<ConversationSummary> SERIALIZER = new Serializer<>() {
 
     @Override
     public void write(OutputStream out, ConversationSummary value) throws IOException {
@@ -61,11 +61,5 @@ public final class ConversationSummary implements ListViewable {
     this.creation = creation;
     this.title = title;
 
-  }
-
-  // How this object should appear in a user-viewable list
-  @Override
-  public String listView() {
-    return title;
   }
 }

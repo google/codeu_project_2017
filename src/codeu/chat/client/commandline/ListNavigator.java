@@ -14,7 +14,7 @@
 
 package codeu.chat.client.commandline;
 
-import codeu.chat.common.ListViewable;
+import codeu.chat.common.ListView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ import java.util.Scanner;
 // Page up and down through a list of objects and allow user to select one.
 // T must implement ListViewable. This gives access to listView(), which produces
 // the human-readable string that identifies the object in the list.
-public final class ListNavigator<T extends ListViewable> {
+public final class ListNavigator<T> {
 
   private final List<T> selection = new ArrayList<T>();
   private final Scanner lineScanner;
@@ -33,8 +33,12 @@ public final class ListNavigator<T extends ListViewable> {
   private int intValue;
   private String choice;
 
+  private final ListView<T> mView;
+
   // Creates a ListNavigator of the desired ListViewable subclass
-  public ListNavigator(Iterable<T> objectList, Scanner scanner, int pageSize) {
+  public ListNavigator(ListView<T> view, Iterable<T> objectList, Scanner scanner, int pageSize) {
+    mView = view;
+
     this.pageSize = pageSize;
     this.lineScanner = scanner;
     for (final T e : objectList) {
@@ -91,7 +95,8 @@ public final class ListNavigator<T extends ListViewable> {
   // Number of entries displayed is determined by pageSize.
   private void displayChoices() {
     for (int i = top; i <= bottom; i++) {
-      System.out.format(" [%d]: %s\n", i, selection.get(i - 1).listView());
+      var value = mView.display(selection.get(i - 1));
+      System.out.format(" [%d]: %s\n", i, value);
     }
   }
 

@@ -19,7 +19,6 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.util.Method;
 import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

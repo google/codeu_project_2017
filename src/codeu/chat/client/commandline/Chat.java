@@ -18,6 +18,7 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
+import codeu.chat.common.ConversationSummaryListView;
 import codeu.chat.util.logging.Log;
 import java.util.Scanner;
 
@@ -300,10 +301,11 @@ public final class Chat {
     if (selectionSize == 0) {
       System.out.println("Nothing to select.");
     } else {
-      final ListNavigator<ConversationSummary> navigator =
-          new ListNavigator<ConversationSummary>(
-              clientContext.conversation.getConversationSummaries(),
-              lineScanner, PAGE_SIZE);
+      final ListNavigator<ConversationSummary> navigator = new ListNavigator<>(
+          new ConversationSummaryListView(),
+          clientContext.conversation.getConversationSummaries(),
+          lineScanner,
+          PAGE_SIZE);
       if (navigator.chooseFromList()) {
         newCurrent = navigator.getSelectedChoice();
         clientContext.message.resetCurrent(newCurrent != previous);

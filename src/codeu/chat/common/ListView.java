@@ -14,9 +14,9 @@
 
 package codeu.chat.common;
 
-public interface ListViewable {
-
-  // Produce a string for presenting this object within a list.
-  String listView();
-
+/**
+ * A view that takes the given value and returns the string needed to display it in a list.
+ */
+public interface ListView<T> {
+  String display(T value);
 }
