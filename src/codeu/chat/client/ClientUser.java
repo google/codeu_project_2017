@@ -17,15 +17,15 @@ package codeu.chat.client;
 import codeu.chat.common.User;
 import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public final class ClientUser {
 
-  private static final Collection<UUID> EMPTY = Arrays.asList(new UUID[0]);
+  private static final Collection<UUID> EMPTY = Collections.emptyList();
   private final Controller controller;
   private final View view;
 

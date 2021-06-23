@@ -28,7 +28,7 @@ public final class ListNavigator<T extends ListViewable> {
   private final Scanner lineScanner;
   private int top;
   private int bottom;
-  private int pageSize;
+  private final int pageSize;
   private boolean hasInt;
   private int intValue;
   private String choice;
@@ -122,15 +122,15 @@ public final class ListNavigator<T extends ListViewable> {
     return hasInt && (intValue >= top) && (intValue <= bottom);
   }
 
-  private final boolean moveDownSelected() {
+  private boolean moveDownSelected() {
     return choice.equals("+") && canMoveDown();
   }
 
-  private final boolean moveUpSelected() {
+  private boolean moveUpSelected() {
     return choice.equals("-") && canMoveUp();
   }
 
-  private final boolean cancelSelected() {
+  private boolean cancelSelected() {
     return choice.equals("*");
   }
 

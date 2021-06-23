@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 
 public final class RawControllerTest {
 
-  private Model model;
   private RawController controller;
 
   private UUID userId;
@@ -37,8 +36,7 @@ public final class RawControllerTest {
 
   @BeforeEach
   public void doBefore() {
-    model = new Model();
-    controller = new Controller(model);
+    controller = new Controller(new Model());
 
     userId = new UUID(0, 1);
     conversationId = new UUID(0, 2);

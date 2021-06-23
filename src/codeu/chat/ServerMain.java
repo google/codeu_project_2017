@@ -15,7 +15,6 @@
 
 package codeu.chat;
 
-import codeu.chat.common.Secret;
 import codeu.chat.server.Server;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
@@ -28,13 +27,12 @@ final class ServerMain {
   public static void main(String[] args) {
     Log.instance.info("============================= START OF LOG =============================");
 
-    final int myPort = Integer.parseInt(args[1]);
-    final byte[] secret = Secret.parse(args[0]);
+    final int myPort = Integer.parseInt(args[0]);
 
     try (ConnectionSource serverSource = ServerConnectionSource.forPort(myPort)) {
 
       Log.instance.info("Starting server...");
-      runServer(secret, serverSource);
+      runServer(serverSource);
 
     } catch (IOException ex) {
 
@@ -43,9 +41,9 @@ final class ServerMain {
     }
   }
 
-  private static void runServer(byte[] secret, ConnectionSource serverSource) {
+  private static void runServer(ConnectionSource serverSource) {
 
-    final Server server = new Server(secret);
+    final Server server = new Server();
 
     Log.instance.info("Created server.");
 

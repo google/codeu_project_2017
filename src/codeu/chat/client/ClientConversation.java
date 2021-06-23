@@ -20,6 +20,7 @@ import codeu.chat.util.Method;
 import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -116,7 +117,7 @@ public final class ClientConversation {
 
   // Get a single conversation from the server.
   public Conversation getConversation(UUID conversationId) {
-    for (final Conversation c : view.getConversations(Arrays.asList(conversationId))) {
+    for (final Conversation c : view.getConversations(Collections.singletonList(conversationId))) {
       return c;
     }
     return null;

@@ -28,7 +28,6 @@ import codeu.chat.util.logging.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -36,17 +35,11 @@ public final class Server {
 
   private final Timeline timeline = new Timeline();
 
-  private final byte[] secret;
-
   private final Model model = new Model();
   private final View view = new View(model);
   private final Controller controller;
 
-  private UUID lastSeen = new UUID(0, 0);
-
-  public Server(final byte[] secret) {
-    this.secret = Arrays.copyOf(secret, secret.length);
-
+  public Server() {
     this.controller = new Controller(model);
   }
 
@@ -58,11 +51,11 @@ public final class Server {
 
           Log.instance.info("Handling connection...");
 
-          final boolean success = onMessage(
+          onMessage(
               connection.in(),
               connection.out());
 
-          Log.instance.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
+          Log.instance.info("Connection handled.");
         } catch (Exception ex) {
 
           Log.instance.error("Exception while handling connection: %s", ex.getMessage());
@@ -78,7 +71,7 @@ public final class Server {
     });
   }
 
-  private boolean onMessage(InputStream in, OutputStream out) throws IOException {
+  private void onMessage(InputStream in, OutputStream out) throws IOException {
 
     final int type = Serializers.INTEGER.read(in);
 
@@ -203,7 +196,5 @@ public final class Server {
       Serializers.INTEGER.write(out, NetworkCode.NO_MESSAGE);
 
     }
-
-    return true;
   }
 }

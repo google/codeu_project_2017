@@ -128,7 +128,7 @@ public final class Serializers {
     }
   };
 
-  public static Serializer<UUID> UUID = new Serializer<>() {
+  public static final Serializer<UUID> UUID = new Serializer<>() {
     @Override
     public void write(OutputStream out, UUID value) throws IOException {
       var str = value.toString();
