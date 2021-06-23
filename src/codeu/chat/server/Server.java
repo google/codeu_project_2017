@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 package codeu.chat.server;
 
 import codeu.chat.common.Conversation;
@@ -43,30 +42,24 @@ public final class Server {
     this.controller = new Controller(model);
   }
 
-  public void handleConnection(final Connection connection) {
-    timeline.scheduleNow(new Runnable() {
-      @Override
-      public void run() {
-        try {
+  public void handleConnection(Connection connection) {
+    timeline.submit(() -> {
+      try {
+        Log.instance.info("Handling connection...");
 
-          Log.instance.info("Handling connection...");
+        onMessage(
+            connection.in(),
+            connection.out());
 
-          onMessage(
-              connection.in(),
-              connection.out());
+        Log.instance.info("Connection handled.");
+      } catch (Exception ex) {
+        Log.instance.error("Exception while handling connection: %s", ex.getMessage());
+      }
 
-          Log.instance.info("Connection handled.");
-        } catch (Exception ex) {
-
-          Log.instance.error("Exception while handling connection: %s", ex.getMessage());
-
-        }
-
-        try {
-          connection.close();
-        } catch (Exception ex) {
-          Log.instance.error("Exception while closing connection: %s", ex.getMessage());
-        }
+      try {
+        connection.close();
+      } catch (Exception ex) {
+        Log.instance.error("Exception while closing connection: %s", ex.getMessage());
       }
     });
   }
