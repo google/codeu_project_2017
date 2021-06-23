@@ -20,12 +20,12 @@ import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Timeline;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
+import codeu.chat.util.logging.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,8 +33,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public final class Server {
-
-  private static final Logger.Log LOG = Logger.newLog(Server.class);
 
   private final Timeline timeline = new Timeline();
 
@@ -61,23 +59,23 @@ public final class Server {
       public void run() {
         try {
 
-          LOG.info("Handling connection...");
+          Log.instance.info("Handling connection...");
 
           final boolean success = onMessage(
               connection.in(),
               connection.out());
 
-          LOG.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
+          Log.instance.info("Connection handled: %s", success ? "ACCEPTED" : "REJECTED");
         } catch (Exception ex) {
 
-          LOG.error(ex, "Exception while handling connection.");
+          Log.instance.error("Exception while handling connection: %s", ex.getMessage());
 
         }
 
         try {
           connection.close();
         } catch (Exception ex) {
-          LOG.error(ex, "Exception while closing connection.");
+          Log.instance.error("Exception while closing connection: %s", ex.getMessage());
         }
       }
     });

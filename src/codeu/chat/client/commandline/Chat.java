@@ -18,13 +18,11 @@ import codeu.chat.client.ClientContext;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.util.Logger;
+import codeu.chat.util.logging.Log;
 import java.util.Scanner;
 
 // Chat - top-level client application.
 public final class Chat {
-
-  private final static Logger.Log LOG = Logger.newLog(Chat.class);
 
   private static final String PROMPT = ">>";
 
@@ -281,7 +279,7 @@ public final class Chat {
       doOneCommand(lineScanner);
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during command processing. Check log for details.");
-      LOG.error(ex, "Exception during command processing");
+      Log.instance.error("Exception during command processing: %s", ex.getMessage());
     }
 
     // "alive" may have been set to false while executing a command. Return

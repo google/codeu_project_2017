@@ -17,28 +17,18 @@ package codeu.chat;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
 import codeu.chat.client.commandline.Chat;
-import codeu.chat.util.Logger;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.ConnectionSource;
-import java.io.IOException;
+import codeu.chat.util.logging.Log;
 import java.util.Scanner;
 
 final class ClientMain {
 
-  private static final Logger.Log LOG = Logger.newLog(ClientMain.class);
-
   public static void main(String[] args) {
+    Log.instance.info("============================= START OF LOG =============================");
 
-    try {
-      Logger.enableFileOutput("chat_client_log.log");
-    } catch (IOException ex) {
-      LOG.error(ex, "Failed to set logger to write to file");
-    }
-
-    LOG.info("============================= START OF LOG =============================");
-
-    LOG.info("Starting chat client...");
+    Log.instance.info("Starting chat client...");
 
     final RemoteAddress address = RemoteAddress.parse(args[0]);
 
@@ -46,10 +36,10 @@ final class ClientMain {
     final Controller controller = new Controller(source);
     final View view = new View(source);
 
-    LOG.info("Creating client...");
+    Log.instance.info("Creating client...");
     final Chat chat = new Chat(controller, view);
 
-    LOG.info("Created client");
+    Log.instance.info("Created client");
 
     final Scanner input = new Scanner(System.in);
 
@@ -59,6 +49,6 @@ final class ClientMain {
 
     input.close();
 
-    LOG.info("chat client has exited.");
+    Log.instance.info("chat client has exited.");
   }
 }

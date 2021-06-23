@@ -20,13 +20,11 @@ import codeu.chat.common.Message;
 import codeu.chat.common.RandomUuidGenerator;
 import codeu.chat.common.RawController;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.Log;
 
 public final class Controller implements RawController, BasicController {
-
-  private final static Logger.Log LOG = Logger.newLog(Controller.class);
 
   private final Model model;
   private final Uuid.Generator uuidGenerator;
@@ -64,7 +62,7 @@ public final class Controller implements RawController, BasicController {
 
       message = new Message(id, Uuid.NULL, Uuid.NULL, creationTime, author, body);
       model.add(message);
-      LOG.info("Message added: %s", message.id);
+      Log.instance.info("Message added: %s", message.id);
 
       // Find and update the previous "last" message so that it's "next" value
       // will point to the new message.
@@ -111,16 +109,13 @@ public final class Controller implements RawController, BasicController {
       user = new User(id, name, creationTime);
       model.add(user);
 
-      LOG.info(
-          "newUser success (user.id=%s user.name=%s user.time=%s)",
+      Log.instance.info("newUser success (user.id=%s user.name=%s user.time=%s)",
           id,
           name,
           creationTime);
 
     } else {
-
-      LOG.info(
-          "newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
+      Log.instance.info("newUser fail - id in use (user.id=%s user.name=%s user.time=%s)",
           id,
           name,
           creationTime);
@@ -140,7 +135,7 @@ public final class Controller implements RawController, BasicController {
       conversation = new Conversation(id, owner, creationTime, title);
       model.add(conversation);
 
-      LOG.info("Conversation added: " + conversation.id);
+      Log.instance.info("Conversation added: " + conversation.id);
     }
 
     return conversation;

@@ -14,6 +14,7 @@
 
 package codeu.chat.util;
 
+import codeu.chat.util.logging.Log;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -25,8 +26,6 @@ import java.util.concurrent.PriorityBlockingQueue;
 // and there is no way to know outside of the code that is executed when the
 // code has been executed.
 public final class Timeline {
-
-  private final static Logger.Log LOG = Logger.newLog(Timeline.class);
 
   private static final class Event implements Comparable<Event> {
 
@@ -117,7 +116,7 @@ public final class Timeline {
         } catch (Exception ex) {
           // Catch all exceptions here to stop any rogue action from
           // take down the timeline.
-          LOG.warning(
+          Log.instance.warning(
               "An exception was seen on the timeline (%s)",
               ex.toString());
         }
@@ -189,7 +188,7 @@ public final class Timeline {
 
   private static <T> void forceAdd(BlockingQueue<T> queue, T value) {
     while (!queue.offer(value)) {
-      LOG.warning("Failed to add to queue, trying again...");
+      Log.instance.warning("Failed to add to queue, trying again...");
     }
   }
 }

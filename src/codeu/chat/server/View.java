@@ -21,9 +21,9 @@ import codeu.chat.common.LogicalView;
 import codeu.chat.common.Message;
 import codeu.chat.common.SinglesView;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.StoreAccessor;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,8 +34,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public final class View implements BasicView, LogicalView, SinglesView {
-
-  private final static Logger.Log LOG = Logger.newLog(View.class);
 
   private final Model model;
 
@@ -146,7 +144,7 @@ public final class View implements BasicView, LogicalView, SinglesView {
   public Collection<Message> getMessages(Uuid rootMessage, int range) {
 
     int remaining = Math.abs(range);
-    LOG.info("in getMessage: UUID=%s range=%d", rootMessage, range);
+    Log.instance.info("in getMessage: UUID=%s range=%d", rootMessage, range);
 
     // We want to return the messages in order. If the range was negative
     // the messages would be backwards. Use a linked list as it supports
@@ -203,11 +201,11 @@ public final class View implements BasicView, LogicalView, SinglesView {
       final T t = store.first(id);
 
       if (t == null) {
-        LOG.warning("Unmapped id %s", id);
+        Log.instance.warning("Unmapped id %s", id);
       } else if (found.add(t)) {
         // do nothing
       } else {
-        LOG.warning("Duplicate id %s", id);
+        Log.instance.warning("Duplicate id %s", id);
       }
     }
 

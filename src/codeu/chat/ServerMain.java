@@ -17,30 +17,17 @@ package codeu.chat;
 
 import codeu.chat.common.Secret;
 import codeu.chat.server.Server;
-import codeu.chat.util.Logger;
-import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.Uuid;
-import codeu.chat.util.connections.ClientConnectionSource;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.connections.ServerConnectionSource;
+import codeu.chat.util.logging.Log;
 import java.io.IOException;
 
 final class ServerMain {
 
-  private static final Logger.Log LOG = Logger.newLog(ServerMain.class);
-
   public static void main(String[] args) {
-
-    Logger.enableConsoleOutput();
-
-    try {
-      Logger.enableFileOutput("chat_server_log.log");
-    } catch (IOException ex) {
-      LOG.error(ex, "Failed to set logger to write to file");
-    }
-
-    LOG.info("============================= START OF LOG =============================");
+    Log.instance.info("============================= START OF LOG =============================");
 
     final int myPort = Integer.parseInt(args[2]);
     final byte[] secret = Secret.parse(args[1]);
@@ -55,12 +42,12 @@ final class ServerMain {
 
     try (ConnectionSource serverSource = ServerConnectionSource.forPort(myPort)) {
 
-      LOG.info("Starting server...");
+      Log.instance.info("Starting server...");
       runServer(id, secret, serverSource);
 
     } catch (IOException ex) {
 
-      LOG.error(ex, "Failed to establish connections");
+      Log.instance.error("Failed to establish connections: %s", ex.getMessage());
 
     }
   }
@@ -69,20 +56,20 @@ final class ServerMain {
 
     final Server server = new Server(id, secret);
 
-    LOG.info("Created server.");
+    Log.instance.info("Created server.");
 
     while (true) {
 
       try {
 
-        LOG.info("Established connection...");
+        Log.instance.info("Established connection...");
         final Connection connection = serverSource.connect();
-        LOG.info("Connection established.");
+        Log.instance.info("Connection established.");
 
         server.handleConnection(connection);
 
       } catch (IOException ex) {
-        LOG.error(ex, "Failed to establish connection.");
+        Log.instance.error("Failed to establish connection: %s", ex.getMessage());
       }
     }
   }

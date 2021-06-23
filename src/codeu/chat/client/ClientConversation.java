@@ -16,17 +16,15 @@ package codeu.chat.client;
 
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class ClientConversation {
-
-  private final static Logger.Log LOG = Logger.newLog(ClientConversation.class);
 
   private final Controller controller;
   private final View view;
@@ -96,7 +94,7 @@ public final class ClientConversation {
       System.out.format("Error: conversation not created - %s.\n",
           (validInputs) ? "server failure" : "bad input value");
     } else {
-      LOG.info("New conversation: Title= \"%s\" UUID= %s", conv.title, conv.id);
+      Log.instance.info("New conversation: Title= \"%s\" UUID= %s", conv.title, conv.id);
 
       currentSummary = conv.summary;
 
@@ -138,11 +136,16 @@ public final class ClientConversation {
     } else {
       currentConversation = getConversation(currentSummary.id);
       if (currentConversation == null) {
-        LOG.info("GetConversation: current=%s, current.id=%s, but currentConversation == null",
-            currentSummary, currentSummary.id);
+        Log.instance
+            .info("GetConversation: current=%s, current.id=%s, but currentConversation == null",
+                currentSummary,
+                currentSummary.id);
       } else {
-        LOG.info("Get Conversation: Title=\"%s\" UUID=%s first=%s last=%s\n",
-            currentConversation.title, currentConversation.id, currentConversation.firstMessage,
+        Log.instance.info(
+            "Get Conversation: Title=\"%s\" UUID=%s first=%s last=%s\n",
+            currentConversation.title,
+            currentConversation.id,
+            currentConversation.firstMessage,
             currentConversation.lastMessage);
       }
     }

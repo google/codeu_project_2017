@@ -17,17 +17,15 @@ package codeu.chat.client;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.ConversationSummary;
 import codeu.chat.common.Message;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Method;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class ClientMessage {
-
-  private final static Logger.Log LOG = Logger.newLog(ClientMessage.class);
 
   private final static int MESSAGE_MAX_COUNT = 100;
   private final static int MESSAGE_FETCH_COUNT = 5;
@@ -105,7 +103,7 @@ public final class ClientMessage {
       System.out.format("Error: message not created - %s.\n",
           (validInputs) ? "server error" : "bad input value");
     } else {
-      LOG.info("New message:, Author= %s UUID= %s", author, message.id);
+      Log.instance.info("New message:, Author= %s UUID= %s", author, message.id);
       current = message;
     }
     updateMessages(false);
@@ -155,7 +153,8 @@ public final class ClientMessage {
     if (replaceAll || conversationContents.isEmpty()) {
       // Fetch/refetch all the messages.
       conversationContents.clear();
-      LOG.info("Refetch all messages: replaceAll=%s firstMessage=%s", replaceAll,
+      Log.instance.info("Refetch all messages: replaceAll=%s firstMessage=%s",
+          replaceAll,
           conversationHead.firstMessage);
       return conversationHead.firstMessage;
     } else {
@@ -172,7 +171,8 @@ public final class ClientMessage {
       nextMessageId = msg.next;
     } else {
       // fall back.
-      LOG.warning("Failed to get tail of messages, starting from %s", nextMessageId);
+      Log.instance.warning("Failed to get tail of messages, starting from %s",
+          nextMessageId);
       conversationContents.clear();
       nextMessageId = conversationHead.firstMessage;
     }
@@ -189,15 +189,17 @@ public final class ClientMessage {
   // Currently rereads the entire message chain.
   public void updateMessages(ConversationSummary conversation, boolean replaceAll) {
     if (conversation == null) {
-      LOG.error("conversation argument is null - do nothing.");
+      Log.instance.error("conversation argument is null - do nothing.");
       return;
     }
     conversationHead = conversationContext.getConversation(conversation.id);
     if (conversationHead == null) {
-      LOG.info("ConversationHead is null");
+      Log.instance.info("ConversationHead is null");
     } else {
-      LOG.info("ConversationHead: Title=\"%s\" UUID=%s first=%s last=%s\n",
-          conversationHead.title, conversationHead.id, conversationHead.firstMessage,
+      Log.instance.info("ConversationHead: Title=\"%s\" UUID=%s first=%s last=%s\n",
+          conversationHead.title,
+          conversationHead.id,
+          conversationHead.firstMessage,
           conversationHead.lastMessage);
 
       Uuid nextMessageId = getCurrentMessageFetchId(replaceAll);
@@ -218,8 +220,10 @@ public final class ClientMessage {
         }
         nextMessageId = conversationContents.get(conversationContents.size() - 1).next;
       }
-      LOG.info("Retrieved %d messages for conversation %s (%s).\n",
-          conversationContents.size(), conversationHead.id, conversationHead.title);
+      Log.instance.info("Retrieved %d messages for conversation %s (%s).\n",
+          conversationContents.size(),
+          conversationHead.id,
+          conversationHead.title);
 
       // Set current to first message of conversation.
       current = (conversationContents.size() > 0) ? conversationContents.get(0) : null;

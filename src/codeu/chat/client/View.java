@@ -21,12 +21,12 @@ import codeu.chat.common.LogicalView;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Serializers;
 import codeu.chat.util.Time;
 import codeu.chat.util.Uuid;
 import codeu.chat.util.connections.Connection;
 import codeu.chat.util.connections.ConnectionSource;
+import codeu.chat.util.logging.Log;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,8 +36,6 @@ import java.util.Collection;
 // the client to reterive readonly data from the server. All methods are blocking
 // calls.
 public final class View implements BasicView, LogicalView {
-
-  private final static Logger.Log LOG = Logger.newLog(View.class);
 
   private final ConnectionSource source;
 
@@ -58,12 +56,12 @@ public final class View implements BasicView, LogicalView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_BY_ID_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return users;
@@ -82,12 +80,12 @@ public final class View implements BasicView, LogicalView {
         summaries
             .addAll(Serializers.collection(ConversationSummary.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return summaries;
@@ -107,11 +105,11 @@ public final class View implements BasicView, LogicalView {
           == NetworkCode.GET_CONVERSATIONS_BY_ID_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return conversations;
@@ -130,11 +128,11 @@ public final class View implements BasicView, LogicalView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_ID_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return messages;
@@ -152,11 +150,11 @@ public final class View implements BasicView, LogicalView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USER_GENERATION_RESPONSE) {
         generation = Uuid.SERIALIZER.read(connection.in());
       } else {
-        LOG.error("Response from server failed");
+        Log.instance.error("Response from server failed");
       }
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return generation;
@@ -175,11 +173,11 @@ public final class View implements BasicView, LogicalView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_USERS_EXCLUDING_RESPONSE) {
         users.addAll(Serializers.collection(User.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return users;
@@ -200,11 +198,11 @@ public final class View implements BasicView, LogicalView {
           == NetworkCode.GET_CONVERSATIONS_BY_TIME_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return conversations;
@@ -224,11 +222,11 @@ public final class View implements BasicView, LogicalView {
           == NetworkCode.GET_CONVERSATIONS_BY_TITLE_RESPONSE) {
         conversations.addAll(Serializers.collection(Conversation.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return conversations;
@@ -248,12 +246,12 @@ public final class View implements BasicView, LogicalView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_TIME_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return messages;
@@ -273,12 +271,12 @@ public final class View implements BasicView, LogicalView {
       if (Serializers.INTEGER.read(connection.in()) == NetworkCode.GET_MESSAGES_BY_RANGE_RESPONSE) {
         messages.addAll(Serializers.collection(Message.SERIALIZER).read(connection.in()));
       } else {
-        LOG.error("Response from server failed.");
+        Log.instance.error("Response from server failed.");
       }
 
     } catch (Exception ex) {
       System.out.println("ERROR: Exception during call on server. Check log for details.");
-      LOG.error(ex, "Exception during call on server.");
+      Log.instance.error("Exception during call on server: %s", ex.getMessage());
     }
 
     return messages;

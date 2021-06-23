@@ -15,8 +15,8 @@
 package codeu.chat.client;
 
 import codeu.chat.common.User;
-import codeu.chat.util.Logger;
 import codeu.chat.util.Uuid;
+import codeu.chat.util.logging.Log;
 import codeu.chat.util.store.Store;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class ClientUser {
-
-  private final static Logger.Log LOG = Logger.newLog(ClientUser.class);
 
   private static final Collection<Uuid> EMPTY = Arrays.asList(new Uuid[0]);
   private final Controller controller;
@@ -96,7 +94,7 @@ public final class ClientUser {
       System.out.format("Error: user not created - %s.\n",
           (validInputs) ? "server failure" : "bad input value");
     } else {
-      LOG.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
+      Log.instance.info("New user complete, Name= \"%s\" UUID=%s", user.name, user.id);
       updateUsers();
     }
   }
@@ -115,7 +113,7 @@ public final class ClientUser {
   public String getName(Uuid id) {
     final User user = lookup(id);
     if (user == null) {
-      LOG.warning("userContext.lookup() failed on ID: %s", id);
+      Log.instance.warning("userContext.lookup() failed on ID: %s", id);
       return null;
     } else {
       return user.name;
