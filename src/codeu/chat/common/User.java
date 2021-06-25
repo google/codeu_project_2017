@@ -46,8 +46,6 @@ public final class User {
     }
   };
 
-  public static final UUID NULL_USER_ID = new UUID(0, 0);
-
   public final UUID id;
   public final String name;
   public final Time creation;

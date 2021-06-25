@@ -1,4 +1,6 @@
-package codeu.chat.common;
+package codeu.chat.client.commandline;
+
+import codeu.chat.common.ConversationSummary;
 
 public final class ConversationSummaryListView implements ListView<ConversationSummary> {
 

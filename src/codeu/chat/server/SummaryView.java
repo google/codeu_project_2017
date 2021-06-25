@@ -14,28 +14,26 @@
 
 package codeu.chat.server;
 
-import codeu.chat.common.Conversation;
-import codeu.chat.common.Message;
-import codeu.chat.common.User;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import codeu.chat.common.ConversationSummary;
+import java.util.ArrayList;
+import java.util.Collection;
 
-public final class Model {
+public class SummaryView extends ServerView {
 
-  private HashMap<UUID, User> mUsers = new HashMap<>();
-  private HashMap<UUID, Conversation> mConversations = new HashMap<>();
-  private HashMap<UUID, Message> mMessages = new HashMap<>();
-
-  public Map<UUID, User> users() {
-    return mUsers;
+  public SummaryView(Model model) {
+    super(model);
   }
 
-  public Map<UUID, Conversation> conversations() {
-    return mConversations;
-  }
+  public Collection<ConversationSummary> getConversations() {
+    var summaries = new ArrayList<ConversationSummary>();
 
-  public Map<UUID, Message> messages() {
-    return mMessages;
+    for (var conversation : model().conversations().values()) {
+      summaries.add(new ConversationSummary(conversation.id,
+          conversation.owner,
+          conversation.creation,
+          conversation.title));
+    }
+
+    return summaries;
   }
 }

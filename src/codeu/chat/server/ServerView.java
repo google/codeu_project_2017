@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2021 Google LLC.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.client;
+package codeu.chat.server;
 
-public final class ClientContext {
+public abstract class ServerView {
 
-  public final ClientUser user;
-  public final ClientConversation conversation;
-  public final ClientMessage message;
+  private final Model mModel;
 
-  public ClientContext(Controller controller, View view) {
-    user = new ClientUser(controller, view);
-    conversation = new ClientConversation(controller, view, user);
-    message = new ClientMessage(controller, view, user, conversation);
+  public ServerView(Model model) {
+    this.mModel = model;
+  }
+
+  protected Model model() {
+    return mModel;
   }
 }

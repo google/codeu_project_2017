@@ -14,12 +14,14 @@
 
 package codeu.chat.client.commandline;
 
-import codeu.chat.client.ClientContext;
+import codeu.chat.client.Context;
 import codeu.chat.client.Controller;
 import codeu.chat.client.View;
-import codeu.chat.common.ConversationSummary;
-import codeu.chat.common.ConversationSummaryListView;
+import codeu.chat.common.Message;
+import codeu.chat.common.User;
+import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.logging.Log;
+import java.util.Collections;
 import java.util.Scanner;
 
 // Chat - top-level client application.
@@ -31,11 +33,12 @@ public final class Chat {
 
   private boolean alive = true;
 
-  private final ClientContext clientContext;
+  private final Context mContext = new Context();
 
-  // Constructor - sets up the Chat Application
-  public Chat(Controller controller, View view) {
-    clientContext = new ClientContext(controller, view);
+  private final ConnectionSource mRemote;
+
+  public Chat(ConnectionSource remote) {
+    mRemote = remote;
   }
 
   // Print help message.
@@ -55,9 +58,7 @@ public final class Chat {
     System.out.println("   c-select <index> - select conversation from list.");
     System.out.println("Message commands:");
     System.out.println("   m-add <body>     - add a new message to the current conversation.");
-    System.out.println("   m-list-all       - list all messages in the current conversation.");
-    System.out.println("   m-next <index>   - index of next message to view.");
-    System.out.println("   m-show <count>   - show next <count> messages.");
+    System.out.println("   m-show-last      - shows the last message in the current conversation.");
   }
 
   // Prompt for new command.
@@ -87,49 +88,93 @@ public final class Chat {
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: No user name supplied.");
       } else {
-        signInUser(tokenScanner.nextLine().trim());
+        var name = tokenScanner.nextLine().trim();
+
+        var view = new View(mRemote);
+
+        User found = null;
+        for (var user : view.getAllUsers()) {
+          if (user.name.equals(name)) {
+            found = user;
+            break;
+          }
+        }
+
+        if (found == null) {
+          System.out.format("No user with the name \"%s\" found. Create a new account?\n");
+        } else {
+          mContext.changeUser(found.id);
+        }
       }
 
     } else if (token.equals("sign-out")) {
 
-      if (!clientContext.user.hasCurrent()) {
-        System.out.println("ERROR: Not signed in.");
-      } else {
-        signOutUser();
+      if (mContext.user() == null) {
+        System.out.println("ERROR: Could not sign-out (were you signed-in?)");
       }
+
+      mContext.changeUser(null);
 
     } else if (token.equals("current")) {
 
-      showCurrent();
+      showContext();
 
     } else if (token.equals("u-add")) {
-
       if (!tokenScanner.hasNext()) {
         System.out.println("ERROR: Username not supplied.");
       } else {
-        addUser(tokenScanner.nextLine().trim());
+        var name = tokenScanner.nextLine().trim();
+
+        var controller = new Controller(mRemote);
+        var user = controller.newUser(name);
+
+        if (user == null) {
+          System.out.format("ERROR: Failed to create user with name \"%s\".", name);
+        } else {
+          mContext.changeUser(user.id);
+        }
       }
-
     } else if (token.equals("u-list-all")) {
+      var view = new View(mRemote);
 
-      showAllUsers();
+      System.out.println("Users:");
+      for (var user : view.getAllUsers()) {
+        var active = user.id.equals(mContext.user());
 
+        if (active) {
+          System.out.format("  %s [%s] (active)\n", user.name, user.id);
+        } else {
+          System.out.format("  %s [%s]\n", user.name, user.id);
+        }
+      }
     } else if (token.equals("c-add")) {
 
-      if (!clientContext.user.hasCurrent()) {
+      if (mContext.user() == null) {
         System.out.println("ERROR: Not signed in.");
+      } else if (!tokenScanner.hasNext()) {
+        System.out.println("ERROR: Conversation title not supplied.");
       } else {
-        if (!tokenScanner.hasNext()) {
-          System.out.println("ERROR: Conversation title not supplied.");
-        } else {
-          final String title = tokenScanner.nextLine().trim();
-          clientContext.conversation.startConversation(title, clientContext.user.getCurrent().id);
-        }
+        final String title = tokenScanner.nextLine().trim();
+
+        var controller = new Controller(mRemote);
+        controller.newConversation(title, mContext.user());
       }
 
     } else if (token.equals("c-list-all")) {
 
-      clientContext.conversation.showAllConversations();
+      var view = new View(mRemote);
+
+      System.out.println("Conversations:");
+
+      for (var conversation : view.getAllConversations()) {
+        boolean active = conversation.id.equals(mContext.conversation());
+
+        if (active) {
+          System.out.format("  \"%s\" [%s] (active)\n", conversation.title, conversation.id);
+        } else {
+          System.out.format("  \"%s\" [%s]\n", conversation.title, conversation.id);
+        }
+      }
 
     } else if (token.equals("c-select")) {
 
@@ -137,47 +182,36 @@ public final class Chat {
 
     } else if (token.equals("m-add")) {
 
-      if (!clientContext.user.hasCurrent()) {
+      if (mContext.user() == null) {
         System.out.println("ERROR: Not signed in.");
-      } else if (!clientContext.conversation.hasCurrent()) {
+      } else if (mContext.conversation() == null) {
+        System.out.println("ERROR: No conversation selected.");
+      } else if (!tokenScanner.hasNext()) {
+        System.out.println("ERROR: Message body not supplied.");
+      } else {
+        var controller = new Controller(mRemote);
+        controller.newMessage(mContext.user(),
+            mContext.conversation(),
+            tokenScanner.nextLine().trim());
+      }
+
+    } else if (token.equals("m-show-last")) {
+
+      if (mContext.conversation() == null) {
         System.out.println("ERROR: No conversation selected.");
       } else {
-        if (!tokenScanner.hasNext()) {
-          System.out.println("ERROR: Message body not supplied.");
-        } else {
-          clientContext.message.addMessage(clientContext.user.getCurrent().id,
-              clientContext.conversation.getCurrentId(),
-              tokenScanner.nextLine().trim());
+        var view = new View(mRemote);
+        var conversations = view
+            .getConversations(Collections.singletonList(mContext.conversation()));
+
+        if (conversations.size() == 1) {
+          var conversation = conversations.stream().findFirst().get();
+          var messages = view.getMessages(Collections.singleton(conversation.lastMessage));
+
+          if (messages.size() == 1) {
+            showMessage(messages.stream().findFirst().get());
+          }
         }
-      }
-
-    } else if (token.equals("m-list-all")) {
-
-      if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else {
-        clientContext.message.showAllMessages();
-      }
-
-    } else if (token.equals("m-next")) {
-
-      // TODO: Implement m-next command to jump to an index in the message chain.
-      if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else if (!tokenScanner.hasNextInt()) {
-        System.out.println("Command requires an integer message index.");
-      } else {
-        clientContext.message.selectMessage(tokenScanner.nextInt());
-      }
-
-    } else if (token.equals("m-show")) {
-
-      // TODO: Implement m-show command to show N messages (currently just show all)
-      if (!clientContext.conversation.hasCurrent()) {
-        System.out.println("ERROR: No conversation selected.");
-      } else {
-        final int count = (tokenScanner.hasNextInt()) ? tokenScanner.nextInt() : 1;
-        clientContext.message.showMessages(count);
       }
 
     } else {
@@ -190,87 +224,77 @@ public final class Chat {
     tokenScanner.close();
   }
 
-  // Sign in a user.
-  private void signInUser(String name) {
-    if (!clientContext.user.signInUser(name)) {
-      System.out.println("Error: sign in failed (invalid name?)");
-    }
-  }
+  /**
+   * Show information about the current user and conversation.
+   */
+  private void showContext() {
+    var view = new View(mRemote);
 
-  // Sign out a user.
-  private void signOutUser() {
-    if (!clientContext.user.signOutUser()) {
-      System.out.println("Error: sign out failed (not signed in?)");
-    }
-  }
+    boolean hadUserInfo = false;
 
-  // Helper for showCurrent() - show message info.
-  private void showCurrentMessage() {
-    if (clientContext.conversation.currentMessageCount() == 0) {
-      System.out.println(" -- no messages in conversation --");
-    } else {
-      System.out.format(" conversation has %d messages.\n",
-          clientContext.conversation.currentMessageCount());
-      if (!clientContext.message.hasCurrent()) {
-        System.out.println(" -- no current message --");
+    if (mContext.user() != null) {
+      var users = view.getUsers(Collections.singletonList(mContext.user()));
+
+      if (users.size() == 1) {
+        var user = users.stream().findFirst().get();
+
+        System.out.println("User:");
+        System.out.format("  id:      %s\n", user.id);
+        System.out.format("  name:    %s\n", user.name);
+        System.out.format("  created: %s\n", user.creation);
+
+        hadUserInfo = true;
       } else {
-        System.out.println("\nCurrent Message:");
-        clientContext.message.showCurrent();
+        Log.instance.error("The server returned an unexpected number of users: %d", users.size());
       }
-    }
-  }
-
-  // Show current user, conversation, message, if any
-  private void showCurrent() {
-    boolean displayed = false;
-    if (clientContext.user.hasCurrent()) {
-      System.out.println("User:");
-      clientContext.user.showCurrent();
-      System.out.println();
-      displayed = true;
-    }
-
-    if (clientContext.conversation.hasCurrent()) {
-      System.out.println("Conversation:");
-      clientContext.conversation.showCurrent();
-
-      showCurrentMessage();
-
-      System.out.println();
-      displayed = true;
-    }
-
-    if (!displayed) {
-      System.out.println("No current user or conversation.");
-    }
-  }
-
-  // Display current user.
-  private void showCurrentUser() {
-    if (clientContext.user.hasCurrent()) {
-      clientContext.user.showCurrent();
     } else {
-      System.out.println("No current user.");
+      Log.instance.error("No active user.");
     }
-  }
 
-  // Display current conversation.
-  private void showCurrentConversation() {
-    if (clientContext.conversation.hasCurrent()) {
-      clientContext.conversation.showCurrent();
+    boolean hadConversationInfo = false;
+
+    if (mContext.conversation() != null) {
+      var conversations = view.getConversations(Collections.singletonList(mContext.conversation()));
+
+      if (conversations.size() == 1) {
+        var conversation = conversations.stream().findFirst().get();
+
+        System.out.println("Conversation:");
+        System.out.format("  id:      %s\n", conversation.id);
+        System.out.format("  title:   %s\n", conversation.title);
+        System.out.format("  created: %s\n", conversation.creation);
+
+        hadConversationInfo = true;
+      } else {
+        Log.instance.error("The server returned an unexpected number of conversations: %d",
+            conversations.size());
+      }
     } else {
-      System.out.println(" No current conversation.");
+      Log.instance.info("No active conversation.");
+    }
+
+    if (!hadUserInfo) {
+      System.out.println("User: no signed-in user");
+    }
+
+    if (!hadConversationInfo) {
+      System.out.println("Conversation: no active conversation");
     }
   }
 
-  // Add a new user.
-  private void addUser(String name) {
-    clientContext.user.addUser(name);
-  }
+  private void showMessage(Message message) {
+    var view = new View(mRemote);
 
-  // Display all users known to server.
-  private void showAllUsers() {
-    clientContext.user.showAllUsers();
+    var authors = view.getUsers(Collections.singletonList(message.author));
+    var author = authors.size() == 1 ? authors.stream().findFirst().get() : null;
+
+    System.out.format("Message:\n");
+    System.out.format("  from: %s [%s]\n", author == null ? "<unknown>" : author.name,
+        author == null ? "?" : author.id);
+    System.out.format("  date: %s\n", message.creation);
+    System.out.println();
+    System.out.println(message.content);
+    System.out.println();
   }
 
   public boolean handleCommand(Scanner lineScanner) {
@@ -291,32 +315,30 @@ public final class Chat {
 
   public void selectConversation(Scanner lineScanner) {
 
-    clientContext.conversation.updateAllConversations(false);
-    final int selectionSize = clientContext.conversation.conversationsCount();
-    System.out.format("Selection contains %d entries.\n", selectionSize);
+    var view = new View(mRemote);
 
-    final ConversationSummary previous = clientContext.conversation.getCurrent();
-    ConversationSummary newCurrent = null;
+    var options = view.getAllConversations();
 
-    if (selectionSize == 0) {
-      System.out.println("Nothing to select.");
-    } else {
-      final ListNavigator<ConversationSummary> navigator = new ListNavigator<>(
-          new ConversationSummaryListView(),
-          clientContext.conversation.getConversationSummaries(),
-          lineScanner,
-          PAGE_SIZE);
-      if (navigator.chooseFromList()) {
-        newCurrent = navigator.getSelectedChoice();
-        clientContext.message.resetCurrent(newCurrent != previous);
-        System.out.format("OK. Conversation \"%s\" selected.\n", newCurrent.title);
-      } else {
-        System.out.println("OK. Current Conversation is unchanged.");
-      }
+    if (options.size() == 0) {
+      System.out.println("There are no conversations, maybe start a new one?");
+      return;
     }
-    if (newCurrent != previous) {
-      clientContext.conversation.setCurrent(newCurrent);
-      clientContext.conversation.updateAllConversations(true);
+
+    System.out.format("Selection contains %d entries.\n", options.size());
+
+    var navigator = new ListNavigator<>(
+        new ConversationSummaryListView(),
+        options,
+        lineScanner,
+        PAGE_SIZE);
+
+    if (!navigator.chooseFromList()) {
+      System.out.format("OK. No new conversation was selected.\n");
     }
+
+    var selection = navigator.getSelectedChoice();
+
+    mContext.changeConversation(selection.id);
+    System.out.format("OK. Conversation \"%s\" selected.\n", selection.title);
   }
 }

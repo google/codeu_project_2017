@@ -16,32 +16,21 @@ package codeu.chat.common;
 
 public final class NetworkCode {
 
-  public static final int
-      NO_MESSAGE = 0,
-      GET_USERS_BY_ID_REQUEST = 1,
-      GET_USERS_BY_ID_RESPONSE = 2,
-      GET_ALL_CONVERSATIONS_REQUEST = 3,
-      GET_ALL_CONVERSATIONS_RESPONSE = 4,
-      GET_CONVERSATIONS_BY_ID_RESPONSE = 5,
-      GET_CONVERSATIONS_BY_ID_REQUEST = 6,
-      GET_MESSAGES_BY_ID_REQUEST = 7,
-      GET_MESSAGES_BY_ID_RESPONSE = 8,
-      NEW_MESSAGE_REQUEST = 9,
-      NEW_MESSAGE_RESPONSE = 10,
-      NEW_USER_REQUEST = 11,
-      NEW_USER_RESPONSE = 12,
-      NEW_CONVERSATION_REQUEST = 13,
-      NEW_CONVERSATION_RESPONSE = 14,
-      GET_CONVERSATIONS_BY_TIME_REQUEST = 15,
-      GET_CONVERSATIONS_BY_TIME_RESPONSE = 16,
-      GET_CONVERSATIONS_BY_TITLE_REQUEST = 17,
-      GET_CONVERSATIONS_BY_TITLE_RESPONSE = 18,
-      GET_MESSAGES_BY_TIME_REQUEST = 19,
-      GET_MESSAGES_BY_TIME_RESPONSE = 20,
-      GET_MESSAGES_BY_RANGE_REQUEST = 21,
-      GET_MESSAGES_BY_RANGE_RESPONSE = 22,
-      GET_USER_GENERATION_REQUEST = 23,
-      GET_USER_GENERATION_RESPONSE = 24,
-      GET_USERS_EXCLUDING_REQUEST = 25,
-      GET_USERS_EXCLUDING_RESPONSE = 26;
+  public static final int NO_MESSAGE = 0;
+  public static final int GET_ALL_USERS_REQUEST = 1;
+  public static final int GET_ALL_USERS_RESPONSE = 2;
+  public static final int GET_ALL_CONVERSATIONS_REQUEST = 3;
+  public static final int GET_ALL_CONVERSATIONS_RESPONSE = 4;
+  public static final int GET_CONVERSATIONS_BY_ID_RESPONSE = 5;
+  public static final int GET_CONVERSATIONS_BY_ID_REQUEST = 6;
+  public static final int GET_USERS_BY_ID_RESPONSE = 7;
+  public static final int GET_USERS_BY_ID_REQUEST = 8;
+  public static final int NEW_MESSAGE_REQUEST = 9;
+  public static final int NEW_MESSAGE_RESPONSE = 10;
+  public static final int NEW_USER_REQUEST = 11;
+  public static final int NEW_USER_RESPONSE = 12;
+  public static final int NEW_CONVERSATION_REQUEST = 13;
+  public static final int NEW_CONVERSATION_RESPONSE = 14;
+  public static final int GET_MESSAGES_BY_ID_REQUEST = 15;
+  public static final int GET_MESSAGES_BY_ID_RESPONSE = 16;
 }

@@ -14,7 +14,6 @@
 
 package codeu.chat.client;
 
-import codeu.chat.common.BasicController;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.NetworkCode;
@@ -25,7 +24,7 @@ import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.logging.Log;
 import java.util.UUID;
 
-public class Controller implements BasicController {
+public class Controller {
 
   private final ConnectionSource source;
 
@@ -33,7 +32,6 @@ public class Controller implements BasicController {
     this.source = source;
   }
 
-  @Override
   public Message newMessage(UUID author, UUID conversation, String body) {
 
     Message response = null;
@@ -58,7 +56,6 @@ public class Controller implements BasicController {
     return response;
   }
 
-  @Override
   public User newUser(String name) {
 
     User response = null;
@@ -83,7 +80,6 @@ public class Controller implements BasicController {
     return response;
   }
 
-  @Override
   public Conversation newConversation(String title, UUID owner) {
 
     Conversation response = null;

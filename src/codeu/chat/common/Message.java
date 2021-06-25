@@ -24,48 +24,49 @@ import java.util.UUID;
 
 public final class Message {
 
-  public static final Serializer<Message> SERIALIZER = new Serializer<Message>() {
-
+  public static final Serializer<Message> SERIALIZER = new Serializer<>() {
     @Override
     public void write(OutputStream out, Message value) throws IOException {
-
       Serializers.UUID.write(out, value.id);
-      Serializers.UUID.write(out, value.next);
-      Serializers.UUID.write(out, value.previous);
+
+      if (value.previous == null) {
+        Serializers.BOOLEAN.write(out, false);
+      } else {
+        Serializers.BOOLEAN.write(out, true);
+        Serializers.UUID.write(out, value.previous);
+      }
+
       Time.SERIALIZER.write(out, value.creation);
       Serializers.UUID.write(out, value.author);
       Serializers.STRING.write(out, value.content);
-
     }
 
     @Override
     public Message read(InputStream in) throws IOException {
+      var id = Serializers.UUID.read(in);
 
-      return new Message(
-          Serializers.UUID.read(in),
-          Serializers.UUID.read(in),
-          Serializers.UUID.read(in),
-          Time.SERIALIZER.read(in),
-          Serializers.UUID.read(in),
-          Serializers.STRING.read(in)
-      );
+      UUID previous = null;
+      if (Serializers.BOOLEAN.read(in)) {
+        previous = Serializers.UUID.read(in);
+      }
 
+      var time = Time.SERIALIZER.read(in);
+      var author = Serializers.UUID.read(in);
+      var content = Serializers.STRING.read(in);
+
+      return new Message(id, previous, time, author, content);
     }
   };
-
-  public static final UUID NULL_MESSAGE_ID = new UUID(0, 0);
 
   public final UUID id;
   public final UUID previous;
   public final Time creation;
   public final UUID author;
   public final String content;
-  public UUID next;
 
-  public Message(UUID id, UUID next, UUID previous, Time creation, UUID author, String content) {
+  public Message(UUID id, UUID previous, Time creation, UUID author, String content) {
 
     this.id = id;
-    this.next = next;
     this.previous = previous;
     this.creation = creation;
     this.author = author;

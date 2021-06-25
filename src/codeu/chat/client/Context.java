@@ -12,26 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.util.store;
+package codeu.chat.client;
 
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.UUID;
 
-final class LinkIterable<KEY, VALUE> implements Iterable<VALUE> {
+public final class Context {
 
-  private final Comparator<KEY> comparator;
-  private final StoreLink<KEY, VALUE> first;
-  private final StoreLink<KEY, VALUE> last;
+  private UUID mUser = null;
+  private UUID mConversation = null;
 
-  public LinkIterable(Comparator<KEY> comparator, StoreLink<KEY, VALUE> first,
-      StoreLink<KEY, VALUE> last) {
-    this.comparator = comparator;
-    this.first = first;
-    this.last = last;
+  public UUID user() {
+    return mUser;
   }
 
-  @Override
-  public Iterator<VALUE> iterator() {
-    return new LinkIterator<KEY, VALUE>(comparator, first, last);
+  public UUID conversation() {
+    return mConversation;
+  }
+
+  public void changeUser(UUID id) {
+    // When changing users, it means that our current conversation and message are no longer value.
+    mUser = id;
+    mConversation = null;
+  }
+
+  public void changeConversation(UUID id) {
+    // When changing conversations, it means that our current message is no longer value.
+    mConversation = id;
   }
 }

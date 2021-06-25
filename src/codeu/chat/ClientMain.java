@@ -14,12 +14,9 @@
 
 package codeu.chat;
 
-import codeu.chat.client.Controller;
-import codeu.chat.client.View;
 import codeu.chat.client.commandline.Chat;
 import codeu.chat.util.RemoteAddress;
 import codeu.chat.util.connections.ClientConnectionSource;
-import codeu.chat.util.connections.ConnectionSource;
 import codeu.chat.util.logging.Log;
 import java.util.Scanner;
 
@@ -30,14 +27,12 @@ final class ClientMain {
 
     Log.instance.info("Starting chat client...");
 
-    final RemoteAddress address = RemoteAddress.parse(args[0]);
+    var address = RemoteAddress.parse(args[0]);
 
-    final ConnectionSource source = new ClientConnectionSource(address.host, address.port);
-    final Controller controller = new Controller(source);
-    final View view = new View(source);
+    var source = new ClientConnectionSource(address.host, address.port);
 
     Log.instance.info("Creating client...");
-    final Chat chat = new Chat(controller, view);
+    final Chat chat = new Chat(source);
 
     Log.instance.info("Created client");
 

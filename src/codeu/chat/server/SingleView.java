@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2021 Google LLC.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.common;
+package codeu.chat.server;
 
-/**
- * A view that takes the given value and returns the string needed to display it in a list.
- */
-public interface ListView<T> {
-  String display(T value);
+import codeu.chat.common.Conversation;
+import codeu.chat.common.Message;
+import codeu.chat.common.User;
+import java.util.UUID;
+
+public final class SingleView extends ServerView {
+
+  public SingleView(Model model) {
+    super(model);
+  }
+
+  public User findUser(UUID id) {
+    return model().users().get(id);
+  }
+
+  public Conversation findConversation(UUID id) {
+    return model().conversations().get(id);
+  }
+
+  public Message findMessage(UUID id) {
+    return model().messages().get(id);
+  }
 }

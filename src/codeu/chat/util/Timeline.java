@@ -19,11 +19,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- *
  * A serialized collection of callback. The timeline manages its own thread no way to know outside
  * of the class when a submitted callback is executed.
  */
 public final class Timeline {
+
   private final BlockingQueue<Runnable> pending = new LinkedBlockingQueue<>();
 
   private final Thread mWorker = new Thread(() -> {

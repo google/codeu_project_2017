@@ -12,20 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package codeu.chat.util.store;
+package codeu.chat.client.commandline;
 
-public interface StoreAccessor<KEY, VALUE> {
+/**
+ * A view that takes the given value and returns the string needed to display it in a list.
+ */
+public interface ListView<T> {
 
-  VALUE first(KEY key);
-
-  Iterable<VALUE> all();
-
-  Iterable<VALUE> at(KEY key);
-
-  Iterable<VALUE> after(KEY start);
-
-  Iterable<VALUE> before(KEY end);
-
-  Iterable<VALUE> range(KEY start, KEY end);
-
+  String display(T value);
 }
