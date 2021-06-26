@@ -19,11 +19,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.UUID;
 
 public final class Serializers {
 
-  public static final Serializer<Boolean> BOOLEAN = new Serializer<Boolean>() {
+  public static final Serializer<Boolean> BOOLEAN = new Serializer<>() {
 
     @Override
     public void write(OutputStream out, Boolean value) throws IOException {
@@ -36,7 +37,7 @@ public final class Serializers {
     }
   };
 
-  public static final Serializer<Integer> INTEGER = new Serializer<Integer>() {
+  public static final Serializer<Integer> INTEGER = new Serializer<>() {
 
     @Override
     public void write(OutputStream out, Integer value) throws IOException {
@@ -61,32 +62,7 @@ public final class Serializers {
     }
   };
 
-  public static final Serializer<Long> LONG = new Serializer<Long>() {
-
-    @Override
-    public void write(OutputStream out, Long value) throws IOException {
-
-      for (int i = 56; i >= 0; i -= 8) {
-        out.write((int) (0xFF & (value >>> i)));
-      }
-
-    }
-
-    @Override
-    public Long read(InputStream in) throws IOException {
-
-      long value = 0;
-
-      for (int i = 0; i < 8; i++) {
-        value = (value << 8) | in.read();
-      }
-
-      return value;
-
-    }
-  };
-
-  public static final Serializer<byte[]> BYTES = new Serializer<byte[]>() {
+  public static final Serializer<byte[]> BYTES = new Serializer<>() {
 
     @Override
     public void write(OutputStream out, byte[] value) throws IOException {
@@ -111,7 +87,7 @@ public final class Serializers {
     }
   };
 
-  public static final Serializer<String> STRING = new Serializer<String>() {
+  public static final Serializer<String> STRING = new Serializer<>() {
 
     @Override
     public void write(OutputStream out, String value) throws IOException {
@@ -148,9 +124,31 @@ public final class Serializers {
     }
   };
 
+  public static final Serializer<Date> DATE = new Serializer<>() {
+    @Override
+    public void write(OutputStream out, Date value) throws IOException {
+      var time = value.getTime();
+
+      for (int i = 56; i >= 0; i -= 8) {
+        out.write((int) (0xFF & (time >>> i)));
+      }
+    }
+
+    @Override
+    public Date read(InputStream in) throws IOException {
+      long time = 0;
+
+      for (int i = 0; i < 8; i++) {
+        time = (time << 8) | in.read();
+      }
+
+      return new Date(time);
+    }
+  };
+
   public static <T> Serializer<Collection<T>> collection(final Serializer<T> serializer) {
 
-    return new Serializer<Collection<T>>() {
+    return new Serializer<>() {
 
       @Override
       public void write(OutputStream out, Collection<T> value) throws IOException {

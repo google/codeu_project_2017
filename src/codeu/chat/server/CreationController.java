@@ -17,9 +17,9 @@ package codeu.chat.server;
 import codeu.chat.common.Conversation;
 import codeu.chat.common.Message;
 import codeu.chat.common.User;
-import codeu.chat.util.Time;
 import codeu.chat.util.logging.Log;
 import java.util.Collections;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -43,7 +43,7 @@ public final class CreationController extends ServerController {
     // Sanitize the name.
     name = name.strip();
 
-    var user = new User(randomUUID(), name, Time.now());
+    var user = new User(randomUUID(), name, new Date());
     model().users().put(user.id, user);
 
     Log.instance.info("Created new user: %s [%s].", user.name, user.id);
@@ -65,7 +65,7 @@ public final class CreationController extends ServerController {
 
     var conversation = new Conversation(randomUUID(),
         owner,
-        Time.now(),
+        new Date(),
         title,
         Collections.singletonList(owner),
         null);
@@ -94,7 +94,7 @@ public final class CreationController extends ServerController {
 
     var message = new Message(randomUUID(),
         parent.lastMessage,
-        Time.now(),
+        new Date(),
         author,
         body);
     model().messages().put(message.id, message);

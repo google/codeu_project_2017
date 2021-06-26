@@ -16,10 +16,10 @@ package codeu.chat.common;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.UUID;
 
 public final class User {
@@ -30,7 +30,7 @@ public final class User {
     public void write(OutputStream out, User value) throws IOException {
       Serializers.UUID.write(out, value.id);
       Serializers.STRING.write(out, value.name);
-      Time.SERIALIZER.write(out, value.creation);
+      Serializers.DATE.write(out, value.creation);
 
     }
 
@@ -40,7 +40,7 @@ public final class User {
       return new User(
           Serializers.UUID.read(in),
           Serializers.STRING.read(in),
-          Time.SERIALIZER.read(in)
+          Serializers.DATE.read(in)
       );
 
     }
@@ -48,9 +48,9 @@ public final class User {
 
   public final UUID id;
   public final String name;
-  public final Time creation;
+  public final Date creation;
 
-  public User(UUID id, String name, Time creation) {
+  public User(UUID id, String name, Date creation) {
 
     this.id = id;
     this.name = name;

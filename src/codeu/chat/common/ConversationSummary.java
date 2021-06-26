@@ -16,10 +16,10 @@ package codeu.chat.common;
 
 import codeu.chat.util.Serializer;
 import codeu.chat.util.Serializers;
-import codeu.chat.util.Time;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.UUID;
 
 public final class ConversationSummary {
@@ -31,7 +31,7 @@ public final class ConversationSummary {
 
       Serializers.UUID.write(out, value.id);
       Serializers.UUID.write(out, value.owner);
-      Time.SERIALIZER.write(out, value.creation);
+      Serializers.DATE.write(out, value.creation);
       Serializers.STRING.write(out, value.title);
 
     }
@@ -42,7 +42,7 @@ public final class ConversationSummary {
       return new ConversationSummary(
           Serializers.UUID.read(in),
           Serializers.UUID.read(in),
-          Time.SERIALIZER.read(in),
+          Serializers.DATE.read(in),
           Serializers.STRING.read(in)
       );
 
@@ -51,10 +51,10 @@ public final class ConversationSummary {
 
   public final UUID id;
   public final UUID owner;
-  public final Time creation;
+  public final Date creation;
   public final String title;
 
-  public ConversationSummary(UUID id, UUID owner, Time creation, String title) {
+  public ConversationSummary(UUID id, UUID owner, Date creation, String title) {
 
     this.id = id;
     this.owner = owner;
